@@ -1,0 +1,218 @@
+{
+  "run": "PG43460",
+  "wbs": "WBS-G04",
+  "related": "WBS-P020-01.02",
+  "source": "33fb6f7db1a497d3af293e30a654c95262b2ea91",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T08:01:17.997795+00:00",
+  "verifiedAtUTC": "2026-11-23T08:03:18.538823+00:00",
+  "actualExit": 0,
+  "exits": {
+    "compileTest": 0,
+    "unit": 0,
+    "analyse": 0
+  },
+  "localToolTests": 25,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": {
+    "PT-CHR-DEF-018": {
+      "class": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "method": "sharedDefinitionNameReaderUsesOnlyTextArrays()"
+    },
+    "PT-CHR-CMP002": {
+      "class": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "method": "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()"
+    },
+    "PT-CHR-DEF080": {
+      "class": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "method": "rejectsNonArrayComparisonDefinitions()"
+    }
+  },
+  "initialCompileFailure": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-scope-compile-before-v1/manifest.json",
+    "sha256": "70b94299576df67947a0dbdb55d3e9ea6fe15cba0fb69373f98f877ee38ba632"
+  },
+  "preFixTypeAudit": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-shape-static-before-v1/manifest.json",
+    "sha256": "8bb3071e306fae8e101e1eabb918a9773b3658d4b4a622e882745f73e7a55291"
+  },
+  "defects": [
+    "BUG-3708",
+    "BUG-3709"
+  ],
+  "horizontal": [
+    "YKT-2909",
+    "YKT-2910"
+  ],
+  "actualToolInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/begin.json",
+    "sha256": "d6f53fa02a358651d628df4322a105c2951c247c57b5adc63cfd5dea981a136a"
+  },
+  "terminus": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/terminal.json",
+    "sha256": "66672154e495c1542e10c55ce2e9936b5cf9b08a325f52fe95887dcfce971ecf"
+  },
+  "commands": {
+    "compileTest": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "-g",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/tests",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java"
+    ],
+    "unit": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Djava.awt.headless=true",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Djunit.jupiter.extensions.autodetection.enabled=false",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/unit.exec,append=false,sessionid=PG43460-DEF25-V3,includes=dev.codex.schubert.characterization.GateContractValidator:dev.codex.schubert.characterization.ArtifactComparator",
+      "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/initialization.log",
+      "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/project-definitions",
+      "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/temp",
+      "-Djunit.jupiter.execution.parallel.enabled=false",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/product:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/resources:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "--select-class",
+      "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "--select-class",
+      "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+      "--select-method",
+      "dev.codex.schubert.characterization.ArtifactComparatorTest#acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences",
+      "--select-method",
+      "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsNonArrayComparisonDefinitions",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/reports",
+      "--disable-banner",
+      "--fail-if-no-tests",
+      "--details",
+      "summary"
+    ],
+    "analyse": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43378-log-search-current-sixteen-v1/measurement:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/unit.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/product/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/product/dev/codex/schubert/characterization/ArtifactComparator.class"
+    ]
+  },
+  "sourceFiles": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "e48a90a7ac9f8f407ebb402d3916d412f80d3992f86ef41400da9b12d5e25141"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "0a69c4063099692b2623d84e02e010a63b4cd012dc0ebc4d63f5447bf56000a0"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "sha256": "69176861f75e7842b4129bc4c70bf553dce1062d66337eecfd76e10e243e7701"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+      "sha256": "5131f714aa4ca4f877f17a17d18180ee0e3921fb56ce1cb9f981483ffd4e22e3"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "e70f9f31bd56649d2bf9eaf15995f8c87b98b684dfae67a331fd7cf82a0693d9"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "sha256": "1ec25d02801cde9a3ed3ca9ec2e7b5a4c510a35c452db88fd3b906d744e463f9"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+      "sha256": "da43fa04caaa1e30c6b28fd1602e7458e7e340bb951a3173a363738aac57d7f5"
+    }
+  ],
+  "physical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/physical.json",
+    "sha256": "e24d08a37243028108beed2fd45d114774627e56f06fa3816dc0e00b43f56547"
+  },
+  "style": {
+    "findings": 0,
+    "scope": 3,
+    "exits": {
+      "scopeGuard": 0,
+      "checkstyle": 0
+    },
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v2/checkstyle.xml",
+      "sha256": "cca20e6ac7a869e94afae6b91ac2b36a099e5976e79c205909ad8bdf5ca3d2d8"
+    }
+  },
+  "identifiedTestAndProductTypes": [
+    "ArtifactComparator",
+    "ArtifactComparator$ComparisonResult",
+    "ArtifactComparatorTest",
+    "ArtifactComparatorTest$Fixture",
+    "ArtifactComparatorTest$Oracle",
+    "CharacterizationIoScope",
+    "CorrelatedLogEvidenceValidator",
+    "CorrelatedMenuActionContractTest",
+    "GateCli",
+    "GateCli$FileJsonOutput",
+    "GateContractValidator",
+    "GateDefinitionDocumentsTest",
+    "GateDefinitionNumericTest",
+    "GateDefinitionNumericTest$NumericField",
+    "GateDefinitionNumericTest$NumericPair"
+  ],
+  "rawSingleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/unit.exec",
+    "sha256": "801f2ed562c4d4b50ccdb4d530bffa796ca0d641f73c6d5b3730c9d9f43ee52b"
+  },
+  "singleExecProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/classes-and-probes.json",
+    "sha256": "c948a2674667a9e0ed2dd95a9f3121a4b2cf266f388db14e8c768cc6f2767e80"
+  },
+  "trueJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43460-comparator-name-types-current-v3/reports/TEST-junit-jupiter.xml",
+    "sha256": "36862d81c897bbc34025db7aff2eca063abf4874b8686f3566865b125e97f3b4"
+  },
+  "redactedJUnit": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/selected-junit.redacted.xml",
+    "sha256": "eaeb8219f35455fea0b11474121ebe6bb97d6a0a1828f8dd48c30de1989a809e"
+  },
+  "scopedUnfilteredCounters": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/two-classes-unfiltered.tsv",
+    "sha256": "d79e0d742366a5feb98982a3dafb13db7eb62e38d77a42b86e750352b2dbca72"
+  },
+  "changedReader": {
+    "lineCovered": 8,
+    "lineMissed": 0,
+    "methodCovered": 1,
+    "methodMissed": 0,
+    "branchCovered": 8,
+    "branchMissed": 0
+  },
+  "reproduction": {
+    "path": "evidence/01_PT/020_NK-CHR-001/input/079_PG43460_comparator_scope.py",
+    "sha256": "72fa4308440aacee126e20826ea9951c7840012310b6a13a28a99b2477fc85ad"
+  },
+  "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "actualChr": 0,
+  "actualProductionPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

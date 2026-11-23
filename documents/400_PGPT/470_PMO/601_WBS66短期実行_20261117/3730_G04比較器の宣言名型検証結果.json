@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-9175",
+  "workCategory": "IMPLEMENTATION",
+  "source": "1a395667a0f2209ad22e6454d44989990fdd08df",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-G04"
+  ],
+  "planRow": {
+    "ID": "WBS-G04",
+    "元行": "WBS-G04",
+    "費目": "F",
+    "主担当": "WBS-G04",
+    "状態": "計画",
+    "作業": "BUG再試験・YKT全対象・重大未解決0",
+    "残pp": "2.0",
+    "着手": "設計353・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "重大BUG0・全BUG実再試験済・全YKT全対象/非該当根拠完了。旧UNKNOWNを新成功で正常化0。",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G04",
+    "対象": "",
+    "範囲": "SS 353",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.75",
+    "慎重pp": "4.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 674,
+    "改訂残pp": "2.0"
+  },
+  "run": "PG43460",
+  "startEvent": "PGPT-20261008-9174",
+  "outcome": {
+    "runVersion": "v3",
+    "localToolTests": 25,
+    "failed": 0,
+    "skipped": 0,
+    "scopeStyleFindings": 0,
+    "selectedReaderLines": 8,
+    "selectedReaderBranches": 8,
+    "toolSource": "33fb6f7db1a497d3af293e30a654c95262b2ea91",
+    "defectClosed": [
+      "BUG-3708",
+      "BUG-3709"
+    ],
+    "yktClosed": [
+      "YKT-2909",
+      "YKT-2910"
+    ],
+    "actualChr": 0,
+    "actualProductTests": 0,
+    "earlierCompileAttemptFailed": true,
+    "whole451": false
+  },
+  "proof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/manifest.json",
+    "sha256": "1af1122941fc8ad7ed0079a3f6acf74ccd8cbe74f9e2aaf134bbc23cc2cf1a06"
+  },
+  "nextEvidence": {
+    "workId": "WBS-P020-01.03",
+    "action": "Bind new CHR tool type tests 016 through 018 and comparator corroboration to program/WBS evidence using current source and the separate original runs. Then move to an independently actionable production value criterion."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T08:03:22+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 68,
+    "remainingPercent": 32,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "45af0436f32997fd22d2f8b760e8e5dee5373cc2f3458164cbf4a779233394f3",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T08:03:22+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 68,
+        "remainingPercent": 32,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T08:03:18.538823+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 68,
+    "remainingPercent": 32,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
