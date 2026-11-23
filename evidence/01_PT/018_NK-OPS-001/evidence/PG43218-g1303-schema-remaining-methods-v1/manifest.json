@@ -1,0 +1,185 @@
+{
+  "run": "PG43218-g1303-schema-remaining-methods-v1",
+  "source": "ac6cc806612e4b65e129d9ea2c1c4300c89bfe10",
+  "testSource": "36eea327b62ba303d48fadfb4b946e33ed1ae2fc",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.03",
+  "oracleCostOwner": "WBS-P019-01",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:55:04.061874+00:00",
+  "priorBinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43180-g1303-current-schema-method-oracle-v1/manifest.json",
+    "sha256": "3eb89d8efb7ff69ca32b722910993b1c87450eb8cfdd5a65d3eabf6c22d1308d"
+  },
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43178-p0190102-schema-history-single-exec-v1/manifest.json",
+    "sha256": "9cdffd38cd7b865fffd4de244c8fea7bf2e2df07cd74d59abd2ce771453011b0"
+  },
+  "priorSanitizedJunit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43178-p0190102-schema-history-single-exec-v1/sanitized-junit.json",
+    "sha256": "9316096bac03aac000f98556112b26438825490426265d39e9b2f7c1b0e07ade"
+  },
+  "rawGraphSha256": "daa282077711f6eae820627501358db8b33ec611937e23f5c4af647145a51da5",
+  "streamInheritedWithoutRerun": true,
+  "measurementScope": 18,
+  "priorIndividualBindings": 6,
+  "newIndividualBindings": [
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "<init>",
+      "descriptor": "(Ljava/util/List;)V",
+      "testId": "PT-OPS-SCHEMA004",
+      "junitMethod": "opsSchema004ExpectedProfileOrderingAndDefensiveCopy()",
+      "independentOracle": "Reject null/member-null, invalid size/rank/version order; accept 1000 entries and preserve snapshot after caller list is cleared",
+      "methodCounters": [
+        "1",
+        "INSTRUCTION:0:69",
+        "BRANCH:0:12",
+        "LINE:0:15",
+        "COMPLEXITY:0:7",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "closeRows",
+      "descriptor": "(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V",
+      "testId": "PT-OPS-SCHEMA006",
+      "junitMethod": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()",
+      "independentOracle": "Fixed 4x4x4 body/row/statement close precedence matrix and same throwable; row owner closes exactly once",
+      "methodCounters": [
+        "10",
+        "INSTRUCTION:0:14",
+        "BRANCH:0:4",
+        "LINE:0:6",
+        "COMPLEXITY:0:3",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "closeStatement",
+      "descriptor": "(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V",
+      "testId": "PT-OPS-SCHEMA006",
+      "junitMethod": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()",
+      "independentOracle": "Independent matrix confirms one statement close and no close of the borrowed connection",
+      "methodCounters": [
+        "10",
+        "INSTRUCTION:0:14",
+        "BRANCH:0:4",
+        "LINE:0:6",
+        "COMPLEXITY:0:3",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "require",
+      "descriptor": "(Z)V",
+      "testId": "PT-OPS-SCHEMA002",
+      "junitMethod": "opsSchema002EveryColumnMissingExtraAndFailedRow()",
+      "independentOracle": "Missing, surplus, failed and mismatched rows produce the fixed SQL diagnostic",
+      "methodCounters": [
+        "10",
+        "INSTRUCTION:0:5",
+        "BRANCH:0:2",
+        "LINE:0:2",
+        "COMPLEXITY:0:2",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "required",
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "testId": "PT-OPS-SCHEMA005",
+      "junitMethod": "opsSchema005NullProviderSqlExceptionsAndAllOwnership()",
+      "independentOracle": "Null statement/result set produce fixed diagnostics; only acquired resources close",
+      "methodCounters": [
+        "10",
+        "INSTRUCTION:0:6",
+        "BRANCH:0:2",
+        "LINE:0:2",
+        "COMPLEXITY:0:2",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "method": "unavailable",
+      "descriptor": "()Ljava/sql/SQLException;",
+      "testId": "PT-OPS-SCHEMA005",
+      "junitMethod": "opsSchema005NullProviderSqlExceptionsAndAllOwnership()",
+      "independentOracle": "Expected SQL state 08001, fixed message, empty cause and no suppressed errors",
+      "methodCounters": [
+        "10",
+        "INSTRUCTION:0:6",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "method": "script",
+      "descriptor": "()Ljava/lang/String;",
+      "testId": "PT-OPS-SCHEMA009",
+      "junitMethod": "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()",
+      "independentOracle": "Direct accessor returns the fixed original script after mutation of the backing fixture row",
+      "methodCounters": [
+        "1",
+        "INSTRUCTION:0:3",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    }
+  ],
+  "totalIndividualBindings": 13,
+  "remainingIndividualMethods": [
+    [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "checksum",
+      "()Ljava/lang/Integer;"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "equals",
+      "(Ljava/lang/Object;)Z"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "installedRank",
+      "()I"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "type",
+      "()Ljava/lang/String;"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "version",
+      "()Ljava/lang/String;"
+    ]
+  ],
+  "remainingIndividualReason": "Use explicit fixed component values for both row kinds and an independent equality contract; the previous aggregate record-list comparison supplies no individual witness for these components",
+  "newTestExecutions": 0,
+  "endingDependencies": [
+    "WBS-F02",
+    "WBS-P018-02"
+  ],
+  "realMigration": false,
+  "wholeG1303": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
