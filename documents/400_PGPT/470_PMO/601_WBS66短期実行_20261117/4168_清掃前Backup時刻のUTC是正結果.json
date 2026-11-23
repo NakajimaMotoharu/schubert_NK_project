@@ -1,0 +1,114 @@
+{
+  "eventId": "PGPT-20261008-9613",
+  "workCategory": "IMPLEMENTATION",
+  "source": "04527fb685067d4de28005ecc26115b42372af34",
+  "productionCoreMain": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-P004-05/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P004-05/2",
+    "第58版ID": "WBS-P004-05/2",
+    "費用主担当項目": "P004-05",
+    "計画窓": "繰越",
+    "予定期間・週末": "2026-12-20までの計画週",
+    "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+    "担当": "API・DB担当",
+    "旧短期残pp": "0.423",
+    "改訂残pp": "0.423",
+    "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 21
+  },
+  "run": "PG43914",
+  "startEvent": "PGPT-20261008-9612",
+  "outcome": {
+    "newProductIds": 3,
+    "currentSelected": 7,
+    "currentPassed": 7,
+    "firstFailure": 1,
+    "scopedPmdMain": 0,
+    "verifiedProductCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+    "technicalRuns": 4064,
+    "technicalApplicable": 3977
+  },
+  "proof": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43914-backup-jdbc-time-instant-correctness/manifest.json",
+    "sha256": "189f6d2edb8f01230ba466bf21d3a79e7789daddcc2db57301a9981711d61abd"
+  },
+  "nextEvidence": {
+    "work": "PG43916 normal offline Batch compile and JAR from this core; compare one changed Main with final proof and unchanged CRC fingerprints, perform same-byte typed checks; no original backing operations"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T20:36:48+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 88,
+    "remainingPercent": 12,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "26b27e7d0ea947f3fbb1701c1e0c0bc1c17bbed10f439d9c06a4113b91394b96",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T20:36:48+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 88,
+        "remainingPercent": 12,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T20:35:44.284169+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 88,
+    "remainingPercent": 12,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

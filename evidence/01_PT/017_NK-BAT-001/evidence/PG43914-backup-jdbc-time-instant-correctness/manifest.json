@@ -1,0 +1,180 @@
+{
+  "run": "PG43914",
+  "source": "a15240fbf7f6810b914ed07f3b075cf1ab7909d0",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "lastPackagedCandidate": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:35:44.284169+00:00",
+  "wbs": [
+    "WBS-P004-05/2",
+    "WBS-P017-06",
+    "WBS-F03/2-2-b"
+  ],
+  "related": [
+    "SS332",
+    "SSC-056",
+    "YKT-128",
+    "BUG-3754",
+    "YKT-2933",
+    "BUG-3755",
+    "YKT-2934"
+  ],
+  "oracle": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4748_Backup失敗行の時刻瞬間照合単体仕様.md",
+    "sha256": "ed5fa11716c028ef3c88e1728fbb7298b85bcf5cca68f3613c47d44485a94457"
+  },
+  "cases": [
+    {
+      "id": "PT-BAT-BACKUP-UTC001",
+      "method": "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC002",
+      "method": "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC003",
+      "method": "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose"
+    }
+  ],
+  "regression": [
+    "PT-BAT-SSC461-BF001",
+    "PT-BAT-SSC461-BF002",
+    "PT-BAT-SSC461-BF003",
+    "PT-BAT-SSC461-BF004"
+  ],
+  "compileInputs": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/fixture/BackupFailureSnapshot.java",
+      "sha256": "7edd20d5074ec0b7e2be4aa6206e643c15cf9d60fb45bded874b5b19310ba484"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/fixture/BackupFailureUtcProjectionTest.java",
+      "sha256": "d1ebf416a82f82ac09d65516cee2799be44da3c17f226a7906d6430d125a68de"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSqlDiagnosticTest.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/fixture/BackupFailureSqlDiagnosticTest.java",
+      "sha256": "60b66222509454b8ef2dee939362981e740b85c32d330d0f287e470e120388ec"
+    }
+  },
+  "execs": {
+    "before": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-before/terminal.json",
+      "sha256": "9fe3153db544fbca5e28752493ef7fe48c1866d4ad9ad3ad2bbdce13ef59dd91"
+    },
+    "intermediate": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-after/terminal.json",
+      "sha256": "3442c040335bc3658573c36b09f75270e19912acb9c1835cb7d5abf1327c9603"
+    },
+    "final": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/terminal.json",
+      "sha256": "2aba660db9900bd87ee00be6250e0224717d9f117c6a0b6618e09aaafb88816f"
+    }
+  },
+  "jsonBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/begin.json",
+    "sha256": "658c0a01a87a9997c2ede04138dd1a3e7cd51f2bb8992b522fefa921ab26908b"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/reports/TEST-junit-jupiter.xml",
+    "sha256": "20764f7735c7562f187621de765229f654e7ad13dc7c799f8c9aefafa25bd333"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/unit.exec",
+    "sha256": "58ff8ace0edd58f7ef1090c12de5452413d6110b1b6b60ef771f063edaa00b1c"
+  },
+  "product": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/product/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class",
+    "sha256": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3"
+  },
+  "recordedCounts": {
+    "before": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "intermediate": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "final": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "targetMatcher": "METHOD\tdev/codex/schubert/nk/batch/repository/BackupFailureSnapshot\tmatchesInstant\t(Ljava/sql/ResultSet;Ljava/lang/String;Ljava/time/Instant;)Z\t10\tINSTRUCTION:0:17\tBRANCH:0:4\tLINE:0:2\tCOMPLEXITY:0:3\tMETHOD:0:1\tCLASS:0:0",
+    "wholeClass": "CLASS\tdev/codex/schubert/nk/batch/repository/BackupFailureSnapshot\t0a5870c3f2826205\ttrue\t106\t65585\tINSTRUCTION:46:315\tBRANCH:30:38\tLINE:5:60\tCOMPLEXITY:36:8\tMETHOD:6:4\tCLASS:0:1",
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/raw.out",
+      "sha256": "e73162b9850334ac446f60d6255df65a608530e00b28ac58ec0c5c008db8e4a5"
+    }
+  },
+  "pmd": [
+    {
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/pmd-main/fixture-pmd-terminal.json",
+        "sha256": "aaa218fd84bed2cf9477d33ae5e75ac7c9928f6bd70be0d5f07b52077972d7ab"
+      },
+      "rawCode": 0,
+      "rawFindings": []
+    },
+    {
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/pmd-utc/fixture-pmd-terminal.json",
+        "sha256": "2144d5ae44f97e5a74343960ba08446837098d1e81d2729b910a08c330a60bcd"
+      },
+      "rawCode": 4,
+      "rawFindings": [
+        {
+          "line": 172,
+          "rule": "UseProperClassLoader",
+          "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+        }
+      ]
+    },
+    {
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/pmd-regression/fixture-pmd-terminal.json",
+        "sha256": "8cf635f83b4da5b5fbc2f71fec745a6cffb23f87b30fe6007661ac52f4d700ce"
+      },
+      "rawCode": 4,
+      "rawFindings": [
+        {
+          "line": 182,
+          "rule": "UseProperClassLoader",
+          "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+        }
+      ]
+    }
+  ],
+  "fixturePmdDisposition": "Both remaining findings are the defining class loader of an explicit JDK JDBC interface on a standalone synthetic proxy. Raw result preserved and no container or active DB.",
+  "formatCheckstyle": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-after/main-style/fixture-style-terminal.json",
+      "sha256": "d15b5d5de41e567c221c69a6666ece1935723e194d81df1049be594e0e952f03"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/style-BackupFailureUtcProjectionTest/fixture-style-terminal.json",
+      "sha256": "ccecaae2af6512f49c66c8d6556431f74436a54b0d4fda832587cbf95313a593"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43914-backup-utc-projection-final/style-BackupFailureSqlDiagnosticTest/fixture-style-terminal.json",
+      "sha256": "df65586e18a78db1fe22280992f0dd657eedbefea82cf77a92aaa1b02df86f6d"
+    }
+  ],
+  "independentEarlierTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43828-backup-sql-diagnostic-migration/manifest.json",
+    "sha256": "ac3ca9480dfc164ad477d276d02720961f2747e34b8f9ed96d374cad6edf0d2a"
+  },
+  "liveDatabase": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Current regular Batch JAR and same product byte; normal NullAway",
+    "Same candidate SpotBugs / entire applicable upstream runtime and formal 451"
+  ]
+}
