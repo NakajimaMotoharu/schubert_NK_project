@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-9173",
+  "workCategory": "IMPLEMENTATION",
+  "source": "e212cd2fe025850e20e6feaf9c6b01bfc12ce46d",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-G04"
+  ],
+  "planRow": {
+    "ID": "WBS-G04",
+    "元行": "WBS-G04",
+    "費目": "F",
+    "主担当": "WBS-G04",
+    "状態": "計画",
+    "作業": "BUG再試験・YKT全対象・重大未解決0",
+    "残pp": "2.0",
+    "着手": "設計353・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "重大BUG0・全BUG実再試験済・全YKT全対象/非該当根拠完了。旧UNKNOWNを新成功で正常化0。",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G04",
+    "対象": "",
+    "範囲": "SS 353",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.75",
+    "慎重pp": "4.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 674,
+    "改訂残pp": "2.0"
+  },
+  "run": "PG43458",
+  "startEvent": "PGPT-20261008-9172",
+  "outcome": {
+    "newToolTest": "PT-CHR-DEF-017",
+    "toolSelectedRed": 1,
+    "toolSelectedGreenPerRun": [
+      22,
+      22
+    ],
+    "distinctCurrentToolCases": 22,
+    "fullRelatedBranches": 56,
+    "originalOneBranchMissPreserved": true,
+    "ordinaryProductPts": 0,
+    "formalDelta": 0,
+    "bug": "BUG-3707",
+    "ykt": "YKT-2909"
+  },
+  "proof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43458-chr-font-selector-types-current-v3/manifest.json",
+    "sha256": "9a795849b6009c9babbafc253c211865261a6f980a9f194e3a150397bef8eaef"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-G04",
+    "goal": "Review ArtifactComparator separate local rule list source and one approved synthetic fixture. Identify whether the same array coercion remains. Register and act only on confirmed differences.",
+    "hold": "No real baseline, browser, server, VM or refused operation"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T07:52:53+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 68,
+    "remainingPercent": 32,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "f6a8bea317b9050ffc658cd36ed782d3377cedffd099a5f565be2aa29d7d4500",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T07:52:53+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 68,
+        "remainingPercent": 32,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T07:52:19.262608+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 68,
+    "remainingPercent": 32,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
