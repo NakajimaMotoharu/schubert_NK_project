@@ -1,0 +1,94 @@
+[
+  {
+    "location": {
+      "beginline": "395",
+      "endline": "395",
+      "begincolumn": "9",
+      "endcolumn": "13",
+      "rule": "CloseResource",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+      "priority": "3"
+    },
+    "rawMessage": "Ensure that resources like this ExecutorService object are closed after use",
+    "disposition": "TEST_OWNED_BOUNDED_RESOURCE",
+    "previousReason": "Worker executor is shut down in finally and its termination is checked with a 10 second limit."
+  },
+  {
+    "location": {
+      "beginline": "395",
+      "endline": "395",
+      "begincolumn": "16",
+      "endcolumn": "47",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection",
+      "variable": "pool",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "disposition": "TEST_OWNED_BOUNDED_RESOURCE",
+    "previousReason": "Eight test-owned workers exercise concurrent projection."
+  },
+  {
+    "location": {
+      "beginline": "401",
+      "endline": "410",
+      "begincolumn": "13",
+      "endcolumn": "64",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "disposition": "TEST_OWNED_BOUNDED_RESOURCE",
+    "previousReason": "Task submission is finite and all futures are checked."
+  },
+  {
+    "location": {
+      "beginline": "419",
+      "endline": "419",
+      "begincolumn": "7",
+      "endcolumn": "25",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "disposition": "TEST_OWNED_BOUNDED_RESOURCE",
+    "previousReason": "Test-owned executor is shut down in finally."
+  },
+  {
+    "location": {
+      "beginline": "420",
+      "endline": "420",
+      "begincolumn": "18",
+      "endcolumn": "61",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.web.view",
+      "class": "ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3"
+    },
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "disposition": "TEST_OWNED_BOUNDED_RESOURCE",
+    "previousReason": "Finally awaits termination with 10 second limit."
+  }
+]
