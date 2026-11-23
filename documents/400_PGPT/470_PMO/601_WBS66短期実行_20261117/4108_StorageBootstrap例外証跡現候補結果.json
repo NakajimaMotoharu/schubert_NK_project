@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-9553",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "4e5b135c85476a0f664c7ed30233e9ace256d1ae",
+  "productionCoreMain": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-F02-b-b"
+  ],
+  "planRow": {
+    "新版ID": "WBS-F02-b-b",
+    "第58版ID": "WBS-F02-b",
+    "費用主担当項目": "F02",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "6 JAR・13要求・契約と品質証拠を照合し担当判定を保存",
+    "先行ID・着手条件": "WBS-F02-b-a、六製品のruntime・品質終端",
+    "担当": "ビルド・アーキテクチャ担当",
+    "旧短期残pp": "0.15",
+    "改訂残pp": "0.3",
+    "終了条件": "6 JAR・13要求・契約と品質証拠を照合し担当判定を保存",
+    "元項目の正式受入に必要な証拠": "QA-056四型の適用判断。API・Webの正規ビルド、Storage JDBC責務、同候補のruntimeと451証跡。",
+    "参照する元項目": "F02、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P020-01、P018-07",
+    "lineNumber": 3
+  },
+  "run": "PG43854",
+  "startEvent": "PGPT-20261008-9552",
+  "outcome": {
+    "type": "EXACT_INPUT_PRIOR_PT_APPLICABILITY",
+    "currentEvidenceRetained": 11,
+    "newTestRuns": 0,
+    "physical": 3,
+    "wholeF02": false,
+    "formalAcceptanceDelta": 0
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43854-current-jdbc-graph-proof-applicability/manifest.json",
+    "sha256": "ec774bcab6e18dbc806304e471eab510721da8ef87ce93dcc7b8e3e41a7791f6"
+  },
+  "nextEvidence": "F03のWeb独立時間集計・HTTP recorderの旧証拠と現純値依存を照合し、差分があれば通常試験。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T18:54:30+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 85,
+      "remainingPercent": 15,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 85,
+    "remainingPercent": 15,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "a208902a209801b5bcf0fdf5fc8e3fd0ccefc570d38e937111259e56d92bb444",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T18:54:30+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 85,
+        "remainingPercent": 15,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T18:53:47.064532+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 85,
+    "remainingPercent": 15,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

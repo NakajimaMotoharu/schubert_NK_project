@@ -1,0 +1,155 @@
+{
+  "run": "PG43854",
+  "source": "4e5b135c85476a0f664c7ed30233e9ace256d1ae",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T18:53:47.064532+00:00",
+  "regularJarEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43834-cleanup-terminal-batch-normal-jar/manifest.json",
+    "sha256": "2e47cd0d1bffaf46cc41fcf929d469737e9269f45d8cd9feb81b4e6efe51018a"
+  },
+  "regularJars": {
+    "Storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    },
+    "Bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+    }
+  },
+  "sameThreePhysical": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+  },
+  "storage": {
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43556-current-storage-values-eight-single-exec-v1/manifest.json",
+      "sha256": "030709273f27defec56de15ec81b2b0053d8ed22482589d78bf19bb4fe49f037"
+    },
+    "originalTerminal": {
+      "path": "../pgpt-runs/PG379/PG43556-current-storage-values-eight-single-exec-v1/terminal.json",
+      "sha256": "be7177cd6d855d48aa8b572e79044c4f3e162f26293466f55d2c5a9e6cdebd97"
+    },
+    "exactFixturePins": [
+      {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java",
+        "sha256": "dab2956991bf738f0de0b6628eb3a166ad5eda749d314b82c44004ce0b6bc1fa"
+      },
+      {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+        "sha256": "53539edfb2a3ae5ad7d4ff98fadf61ac3ff4dbdbc7c783c17dc5d5a4d7cfda9e"
+      }
+    ],
+    "keptScope": "pure Storage graph and reason value contract",
+    "originalCases": [
+      "injectedGraphRejectsNullInputsBeforeCallingTheEdge()",
+      "fixedReasonsAndNullContract()",
+      "sqlNextAndMixedEdgesRetainIdentity()",
+      "injectedGraphVisitsEachNonFatalObjectOnceInBreadthFirstEdgeOrder()",
+      "injectedGraphStopsBeforeFatalOrLaterNodesCanInvokeTheEdge()",
+      "reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract()",
+      "directCauseAndSuppressedIdentityAndOrder()",
+      "nonFatalCyclesAndDuplicateEdgesFinishWithoutMutation()"
+    ],
+    "originalCoverageMissedCovered": {
+      "StorageIoException$Reason": {
+        "INSTRUCTION": [
+          0,
+          50
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          4
+        ],
+        "COMPLEXITY": [
+          0,
+          5
+        ],
+        "METHOD": [
+          0,
+          5
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "StorageIoException": {
+        "INSTRUCTION": [
+          0,
+          93
+        ],
+        "BRANCH": [
+          0,
+          12
+        ],
+        "LINE": [
+          0,
+          23
+        ],
+        "COMPLEXITY": [
+          0,
+          11
+        ],
+        "METHOD": [
+          0,
+          5
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "bootstrap": {
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/manifest.json",
+      "sha256": "3bfbde1125b667e770997c1c74dc33fc2d14db17c764dea6f77e32d56b248b28"
+    },
+    "originalTerminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/terminal.json",
+      "sha256": "e747f446b09e86a3202f7f0ceea09991b7907674a6a263d7c97cb9ad0aad197b"
+    },
+    "exactInputPins": [
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+        "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+      },
+      {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java",
+        "sha256": "09fe8fdec485fc5db5cf34f82f02d818be66dd37f19a651d1b4ff2af13239922"
+      }
+    ],
+    "originalCaseIds": {
+      "queueRanksCauseAndSuppressedEntriesBeforeSqlNextAtTheSameDepth()": "PT-OPS-JDBCGRAPH006",
+      "closerSuppressedErrorWinsOverAnEarlierButDeeperCause()": "PT-OPS-JDBCGRAPH007",
+      "sameSqlObjectsAreQueriedOnceWhenNextAndCauseLinkBack()": "PT-OPS-JDBCGRAPH008"
+    },
+    "supersededFixtureEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41210-f02-ssc461-jdbc-order-identity-v1/manifest.json",
+      "sha256": "4d537b5af684d6474353fcbc5a3e65f6d07b9374f37ef6c16d16a10697f01681"
+    },
+    "keptScope": "PT-OPS-JDBCGRAPH006-008, JDBC exception values only"
+  },
+  "applicableOriginalResults": 11,
+  "existingExecsKeptSeparate": true,
+  "newResults": 0,
+  "externalActions": 0,
+  "formalDelta": 0,
+  "formalAcceptanceId": null,
+  "stillOpen": [
+    "Legacy Storage entry removal and FileOperation migration criteria beyond this pure unit scope",
+    "Remaining upper JDBC ownership boundaries",
+    "Current runtime packaging and all-six 451"
+  ]
+}
