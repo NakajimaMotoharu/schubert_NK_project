@@ -246,7 +246,7 @@ final class MaintenanceStopSnapshotTest {
     for (int index = 0; index < names.size(); index++) {
       assertEquals(NAMES.get(index), MaintenanceUnit.valueOf(names.get(index)).serviceName());
     }
-    assertThrows(IllegalArgumentException.class, () -> MaintenanceUnit.valueOf("caddy.service"));
+    assertThrows(IllegalArgumentException.class, () -> MaintenanceUnit.valueOf(NAMES.getFirst()));
     assertThrows(NullPointerException.class, () -> MaintenanceUnit.valueOf(null));
   }
 
