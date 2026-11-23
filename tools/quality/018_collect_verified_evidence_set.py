@@ -9,7 +9,7 @@ import re
 import subprocess
 import sys
 
-from pgpt_reactor_junit import verify_reactor_junit
+from pgpt_reactor_junit import reactor_run_record, verify_reactor_junit
 from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
 
 BASE = (
@@ -235,7 +235,8 @@ def main():
     if not re.fullmatch(r"PT-(WEB|ADM|MED|SCN)-[A-Za-z0-9-]+", args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    temporary_commit = Path("/tmp") / (args.run_id + ".commit")
+    records = Path("/tmp")
+    temporary_commit = records / (args.run_id + ".commit")
     root = repo / "evidence/01_PT"
     if args.candidate_root is not None:
         root = check_candidate_root(repo, args.candidate_root)
@@ -246,10 +247,12 @@ def main():
         if manifest["runId"] != args.run_id:
             raise ValueError("invalid persisted reactor run")
         commit = manifest["targetCommit"]
-        if temporary_commit.is_file() and temporary_commit.read_text().strip() != commit:
-            raise ValueError("temporary and persisted source commits disagree")
+        if temporary_commit.exists() or temporary_commit.is_symlink():
+            observed = reactor_run_record(records, args.run_id, ".commit").read_text().strip()
+            if observed != commit:
+                raise ValueError("temporary and persisted source commits disagree")
     else:
-        commit = temporary_commit.read_text().strip()
+        commit = reactor_run_record(records, args.run_id, ".commit").read_text().strip()
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid evidence source commit")
     subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=repo, check=True)

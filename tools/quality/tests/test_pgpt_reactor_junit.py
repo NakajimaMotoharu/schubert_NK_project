@@ -83,6 +83,22 @@ class ReactorJunitTest(unittest.TestCase):
         self.capture()
         self.marker(".exit").write_text("0\n")
 
+    def test_run_metadata_must_use_its_local_regular_path(self):
+        self.success()
+        for suffix in (".commit", ".branch", ".started", ".completed", ".log", ".junit.json", ".exit"):
+            with self.subTest(suffix=suffix):
+                marker = self.marker(suffix)
+                local_copy = marker.with_name(marker.name + ".copy")
+                marker.rename(local_copy)
+                marker.symlink_to(local_copy.name)
+                try:
+                    with self.assertRaisesRegex(ValueError, "reactor run record must be a local regular file"):
+                        self.verify()
+                finally:
+                    marker.unlink()
+                    local_copy.rename(marker)
+        self.assertEqual(self.marker(".junit.json").read_bytes(), self.verify())
+
     def test_terminal_binds_all_original_paths_and_counts(self):
         self.success()
         content = self.verify()

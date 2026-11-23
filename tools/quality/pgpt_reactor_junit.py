@@ -40,6 +40,16 @@ def _run_path(directory, run, suffix):
     return directory / (run + suffix)
 
 
+def reactor_run_record(directory, run, suffix):
+    """Locate an existing regular record under its own run path."""
+    path = _run_path(directory, run, suffix)
+    if not path.exists() and not path.is_symlink():
+        raise FileNotFoundError(path)
+    if not path.is_file() or path.absolute() != path.resolve():
+        raise ValueError("reactor run record must be a local regular file")
+    return path
+
+
 def _report(content, module_cases):
     suite = ET.fromstring(content)
     cases = suite.findall("testcase")
@@ -111,15 +121,15 @@ def _terminal_instant(value):
 def _snapshot(repo, run, commit, directory):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid reactor commit")
-    observed = _run_path(directory, run, ".commit").read_text().strip()
+    observed = reactor_run_record(directory, run, ".commit").read_text().strip()
     if commit != observed:
         raise ValueError("reactor commit does not match")
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo,
                                      text=True).strip()
-    if not branch or branch != _run_path(directory, run, ".branch").read_text().strip():
+    if not branch or branch != reactor_run_record(directory, run, ".branch").read_text().strip():
         raise ValueError("reactor branch does not match")
-    started = _run_path(directory, run, ".started").read_text().strip()
-    completed = _run_path(directory, run, ".completed").read_text().strip()
+    started = reactor_run_record(directory, run, ".started").read_text().strip()
+    completed = reactor_run_record(directory, run, ".completed").read_text().strip()
     if _terminal_instant(started) > _terminal_instant(completed):
         raise ValueError("reactor completion precedes start")
     reports = {}
@@ -145,7 +155,7 @@ def _snapshot(repo, run, commit, directory):
         "branch": branch,
         "startedAt": started,
         "completedAt": completed,
-        "buildLogSha256": _file_digest(_run_path(directory, run, ".log")),
+        "buildLogSha256": _file_digest(reactor_run_record(directory, run, ".log")),
         "reports": reports,
         "qualityArtifacts": quality,
     }
@@ -166,9 +176,9 @@ def capture_reactor_junit(repo, run, commit, directory=Path("/tmp")):
 
 def verify_reactor_junit(repo, run, commit, directory=Path("/tmp")):
     """Refuse a missing success marker or any difference from the terminal bytes."""
-    if _run_path(directory, run, ".exit").read_text().strip() != "0":
+    if reactor_run_record(directory, run, ".exit").read_text().strip() != "0":
         raise ValueError("reactor execution is not successful")
-    manifest = _run_path(directory, run, ".junit.json")
+    manifest = reactor_run_record(directory, run, ".junit.json")
     content = manifest.read_bytes()
     if _serialize(_snapshot(repo, run, commit, directory)) != content:
         raise ValueError("reactor quality input differs from the successful terminal record")

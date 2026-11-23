@@ -13,7 +13,9 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
-from pgpt_reactor_junit import MODULE_DIRECTORIES, compiled_class_paths, verify_reactor_junit
+from pgpt_reactor_junit import (
+    MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record, verify_reactor_junit,
+)
 from pgpt_evidence_destination import evidence_output_root
 
 
@@ -113,16 +115,16 @@ def main():
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
     evidence = evidence_output_root(repo) / "008_NK-SCN-001/evidence"
-    read = lambda suffix: (Path("/tmp") / (run + suffix)).read_text().strip()
-    if read(".exit") != "0":
+    records = Path("/tmp")
+    if reactor_run_record(records, run, ".exit").read_text().strip() != "0":
         raise SystemExit("failed execution cannot be certified")
-    commit = read(".commit")
+    commit = reactor_run_record(records, run, ".commit").read_text().strip()
     subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True,
                    stdout=subprocess.DEVNULL)
     report_receipt = verify_reactor_junit(repo, run, commit)
     terminal = json.loads(report_receipt)
-    raw = (Path("/tmp") / (run + ".log")).read_bytes()
+    raw = reactor_run_record(records, run, ".log").read_bytes()
     if b"BUILD SUCCESS" not in raw or b"[ERROR]" in raw:
         raise SystemExit("build log is not successful")
     for folder in ("output", "coverage", "logs"):
