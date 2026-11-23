@@ -15,8 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 final class ArtifactComparatorQa055Test {
   private static final String DEFINITIONS = "program/characterization/tests/resources/cases";
   private static final String CASE_FILE = "CHR-A02.json";
-  private static final String FIXED_MESSAGE =
-      "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。";
+  private static final String FIXED_MESSAGE = "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。";
 
   @TempDir Path root;
 
@@ -53,7 +52,8 @@ final class ArtifactComparatorQa055Test {
 
   private static String artifact(String displayText, String retryAfter) {
     return """
-        {"caseId":"CHR-A02","status":"PASS","lockedMessage":"%s","lockedHeaders":{"Retry-After":"%s"}}
-        """.formatted(displayText, retryAfter);
+    {"caseId":"CHR-A02","status":"PASS","lockedMessage":"%s","lockedHeaders":{"Retry-After":"%s"}}
+    """
+        .formatted(displayText, retryAfter);
   }
 }
