@@ -63,6 +63,21 @@ def pins(value):
 def audit(repo, start, end):
     if not exact_source(start) or not exact_source(end):
         raise ValueError("expected two full Git commit IDs")
+
+    @cache
+    def is_commit(candidate):
+        result = git(
+            repo,
+            "rev-parse",
+            "--verify",
+            "--end-of-options",
+            f"{candidate}^{{commit}}",
+            required=False,
+        )
+        return result.returncode == 0 and result.stdout.strip() == candidate.encode()
+
+    if not is_commit(start) or not is_commit(end):
+        raise ValueError("range must identify Git commits")
     git(repo, "merge-base", "--is-ancestor", start, end)
     span = f"{start}..{end}"
     changed = git(
@@ -75,6 +90,8 @@ def audit(repo, start, end):
 
     @cache
     def blob_hash(commit, path):
+        if not is_commit(commit):
+            return None
         result = git(repo, "cat-file", "blob", f"{commit}:{path}", required=False)
         return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
@@ -93,7 +110,7 @@ def audit(repo, start, end):
             if path is None:
                 counts["externalOrProtected"] += 1
                 continue
-            if has_explicit_source and source is None:
+            if has_explicit_source and (source is None or not is_commit(source)):
                 unresolved.append(
                     {
                         "manifest": manifest,
