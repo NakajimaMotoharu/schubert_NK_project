@@ -100,8 +100,10 @@ final class TimedMonitorSnapshotConcurrencyTest {
       worker
           .submit(
               () -> {
-                assertTrue(filesystem.observe(OptionalDouble.of(92), true, at(2)).event().isEmpty());
-                assertTrue(heap.observe(OptionalDouble.of(88), false, true, at(2)).event().isEmpty());
+                assertTrue(
+                    filesystem.observe(OptionalDouble.of(92), true, at(2)).event().isEmpty());
+                assertTrue(
+                    heap.observe(OptionalDouble.of(88), false, true, at(2)).event().isEmpty());
                 assertEquals(
                     2,
                     pool.observe(OptionalDouble.of(0), 1, 0, true, at(2))

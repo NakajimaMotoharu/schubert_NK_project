@@ -189,8 +189,7 @@ public final class AlertLifecycle {
       }
     }
 
-    private Optional<Event> violation(
-        Severity observed, Instant at, Duration elapsed) {
+    private Optional<Event> violation(Severity observed, Instant at, Duration elapsed) {
       final ReentrantLock held = lock;
       held.lock();
       try {
@@ -214,7 +213,8 @@ public final class AlertLifecycle {
       try {
         advance(elapsed);
         if (active.isEmpty()) return Optional.empty();
-        // SS351 §12: routine normal samples/cause flags cannot retire investigation-required alerts.
+        // SS351 §12: routine normal samples/cause flags cannot retire investigation-required
+        // alerts.
         if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG)
           return active;
         Duration since = recoveringSince.orElse(elapsed);
