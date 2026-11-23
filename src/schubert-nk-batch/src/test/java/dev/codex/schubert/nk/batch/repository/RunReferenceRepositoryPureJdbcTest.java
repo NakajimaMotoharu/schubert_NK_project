@@ -19,9 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..009; no database or native calls. */
@@ -272,7 +274,8 @@ final class RunReferenceRepositoryPureJdbcTest {
   }
 
   @Test
-  void independentConnectionsCanRunConcurrently() throws Exception {
+  void independentConnectionsCanRunConcurrently()
+      throws ExecutionException, InterruptedException, TimeoutException {
     var executor = Executors.newVirtualThreadPerTaskExecutor();
     try {
       List<Future<Boolean>> results = new ArrayList<>();
