@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="ReplyCorrelationRegistryAndTerminalRace" tests="11" failures="0" errors="0" skipped="0">
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="nullDeadlineAndCapacityContractsFailBeforeMutation()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="oneOfOneHundredSimultaneousResponsesWins()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest" name="successfulCompletionIsAtomicAndDefensivelyCopiesBody()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest" name="callerCompletionViewCannotSetOrCancelTheRegistryPromise()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest" name="concurrentRegistrationsRespectCapacityAndReuseAllSlots()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest" name="nanosecondDeadlineAndCopiesStayIndependent()" />
+  <testcase classname="dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest" name="terminalRaceHasOneWinnerAndReturnsThePermit()" />
+</testsuite>

@@ -43,3 +43,7 @@ NK-MSG-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P00502公開19source1820行を全review、origin/main RD131 MQ021..036/UI231232234/SS321312311322323の個別method/入力/期待値/TestID19へ対応、485primary/costOwner全19一致。candidate8whole60定義はmetadata、Registry whole7のみ全body審査済み。Registry/PendingReply/Testの三入力が旧PG26456真正19成功と現byte一致で確認再演0、旧全体を現sourceへ転用しない。実EmbeddedBroker3wholeとWebBroker actual4/nativeownerはHOLD、他wholeはSDK/全body/sourcehistory資格前。MqLoginClientの既知callbackgraphがUNAVAILABLEへ縮退するBUG2834を修正前起票。Main/Test/compile/PT/実JMS/Root/native/DB/credential/actual4.class操作0。原/1 .087/.227/.455のみ準備完了、/2/190/正式451未受入、工数null。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py audit evidence/01_PT/018_NK-OPS-001/input/2314_p00502_audit_contract.json` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+## 2026-11-23 応答相関の有限単体確認
+
+Registryの既7とTerminal Raceの既4はSS321 §9のJVM内だけで実行。登録容量、1/100同時応答、1 ns境界、終端順、コピー、外部viewからの状態変更不可を固定入力で検査。5秒でworker終了を確認、JUnit 11件F/E/S0。同一execはL74/M17/C2/B22全数。PMD生18・意図null11を保持。実JMS無し。[PG43158](evidence/PG43158-p00502-registry-fixture-finite-v1/manifest.json)。

@@ -1,0 +1,492 @@
+{
+  "run": "PG43158-p00502-registry-fixture-finite-v1",
+  "source": "e428b9207cf3fade5316486459cabfabdf5dd28b",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:29:03.635876+00:00",
+  "wbs": "WBS-P005-02/2",
+  "design": [
+    "SS321 §9",
+    "SS312 §3.2"
+  ],
+  "defects": [
+    "BUG-3676",
+    "BUG-3677",
+    "YKT-2890"
+  ],
+  "earlierNineWereSubset": true,
+  "earlier": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG24242-jms-memory-bounded-twentyone-independent-v1/manifest.json",
+    "sha256": "cd3f6989e0b970ff8591fbf8fd86a676200f712963a053e71e1492f32df4334c"
+  },
+  "cases": [
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "allSixTerminalOrdersReturnOnePermitAndKeepTheFirstLiteralOutcome()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "callerCompletedOrCancelledViewsNeverChangeTheOwnedPromiseAndNullIsRejected()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "nullDeadlineAndCapacityContractsFailBeforeMutation()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "oneOfOneHundredSimultaneousResponsesWins()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "successfulCompletionIsAtomicAndDefensivelyCopiesBody()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "callerCompletionViewCannotSetOrCancelTheRegistryPromise()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "concurrentRegistrationsRespectCapacityAndReuseAllSlots()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "nanosecondDeadlineAndCopiesStayIndependent()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "terminalRaceHasOneWinnerAndReturnsThePermit()"
+    ]
+  ],
+  "passed": 11,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newTestDefinitions": 0,
+  "independentCoverage": {
+    "totals": {
+      "LINE": 74,
+      "METHOD": 17,
+      "CLASS": 2,
+      "BRANCH": 22
+    },
+    "subjects": [
+      {
+        "className": "dev/codex/schubert/nk/web/messaging/PendingReply",
+        "crc": "1dcaf9c000b10295",
+        "scope": {
+          "BRANCH": 0,
+          "LINE": 13,
+          "METHOD": 8,
+          "CLASS": 1
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry",
+        "crc": "4a6c4db1d34d43ea",
+        "scope": {
+          "BRANCH": 22,
+          "LINE": 61,
+          "METHOD": 9,
+          "CLASS": 1
+        }
+      }
+    ],
+    "sameExec": true,
+    "noExclusions": true,
+    "archiveAggregation": false
+  },
+  "compileMainUnchanged": true,
+  "inputSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java",
+      "sha256": "81563c7215b1c1f37e816a838b96c0349e0f4aa0316fc20f7e2f42b499b4b6ea"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+      "sha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "sha256": "d236882a6f42c543510d2e52c16c44c911843842628ccfe64ac13f90f6dffd94"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "sha256": "538bc2eae1405d88306c878fc17500d6e677c5d45ae31c6a00c507abe9813baa"
+    }
+  ],
+  "boundedWorkers": {
+    "daemonFactory": true,
+    "finiteTerminationSeconds": 5,
+    "finiteLatchSeconds": 5,
+    "affectedFixtureMethods": 2,
+    "exactCheckedDeclarations": 3
+  },
+  "toolReports": {
+    "checkstyle": 0,
+    "rawPmdBefore": [
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 111,
+        "rule": "CloseResource",
+        "reason": "only private executor with shutdownNow and finite await in finally or the local stop helper"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 111,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 116,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 130,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 131,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 36,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 44,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 50,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 56,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 96,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 101,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      }
+    ],
+    "rawPmdCurrent": [
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 114,
+        "rule": "CloseResource",
+        "reason": "only private executor with shutdownNow and finite await in finally or the local stop helper"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 114,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 119,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 133,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationRegistryTest.java",
+        "site": 134,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 38,
+        "rule": "CloseResource",
+        "reason": "only private executor with shutdownNow and finite await in finally or the local stop helper"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 39,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 39,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 48,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 54,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 60,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 103,
+        "rule": "CloseResource",
+        "reason": "only private executor with shutdownNow and finite await in finally or the local stop helper"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 104,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 104,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 110,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 146,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 147,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      },
+      {
+        "fixture": "ReplyCorrelationTerminalRaceTest.java",
+        "site": 149,
+        "rule": "DoNotUseThreads",
+        "reason": "owned finite local concurrency fixture"
+      }
+    ],
+    "rawSpotBugsBefore": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 99
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 100
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 91
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 92
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 93
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 95
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 96
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 97
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 98
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 182
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 183
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 106
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+        "site": 92
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+        "site": 36
+      }
+    ],
+    "rawSpotBugsCurrent": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 101
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 102
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 93
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 94
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 95
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 97
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 98
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 99
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 100
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 185
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "fixture": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+        "site": 186
+      }
+    ],
+    "suppressionsAdded": 0
+  },
+  "preservedReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43156-p00502-registry-fixture-static-before-v1/terminal.json",
+      "sha256": "85c2ca0a82e4be6928828d58f9de179b483b69bf3b9b508aac55047f1e9a3a36"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/terminal.json",
+      "sha256": "c4aec39b0fe8db85b01fa34d3f38a24f5f4815645ff025b34fb001e0d7aeed7d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/begin.json",
+      "sha256": "6a5744c8f2b9f5703804397d6eb73010f464999da5fe173fa70b68fdc455f29d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "85e0f052430270df69a0c3dec20c004f430c1c538f72edbd47248a8c7267f426"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/unit.exec",
+      "sha256": "8b6a5ea489e6cbe9b0dd118689d6c34aa847a8f313a42ccccc5adab3f3ee2c90"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/unfiltered.stdout",
+      "sha256": "5de8391d7df6088cc4e93066ca15c0279b2b2a4df57004690ed4ca667b7dc44c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/pmd.xml",
+      "sha256": "8f4d53421e5cb57444b03e135f6acfb42d81ba8553ce2bfeee6fb51f8739d60c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43158-p00502-registry-fixture-finite-v1/spotbugs.xml",
+      "sha256": "47c227ed6d879bc89a474b98a2f1517acb97d948b37dfaaf68a060e6c35b9574"
+    }
+  ],
+  "sanitized": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43158-p00502-registry-fixture-finite-v1/sanitized-junit.xml",
+      "sha256": "056eaad9119da18fa8cda5e9fc510bf6a8dd4066d57713d303aa505094d969fe"
+    },
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43158-p00502-registry-fixture-finite-v1/coverage-unfiltered.tsv",
+      "sha256": "5de8391d7df6088cc4e93066ca15c0279b2b2a4df57004690ed4ca667b7dc44c"
+    }
+  ],
+  "actualBrokerOrServer": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

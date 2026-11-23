@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-8877",
+  "workCategory": "SELECTED_TEST",
+  "source": "54ed9cdd8307c6491d8d5553b64735726059744a",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P005-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P005-02/2",
+    "元行": "WBS-P005-02/2",
+    "費目": "B",
+    "主担当": "WBS-P005-02",
+    "状態": "計画",
+    "作業": "同期request/reply・correlation・2秒期限／同source証拠による受入判定",
+    "残pp": "0.423",
+    "着手": "設計321・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "同期request/reply・correlation・2秒期限：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MQ-021,MQ-022,MQ-023,MQ-024,MQ-025,MQ-026,MQ-027,MQ-028,MQ-029,MQ-030,MQ-031,MQ-032,MQ-033,MQ-034,MQ-035,MQ-036",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "MQ-021、MQ-022、MQ-023、MQ-024、MQ-025、MQ-026、MQ-027、MQ-028",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.163",
+    "慎重pp": "0.845",
+    "要求設計の版差": "PT基準仕様 NK-MSG-001",
+    "lineNumber": 323,
+    "改訂残pp": "0.423"
+  },
+  "run": "PG43156-p00502-registry-fixture-static-before-v1",
+  "startEvent": "PGPT-20261008-8876",
+  "outcome": {
+    "newlyExecutedExisting": 11,
+    "passed": 11,
+    "actualCounter": {
+      "LINE": 74,
+      "METHOD": 17,
+      "CLASS": 2,
+      "BRANCH": 22
+    },
+    "finiteTeardownSites": 2,
+    "basicCheckedEliminated": 3,
+    "pmdRawBefore": 11,
+    "pmdRawAfter": 18,
+    "formalDelta": 0
+  },
+  "proof": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43158-p00502-registry-fixture-finite-v1/manifest.json",
+    "sha256": "474aaaa699d829ac3e5125d73246a87444fa0d10d75754e54e9e0c3236cc11c1"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-F03/2-2-b",
+    "target": "qualify PendingReply and ReplyCorrelationRegistry under current typed parent controls and publish both with same CRC"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T00:29:33+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 56,
+    "remainingPercent": 44,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "636cb4214728ba381b9b35ad7139de96aae04f335ea192bc1edbbce61faeb8e6",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T00:29:33+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 56,
+        "remainingPercent": 44,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T00:29:03.635876+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 56,
+    "remainingPercent": 44,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
