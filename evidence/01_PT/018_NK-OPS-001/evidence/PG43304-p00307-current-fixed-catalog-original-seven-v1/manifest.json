@@ -1,0 +1,192 @@
+{
+  "run": "PG43304-p00307-current-fixed-catalog-original-seven-v1",
+  "source": "dad4a44fac9b623df3606a069ab5d01d59d5d224",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P003-07/2",
+  "design": [
+    "SS343",
+    "SSC-456",
+    "SYS-002",
+    "SYS-004",
+    "UI243",
+    "UI253"
+  ],
+  "canonicalMain": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "canonicalDigest": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T04:00:52.281171+00:00",
+  "associatedMain": {
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+    "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740"
+  },
+  "originalJUnitCases": 7,
+  "firstPlanTyping": "The seven existing cases are JUnit, as checked in source receipts.",
+  "actualSelectProbe": 0,
+  "currentPhysical": [
+    {
+      "entry": "dev/codex/schubert/nk/storage/ServiceCredentialId.class",
+      "sha256": "34469e2c408bc7b2bf4b8f5c85dc4a715d9354753c3d4674d35b2603af725533"
+    },
+    {
+      "entry": "dev/codex/schubert/nk/storage/ServiceCredentialId$Kind.class",
+      "sha256": "f07689db44ba73074d9d553532c2c32a25b57eaafb63b9626f6c9aed1abc606c"
+    },
+    {
+      "entry": "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.class",
+      "sha256": "3ba3120b773b03b8627f97b7438d31744fa327262d9a9bee0a523eb91d82955d"
+    }
+  ],
+  "declaredOrder": [
+    {
+      "service": "API",
+      "sequence": 1,
+      "catalogName": "DB_API",
+      "kind": "PASSWORD",
+      "testId": "PT-OPS-CREDID-001"
+    },
+    {
+      "service": "API",
+      "sequence": 2,
+      "catalogName": "MQ_API",
+      "kind": "PASSWORD",
+      "testId": "PT-OPS-CREDID-001"
+    },
+    {
+      "service": "API",
+      "sequence": 3,
+      "catalogName": "API_CONTEXT_AES_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-001"
+    },
+    {
+      "service": "API",
+      "sequence": 4,
+      "catalogName": "API_INBOX_RESPONSE_AES_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-001"
+    },
+    {
+      "service": "API",
+      "sequence": 5,
+      "catalogName": "OPERATION_HMAC_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-001"
+    },
+    {
+      "service": "WEB",
+      "sequence": 1,
+      "catalogName": "DB_WEB",
+      "kind": "PASSWORD",
+      "testId": "PT-OPS-CREDID-002"
+    },
+    {
+      "service": "WEB",
+      "sequence": 2,
+      "catalogName": "MQ_WEB",
+      "kind": "PASSWORD",
+      "testId": "PT-OPS-CREDID-002"
+    },
+    {
+      "service": "WEB",
+      "sequence": 3,
+      "catalogName": "WEB_SESSION_AES_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-002"
+    },
+    {
+      "service": "WEB",
+      "sequence": 4,
+      "catalogName": "WEB_REVOKE_AES_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-002"
+    },
+    {
+      "service": "WEB",
+      "sequence": 5,
+      "catalogName": "WEB_LOG_AES_CURRENT",
+      "kind": "KEY",
+      "testId": "PT-OPS-CREDID-002"
+    }
+  ],
+  "fixtureSource": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/EnumValueCatalogCompatibilityTest.java",
+      "sha256": "d5ca7770d0664831aae96eabf785d13195cc0695e6903c7ce01a31b0c1e7b61f"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialIdEnumValueContractTest.java",
+      "sha256": "51fed6f4f24ee3c43bbe24d8da919c74bc368dcf165452cb7b5e9c4dc43bfbbb"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialIdTest.java",
+      "sha256": "3e57341d9cc9427e366ea1e91ac5f2d808f87d0f0cc3dc0679e6470776438461"
+    }
+  ],
+  "qualifiedOriginal": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38480-ssc456-storage-fixed-catalog-independent-v1/manifest.json",
+      "sha256": "73afa8af830c640c651a878dfd991bb958342c93b6ca716800921d513ed6d03e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38466-ssc456-storage-main-compile-v1/manifest.json",
+      "sha256": "c9f48e645bf425dadb8fb49d8e8d1ea5907f55df329b9d900715fff9f7ca330c"
+    }
+  ],
+  "rawOriginalTwoClasses": {
+    "LINE": {
+      "missed": 0,
+      "covered": 31
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 14
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 2
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0
+    },
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 240
+    }
+  },
+  "scopeXml": [
+    {
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38480-ssc456-storage-fixed-catalog-independent-v1/TEST-junit-jupiter.xml",
+        "sha256": "95039ac867394dfe3c8ad78bbfe9a92b7c1e575ab6f78fd8e895702063c836af"
+      },
+      "originalSha256": "436eaa5765c67bcdadc70de4b911809a04f09dbf4567cd667bdc9b0afccd9269",
+      "cases": 7
+    },
+    {
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38480-ssc456-storage-fixed-catalog-independent-v1/TEST-junit-platform-suite.xml",
+        "sha256": "85d08e6b21449a919e54f389c4415b278fd6055387c6e4b771cddc20d2580c7b"
+      },
+      "originalSha256": "c45930f9dd57165a2e2217b89674fb930d74b4d197e6202518966632be4e5c1d",
+      "cases": 0
+    },
+    {
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38480-ssc456-storage-fixed-catalog-independent-v1/TEST-junit-vintage.xml",
+        "sha256": "9e83518fe4b9abed6d7f286a85e2690b1e2e23706b352bb7d76d45ce31a075ad"
+      },
+      "originalSha256": "f463858129a74f44bebe9a3a00334e021984c054cc88faf6817b8923fc45b6fd",
+      "cases": 0
+    }
+  ],
+  "currentStorageRegular": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+  },
+  "dynamicReruns": 0,
+  "configurationOrCredentialAccess": 0,
+  "realDirectoryInodeAclAndOwnerQualification": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
