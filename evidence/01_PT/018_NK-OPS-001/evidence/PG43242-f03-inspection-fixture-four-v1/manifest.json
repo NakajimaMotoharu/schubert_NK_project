@@ -1,0 +1,145 @@
+{
+  "run": "PG43242-f03-inspection-fixture-four-v1",
+  "source": "db533e4f5c90da1a1a6488e20f7e456d5008c385",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "related": "WBS-P004-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:30:54.486306+00:00",
+  "bugs": [
+    "BUG-3690",
+    "BUG-3691"
+  ],
+  "ykt": "YKT-2899",
+  "qualifiedSelectedCases": {
+    "literalSqlTimeoutAndUuidUtcBindingsReturnAllFourColumnsWithoutOwnershipMutation": "INSPPORT001",
+    "everyProviderFaultPointIsReachedAndOnlySqlLosesPrivateDiagnostics": "INSPPORT006",
+    "beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag": "INSPPORT008",
+    "singleSqlFailurePreservesNestedErrorAfterOwnedResourcesClose": "INSPPORT011"
+  },
+  "qualifiedRuns": 4,
+  "newTestDefinitions": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunForSelected": 0,
+  "xml": [
+    {
+      "file": "TEST-junit-jupiter.xml",
+      "sha256": "bb4a0d18e38e904b6dafbc8296454b4dc92a7ef154ef98c2f2b3467e1e997ad4",
+      "cases": 4
+    },
+    {
+      "file": "TEST-junit-platform-suite.xml",
+      "sha256": "4d5da31307953f9e65e74eeade87e0b7bbe4fbeb5476616aae46ef60b6b3c825",
+      "cases": 0
+    },
+    {
+      "file": "TEST-junit-vintage.xml",
+      "sha256": "bddb2477a6c6a20943f8c9487db52f85577caade1daf057f9edecdbcbf41d671",
+      "cases": 0
+    }
+  ],
+  "fixture": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "1c58be5862701602934d2e0f15f72e255150342fe17ee2ebf25444f83953f6ba"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+    }
+  ],
+  "actualToolExitCodes": {
+    "format": 0,
+    "fixture": 0,
+    "style": 0,
+    "spotbugs": 1,
+    "pmd": 4,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "physical": [
+    {
+      "module": "storage",
+      "type": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "module": "storage",
+      "type": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "module": "bootstrap",
+      "type": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+      "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    }
+  ],
+  "originalRegularArtifacts": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "rawCov": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43242-f03-inspection-fixture-four-v1/coverage-unfiltered.tsv",
+    "sha256": "a7c7dbb96ae5a4690548c9879ab3340adbea62645d3a3e19e8a2cac4d07b36df"
+  },
+  "originalExecSha256": "da8a6ddac6394f0532fe7d548b0f4ce15661efcedc5e209d2244f8004c161b93",
+  "original13Replayed": false,
+  "priorStaticExactComparison": {
+    "spotbugsBefore": 2,
+    "spotbugsAfter": 1,
+    "remainingSpotbugs": [
+      "THROWS_METHOD_THROWS_CLAUSE_THROWABLE"
+    ],
+    "pmdBefore": 20,
+    "pmdAfter": 17,
+    "remainingPmdRules": {
+      "UseProperClassLoader": 3,
+      "DoNotUseThreads": 11,
+      "CloseResource": 1,
+      "UseConcurrentHashMap": 2
+    },
+    "checkstyle": 0,
+    "noSuppression": true,
+    "staticRawHashes": [
+      "d61d782a11fa04aae4a217d40c65bd368a2c324d87a6f0b8c845ecde59201e60",
+      "497d6466ce784ea90f99ff059cbdc18f8e8238ae1c8eb078b859f65ed221e8cb"
+    ]
+  },
+  "typedJdkOnly": true,
+  "realDbActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
