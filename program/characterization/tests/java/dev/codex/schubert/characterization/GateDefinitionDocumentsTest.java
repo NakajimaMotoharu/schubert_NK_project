@@ -425,11 +425,15 @@ final class GateDefinitionDocumentsTest {
   @Test
   void declaredFontAndSelectorNamesRejectNonTextEntries() throws IOException {
     List<Executable> checks = new ArrayList<>();
+    List<String> fontFailure = List.of("BROWSER_FONTS");
+    var emptyFonts = fixture();
+    object(emptyFonts, BROWSER).putArray("fonts");
+    checks.add(() -> assertEquals(fontFailure, validate(emptyFonts)));
     for (JsonNode invalid :
         List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
       var input = fixture();
       object(input, BROWSER).putArray("fonts").add(invalid);
-      checks.add(() -> assertEquals(List.of("BROWSER_FONTS"), validate(input)));
+      checks.add(() -> assertEquals(fontFailure, validate(input)));
     }
     for (JsonNode invalid :
         List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("false"))) {
