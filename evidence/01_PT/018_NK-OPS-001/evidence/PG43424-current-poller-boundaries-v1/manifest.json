@@ -1,0 +1,32 @@
+{
+  "run": "PG43424-current-poller-boundaries-v1",
+  "source": "51aceeba73223307dd53bf0a5d6632e3160f504d",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-23T06:52:53.343231+00:00",
+  "observedJUnit": {
+    "started": 5,
+    "endedWithoutFailure": 3,
+    "errors": 2,
+    "failures": 0,
+    "skipped": 0
+  },
+  "errors": [
+    {
+      "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+      "error": "java.lang.NoClassDefFoundError"
+    },
+    {
+      "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+      "error": "java.lang.NoClassDefFoundError"
+    }
+  ],
+  "missingFixtureClass": "FilesystemHealthObservationTest$FixtureStore",
+  "originalXmlSha256": "83bc295d72fcefaef1077d3357c8465897833f4eb18d366b42b84224fe6c6758",
+  "terminalSha256": "ce9e931b37c70e901226b244cccaa17b87ae3b86e841e8d6b435dc4da63fa4e3",
+  "inputSha256": "530de214fd5770829c15a873b6e5352d9d130fbb77426e9ef053b6feb5f89dbb",
+  "coverageQualified": false,
+  "notCountedAsAcceptedRun": true,
+  "defect": "BUG-3705",
+  "productSourceChanged": false,
+  "formalAcceptanceId": null
+}
