@@ -1,0 +1,67 @@
+{
+  "run": "PG43532",
+  "terminalAtUTC": "2026-11-23T09:45:37.933842+00:00",
+  "actualExit": 0,
+  "source": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "approvedDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "designPins": [
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    }
+  ],
+  "trace": {
+    "owner": "WBS-P018-09/2",
+    "verificationRefs": [
+      "WBS-G13.07/2"
+    ],
+    "source": "3b49a100d473f7d3c58eeb0457e689023ec1ef42",
+    "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "tests": [
+      "BATCHMET001",
+      "BATCHMET002",
+      "BATCHMET003",
+      "BATCHMET004",
+      "BATCHMET005",
+      "GENB002"
+    ],
+    "rawSingleProductRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43530-current-batch-metric-six-single-exec-v1/manifest.json",
+      "sha256": "61be08e87064a22294f13d7e6de2dfc8de6fb0aca5427470466306c2cd80ca4e"
+    },
+    "design": {
+      "SS351 §6": [
+        "counter:step,status",
+        "gauge:step",
+        "exclude uncontrolled labels"
+      ],
+      "SS341 §§4-5": "approved lifecycle outcome vocabulary",
+      "RD171 MON-010/011": "local mode-value distinction only"
+    },
+    "counters": {
+      "LINE": 30,
+      "METHOD": 18,
+      "CLASS": 3,
+      "BRANCH": 10
+    },
+    "newLocallyQualifiedDistinctWitness": 1,
+    "sharedReplaysForSameStream": 5,
+    "newMeasurementsInThisAudit": 0,
+    "formalDelta": 0,
+    "formalAcceptanceId": null
+  },
+  "previousProposedTraceCorrection": "3800 next-action mentioned MON-001/MON-009 prospectively; canonical definitions are other contracts and receive no evidence allocation here.",
+  "pending": [
+    "actual emitter and view of counters/gauges",
+    "MON-010/011 effective service behavior",
+    "451 and formal owner review"
+  ]
+}

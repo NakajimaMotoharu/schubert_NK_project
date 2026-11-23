@@ -719035,5 +719035,49 @@
       "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43510-current-coverage-probe-trace-v1/manifest.json",
       "sha256": "09a5d845517501c24bc447187d11e225907e1b5ab8b512b33bc1a7e2d4be8a6d"
     }
+  },
+  "currentBatchMetricCatalogueThreeTypesPG43532": {
+    "owner": "WBS-P018-09/2",
+    "verificationRefs": [
+      "WBS-G13.07/2"
+    ],
+    "source": "3b49a100d473f7d3c58eeb0457e689023ec1ef42",
+    "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "tests": [
+      "BATCHMET001",
+      "BATCHMET002",
+      "BATCHMET003",
+      "BATCHMET004",
+      "BATCHMET005",
+      "GENB002"
+    ],
+    "rawSingleProductRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43530-current-batch-metric-six-single-exec-v1/manifest.json",
+      "sha256": "61be08e87064a22294f13d7e6de2dfc8de6fb0aca5427470466306c2cd80ca4e"
+    },
+    "design": {
+      "SS351 §6": [
+        "counter:step,status",
+        "gauge:step",
+        "exclude uncontrolled labels"
+      ],
+      "SS341 §§4-5": "approved lifecycle outcome vocabulary",
+      "RD171 MON-010/011": "local mode-value distinction only"
+    },
+    "counters": {
+      "LINE": 30,
+      "METHOD": 18,
+      "CLASS": 3,
+      "BRANCH": 10
+    },
+    "newLocallyQualifiedDistinctWitness": 1,
+    "sharedReplaysForSameStream": 5,
+    "newMeasurementsInThisAudit": 0,
+    "formalDelta": 0,
+    "formalAcceptanceId": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43532-current-batch-metric-catalogue-requirement-trace-v1/manifest.json",
+      "sha256": "f351d365504e04f79d50076368d5ff57fb7ec61a96bf415a00713a7e36ffc912"
+    }
   }
 }
