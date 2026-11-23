@@ -1,0 +1,181 @@
+{
+  "run": "PG43794",
+  "source": "5542a9e9018071868e7d2317bb126ec09ed6f64e",
+  "productionCoreMain": "5542a9e9018071868e7d2317bb126ec09ed6f64e",
+  "terminalAtUTC": "2026-11-23T17:25:08.276720+00:00",
+  "actualExit": 0,
+  "counts": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "fixtureTestIds": [
+    "EXDUR001",
+    "EXDUR002",
+    "EXDUR003",
+    "EXDUR004",
+    "EXDUR005",
+    "EXDUR006",
+    "EXDUR007",
+    "EXDUR008",
+    "EXDUR009",
+    "EXDUR010",
+    "EXDUR011"
+  ],
+  "newRegressionId": "EXDUR011",
+  "existingIndependentVectorCount": 10,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v1/begin.json",
+    "sha256": "ee25f5de17d98947ee33f7897fcb2f4d0fc25cbf6d2ffefeee0a731d4ac33e64"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v1/terminal.json",
+    "sha256": "dec78fcaeb65101ab7ed201cce72516ecaf0c309de54a58b27f8f539a3f561bd"
+  },
+  "unitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "b3520a6a940fc869d13cede8e042b9e5b4806692d421069918f65bcce9aff71e"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v1/unit.exec",
+    "sha256": "2ce4f8f3f5ad774f9ae17050b74579dc45be4646e275ef9cd2055179a206f02f"
+  },
+  "coverageUnfiltered": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v1/unfiltered.out",
+    "sha256": "a41c35c85c496662f961f28babf490d8208d5065b1c8504e9a45882381054bd1"
+  },
+  "classMeasurements": {
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry": {
+      "id": "9cac91834dd9c808",
+      "missedCovered": {
+        "INSTRUCTION": [
+          1,
+          110
+        ],
+        "BRANCH": [
+          1,
+          13
+        ],
+        "LINE": [
+          1,
+          22
+        ],
+        "COMPLEXITY": [
+          1,
+          12
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary": {
+      "id": "2acaa9b7d3bcab64",
+      "missedCovered": {
+        "INSTRUCTION": [
+          6,
+          146
+        ],
+        "BRANCH": [
+          0,
+          10
+        ],
+        "LINE": [
+          1,
+          25
+        ],
+        "COMPLEXITY": [
+          0,
+          12
+        ],
+        "METHOD": [
+          0,
+          7
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "methodDeficits": [
+    {
+      "name": "requireCompatible",
+      "descriptor": "(Lio/micrometer/core/instrument/MeterRegistry;)V",
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "missedCovered": {
+        "INSTRUCTION": [
+          1,
+          8
+        ],
+        "BRANCH": [
+          1,
+          1
+        ],
+        "LINE": [
+          1,
+          2
+        ],
+        "COMPLEXITY": [
+          1,
+          1
+        ],
+        "METHOD": [
+          0,
+          1
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "takeSnapshot",
+      "descriptor": "()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;",
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "missedCovered": {
+        "INSTRUCTION": [
+          6,
+          48
+        ],
+        "BRANCH": [
+          0,
+          2
+        ],
+        "LINE": [
+          1,
+          6
+        ],
+        "COMPLEXITY": [
+          0,
+          2
+        ],
+        "METHOD": [
+          0,
+          1
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "bugs": [
+    "BUG-3734"
+  ],
+  "relatedYkt": "YKT-2929",
+  "compileStrictJavac": true,
+  "nullAwayAndTypedStaticEvidencePending": true,
+  "realServiceActions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

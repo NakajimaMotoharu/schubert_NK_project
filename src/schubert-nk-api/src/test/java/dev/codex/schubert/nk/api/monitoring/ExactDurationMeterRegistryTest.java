@@ -261,6 +261,21 @@ class ExactDurationMeterRegistryTest {
           IllegalArgumentException.class, () -> ExactDurationMeterRegistry.requireCompatible(null));
       assertEquals(0, registry.getMeters().size());
     }
+    try (var registry = registry()) {
+      var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+      recorder.record(
+          DbQueryDurationMetricRecorder.Query.ASYNC_JOB_STATE_COUNTS,
+          DbQueryDurationMetricRecorder.Outcome.SUCCESS,
+          100_000_000L);
+      var observed =
+          registry
+              .get(NAME)
+              .tags("query_id", "ASYNC_JOB_STATE_COUNTS", "outcome", "SUCCESS")
+              .summary();
+      assertEquals(1, observed.count());
+      assertEquals(.1, observed.totalAmount());
+      cdf(observed, 0, 0, 1, 1, 1);
+    }
   }
 
   private static class GenericRegistry extends SimpleMeterRegistry implements AutoCloseable {

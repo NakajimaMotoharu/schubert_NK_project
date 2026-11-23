@@ -25,3 +25,5 @@ SDK内部のdynamic range調整・最初の大/小観測からの順序依存と
 BUG-3734、YKT-2929、WBS-F03/2-2-b／P018-09、RD171／UI252／SS351 §6。前提は空の自己所有Micrometer registry、固定clock、正規の5境界。ExactSummary.recordにNaNを一回渡して拒否を確認する。続いて別のテスト所有workerが0.1秒を一件記録し、takeSnapshotを5秒以内に返す。独立期待は件数1、合計・最大値0.1秒、CDFは0/0/1/1/1。NaNの算入、失敗後の排他残存、snapshotの不整合を検出する。workerにはvirtual threadを使い、finallyでshutdownNowと10秒の終了確認を行う。入力は固定値と自己所有registryのみ。
 
 収録範囲は元EXDUR001～010およびEXDUR011。元10件の期待値は維持する。Java25、Mavenローカル固定依存、選択Test ID、実行commit、NullAway・書式・Checkstyle・PMD・SpotBugs・単一exec四指標、実JUnitの終端は再試験manifestに結ぶ。全製品の正規包装・全451は別の条件。
+
+EXDUR006 追補。汎用registryのDEBUG拒否と対に、適合registryのDEBUG経路に100,000,000nsを一件供給する。対象query、outcomeのseriesだけを固定タグで参照し、件数1、合計0.1秒、CDF 0/0/1/1/1を独立に検証する。元の未測定枝はBUG-2003／YKT-1751も参照。
