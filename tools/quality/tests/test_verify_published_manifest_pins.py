@@ -84,6 +84,27 @@ class PublishedManifestPinsTest(unittest.TestCase):
             result["unresolved"],
         )
 
+    def test_explicit_source_must_name_a_full_commit_without_implicit_fallback(self):
+        for invalid in (self.original[:9], "HEAD", None, 123):
+            with self.subTest(invalid=invalid):
+                # Each digest matches the latest bytes. The explicit source still must bind them.
+                self.manifest({"reference": pin(FIXTURE, INITIAL, source=invalid)})
+                end = self.commit()
+
+                result = audit(self.repo, self.original, end)
+
+                self.assertEqual(0, result["current"])
+                self.assertEqual(
+                    [
+                        {
+                            "manifest": MANIFEST,
+                            **pin(FIXTURE, INITIAL, source=None),
+                            "reason": "INVALID_EXPLICIT_SOURCE",
+                        }
+                    ],
+                    result["unresolved"],
+                )
+
     def test_current_tree_is_from_commit_and_never_from_worktree(self):
         self.manifest([pin(FIXTURE, INITIAL), pin(FIXTURE, INITIAL)])
         self.manifest([pin(FIXTURE, UPDATED)], "documents/manifest.json")
