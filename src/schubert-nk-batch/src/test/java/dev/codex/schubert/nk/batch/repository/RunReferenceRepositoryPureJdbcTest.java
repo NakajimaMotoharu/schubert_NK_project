@@ -83,6 +83,26 @@ final class RunReferenceRepositoryPureJdbcTest {
   }
 
   @Test
+  void historicalAndNonzeroOffsetsBindTheSameFixedUtcInstant() {
+    // PT-BAT-UTCPORT001: pairs spell out the expected value independently of the JDBC adapter.
+    var vectors =
+        List.of(
+            List.of("1582-10-04T09:00:00+09:00", "1582-10-04T00:00:00Z"),
+            List.of("1582-10-14T20:00:00-04:00", "1582-10-15T00:00:00Z"),
+            List.of("1900-01-01T00:30:00+09:00", "1899-12-31T15:30:00Z"),
+            List.of("1969-12-31T19:00:00-05:00", "1970-01-01T00:00:00Z"),
+            List.of("2026-09-12T23:59:59.999999-04:00", "2026-09-13T03:59:59.999999Z"));
+    for (var vector : vectors) {
+      var fixture = new Fixture();
+      var cutoff = OffsetDateTime.parse(vector.getFirst()).toInstant();
+      fixture.read(new BatchRun(ID, cutoff));
+      assertSame(ID, fixture.parameters.get(1));
+      assertEquals(OffsetDateTime.parse(vector.getLast()), fixture.parameters.get(2));
+      fixture.closed();
+    }
+  }
+
+  @Test
   void independentBooleanProjections() {
     for (int mask = 1; mask < 16; mask++) {
       var fixture = new Fixture();
