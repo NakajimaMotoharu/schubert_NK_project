@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorderTest.Registry
 import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorderTest.Unformattable;
 import dev.codex.schubert.nk.web.monitoring.WebOutboxObservationRepositoryTest.Fixture;
 import dev.codex.schubert.nk.web.monitoring.WebOutboxObservationRepositoryTest.Row;
+import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -22,7 +23,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
 import org.junit.jupiter.api.Test;
 
 /** WEBOBXCONN001..008/1721, own JDBC proxy/registry/latches only, never real DB/clock/Root. */
@@ -242,7 +245,8 @@ class WebOutboxMetricCollectorTest {
         var entered = new CountDownLatch(1);
         var release = new CountDownLatch(1);
         var attempted = new CountDownLatch(1);
-        var contender = new AtomicReference<Thread>();
+        var firstThreadId = new AtomicLong();
+        var contenderThreadId = new AtomicLong();
         var first = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 2));
         var second = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 7, 6));
         var seen = new AtomicReference<Observation>();
@@ -250,6 +254,7 @@ class WebOutboxMetricCollectorTest {
             () -> {
               assertTrue(collector.snapshot().isEmpty());
               unknown(registry);
+              firstThreadId.set(Thread.currentThread().threadId());
               entered.countDown();
               await(release);
             };
@@ -264,15 +269,21 @@ class WebOutboxMetricCollectorTest {
           var b =
               executor.submit(
                   () -> {
-                    contender.set(Thread.currentThread());
+                    var connection = second.connection();
+                    contenderThreadId.set(Thread.currentThread().threadId());
                     attempted.countDown();
-                    return collector.collect(second.connection(), AS_OF);
+                    return collector.collect(connection, AS_OF);
                   });
           await(attempted);
+          var threads = ManagementFactory.getThreadMXBean();
+          var waiter = threads.getThreadInfo(contenderThreadId.get());
           long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-          while (contender.get().getState() != Thread.State.BLOCKED && System.nanoTime() < deadline)
-            Thread.onSpinWait();
-          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+          while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
+              && System.nanoTime() < deadline) {
+            LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+            waiter = threads.getThreadInfo(contenderThreadId.get());
+          }
+          assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
           assertEquals(0, second.prepared);
           assertTrue(collector.snapshot().isEmpty());
           release.countDown();

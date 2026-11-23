@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Private-owner readonly acquisition through complete publication; no real DB or scheduler
  * admission.
  */
 public final class WebOutboxMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final WebOutboxObservationRepository repository;
   private final WebOutboxMetricRecorder metrics;
 
@@ -26,7 +27,8 @@ public final class WebOutboxMetricCollector {
   public Optional<Observation> collect(Connection connection, Instant asOf) throws SQLException {
     Objects.requireNonNull(connection, "borrowed Web metrics connection");
     Objects.requireNonNull(asOf, "Web outbox observation instant");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return Optional.empty();
       try {
         Observation value = repository.read(connection, asOf);
@@ -36,6 +38,8 @@ public final class WebOutboxMetricCollector {
         metrics.missing();
         throw unavailableObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 

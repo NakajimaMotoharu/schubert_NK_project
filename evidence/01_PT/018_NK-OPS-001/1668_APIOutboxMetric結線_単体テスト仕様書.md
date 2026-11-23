@@ -16,3 +16,7 @@ NK-OPS-001/P01809/C07/RD171-MON005～013/UI252/SS331351/PG-D548/group1887。Outb
 expectedはTest固定件数/秒・独立元Fixtureの固定SQL/列名/型/close oracle（1664）で生成、production.getGauge等をexpectedへ用いない。record生成32契約は当sourceの既GENMET8/OUTBOXAGE8/OUTBOXDB010で必要回帰し、数値coverageへ足さず明示保持。既Fixtureのoracle/sourceを変更せずpackage共有を再利用、返却Snapshotはimmutable。private lockはread-close-publication全体だけ、別gauge/family scrapeの同時整合は保証しない。caller registry/connection/tx/asOf真正性やscheduler/外側timeoutの所有を移譲しない。
 
 新8＋必要既90→当98PT12suite/全24Java・実20＋metadata1予定、7462等の旧成功を算術加算0。run7476/独立7478/正常六compile7480/全Jar7482/trace7484/review7486、branch/source/command/time/environment/actual exit/input/output/XML/four100/static/BUG/hashは原manifestと後続結果へ。全分岐/null/異常/例外/並行/provider部分失敗とNPE静的解析を確認、fail/flaky/skipped/notrunはPASS0。開始3/5/9pp上限10/原-v4-v5固定、元製造新8・既90当再資格/tool費を分離、正式1964-53/原190新受入0/工数null/QA051final/PTALT0/whole451/native/CHR/actualHOLD不変更。
+
+## 2026-11-24 排他方式の是正
+
+BUG-3744／YKT-2929。取得済み資源の解放から同ownerの完全値公開を私有ReentrantLockに保持し、正常・早期return・元Throwable再throwの全てでfinally解放。借用Connection、read-only契約、取得資源の順、公開後の値と既OUTBOXCONN001～008の独立期待を維持する。PG43812の局所scopeで元指摘と生四指標を照合。実DBを使用しない。

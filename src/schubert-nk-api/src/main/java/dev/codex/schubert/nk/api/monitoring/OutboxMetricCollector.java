@@ -9,10 +9,11 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.ReentrantLock;
 
 /** Owner-local read/close/publication, not actual source or outer deadline. PG-D548/1668. */
 public final class OutboxMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final OutboxObservationRepository repository;
   private final OutboxRowsMetricRecorder rows;
   private final OutboxAgeMetricRecorder ages;
@@ -30,7 +31,8 @@ public final class OutboxMetricCollector {
   public Optional<Snapshot> collect(Connection connection, Instant asOf) throws SQLException {
     Objects.requireNonNull(connection, "borrowed metrics connection");
     Objects.requireNonNull(asOf, "outbox observation instant");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!rows.detailedMetricsRequested()) return Optional.empty();
       try {
         Snapshot supplied = repository.read(connection, asOf);
@@ -44,6 +46,8 @@ public final class OutboxMetricCollector {
         lastObservation.set(Optional.empty());
         throw failedObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 

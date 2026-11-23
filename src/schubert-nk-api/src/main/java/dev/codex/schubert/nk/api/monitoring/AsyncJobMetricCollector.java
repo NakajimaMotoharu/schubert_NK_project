@@ -7,13 +7,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Owner-local collection/publication, not real connection admission, scheduler or outer deadline.
  * RD171/UI252/SS331332351; PG-D541/ASYNCCONN001..008/spec1631.
  */
 public final class AsyncJobMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final AsyncJobCountRepository repository;
   private final AsyncJobMetricRecorder metrics;
 
@@ -26,7 +27,8 @@ public final class AsyncJobMetricCollector {
   /** Caller owns the connection/transaction; serializes read through publication for this owner. */
   public Optional<Snapshot> collect(Connection connection) throws SQLException {
     Objects.requireNonNull(connection, "borrowed metrics connection");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return Optional.empty();
       try {
         Snapshot supplied = repository.read(connection);
@@ -36,6 +38,8 @@ public final class AsyncJobMetricCollector {
         metrics.missing();
         throw failedObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 
