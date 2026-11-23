@@ -44,8 +44,8 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
         )
         self.wrapper.chmod(0o700)
 
-    def invoke(self, *args, output="success"):
-        env = dict(os.environ, NK_SIMULATED_MAVEN_OUTCOME=output)
+    def invoke(self, *args, output="success", cdpath=""):
+        env = dict(os.environ, NK_SIMULATED_MAVEN_OUTCOME=output, CDPATH=str(cdpath))
         return subprocess.run(
             ["bash", str(SCRIPT), *map(str, args)],
             cwd=self.root,
@@ -129,6 +129,23 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
         self.assertEqual(2, result.returncode)
         self.assertFalse((self.root / "arguments.json").exists())
         self.assertEqual([], list(elsewhere.iterdir()))
+
+    def test_sbom014_relative_repository_is_resolved_from_the_worktree(self):
+        search_directory = self.root / "shell search path"
+        (search_directory / self.repository.name).mkdir(parents=True)
+        (search_directory / "missing from worktree").mkdir()
+
+        missing = self.invoke("protocol", "missing from worktree", STAMP, cdpath=search_directory)
+        self.assertNotEqual(0, missing.returncode)
+        self.assertFalse((self.root / "arguments.json").exists())
+
+        result = self.invoke("protocol", self.repository.name, STAMP, cdpath=search_directory)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(1, len(result.stdout.splitlines()))
+        self.assertEqual(FIXTURE, Path(result.stdout.strip()).read_bytes())
+        args = json.loads((self.root / "arguments.json").read_bytes())
+        repositories = [arg for arg in args if arg.startswith("-Dmaven.repo.local=")]
+        self.assertEqual([f"-Dmaven.repo.local={self.repository}"], repositories)
 
 
 if __name__ == "__main__":

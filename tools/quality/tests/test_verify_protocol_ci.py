@@ -1,4 +1,4 @@
-"""Local Maven command contract for PT-OPS-CI-PRO001..004."""
+"""Local Maven command contract for PT-OPS-CI-PRO001..005."""
 import os
 from pathlib import Path
 import subprocess
@@ -30,11 +30,12 @@ class VerifyProtocolCiTest(unittest.TestCase):
         )
         wrapper.chmod(0o700)
 
-    def invoke(self, *arguments, status=0):
+    def invoke(self, *arguments, status=0, cdpath=""):
         return subprocess.run(
             [str(SCRIPT), *map(str, arguments)],
             cwd=self.root,
-            env=dict(os.environ, MAVEN_ARGS="-pl unrelated", FIXTURE_MAVEN_EXIT=str(status)),
+            env=dict(os.environ, MAVEN_ARGS="-pl unrelated", FIXTURE_MAVEN_EXIT=str(status),
+                     CDPATH=str(cdpath)),
             capture_output=True,
             timeout=10,
         )
@@ -69,3 +70,19 @@ class VerifyProtocolCiTest(unittest.TestCase):
         result = self.invoke(self.repository)
         self.assertEqual(2, result.returncode)
         self.assertFalse((self.root / "observed.args").exists())
+
+    def test_ci_pro005_relative_repository_is_resolved_from_the_worktree(self):
+        search_directory = self.root / "shell search path"
+        (search_directory / self.repository.name).mkdir(parents=True)
+        (search_directory / "missing from worktree").mkdir()
+
+        missing = self.invoke("missing from worktree", cdpath=search_directory)
+        self.assertEqual(2, missing.returncode)
+        self.assertFalse((self.root / "observed.args").exists())
+
+        result = self.invoke(self.repository.name, cdpath=search_directory)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(b"", result.stdout)
+        args = (self.root / "observed.args").read_bytes().split(b"\0")
+        repositories = [arg for arg in args if arg.startswith(b"-Dmaven.repo.local=")]
+        self.assertEqual([f"-Dmaven.repo.local={self.repository}".encode()], repositories)
