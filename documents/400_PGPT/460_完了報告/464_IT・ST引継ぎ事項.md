@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 現四モデルの外部archiveの技術証拠
+
+四正規製品の既存有効モデルに外部36座標があり、同じ保全cache内の36実ファイルのSHA-256を元証跡と照合した。外部compile 40・runtime 6 edge。保全cache側の証拠であり、署名付き実配布クラスパスと配布条件・承認担当は未決。 [PG43428](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43428-four-model-cache-byte-provenance-v1/manifest.json)
+
 ## 2026-11-23 15:23 JST 正規四製品のMaven依存とQA-061
 
 Protocol／Storage／Bootstrap／Batchの実効compile/runtimeモデルを現埋込POMと照合。外部36座標に該当する過去宣言36、通知名候補18、該当名観測なし18。署名付き同候補、正規API／Web、配布条件・承認担当、実配布class pathの照合を次の判定に要する。 [PG43404](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43404-four-regular-runtime-tree-offline-v2/manifest.json) [PG43406](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43406-current-four-models-labeled-license-metadata-v1/manifest.json)
