@@ -1,0 +1,465 @@
+{
+  "run": "PG43878",
+  "source": "c6cce801307550bd962ea0356f9ec025caff425d",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:31:19.036280+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "WBS-C07",
+    "WBS-P018-09",
+    "RD171",
+    "UI252",
+    "SS351"
+  ],
+  "scope": "Batch assembly, SDK owner and GC handle contracts with isolated own JVM and value ports.",
+  "specs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3949_Batch標準残七十三_有限owner仕様.md",
+      "sha256": "0a9e99540d347ad4a36570a8836b558458ff0dddb69bec1c3e5c2a2515bdc443"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/5466_Batch標準SDK段階解放の単体仕様.md",
+      "sha256": "37d613d927d4348e2cea23dd870b8f6a0a2ab5b1d52e3734100d6803ecb0c78b"
+    }
+  ],
+  "oldModeEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40904-f03-standard-sdk-owners-current-51-raw-v1/manifest.json",
+    "sha256": "85dbac94a0834471860b08f8608599cdd68b3d7c9ff1ea8747d14d8e8b4c1d70"
+  },
+  "sameNormalJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43834-current-batch-cleanup-normal-offline-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "a3739a0177c80af50258ac11d2ea84ec00a1dc28bc57d8300bd9d508f3df3eb7"
+  },
+  "exactFixtures": {
+    "BatchStandardMetrics": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricsTest.java",
+        "sha256": "28948cd885471a48ff86734c87578246bafc4abda53d64eb180ab3f6b063bdf7"
+      },
+      "snapshot": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43878-batch-standard-three-current-46/fixture/BatchStandardMetricsTest.java",
+        "sha256": "28948cd885471a48ff86734c87578246bafc4abda53d64eb180ab3f6b063bdf7"
+      }
+    },
+    "BatchStandardMetricSource": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSourceTest.java",
+        "sha256": "6d325cbbf8260f62d7b71a4250516b818cb8b73888e2e43f1a7d45c2a8dadd4d"
+      },
+      "snapshot": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43878-batch-standard-three-current-46/fixture/BatchStandardMetricSourceTest.java",
+        "sha256": "6d325cbbf8260f62d7b71a4250516b818cb8b73888e2e43f1a7d45c2a8dadd4d"
+      }
+    },
+    "BatchGcMetricRegistration": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistrationTest.java",
+        "sha256": "01b0de550a7448fb7cf573b2ecc5571b8053b997da966ff67549359a199f1e30"
+      },
+      "snapshot": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43878-batch-standard-three-current-46/fixture/BatchGcMetricRegistrationTest.java",
+        "sha256": "01b0de550a7448fb7cf573b2ecc5571b8053b997da966ff67549359a199f1e30"
+      }
+    }
+  },
+  "cases": [
+    {
+      "testId": "BATCHSTD001",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd001RealSdkThreePhasesWithCallerGcCloseBeforeRegistry"
+    },
+    {
+      "testId": "BATCHSTD002",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd002StandardDoesNotInvokeAnyPortOrOwner"
+    },
+    {
+      "testId": "BATCHSTD003",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd003ForwardOrderAndNoImplicitCleanup"
+    },
+    {
+      "testId": "BATCHSTD004",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd004AllNullBoundariesFailBeforeActions"
+    },
+    {
+      "testId": "BATCHSTD005",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd005UnknownModesReadNoSourceAndExecuteNoPhase"
+    },
+    {
+      "testId": "BATCHSTD006",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd006ClosedDebugFailsBeforeAnyPhase"
+    },
+    {
+      "testId": "BATCHSTD007",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd007EachRuntimeFailureStopsOnlyLaterPhases"
+    },
+    {
+      "testId": "BATCHSTD008",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd008EachErrorKeepsIdentityWithoutCleanup"
+    },
+    {
+      "testId": "BATCHSTD009",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd009GcOwnerRejectKeepsEarlierBorrowedMetricsAndCallerHandle"
+    },
+    {
+      "testId": "BATCHSTD010",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd010GcOwnerFailureIsNotNormalizedOrRetried"
+    },
+    {
+      "testId": "BATCHSTD011",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd011ClosedStandardDoesNotReadOrReclose"
+    },
+    {
+      "testId": "BATCHSTD012",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd012IndependentDefaultScopesNeverShareGcHandles"
+    },
+    {
+      "testId": "BATCHSTD013",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest",
+      "method": "batchstd013FiniteIndependentConcurrentCompositions"
+    },
+    {
+      "testId": "BATCHHOST001",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost001StandardIsEntirelyLazyIncludingAfterClose"
+    },
+    {
+      "testId": "BATCHHOST002",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost002DefaultUsesOfficialStandardTextAndFixedBatchTag"
+    },
+    {
+      "testId": "BATCHHOST003",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost003UnboundScrapeNeverAcquires"
+    },
+    {
+      "testId": "BATCHHOST004",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost004NullAndUnknownModesFailBeforeAcquisition"
+    },
+    {
+      "testId": "BATCHHOST005",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost005ConstructorEstablishesNonNullPorts"
+    },
+    {
+      "testId": "BATCHHOST006",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost006FactoryRuntimeIdentityAndNoAutomaticRetry"
+    },
+    {
+      "testId": "BATCHHOST007",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost007FactoryErrorIdentityIsNotNormalized"
+    },
+    {
+      "testId": "BATCHHOST008",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost008NullFactoryResultIsNotSuccess"
+    },
+    {
+      "testId": "BATCHHOST009",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost009ClosedCandidateIsRejectedAndRetainedUntilCallerClose"
+    },
+    {
+      "testId": "BATCHHOST010",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost010PartialRegistryBeforeGcRemainsOwnedAfterFailure"
+    },
+    {
+      "testId": "BATCHHOST011",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost011GcRetainedBeforeFatalAndClosedInReverseOrder"
+    },
+    {
+      "testId": "BATCHHOST012",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost012FailedGcCloseKeepsRegistryAndExplicitRetryOwnership"
+    },
+    {
+      "testId": "BATCHHOST013",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost013FailedRegistryCloseIsNotConfirmedAndCanBeExplicitlyRetried"
+    },
+    {
+      "testId": "BATCHHOST017",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost017RegistryFailureRetriesOnlyItsUnreleasedHandle"
+    },
+    {
+      "testId": "BATCHHOST014",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost014NullGcCallbackFailsWithoutImplicitRegistryClose"
+    },
+    {
+      "testId": "BATCHHOST015",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost015SingleBindAndIdempotentClose"
+    },
+    {
+      "testId": "BATCHHOST016",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSourceTest",
+      "method": "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes"
+    },
+    {
+      "testId": "BATCHGC001",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry"
+    },
+    {
+      "testId": "BATCHGC002",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc002StandardIsLazyForSourceFactoryAndOwner"
+    },
+    {
+      "testId": "BATCHGC003",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc003FactoryOwnerBindOrderAndSameHandle"
+    },
+    {
+      "testId": "BATCHGC004",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc004NullBoundariesFailBeforeActivation"
+    },
+    {
+      "testId": "BATCHGC005",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc005UnknownModesNeverInspectSourceOrCallbacks"
+    },
+    {
+      "testId": "BATCHGC006",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc006ClosedDebugFailsBeforeFactoryAndOwner"
+    },
+    {
+      "testId": "BATCHGC007",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc007NullFactoryResultIsNeverAcknowledged"
+    },
+    {
+      "testId": "BATCHGC008",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc008FactoryRuntimeAndErrorIdentityRetained"
+    },
+    {
+      "testId": "BATCHGC009",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc009OwnerRejectMeansNoBindOrImplicitClose"
+    },
+    {
+      "testId": "BATCHGC010",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose"
+    },
+    {
+      "testId": "BATCHGC011",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc011BindFailureLeavesExactHandleInAcknowledgedOwner"
+    },
+    {
+      "testId": "BATCHGC012",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc012SameInstallerDoesNotMixTwoOwnerScopes"
+    },
+    {
+      "testId": "BATCHGC013",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc013FiniteIndependentConcurrentOwnerScopes"
+    },
+    {
+      "testId": "BATCHGC014",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation"
+    },
+    {
+      "testId": "BATCHGC015",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard"
+    },
+    {
+      "testId": "BATCHGC016",
+      "fixture": "dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistrationTest",
+      "method": "batchgc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry"
+    }
+  ],
+  "counts": {
+    "tests": 46,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newTestDefinitions": 0,
+  "allClassScopeCounters": {
+    "BatchStandardMetrics": {
+      "INSTRUCTION": [
+        0,
+        82
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        18
+      ],
+      "COMPLEXITY": [
+        0,
+        8
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "BatchStandardMetricSource": {
+      "INSTRUCTION": [
+        0,
+        206
+      ],
+      "BRANCH": [
+        0,
+        16
+      ],
+      "LINE": [
+        0,
+        45
+      ],
+      "COMPLEXITY": [
+        0,
+        17
+      ],
+      "METHOD": [
+        0,
+        9
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "BatchGcMetricRegistration": {
+      "INSTRUCTION": [
+        0,
+        66
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        15
+      ],
+      "COMPLEXITY": [
+        0,
+        8
+      ],
+      "METHOD": [
+        0,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "mergedCoverage": 0,
+  "sdkInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/micrometer-registry-prometheus-1.17.1.jar",
+      "sha256": "ac24d43f123e103828a23a86f092a8709d87d309ad3212e798305654e951a8ce"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-config-1.7.0.jar",
+      "sha256": "bc9455f938df76ec4add13fe31903a5bb583c605679a16a779d6a6c2b21218f2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-core-1.7.0.jar",
+      "sha256": "f9e5f1c8a20073347c88941d43e8c64ae6810afe0a61cbfe9c2f4efffe72808b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-formats-1.7.0.jar",
+      "sha256": "7352ca8b50e861eca3567ceb332e9590a06742a9d177cff54e52c8cff4c4fb90"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-textformats-1.7.0.jar",
+      "sha256": "7e49065895a35181c57f2c3c6d07b7b3f9b5754cd6422e0a7bd793f20a29c28a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-model-1.7.0.jar",
+      "sha256": "e6d94538f8735c4161c36a660298f3a0fa8e4b281ceaf209723aaf9e212d292d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-tracer-common-1.7.0.jar",
+      "sha256": "b7e8699032f0f1501556eeafd20fcfdd89b355f5d22b6d8361d723d467d88ed4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+      "sha256": "22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "manifestRunProof": [
+    {
+      "path": "../pgpt-runs/PG379/PG43878-batch-standard-three-current-46/begin.json",
+      "sha256": "22fdcfdd15c95947c57b31b3c61d9d585b2909ffdd83c7fb241bd4c5eafcb8a0"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43878-batch-standard-three-current-46/terminal.json",
+      "sha256": "f08f03d4cb170d06d200a2c51fec159f9bb7cfd53b89dbf79bb4338b29984cfe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43878-batch-standard-three-current-46/reports/TEST-junit-jupiter.xml",
+      "sha256": "55da8a4961c0470c2c6cc70d8ca283be5ea93c7cec9cdd93c7f505cbe977c02a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43878-batch-standard-three-current-46/unit.exec",
+      "sha256": "e4d1d7947619e66e69e406a852eac6a3637b3358879fc358316b9709a675829f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43878-current-batch-standard-owners-whole/selected.tsv",
+      "sha256": "401c58bc37cc27f89ef9a25ba8b6561574cfb6af3b762e99435a826ef987dc60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43878-current-batch-standard-owners-whole/coverage.tsv",
+      "sha256": "29fd680400bec24be28d2dbdf6a656be3e38db4c205610118e62e97de5070b62"
+    }
+  ],
+  "startActiveProductionServiceOrRemote": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
