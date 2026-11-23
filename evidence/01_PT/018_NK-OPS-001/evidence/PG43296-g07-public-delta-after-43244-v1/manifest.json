@@ -1,0 +1,42 @@
+{
+  "run": "PG43296-g07-public-delta-after-43244-v1",
+  "source": "b5cdfc5bff254e240eddebd5e2d601b18ea2543e",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "wbs": "WBS-G07",
+  "terminalAtUTC": "2026-11-23T03:49:20.037635+00:00",
+  "priorScan": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43244-g07-since-43214-public-delta-v1/manifest.json",
+    "sha256": "bdeea478725325ecfca3d30cc1d707138276dd2cf4ca78a5381bb4bb787c93c0"
+  },
+  "rangeStart": "3c935878599f4bc1357a5babdfd8c122df73651e",
+  "rangeEnd": "b5cdfc5bff254e240eddebd5e2d601b18ea2543e",
+  "checkedCommits": 29,
+  "touchedPublicTrackedPaths": 101,
+  "newFindings": 0,
+  "scanner": {
+    "path": "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "scannedRemoteIdentity": "b5cdfc5bff254e240eddebd5e2d601b18ea2543e",
+  "terminalReceipt": {
+    "path": "../pgpt-runs/PG379/PG43296-g07-public-delta-after-43244-v1/terminal.json",
+    "sha256": "1f1b4f47eb2c55ab4bb3f2b87b24d19eacd119dd36fead80d49128894d260737"
+  },
+  "command": [
+    "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "git",
+    "--no-banner",
+    "--redact",
+    "--log-opts=3c935878599f4bc1357a5babdfd8c122df73651e..b5cdfc5bff254e240eddebd5e2d601b18ea2543e",
+    "."
+  ],
+  "baselineGitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "stashCount": 7,
+  "historicalUnresolvedFindings": 3280,
+  "historicalActualSecretCount": null,
+  "privatePathsExamined": 0,
+  "newProductionTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
