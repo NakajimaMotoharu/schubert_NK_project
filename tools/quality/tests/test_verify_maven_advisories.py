@@ -188,6 +188,24 @@ class VerifyMavenAdvisoriesTest(unittest.TestCase):
             self.scan()
         run.assert_not_called()
 
+    @patch("verify_maven_advisories.subprocess.run")
+    def test_012_non_json_input_stops_before_the_scanner(self, run):
+        self.bom.write_bytes(b'{"fixture":NaN}')
+
+        with self.assertRaisesRegex(ValueError, "non-JSON constant in Maven metadata"):
+            self.scan()
+
+        run.assert_not_called()
+
+    @patch("verify_maven_advisories.subprocess.run")
+    def test_013_non_json_mocked_scanner_result_is_rejected(self, run):
+        run.return_value = subprocess.CompletedProcess([], 0, b'{"fixture":Infinity}')
+
+        with self.assertRaisesRegex(ValueError, "non-JSON constant in Maven metadata"):
+            self.scan()
+
+        run.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()

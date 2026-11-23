@@ -199,3 +199,14 @@ class VerifyMavenSbomTest(unittest.TestCase):
         self.assertEqual(1, invalid.returncode)
         self.assertEqual("", invalid.stdout)
         self.assertIn("duplicate JSON field", invalid.stderr)
+
+    def test_sbom028_cli_rejects_non_json_numeric_constants(self):
+        bom = self.scratch / "software-bom.json"
+        command = [sys.executable, str(SCRIPT), str(bom), str(self.repository)]
+        for literal in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(literal=literal):
+                bom.write_text('{"fixture":' + literal + '}', encoding="utf-8")
+                result = subprocess.run(command, capture_output=True, text=True, check=False)
+                self.assertEqual(1, result.returncode)
+                self.assertEqual("", result.stdout)
+                self.assertIn("non-JSON constant in Maven metadata", result.stderr)

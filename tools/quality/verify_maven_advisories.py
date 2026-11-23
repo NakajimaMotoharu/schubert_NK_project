@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from verify_maven_sbom import SHA256, unique_fields, verify_model_bom
+from verify_maven_sbom import SHA256, parse_maven_metadata_json, verify_model_bom
 
 
 def pinned_file(path, expected):
@@ -59,7 +59,7 @@ def scan_bom(bom, repository, scanner, scanner_sha256, cache, database_sha256):
     cache = cache.resolve(strict=True)
     pinned_file(cache / "osv-scalibr" / "Maven" / "all.zip", database_sha256)
     contents = bom.read_bytes()
-    document = json.loads(contents, object_pairs_hook=unique_fields)
+    document = parse_maven_metadata_json(contents)
     verify_model_bom(document, repository)
     expected_refs = {item["purl"] for item in document["components"]}
     if not expected_refs:
@@ -87,7 +87,7 @@ def scan_bom(bom, repository, scanner, scanner_sha256, cache, database_sha256):
         )
         if execution.returncode not in (0, 1):
             raise ValueError(f"OSV scan did not complete, exit {execution.returncode}")
-        report = json.loads(execution.stdout, object_pairs_hook=unique_fields)
+        report = parse_maven_metadata_json(execution.stdout)
         findings = findings_from_report(report, scan_input, expected_refs)
         if execution.returncode != int(bool(findings)):
             raise ValueError("OSV exit code and advisory report disagree")

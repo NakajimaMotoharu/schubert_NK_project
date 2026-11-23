@@ -21,6 +21,18 @@ def unique_fields(pairs):
     return fields
 
 
+def _reject_non_json_constant(_literal):
+    raise ValueError("non-JSON constant in Maven metadata")
+
+
+def parse_maven_metadata_json(contents):
+    return json.loads(
+        contents,
+        object_pairs_hook=unique_fields,
+        parse_constant=_reject_non_json_constant,
+    )
+
+
 def maven_jar_coordinates(component):
     group, name, version = (component.get(key) for key in ("group", "name", "version"))
     if not all(
@@ -144,8 +156,7 @@ def main():
     parser.add_argument("repository", type=Path)
     options = parser.parse_args()
     try:
-        with options.bom.open(encoding="utf-8") as source:
-            document = json.load(source, object_pairs_hook=unique_fields)
+        document = parse_maven_metadata_json(options.bom.read_text(encoding="utf-8"))
         result = verify_model_bom(document, options.repository)
     except (AttributeError, KeyError, OSError, RuntimeError, TypeError, ValueError) as failure:
         parser.exit(1, f"BOM verification failed: {failure}\n")
