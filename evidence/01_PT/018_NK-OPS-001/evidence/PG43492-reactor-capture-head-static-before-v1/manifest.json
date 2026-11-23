@@ -1,0 +1,34 @@
+{
+  "run": "PG43492",
+  "source": "4634bcb587d5706a8cd23a705a0aa59d1357237b",
+  "terminalAtUTC": "2026-11-23T08:54:43.434845+00:00",
+  "actualExit": 0,
+  "status": "STATIC_CAPTURER_CHECKOUT_BINDING_GAP",
+  "currentDesign": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "1612ea760b1802d217977060fd0a0f6fc8230121d2af0497c075d0941151d828"
+  },
+  "auditedTool": {
+    "path": "tools/quality/pgpt_reactor_junit.py",
+    "sha256": "3876fbd63d2120bb7606bcbec9e1401f4948b262f60efddcb43ba7c844362f38"
+  },
+  "auditedLauncher": {
+    "path": "tools/quality/030_run_pgpt_verify.sh",
+    "sha256": "c0fa0c42e9ae46c13c1f1023acd13be5843d98a77dd9aa875b62563ca6a86944"
+  },
+  "supportedEvidenceReaders": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "f597c7e6809497c7bc1d56e39f9d2bf860f8cd18fb4636853951a4b487dab766"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "2fca14075518e59cf4a766a5e5f08b625ba59ae87648ab07bb7dff4300f7a3d6"
+    }
+  ],
+  "realReactorInvocations": 0,
+  "expectation": "The new receipt is published only from the checked-out source commit of the frozen live reactor build.",
+  "observation": "The caller and marker agree, and the common snapshot checks only branch. The new capture operation does not verify actual HEAD during the receipt creation interval.",
+  "preservation": "Review readers already compare qualified content and the older documented persisted-validation mode; their HEAD equivalence behavior is preserved.",
+  "testAnchor": "PT-OPS-G09-JUNIT018"
+}
