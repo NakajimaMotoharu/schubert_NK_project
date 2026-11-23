@@ -33,6 +33,17 @@ final class BackupFailureUtcProjectionTest {
       OffsetDateTime.parse("2026-09-12T21:00:03.654321-05:00");
   private static final List<String> COMPLETE =
       List.of("row-1", "stmt-1", "row-2", "stmt-2", "row-3", "stmt-3", "row-4", "stmt-4");
+  private static final String FIRST_BACKUP_STATEMENT = "stmt-2";
+
+  private enum ReadFault {
+    NONE,
+    MISSING_STATEMENT,
+    MISSING_RESULT_SET,
+    EMPTY_RESULT_SET,
+    EXTRA_RESULT_ROW,
+    INITIAL_INCONSISTENT_RUN,
+    FINAL_INCONSISTENT_RUN
+  }
 
   /** PT-BAT-BACKUP-UTC001. */
   @Test
@@ -56,24 +67,91 @@ final class BackupFailureUtcProjectionTest {
     rejects(DISPLAY_START, null);
   }
 
+  /** PT-BAT-BACKUP-UTC004. */
+  @Test
+  void utc004EveryOtherRequiredProjectionColumnRejectsNullIndependently() {
+    for (String name :
+        List.of(
+            "id",
+            "run_id",
+            "business_date",
+            "step",
+            "attempt",
+            "status",
+            "target_count",
+            "success_count",
+            "failure_count",
+            "byte_count",
+            "error_code",
+            "error_summary")) {
+      var fixture = new Fixture(DISPLAY_START, DISPLAY_END, ReadFault.NONE, name);
+      rejectsProjection(fixture, COMPLETE.subList(0, 4));
+    }
+  }
+
+  /** PT-BAT-BACKUP-UTC005. */
+  @Test
+  void utc005MissingHandlesAndUnexpectedRowCountsRetainOnlyOwnedCloses() {
+    rejectsProjection(fixture(ReadFault.MISSING_STATEMENT), COMPLETE.subList(0, 2));
+    rejectsProjection(
+        fixture(ReadFault.MISSING_RESULT_SET), List.of("row-1", "stmt-1", FIRST_BACKUP_STATEMENT));
+    for (ReadFault fault : List.of(ReadFault.EMPTY_RESULT_SET, ReadFault.EXTRA_RESULT_ROW)) {
+      rejectsProjection(fixture(fault), COMPLETE.subList(0, 4));
+    }
+  }
+
+  /** PT-BAT-BACKUP-UTC006. */
+  @Test
+  void utc006RunIdentityMustRemainConsistentBeforeAndAfterBothRows() {
+    var initial = fixture(ReadFault.INITIAL_INCONSISTENT_RUN);
+    var end = fixture(ReadFault.FINAL_INCONSISTENT_RUN);
+    for (var fixture : List.of(initial, end)) {
+      var failure = assertThrows(IOException.class, fixture::verify);
+      assertEquals("failed backup run identity unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+    assertEquals(COMPLETE.subList(0, 2), initial.closed);
+    assertEquals(COMPLETE, end.closed);
+  }
+
+  private static Fixture fixture(ReadFault fault) {
+    return new Fixture(DISPLAY_START, DISPLAY_END, fault, null);
+  }
+
   private static void rejects(@Nullable OffsetDateTime start, @Nullable OffsetDateTime end) {
-    var fixture = new Fixture(start, end);
+    rejectsProjection(new Fixture(start, end), COMPLETE.subList(0, 4));
+  }
+
+  private static void rejectsProjection(Fixture fixture, List<String> expectedCloses) {
     var failure = assertThrows(IOException.class, fixture::verify);
     assertEquals("failed backup observation unavailable", failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
-    assertEquals(COMPLETE.subList(0, 4), fixture.closed);
+    assertEquals(expectedCloses, fixture.closed);
   }
 
   private static final class Fixture {
     private final @Nullable OffsetDateTime start;
     private final @Nullable OffsetDateTime end;
+    private final ReadFault fault;
+    private final @Nullable String missingColumn;
     private final List<String> closed = new ArrayList<>();
     private int prepared;
 
     Fixture(@Nullable OffsetDateTime start, @Nullable OffsetDateTime end) {
+      this(start, end, ReadFault.NONE, null);
+    }
+
+    Fixture(
+        @Nullable OffsetDateTime start,
+        @Nullable OffsetDateTime end,
+        ReadFault fault,
+        @Nullable String missingColumn) {
       this.start = start;
       this.end = end;
+      this.fault = fault;
+      this.missingColumn = missingColumn;
     }
 
     void verify() throws IOException {
@@ -98,10 +176,11 @@ final class BackupFailureUtcProjectionTest {
               });
     }
 
-    private PreparedStatement statement(int position, String sql) {
+    private @Nullable PreparedStatement statement(int position, String sql) {
       boolean identity = position == 1 || position == 4;
       String table = identity ? "maintenance_read_run_references" : "from schubert.batch_runs";
       assertTrue(sql.contains(table));
+      if (position == 2 && fault == ReadFault.MISSING_STATEMENT) return null;
       return proxy(
           PreparedStatement.class,
           (ignored, method, args) ->
@@ -120,7 +199,10 @@ final class BackupFailureUtcProjectionTest {
                   assertEquals(position == 2 ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
                   yield null;
                 }
-                case "executeQuery" -> rows(position, identity);
+                case "executeQuery" ->
+                    position == 2 && fault == ReadFault.MISSING_RESULT_SET
+                        ? null
+                        : rows(position, identity);
                 case "close" -> {
                   closed.add("stmt-" + position);
                   yield null;
@@ -130,17 +212,25 @@ final class BackupFailureUtcProjectionTest {
     }
 
     private ResultSet rows(int position, boolean identity) {
-      boolean[] advanced = new boolean[1];
+      int rowCount = 1;
+      if (position == 2) {
+        if (fault == ReadFault.EMPTY_RESULT_SET) rowCount = 0;
+        if (fault == ReadFault.EXTRA_RESULT_ROW) rowCount = 2;
+      }
+      final int expectedRows = rowCount;
+      int[] advanced = new int[1];
       return proxy(
           ResultSet.class,
           (ignored, method, args) ->
               switch (method.getName()) {
                 case "next" -> {
-                  boolean next = !advanced[0];
-                  advanced[0] = true;
-                  yield next;
+                  advanced[0]++;
+                  yield advanced[0] <= expectedRows;
                 }
-                case "getObject" -> identity ? Boolean.TRUE : field(position, (String) args[0]);
+                case "getObject" ->
+                    identity
+                        ? identityValue(position, (String) args[0])
+                        : field(position, (String) args[0]);
                 case "close" -> {
                   closed.add("row-" + position);
                   yield null;
@@ -149,7 +239,14 @@ final class BackupFailureUtcProjectionTest {
               });
     }
 
+    private boolean identityValue(int position, String name) {
+      if (!"identity_consistent".equals(name)) return true;
+      return !(position == 1 && fault == ReadFault.INITIAL_INCONSISTENT_RUN)
+          && !(position == 4 && fault == ReadFault.FINAL_INCONSISTENT_RUN);
+    }
+
     private @Nullable Object field(int position, String name) {
+      if (name.equals(missingColumn)) return null;
       return switch (name) {
         case "id" -> position == 2 ? 7L : 8L;
         case "run_id" -> RUN_ID;
