@@ -1,0 +1,222 @@
+{
+  "run": "PG43514",
+  "terminalAtUTC": "2026-11-23T09:28:12.227561+00:00",
+  "actualExit": 0,
+  "source": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "ordinaryProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43512-current-batch-inspection-and-step-value-reuse-v1/manifest.json",
+    "sha256": "b109759325d1eece23954abbfc1b6d053f491d4c91469dc3e5b0e3a185388209"
+  },
+  "records": [
+    {
+      "name": "InspectionAttempt",
+      "originalSource": "b8f5261a03405b7fd7e2cfafa2e22dbb11e9220f",
+      "baseReports": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1/manifest.json",
+          "sha256": "df9f5928524e31d4c43ab4942a6aa2a55eaa90d3b15dc370f4f9c286e9f24484"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29430-attempt8-preflight-v1/manifest.json",
+          "sha256": "b98ad4cfb743c8a76bbc1e155581d1f875a837135b0e592fc6dfa5d5b565d3eb"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29426-attempt8-prepare-v1/manifest.json",
+          "sha256": "7037030aa41a9855fa62ede1db0a9c860f20007152de24a4b27a1cf2815f7dc3"
+        }
+      ],
+      "fixtureSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+        "sha256": "e470927d66599488f16a7d9db8253372a728ad5e7579e8da52989d11b2e4606c"
+      },
+      "policy": [
+        {
+          "path": "tools/quality/static/pmd.xml",
+          "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+        },
+        {
+          "path": "tools/quality/static/checkstyle.xml",
+          "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+        }
+      ],
+      "originalSourceMembership": {
+        "pmd": {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1/sources.txt",
+          "sha256": "1010958f08e1ac36d47b0d82865ecfbed0e6f45fba3b3ce27e825c27faaa91b3"
+        },
+        "checkstyle": {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1/sources.txt",
+          "sha256": "1010958f08e1ac36d47b0d82865ecfbed0e6f45fba3b3ce27e825c27faaa91b3"
+        }
+      },
+      "checkstyleFindings": 0,
+      "ownPmdRawEntries": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "CloseResource",
+          "line": "190",
+          "message": "Ensure that resources like this ExecutorService object are closed after use"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "190",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "196",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "214",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "215",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        }
+      ],
+      "ruleBasis": [
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "CloseResource",
+          "line": "190",
+          "reason": "The executor is released in unconditional finally shutdownNow plus asserted finite awaitTermination10SECONDS. TWR.close waits indefinitely and would reintroduce BUG2833. Failure/cancellation remains failed PT.",
+          "disposition": "NOT_APPLICABLE",
+          "message": "Ensure that resources like this ExecutorService object are closed after use"
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "190",
+          "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+          "disposition": "NOT_APPLICABLE",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "196",
+          "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+          "disposition": "NOT_APPLICABLE",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "214",
+          "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+          "disposition": "NOT_APPLICABLE",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+          "rule": "DoNotUseThreads",
+          "line": "215",
+          "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+          "disposition": "NOT_APPLICABLE",
+          "message": "To be compliant to J2EE, a webapp should not use any thread."
+        }
+      ],
+      "qualifiedProductionSpotbugs": {
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0,
+        "classStats": [
+          "dev.codex.schubert.nk.batch.cleanup.InspectionAttempt",
+          "dev.codex.schubert.nk.batch.repository.BatchRun",
+          "dev.codex.schubert.nk.batch.repository.CleanupCounts",
+          "dev.codex.schubert.nk.batch.repository.InspectionSummary",
+          "dev.codex.schubert.nk.batch.repository.MaintenanceActivation",
+          "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion",
+          "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion$Outcome"
+        ]
+      },
+      "compiledFixtureSpotbugs": "UNMEASURED_NOT_IN_ORIGINAL_CLASS_STATS"
+    },
+    {
+      "name": "StepObservation",
+      "originalSource": "9cc43d1db13760ea60e17d99e44d08829fe41982",
+      "baseReports": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35095-step-observation10-static-v2/manifest.json",
+          "sha256": "bd662b3c242345d6f3e81a90e547432f899a2fd73a53d162d8e4b4e6b77ace45"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35096-step-observation10-preflight-v1/manifest.json",
+          "sha256": "fe4f3c7f76ed57d9fedfdcf4629cc09aa743802a576947268358ed231d0d9e2a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35093-step-observation10-test-complete-v1/manifest.json",
+          "sha256": "e73bf179850f5db2242d767e99d2ccd6325cd6b0d5283f89e44b5f0dca58a2c5"
+        }
+      ],
+      "fixtureSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/StepObservationValueContractTest.java",
+        "sha256": "17d0e4069ea9c6c1b9b6fff96c9e5c5b7480cafed93a0d7012f213e9235b5386"
+      },
+      "policy": [
+        {
+          "path": "tools/quality/static/pmd.xml",
+          "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+        },
+        {
+          "path": "tools/quality/static/checkstyle.xml",
+          "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+        }
+      ],
+      "originalSourceMembership": {
+        "pmd": {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG35095-step-observation10-static-v2/sources.txt",
+          "sha256": "33d63167da06df24d480e39b317b8cdedb7949c366c24032f26eb5b8704a13e3"
+        },
+        "checkstyle": {
+          "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG35095-step-observation10-static-v2/all-sources.txt",
+          "sha256": "33d63167da06df24d480e39b317b8cdedb7949c366c24032f26eb5b8704a13e3"
+        }
+      },
+      "checkstyleFindings": 0,
+      "ownPmdRawEntries": [],
+      "ruleBasis": [],
+      "qualifiedProductionSpotbugs": {
+        "bugs": 0,
+        "missing": 0,
+        "errors": 0,
+        "classStats": [
+          "dev.codex.schubert.nk.batch.cleanup.StepCleanupSummary",
+          "dev.codex.schubert.nk.batch.repository.BatchRun",
+          "dev.codex.schubert.nk.batch.repository.BatchStep",
+          "dev.codex.schubert.nk.batch.repository.BatchStepAttempt",
+          "dev.codex.schubert.nk.batch.repository.CleanupCounts",
+          "dev.codex.schubert.nk.batch.repository.CleanupKind",
+          "dev.codex.schubert.nk.batch.repository.CleanupStepChunk",
+          "dev.codex.schubert.nk.batch.repository.CleanupStepChunk$Reason"
+        ]
+      },
+      "compiledFixtureSpotbugs": "UNMEASURED_NOT_IN_ORIGINAL_CLASS_STATS"
+    }
+  ],
+  "result": {
+    "existingOrdinaryReused": 10,
+    "newActualPt": 0,
+    "sourcePmdRaw": 5,
+    "localReviewed": 5,
+    "checkstyleFiles": 2,
+    "typedFixtureMatchingReport": 0,
+    "typedProductionClassesWithExactInputs": 13,
+    "newCalls": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "remaining": [
+    "same-product coverage 451",
+    "exact explicit fixture SpotBugs authority, no admitted report in the two older runs",
+    "owner receipt"
+  ]
+}
