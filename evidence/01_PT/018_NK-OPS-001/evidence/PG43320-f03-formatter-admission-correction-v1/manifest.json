@@ -1,0 +1,147 @@
+{
+  "run": "PG43320-f03-formatter-admission-correction-v1",
+  "source": "acf54423f5aca80aa2e9508599095b39f36179bd",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T04:20:31.895809+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "defect": "BUG-3695",
+  "horizontal": "YKT-2902",
+  "rawFormatterExitUnchanged": {
+    "PG43308": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43308-f03-web-admitted-lexical-package-delta-v1/manifest.json",
+        "sha256": "9527f9a2c37e37874e35ce5f1cbf6a59c82ec766668776bbe73f4bab289e9435"
+      },
+      "paths": 81,
+      "terminal": 0
+    },
+    "PG43312": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43312-f03-api-admitted-lexical-package-delta-v1/manifest.json",
+        "sha256": "2277e33053b7e8513e3f4b4bbf8f93af29cb20de8b82def59b5ba8f5ad1cae67"
+      },
+      "paths": 134,
+      "terminal": 0
+    },
+    "PG43314": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43314-f03-batch-bootstrap-admitted-format-v1/manifest.json",
+        "sha256": "0d97eba236df630fa084006e0ba7f9884c5eeb98855f4a2f43c613d23479f357"
+      },
+      "paths": 43,
+      "terminal": 0
+    },
+    "PG43318": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43318-f03-current-admitted-business-fixture-format-v1/manifest.json",
+        "sha256": "420fa73af937633e7c6a33e2b1f1869dba724a44693c888424b3a14120878a37"
+      },
+      "paths": 192,
+      "terminal": 0
+    }
+  },
+  "originalGroupRecordsPreserved": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/3578_F03Web局所整形選択結果.json",
+      "sha256": "b91d66c561e90d2d6f49e6ebc40a21444eb928ffb920d40ac128ef3f7d0aaf97"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/3582_F03API局所整形選択結果.json",
+      "sha256": "fb46afd8a3274517030c8409482b69746c78099b1a6fb3a04e9a1662086bf00c"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/3584_F03BatchBootstrap局所整形結果.json",
+      "sha256": "4cfd586915bdd86999b4617a4654601516600dfe07c63bcbb3e0cc8eb32d27ea"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/3588_F03公開fixture残書式結果.json",
+      "sha256": "e33255fe74149d7109a0a7b919e3d4080e501437b0a39e0843595857525a7ca0"
+    }
+  ],
+  "priorCountWasUnqualified809": 809,
+  "creditedVerifiedFormatterPathsRetained": 359,
+  "candidateFormatterSourceDenominator": 1135,
+  "underAdmissionReview": 450,
+  "concreteOverlapCount": 8,
+  "unreviewedAdditional": 442,
+  "strictCoverageCreditFromReviewedRuns": 0,
+  "originalSelectiveScopeEarlierBasis": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43306-f03-six-module-retained-formatter-sources-v1/manifest.json",
+    "sha256": "d3441ee3126ed02c93a1c7467e3e627e18dec6a9950f6558a1347b7217881240"
+  },
+  "namedHeldRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43040-f03-held-roster-current-v1/manifest.json",
+    "sha256": "6db2af612b6b99b2a07c611720b5fe73200ba866fd79b7d4ec53502a0413b51f"
+  },
+  "namedHoldCountUnchanged": 32,
+  "holdIntersection": [
+    {
+      "testSource": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestTest.java",
+      "formerRun": "PG43312",
+      "priorHoldRef": "456 previous candidate named list shares the held fingerprint type.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java",
+      "formerRun": "PG43312",
+      "priorHoldRef": "456 previous candidate named list shares the held fingerprint type.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestTest.java",
+      "formerRun": "PG43312",
+      "priorHoldRef": "456 previous candidate named list shares the held fingerprint type.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcherTest.java",
+      "formerRun": "PG43312",
+      "priorHoldRef": "PG42068 / QA-056 held as compiled and dynamic dependent scope; separate formatter admission has not been established here.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValveTest.java",
+      "formerRun": "PG43308",
+      "priorHoldRef": "25474 / 25476 and 456 G03.05 P01809 keep the whole WebStartupException-dependent scope held.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBindingTest.java",
+      "formerRun": "PG43308",
+      "priorHoldRef": "23368 / 23370 and 456 P01809 retain the graph-bound whole-test hold.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ErrorMvcTest.java",
+      "formerRun": "PG43318",
+      "priorHoldRef": "456 prior servlet and live database fixture scope is recorded as held.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    },
+    {
+      "testSource": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MenuMvcTest.java",
+      "formerRun": "PG43318",
+      "priorHoldRef": "456 prior servlet and live database fixture scope is recorded as held.",
+      "newTestExecuted": false,
+      "currentFormatCredit": false
+    }
+  ],
+  "rawMissingOutsideEvidenceSets": 326,
+  "filesWithoutVerifiedFormatterReceiptNow": 776,
+  "crossToolAuthorizationInferenceWithdrawn": true,
+  "bulkSelectionStopped": true,
+  "newFormatOrTestOrClassLoading": 0,
+  "protectedBodyReadsByThisMetadataCorrection": 0,
+  "externalActions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "acknowledgedOriginalScope": "Indices are source-only; adoption requires per-file applicability for each check. The four raw receipts are preserved and none are used as accepted quality gain.",
+  "nextAllowed": "Independent evidence tools or each explicitly preapproved same-source ordinary Java fixture with full scope"
+}
