@@ -1,4 +1,200 @@
 {
+  "currentBatchMonitorLockTracePG43690": {
+    "owner": "WBS-P018-09",
+    "traceWork": "WBS-G13.06",
+    "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "program": "NK-OPS-001",
+    "design": [
+      {
+        "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+        "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+      },
+      {
+        "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+        "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+      },
+      {
+        "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+        "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611"
+      }
+    ],
+    "modifiedMain": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java": {
+        "gitBlob": "31b02898c303b123332a4cd2a7075de9b8bfb584",
+        "currentSha256": "ceb7f4597c15d6db02714faeefc6911dbda7d4eee5792503d65a062b692071a2",
+        "originalRegistrySha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+            "crc64": "0b522f9b17ff6871",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+            "crc64": "29da7d7aac629468",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+            "crc64": "265d89d43ac427f8",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+            "crc64": "a5228fadcac1921d",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+            "crc64": "33b7e7037e5187db",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State": {
+            "crc64": "d9d97f271b5a1101",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+            "crc64": "dcc593e5682fe55b",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-005",
+          "MON-006",
+          "MON-008",
+          "MON-009"
+        ]
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java": {
+        "gitBlob": "0597347e73fb6b71458d6ace51fb696181dacdc7",
+        "currentSha256": "42cf352f32843e11ccef2abb1338425f8139a0da1a0226f15ce0ead9576f4325",
+        "originalRegistrySha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+            "crc64": "ed848fa8601ab4fd",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+            "crc64": "37e00458b90bb1b8",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-006"
+        ]
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java": {
+        "gitBlob": "d112496f552ffde3c9121dd6ef1e20e078a20f72",
+        "currentSha256": "d621cd46c14d56df1dd147c69014c4fb43dc3fe65ecb6369a80c9f2a254709d5",
+        "originalRegistrySha256": "bf02bb6b387398ce3a0f5f1229b1df747284eef521946984a7d37d834a4ac649",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+            "crc64": "9d9aaa2421138556",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+            "crc64": "4c1d31dffe682bfe",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-006"
+        ]
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java": {
+        "gitBlob": "749bcc56785ec29aae1192f3e6c6470eea15800e",
+        "currentSha256": "453a2bc07a2c4b714eff3d36c6e22e0dd7cf568ae56e2c79b179a230fb24eee2",
+        "originalRegistrySha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+            "crc64": "ef83941de2419afc",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+            "crc64": "0f0ade2c7c19bc9e",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-006"
+        ]
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java": {
+        "gitBlob": "8c14875316f4cfe439695809b77b3a7108357413",
+        "currentSha256": "99f3c44c98bc83de2c52aaec13b696feec1fd21eec44b81a2615cd77af3d2c53",
+        "originalRegistrySha256": "e17c6174e193584fcc681d26706390d165c7a29b7ea1c77a13ac3a7eb54566e4",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+            "crc64": "8d044fdfaa87f647",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+            "crc64": "2dbce6339dcd0a81",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-006"
+        ]
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java": {
+        "gitBlob": "adabe3fe190700dd725cae1b948d7641815c0b66",
+        "currentSha256": "235978e47a69d00132a0dd79ccf925619f07041aa396c33cd29d54cea41cc2e8",
+        "originalRegistrySha256": "fb6e3e4efc7d43f537bbe830537bfccd133f759640943be3f0204e83a92dd7a9",
+        "registeredOwner": "WBS-P018-09",
+        "costOwner": "WBS-P018-09",
+        "physical": {
+          "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+            "crc64": "0e788b56667cc990",
+            "singleExecObserved": true
+          },
+          "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+            "crc64": "6e80738be9c3d357",
+            "singleExecObserved": true
+          }
+        },
+        "requirements": [
+          "MON-006"
+        ]
+      }
+    },
+    "ptSpec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5817_Batch監視排他の単体テスト仕様追補.md",
+      "sha256": "558d447bb81c224f6232b58cbf8057fe69adb52b3cb31df8900b56cc36cad626"
+    },
+    "testId": "PT-OPS-MON-SNAP005",
+    "qualification": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43690-batch-monitor-lock-final-72/manifest.json",
+        "sha256": "0f2bf61ee9a47ee95525886495c0086262e27d10307b392852c427435b0c6e8d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43692-current-monitor-wrappers-and-registry/manifest.json",
+        "sha256": "5275461459409a66d4e215ac6afbfc4373a7256744b59a4d936e505039d20e8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43694-alert-registry-current-original-probes/manifest.json",
+        "sha256": "7e05e2e073b9255aa5ca1fba18720c6a5302e6f043b53faeb5c6840af92a4cb9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43696-current-transfer-monitor-eight/manifest.json",
+        "sha256": "87413258b434249adf0a9a6820bebf4f5b3288021e42ebb979b1642c201f5e65"
+      }
+    ],
+    "formalAcceptanceId": null,
+    "full451": false,
+    "oldInventoryRowsRetained": 1139
+  },
   "currentDefaultRoutinePrivilegesPG43658PG43660PG43662": {
     "owner": "WBS-P004-01",
     "workIds": [
