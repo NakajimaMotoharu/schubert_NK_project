@@ -1,0 +1,140 @@
+{
+  "run": "PG43204-p00503-guard-dlq-record-observations-v3",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:30:23.353876+00:00",
+  "source": "82c184e8764a08317756daf4e75a941faba37758",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P005-03/2",
+    "WBS-P018-10.02"
+  ],
+  "design": "SS321, SSC467, SS351, SS354, 451",
+  "originalScope": 14,
+  "unchangedCaseDefinitions": 12,
+  "newDefinitions": 2,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "actualFinalCounters": {
+    "LINE": 117,
+    "METHOD": 37,
+    "CLASS": 5,
+    "BRANCH": 52
+  },
+  "physicalShaAndNames": [
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.class",
+      "sha256": "d3f7abc900267d4fe4e6c00df230375434c8f2a73c96193509c586cfb7c11a07"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.class",
+      "sha256": "8624866d9fdf9dbf74accdc84f0aad895c9e16e0d8db90f7486c18bbc8c3de6d"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter.class",
+      "sha256": "98857f58ffa11ad93a847aeb7ed20f3802a8e75941a4403e4244fdfa78ad6b21"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy.class",
+      "sha256": "d9c9766a65c17ce0351f5703cdc45f7e61f42b3042b5d62644f5fd9b39436568"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.class",
+      "sha256": "dc47d512426d33e31f3f121d149e0dffeea0757c9e643770de30d0ac0484aa0d"
+    }
+  ],
+  "scopeInputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "sha256": "51e71dd1bdaec0dd3ea1b0bc5f05391a67348fbe525d993ef41943b2eae16b0f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+      "sha256": "9dbb5e57812cc258e719c3e0d107abbc370da2792ccb3afe7a607469f0c1e69e"
+    }
+  ],
+  "existingRestoredProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43202-p00503-jms-guard-dlq-exact12-v1/manifest.json",
+    "sha256": "bace2dc1aae341b853b1dc60e60a2be3e187cceddd5cd404ec99ee1552f21dee"
+  },
+  "independent": [
+    {
+      "id": "PT-MSG-GUARD-SNAPSHOT-001",
+      "expected": "Original stored marker visible via same object after supplied and detached returned arrays are changed; snapshot {12, 34} exact; message with different body distinct. No hash called to form expected value."
+    },
+    {
+      "id": "PT-MSG-DLQ-METADATA-001",
+      "expected": "Independent fixed code, actor and time fields; equality at epoch and difference after one second; JDK25 component fold and literal word-for-word diagnostic."
+    }
+  ],
+  "beforeFormat": {
+    "exit": 1,
+    "commandLedger": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43204-p00503-guard-dlq-record-observations-v1/begin.json",
+      "sha256": "7e09b9f0fc7ac7197164b80c94fa35b7d38e0f7623a6f32686bb26ac85bbacf6"
+    },
+    "observation": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43204-p00503-guard-dlq-record-observations-v1/format.stdout",
+      "sha256": "013782fb0103efba07d7594be9d8e4cdcc2c95c718a2d578a2dc898b67813dec"
+    },
+    "fixtureCompileStarted": false,
+    "productTestsStarted": false
+  },
+  "intermediateAttempt": {
+    "source": "fed42fd8fd4d82324a124b81452bae38115da63c",
+    "localTests": 14,
+    "pmDRaw": 12,
+    "deficit": "AvoidDuplicateLiterals",
+    "manifest": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43204-p00503-guard-dlq-record-observations-v2/terminal.json",
+      "sha256": "338bf9aa9e83fe0d3f5da8af68d79a70284aa59a4d1b4f50f6e1f3e6604f7b05"
+    }
+  },
+  "finalToolResults": {
+    "format": 0,
+    "fixtures": 0,
+    "style": 0,
+    "spotbugs": 0,
+    "pmd": 4,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "pmd": [
+    "UseProperClassLoader",
+    "UseConcurrentHashMap",
+    "UseConcurrentHashMap",
+    "UseConcurrentHashMap",
+    "UseProperClassLoader",
+    "CompareObjectsWithEquals",
+    "CloseResource",
+    "CompareObjectsWithEquals",
+    "UseProperClassLoader",
+    "UseConcurrentHashMap",
+    "UseConcurrentHashMap"
+  ],
+  "spotBugs": [],
+  "oldCoverageWasMerged": false,
+  "oneFinalOrdinaryExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43204-p00503-guard-dlq-record-observations-v3/unit.exec",
+    "sha256": "c7d3309ed42fb9c3f9f1d48737a0cfb1160d80b2543d9ed35481389175eb9c4c"
+  },
+  "commandReceipt": {
+    "path": "../pgpt-runs/PG379/PG43204-p00503-guard-dlq-record-observations-v3/begin.json",
+    "sha256": "accc64fb0bfd9aba3fe311966490a6de29f8ad168766c062152982f0a0aa22b1"
+  },
+  "command": "python3 -B evidence/01_PT/018_NK-OPS-001/input/5796_p00503_retained_records_same_exec.py",
+  "sanitized": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43204-p00503-guard-dlq-record-observations-v3/sanitized-junit.json",
+      "sha256": "2f2966dd8cce92dda89110e4932ca52aebcb229af802295b2a258397ee4d17f6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43204-p00503-guard-dlq-record-observations-v3/coverage-unfiltered.tsv",
+      "sha256": "f05eb710217c20aa95c4b9af61db68e896eb210a805e7d5275e2820d748907b7"
+    }
+  ],
+  "realBrokerOrDb": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
