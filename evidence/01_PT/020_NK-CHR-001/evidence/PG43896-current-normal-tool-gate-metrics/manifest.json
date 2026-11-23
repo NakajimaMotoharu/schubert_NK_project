@@ -1,0 +1,136 @@
+{
+  "run": "PG43896",
+  "source": "7424634a1707b471bb0346902ba4fc1540cbcebc",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:04:31.877673+00:00",
+  "wbs": "WBS-P020-01.03/2",
+  "toolSource": "3506661133949541e72851381235213cf32f421f",
+  "priorToolResults": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43108-chr-metric-direct-values-v1/manifest.json",
+    "sha256": "867c4de02cced25f55a9404fe187b0afdc9e04ff1e39e47e78084f98974dd875"
+  },
+  "physicalInputs": {
+    "archive": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43824-current-packaged-gate-metadata-eight/approved-app-tool-classfile-only.jar",
+      "sha256": "449d9bf834684d6ef5d2db60cbd42eb3a52abd3772fc6bc64c3998ac07af9bdc"
+    },
+    "measuredClass": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/GateContractValidator.class",
+      "sha256": "f0970b07e22c2ce8c93f3acd233e689f7d15dc2a4d80dd939e7b5680a55152a3"
+    },
+    "fixture": {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+      "sha256": "8dec83c4a7869a21b8a78f15f1f8f2aafc0502feb0b8d0d1f06172c162546a3c"
+    }
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/020_NK-CHR-001/014_NK-CHR-001_metric件数単体仕様書.md",
+    "sha256": "f80f16895c831c3a514f8f15810e019e62ef48b1eed4d658e67e3a7447b24ab8"
+  },
+  "cases": [
+    {
+      "id": "PT-CHR-METRIC001",
+      "method": "validSnapshotUsesExactProvidedCountsAndIsImmutable"
+    },
+    {
+      "id": "PT-CHR-METRIC002",
+      "method": "javaNullAndNegativeProvidedCountsFailWithoutNpe"
+    },
+    {
+      "id": "PT-CHR-METRIC003",
+      "method": "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue"
+    },
+    {
+      "id": "PT-CHR-METRIC004",
+      "method": "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero"
+    },
+    {
+      "id": "PT-CHR-METRIC005",
+      "method": "baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary"
+    },
+    {
+      "id": "PT-CHR-METRIC006",
+      "method": "concurrentIndependentSnapshotsNeverShareUnknownValues"
+    }
+  ],
+  "exitCodes": {
+    "compile": 0,
+    "junit": 0,
+    "unfiltered": 0
+  },
+  "counts": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "gateMetrics": {
+      "line": [
+        14,
+        14
+      ],
+      "branch": [
+        16,
+        16
+      ],
+      "method": [
+        1,
+        1
+      ]
+    },
+    "matchesBaselineFileCount": {
+      "line": [
+        3,
+        3
+      ],
+      "branch": [
+        4,
+        4
+      ],
+      "method": [
+        1,
+        1
+      ]
+    }
+  },
+  "rawClass": "CLASS\tdev/codex/schubert/characterization/GateContractValidator\t3abafb93661a8e37\ttrue\t713\t48\tINSTRUCTION:2711:295\tBRANCH:277:26\tLINE:511:28\tCOMPLEXITY:201:17\tMETHOD:59:4\tCLASS:0:1",
+  "unfiltered": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/unfiltered.out",
+    "sha256": "6acf9a66156235f6b3fc9d49803ccd281e3ba6ba0b2d3208e178ed5010d963ed"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/begin.json",
+    "sha256": "f69ec56ff965f25eaa6742c47b130d69277bd1a57ce890fc25418d4a53fa6821"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/terminal.json",
+    "sha256": "c541950848897cc1f94e769eaf25dd2499ba9f47ac51a90fd4d85fdc0da6e19b"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "9316b92e09b5f3d08e08b0d62cb31e0b9b7a95da98f069026297e47f656f1eb1"
+  },
+  "unitExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six-v2/unit.exec",
+    "sha256": "fad272e1e564e7ff2dfc8bccacc00512c12d08f5cec2ee13bc1a89d80fd47f27"
+  },
+  "preLaunchAttempt": {
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43896-current-chr-gate-metrics-six/terminal.json",
+      "sha256": "25d75891128f3572bb02e4f13dc0ae0d549e973135bc7dea0721e18ff65736a9"
+    },
+    "compileExit": 2,
+    "attemptedJUnit": false,
+    "reason": "legacy fixture path in arguments"
+  },
+  "realCurrentOrNkRead": false,
+  "realGate": false,
+  "productTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Managed candidate Linux ownership and fresh same-source actual CHR",
+    "Other comparison tool methods"
+  ]
+}
