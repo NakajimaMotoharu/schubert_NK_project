@@ -1,0 +1,146 @@
+{
+  "run": "PG43870",
+  "source": "715eb6e2c4e2f94b87f62826f8ef0dd00671123a",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:22:13.699931+00:00",
+  "wbs": "A1-21.05",
+  "related": [
+    "WBS-P004-05/2",
+    "WBS-P017-07",
+    "SS332",
+    "451"
+  ],
+  "currentProductClass": {
+    "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/scope/target/classes/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+    "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+  },
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/manifest.json",
+    "sha256": "a1d13cf456925dfba5d08be629b6ac26a91346ed9e6af55fff5e662ebd2d3d8f"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5799_清掃終端の通常読取単体試験仕様.md",
+    "sha256": "e340d9ac09b7d193b5797b89c9b9f39995a5df53ae9327937d8c5f86eeb21ac8"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "sha256": "d672a8e284a106ccbb2665b2612624b609687af245cbc053a7fd4709ac4281eb"
+  },
+  "tests": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "cases": {
+    "PT-F02-CTERM-READ001": "ordinaryTerminalReadPreservesTheOriginalFatalErrorAfterClosingItsStatement",
+    "PT-F02-CTERM-READ002": "ordinaryTerminalReadReturnsTheFixedDiagnosticWithoutClosingTheBorrowedConnection",
+    "PT-F02-CTERM-READ003": "ordinaryTerminalReadProjectsTheSevenSuccessfulRowsInFixedOrder",
+    "PT-F02-CTERM-READ004": "ordinaryTerminalReadKeepsRuntimePrimaryAndRecordsTwoSanitizedCloseFailures",
+    "PT-F02-CTERM-READ005": "ordinaryTerminalReadRejectsAnOtherwiseCompleteReadWhenResultCloseFails",
+    "PT-F02-CTERM-READ006": "ordinaryTerminalReadKeepsAnOriginalCloseErrorOverTheKnownSqlFailure",
+    "PT-F02-CTERM-READ007": "ordinaryTerminalReadRejectsAnAbsentStatementWithoutClosingUnownedHandles",
+    "PT-F02-CTERM-READ008": "ordinaryTerminalReadRejectsAbsentRowsAndClosesOnlyItsStatement",
+    "PT-F02-CTERM-READ009": "ordinaryTerminalReadRejectsARepeatedStepAndClosesBothOwnedHandles"
+  },
+  "newCases": [
+    "PT-F02-CTERM-READ007",
+    "PT-F02-CTERM-READ008",
+    "PT-F02-CTERM-READ009"
+  ],
+  "priorSixAffectedSharedFixture": true,
+  "originalRerunsForChangedFixture": 6,
+  "oracle": [
+    "Independent fixed diagnostics and no close of unacquired statement/row",
+    "Two identical otherwise valid projection rows rejected on second index",
+    "Owned child handles close once in reverse acquisition order; borrowed connection unchanged"
+  ],
+  "actualDbAndRootCount": 0,
+  "coverageMissedCovered": {
+    "INSTRUCTION": [
+      880,
+      496
+    ],
+    "BRANCH": [
+      140,
+      32
+    ],
+    "LINE": [
+      204,
+      110
+    ],
+    "COMPLEXITY": [
+      87,
+      20
+    ],
+    "METHOD": [
+      9,
+      12
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "coverageMergedRuns": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "recorded": [
+    {
+      "path": "../pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/begin.json",
+      "sha256": "dc47a61e269c92db337181870c9cefaed69947151eef9eba3dbc75fcb779b08b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/terminal.json",
+      "sha256": "8e2452845b89d6f400c14c037a1331f039543ba5eaed25894eb48112fa56879a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/reports/TEST-junit-jupiter.xml",
+      "sha256": "c4833377bac013f8a7fd497e9acd39a794ebad53af8dde2be3c2d5a75cc14473"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/unit.exec",
+      "sha256": "4ea5f857871acbebde7c01fed20a3eccd2fa3d0423aadd77cc48b2e819d0ccd6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/fixture-style-terminal.json",
+      "sha256": "755398ad3bf07d3890fce311d8d1c07c1966781f9923ff000641a66e243a8c6c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/fixture-pmd-terminal.json",
+      "sha256": "ff182db40f647ac51b9152ebe9bcd7938d7f4d07419da2dbd83e00694672f4e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43870-current-cleanup-ordinary-nulls-duplicate/selected.tsv",
+      "sha256": "72a788dde8adc357ccf5088f4680f60e465023513af55d4f906614855e7fccc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43870-current-cleanup-ordinary-nulls-duplicate/coverage.tsv",
+      "sha256": "c3aaac0ac33d8a33739d439937a8c7d48b58c86936404b63195e473c6b3e5a57"
+    }
+  ],
+  "rawStatic": {
+    "pmdExit": 4,
+    "retained": [
+      {
+        "line": 125,
+        "rule": "CloseResource",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      {
+        "line": 156,
+        "rule": "CloseResource",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      {
+        "line": 668,
+        "rule": "UseProperClassLoader",
+        "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+      }
+    ],
+    "newApplicable": 0,
+    "checkstyle": 0,
+    "format": 0,
+    "scope": "All three are continued existing two borrowed JDK proxies plus SDK loader findings. No product scan suppression."
+  }
+}
