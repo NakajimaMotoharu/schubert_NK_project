@@ -15,3 +15,5 @@ SS343／351、API/Webの003・004・007を既存の合成入力で選択実行�
 ### 公開診断修正後の同一実行
 
 PG43278は正規Bootstrap・Storage JARから固定した同じ物理5、公開雛形3、修正後fixture2で、API/Web各001～007を実行した。14成功、失敗・エラー・スキップ・未実行各0。二Mainの同一実行における生counterは行241/241、メソッド25/25、クラス2/2、分岐150/150。CheckstyleとSpotBugsは指摘0、PMDは試験に10件を保持。実設定や実運用ログ、全451の判定は別に残る。[実行manifest](evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/manifest.json)。
+
+PG43280でPMD生10件を個別分類した。範囲は現行の2 fixture。元のPG43118の説明は4 workerと記載したが、当時と現行の該当試験はいずれも各8 workerで32入力を検証している。記録・生指摘の訂正は追補で、全451の判定は別に残る。[適用判断](evidence/PG43280-f03-config-fixture-static-applicability-v1/manifest.json)。

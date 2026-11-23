@@ -1,0 +1,125 @@
+{
+  "run": "PG43280-f03-config-fixture-static-applicability-v1",
+  "source": "0ea5d8f83bba53cf8ce190622e84457ca4af79a3",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T03:18:52.019447+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "reviewedInputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/manifest.json",
+      "sha256": "1d1907f2eb3010e662e14f1346a06d4e61b0ed595d47c8ae018316f597cbbe6f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/manifest.json",
+      "sha256": "1d929834c4b1b0e02528e5f3586f3d1e50c8c66258b0436f58d4513ece035492"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/pmd.xml",
+      "sha256": "7b00004459d42a474a07cdbd7d08c786c6a0a155fe0e2178f70a3d6d845e0873"
+    }
+  ],
+  "raw": 10,
+  "applicableInThisContext": 0,
+  "unclassifiedInThisScope": 0,
+  "results": [
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "originalLine": 191,
+      "currentLine": 193,
+      "code": "var executor = Executors.newFixedThreadPool(8);",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "The test owns this ExecutorService exclusively. Its finally block cancels remaining work and asserts termination within ten seconds. Runtime qualification includes both fixture methods."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 191,
+      "currentLine": 193,
+      "code": "var executor = Executors.newFixedThreadPool(8);",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 195,
+      "currentLine": 197,
+      "code": "jobs.add(executor.submit(() -> ApiNonSecretConfig.parse(\"\", \"\").canonicalSha256()));",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 198,
+      "currentLine": 200,
+      "code": "executor.shutdownNow();",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 199,
+      "currentLine": 201,
+      "code": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "originalLine": 226,
+      "currentLine": 228,
+      "code": "var executor = Executors.newFixedThreadPool(8);",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "The test owns this ExecutorService exclusively. Its finally block cancels remaining work and asserts termination within ten seconds. Runtime qualification includes both fixture methods."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 226,
+      "currentLine": 228,
+      "code": "var executor = Executors.newFixedThreadPool(8);",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 230,
+      "currentLine": 232,
+      "code": "jobs.add(executor.submit(() -> WebNonSecretConfig.parse(\"\", \"\").canonicalSha256()));",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 233,
+      "currentLine": 235,
+      "code": "executor.shutdownNow();",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    },
+    {
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "originalLine": 234,
+      "currentLine": 236,
+      "code": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "localAssessment": "NON_APPLICABLE_IN_THIS_FIXTURE",
+      "reason": "This source executes standalone in the selected JUnit JVM. Eight local workers exercise 32 in-memory parser/hash inputs under bounded waits. No servlet-container thread ownership applies at the reported call site."
+    }
+  ],
+  "workerCountPerFixture": 8,
+  "casesPerFixture": 32,
+  "priorExplanationCorrection": "PG43118 called the pool four workers. The exact same fixture body has eight in both revisions. Prior evidence remains immutable.",
+  "pmdSuppressions": 0,
+  "rerunProductTests": 0,
+  "rerunStatic": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
