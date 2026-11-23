@@ -10,3 +10,5 @@ WBS-P018-02/2、RD171 SCM-004/005、SS352 §13、`.mvn/wrapper/maven-wrapper.pro
 検証済みZIPを一度だけ渡すローカルのダウンロード代替を使い、新規キャッシュと既存キャッシュの混在を避けた。製品試験・製品coverageおよびWindows起動の実測は今回対象外。新規展開時の検査であり、展開済みキャッシュの整合確認は別群。実行時刻・処理別終了値、原証跡SHA-256、ZIPとpropertiesのSHA-256はmanifestに保存した。[PG42734](evidence/PG42734-p01802-maven-wrapper-distribution-checksum-v1/manifest.json)
 
 PT-OPS-MVN-WRAP003／PG42736。既存Linux cacheを読み取り、照合済み公式ZIPの96ファイルすべてのSHA-256と `bin/mvn` の実行可能性を比較した。96一致、欠落・不一致・特殊ファイル・未識別の追加ファイルは0。Wrapper自身の追加管理ファイル `mvnw.url` は名前だけ照合した。Maven再実行とキャッシュ書込は0。[PG42736](evidence/PG42736-p01802-maven-wrapper-existing-cache-v1/manifest.json)
+
+同じ単一execに既存AlertWindowedInputContractTest 3件とAlertContinuityTest 2件を加える。元語彙の独立固定表と負値／逆順の連続性切り替えを含む計72件。同じprivate state lockで全遷移・snapshotを保護する。PG43690 v1の67終了0と別sourceの生未測定は当結果へ合算しない。BUG-3728も参照。

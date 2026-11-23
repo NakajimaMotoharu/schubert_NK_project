@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
 /**
  * One pure alert key, never a live observer/controller. NK-OPS-001/P018-09; MON005..009/013; UI252
@@ -168,77 +169,72 @@ public final class AlertLifecycle {
     }
 
     private Optional<Event> snapshot() {
-      final ReentrantLock held = lock;
-      held.lock();
-      try {
-        return active;
-      } finally {
-        held.unlock();
-      }
+      return withLock(() -> active);
     }
 
     private Optional<Event> interrupt(Duration elapsed) {
-      final ReentrantLock held = lock;
-      held.lock();
-      try {
-        advance(elapsed);
-        recoveringSince = Optional.empty();
-        return active;
-      } finally {
-        held.unlock();
-      }
+      return withLock(
+          () -> {
+            advance(elapsed);
+            recoveringSince = Optional.empty();
+            return active;
+          });
     }
 
     private Optional<Event> violation(Severity observed, Instant at, Duration elapsed) {
-      final ReentrantLock held = lock;
-      held.lock();
-      try {
-        advance(elapsed);
-        recoveringSince = Optional.empty();
-        Instant first = active.map(Event::firstSeen).orElse(at);
-        BigInteger count = active.map(Event::count).orElse(BigInteger.ZERO).add(BigInteger.ONE);
-        Severity level = observed;
-        if (active.isPresent() && active.orElseThrow().severity() == Severity.CRITICAL)
-          level = Severity.CRITICAL;
-        active = Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
-        return active;
-      } finally {
-        held.unlock();
-      }
+      return withLock(
+          () -> {
+            advance(elapsed);
+            recoveringSince = Optional.empty();
+            Instant first = active.map(Event::firstSeen).orElse(at);
+            BigInteger count = active.map(Event::count).orElse(BigInteger.ZERO).add(BigInteger.ONE);
+            Severity level = observed;
+            if (active.isPresent() && active.orElseThrow().severity() == Severity.CRITICAL)
+              level = Severity.CRITICAL;
+            active = Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
+            return active;
+          });
     }
 
     private Optional<Event> normal(CauseClearance clearance, Duration elapsed) {
+      return withLock(
+          () -> {
+            advance(elapsed);
+            if (active.isEmpty()) return Optional.empty();
+            // SS351 §12: routine normal samples/cause flags cannot retire investigation-required
+            // alerts.
+            if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG)
+              return active;
+            Duration since = recoveringSince.orElse(elapsed);
+            recoveringSince = Optional.of(since);
+            Event event = active.orElseThrow();
+            Duration recovery =
+                event.severity() == Severity.CRITICAL ? CRITICAL_RECOVERY : WARNING_RECOVERY;
+            boolean enough = elapsed.minus(since).compareTo(recovery) >= 0;
+            if (enough
+                && (event.severity() != Severity.CRITICAL || clearance == CauseClearance.CONFIRMED)) {
+              var closed =
+                  new Event(
+                      conditionKey,
+                      serviceKey,
+                      event.severity(),
+                      event.firstSeen(),
+                      event.lastSeen(),
+                      event.count(),
+                      false);
+              active = Optional.empty();
+              recoveringSince = Optional.empty();
+              return Optional.of(closed);
+            }
+            return active;
+          });
+    }
+
+    private Optional<Event> withLock(Supplier<Optional<Event>> action) {
       final ReentrantLock held = lock;
       held.lock();
       try {
-        advance(elapsed);
-        if (active.isEmpty()) return Optional.empty();
-        // SS351 §12: routine normal samples/cause flags cannot retire investigation-required
-        // alerts.
-        if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG)
-          return active;
-        Duration since = recoveringSince.orElse(elapsed);
-        recoveringSince = Optional.of(since);
-        Event event = active.orElseThrow();
-        Duration recovery =
-            event.severity() == Severity.CRITICAL ? CRITICAL_RECOVERY : WARNING_RECOVERY;
-        boolean enough = elapsed.minus(since).compareTo(recovery) >= 0;
-        if (enough
-            && (event.severity() != Severity.CRITICAL || clearance == CauseClearance.CONFIRMED)) {
-          var closed =
-              new Event(
-                  conditionKey,
-                  serviceKey,
-                  event.severity(),
-                  event.firstSeen(),
-                  event.lastSeen(),
-                  event.count(),
-                  false);
-          active = Optional.empty();
-          recoveringSince = Optional.empty();
-          return Optional.of(closed);
-        }
-        return active;
+        return action.get();
       } finally {
         held.unlock();
       }
