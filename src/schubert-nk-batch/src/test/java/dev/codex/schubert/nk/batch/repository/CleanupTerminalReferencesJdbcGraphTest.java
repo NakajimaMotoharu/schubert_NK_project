@@ -57,6 +57,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   private static final String IDENTITY_ROWS_CLOSE = "result close";
   private static final String IDENTITY_STATEMENT_CLOSE = "statement close";
   private static final String CLOSE_METHOD = "close";
+  private static final String NEXT_METHOD = "next";
   private static final String TERMINAL_QUERY = "terminal query";
   private static final String TERMINAL_TIMEOUT = "terminal timeout";
   private static final String TERMINAL_RUN = "terminal run";
@@ -428,7 +429,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
         ResultSet.class,
         (unused, method, args) ->
             switch (method.getName()) {
-              case "next" -> next.next();
+              case NEXT_METHOD -> next.next();
               case CLOSE_METHOD -> {
                 calls.add(TERMINAL_ROWS_CLOSE);
                 closeAction.close();
@@ -449,7 +450,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
         ResultSet.class,
         (unused, method, args) ->
             switch (method.getName()) {
-              case "next" -> cursor.incrementAndGet() < EXPECTED_STEPS.size();
+              case NEXT_METHOD -> cursor.incrementAndGet() < EXPECTED_STEPS.size();
               case "getString" -> terminalColumn(cursor.get(), (String) args[0]);
               case "getObject" ->
                   ((Class<?>) args[1]).cast(terminalColumn(cursor.get(), (String) args[0]));
@@ -501,7 +502,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
         ResultSet.class,
         (unused, method, args) ->
             switch (method.getName()) {
-              case "next" -> cursor.incrementAndGet() == 1;
+              case NEXT_METHOD -> cursor.incrementAndGet() == 1;
               case "getString" -> priorLookupColumn((String) args[0]);
               case "getObject" -> ((Class<?>) args[1]).cast(priorLookupColumn((String) args[0]));
               case CLOSE_METHOD -> {
@@ -585,7 +586,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
         ResultSet.class,
         (unused, method, args) ->
             switch (method.getName()) {
-              case "next" -> position.incrementAndGet() == 1;
+              case NEXT_METHOD -> position.incrementAndGet() == 1;
               case "getObject" -> "identity_consistent".equals(args[0]);
               case CLOSE_METHOD -> {
                 calls.add(IDENTITY_ROWS_CLOSE);
