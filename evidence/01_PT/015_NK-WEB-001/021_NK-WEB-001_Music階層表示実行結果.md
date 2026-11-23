@@ -11,3 +11,6 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 ```
 
 source eef1da18＋PG208作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12。raw log `/tmp/pgpt-pg208-green.log` SHA256=5a6427e29de67ae9351477d3e082828c9de9b0372b917769310a2e8ed8edcaf0。015collectorに8ID/3source/020021、019の独立inventory負canary追加、72件合格（017の1件と合わせ正式時73）。正式manifestへ対象commit/環境/実行日時/command/coverage/hashを保存予定。HTTP/音楽配信/実NKgate・PGPT/IT/ST未完了。
+## PG43368 現候補の音楽階層の選択試験
+
+UI235 §§7–8、SCR011／012、PT-WEB-246～253。現在のfixtureとProtocol正規JAR、現SDKで8/8成功。対象はMusicCategoryViewModelとMusicSectionViewModelおよび各Cardの4物理。単一execを独立CRCと照合し、行76/76、method 25/25、class 4/4、branch 28/28。初回は局所コンパイルの引数にSpring Webが欠け、PTは未起動。再試験は固定済み依存を明示した。旧別実行の結果は合算しない。実ブラウザ・HTTP・配信、正式Web JARと全451は別の受入条件。[PG43368](../018_NK-OPS-001/evidence/PG43368-current-music-hierarchy-eight-v2/manifest.json)
