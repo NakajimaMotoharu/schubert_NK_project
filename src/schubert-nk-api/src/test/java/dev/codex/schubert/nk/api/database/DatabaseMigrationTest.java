@@ -78,6 +78,14 @@ final class DatabaseMigrationTest {
   private static final String FIXTURE_RESET_ROLE_E5818A11 = "reset role";
   private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
   private static final String FIXTURE_22023_CDCA15BB = "22023";
+  private static final String OWNER_ROUTINE_DEFAULTS =
+      """
+      select defaclrole, defaclacl
+        from pg_catalog.pg_default_acl
+       where defaclrole = 'nk_owner'::regrole
+         and defaclnamespace = 0
+         and defaclobjtype = 'f'
+      """;
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS = MigrationInventory.VERSIONS;
   private static final String DATABASE = "schubert_nk";
@@ -2041,25 +2049,86 @@ final class DatabaseMigrationTest {
   @Order(35)
   @DisplayName("PT-DB-ACL031-001 only the owner retains default routine execution")
   void routineDefaultsRetainOwnerExecutionWithoutPublicExecution() throws SQLException {
-    String ownerRoutineDefaults =
-        """
-        select defaclrole, defaclacl
-          from pg_catalog.pg_default_acl
-         where defaclrole = 'nk_owner'::regrole
-           and defaclnamespace = 0
-           and defaclobjtype = 'f'
-        """;
+    assertRoutineOwnerDefaults(jdbcUrl);
+  }
+
+  @Test
+  @Order(36)
+  @DisplayName("PT-DB-ACL031-002 V030 upgrade preserves explicit routine ACLs")
+  void routineDefaultUpgradePreservesExplicitPrivileges() throws Exception {
+    String database = "schubert_routine_acl_upgrade";
+    run(
+        pgBinary(FIXTURE_CREATEDB_AF6714D1),
+        "-h",
+        FIXTURE_127_0_0_1_88270499,
+        "-p",
+        Integer.toString(port),
+        "-U",
+        ADMIN,
+        database);
+    String url = FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 + port + "/" + database;
+    executeResource(ADMIN, url, FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411);
+    execute(ADMIN, url, "create schema schubert_meta authorization nk_owner");
+    Flyway current = configuredFlyway(url, false, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8);
+    Flyway old = Flyway.configure().configuration(current.getConfiguration()).target("030").load();
+    assertEquals(30, old.migrate().migrationsExecuted);
     assertEquals(
-        1L, queryLong(ADMIN, "select count(*) from (" + ownerRoutineDefaults + ") defaults"));
+        0L, queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
+
+    String explicitRoutineAcls =
+        """
+        select n.nspname || '.' || p.proname ||
+               '(' || pg_catalog.pg_get_function_identity_arguments(p.oid) || '):' ||
+               coalesce(p.proacl::text, '<default>')
+          from pg_catalog.pg_proc p
+          join pg_catalog.pg_namespace n on n.oid = p.pronamespace
+         where n.nspname in ('schubert', 'schubert_web_session', 'schubert_meta')
+         order by 1
+        """;
+    List<String> before = queryList(ADMIN, url, explicitRoutineAcls);
+    assertFalse(before.isEmpty());
+    String unaffectedDefaults =
+        """
+        select defaclrole::regrole::text || ':' || defaclnamespace::text || ':' ||
+               defaclobjtype::text || ':' || defaclacl::text
+          from pg_catalog.pg_default_acl
+         where not (defaclrole = 'nk_owner'::regrole
+                    and defaclnamespace = 0 and defaclobjtype = 'f')
+         order by 1
+        """;
+    List<String> defaultsBefore = queryList(ADMIN, url, unaffectedDefaults);
+
+    assertEquals(1, current.migrate().migrationsExecuted);
+    assertTrue(current.validateWithResult().validationSuccessful);
+    assertEquals(
+        1L,
+        queryLong(
+            ADMIN,
+            url,
+            """
+            select count(*) from schubert_meta.flyway_schema_history
+             where installed_rank = 31 and version = '031'
+               and type = 'SQL' and script = 'V031__restrict_routine_default_privileges.sql'
+               and checksum = 1880247817 and success
+            """));
+    assertEquals(before, queryList(ADMIN, url, explicitRoutineAcls));
+    assertEquals(defaultsBefore, queryList(ADMIN, url, unaffectedDefaults));
+    assertRoutineOwnerDefaults(url);
+    assertEquals(0, current.migrate().migrationsExecuted);
+  }
+
+  private static void assertRoutineOwnerDefaults(String url) throws SQLException {
+    assertEquals(
+        1L, queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
 
     String executionEntries =
         "select count(*) from ("
-            + ownerRoutineDefaults
+            + OWNER_ROUTINE_DEFAULTS
             + ") defaults cross join lateral pg_catalog.aclexplode(defaults.defaclacl) acl"
             + " where acl.privilege_type = 'EXECUTE'";
     assertEquals(
-        1L, queryLong(ADMIN, executionEntries + " and acl.grantee = defaults.defaclrole"));
-    assertEquals(0L, queryLong(ADMIN, executionEntries + " and acl.grantee = 0"));
+        1L, queryLong(ADMIN, url, executionEntries + " and acl.grantee = defaults.defaclrole"));
+    assertEquals(0L, queryLong(ADMIN, url, executionEntries + " and acl.grantee = 0"));
   }
 
   private static String strictMediaInsert() {
