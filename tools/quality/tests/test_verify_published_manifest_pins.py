@@ -105,6 +105,16 @@ class PublishedManifestPinsTest(unittest.TestCase):
                     result["unresolved"],
                 )
 
+    def test_tree_object_id_cannot_substitute_for_a_source_commit(self):
+        tree = self.git("rev-parse", self.original + "^{tree}")
+        self.manifest({"reference": pin(FIXTURE, INITIAL, source=tree)})
+        end = self.commit()
+
+        result = audit(self.repo, self.original, end)
+
+        self.assertEqual(0, result["historical"])
+        self.assertEqual("INVALID_EXPLICIT_SOURCE", result["unresolved"][0]["reason"])
+
     def test_current_tree_is_from_commit_and_never_from_worktree(self):
         self.manifest([pin(FIXTURE, INITIAL), pin(FIXTURE, INITIAL)])
         self.manifest([pin(FIXTURE, UPDATED)], "documents/manifest.json")
