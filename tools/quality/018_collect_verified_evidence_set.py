@@ -78,21 +78,25 @@ def local_file(root, relative):
     return path
 
 
-def load_success_manifest(path):
+def load_evidence_json(path, description):
     def unique_object(pairs):
         values = dict(pairs)
         if len(values) != len(pairs):
-            raise ValueError("duplicate evidence manifest field")
+            raise ValueError(f"duplicate {description} field")
         return values
 
     def invalid_constant(_):
-        raise ValueError("invalid evidence manifest numeric constant")
+        raise ValueError(f"invalid {description} numeric constant")
 
-    manifest = json.loads(
+    return json.loads(
         path.read_text(encoding="utf-8"),
         object_pairs_hook=unique_object,
         parse_constant=invalid_constant,
     )
+
+
+def load_success_manifest(path):
+    manifest = load_evidence_json(path, "evidence manifest")
     if (not isinstance(manifest, dict)
             or type(manifest.get("exitCode")) is not int
             or manifest["exitCode"] != 0):
@@ -146,7 +150,7 @@ def validate_scope(root, scope, run, commit, branch):
         payload = local_file(directory, receipt)
         if digest(payload) != manifest["reactorJunitReceiptSha256"]:
             raise ValueError("invalid persisted reactor JUnit receipt hash")
-        terminal = json.loads(payload.read_bytes())
+        terminal = load_evidence_json(payload, "persisted reactor JUnit receipt")
         if (
             not isinstance(terminal, dict)
             or terminal.get("schema") not in {

@@ -3211,6 +3211,12 @@ class EvidenceSetTest(unittest.TestCase):
             current = json.dumps({
                 **json.loads(original), "schema": "pgpt-reactor-junit-v3", "branch": "dev-foundation"
             }).encode()
+            invalid_json_receipts = (
+                b'{"runId":"PT-WEB-OTHER",' + current[1:],
+                current[:-1] + b', "metadata": {"count": 0, "count": 1}}',
+                *(current[:-1] + b', "count": ' + value + b'}'
+                  for value in (b"NaN", b"Infinity", b"-Infinity")),
+            )
             for linked, content, good_hash, valid in (
                 (receipt, original, True, True),
                 (receipt, previous, True, True),
@@ -3219,6 +3225,7 @@ class EvidenceSetTest(unittest.TestCase):
                 (receipt, original, False, False),
                 ("results.xml", original, True, False),
                 (receipt, different_run, True, False),
+                *((receipt, content, True, False) for content in invalid_json_receipts),
             ):
                 path.write_bytes(content)
                 expected = hashlib.sha256(content).hexdigest()
