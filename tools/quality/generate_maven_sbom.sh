@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..014.
+# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..013, PT-OPS-SBOM-029.
 # Use a verified Maven repository for the selected source. Run from its worktree root.
 if [[ $# -ne 3 || -z ${3:-} ]]; then
   printf 'Usage: %s MODULE MAVEN_REPOSITORY OUTPUT_TIMESTAMP\n' "$0" >&2

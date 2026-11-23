@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# SCM-005 / RD171 / SS352 / SS354 / PT-OPS-CI-PRO001..005.
+# SCM-005 / RD171 / SS352 / SS354 / PT-OPS-CI-PRO001..006.
 if [[ $# -ne 1 ]]; then
   printf 'Usage: %s MAVEN_REPOSITORY\n' "$0" >&2
   exit 2

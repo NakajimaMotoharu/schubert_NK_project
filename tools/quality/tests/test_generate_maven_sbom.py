@@ -130,7 +130,7 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
         self.assertFalse((self.root / "arguments.json").exists())
         self.assertEqual([], list(elsewhere.iterdir()))
 
-    def test_sbom014_relative_repository_is_resolved_from_the_worktree(self):
+    def test_sbom029_relative_repository_is_resolved_from_the_worktree(self):
         search_directory = self.root / "shell search path"
         (search_directory / self.repository.name).mkdir(parents=True)
         (search_directory / "missing from worktree").mkdir()

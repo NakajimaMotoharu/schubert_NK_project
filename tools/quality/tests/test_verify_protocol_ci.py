@@ -1,4 +1,4 @@
-"""Local Maven command contract for PT-OPS-CI-PRO001..005."""
+"""Local Maven command contract for PT-OPS-CI-PRO001..004 and PT-OPS-CI-PRO006."""
 import os
 from pathlib import Path
 import subprocess
@@ -71,7 +71,7 @@ class VerifyProtocolCiTest(unittest.TestCase):
         self.assertEqual(2, result.returncode)
         self.assertFalse((self.root / "observed.args").exists())
 
-    def test_ci_pro005_relative_repository_is_resolved_from_the_worktree(self):
+    def test_ci_pro006_relative_repository_is_resolved_from_the_worktree(self):
         search_directory = self.root / "shell search path"
         (search_directory / self.repository.name).mkdir(parents=True)
         (search_directory / "missing from worktree").mkdir()
