@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -31,6 +32,7 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   private static final Instant STARTED = Instant.parse("2026-10-01T21:00:01Z");
   private static final Instant ENDED = Instant.parse("2026-10-01T21:00:02Z");
   private static final BatchRun RUN = new BatchRun(new UUID(0, 7), CUTOFF);
+  private static final UUID PRIOR_RUN_ID = new UUID(0, 4);
   private static final List<BatchStep> EXPECTED_STEPS =
       List.of(
           BatchStep.CLEAN_NOTIFICATION,
@@ -63,6 +65,9 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   private static final String TERMINAL_CLOSE = "terminal close";
   private static final List<String> EXPECTED_CALLS =
       List.of(IDENTITY_CHECK, IDENTITY_ROWS_CLOSE, IDENTITY_STATEMENT_CLOSE, "prior success");
+  private static final String PRIOR_RESOLVE = "resolve independent prior owner";
+  private static final String PRIOR_ROW_CLOSE = "prior row close";
+  private static final String PRIOR_STATEMENT_CLOSE = "prior statement close";
   private static final List<String> EXPECTED_READ_CALLS =
       List.of(
           IDENTITY_CHECK,
@@ -120,6 +125,65 @@ final class CleanupTerminalReferencesJdbcGraphTest {
         assertThrows(BatchRepositoryException.class, () -> repository.references(snapshot()));
     assertFixedDiagnostic(failure);
     assertEquals(EXPECTED_CALLS, calls);
+  }
+
+  /** PT-F02-CTERM-REF-003. */
+  @Test
+  void checkedPriorLookupFailureRemainsPrimaryWhenResultCloseThrowsSql() {
+    assertCheckedLookupFailure(
+        () -> {
+          throw new SQLException("independent prior row close failure");
+        },
+        () -> {});
+  }
+
+  /** PT-F02-CTERM-REF-004. */
+  @Test
+  void checkedPriorLookupFailureRemainsPrimaryWhenStatementCloseThrowsError() {
+    assertCheckedLookupFailure(
+        () -> {},
+        () -> {
+          throw new LinkageError("independent prior statement close error");
+        });
+  }
+
+  private static void assertCheckedLookupFailure(CloseAction rowClose, CloseAction statementClose) {
+    var calls = new ArrayList<String>();
+    var primary = new IOException("independent prior lookup failure");
+    var connection =
+        connection(
+            SUCCESS_REFERENCE_SQL,
+            () -> priorLookupStatement(calls, rowClose, statementClose),
+            calls);
+    var repository = new CleanupTerminalRepository(connection, () -> 5_000_000_000L);
+
+    var observed =
+        assertThrows(
+            IOException.class,
+            () ->
+                repository.references(
+                    snapshot(),
+                    (id, instant) -> {
+                      assertEquals(PRIOR_RUN_ID, id);
+                      assertEquals(STARTED, instant);
+                      calls.add(PRIOR_RESOLVE);
+                      throw primary;
+                    }));
+
+    assertSame(primary, observed);
+    assertNull(observed.getCause());
+    var suppressed = observed.getSuppressed();
+    assertEquals(1, suppressed.length);
+    assertFixedDiagnostic(assertInstanceOf(BatchRepositoryException.class, suppressed[0]));
+    assertEquals(
+        List.of(
+            IDENTITY_CHECK,
+            IDENTITY_ROWS_CLOSE,
+            IDENTITY_STATEMENT_CLOSE,
+            PRIOR_RESOLVE,
+            PRIOR_ROW_CLOSE,
+            PRIOR_STATEMENT_CLOSE),
+        calls);
   }
 
   /** PT-F02-CTERM-READ001. */
@@ -397,6 +461,66 @@ final class CleanupTerminalReferencesJdbcGraphTest {
               default ->
                   throw new AssertionError("unexpected terminal row call: " + method.getName());
             });
+  }
+
+  private static PreparedStatement priorLookupStatement(
+      List<String> calls, CloseAction rowClose, CloseAction statementClose) {
+    return proxy(
+        PreparedStatement.class,
+        (unused, method, args) -> {
+          switch (method.getName()) {
+            case "setQueryTimeout" -> assertEquals(5, args[0]);
+            case "setObject" -> {
+              assertEquals(1, args[0]);
+              assertEquals(LocalDate.of(2026, 10, 2), args[1]);
+            }
+            case "setString" -> {
+              assertEquals(2, args[0]);
+              assertEquals("CLEAN_NOTIFICATION", args[1]);
+            }
+            case "setInt" -> {
+              assertEquals(3, args[0]);
+              assertEquals(2, args[1]);
+            }
+            case "executeQuery" -> {
+              return priorLookupRow(calls, rowClose);
+            }
+            case CLOSE_METHOD -> {
+              calls.add(PRIOR_STATEMENT_CLOSE);
+              statementClose.close();
+            }
+            default -> throw new AssertionError("unexpected prior lookup statement call");
+          }
+          return null;
+        });
+  }
+
+  private static ResultSet priorLookupRow(List<String> calls, CloseAction rowClose) {
+    var cursor = new AtomicInteger();
+    return proxy(
+        ResultSet.class,
+        (unused, method, args) ->
+            switch (method.getName()) {
+              case "next" -> cursor.incrementAndGet() == 1;
+              case "getString" -> priorLookupColumn((String) args[0]);
+              case "getObject" -> ((Class<?>) args[1]).cast(priorLookupColumn((String) args[0]));
+              case CLOSE_METHOD -> {
+                calls.add(PRIOR_ROW_CLOSE);
+                rowClose.close();
+                yield null;
+              }
+              default -> throw new AssertionError("unexpected prior lookup row call");
+            });
+  }
+
+  private static Object priorLookupColumn(String column) {
+    return switch (column) {
+      case "id" -> 80L;
+      case "run_id" -> PRIOR_RUN_ID;
+      case "started_at" -> CUTOFF.atOffset(ZoneOffset.UTC);
+      case "ended_at" -> STARTED.atOffset(ZoneOffset.UTC);
+      default -> terminalColumn(EXPECTED_STEPS.size() - 1, column);
+    };
   }
 
   private static Object terminalColumn(int offset, String column) {
