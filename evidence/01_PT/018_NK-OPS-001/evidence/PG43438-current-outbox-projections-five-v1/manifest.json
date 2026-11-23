@@ -1,0 +1,236 @@
+{
+  "run": "PG43438-current-outbox-projections-five-v1",
+  "wbs": "WBS-P004-05/2",
+  "source": "4f0c824626ff59c673a9787fadcf3f84aaefd9b0",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T07:17:31.008970+00:00",
+  "actualRunTerminalAtUTC": "2026-11-23T07:17:05.674508+00:00",
+  "actualExit": 0,
+  "executed": 5,
+  "applicable": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunWithinExactSelection": 0,
+  "testIds": {
+    "PT-OUT-JDBC001": "enqueueBindsExactUtcAndOptionalDlqWithoutOwningTransaction",
+    "PT-OUT-JDBC002": "claimUsesBoundedLeaseStableOrderAndImmutableRowBody",
+    "PT-OUT-JDBC003": "requiredAndInvalidRowsFailClosedIncludingNullableAttempt",
+    "PT-OUT-JDBC004": "dlqMetadataIsAllOrNoneAndPreservesClosedProjection",
+    "PT-OUT-JDBC008": "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+    "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+  },
+  "unchangedCompiledInputReused": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43436-current-returned-outbox-null-v1/manifest.json",
+    "sha256": "2b42369d220bbd5398649414b12634aeb312e51ef1f14665cd9dd891469b5b86"
+  },
+  "originalLimitedCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39653-bug3296-business-outbox-unit-v1/manifest.json",
+    "sha256": "ca73000f39d0638679101e16b6afc68b9d4f74aa96ffa737b5eca6715609c36c"
+  },
+  "frozenFixtureSource": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+    "sha256": "02c2b2bcd516450620ccccd81d822bf6a8e6de44e957a4d5b6e5b163c098ab0a"
+  },
+  "compiledTenPhysical": {
+    "dev/codex/schubert/nk/api/database/package-info.class": {
+      "sha256": "3cca901840ef72be16132784cbf33e12e200e334b58e3807a4a03d0cdb2ef69a",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn.class": {
+      "sha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class": {
+      "sha256": "adbf88229a5f9ee9450d663b40d1c14d8cb2fdb7ab284d1e033ea2efb0007350",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class": {
+      "sha256": "25fc2bfed69e1dcee0b9213f8448a45e3f3cc8eba3ed20d1cfdb31d0503284db",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info.class": {
+      "sha256": "8b27ff9b19d5dc8b5889a1a4fe3488ce50fb6dc83ddd543b38e5f2cbc212bb9e",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": {
+      "sha256": "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.class": {
+      "sha256": "aaa42a91d293116e9a25e9d8c8f51641acdd75572a56d403ada8e45acef3a190",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class": {
+      "sha256": "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class": {
+      "sha256": "974d34dc68a2ff9b13a9b32a8fda4e72e09640440c4ac64577e0538b148c91b7",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class": {
+      "sha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+      "samePrevious": true
+    }
+  },
+  "physicalDelta": [
+    "OutboxEntry.class",
+    "OutboxRequest.class"
+  ],
+  "projectInitialization": [
+    "dev/codex/schubert/nk/api/database/RequiredColumn",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest$Fixture",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest"
+  ],
+  "individuallyRelevantMethods": {
+    "enqueue": [
+      {
+        "descriptor": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRequest;)J",
+        "rawCounters": [
+          "INSTRUCTION:0:176",
+          "BRANCH:0:4",
+          "LINE:0:43",
+          "COMPLEXITY:0:3",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "claim": [
+      {
+        "descriptor": "(Ljava/sql/Connection;Ljava/lang/String;Ljava/time/Instant;I)Ljava/util/List;",
+        "rawCounters": [
+          "INSTRUCTION:5:116",
+          "BRANCH:2:4",
+          "LINE:1:32",
+          "COMPLEXITY:2:2",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "requireValue": [
+      {
+        "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+        "rawCounters": [
+          "INSTRUCTION:0:10",
+          "BRANCH:0:2",
+          "LINE:0:3",
+          "COMPLEXITY:0:2",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ]
+  },
+  "unfilteredPerClass": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": {
+      "counters": {
+        "INSTRUCTION": [
+          227,
+          472
+        ],
+        "BRANCH": [
+          19,
+          21
+        ],
+        "LINE": [
+          58,
+          120
+        ],
+        "COMPLEXITY": [
+          17,
+          16
+        ],
+        "METHOD": [
+          5,
+          8
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "classSha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+      "crc": "121ba7e51653e855",
+      "distinctCoveredProbes": 104
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "counters": {
+        "INSTRUCTION": [
+          7,
+          10
+        ],
+        "BRANCH": [
+          0,
+          2
+        ],
+        "LINE": [
+          2,
+          3
+        ],
+        "COMPLEXITY": [
+          1,
+          2
+        ],
+        "METHOD": [
+          1,
+          1
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "classSha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+      "crc": "acbdd66ef7fda4d1",
+      "distinctCoveredProbes": 3
+    }
+  },
+  "session": {
+    "labelBytesHex": "504734333433382d4f555435",
+    "startMillis": 1795418224901,
+    "endMillis": 1795418225531
+  },
+  "candidateRegularAPIProved": false,
+  "allCounterClosure": false,
+  "input": {
+    "path": "../pgpt-runs/PG379/PG43438-current-outbox-projections-five-v1/begin.json",
+    "sha256": "c4eb7809240ed250dfc8aa54339be5d24db07acd90d0d62d3cacfc1a6f590f6c"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43438-current-outbox-projections-five-v1/terminal.json",
+    "sha256": "f9a328cb130e7d9f2cfbd3925a32d753822d73ecdd3a7f726e19875668fd84cf"
+  },
+  "originalExec": {
+    "path": "../pgpt-runs/PG379/PG43438-current-outbox-projections-five-v1/selected.exec",
+    "sha256": "8bb2359b3a4da1e10a392c01bb8b22fc63ee28f3f88949dc839afbf10f7b4ef1"
+  },
+  "originalXml": {
+    "path": "../pgpt-runs/PG379/PG43438-current-outbox-projections-five-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "ff1ce0058876244e94d2d677df824e04ba78b6bbdab095737d025cf244379277"
+  },
+  "sanitizedXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/sanitized-junit.xml",
+    "sha256": "2004dcabcc0b88a77bf2c89ebb300f4c24c2d2a9f398aac8c0d6e77aa9655b16"
+  },
+  "sanitizedCoverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/coverage-unfiltered.tsv",
+    "sha256": "8fa66b93d7119c83551aa498a768f60d2c0eaaf37b5c69d5f9cba1e4829b7326"
+  },
+  "actualJdbcConnection": 0,
+  "actualDriver": 0,
+  "actualBroker": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
