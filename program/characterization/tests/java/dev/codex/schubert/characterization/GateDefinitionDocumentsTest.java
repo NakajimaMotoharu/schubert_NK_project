@@ -421,6 +421,27 @@ final class GateDefinitionDocumentsTest {
     assertAll(checks);
   }
 
+  /** PT-CHR-DEF-017: fonts and difference selectors contain text names. */
+  @Test
+  void declaredFontAndSelectorNamesRejectNonTextEntries() throws IOException {
+    List<Executable> checks = new ArrayList<>();
+    for (JsonNode invalid :
+        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
+      var input = fixture();
+      object(input, BROWSER).putArray("fonts").add(invalid);
+      checks.add(() -> assertEquals(List.of("BROWSER_FONTS"), validate(input)));
+    }
+    for (JsonNode invalid :
+        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("false"))) {
+      var input = fixture();
+      var difference = (ObjectNode) object(input, DIFFERENCES).withArray("differences").get(1);
+      assertEquals("DIF-002", difference.path("id").textValue());
+      difference.putArray("selectors").add(invalid);
+      checks.add(() -> assertEquals(List.of("DIF_SELECTOR_EMPTY:DIF-002"), validate(input)));
+    }
+    assertAll(checks);
+  }
+
   @Test
   void concurrentValidAndInvalidDefinitionsRemainIndependent() throws Exception {
     List<JsonNode> valid = fixture();
