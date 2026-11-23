@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-9046",
+  "groupId": "WBS66-3601",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T04:35:56+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "b7427dae53d2c4c80af0a3180d0c5b0f1436145c",
+    "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "run": "PG43332",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "previousCheckpoint": 3600,
+    "planRow": {
+      "新版ID": "WBS-P020-01.02/2",
+      "第58版ID": "WBS-P020-01.02/2",
+      "費用主担当項目": "P020-01",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-17までの計画週",
+      "作業・成果物": "比較/DIFマスク・未登録差分・欠落caseのnegative／同source証拠による受入判定",
+      "先行ID・着手条件": "WBS-P020-01.02/1、閉/WBS-P020-01.01",
+      "担当": "環境・比較担当",
+      "旧短期残pp": "0.488",
+      "改訂残pp": "0.488",
+      "終了条件": "比較/DIFマスク・未登録差分・欠落caseのnegativeの対象別完了記録を確認",
+      "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+      "参照する元項目": "P020-01",
+      "lineNumber": 56
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "scope": "QA055/UI226、SSC338、承認SS355 §8。許可済みArtifactComparatorの合成CHR-A02に固定lock文と別々のRetry-Afterを設定。合成Current/NKの両値一致・本文だけの変更・headerだけの変更を局所検証。実NK/Browser/認証/API/DBとCurrent baseline実体を読まない。",
+      "exit": "試験IDを明記し、正固定比較と、未登録差分が本文/header別に失格となることを当source/一JUnit実行で確認。意味ある差以外は元226を再演しない。",
+      "nextCandidate": "短期の他中核に戻り、静的六製品の残差を候補別・保留別で絞る。"
+    },
+    "groupCapPp": 0.48,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.16,
+      "high": 0.48
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

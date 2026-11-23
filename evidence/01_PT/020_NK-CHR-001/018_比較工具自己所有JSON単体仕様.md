@@ -27,3 +27,9 @@ JDK25.0.4/Maven3.9.12、normal21088はtool Main5/物理10をTest/baseline/captur
 Command: 020/input002 prepare→static→source固定→run <source>→post <source>→独立post。実日時/OS/JDK/tool/branch/source/command/終了code/input/expected/actual/XML/CRC/counters/BUG/hashはmanifestと019結果。SDK class-init/Jar/JDK metadata/syscalls全0を主張しない。Null/欠落/空/未知はSpotBugsとnegativeで組合せる。実CHR-A01/L01/G01～G06・QA051final・Browser/IT-ST/全451は別未受入、fixtureのPASSを実NK/Current合格へ変換しない。
 
 結果recordのimmutable/null契約を当source constructor reviewで追加確認が必要と判定しCMP010を追加。新規method2/既8再認証を区別、群開始見積1/3/6 cap8は不変更、元9想定・旧compile/staticは保全する。Main変更は不要でTestと期待値補完だけ、既Main五/10class SpotBugs0はbyte一致で再利用する。
+
+## QA-055の表示文字とHTTP値
+
+PT-CHR-QA055-001、`ArtifactComparatorQa055Test.lockedLoginTextAndRetryAfterRemainSeparateComparisonValues`。WBS-P020-01.02/2、UI226 §2、SS355 §7.2／§8、QA-055／UIC-012／SSC-338。自己所有の一件の合成CHR-A02に、承認固定文と別個の合成HTTP値27を設定する。同じ二値では未登録差分0、表示文だけを変えると `CHR-A02:/lockedMessage`、HTTP値だけを28にすると `CHR-A02:/lockedHeaders/Retry-After` の各一件が未登録となる。両pointerと値は設計から独立して固定した。定義は公開catalogとDIF一覧を使い、他23caseを省略したfixtureの全体判定はFAILのまま確認する。
+
+PG43332 v2、Java 25.0.4で4 Mainと専用fixtureをローカルcompile、選択1件成功、失敗・エラー・skip 0。初回は既存の広いfixtureに未指定依存がありcompile終了1、試験未起動。実環境、Browser、実Retry-After、Current baseline本体、製品coverage、CHR全体判定は対象外。[PG43332](evidence/PG43332-chr-lock-text-retry-header-v2/manifest.json)
