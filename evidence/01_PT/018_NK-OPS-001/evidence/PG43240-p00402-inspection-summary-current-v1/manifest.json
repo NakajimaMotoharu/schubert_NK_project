@@ -1,0 +1,132 @@
+{
+  "run": "PG43240-p00402-inspection-summary-current-v1",
+  "source": "4a70b8cf41313bf1095164d39d31230a7c1f2c4f",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P004-02/2",
+  "sharedRead": [
+    "WBS-F03/2-2-b",
+    "WBS-P004-05/2"
+  ],
+  "authoritativeProductArtifact": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "fixtures": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "ca88a77ac3dad9b71acb0823fb5c210ec5c35a229fd037f8c5f1aff2f3082c4d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+    }
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:27:20.270998+00:00",
+  "eligibleCaseCount": 13,
+  "passed": 13,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "newTestDefinitions": 0,
+  "excludeOldExecutionsFromOriginalStream": true,
+  "originalXml": [
+    {
+      "file": "TEST-junit-jupiter.xml",
+      "sha256": "be730a7c4cc7412433514723c4f30c8b334466cc25af7b0703d5dc54fceef40c",
+      "cases": 13
+    },
+    {
+      "file": "TEST-junit-platform-suite.xml",
+      "sha256": "34f95a54aea9205b6c24c0a9719548ce58f69dc3960ec13d6c2c8f28b8dd47c6",
+      "cases": 0
+    },
+    {
+      "file": "TEST-junit-vintage.xml",
+      "sha256": "ce7d267b6859395594bfdd061872a6ac7f2d337c44872858466f9ceea5b5276c",
+      "cases": 0
+    }
+  ],
+  "sanitizedResults": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43240-p00402-inspection-summary-current-v1/junit-cases.json",
+    "sha256": "5b7f85d69e797058645484621f5d55a80d5ed443d43e6d2b28b5a4d754dbebc8"
+  },
+  "priorEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42164-p00402-prior-summary-port-evidence-v1/manifest.json",
+      "sha256": "88b3c97bae549f6dec99ea7d1aa81926c557326093147e47ce65b3e78fdcca4b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+      "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42952-batch-read-only-jdbc-cross-check-v1/manifest.json",
+      "sha256": "047cdfe530f26ee47a4958ba01256d7456cb6b831adcac290c1c79cf64f4c7de"
+    }
+  ],
+  "streamSha256": "fac4c6555d39df647879c438a802fe31ba6a31458b2f7942110ce7cf2dfc5f4d",
+  "strictResultSha256": "618a64bc78deb1e33c4da17f36ea998561de0eca7f7773292e6767fcc4eced66",
+  "sessionVerifiedByIndependentReadOnlyDecoder": true,
+  "measuredRaw": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 226
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 59
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 16
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "rawClass": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43240-p00402-inspection-summary-current-v1/coverage-unfiltered.tsv",
+    "sha256": "b6296cc4d7bc44598416b566712e5e2d5cd233c525e59044b073937e835cc645"
+  },
+  "crc64": "5d524ee1e3c908e8",
+  "recordedExecProbeCount": 55,
+  "commandManifestSha256": "4a70ac9e7578621b72cbaf433e165acf446967f7e37594b927761997de897e38",
+  "fixtureScopeStatic": {
+    "cs": 0,
+    "sb": 2,
+    "pmd": 20,
+    "rawRetained": true
+  },
+  "allLocalTargetCountersComplete": true,
+  "actualToolExitCodes": {
+    "format": 0,
+    "fixture": 0,
+    "style": 0,
+    "spotbugs": 1,
+    "pmd": 4,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "exactRuntimePhysicalCount": 9,
+  "typedSdkFixture": "JDK proxy, no DB/production transaction/native",
+  "knownEndingRequirements": [
+    "F02",
+    "F03",
+    "P004-02 actual DDL/roles and Inbox retention",
+    "451 at six-module width"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

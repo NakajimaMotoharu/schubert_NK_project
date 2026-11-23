@@ -1,0 +1,130 @@
+{
+  "eventId": "PGPT-20261008-8954",
+  "workCategory": "SELECTED_TEST",
+  "source": "4a70b8cf41313bf1095164d39d31230a7c1f2c4f",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P004-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P004-02/2",
+    "元行": "WBS-P004-02/2",
+    "費目": "B",
+    "主担当": "WBS-P004-02",
+    "状態": "計画",
+    "作業": "Inbox参照保護・summaryのSQL契約／同source証拠による受入判定",
+    "残pp": "0.423",
+    "着手": "設計332・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Inbox参照保護・summaryのSQL契約：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 332",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "2",
+    "楽観pp": "0.163",
+    "慎重pp": "0.845",
+    "要求設計の版差": "PT基準仕様 NK-DAT-001、SS 332",
+    "lineNumber": 309,
+    "改訂残pp": "0.423"
+  },
+  "run": "PG43240",
+  "startEvent": "PGPT-20261008-8953",
+  "outcome": {
+    "newOrdinaryExecutions": 13,
+    "passCount": 13,
+    "newTestDefinitions": 0,
+    "exactCurrentRegularPhysical": 9,
+    "realMissedCounterCount": 0,
+    "branchDenominator": 20,
+    "oldXmlUntouched": true,
+    "retainedStatic": {
+      "checkstyle": 0,
+      "sb": 2,
+      "pmd": 20
+    },
+    "whole451": false,
+    "technicalOrdinaryExecutions": 2860,
+    "technicalAppliedSuccess": 2817
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43240-p00402-inspection-summary-current-v1/manifest.json",
+    "sha256": "55fe5434db49f7b075e6b460eb16dc2314dcab8f658129b5706ba0a503e70ac8"
+  },
+  "nextEvidence": {
+    "managementWorkId": "WBS-F03/2-2-b",
+    "object": "Remove one overly broad checked declaration and three duplicated selector names in authorized InspectionSummaryPortTest after distinct BUG registration, then exact affected ordinary methods",
+    "hold": "No DB, external process, updated held types, native or whole451"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T02:27:55+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 59,
+    "remainingPercent": 41,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "4414b6b0468e04bac242e422f5464b9ec681fb57aa12d96f91f959ebd99e151e",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T02:27:55+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 59,
+        "remainingPercent": 41,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T02:27:20.270998+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 59,
+    "remainingPercent": 41,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
