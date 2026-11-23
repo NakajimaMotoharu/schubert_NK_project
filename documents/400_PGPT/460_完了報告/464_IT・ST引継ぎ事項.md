@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-24 05:59 JST IT・STへ引き継ぐ現候補の未実測条件
+
+同候補BatchのBackup読取時刻は合成JDBC入力をInstantへ変換する局所試験で確認した。Linuxでは正規署名候補とDB所有を確定し、二時刻のµs・切替、両FAILED行の再確認、借用接続、取得資源の終了を実環境の結果と照合する。C02の実効Unitと公開、F04のFileStore・ブラウザ、実CHRと全451はPG/PTの残条件やIT/STの開始条件として区分して扱う。Backupの同時例外順位は対象読取固有の設計確認を残す。 [局所証拠](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG43930-backup-projection-current-single-exec/manifest.json) [例外順位の検討記録](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43934-backup-owned-close-design-review/manifest.json) [Caddy静的証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43906-caddy-unit-fixture-pmd/manifest.json)
+
 ## 2026-11-24 02:12 JST Linux引継ぎの未実測条件
 
 監視しきい値・状態表示・生成メトリクスの合成値は局所確認済み。実観測の供給元、実プロセスのSDK観測、実CPU・DB・JMS・FileStore、Caddyの同boot実効設定と、日次保守の固定受けに対する真正な終端・逆順停止は後段の別証拠が必要。正式PG/PTとIT/STの開始・完了判定を個別に行う。 [監視状態の型付き証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43780-monitor-status-spotbugs-current/manifest.json)

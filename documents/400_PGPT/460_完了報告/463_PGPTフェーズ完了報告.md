@@ -1,5 +1,9 @@
 # PGPTフェーズ完了報告
 
+## 2026-11-24 05:59 JST 工程中間判定
+
+有効正式受入16/190件（8.4%）。新規0、重点0/5、指定0/12、最低線27件まで11件。着手値からの増減と工数を区別し、工数完成率は未較正。今回の共有週次の表示は使用82%から89%へ変化し、観測時残11%。専有消費とreset跨ぎ差は未確定。今回の成果はBackupのJDBC時刻是正、正規Batch、局所通常試験と証跡検査。正式担当受領、正規API/Web、六製品451、実環境・QA-051・QA-056・QA-062、QA-061の配布条件と担当は残る。 [現包装](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43916-corrected-backup-utc-batch-regular-jar/manifest.json) [PT結果](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG43930-backup-projection-current-single-exec/manifest.json)
+
 ## 2026-11-24 02:12 JST 工程中間判定
 
 正式16/190（8.4%）、中核0/5、指定0/12。正式認定PT-WEB-20260925-24の1,964件／53領域を維持。工数完成率は未較正。 今回の技術的な前進は監視116個別試験の現候補確認、単一execの局所coverage、二つのAPI/Web依存モデル。**正式受入の追加は0件。** F02は正規4/6 JAR、現POMに一致するAPI/Web依存モデル86ノード。API/Web正規JAR、QA-056、StorageのSSC-461と実JDBC、同候補六製品全451、C02/F04実環境、QA-061の配布判断とQA-062のマニフェスト改行判断が残る。 [PTのcheckpoint](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43774-current-batch-metric-text-thirtysix-single-exec/manifest.json)
