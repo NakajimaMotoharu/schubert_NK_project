@@ -1,0 +1,52 @@
+{
+  "schema": "PGPT_USAGE_STOP_V1",
+  "timeUTC": "2026-11-23T21:11:50+00:00",
+  "reason": "FRESH_WEEKLY_REMAINING_10_PERCENT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T21:11:50+00:00",
+    "ordinaryUsageAllowed": null,
+    "primary": {
+      "usedPercent": 90,
+      "remainingPercent": 10,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "branch": "dev-foundation",
+  "preCheckpointHead": "eca3e12f83be9334c2534d4db49d5560eebe3274",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "latestTestCommit": "eca3e12f83be9334c2534d4db49d5560eebe3274",
+  "provisionalEvidence": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43942-ssc481-backup-close-before-format/manifest.json",
+    "sha256": "72964d0f1fdeeed545e9aa996ae4eb1276b54833915df8bbbd5721581638077e"
+  },
+  "groupCheckpoint": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/4196_SSC481暫定結果と利用枠保全停止.json",
+    "sha256": "71f1b5849938665f1b94bd49288679b5b686f568a360f50b27b99234147a08d6"
+  },
+  "knownOwnedRunning": 0,
+  "trackedDirtyBeforeCheckpoint": [],
+  "priorUntrackedArtifacts": 1626,
+  "stashesPreserved": 7,
+  "canonicalMain": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "existingHistory": "既存stash、原Scenario3、Currentbaseline、原本DB・Backup・鍵、全成功失敗・native証拠を保持。今回の安全な範囲の読取・局所試験以外の外部停止や再起動を発行していない。",
+  "next": {
+    "onResume": "取得直後の週次・該当短期枠が残10%超であることと、現HEAD・owner・同じrunの有無を確認してから再開。",
+    "expectedProductionSource": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+    "latestFixtureCommit": "eca3e12f83be9334c2534d4db49d5560eebe3274",
+    "command": "python3 -B ../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-verified/resume-scoped-junit.py post-format \"$(git rev-parse HEAD)\"",
+    "require": "post-formatの新終端で当18件・四counterを照合し、当Main・fixtureのformatter/Checkstyle・適用PMD、標準Batch包装と同一物理の型付き検査を確認。残SSC461・F02/F03・正式451へ続ける。",
+    "deny": "権限未確定のQA-056、QA-062、実DB／VM／Root11・保留26、QA-051 finalは該当条件の成立待ち。既存jobや合格結果を二重実行しない。"
+  },
+  "formal": {
+    "acceptedOriginal": 16,
+    "totalOriginal": 190,
+    "newFormalAcceptance": 0,
+    "formalAcceptanceId": null,
+    "officialTests": 1964,
+    "officialScopes": 53,
+    "effortRate": null
+  }
+}
