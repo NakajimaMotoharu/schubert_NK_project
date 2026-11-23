@@ -1,0 +1,44 @@
+{
+  "run": "PG43934",
+  "source": "a1028a0b7178d4dfa3a2027b70ef9a04d763239a",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "terminalAtUTC": "2026-11-23T20:58:24.331038+00:00",
+  "wbs": [
+    "WBS-P004-05/2",
+    "WBS-P017-06"
+  ],
+  "applicableDesign": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+    }
+  ],
+  "evidence": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43930-backup-projection-current-single-exec/manifest.json",
+    "sha256": "aa155fabd3b01c487180e7c15c2d024f93132fa291e31c38cbc2ad2e65481394"
+  },
+  "confirmed": [
+    "SSC063 direct close precedence is expressly applied by other repository-specific sections. SSC310 explicitly contrasts read and other TWR scopes.",
+    "SSC124 failed pair is read-only with same context and base owner; ordinary JDBC result/stop boundaries stay fixed.",
+    "Two close-condition branches still missed in exact normal Backup class."
+  ],
+  "decision": "No automatic policy transplantation. Record exact false-branch/invariant and resolve the reader-specific close semantics in SS before changing behavior.",
+  "testCount": 0,
+  "manufactureChanged": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Determine the exact same-handle exception identity contract on this pair reader before new source",
+    "Any further validation uses approved ordinary synthetic scope; main role/process/runtime holds remain."
+  ]
+}
