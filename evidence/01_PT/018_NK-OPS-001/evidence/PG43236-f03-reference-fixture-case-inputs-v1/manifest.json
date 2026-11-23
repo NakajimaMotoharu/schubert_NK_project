@@ -1,0 +1,299 @@
+{
+  "run": "PG43236-f03-reference-fixture-case-inputs-v1",
+  "source": "e4106c5f1df49ca964d96c9ca1138a5ec0dc08ea",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "related": "WBS-P004-03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:21:43.437359+00:00",
+  "bug": "BUG-3689",
+  "ykt": "YKT-2898",
+  "originalSpec": {
+    "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+    "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+  },
+  "actualToolExitCodes": {
+    "format": 0,
+    "fixture": 0,
+    "style": 0,
+    "spotbugs": 1,
+    "pmd": 4,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+    "sha256": "6d06083d7fc2209bdcb1f92a5112365beffc35538d6602fc34901ff57eb50450"
+  },
+  "localTests": 3,
+  "newTestDefinitions": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "xml": [
+    {
+      "file": "TEST-junit-jupiter.xml",
+      "sha256": "a6474df6bee2cbbf9465930351c1bf3d8615ee0dcc32d698762d33ff28bf56df",
+      "cases": 3
+    },
+    {
+      "file": "TEST-junit-platform-suite.xml",
+      "sha256": "3d57de6b9b4d0cacf69d7ad3cbb801209a20eef971eba640f0eec72267f3607d",
+      "cases": 0
+    },
+    {
+      "file": "TEST-junit-vintage.xml",
+      "sha256": "34e7164d85356a5d47a11641b3d9c6ddd31673fe35df70066b38bb359044fc3f",
+      "cases": 0
+    }
+  ],
+  "cases": {
+    "nullTransactionAndInterruptContracts": "RRF-PURE-003",
+    "missingProjectionAndCardinality": "RRF-PURE-004",
+    "fatalProviderGraphIsNotDiscarded": "RRF-PURE-007"
+  },
+  "originalOraclePreserved": {
+    "transactionPredicateVariants": 3,
+    "projectionVariants": 9,
+    "fatalGraphPaths": 3,
+    "expectedFields": "fixed borrowed connection, fixed rejection, exact owned closures and fatal identity"
+  },
+  "approvedPhysicalInputs": [
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/package-info.class",
+      "originalSha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "currentSha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "exact": true
+    },
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "originalSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "currentSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "exact": true
+    },
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "originalSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "currentSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "exact": true
+    },
+    {
+      "module": "bootstrap",
+      "physical": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "originalSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "currentSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "originalSha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "currentSha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "originalSha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "currentSha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "originalSha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "currentSha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+      "originalSha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "currentSha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "originalSha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "currentSha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "exact": true
+    }
+  ],
+  "regularProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "previousNineSame": true,
+  "onlyJdkProxies": true,
+  "unfilteredClass": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43236-f03-reference-fixture-case-inputs-v1/coverage-unfiltered.tsv",
+    "sha256": "02a934067625d90012f1e9953b38ef9a7c3a1aab861274b021c90f1104c732e4"
+  },
+  "newExecSha256": "a07feb051d6f865e8a8065736245920b55e4f32947c8247019c73d56ffb1cced",
+  "commandManifestSha256": "1ee3652128a8791571030ac1cfe16986519254b3a8c51cce68365699fe84678c",
+  "static": {
+    "checkstyle": 0,
+    "spotbugs": 2,
+    "pmdBefore": 25,
+    "pmdAfter": 16,
+    "removedByMethod": [
+      {
+        "method": "fatalProviderGraphIsNotDiscarded",
+        "n": 2
+      },
+      {
+        "method": "missingProjectionAndCardinality",
+        "n": 5
+      },
+      {
+        "method": "nullTransactionAndInterruptContracts",
+        "n": 2
+      }
+    ],
+    "retained": [
+      {
+        "rule": "DoNotUseThreads",
+        "method": "nullTransactionAndInterruptContracts",
+        "line": 144,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "nullTransactionAndInterruptContracts",
+        "line": 146,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "nullTransactionAndInterruptContracts",
+        "line": 149,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "nullTransactionAndInterruptContracts",
+        "line": 155,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "nullTransactionAndInterruptContracts",
+        "line": 158,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "NullAssignment",
+        "method": "missingProjectionAndCardinality",
+        "line": 178,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "Explicit null of every projected Boolean is the independent negative input, with fixed exception and close assertions."
+      },
+      {
+        "rule": "CloseResource",
+        "method": "independentConnectionsCanRunConcurrently",
+        "line": 298,
+        "variable": "executor",
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "Executor owner calls shutdownNow and verifies finite termination in finally. Its scope is test-only and a second close is not required."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "independentConnectionsCanRunConcurrently",
+        "line": 298,
+        "variable": "executor",
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "independentConnectionsCanRunConcurrently",
+        "line": 303,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "independentConnectionsCanRunConcurrently",
+        "line": 313,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "independentConnectionsCanRunConcurrently",
+        "line": 314,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "method": null,
+        "line": 361,
+        "variable": "counts",
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "Each Fixture is constructed for one call or in the worker task, and maps remain confined to that owner. Test assertions inspect those maps on the same thread."
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "method": null,
+        "line": 362,
+        "variable": "failures",
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "Each Fixture is constructed for one call or in the worker task, and maps remain confined to that owner. Test assertions inspect those maps on the same thread."
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "method": null,
+        "line": 363,
+        "variable": "parameters",
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "Each Fixture is constructed for one call or in the worker task, and maps remain confined to that owner. Test assertions inspect those maps on the same thread."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "method": "row",
+        "line": 455,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The JDK-owned worker/interrupt methods solely model thread ownership and interruption in this fixture. Interrupts and worker lifecycle are restored in finally."
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "method": "proxy",
+        "line": 480,
+        "variable": null,
+        "localDisposition": "RETAINED_WITH_TEST_CONTEXT_REVIEW",
+        "basis": "The proxy is for the declared JDK interface and uses that interface loader. No context loader or external channel is involved."
+      }
+    ],
+    "hashes": {
+      "pmd.xml": "1a490b6f3709743aa19cf94f351fba0403ffbc6c574c31800d94ae95ebccdc16",
+      "spotbugs.xml": "d21b896269a87389a9a769b176b811b5cddc63844ea49101714bee52fe99e4c5"
+    },
+    "noSuppression": true,
+    "localReviewOnly": true
+  },
+  "otherTestsReexecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
