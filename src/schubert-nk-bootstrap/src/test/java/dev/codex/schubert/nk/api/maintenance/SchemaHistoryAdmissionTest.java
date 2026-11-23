@@ -179,6 +179,35 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
+  void opsSchema016V031RequiresTheNewAclMigrationReceipt() throws SQLException {
+    String priorScript = "V030__preserve_current_audio_role.sql";
+    String aclScript = "V031__restrict_routine_default_privileges.sql";
+    int priorChecksum = -1529040748;
+    int aclChecksum = 1880247817;
+    var expected =
+        List.of(
+            SCHEMA_ROW,
+            new Row(1, "030", FIXTURE_SQL_5B7E398D, priorScript, priorChecksum, true),
+            new Row(2, "031", FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
+    var admission = new SchemaHistoryAdmission(expected);
+    var prior = versionedRow(1, "030", priorScript, priorChecksum);
+    var exact = new Probe(List.of(schema(), prior, versionedRow(2, "031", aclScript, aclChecksum)));
+    assertEquals(expected, admission.inspect(exact.connection()));
+    assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
+
+    for (var rows :
+        List.of(
+            List.of(schema(), prior),
+            List.of(schema(), prior, versionedRow(2, "031", aclScript, 1880247818)),
+            List.of(schema(), prior, versionedRow(2, "031", "V031__different.sql", aclChecksum)),
+            List.of(schema(), prior, versionedRow(2, "032", "V032__unknown.sql", aclChecksum)))) {
+      var mismatch = new Probe(rows);
+      failed(() -> admission.inspect(mismatch.connection()));
+      assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
+    }
+  }
+
+  @Test
   void opsSchema003ExpectedRowInvariantBoundaries() {
     assertThrows(NullPointerException.class, () -> new Row(0, null, null, "x", null, true));
     assertThrows(
