@@ -1,0 +1,102 @@
+[
+  {
+    "fixture": "LogSearchViewModelTest.java",
+    "rule": "CloseResource",
+    "method": "web293ConcurrentViews",
+    "rawMessage": "Ensure that resources like this ExecutorService object are closed after use",
+    "currentLine": 360,
+    "previousLine": 360,
+    "matchedCode": "var pool = Executors.newFixedThreadPool(8);",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web293ConcurrentViews",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 360,
+    "previousLine": 360,
+    "matchedCode": "var pool = Executors.newFixedThreadPool(8);",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web293ConcurrentViews",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 366,
+    "previousLine": 366,
+    "matchedCode": "pool.submit(",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web293ConcurrentViews",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 388,
+    "previousLine": 388,
+    "matchedCode": "pool.shutdownNow();",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web293ConcurrentViews",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 389,
+    "previousLine": 389,
+    "matchedCode": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchResultsViewModelTest.java",
+    "rule": "CloseResource",
+    "method": "web269ConcurrentProjection",
+    "rawMessage": "Ensure that resources like this ExecutorService object are closed after use",
+    "currentLine": 336,
+    "previousLine": 336,
+    "matchedCode": "var pool = Executors.newFixedThreadPool(8);",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchResultsViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web269ConcurrentProjection",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 336,
+    "previousLine": 336,
+    "matchedCode": "var pool = Executors.newFixedThreadPool(8);",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchResultsViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web269ConcurrentProjection",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 342,
+    "previousLine": 342,
+    "matchedCode": "pool.submit(",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchResultsViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web269ConcurrentProjection",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 355,
+    "previousLine": 356,
+    "matchedCode": "pool.shutdownNow();",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  },
+  {
+    "fixture": "LogSearchResultsViewModelTest.java",
+    "rule": "DoNotUseThreads",
+    "method": "web269ConcurrentProjection",
+    "rawMessage": "To be compliant to J2EE, a webapp should not use any thread.",
+    "currentLine": 356,
+    "previousLine": 357,
+    "matchedCode": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+    "classification": "SCOPED_TEST_OWNED_FINITE_WORKER"
+  }
+]
