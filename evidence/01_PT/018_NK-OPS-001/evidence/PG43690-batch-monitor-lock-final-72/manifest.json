@@ -1,0 +1,509 @@
+{
+  "run": "PG43690",
+  "source": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "currentProductCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "priorCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P018-09/2"
+  ],
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "terminalAtUTC": "2026-11-23T14:13:48.529815+00:00",
+  "branch": "dev-foundation",
+  "actualExit": 0,
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "pmd": "7.28.0",
+  "spotbugs": "4.10.4",
+  "checkstyle": "14.3.0",
+  "formatter": "1.36.1",
+  "evidence": {
+    "initialCompile": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v1/terminal.json",
+      "sha256": "9d5f475dc38ece65a859fe6f9cf88ee4ab688e53641c4257c4253769805c49ec"
+    },
+    "initialUnit": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v1/terminal.json",
+      "sha256": "b03baa10da47530ecaee031687eddbc9feed5d3e41703f6571b61154cd3ce2e7"
+    },
+    "compile": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/terminal.json",
+      "sha256": "1a0cdb47374fdbeb0579f347443baf1331b0e82669e5472c6fcbc751378c420d"
+    },
+    "unit": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/terminal.json",
+      "sha256": "ff36f4683451e8ea9dfb032db66078ae217b23939190364674ad83dba1084f8f"
+    },
+    "formatter": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-format-exact-v3/terminal.json",
+      "sha256": "8a96b78f4568c1723c02e55a6f3922e832fab1077459cdea45ec9b25c3941c55"
+    },
+    "checkstyle": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-checkstyle-v1/terminal.json",
+      "sha256": "7d98e5ead48aac31498e1c7625ea210293c02236407161c17cce1b43dd112a59"
+    },
+    "typed": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-typed-v1/terminal.json",
+      "sha256": "ca47142b0a436332d7a7671811c664fb58ee3c8089d7c5712f806d5a05652c3e"
+    },
+    "jar": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-owned-batch-jar-v1/terminal.json",
+      "sha256": "e9d87ba15d5325e59d387164a88de128175301584b89c39645d5646a2a98dc4c"
+    }
+  },
+  "sameSourceCurrentJUnit": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "28e802dc2f670b6f6f1592bec858421d2f77987f64976d80a2803de391fd0b91"
+  },
+  "currentTestCasenames": [
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime005NullInvalidAndBackwardsInputsCannotMutateExistingState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert002DedupEscalationAndNoAutomaticDowngrade()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime008BoundariesMaximumCountsAndOwnersStayIndependent()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow004ExplicitGapNeverBridgesOldPeriod()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow006WholeNonnegativeDurationDomain()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertWindowedInputContractTest",
+      "invalidPendingObservationCannotResetAnExistingRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime006ExplicitGapRestartsViolationAndRecoveryWithStickyCritical()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime005NullInvalidAndBackwardsInputsNeverMutateState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe008MissingObservationResetsOnlyItsConditionAndService()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime008FiniteMaximumAndWarningRecoveryDoNotMixSeparateOwners()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow001FirstContinuousAndSameTimestampBoundaries()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert003WarningFiveMinuteExactBoundary()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe005ModeConsistencyDoesNotChangeAlerts()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert010AllClosedConditionServiceIdentities()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "snap001FilesystemPublishesWholeEvents()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs006ConcurrentOwnerAndLocalStatusLiteral()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime005InvalidNullAndBackwardsInputsCannotMutateState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert005AnyViolationRestartsContinuousNormalPeriod()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.GeneratedBatchValueContractTest",
+      "genBatch004ModeContinuityAndSuffixFactoriesCannotShareReturnedArrays()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow003UnknownIsAbsentAndBreaksHistory()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.GeneratedBatchValueContractTest",
+      "genBatch006AllFiveEvaluationRecordsHaveEveryFieldInValueContracts()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe007AllSeventyTwoFixedKeysAndImmutableProjection()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+      "alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert006ClosedEventRetiredAndNewViolationStartsFresh()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime001StrictTwoSecondWarningNeedsFiveMinutes()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime003UnknownCutsBothViolationWindowsRatherThanBecomingZero()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "snap003PoolPublishesWholeEvents()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow005RejectedSequenceLeavesStateUnchanged()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime004KnownCountsAreIndependentOfUnknownPercent()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert004CriticalNeedsTenMinutesAndCauseConfirmation()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+      "alertContinuity001InvalidInterruptionHasNoStateChange()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs001WarningBoundaryAndFiveMinuteRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime004ReportedOomIsIndependentOfMissingUsageAndNeverInventsZero()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow007ConcurrentSamePointHasOneOrigin()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert008WallClockJumpDoesNotShortenRecoveryOrOverflow()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "rejectedElapsedTimeReleasesAllSixLocks()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime001WarningNeedsTenMinutesAndFiveNormalMinutesToClose()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "snap004LatencyPublishesWholeEvents()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe004RejectedInputsDoNotPartiallyUpdateState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertWindowedInputContractTest",
+      "diagnosticNamesRoundTripThroughTheClosedAlertVocabulary()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs005InvalidInputsCannotChangeOwnerState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime002StrictTwoPointFiveNeedsFiveMinutesBeforeCriticalPromotion()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe006ConcurrentSingleEntryKeepsOneOwner()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe001ObservationContextInvariantsAndImmutableValues()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+      "dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime008CriticalIsStickyAcrossWarningAndReportedOomResetsRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertWindowedInputContractTest",
+      "pendingBeforeFirstTriggerDoesNotCreateAnAlert()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe002EveryNormalAndWarningEndpointIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime003UnknownBreaksBothViolationAndRecoveryWithoutInventingNormal()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert007NullAndInvalidElapsedLeaveStateUnchanged()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs003MissingBreaksViolationWithoutClearingOpenEvent()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+      "monWindow002NormalBreaksViolationHistory()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+      "syncTime004UnknownCutsCriticalRecoveryAndCauseMustBeConfirmed()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert009ConcurrentSameTickCountsAndPrivateMonitor()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs004MissingAndExplicitGapBreakNormalRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "monPipe003EveryCriticalEndpointAndCauseAwareRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "snap002HeapPublishesWholeEvents()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime006ExplicitGapRestartsViolationAndNormalRecovery()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "alert001InitialNormalAndFirstWarningIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+      "asyncByte001EngineUsesStorageBytesIndependentOfMessageCount()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+      "timedFs002CriticalBoundaryAndExplicitCause()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+      "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+      "heapTime002NinetyIsImmediateAndCriticalNeedsCauseAndTenMinutes()"
+    ]
+  ],
+  "currentTests": {
+    "executed": 72,
+    "passed": 72,
+    "failed": 0,
+    "skipped": 0,
+    "notRunInsideSelection": 0
+  },
+  "historicalPartialJUnit": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "bbac7bd7b3115ba43fcf59e64b8881e587bdb71116668ecf359badc8f550ceef"
+  },
+  "previousPartial67": {
+    "executed": 67,
+    "passed": 67,
+    "combinedIntoCurrentCoverage": false
+  },
+  "newDistinctTestIds": [
+    "PT-OPS-MON-SNAP005"
+  ],
+  "coverage": {
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43690-batch-monitor-lock-final-72/coverage.unfiltered.tsv",
+      "sha256": "03f9cf6039da53753f5bf79eb4598b06f39149b6b5fd30e15023f7f42b9a186b"
+    },
+    "counters": {
+      "INSTRUCTION": [
+        0,
+        1681
+      ],
+      "BRANCH": [
+        0,
+        132
+      ],
+      "LINE": [
+        0,
+        300
+      ],
+      "COMPLEXITY": [
+        0,
+        155
+      ],
+      "METHOD": [
+        0,
+        89
+      ],
+      "CLASS": [
+        0,
+        17
+      ]
+    },
+    "sameExec": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit.exec",
+      "sha256": "160826c83c482a162fde8928138c4a90dcef34b4fc9fd99058c5756d8bf429e8"
+    },
+    "classes": {
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+        "crc64": "0b522f9b17ff6871",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+        "crc64": "29da7d7aac629468",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+        "crc64": "265d89d43ac427f8",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+        "crc64": "a5228fadcac1921d",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+        "crc64": "33b7e7037e5187db",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State": {
+        "crc64": "d9d97f271b5a1101",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+        "crc64": "dcc593e5682fe55b",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+        "crc64": "ed848fa8601ab4fd",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+        "crc64": "37e00458b90bb1b8",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+        "crc64": "9d9aaa2421138556",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+        "crc64": "4c1d31dffe682bfe",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+        "crc64": "ef83941de2419afc",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+        "crc64": "0f0ade2c7c19bc9e",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+        "crc64": "8d044fdfaa87f647",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+        "crc64": "2dbce6339dcd0a81",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+        "crc64": "0e788b56667cc990",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+        "crc64": "6e80738be9c3d357",
+        "singleExecObserved": true
+      }
+    },
+    "noMergedExecutions": true
+  },
+  "static": {
+    "spotbugsCurrent17": 0,
+    "pmdCurrentSixMain": 0,
+    "previousRawPmdRules": 9,
+    "suppressionsAdded": 0,
+    "checkstyleCurrentSevenFiles": 0,
+    "formatterCurrentSevenFiles": 0,
+    "currentMainNullAwayCompile": 0
+  },
+  "normalBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5450a2884f297fce02052a152763ec3dbce82f6fa4e8fc3348b7c2e1397dfc25"
+  },
+  "normalBatchClassCount": 660,
+  "verifiedCurrentJarUnitMembers": 38,
+  "changedCurrentClassBytes": 17,
+  "publicAbiMatch": 17,
+  "bugs": [
+    "BUG-3726",
+    "BUG-3727",
+    "BUG-3728"
+  ],
+  "horizontal": "YKT-2925",
+  "environmentActions": 0,
+  "phaseTotalOrdinary": 3613,
+  "phaseApplicablePassed": 3565,
+  "originalHold": [
+    "32 held tests",
+    "Root11",
+    "QA-056",
+    "real monitoring",
+    "six product 451"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
