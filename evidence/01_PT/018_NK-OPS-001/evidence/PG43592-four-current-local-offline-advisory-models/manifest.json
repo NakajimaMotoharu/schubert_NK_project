@@ -1,0 +1,114 @@
+{
+  "run": "PG43592",
+  "source": "3cb90c292a7d42b09cfbaa2b5b66354b6c42ff93",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P018-02/2"
+  ],
+  "startedAtUTC": "2026-11-23T11:19:37.108410+00:00",
+  "terminalAtUTC": "2026-11-23T11:19:37.266369+00:00",
+  "actualExit": 2,
+  "tool": "OSV Scanner 2.7.1 offline via strict Maven verifier",
+  "command": [
+    "python3",
+    "-B",
+    "tools/quality/verify_maven_advisories.py",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG43592-four-current-local-offline-advisory-models/coordinate-projection.cdx.json",
+    "/home/mini/codex/project1/work/toolchain/m2/repository",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/osv-scanner_linux_amd64",
+    "fb7dab19a8bd9bbe5c3189f09d4b7ee1820c9553a23bac202648a56efd2f6ee8",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/cache",
+    "75fb59af0d2c7bbae5ef447ca1093b371168b0ec0704c77e9bb1271f83a0aff8"
+  ],
+  "toolSource": {
+    "path": "tools/quality/verify_maven_advisories.py",
+    "sha256": "8c7ad50f14008c1755f476f11976dcfe2ff49f8796c64957f6f83367939e1499"
+  },
+  "pinnedCorpus": "75fb59af0d2c7bbae5ef447ca1093b371168b0ec0704c77e9bb1271f83a0aff8",
+  "scannerProvenance": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42738-p01802-offline-advisory-ci-v1/manifest.json",
+    "sha256": "20ae9db03c8925e39b39450214bfda5d69cdabf2d7d2caf5a03486a6e7b4d40c"
+  },
+  "modelProvenance": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43404-four-regular-runtime-tree-offline-v2/manifest.json",
+    "sha256": "fe125b1d123161f7a8f4d683ee6c16ce6d6ca4684ea71ed8dc613d993700bc6c"
+  },
+  "archiveHashProvenance": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43498-current-four-external-license-inputs-v1/descriptor-and-notice-provenance.json",
+    "sha256": "21f34c52c915133b4ef59a767f9998614d006d4669c65b4cc1233710b433887d"
+  },
+  "modelScopes": {
+    "batch": {
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43404-four-regular-runtime-tree-offline-v2/src/schubert-nk-batch/target/pgpt-runtime-tree.json",
+        "sha256": "3dd7528ffb840c7df2e8e063ac5f51f5192a92c61a19adcf1203fe7b83bd55bf"
+      },
+      "coordinates": 36,
+      "scopes": {
+        "compile": 30,
+        "runtime": 6
+      }
+    },
+    "bootstrap": {
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43404-four-regular-runtime-tree-offline-v2/src/schubert-nk-bootstrap/target/pgpt-runtime-tree.json",
+        "sha256": "ad8742e2bdc106d800a0ee44076c57707e9d52b943e4f3f33bf9c6b252de6549"
+      },
+      "coordinates": 8,
+      "scopes": {
+        "compile": 8
+      }
+    },
+    "protocol": {
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43404-four-regular-runtime-tree-offline-v2/src/schubert-nk-protocol/target/pgpt-runtime-tree.json",
+        "sha256": "c146ab5af77b656656ecd7eb887532bfd21c78ccb7c088f966bc08aa148e932b"
+      },
+      "coordinates": 1,
+      "scopes": {
+        "compile": 1
+      }
+    },
+    "storage": {
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43404-four-regular-runtime-tree-offline-v2/src/schubert-nk-storage/target/pgpt-runtime-tree.json",
+        "sha256": "193b5de8c5ecd1d68e618bf9e9dda15c694d983e82699c7d06f6bdceb05518ae"
+      },
+      "coordinates": 1,
+      "scopes": {
+        "compile": 1
+      }
+    }
+  },
+  "coordinateScopeCounts": {
+    "compile": 40,
+    "runtime": 6
+  },
+  "uniqueExternalCoordinates": 36,
+  "projection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43592-four-current-local-offline-advisory-models/coordinate-projection.cdx.json",
+    "sha256": "c5c20b162bfee8ee9bddc45b429efa048a928f5b5120e199b473b5cdcfcaf2aa"
+  },
+  "rawStdout": {
+    "path": "../pgpt-runs/PG379/PG43592-four-current-local-offline-advisory-models/scanner.stdout.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawStderr": {
+    "path": "../pgpt-runs/PG379/PG43592-four-current-local-offline-advisory-models/scanner.stderr.log",
+    "sha256": "7bd27748391f33b4bc0b706a6d99eeacc09cae42555627e5f2124bbf9c42f541"
+  },
+  "verifiedPackageReport": null,
+  "productJavaTests": 0,
+  "whole451": false,
+  "hostedOrNetworkScan": false,
+  "currentReleasedArtifactVerified": false,
+  "releaseBom": false,
+  "qa061": "Distribution terms and owner undecided",
+  "remaining": [
+    "Regular API/Web dependency models and jars",
+    "Current full release BOM and release disposition",
+    "QA-061 license policy/owner",
+    "451 and formal acceptance"
+  ],
+  "formalAcceptanceId": null
+}
