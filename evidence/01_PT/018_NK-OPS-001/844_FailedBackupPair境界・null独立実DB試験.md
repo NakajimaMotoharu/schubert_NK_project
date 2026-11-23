@@ -15,3 +15,16 @@ fixture=隔離PostgreSQL18の固定run/cutoff、BACKUP_DB7/BACKUP_CONFIG8・atte
 WorkPG379 `pg2916-failed-pair-boundary-selected-v1/manifest.safe.json`、payload7d254009934a3b8ab6a190d8a74836633e004ac69f38c3ee58209a47c9557578、XML e83f7b461b9b9c9e57bdd57eec9e9b7e2a8ea5592444a31d255a2fa16b353743、LANmanifest4fa8b7560cb112c78a0ac0280c5d975be5c9b760a703104c36b8384952c955c7。実時刻/OS/tool/command/input/output/hashはmanifest、raw SQL結果・credential非Git。関連BUG1257/1258工具側は各915/916へ分離。
 
 当source限定成功でcoverage claimfalse/正式1964-53/leafdelta0/effortnull。group全体2918はformatで失敗してbatch未実行、成果は流用合格0。Maven applyでも当Test byte不変更を実照合し、new2930全体へ同入力として統合。四counter測定は全体後に実証し、未実行を合格に算入しない。
+
+## SSC-461 SQL診断接続の独立単体試験
+
+PT-BAT-SSC461-BF001～004、PG43828、BUG-3233／YKT-2680、WBS-F02-b-a／P017-06。公開verifyLatestに固定run、同一の開始・終了時刻と二段階のJDK Connection代理を供給する。最初の独立identityはhistory=true、inbox/log=false、consistent=true。一件終端後に所定14列照会のprepare／bindへ進む。実行は既接続を借用し、実DB、Backupとnativeを使わない。
+
+|ID|入力と独立期待|
+|---|---|
+|BF001|二番目の文executeで通常SQLException。固定IOExceptionの文言と空cause・空suppressedを照合。identity行→identity文→backup文のclose各一回、Connection操作は固定read属性とprepareのみ。|
+|BF002|SQL次辺のcauseにError。同じErrorを伝播し、資源closeの期待はBF001と同じ。|
+|BF003|普通causeとSQL次辺双方に別Error。普通causeにある先行Errorを同じインスタンスで伝播。閉鎖順は同じ。|
+|BF004|次辺・抑制辺の重複と有限循環にErrorなし。固定IOExceptionと同一資源閉鎖、有限終了。|
+
+初回の旧Mainと移管後の同fixtureを別runで記録する。コードは既SQL・留保済み実DB試験・公開ABIを保持する。局所coverageの不足を明記し、全F02の受入に加えない。
