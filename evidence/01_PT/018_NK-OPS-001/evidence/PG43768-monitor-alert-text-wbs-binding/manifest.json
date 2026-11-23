@@ -1,0 +1,114 @@
+{
+  "run": "PG43768",
+  "source": "ea1c68c8f28f4ffa37d651fc1c7d6433e8dad52f",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "owner": "WBS-P018-09",
+  "refs": [
+    "WBS-G13.06",
+    "WBS-G03.05",
+    "WBS-F03/2-2-b",
+    "WBS-P018-09/2"
+  ],
+  "qualification": "local output and alert handling from supplied fixture inputs",
+  "currentRuns": {
+    "PG43754": {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43754-current-backup-weblog-sixteen/manifest.json",
+        "sha256": "8e2b5bfd97bd3018cdb33f79372ce3069751fecb4fa9c65052463919c6e36520"
+      },
+      "count": 16,
+      "singleExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43754-current-backup-weblog-sixteen-v1/unit.exec",
+        "sha256": "5af242564c94a50fa15f41443a8819e010cf200c01c6a774be1b94c87e861dc3"
+      }
+    },
+    "PG43756": {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43756-current-alert-consumers-fortythree/manifest.json",
+        "sha256": "f3b13e0a10d077a3cb5cbdcd2fb2809b09dc5b9122436c0c8dff424ed400f8b2"
+      },
+      "count": 43,
+      "singleExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/unit.exec",
+        "sha256": "717e40848b9d543eb05dd514197e2c637b136725fab98f83aef3006fabd83372"
+      }
+    },
+    "PG43764": {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43764-current-metric-lf-mode-six/manifest.json",
+        "sha256": "1a0a9fff90a5817265520941a8f74cb1c5627ae60e3c1a959994f44418a1e44a"
+      },
+      "count": 6,
+      "singleExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43764-current-metric-lf-mode-six-v1/unit.exec",
+        "sha256": "af7b312ff6854169487d6b8169c42c836d6ef1e4dcf26801790b23d0e6b03c38"
+      }
+    },
+    "PG43766": {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43766-current-monitor-status-lf-six/manifest.json",
+        "sha256": "91d7825412052d5e3892df554c3203f6a10d05eb3b4038e595b356c13e655e02"
+      },
+      "count": 6,
+      "singleExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43766-monitor-status-text-six-v1/unit.exec",
+        "sha256": "ef3167e6604a147902fb03fd8481eba7542de9caf9cca22999ef333594940f96"
+      }
+    }
+  },
+  "existingSevenFixedMode": {
+    "sourceIndependence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42892-c07-mode-policy-current-reuse-v1/manifest.json",
+      "sha256": "d57c7c1a1eaa09f9aaa4e96c75db91a35726cd8f692a6d17f217f1b4d3c9031e"
+    },
+    "previous": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43542-current-mode-18-single-exec-v1/manifest.json",
+      "sha256": "bb850ab86348ace37f0a15d37438a90eff0288c4d442f22442bdc90470e4fce3"
+    },
+    "exactSamePhysical": {
+      "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+      "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+      "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicyTest.java",
+      "sha256": "23a1dbd2fa6bfa263e1f1e65d933f288ae35eddaec576fbfb9b7a1ba3f74e4a3"
+    },
+    "caseIds": {
+      "PT-OPS-MONMODE-001": "monMode001ApprovedLiteralSettings",
+      "PT-OPS-MONMODE-002": "monMode002MatchingObservationsNotMutated",
+      "PT-OPS-MONMODE-003": "monMode003AllThirtyTwoServiceStates",
+      "PT-OPS-MONMODE-004": "monMode004MissingObservationNeverMeansHealthy",
+      "PT-OPS-MONMODE-005": "monMode005NullContractsAreNotNormalObservations",
+      "PT-OPS-MONMODE-006": "monMode006UnknownAndAliasedInputIsRedacted",
+      "PT-OPS-MONMODE-007": "monMode007ConcurrentCallersCannotChangePolicy"
+    },
+    "newExecutions": 0
+  },
+  "excludedEarlierFixture": {
+    "run": "PG40986",
+    "reason": "The older fixture declared the concurrent case exception more broadly. Later PG43542 matches current fixture."
+  },
+  "comparisonInitialExit": 1,
+  "ss351OracleLinks": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43758-current-seven-monitor-oracles/manifest.json",
+    "sha256": "d80122b4222b540bff24436fe3060c83232fe50f2827b336223b8b1e676d8a60"
+  },
+  "pendingMsg009Decision": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43760-msg009-manifest-scope-question/manifest.json",
+    "sha256": "05e6324d880d0b490f4a73cb067cb809e7bde3775678eeb8c73f95d69583e7e0"
+  },
+  "counterScope": "per exec",
+  "technicalRunsAdded": 71,
+  "newTestDefinitions": 0,
+  "partialTestsPromotedToFormal": 0,
+  "originalPriceCompletedPp": 0,
+  "unresolved": [
+    "real inputs and actual observation providers",
+    "cross-product quality 451",
+    "formal fulfilment and owner receipt"
+  ],
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-23T16:55:03.100062+00:00",
+  "exitCode": 0
+}
