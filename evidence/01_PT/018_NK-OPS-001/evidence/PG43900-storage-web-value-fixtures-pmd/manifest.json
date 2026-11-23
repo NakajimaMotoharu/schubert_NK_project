@@ -1,0 +1,101 @@
+{
+  "run": "PG43900",
+  "source": "7307478e330a26a2f6c3815c2e1cebabda8428c5",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:10:50.633901+00:00",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P003-05",
+    "WBS-P015-01"
+  ],
+  "fixedSources": [
+    {
+      "source": "f1f5a32d3b7d64f59eef46a9bab86225c8774506",
+      "file": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture/OwnedDirectoryCallbackValueTest.java",
+        "sha256": "a18e64573cf9cec639c31f70fff0439f3c4ef270aadf81160b32af8202ad4d23"
+      },
+      "expectedFormatZero": true,
+      "staticPrior": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-style-terminal.json",
+        "sha256": "90d1275a6665f1fd6cb43b50788e2731c25dc5726149ac04ce5f502d5c3716ec"
+      },
+      "fixtureUnit": {
+        "path": "evidence/01_PT/003_NK-PRO-003/evidence/PG43898-current-storage-file-callback-pure/manifest.json",
+        "sha256": "b45d05b1c2ae67117db14a3e764d82a1c18cd1358806795140eea57f5a11403d"
+      },
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-pmd-begin.json",
+        "sha256": "98610cbaf8c7d9e05342a9e00d4a09ff6e18118a8bd69ef859d448c49f616e8d"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-pmd-terminal.json",
+        "sha256": "d0c9b59fb8b8bf99f8c83ea99c7b430cefa46172cb11d80c8253d020cee3418b"
+      },
+      "raw": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-pmd.xml",
+        "sha256": "31cc35b9b8bcbc3fc6a45eba990b956002f793d6170a8f4b687b61d2496db879"
+      },
+      "rawExit": 4,
+      "rawDiagnosticCount": 1,
+      "dispositions": [
+        {
+          "rule": "UseProperClassLoader",
+          "classification": "NOT_APPLICABLE_TO_STANDALONE_TEST",
+          "reason": "This non-container fixture creates one Java proxy of the already compiled fixed DirectoryCalls interface. Its defining loader is the independently fixed driver; thread context could designate a different loader. This file never enters a J2EE container. Raw exit/detection are retained.",
+          "original": {
+            "line": 100,
+            "rule": "UseProperClassLoader",
+            "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+          }
+        }
+      ],
+      "suppressionAdded": false
+    },
+    {
+      "source": "870d1644d81895bf04d17fd32d7b72ab73bb2bca",
+      "file": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/SessionPrincipalValueTest.java",
+        "sha256": "dad8fca13c7c94598360b5f5cc06ab5e61e1fb91a65cec32d9c3b25d2c830974"
+      },
+      "expectedFormatZero": true,
+      "staticPrior": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-style-terminal.json",
+        "sha256": "44c14e10cf91bb545406a7cd9f4c3e0b9ef1d55ab26e938e9851e08ff8b0cc47"
+      },
+      "fixtureUnit": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG43890-current-session-principal-value/manifest.json",
+        "sha256": "de617a9e6d90788d87e80c91eba6dcae92805d47f81ff28c66b6acef49668d4e"
+      },
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-pmd-begin.json",
+        "sha256": "51ac5f64ca0858350c81ba707a7fb1c4dbbe4baf0f9025293efde3f7adf630fb"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-pmd-terminal.json",
+        "sha256": "e612908f69dea247f03208871b52659847f4a3de3f5e5383f0d353f8bf30fab6"
+      },
+      "raw": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-pmd.xml",
+        "sha256": "b1bd3df3adf6e5fc434d2d555ad6415cc6a2fe620b54533fbed5984a33417773"
+      },
+      "rawExit": 0,
+      "rawDiagnosticCount": 0,
+      "dispositions": [],
+      "suppressionAdded": false
+    }
+  ],
+  "independentPriorRuleDecision": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43866-current-cleanup-prior-checked-io/manifest.json",
+    "sha256": "2756c81885cf06ba5e628e06070cec8c9c6b768f772f2e6ea3f32535cf8df0df"
+  },
+  "newProductRuns": 0,
+  "newFormalAcceptance": null,
+  "whole451": false,
+  "rawFindings": 1,
+  "localApplicable": 0,
+  "remaining": [
+    "Whole six-product same-source static required for F03",
+    "Hold QA-056 and platform-denied targets unchanged"
+  ]
+}
