@@ -1,0 +1,274 @@
+{
+  "run": "PG43248-g1306-batch-two-repository-methods-v1",
+  "source": "e8cc39ef5c32ebcfbed4e13c3f1e1985ebeaa014",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.06",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:36:05.892289+00:00",
+  "canonicalApprovalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "canonicalDesign": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de",
+      "section": "3.12–3.13"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+      "section": "SSC056/063/461"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+      "section": "3/7.3"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7",
+      "section": "JDBC and unit expectations"
+    },
+    {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "section": "RD→UI→SS"
+    }
+  ],
+  "requirementIds": [
+    "DAT-009",
+    "OPS-009"
+  ],
+  "uiRefs": [
+    "UI251"
+  ],
+  "program": "NK-DAT-001 (references by NK-BAT-001)",
+  "partitions": [
+    {
+      "owner": "WBS-P004-03/2",
+      "className": "RunReferenceRepository",
+      "source": "246e67a802fd556d51f8742e8a171a06199a39ca",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43238-p00403-reference-ten-single-exec-v1/manifest.json",
+        "sha256": "7fb3cbb54efa1efcdcb78021f5b7bc90a6747772d0c1f38239f2fb3db2b4ea18"
+      },
+      "rawGraphHash": "feba0c5a69f3cb5b9e86e005d053e8be228a3a0cdef78f977972730c811ab0d3",
+      "methods": [
+        {
+          "method": "<init>",
+          "descriptor": "(Ljava/sql/Connection;)V",
+          "testId": "RRF-PURE-003",
+          "observedMethod": "nullTransactionAndInterruptContracts",
+          "independentContract": "Null parent cannot establish admission. The known good borrowed parent enters its own contract without replacement.",
+          "rawCounters": [
+            "1",
+            "INSTRUCTION:0:9",
+            "BRANCH:0:0",
+            "LINE:0:3",
+            "COMPLEXITY:0:1",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "read",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/RunReferences;",
+          "testId": "PT-BAT-UTCPORT001",
+          "observedMethod": "historicalAndNonzeroOffsetsBindTheSameFixedUtcInstant",
+          "independentContract": "Five fixed nonzero offset cases verify UTC positional bind and owner preservation.",
+          "rawCounters": [
+            "1",
+            "INSTRUCTION:0:178",
+            "BRANCH:0:12",
+            "LINE:0:40",
+            "COMPLEXITY:0:7",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "closeRow",
+          "descriptor": "(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V",
+          "testId": "RRF-PURE-009",
+          "observedMethod": "combinedReadAndCloseSqlFailuresKeepFirstFatalAndReleaseBothResources",
+          "independentContract": "Three independent outcome sources keep the first fatal object and close the owned row once in order.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:13",
+            "BRANCH:0:4",
+            "LINE:0:6",
+            "COMPLEXITY:0:3",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "closeStatement",
+          "descriptor": "(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V",
+          "testId": "RRF-PURE-006",
+          "observedMethod": "uncheckedAndCloseFailurePrecedence",
+          "independentContract": "The checked/unchecked primary and secondary order and statement owner count are independent.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:13",
+            "BRANCH:0:4",
+            "LINE:0:6",
+            "COMPLEXITY:0:3",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "require",
+          "descriptor": "(Z)V",
+          "testId": "RRF-PURE-003",
+          "observedMethod": "nullTransactionAndInterruptContracts",
+          "independentContract": "Autocommit, readonly, wrong isolation and interruption reject before acquisition or after proper cleanup.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:8",
+            "BRANCH:0:2",
+            "LINE:0:2",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "present",
+          "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "testId": "RRF-PURE-004",
+          "observedMethod": "missingProjectionAndCardinality",
+          "independentContract": "Null statement, result set and each of the four typed columns reject while acquired resources alone are closed.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:9",
+            "BRANCH:0:2",
+            "LINE:0:2",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "WBS-P004-02/2",
+      "className": "InspectionSummaryRepository",
+      "source": "4a70b8cf41313bf1095164d39d31230a7c1f2c4f",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43240-p00402-inspection-summary-current-v1/manifest.json",
+        "sha256": "55fe5434db49f7b075e6b460eb16dc2314dcab8f658129b5706ba0a503e70ac8"
+      },
+      "rawGraphHash": "618a64bc78deb1e33c4da17f36ea998561de0eca7f7773292e6767fcc4eced66",
+      "methods": [
+        {
+          "method": "<init>",
+          "descriptor": "(Ljava/sql/Connection;)V",
+          "testId": "INSPPORT004",
+          "observedMethod": "nullAndExplicitAutocommitWritableReadCommittedPrerequisitesRejectBeforeOwnedSql",
+          "independentContract": "A null borrowed connection rejects and a valid newly supplied caller retains ownership.",
+          "rawCounters": [
+            "1",
+            "INSTRUCTION:0:9",
+            "BRANCH:0:0",
+            "LINE:0:3",
+            "COMPLEXITY:0:1",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "read",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ljava/util/Optional;",
+          "testId": "INSPPORT001",
+          "observedMethod": "literalSqlTimeoutAndUuidUtcBindingsReturnAllFourColumnsWithoutOwnershipMutation",
+          "independentContract": "Bound fixed SQL and UTC, four-column projection, memory result, the borrowed caller contracts with writable read-committed settings over a read, without connection state changes.",
+          "rawCounters": [
+            "1",
+            "INSTRUCTION:0:178",
+            "BRANCH:0:12",
+            "LINE:0:42",
+            "COMPLEXITY:0:7",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "closeRow",
+          "descriptor": "(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V",
+          "testId": "INSPPORT011",
+          "observedMethod": "singleSqlFailurePreservesNestedErrorAfterOwnedResourcesClose",
+          "independentContract": "Fault at row close still attempts exact row/documented statement release and preserves the same fatal instance.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:11",
+            "BRANCH:0:2",
+            "LINE:0:5",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "closeStatement",
+          "descriptor": "(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V",
+          "testId": "INSPPORT007",
+          "observedMethod": "primaryAndBothCloseScopesHaveIndependentPriorityAndExactSafeSecondaryCounts",
+          "independentContract": "Body and acquired children yield a fixed class and exact secondary handling in the existing independent priority matrix.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:11",
+            "BRANCH:0:2",
+            "LINE:0:5",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "require",
+          "descriptor": "(Z)V",
+          "testId": "INSPPORT003",
+          "observedMethod": "requiredNullCountBalanceAndDuplicateRowsCannotFabricateAValidSummary",
+          "independentContract": "Duplicate rows, missing values, and unbalanced counts never fabricate a valid output.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:8",
+            "BRANCH:0:2",
+            "LINE:0:2",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        },
+        {
+          "method": "present",
+          "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "testId": "INSPPORT005",
+          "observedMethod": "nullStatementOrResultSetIsCataloguedAndEveryAcquiredResourceStillCloses",
+          "independentContract": "Null statement/row refuses and only already acquired resources are closed.",
+          "rawCounters": [
+            "10",
+            "INSTRUCTION:0:9",
+            "BRANCH:0:2",
+            "LINE:0:2",
+            "COMPLEXITY:0:2",
+            "METHOD:0:1",
+            "CLASS:0:0"
+          ]
+        }
+      ]
+    }
+  ],
+  "declaredVerifiedMethodCount": 12,
+  "separateRuntimeEvidence": true,
+  "scopedLaterInspectionFixtureCorrection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43242-f03-inspection-fixture-four-v1/manifest.json",
+    "sha256": "4ec0d3f4b4e0065a9ac23fbab23a59a0cebd1c9ce9c1d59c9547ff7a77b5429c"
+  },
+  "costDeduplicated": true,
+  "newTestExecutions": 0,
+  "actualDbEvidence": false,
+  "newAcceptance": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
