@@ -115,6 +115,33 @@ class PublishedManifestPinsTest(unittest.TestCase):
         self.assertEqual(0, result["historical"])
         self.assertEqual("INVALID_EXPLICIT_SOURCE", result["unresolved"][0]["reason"])
 
+    def test_invalid_declared_digest_cannot_disappear_from_the_pin_count(self):
+        for invalid in (None, "0" * 63, "z" * 64):
+            with self.subTest(invalid=invalid):
+                self.manifest(
+                    {
+                        "reference": {"path": FIXTURE, "sha256": invalid},
+                        "observation": {"path": "src/observation.txt"},
+                    }
+                )
+                end = self.commit()
+
+                result = audit(self.repo, self.original, end)
+
+                self.assertEqual(0, result["current"])
+                self.assertEqual(
+                    [
+                        {
+                            "manifest": MANIFEST,
+                            "path": FIXTURE,
+                            "sha256": None,
+                            "source": None,
+                            "reason": "INVALID_EXPLICIT_SHA256",
+                        }
+                    ],
+                    result["unresolved"],
+                )
+
     def test_current_tree_is_from_commit_and_never_from_worktree(self):
         self.manifest([pin(FIXTURE, INITIAL), pin(FIXTURE, INITIAL)])
         self.manifest([pin(FIXTURE, UPDATED)], "documents/manifest.json")
