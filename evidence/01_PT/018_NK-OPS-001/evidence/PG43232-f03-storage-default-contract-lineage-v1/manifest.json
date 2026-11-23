@@ -1,0 +1,98 @@
+{
+  "run": "PG43232-f03-storage-default-contract-lineage-v1",
+  "source": "7848457669f0792c053807d4873e3913e109b1c1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:14:28.594178+00:00",
+  "oldProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/manifest.json",
+    "sha256": "d74cb18700d22eb12b93b0e84c4bc133e0ed6d836d6d56195e05f27be72154c8"
+  },
+  "regularCurrentProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "exactPhysical": [
+    {
+      "className": "dev/codex/schubert/nk/storage/DirectoryCalls.class",
+      "original": "a7a18b1d98070fb3fed529213827e46205c3c45e0bdefc280039d398c0bdd333",
+      "current": "a7a18b1d98070fb3fed529213827e46205c3c45e0bdefc280039d398c0bdd333",
+      "exact": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "original": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "current": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "exact": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "original": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "current": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "exact": true
+    }
+  ],
+  "oldFixture": {
+    "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/UnsupportedDirectoryDefaultsPortTest.java",
+    "sha256": "9557f76bfb15ef536988b2bd25ccabd175f1eb5a9cd4133f2c3d9ef704ca2a17"
+  },
+  "currentFixtureExact": true,
+  "independentOriginalOracle": [
+    "Private file refusal never calls ordinary file provider",
+    "Private directory refusal never calls ordinary mkdir provider",
+    "Empty-directory removal refusal never calls unlink or closes the parent",
+    "Every declined action emits a fresh fixed bounded exception with independent null-input checks"
+  ],
+  "oldPassedMethods": [
+    "defaults001PrivateFileUnsupportedHasNoPublicFileFallback()",
+    "defaults003EmptyDirectoryUnsupportedNeverDelegatesToUnlinkOrRootClose()",
+    "defaults002PrivateDirectoryUnsupportedHasNoPublicDirectoryFallback()",
+    "defaults004EveryDeclinedOperationHasFreshBoundedExceptionState()"
+  ],
+  "oldCases": 4,
+  "newCases": 0,
+  "oldXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/jupiter.xml",
+    "sha256": "7902424a661944060a210bedd10ba0c5a3696481e9927987b11eb6ee9bb62d9a"
+  },
+  "oldRawReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/raw.tsv",
+    "sha256": "5365ca8460569a018c5710117c2264c439cb2b5c63a5a4ab433c31e8e3dfc6d5"
+  },
+  "oldScopedCounters": {
+    "INSTRUCTION": {
+      "missing": 0,
+      "covered": 15
+    },
+    "BRANCH": {
+      "missing": 0,
+      "covered": 0
+    },
+    "LINE": {
+      "missing": 0,
+      "covered": 3
+    },
+    "COMPLEXITY": {
+      "missing": 0,
+      "covered": 3
+    },
+    "METHOD": {
+      "missing": 0,
+      "covered": 3
+    },
+    "CLASS": {
+      "missing": 0,
+      "covered": 1
+    }
+  },
+  "naturalCodeBranchCount": 0,
+  "normalStoragePhysical": 79,
+  "reusedLocalScopeOnly": true,
+  "actualFilesystemAndDescriptors": 0,
+  "qa056Access": 0,
+  "otherRawCoverageImported": false,
+  "wholeStorageCoverage": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
