@@ -9,3 +9,7 @@ NK-MSG-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 Legacy参照だけだったP00501/1について全BrokerTopology62行とwholeTest2を審査、origin/main SS321/UI231/RD131へ6physicaladdress/queue/FQQN/TTL/bodylimitと厳密null/unknown拒否を固定vectorで対応。485primary/costOwner一致。PG29522でMain/Testがsource24507ea07977のPG29478 fresh155資格と現byte一致、対象全source I137/L25/M9/C1/B6 miss0を参照し確認再演0、新定義/新PT0。Broker実設定/role/consumer/Unitはenumの値から成立とせず独立gate、/2とglobalF02/F03未受入。原/1 .087/.227/.455だけ完了、元190新0/正式1964-53/工数null、actual4/Root/実JMS/DB/native操作0。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py audit evidence/01_PT/018_NK-OPS-001/input/2336_p00501_audit_contract.json` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+## 2026-11-23 正規宣言XMLとの照合
+
+SS321 §4・§5.1–5.3の独立表を現候補 broker.xml と結合。六Address／ANYCAST／Queue、共通17設定、メモリ448MiB／全合計4,864MiB、Protocol元二件を確認。実耐久性・ACL・状態・実配信は観測対象外。[PG43154](../018_NK-OPS-001/evidence/PG43154-p00501-broker-static-catalog-current-v1/manifest.json)。

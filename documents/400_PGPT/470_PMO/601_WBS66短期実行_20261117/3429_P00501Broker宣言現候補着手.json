@@ -1,0 +1,87 @@
+{
+  "eventId": "PGPT-20261008-8874",
+  "groupId": "G-20261123-P00501-BROKER-DECLARATIONS-43154",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T00:23:40+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "08385ce6376be3e1658295980c8100ade1ba1802",
+    "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "run": "PG43154-p00501-broker-static-catalog-current-v1",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P005-01/2"
+    ],
+    "previousCheckpoint": "3428_G1307正式依存作業地図結果.json",
+    "planRow": {
+      "ID": "WBS-P005-01/2",
+      "元行": "WBS-P005-01/2",
+      "費目": "B",
+      "主担当": "WBS-P005-01",
+      "状態": "計画",
+      "作業": "Artemis明示address・queue・DLQ・Expiry catalog／同source証拠による受入判定",
+      "残pp": "0.423",
+      "着手": "現sourceへ適用可能なPT-JMS-002の実broker証跡とC04・P002-03を確認。保存証跡が使えない場合はN04の条件成立後",
+      "終了証拠": "Artemis明示address・queue・DLQ・Expiry catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MQ-001,MQ-002,MQ-003,MQ-004,MQ-005",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "MQ-001、MQ-002、MQ-003、MQ-004、MQ-005",
+      "保存証跡": "６宛先・routing・durability・ACLの実測＋MQ-001～005の寄与証拠＋451",
+      "順次": "False",
+      "配賦窓": "11",
+      "楽観pp": "0.163",
+      "慎重pp": "0.845",
+      "要求設計の版差": "PT基準仕様 NK-MSG-001",
+      "lineNumber": 321,
+      "改訂残pp": "0.423"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "CONTRACT_AUDIT",
+      "goal": "bind six declared address/queue and capacity values to SS321 independently of runtime, existing Protocol case input on same current archive",
+      "start": [
+        "SS321 §4 and §5.1–5.3 approved values",
+        "PG43046 current Protocol artifacts, PG42624 raw case list, normal tracked XML"
+      ],
+      "exit": "exact six declared entries, aggregate/capacity and policy values; leave physical durability, ACL and broker ownership separately held"
+    },
+    "groupCapPp": 0.63,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.28,
+      "high": 0.63
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

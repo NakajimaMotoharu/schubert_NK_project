@@ -1,0 +1,146 @@
+{
+  "run": "PG43154-p00501-broker-static-catalog-current-v1",
+  "source": "08385ce6376be3e1658295980c8100ade1ba1802",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "startEvent": "PGPT-20261008-8874",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:24:31.172161+00:00",
+  "wbs": "WBS-P005-01/2",
+  "design": {
+    "path": "documents/300_SS/320_\u30e1\u30c3\u30bb\u30fc\u30b8\u30f3\u30b0/321_Artemis\u7269\u7406\u69cb\u6210\u30fbJMS\u8a2d\u5b9a\u8a2d\u8a08.md",
+    "source": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156"
+  },
+  "trackedBroker": {
+    "path": "src/deployment/artemis/etc/broker.xml",
+    "sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820"
+  },
+  "addresses": [
+    {
+      "address": "nk.sync.request",
+      "queue": "nk.sync.request.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 32,
+      "memoryMessages": 50,
+      "pagingMiB": 224,
+      "pagingMessages": 450,
+      "combinedMiB": 256,
+      "combinedMessages": 500
+    },
+    {
+      "address": "nk.sync.reply.web",
+      "queue": "nk.sync.reply.web.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 32,
+      "memoryMessages": 50,
+      "pagingMiB": 224,
+      "pagingMessages": 450,
+      "combinedMiB": 256,
+      "combinedMessages": 500
+    },
+    {
+      "address": "nk.async.work",
+      "queue": "nk.async.work.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 128,
+      "memoryMessages": 1000,
+      "pagingMiB": 896,
+      "pagingMessages": 9000,
+      "combinedMiB": 1024,
+      "combinedMessages": 10000
+    },
+    {
+      "address": "nk.web.log",
+      "queue": "nk.web.log.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 64,
+      "memoryMessages": 1000,
+      "pagingMiB": 192,
+      "pagingMessages": 9000,
+      "combinedMiB": 256,
+      "combinedMessages": 10000
+    },
+    {
+      "address": "nk.dead.letter",
+      "queue": "nk.dead.letter.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 128,
+      "memoryMessages": 1000,
+      "pagingMiB": 1920,
+      "pagingMessages": 9000,
+      "combinedMiB": 2048,
+      "combinedMessages": 10000
+    },
+    {
+      "address": "nk.expiry",
+      "queue": "nk.expiry.q",
+      "routing": "ANYCAST",
+      "memoryMiB": 64,
+      "memoryMessages": 1000,
+      "pagingMiB": 960,
+      "pagingMessages": 9000,
+      "combinedMiB": 1024,
+      "combinedMessages": 10000
+    }
+  ],
+  "globalMemoryMiB": 512,
+  "perAddressMemoryMiB": 448,
+  "combinedMiB": 4864,
+  "observedCommon": {
+    "dead-letter-address": "nk.dead.letter",
+    "expiry-address": "nk.expiry",
+    "auto-create-dead-letter-resources": "false",
+    "auto-create-expiry-resources": "false",
+    "auto-create-addresses": "false",
+    "auto-create-queues": "false",
+    "auto-delete-addresses": "false",
+    "auto-delete-queues": "false",
+    "address-full-policy": "PAGE",
+    "page-full-policy": "FAIL",
+    "disk-full-policy": "BLOCK",
+    "page-size-bytes": "8MiB",
+    "max-read-page-bytes": "16MiB",
+    "max-read-page-messages": "100",
+    "redelivery-collision-avoidance-factor": "0.0",
+    "enable-metrics": "true",
+    "enable-ingress-timestamp": "true"
+  },
+  "reusedProtocolCases": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "method": "nullUnknownAndNearMatchAddressesAreDenied",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "method": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+      "outcome": "PASS"
+    }
+  ],
+  "prior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+      "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43046-p00201-current-codec-recheck-v1/manifest.json",
+      "sha256": "0e15412c3ce060337d9c6237d648799aa423dce024d07a0c846e7ba2e9168b4e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/case-results.json",
+      "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+    }
+  ],
+  "declaredQueueCount": 6,
+  "actualDurableQueuesObserved": 0,
+  "actualRoleChecks": 0,
+  "actualBrokerActions": 0,
+  "productTestsReplayed": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "outstanding": [
+    "effective durable queues and ACL",
+    "runtime data/paging/expiry behavior",
+    "formal build and 451"
+  ]
+}
