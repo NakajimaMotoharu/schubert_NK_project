@@ -1,0 +1,115 @@
+{
+  "run": "PG43546",
+  "wbs": "WBS-P020-01.02/2",
+  "source": "9a355a4ce326699e2b3622654b05e89bc31c2a36",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T10:09:47.443743+00:00",
+  "actualToolTerminalAtUTC": "2026-11-23T10:09:05.847239+00:00",
+  "actualExit": 0,
+  "sourceGovernance": {
+    "args": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/static_input_scope.py",
+      "--source-only",
+      "--plan",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-plan.json",
+      "--scope",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-scope.json",
+      "--scope-sha256",
+      "113a13f26697338b8d5b8ce9244130715f1265905d63acfc06a6311629e08bf4",
+      "--inventory",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-inventory.json",
+      "--inventory-sha256",
+      "bb5296b84572ca7cdb7b15d02d5ec03cdaf03622e4472e3283ffec17d2846c5d"
+    ],
+    "result": {
+      "scopeMatch": true,
+      "tool": "checkstyle",
+      "files": 2
+    },
+    "metadata": [
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-plan.json",
+        "sha256": "7ca52430489f7f401bd9bfecf2c172925faa0464dbca3d520453df60b2575cab"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-scope.json",
+        "sha256": "113a13f26697338b8d5b8ce9244130715f1265905d63acfc06a6311629e08bf4"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/cs-inventory.json",
+        "sha256": "bb5296b84572ca7cdb7b15d02d5ec03cdaf03622e4472e3283ffec17d2846c5d"
+      }
+    ],
+    "justification": "Comparator path explicitly admitted before, new pointer fixture contains string literals and direct pure method only. Two named source files, all earlier hold names retained."
+  },
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43546-comparator-pointer-syntax-before-v1/manifest.json",
+    "sha256": "176176050663cdbe436ade1bccd5cd15bd2c8f5937df9e398123779c704ac794"
+  },
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/begin.json",
+    "sha256": "fa58ce56dba7baf5eb5b7aa7996ba9610c38e62bffa51eb2c2685a8415efcef8"
+  },
+  "actualTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/terminal.json",
+    "sha256": "47b7ae9db695c2370f3d7512a89c42cd772f1d4499e32a98ce3a8b41aec42f8c"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "480ee4b7ad977d193453dd4c82ca2aec0052393d57eef07a507254a09ee231b8"
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43546-comparator-pointer-pure-three-v1/pointer-method-unfiltered.tsv",
+    "sha256": "f1176d7ac335a0ffbde5e0243270699a5a9a2a194a2a0b8bfc8379c4576c54c5"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43546-comparator-pure-pointer-v1/unit.exec",
+    "sha256": "cdb5fbd4c964674a9514825355d816e577e9066ba5999a3b615c4c4d638c731c"
+  },
+  "session": {
+    "labelBytesHex": "504734333534362d505552452d504f494e54455233",
+    "startMillis": 1795428544920,
+    "endMillis": 1795428545719
+  },
+  "productAndFixtureInit": [
+    "dev/codex/schubert/characterization/ArtifactComparator",
+    "dev/codex/schubert/characterization/ArtifactComparatorPointerTest"
+  ],
+  "expected": {
+    "PT-CHR-POINTER-001": "acceptsCanonicalLiteralAndEscapedTokens",
+    "PT-CHR-POINTER-002": "rejectsMalformedTildeEscapes",
+    "PT-CHR-POINTER-003": "retainsExplicitComparisonScopeRestrictions"
+  },
+  "related": [
+    "BUG-3713",
+    "YKT-2913",
+    "SS355 §8"
+  ],
+  "scope": "Tool-local literal grammar, comparator broader validation and actual NK separate",
+  "result": {
+    "toolTests": 3,
+    "passed": 3,
+    "failures": 0,
+    "skipped": 0,
+    "productionSourceToolChanges": 1,
+    "productPtAdded": 0,
+    "checkstyleFindings": 0,
+    "testInputSubcases": 18,
+    "methodL": 13,
+    "methodM": 1,
+    "methodB": 18,
+    "methodCoverageAllReached": true,
+    "wholeComparatorCoverage": false,
+    "actualNKCHR": 0,
+    "realContextOrHeldFileStore": 0,
+    "formalAcceptanceId": null,
+    "whole451": false
+  },
+  "remaining": [
+    "named previous closed synthetic comparison positive regression",
+    "held full comparator FileStore branches and real Current/NK",
+    "451"
+  ]
+}
