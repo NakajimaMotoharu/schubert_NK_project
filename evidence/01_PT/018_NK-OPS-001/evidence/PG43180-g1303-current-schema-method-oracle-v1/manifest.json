@@ -1,0 +1,114 @@
+{
+  "run": "PG43180-g1303-current-schema-method-oracle-v1",
+  "source": "570f8662507fc22663d90aa89c8af8aacab32728",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.03",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:01:56.760319+00:00",
+  "currentPhysicalFound": 2,
+  "priorScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41432-g1303-current-bootstrap-owner-v1/manifest.json",
+    "sha256": "46e381b64352416ada6e15589a8798c3871da9fe02ca592d246c1dd4ea1667fd"
+  },
+  "priorTable": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41432-g1303-current-bootstrap-owner-v1/bootstrap-source-owner-inventory.json",
+    "sha256": "c43a275e8d5cdfbcf903adbc22dbe531292843ff93bef289136cd71bcff5e5da"
+  },
+  "priorOwnedSource": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+  "currentGitBlob": "e6c7ffe8693cb17548c9ba4b5766c8db6086c30d",
+  "owner": "WBS-P019-01",
+  "costOwner": "WBS-P019-01",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43178-p0190102-schema-history-single-exec-v1/manifest.json",
+    "sha256": "9cdffd38cd7b865fffd4de244c8fea7bf2e2df07cd74d59abd2ce771453011b0"
+  },
+  "sourceBinding": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    },
+    {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611"
+    },
+    {
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/254_移行・切替・切戻し設計.md",
+      "sha256": "281751170c289cc755777775beb4f997e7b3c5fe0171a0e14d654758b9ff713a"
+    }
+  ],
+  "canonicalDesign": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "methodsMeasured": 18,
+  "explicitMethodTestOracleBindings": [
+    {
+      "method": "inspect",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA014",
+      "independentOracle": "Exact synthetic V029/V030 list and order; missing historical last row, unknown version, wrong name/checksum reject",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "descriptor": "(Ljava/sql/Connection;)Ljava/util/List;"
+    },
+    {
+      "method": "verify",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA001",
+      "independentOracle": "Fixed SELECT text/time limit and borrowed caller ownership retained",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "descriptor": "(Ljava/sql/Connection;)V"
+    },
+    {
+      "method": "<init>",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA003",
+      "independentOracle": "Independent constructor invariants reject invalid type/rank/version/value bounds",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "descriptor": "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Z)V"
+    },
+    {
+      "method": "success",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA011",
+      "independentOracle": "success=true is observable",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "descriptor": "()Z"
+    },
+    {
+      "method": "toString",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA011",
+      "independentOracle": "JDK25 six named public fields and exact fixed synthetic display",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "method": "hashCode",
+      "singleStreamMeasured": true,
+      "independentTestId": "PT-OPS-SCHEMA011",
+      "independentOracle": "Independent six-component hash fold yields 583197644",
+      "name": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+      "descriptor": "()I"
+    }
+  ],
+  "remainingMethodsWithoutThisIndividualJoin": 12,
+  "endingDependencies": [
+    "WBS-F02",
+    "WBS-P018-02"
+  ],
+  "actualLifecycleAndMigrationQualified": false,
+  "alreadyKnownHistoricalBootstrapSourceRows": 88,
+  "newTestExecutions": 0,
+  "wholeG1303": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
