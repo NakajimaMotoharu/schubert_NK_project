@@ -432,11 +432,11 @@ class ScenarioSearchViewModelTest {
             engine.process(
                 "<p th:text='${page.filters.q}'></p><a th:href='${page.nextHref.orElseThrow()}'>次</a>",
                 context));
-    assertEquals("<script>&\"", doc.selectFirst("p").text());
+    assertEquals(List.of("<script>&\""), doc.select("p").eachText());
     assertTrue(doc.select("script").isEmpty());
     assertEquals(
-        "/search?q=%3Cscript%3E%26%22&game=&speaker=&chapter=&entry_type=&voice=&page=2",
-        doc.selectFirst("a").attr("href"));
+        List.of("/search?q=%3Cscript%3E%26%22&game=&speaker=&chapter=&entry_type=&voice=&page=2"),
+        doc.select("a").eachAttr("href"));
   }
 
   @Test

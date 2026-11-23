@@ -381,7 +381,7 @@ class ScenarioDetailViewModelTest {
                 + " th:href='${audio.href}' th:text='${audio.displayPath}'></a></article>",
             context);
     var dom = Jsoup.parse(html);
-    assertEquals("章<script>", dom.selectFirst("h1").text());
+    assertEquals(List.of("章<script>"), dom.select("h1").eachText());
     assertTrue(dom.select("script,img").isEmpty());
     assertEquals(List.of("地の文", SCENARIO_BODY_TEXT, "最後"), dom.select("article p").eachText());
     assertEquals(
