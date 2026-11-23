@@ -1,0 +1,69 @@
+{
+  "run": "PG43888",
+  "source": "68ea1ed5aae1ba590b3388faad2ed51d52601c65",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:49:46.385490+00:00",
+  "wbs": "WBS-G08",
+  "related": [
+    "SS354",
+    "451",
+    "BUG-3750",
+    "YKT-2930"
+  ],
+  "toolAndIndependentTests": [
+    {
+      "path": "tools/quality/verify_published_manifest_pins.py",
+      "sha256": "732abe69cda8f6c627f7c004d08d250be86fe4b6dfc5c368f9f7444332f8fbf1"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_published_manifest_pins.py",
+      "sha256": "9b9850f97b0a4a732dede06f133f831817016089112cecd8ea92849cfd0b89aa"
+    }
+  ],
+  "matrixToolTestIds": {
+    "PT-OPS-G08-PINS001": "test_current_tree_is_from_commit_and_never_from_worktree",
+    "PT-OPS-G08-PINS002": "test_exact_source_can_precede_the_current_range",
+    "PT-OPS-G08-PINS003": "test_implicit_reference_uses_its_published_history",
+    "PT-OPS-G08-PINS004": "test_missing_path_is_reported_and_invalid_commit_is_rejected",
+    "PT-OPS-G08-PINS005": "test_named_source_requires_its_own_hash"
+  },
+  "passingToolTests": 5,
+  "publishedTerminalSummary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43888-published-manifest-pin-tool/terminal-summary.json",
+    "sha256": "c7e3c542cdc1f69f62d1d81c0c3c0b7cb71fdcdada2ce8fad45ecbe99ea3f414"
+  },
+  "originalBeforeUnresolved": 1,
+  "verifiedAfterUnresolved": 0,
+  "verifiedManifestCount": 35,
+  "correctedReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43880-current-batch-standard-five-static/manifest.json",
+    "sha256": "d62530bb168ab07a78132183266751a119f333d5c79f73285962b17d49ccff55"
+  },
+  "publishedHistoricalSummary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43888-published-manifest-pin-tool/input-provenance.json",
+    "sha256": "b467d30d56558f708459f1bca6a433e23b88e78906dffbe63effbbcf711953d0"
+  },
+  "original": [
+    {
+      "path": "../pgpt-runs/PG379/PG43888-published-pins-current-v2/begin.json",
+      "sha256": "e35c929c0b262a32bc1ce27e595f0c376633276fdf71ff1bd4ce86ae896acb87"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43888-published-pins-current-v2/terminal.json",
+      "sha256": "92797f80b7886ce95285486770e2b2e2a49c7ea3d1812b54f18e2db952764d6b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43888-published-pins-current-v1/published-pins.json",
+      "sha256": "5b87954037b0115b9338d8acd9c183818ec39cafbf5d2a1a8015f1a3188891e1"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43888-published-pins-current-v2/tests.err",
+      "sha256": "843278100f0956a1e0f08e5995c0b372649fc76f73d025ed6fe17a7af936c6da"
+    }
+  ],
+  "implementationFacts": "Read marked public Git blobs only. An explicit child source is resolved by that exact commit. Local historical fallback uses the bounded comparison lineage.",
+  "productTestsExecuted": 0,
+  "externalOperations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
