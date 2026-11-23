@@ -1,0 +1,88 @@
+{
+  "run": "PG43812-before",
+  "source": "3341c839d057efb100807a5e528950df5ec1801c",
+  "terminalAtUTC": "2026-11-23T18:00:36.298016+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "status": "ALL_THREE_BASELINES_SCOPED",
+  "currentTargets": [
+    {
+      "target": "AsyncJobMetricCollector",
+      "scope": "async",
+      "source": "3341c839d057efb100807a5e528950df5ec1801c",
+      "bug": "BUG-3743",
+      "testIds": "ASYNCCONN001–008",
+      "rules": [
+        [
+          "AvoidSynchronizedStatement",
+          29
+        ],
+        [
+          "AvoidCatchingGenericException",
+          35
+        ],
+        [
+          "AvoidCatchingGenericException",
+          35
+        ]
+      ],
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-before-v1/terminal.json",
+        "sha256": "386baedee9c84115e989026cfae9b2dcbf4e9b2f4a4d49774a00c5e7bac6b77b"
+      }
+    },
+    {
+      "target": "OutboxMetricCollector",
+      "scope": "api-outbox",
+      "source": "3341c839d057efb100807a5e528950df5ec1801c",
+      "bug": "BUG-3744",
+      "testIds": "OUTBOXCONN001–008",
+      "rules": [
+        [
+          "AvoidSynchronizedStatement",
+          33
+        ],
+        [
+          "AvoidCatchingGenericException",
+          41
+        ],
+        [
+          "AvoidCatchingGenericException",
+          41
+        ]
+      ],
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-before-v1/terminal.json",
+        "sha256": "b7edea8d4485dd7fa92b56c2596a7bb4712ed06ebc5fe095432ef14303eda822"
+      }
+    },
+    {
+      "target": "WebOutboxMetricCollector",
+      "scope": "web-outbox",
+      "source": "3341c839d057efb100807a5e528950df5ec1801c",
+      "bug": "BUG-3745",
+      "testIds": "WEBOBXCONN001–008",
+      "rules": [
+        [
+          "AvoidSynchronizedStatement",
+          29
+        ],
+        [
+          "AvoidCatchingGenericException",
+          35
+        ],
+        [
+          "AvoidCatchingGenericException",
+          35
+        ]
+      ],
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-before-v1/terminal.json",
+        "sha256": "caf18a72ed384dbd08db73ca05d28950047e97db50f7ea59088223fbe44c9fba"
+      }
+    }
+  ],
+  "typedInputsOnly": true,
+  "actualDatabaseOperations": 0,
+  "actualOrdinaryExecutions": 0,
+  "formalAcceptanceId": null
+}
