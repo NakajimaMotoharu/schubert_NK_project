@@ -1,0 +1,145 @@
+{
+  "run": "PG43536",
+  "source": "c552a3983c7b0c5bd5c702611c5a7aff08896cc6",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-C07",
+  "terminalAtUTC": "2026-11-23T09:52:37.471401+00:00",
+  "actualToolTerminalAtUTC": "2026-11-23T09:51:48.021768+00:00",
+  "actualExit": 0,
+  "tool": {
+    "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "jacoco": "0.8.15"
+  },
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43536-c07-window-nine-same-exec-v1/begin.json",
+    "sha256": "06376f9f66fe7b7df1040adadb60ecc436cddb2a19dc5de3d7e1c153a4076aa8"
+  },
+  "completion": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43536-c07-window-nine-same-exec-v1/terminal.json",
+    "sha256": "7e88fa05e85a7990a4e70b38444346137f41b55710bf3fd8368cfcc6bfa12656"
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43536-c07-window-nine-same-exec-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "6b3da23308cea3acf996b5b272160176720f273cda141d2130e392d205e3d8ba"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43536-c07-window-nine-same-exec-v1/selected.exec",
+    "sha256": "c2c14c9140c0123c8142dde62bd1c2fba5c5a82ea0d18e8470380c74c3616fcc"
+  },
+  "originalSingleSession": {
+    "labelBytesHex": "504734333533362d4330372d57494e444f5739",
+    "startMillis": 1795427507295,
+    "endMillis": 1795427507866
+  },
+  "evidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43536-current-c07-window-nine-unfiltered-v1/unfiltered.tsv",
+    "sha256": "7d6423c5e753a491b726f95b1b37c62d9bdb2919fa2598ce95a346af8a5c5ef6"
+  },
+  "priorRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/rawCoverage.stdout",
+    "sha256": "8a307b69ab849e2ffea245ca3373707ea5564221225a4706a047f0efbfae1dad"
+  },
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/manifest.json",
+    "sha256": "71d38e9dba282f599430168b30cec1fa09935a98d9827e9465f6303d01740b39"
+  },
+  "actualProductInitialized": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix"
+  ],
+  "cases": {
+    "PT-OPS-MONWINDOW001": [
+      "ContinuousConditionWindowTest",
+      "monWindow001FirstContinuousAndSameTimestampBoundaries"
+    ],
+    "PT-OPS-MONWINDOW002": [
+      "ContinuousConditionWindowTest",
+      "monWindow002NormalBreaksViolationHistory"
+    ],
+    "PT-OPS-MONWINDOW003": [
+      "ContinuousConditionWindowTest",
+      "monWindow003UnknownIsAbsentAndBreaksHistory"
+    ],
+    "PT-OPS-MONWINDOW004": [
+      "ContinuousConditionWindowTest",
+      "monWindow004ExplicitGapNeverBridgesOldPeriod"
+    ],
+    "PT-OPS-MONWINDOW005": [
+      "ContinuousConditionWindowTest",
+      "monWindow005RejectedSequenceLeavesStateUnchanged"
+    ],
+    "PT-OPS-MONWINDOW006": [
+      "ContinuousConditionWindowTest",
+      "monWindow006WholeNonnegativeDurationDomain"
+    ],
+    "PT-OPS-MONWINDOW007": [
+      "ContinuousConditionWindowTest",
+      "monWindow007ConcurrentSamePointHasOneOrigin"
+    ],
+    "PT-OPS-MONWINDOW008": [
+      "ContinuousConditionWindowTest",
+      "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations"
+    ],
+    "GENB004": [
+      "GeneratedBatchValueContractTest",
+      "genBatch004ModeContinuityAndSuffixFactoriesCannotShareReturnedArrays"
+    ]
+  },
+  "independentSpecifications": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1561_ContinuousConditionWindow_単体テスト仕様書.md",
+      "sha256": "dbd817d61bf4ab922d16b3a4d231c0c241e2422b9ceabe117978d242fb941ed7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md",
+      "sha256": "b3be89b8c107c81d2daae1ab39f973dc27660483fd56670e23be02e26ad2bd69"
+    }
+  ],
+  "result": {
+    "executed": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "newCurrentWitness": 1,
+    "cohortRepeats": 8,
+    "rawEach": {
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+        "LINE": 17,
+        "METHOD": 2,
+        "CLASS": 1,
+        "BRANCH": 14
+      },
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+        "LINE": 4,
+        "METHOD": 5,
+        "CLASS": 1,
+        "BRANCH": 0
+      }
+    },
+    "rawTotal": {
+      "LINE": 21,
+      "METHOD": 7,
+      "CLASS": 2,
+      "BRANCH": 14
+    },
+    "newDefinitions": 0,
+    "productOrdinaryExecutionsCumulative": 3133,
+    "productApplicableSuccessesCumulative": 3085,
+    "actualObservationOperations": 0,
+    "actualServices": 0,
+    "oldExecCombined": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "remaining": [
+    "real monitor sampling and effective externally-owned mode",
+    "actual actuator/registry/publisher paths",
+    "all six-product 451"
+  ]
+}
