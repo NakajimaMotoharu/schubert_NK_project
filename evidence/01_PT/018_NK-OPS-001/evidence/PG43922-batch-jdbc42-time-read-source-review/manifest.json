@@ -1,0 +1,88 @@
+{
+  "run": "PG43922",
+  "source": "4f5430e69e1d3331a16f09dab9708d946b0d9e61",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "terminalAtUTC": "2026-11-23T20:43:01.938638+00:00",
+  "wbs": [
+    "WBS-P004-05/2",
+    "WBS-P017-06"
+  ],
+  "yg": "YKT-2933",
+  "lookup": "Literal OffsetDateTime.class in tracked Batch repository read projection. Related annotated packages not presumed.",
+  "review": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "7edd20d5074ec0b7e2be4aa6206e643c15cf9d60fb45bded874b5b19310ba484",
+      "lineNumbers": [
+        97
+      ],
+      "disposition": "matchesInstant obtains required value once and determines temporal equality; use in started_at/ended_at"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "lineNumbers": [
+        77,
+        78,
+        214,
+        218
+      ],
+      "disposition": "Required conversion via present(...).toInstant; no end in RUNNING; SUCCESS converts after explicit present guard"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "04024c0597717b5606d85b6e82b1054139f0fd6edb4e707b61fe273d6a5b372d",
+      "lineNumbers": [
+        248,
+        249
+      ],
+      "disposition": "Required start goes through present(...).toInstant; nullable end preserved, converted only if present"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "8cb51b0a9e1d9a743450ca239a134680b7035b40d5847962bd97ade4deff55af",
+      "lineNumbers": [
+        431,
+        433
+      ],
+      "disposition": "Required start via present(...).toInstant; optional end mapped to Instant"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12",
+      "lineNumbers": [
+        146,
+        309,
+        310
+      ],
+      "disposition": "Required started_at converts; nullable cutoff/end preserve null and otherwise convert before projection"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+      "sha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+      "lineNumbers": [
+        945,
+        949,
+        975,
+        976,
+        1141
+      ],
+      "disposition": "Five required reads through present then Instant. Only lexical review, no held method or compiled proof exercised"
+    }
+  ],
+  "rowsTotal": 17,
+  "addedBugCandidates": 0,
+  "heldRuntimeEvaluated": false,
+  "localProductRuns": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Driver/server SQL epoch values/reality and caller DB ownership",
+    "Whole SSC-056 / YKT-128 outside six reviewed sources"
+  ]
+}
