@@ -1,0 +1,155 @@
+{
+  "run": "PG43344-p019-history-four-current-criteria-v1",
+  "source": "c5dcc9eb8453806c571d5518762288d6ba92f963",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P019-01.02/2",
+  "terminalAtUTC": "2026-11-23T04:53:30.986427+00:00",
+  "actualExit": 0,
+  "design": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "source": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "section": "9.1",
+    "sectionSha256": "e419c04e209a61eeabdb323135f71cc1f9d454a6abe2f8b604844a7c4b6c9002"
+  },
+  "testSpecification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5793_Schema履歴末尾と物理行の単体試験仕様.md",
+    "sha256": "8bf1ee5b871bb248336c132065f3ac1241babc0d70a416a6551f5bc83cdb676f"
+  },
+  "currentUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43292-p019-current-schema-history-with-row-direct-14-v2/manifest.json",
+    "sha256": "97017dd559e61933ba6c6a3cea31669d3d3782dcf8d4dbaf56d7fc9897f74a54"
+  },
+  "originalSanitized": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43292-p019-current-schema-history-with-row-direct-14-v2/junit-cases.json",
+    "sha256": "9ffcd2d7e0c8f0bd8be9696bc79b853521abbd20323871672834aa82bfbf5bc1"
+  },
+  "originalIds": [
+    {
+      "testId": "PT-OPS-SCHEMA001",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema001ExactFixedQueryAndBorrowedOwner()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA002",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema002EveryColumnMissingExtraAndFailedRow()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA003",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema003ExpectedRowInvariantBoundaries()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA004",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema004ExpectedProfileOrderingAndDefensiveCopy()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA005",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema005NullProviderSqlExceptionsAndAllOwnership()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA006",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA007",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema007InterruptBeforeAndAfterNeverAccepts()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA008",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema008IndependentConcurrentOwners()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA009",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA010",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema010KnownSqlFatalGraphsCloseOwnersAndPreserveOriginalIdentity()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA011",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryRowValueTest",
+      "case": "opsSchema011PublishedRowRetainsSuccessAndValueDiagnostics()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA012",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema012InterruptWhileClosingRowsRejectsObservedHistory()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA013",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema013InterruptWhileClosingStatementRejectsObservedHistory()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA014",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "case": "opsSchema014CurrentTailRequiresTheExactVersionScriptAndChecksum()"
+    },
+    {
+      "testId": "PT-OPS-SCHEMA015",
+      "className": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryRowComponentsTest",
+      "case": "opsSchema015BothRowKindsRetainValuesAndCompareByContent()"
+    }
+  ],
+  "qualifiedLocalCriteria": [
+    {
+      "criterion": "EXACT",
+      "input": "SCHEMA then V029 (29), V030 (-30)",
+      "expected": "ordered rows returned; both child owners close once, borrowed connection not closed",
+      "ids": [
+        "PT-OPS-SCHEMA001",
+        "PT-OPS-SCHEMA014"
+      ]
+    },
+    {
+      "criterion": "DIFFERENT",
+      "input": "V030 with changed script or checksum; null, missing, extra, failed and different individual columns",
+      "expected": "readiness rejected with SQLState 08001; keep borrowed connection",
+      "ids": [
+        "PT-OPS-SCHEMA002",
+        "PT-OPS-SCHEMA014"
+      ]
+    },
+    {
+      "criterion": "OLDER",
+      "input": "remaining old tail V029, expected V030 missing",
+      "expected": "reject with SQLState 08001; no acceptance of an older history",
+      "ids": [
+        "PT-OPS-SCHEMA014"
+      ]
+    },
+    {
+      "criterion": "UNKNOWN",
+      "input": "replace observed tail by V031 under expected V030",
+      "expected": "reject with SQLState 08001; preserve child/borrowed ownership rules",
+      "ids": [
+        "PT-OPS-SCHEMA014"
+      ]
+    }
+  ],
+  "currentRawCoverage": {
+    "LINE": 93,
+    "METHOD": 18,
+    "CLASS": 2,
+    "BRANCH": 72
+  },
+  "originalExecCombined": false,
+  "newOrdinaryPt": 0,
+  "actualDatabaseOrMigrationRuns": 0,
+  "currentRealFlywayHistoryLinked": false,
+  "remaining": [
+    "real signed SQL/profile, live expected-versus-observed history and grants",
+    "actual owner/input readback, 451 and completion dependencies"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
