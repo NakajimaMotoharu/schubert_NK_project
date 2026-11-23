@@ -1,4 +1,92 @@
 {
+  "currentCleanupJdbcOwnedCloseTracePG43868": {
+    "owner": "WBS-P017-07",
+    "traceWork": "WBS-G13.06",
+    "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+    "program": "NK-BAT-001 / NK-OPS-001",
+    "connected": [
+      "A1-21.05",
+      "WBS-P004-05/2",
+      "WBS-F02-b-a",
+      "WBS-F03/2-2-b"
+    ],
+    "design": [
+      "SS311",
+      "SS332",
+      "SS341",
+      "SSC-461",
+      "451"
+    ],
+    "newIdJoin": [
+      {
+        "id": "PT-F02-CTERM-READ004",
+        "fixtureMethod": "ordinaryTerminalReadKeepsRuntimePrimaryAndRecordsTwoSanitizedCloseFailures",
+        "verifiedFixtureAt": "a31f44b54065d056705d1e383350891f80ea0de5",
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/manifest.json",
+          "sha256": "a1d13cf456925dfba5d08be629b6ac26a91346ed9e6af55fff5e662ebd2d3d8f"
+        }
+      },
+      {
+        "id": "PT-F02-CTERM-READ005",
+        "fixtureMethod": "ordinaryTerminalReadRejectsAnOtherwiseCompleteReadWhenResultCloseFails",
+        "verifiedFixtureAt": "a31f44b54065d056705d1e383350891f80ea0de5",
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/manifest.json",
+          "sha256": "a1d13cf456925dfba5d08be629b6ac26a91346ed9e6af55fff5e662ebd2d3d8f"
+        }
+      },
+      {
+        "id": "PT-F02-CTERM-READ006",
+        "fixtureMethod": "ordinaryTerminalReadKeepsAnOriginalCloseErrorOverTheKnownSqlFailure",
+        "verifiedFixtureAt": "a31f44b54065d056705d1e383350891f80ea0de5",
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/manifest.json",
+          "sha256": "a1d13cf456925dfba5d08be629b6ac26a91346ed9e6af55fff5e662ebd2d3d8f"
+        }
+      },
+      {
+        "id": "PT-F02-CTERM-REF-003",
+        "fixtureMethod": "checkedPriorLookupFailureRemainsPrimaryWhenResultCloseThrowsSql",
+        "verifiedFixtureAt": "0635b60c2eb9384a803e31ed1da163e6bdd86d13",
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43866-current-cleanup-prior-checked-io/manifest.json",
+          "sha256": "2756c81885cf06ba5e628e06070cec8c9c6b768f772f2e6ea3f32535cf8df0df"
+        }
+      },
+      {
+        "id": "PT-F02-CTERM-REF-004",
+        "fixtureMethod": "checkedPriorLookupFailureRemainsPrimaryWhenStatementCloseThrowsError",
+        "verifiedFixtureAt": "0635b60c2eb9384a803e31ed1da163e6bdd86d13",
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43866-current-cleanup-prior-checked-io/manifest.json",
+          "sha256": "2756c81885cf06ba5e628e06070cec8c9c6b768f772f2e6ea3f32535cf8df0df"
+        }
+      }
+    ],
+    "currentClass": {
+      "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/scope/target/classes/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+      "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+    },
+    "currentTestSource": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+      "sha256": "94ecf609b888907b3ec149e51ee00d2854aa78fe6a9ab6303cd442e64bd77951"
+    },
+    "currentIndependentOracle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5799_清掃終端の通常読取単体試験仕様.md",
+      "sha256": "5b89994e11b24ff65a950b30562cf35dfd82477d9f9b290fa1339d450090f83a"
+    },
+    "remaining": [
+      "same-source normal repository negative cases and integrated JDBC/authority proofs",
+      "QA-056/062 and full six-module technical gate"
+    ],
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43868-current-cleanup-jdbc-wbs-trace/manifest.json",
+      "sha256": "7a6e1e24f8d16f7d68163206d9b1ad8f5556653b823a48218e0ae8723dcbb17f"
+    },
+    "formalAcceptanceId": null,
+    "whole451": false
+  },
   "currentCaddyWebDeclaredDependenciesPG43736": {
     "owner": "WBS-C02",
     "traceKey": "WBS-G13.06",
