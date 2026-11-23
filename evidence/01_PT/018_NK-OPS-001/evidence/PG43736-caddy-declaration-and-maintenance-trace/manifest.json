@@ -1,0 +1,106 @@
+{
+  "run": "PG43736",
+  "source": "6c0373c3f7d0b7f5c5b1e611e9214ee13a994e2b",
+  "javaProductCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "record": {
+    "owner": "WBS-C02",
+    "traceKey": "WBS-G13.06",
+    "related": [
+      "WBS-C02-a",
+      "WBS-C02-b",
+      "WBS-P018-07"
+    ],
+    "source": "bc568ff8563189e49a850808e8bd18a9980c2bbb",
+    "javaProductCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "design": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    },
+    "program": "NK-OPS-001",
+    "requirements": [
+      "OPS-009",
+      "UI251",
+      "SS342 §4.1"
+    ],
+    "testId": "PT-OPS-UNIT-SUP006",
+    "test": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java",
+      "sha256": "12c9cc84634c35ffc6e75cb52cddfe90db2d2aadc929d19503bf019611683d38"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5819_CaddyとWebの依存宣言の単体テスト仕様.md",
+      "sha256": "4110c79a0b69c783ba381ca133c491016b11e9ce5eea302eed38ba276303f4f7"
+    },
+    "changedConfig": {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "sha256": "3ded75c5cfb8cb84ffc7a4bff695ed9f57558e1716a1fbb614a33902ebc92557"
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+      "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+    },
+    "productPtPass": 6,
+    "newOrdinaryTestIds": 1,
+    "scheduledMaintenancePrior": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5686_日次保守現候補の要件と試験対応.md",
+      "sha256": "dc4891751b36d43af2b45b3be8a2524a772d2d37c8422be7b1e46be1a0f89bdf"
+    },
+    "packagingPath": {
+      "path": "systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "staticClassifier": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+        "sha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348"
+      },
+      "approvedArchiveReceiptOfThisConfig": null
+    },
+    "maintenance": {
+      "timer": {
+        "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+        "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+      },
+      "receiverTracked": false,
+      "related": "BUG-3577/YKT-2812",
+      "existingPrebootPurePartsRetained": true,
+      "preconditions": [
+        "fixed receiver authorization and entrypoint distinct from post-reboot Morning",
+        "ordered stop and update/reboot continuation and PT",
+        "current owner and real authorized Linux"
+      ]
+    },
+    "formalAcceptanceId": null,
+    "newFormal": 0,
+    "completedOriginalRowPricePp": 0
+  },
+  "inputWbs": [
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "0b29ca1ea995dd79bbe6d6778b6c97307a13abb07b9dd33ccadf04b8b78b70a3"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "499ecefa62c8f528ffa6d55eb743da58c1859a5b499073eaf960e42ad585dd87"
+    }
+  ],
+  "actualExit": 0,
+  "outputWbs": [
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "bb6ca94f057641a4f5a7481652b5c1468aa0822954e087429b4b191b9ccb0eb2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "b01863b8e77ba70531350803d3515c082cfb892740bb5c15d048c58cc28b4e35"
+    }
+  ],
+  "executedProductPt": 0,
+  "sameProjectTotals": {
+    "originalWBS": 190,
+    "acceptedOriginalWBS": 16,
+    "productOrdinaryExecutions": 3643,
+    "productApplicableSuccesses": 3595
+  },
+  "whole451": false,
+  "actualManagerOrRuntimeActions": 0,
+  "terminalAtUTC": "2026-11-23T15:35:12.958592+00:00"
+}
