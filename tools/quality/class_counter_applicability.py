@@ -3,6 +3,7 @@ KINDS = frozenset(('LINE','METHOD','CLASS','BRANCH'))
 
 
 def classify(counters):
+    """Classify four JaCoCo counters for a single physical class."""
     if not isinstance(counters,dict) or set(counters) != KINDS:
         raise ValueError('four exact counter kinds required')
     for value in counters.values():
@@ -11,6 +12,8 @@ def classify(counters):
         if any(type(n) is not int or n < 0 for n in value.values()):
             raise ValueError('nonnegative integer counters required')
     totals = {kind:v['missed'] + v['covered'] for kind,v in counters.items()}
+    if totals['CLASS'] > 1:
+        raise ValueError('CLASS counter must describe at most one physical class')
     if not any(totals.values()):
         return 'NO_COUNTERS_NOT_A_MEASURED_PASS'
     if any(totals[k] == 0 for k in ('LINE','METHOD','CLASS')):
