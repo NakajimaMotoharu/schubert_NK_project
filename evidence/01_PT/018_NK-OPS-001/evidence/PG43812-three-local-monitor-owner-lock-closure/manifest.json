@@ -1,0 +1,216 @@
+{
+  "run": "PG43812",
+  "source": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+  "terminalAtUTC": "2026-11-23T18:03:32.790103+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "canonicalArea": "WBS-P018-09",
+  "ordinaryExecuted": 24,
+  "passed": 24,
+  "failed": 0,
+  "skipped": 0,
+  "discoveredNewTestIds": 0,
+  "scopedSynchronizeFindingsBefore": 3,
+  "scopedSynchronizeFindingsAfter": 0,
+  "measurementSingleSourceSingleScopeOnly": true,
+  "executionsCombinedForCoverage": false,
+  "firstProductAttemptPassedEach": true,
+  "oneBeforeExecutionSelectionStop": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43812-web-outbox-selection-preflight/manifest.json",
+    "sha256": "146f33eee26fa0461dd187dffdab47ad2211228c4ef2ff1bf91aa4885e5d2bf6"
+  },
+  "results": [
+    {
+      "target": "AsyncJobMetricCollector",
+      "testIds": "ASYNCCONN001–008",
+      "issue": "BUG-3743",
+      "source": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "localRuns": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-before-v1/terminal.json",
+          "sha256": "386baedee9c84115e989026cfae9b2dcbf4e9b2f4a4d49774a00c5e7bac6b77b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/terminal.json",
+          "sha256": "0c9487a5d99545b0e5d8cdc7f07a24175514ea6e60aa7c6abb2663a7cd9a5b1b"
+        }
+      ],
+      "ordinary": 8,
+      "passed": 8,
+      "newIds": 0,
+      "raw": {
+        "beforePMD": [
+          [
+            "AvoidSynchronizedStatement",
+            29
+          ],
+          [
+            "AvoidCatchingGenericException",
+            35
+          ],
+          [
+            "AvoidCatchingGenericException",
+            35
+          ]
+        ],
+        "afterPMD": [
+          [
+            "AvoidCatchingGenericException",
+            37
+          ],
+          [
+            "AvoidCatchingGenericException",
+            37
+          ]
+        ],
+        "pmdExit": 4,
+        "spotbugs": 0,
+        "checkstyle": 0,
+        "mainNullAway": 0
+      },
+      "coverageLocal": {
+        "line": 17,
+        "method": 3,
+        "class": 1,
+        "branch": 2,
+        "missed": 0,
+        "rawSingleRun": true
+      },
+      "sameOriginalFixtureInput": true
+    },
+    {
+      "target": "OutboxMetricCollector",
+      "testIds": "OUTBOXCONN001–008",
+      "issue": "BUG-3744",
+      "source": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "localRuns": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-before-v1/terminal.json",
+          "sha256": "b7edea8d4485dd7fa92b56c2596a7bb4712ed06ebc5fe095432ef14303eda822"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/terminal.json",
+          "sha256": "4916c200e13d1bdfbd29d3d5036e35a7a80a69c7d8ae0c536c29eee32b3d37a2"
+        }
+      ],
+      "ordinary": 8,
+      "passed": 8,
+      "newIds": 0,
+      "raw": {
+        "beforePMD": [
+          [
+            "AvoidSynchronizedStatement",
+            33
+          ],
+          [
+            "AvoidCatchingGenericException",
+            41
+          ],
+          [
+            "AvoidCatchingGenericException",
+            41
+          ]
+        ],
+        "afterPMD": [
+          [
+            "AvoidCatchingGenericException",
+            43
+          ],
+          [
+            "AvoidCatchingGenericException",
+            43
+          ]
+        ],
+        "pmdExit": 4,
+        "spotbugs": 0,
+        "checkstyle": 0,
+        "mainNullAway": 0
+      },
+      "coverageLocal": {
+        "line": 25,
+        "method": 3,
+        "class": 1,
+        "branch": 2,
+        "missed": 0,
+        "rawSingleRun": true
+      },
+      "sameOriginalFixtureInput": true
+    },
+    {
+      "target": "WebOutboxMetricCollector",
+      "testIds": "WEBOBXCONN001–008",
+      "issue": "BUG-3745",
+      "source": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "localRuns": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-before-v1/terminal.json",
+          "sha256": "caf18a72ed384dbd08db73ca05d28950047e97db50f7ea59088223fbe44c9fba"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/terminal.json",
+          "sha256": "120a986f0050c1696817e215dcb9d18c1cfb844b8e9744d19efb003e39d9adc2"
+        }
+      ],
+      "ordinary": 8,
+      "passed": 8,
+      "newIds": 0,
+      "raw": {
+        "beforePMD": [
+          [
+            "AvoidSynchronizedStatement",
+            29
+          ],
+          [
+            "AvoidCatchingGenericException",
+            35
+          ],
+          [
+            "AvoidCatchingGenericException",
+            35
+          ]
+        ],
+        "afterPMD": [
+          [
+            "AvoidCatchingGenericException",
+            37
+          ],
+          [
+            "AvoidCatchingGenericException",
+            37
+          ]
+        ],
+        "pmdExit": 4,
+        "spotbugs": 0,
+        "checkstyle": 0,
+        "mainNullAway": 0
+      },
+      "coverageLocal": {
+        "line": 18,
+        "method": 3,
+        "class": 1,
+        "branch": 2,
+        "missed": 0,
+        "rawSingleRun": true
+      },
+      "fixtureStyle": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/fixture-style-terminal.json",
+        "sha256": "a1e46122d793d2a25ccb8a5352c105366d963ec4a38c8a942b4faa87da4ac38c"
+      },
+      "compileReused": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-v1/compile.out",
+          "sha256": "3089a3a8930c8372c363b32f7bf9f74fc25174700d2ca641d5c9203834c1aafa"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-v1/begin.json",
+          "sha256": "9c0d7a9d070c6f1f6ce2b849b1a25b42675f1afafd62affafb06cd1dadb1c96a"
+        }
+      ]
+    }
+  ],
+  "borrowedConnectionOwner": "Existing synthetic JDK interface procedures only. Assertions include ResultSet then Statement release, preservation of primary exception, no borrowed owner mutation, no delayed or partial publication, exact measurements and no management/service operations.",
+  "actualDatabaseOperations": 0,
+  "acceptanceId": null,
+  "wholeF03": false,
+  "whole451": false,
+  "relatedHorizontal": "YKT-2929"
+}
