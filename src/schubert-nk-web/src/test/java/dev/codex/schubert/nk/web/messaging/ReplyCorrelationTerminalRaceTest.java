@@ -16,6 +16,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -32,8 +33,11 @@ final class ReplyCorrelationTerminalRaceTest {
   private static final UUID THIRD = new UUID(0, 3);
 
   @Test
-  void terminalRaceHasOneWinnerAndReturnsThePermit() throws Exception {
-    try (ExecutorService workers = Executors.newFixedThreadPool(3)) {
+  void terminalRaceHasOneWinnerAndReturnsThePermit()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    ExecutorService workers =
+        Executors.newFixedThreadPool(3, Thread.ofPlatform().daemon().factory());
+    try {
       for (int iteration = 0; iteration < 64; iteration++) {
         ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry(1);
         PendingReply pending = registry.register(FIRST, DEADLINE, NOW).orElseThrow();
@@ -84,16 +88,21 @@ final class ReplyCorrelationTerminalRaceTest {
         assertTrue(registry.cancel(SECOND));
         assertEquals(0, registry.pendingCount());
       }
+    } finally {
+      stopWorkers(workers);
     }
   }
 
   @Test
-  void concurrentRegistrationsRespectCapacityAndReuseAllSlots() throws Exception {
+  void concurrentRegistrationsRespectCapacityAndReuseAllSlots()
+      throws InterruptedException, ExecutionException, TimeoutException {
     ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry(2);
     CountDownLatch start = new CountDownLatch(1);
     List<Future<Optional<PendingReply>>> calls = new ArrayList<>();
     List<PendingReply> accepted = new ArrayList<>();
-    try (ExecutorService workers = Executors.newFixedThreadPool(20)) {
+    ExecutorService workers =
+        Executors.newFixedThreadPool(20, Thread.ofPlatform().daemon().factory());
+    try {
       try {
         for (int index = 1; index <= 20; index++) {
           UUID id = new UUID(0, index);
@@ -122,6 +131,8 @@ final class ReplyCorrelationTerminalRaceTest {
       for (PendingReply pending : accepted) {
         assertTrue(registry.cancel(pending.correlationId()));
       }
+    } finally {
+      stopWorkers(workers);
     }
     assertEquals(0, registry.pendingCount());
     assertTrue(registry.register(FIRST, DEADLINE, NOW).isPresent());
@@ -130,6 +141,12 @@ final class ReplyCorrelationTerminalRaceTest {
     assertTrue(registry.cancel(FIRST));
     assertTrue(registry.cancel(SECOND));
     assertEquals(0, registry.pendingCount());
+  }
+
+  private static void stopWorkers(ExecutorService workers) throws InterruptedException {
+    workers.shutdownNow();
+    assertTrue(
+        workers.awaitTermination(5, TimeUnit.SECONDS), "reply test workers did not terminate");
   }
 
   @Test
