@@ -218,3 +218,6 @@ WBS-F03/2-2-b、SS354、451、BUG-3695／YKT-2902。対象 `static_input_scope.c
 | PT-OPS-SRC-SCOPE008 | `test_changed_blob_at_same_path_is_rejected` | 同一pathで別blobの `SOURCE_BLOB_MISMATCH` |
 | PT-OPS-SRC-SCOPE009 | `test_path_aliases_and_wildcards_are_rejected_even_if_listed` | 非正規path六種の `INVALID_SOURCE_PATH` |
 | PT-OPS-SRC-SCOPE010 | `test_unmodeled_arg_list_is_rejected` | 未定義の入力欄を `INVALID_SOURCE_PLAN_FIELDS` |
+| PT-OPS-SRC-SCOPE011 | `StaticInputScopeTest.test_non_json_constants_are_rejected_even_with_exact_digest` | SHA-256が合う合成文書でも、内側のNaN、Infinity、-Infinityを `INVALID_JSON_CONSTANT` |
+
+PG43362ではBUG-3699の旧3失敗を保全した。変更後に正規のbinary入力とsource-only入力を含む工具22件が成功した。製品試験・coverageは未実行。[PG43362](evidence/PG43362-scope-metadata-json-v1/manifest.json)

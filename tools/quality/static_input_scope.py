@@ -18,11 +18,17 @@ def unique_object(pairs):
     return fields
 
 
+def invalid_constant(_):
+    raise ScopeError("INVALID_JSON_CONSTANT")
+
+
 def read_metadata(path, expected_sha256=None):
     contents = path.read_bytes()
     if expected_sha256 is not None and hashlib.sha256(contents).hexdigest() != expected_sha256:
         raise ScopeError("RECEIPT_DIGEST_MISMATCH")
-    document = json.loads(contents, object_pairs_hook=unique_object)
+    document = json.loads(
+        contents, object_pairs_hook=unique_object, parse_constant=invalid_constant
+    )
     if not isinstance(document, dict):
         raise ScopeError("INVALID_RECEIPT")
     return document
