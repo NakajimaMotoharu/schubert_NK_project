@@ -26,7 +26,14 @@ def window(value):
 def receipt(api,observed_at):
     allowed=api.get('ordinaryUsageAllowed');require(allowed is None or type(allowed) is bool,'explicit allowed state')
     buckets=api.get('rateLimitsByLimitId') or {}
-    limits=buckets.get('codex') or api.get('rateLimits') or {}
+    if 'codex' in buckets:
+        limits=buckets['codex'] or {}
+        identity=limits.get('limitId','codex')
+    else:
+        limits=api.get('rateLimits') or {}
+        identity=limits.get('limitId')
+    if identity!='codex':
+        limits={}
     return dict(schema='PGPT_FRESH_QUOTA_V1',observedAtUTC=utc(observed_at).isoformat(),ordinaryUsageAllowed=allowed,
       primary=window(limits.get('primary')),secondary=window(limits.get('secondary')))
 

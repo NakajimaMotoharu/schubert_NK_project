@@ -12,7 +12,7 @@ AT='2026-10-23T14:00:00Z'
 NOW='2026-10-23T14:00:01Z'
 
 def observed(used=24):
-    return receipt(dict(ordinaryUsageAllowed=True,rateLimits=dict(primary=dict(usedPercent=used,
+    return receipt(dict(ordinaryUsageAllowed=True,rateLimits=dict(limitId='codex',primary=dict(usedPercent=used,
       resetsAt=1793306748,windowDurationMins=10080),secondary=None)),AT)
 
 class QuotaWriterTest(unittest.TestCase):

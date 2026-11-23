@@ -7,7 +7,7 @@ AT='2026-10-23T14:00:00+00:00'
 NOW='2026-10-23T14:00:01+00:00'
 
 def api(used=24,secondary=None):
-    return dict(ordinaryUsageAllowed=True,rateLimits=dict(primary=dict(usedPercent=used,resetsAt=1793306748,windowDurationMins=10080),secondary=secondary))
+    return dict(ordinaryUsageAllowed=True,rateLimits=dict(limitId='codex',primary=dict(usedPercent=used,resetsAt=1793306748,windowDurationMins=10080),secondary=secondary))
 
 def bound(value,**kwargs):
     return start_fields('OWNED_TEST_GROUP',{},value,digest(value),NOW,**kwargs)
@@ -65,5 +65,33 @@ class QuotaBindingTest(unittest.TestCase):
         self.assertEqual(24,bound(value)['quotaBefore']['usedPercent'])
         self.assertNotIn('DROP_THIS_FIXTURE',str(value))
         with self.assertRaises(ValueError):receipt(api(),'2026-10-23T14:00:00')
+
+    def test_011_other_or_unidentified_global_window_is_unavailable(self):
+        for limit_id in ('another-product', None):
+            with self.subTest(limit_id=limit_id):
+                raw = api()
+                raw['rateLimits'].pop('limitId')
+                if limit_id is not None:
+                    raw['rateLimits']['limitId'] = limit_id
+                measured = receipt(raw, AT)
+                self.assertIsNone(measured['primary'])
+                with self.assertRaisesRegex(ValueError, 'available primary'):
+                    bound(measured)
+
+    def test_012_unavailable_or_conflicting_keyed_window_blocks_fallback(self):
+        for window in (None, {}, dict(api()['rateLimits'], limitId='another-product')):
+            with self.subTest(window=window):
+                raw = api()
+                raw['rateLimitsByLimitId'] = {'codex': window}
+                measured = receipt(raw, AT)
+                self.assertIsNone(measured['primary'])
+                with self.assertRaisesRegex(ValueError, 'available primary'):
+                    bound(measured)
+
+    def test_013_map_key_alone_identifies_the_codex_window(self):
+        codex = api(51)['rateLimits']
+        codex.pop('limitId')
+        raw = dict(api(), rateLimitsByLimitId={'codex': codex})
+        self.assertEqual(51, bound(receipt(raw, AT))['quotaBefore']['usedPercent'])
 
 if __name__=='__main__':unittest.main()
