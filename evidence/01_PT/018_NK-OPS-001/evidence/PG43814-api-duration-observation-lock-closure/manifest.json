@@ -1,0 +1,123 @@
+{
+  "run": "PG43814",
+  "source": "b82c7b62ee4dbbcf094760be9022e8fd62a6a3fa",
+  "terminalAtUTC": "2026-11-23T18:07:16.042783+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "owner": "WBS-P018-09",
+  "outcome": "DIRECT_LOCAL_COLLECTOR_REQUIREMENT_VERIFIED",
+  "testIds": "PT-OPS-DBCONN001–008",
+  "tests": 8,
+  "passes": 8,
+  "failed": 0,
+  "skipped": 0,
+  "firstProductAttemptPassed": true,
+  "newTestIds": 0,
+  "metricsBefore": [
+    [
+      "AvoidSynchronizedStatement",
+      35
+    ]
+  ],
+  "metricsAfter": [],
+  "coverageSameExec": [
+    {
+      "class": "DbQueryDurationMetricCollector",
+      "line": 16,
+      "method": 2,
+      "clazz": 1,
+      "branch": 4
+    },
+    {
+      "class": "DbQueryDurationMetricCollector$Observation",
+      "line": 6,
+      "method": 6,
+      "clazz": 1,
+      "branch": 2
+    }
+  ],
+  "crossRunsCombined": false,
+  "mainNullAway": 0,
+  "mainSpotless": 0,
+  "actualStaticExit": {
+    "compile": 0,
+    "pmd": 0,
+    "checkstyle": 0,
+    "spotbugs": 0,
+    "compileFixture": 0,
+    "unit": 0,
+    "unfiltered": 0
+  },
+  "independentOracle": "During forced acquisition of the first sample, the exact second worker is waiting for the first owner, counts stay zero. Once released, second confirms the first sample at 0.25 sec; failed legitimate sample is 0.5 sec. Missing and valid zero stay distinct; Observation invariants are ordinary test input.",
+  "staticOriginAndPost": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43814-api-db-duration-before-bound-v1/terminal.json",
+      "sha256": "15729c883214250cc99044009da9f58390f579f6961c09bf4a3f635974bf8ff9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43814-api-db-duration-after-v1/terminal.json",
+      "sha256": "4b78403b1c222247f347b526dfa7eeedb92d814a818fbb161403948da1e9faba"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43814-api-db-duration-after-v1/fixture-style-terminal.json",
+      "sha256": "d938a176f443bacf5f3db5ecf0d45924dcc138e3e3082622590662e71c34c344"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43814-api-db-duration-after-v1/unfiltered.out",
+      "sha256": "2b7d61980bb18735cd3a15a11a21989cdd591ac08edbb6e7705acef1fdf82168"
+    }
+  ],
+  "relatedLifecycleOwners": {
+    "ApiOutboxObservationSource": {
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "sha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d"
+      },
+      "disposition": "REQUIRES_SEPARATE_LIFECYCLE_APPLICABILITY_AND_TEST_AUTHORIZATION",
+      "reason": "Raw sampling-source lifecycle as well as synchronous supplied observation; includes separate caller connection and owned attempt overload, missing/close ownership. No scope bypass.",
+      "appliedChanges": 0,
+      "testRuns": 0
+    },
+    "OwnedApiObservationWorker": {
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java",
+        "sha256": "8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf"
+      },
+      "disposition": "REQUIRES_SEPARATE_LIFECYCLE_APPLICABILITY_AND_TEST_AUTHORIZATION",
+      "reason": "Start/stop thread ownership, scheduling and lifecycle coordination. Expectation differs from atomic value publication.",
+      "appliedChanges": 0,
+      "testRuns": 0
+    },
+    "ApiOutboxObservationPump": {
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+        "sha256": "25eed3a03c68fd2f0bb7c68bf576239e238a2e2ecd4b4003ddc3d076348c2f41"
+      },
+      "disposition": "REQUIRES_SEPARATE_LIFECYCLE_APPLICABILITY_AND_TEST_AUTHORIZATION",
+      "reason": "Clocked refresh, callbacks and stop budget for observation driver. Expectation differs from atomic value publication.",
+      "appliedChanges": 0,
+      "testRuns": 0
+    },
+    "ApiReadOnlyObservationAttempt": {
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+        "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea"
+      },
+      "disposition": "REQUIRES_SEPARATE_LIFECYCLE_APPLICABILITY_AND_TEST_AUTHORIZATION",
+      "reason": "Owned attempt for transaction acquisition and cleanup, failure and unknown resource custody. Expectation differs from atomic value publication.",
+      "appliedChanges": 0,
+      "testRuns": 0
+    }
+  },
+  "remainingOriginalF03": [
+    "whole 451",
+    "existing held scopes, roles and packaged API/Web",
+    "the four lifecycle scopes listed here have a different end contract"
+  ],
+  "actualDatabaseOrNetworkOperations": 0,
+  "formalAcceptanceId": null,
+  "bug": [
+    "BUG-3747",
+    "BUG-3748",
+    "YKT-2929"
+  ]
+}
