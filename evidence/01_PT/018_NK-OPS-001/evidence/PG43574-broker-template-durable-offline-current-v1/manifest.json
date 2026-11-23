@@ -1,0 +1,123 @@
+{
+  "run": "PG43574",
+  "wbs": "WBS-P005-01/2",
+  "source": "a2e709c214485d9cb9e678b1d6ba169860b1bc36",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T10:46:39.284721+00:00",
+  "actualExit": 0,
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "source": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156"
+  },
+  "input": {
+    "path": "src/deployment/artemis/etc/broker.xml",
+    "sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820"
+  },
+  "vendorVersion": "Artemis 2.56.0",
+  "expectedDurable": "schema queueType durable minOccurs=0 default=true",
+  "assertedIndependentCatalog": {
+    "nk.sync.request": {
+      "queue": "nk.sync.request.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    },
+    "nk.sync.reply.web": {
+      "queue": "nk.sync.reply.web.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    },
+    "nk.async.work": {
+      "queue": "nk.async.work.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    },
+    "nk.web.log": {
+      "queue": "nk.web.log.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    },
+    "nk.dead.letter": {
+      "queue": "nk.dead.letter.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    },
+    "nk.expiry": {
+      "queue": "nk.expiry.q",
+      "routing": "ANYCAST",
+      "durableSchemaDefault": true,
+      "explicitDurable": false
+    }
+  },
+  "vendorSchemaInputs": {
+    "artemis-configuration.xsd": {
+      "path": "/home/mini/codex/project1/work/toolchain/artemis/apache-artemis-2.56.0/schema/artemis-configuration.xsd",
+      "sha256": "472e5b68b10b5b75b32e14c968612d8c05ed9f4c1c99b02aa65acce51a9a6732"
+    },
+    "artemis-jms.xsd": {
+      "path": "/home/mini/codex/project1/work/toolchain/artemis/apache-artemis-2.56.0/schema/artemis-jms.xsd",
+      "sha256": "56cb6dbddf8b9ffc8faa649a801269ad622462e8b0095b6a1710113acea66064"
+    },
+    "artemis-server.xsd": {
+      "path": "/home/mini/codex/project1/work/toolchain/artemis/apache-artemis-2.56.0/schema/artemis-server.xsd",
+      "sha256": "b9a5821784dce492d8cda6c3d338ad743b30fc1c48654d11c16c9acd34ba4eb7"
+    },
+    "xml.xsd": {
+      "path": "/home/mini/codex/project1/work/toolchain/artemis/apache-artemis-2.56.0/schema/xml.xsd",
+      "sha256": "a20d46f47bc925931ec19e4bcbedfbe4233a39b42bfa45a81077978442d21ccc"
+    }
+  },
+  "pointedFixture": {
+    "path": "evidence/01_PT/005_NK-MSG-001/input/PG43574_BrokerTemplateSchemaCheck.java",
+    "sha256": "e64339b109f561c177ad884e6c38ad13aebe7c9829399008d65ea9425b0b1784"
+  },
+  "begin": {
+    "path": "../pgpt-runs/PG379/PG43574-broker-template-current-offline-xsd-v1/begin.json",
+    "sha256": "c3219d599bf876422bff3b5bd71542aaaa3ae7e3ed810e0a477cc6d3403153ed"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43574-broker-template-current-offline-xsd-v1/terminal.json",
+    "sha256": "9793140f5dbc077b6041d0147e474737320bd95aabbd709f830f3c3d77c42b16"
+  },
+  "qualifier": "PT-JMS-001 archived static template portion only",
+  "tests": {
+    "templateXsdPassed": true,
+    "invalidBooleanRejected": true,
+    "dynamicBrokerTasks": 0,
+    "actualQueueObservations": 0
+  },
+  "secureProcessing": {
+    "schemaImports": "four fixed local validated XSD files",
+    "xmlDtdAccess": false,
+    "xmlSchemaOutboundAccess": false,
+    "noServices": true
+  },
+  "fixtureUsesJdkOnly": true,
+  "providerRuntimeDuration": null,
+  "previousStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43154-p00501-broker-static-catalog-current-v1/manifest.json",
+    "sha256": "103c810929edf814a622592ea4b92217b95b4805b72eccd33af3386015a34d11"
+  },
+  "remainder": [
+    "effective durable and routing from actual candidate broker",
+    "role ACL and actual send/receive",
+    "paging, expiry and PT-JMS-002 runtime",
+    "C04/P002-03 exit dependencies and 451"
+  ],
+  "productPtAdded": 0,
+  "whole451": false,
+  "formal": {
+    "acceptedOriginal": 16,
+    "totalOriginal": 190,
+    "newFormalAcceptance": 0,
+    "formalAcceptanceId": null,
+    "officialTests": 1964,
+    "officialScopes": 53,
+    "effortRate": null
+  }
+}
