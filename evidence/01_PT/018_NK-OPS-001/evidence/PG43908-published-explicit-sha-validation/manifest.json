@@ -1,0 +1,45 @@
+{
+  "run": "PG43908",
+  "source": "cdf9e60b59ff201aa432c5e616af87570d5f05ba",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:21:55,401251911+00:00",
+  "wbs": "WBS-G08",
+  "related": [
+    "SS354",
+    "451",
+    "BUG-3753",
+    "YKT-2932"
+  ],
+  "tool": {
+    "path": "tools/quality/verify_published_manifest_pins.py",
+    "sha256": "5d59c79f6c26fe3dac273bcc616986ccf5f83bc602bc0acb2125f0597c27a334"
+  },
+  "fixture": {
+    "path": "tools/quality/tests/test_verify_published_manifest_pins.py",
+    "sha256": "29d03bf5a5fec1d6e1b930ba7ec0cc19ed02cb42c10d5ba5c48cf3c6d44c6870"
+  },
+  "testId": "PT-OPS-G08-PINS008",
+  "expected": "Explicit null or invalid digest yields exactly one unresolved pin per file reference; path-only observation ignored.",
+  "firstTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43908-explicit-digest-before/unit.out",
+    "sha256": "386e639e9ee46e201b262b8bed88830696773f374a4e730a88753dc17d5b86ba"
+  },
+  "firstFailedInputs": 3,
+  "actualExitCodes": [
+    0,
+    0,
+    0
+  ],
+  "totalIndependentToolTests": 8,
+  "actual": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43908-explicit-digest-after/unit.out",
+    "sha256": "d698a5c7153cc32a699be16f6f3691eeb01542f852afc9e78dca52482a328512"
+  },
+  "checked": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43908-published-explicit-sha-validation/verified-ranges.json",
+    "sha256": "45d344d46cd5c34d07b263f562b25eb22980f3f7341e6f2cdf698fcbb1f04aa1"
+  },
+  "rawInvalidDigestLogged": false,
+  "actualProductTests": 0,
+  "formalAcceptanceId": null
+}
