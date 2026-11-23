@@ -53,6 +53,7 @@ def reactor_run_record(directory, run, suffix):
 def _report(content, module_cases):
     suite = ET.fromstring(content)
     cases = suite.findall("testcase")
+    output_tags = ("system-out", "system-err")
     if (
         suite.tag != "testsuite"
         or not (suite.get("name") or "").strip()
@@ -60,14 +61,19 @@ def _report(content, module_cases):
         or suite.get("tests") != str(len(cases))
         or any(suite.get(field) != "0" for field in ("failures", "errors", "skipped"))
         or any(
-            child.tag not in ("properties", "testcase", "system-out", "system-err")
+            child.tag not in ("properties", "testcase", *output_tags)
             for child in suite
         )
         or any(
             not (case.get("classname") or "").strip()
             or not (case.get("name") or "").strip()
-            or any(child.tag not in ("system-out", "system-err") for child in case)
+            or any(child.tag not in output_tags for child in case)
             for case in cases
+        )
+        or any(
+            child.tag in output_tags and len(child) != 0
+            for entry in (suite, *cases)
+            for child in entry
         )
     ):
         raise ValueError("empty, inconsistent or nonpassing reactor JUnit report")

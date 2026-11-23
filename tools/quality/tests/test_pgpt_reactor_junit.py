@@ -142,6 +142,35 @@ class ReactorJunitTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "differs"):
             self.verify()
 
+    def test_junit021_output_elements_must_contain_only_text(self):
+        for case_output in (False, True):
+            for tag in ("system-out", "system-err"):
+                with self.subTest(case_output=case_output, tag=tag):
+                    suite = ET.fromstring(REPORT)
+                    parent = suite.find("testcase") if case_output else suite
+                    for previous in parent.findall(tag):
+                        parent.remove(previous)
+                    log = ET.SubElement(parent, tag)
+                    ET.SubElement(log, "note").text = "ordinary synthetic note"
+                    self.paths[0].write_bytes(ET.tostring(suite))
+                    with self.assertRaisesRegex(ValueError, "nonpassing reactor JUnit report"):
+                        self.capture()
+                    self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_junit022_escaped_text_and_cdata_leave_original_report_hashes(self):
+        content = REPORT.replace(
+            b"fixture-omitted-stdout", b"&lt;note&gt; A &amp; B &lt;/note&gt;"
+        ).replace(
+            b"</testsuite>", b"<system-err><![CDATA[<note>diagnostic</note>]]></system-err></testsuite>"
+        )
+        self.paths[0].write_bytes(content)
+        self.success()
+        report_path = self.paths[0].relative_to(self.repo).as_posix()
+        self.assertEqual(
+            {"tests": 1, "sha256": hashlib.sha256(content).hexdigest()},
+            json.loads(self.verify())["reports"][report_path],
+        )
+
     def test_missing_module_is_rejected(self):
         self.paths[0].unlink()
         with self.assertRaisesRegex(ValueError, "missing original"):
