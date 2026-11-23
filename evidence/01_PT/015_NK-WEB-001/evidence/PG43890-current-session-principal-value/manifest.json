@@ -1,0 +1,170 @@
+{
+  "run": "PG43890",
+  "source": "870d1644d81895bf04d17fd32d7b72ab73bb2bca",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P015-01"
+  ],
+  "testSpecification": {
+    "path": "evidence/01_PT/015_NK-WEB-001/4693_SessionPrincipal表示値の単体仕様.md",
+    "sha256": "2de5114e68269de90fdcfd2fc4a89d9cff3e468426803ffe2f0f04c3a55144b1"
+  },
+  "terminalAtUTC": "2026-11-23T19:56:13.660002+00:00",
+  "execution": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "commands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/classes",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/SessionPrincipal.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/package-info.java"
+    ],
+    "compileFixture": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/test",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/SessionPrincipalValueTest.java"
+    ],
+    "unit": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/tmp",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Djunit.jupiter.extensions.autodetection.enabled=false",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/unit.exec,append=false,sessionid=PG43890-VALUE",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-ansi-colors",
+      "--disable-banner",
+      "--fail-if-no-tests",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/reports",
+      "--select-method",
+      "dev.codex.schubert.nk.web.session.SessionPrincipalValueTest#principal001NormalizesBeforeCheckingTheExactUtf8Width",
+      "--select-method",
+      "dev.codex.schubert.nk.web.session.SessionPrincipalValueTest#principal002RejectsEachInvalidDisplayNameWithTheFixedDiagnostic",
+      "--select-method",
+      "dev.codex.schubert.nk.web.session.SessionPrincipalValueTest#principal003EveryMissingFieldFailsAtItsOwnBoundary",
+      "--select-method",
+      "dev.codex.schubert.nk.web.session.SessionPrincipalValueTest#principal004FrameworkNameAndRedactedDiagnosticHaveDistinctContracts",
+      "--select-method",
+      "dev.codex.schubert.nk.web.session.SessionPrincipalValueTest#principal005EqualValuesHaveStableHashesAndRoleParticipatesInEquality"
+    ],
+    "raw": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/raw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "--line-deficits",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/unit.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/classes/dev/codex/schubert/nk/web/session/SessionPrincipal.class"
+    ]
+  },
+  "sourcePins": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/package-info.java",
+      "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPrincipalValueTest.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture/SessionPrincipalValueTest.java",
+      "sha256": "dad8fca13c7c94598360b5f5cc06ab5e61e1fb91a65cec32d9c3b25d2c830974"
+    }
+  },
+  "trust": "local pure value fixture",
+  "caseIds": [
+    "PT-WEB-PRINCIPAL001",
+    "PT-WEB-PRINCIPAL002",
+    "PT-WEB-PRINCIPAL003",
+    "PT-WEB-PRINCIPAL004",
+    "PT-WEB-PRINCIPAL005"
+  ],
+  "expected": "固定NFC値・診断・REDACTED・値の同等性",
+  "actual": "固定期待値との一致 five",
+  "coverage": {
+    "scope": "SessionPrincipal exact isolated javac class",
+    "line": [
+      16,
+      16
+    ],
+    "method": [
+      9,
+      9
+    ],
+    "class_": [
+      1,
+      1
+    ],
+    "branch": [
+      10,
+      10
+    ]
+  },
+  "evidence": {
+    "runEnd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/terminal.json",
+      "sha256": "2be45f584d13e9859638ff54118532b1be359c4701eaa74862ba0aa557f4d021"
+    },
+    "styleEnd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-style-terminal.json",
+      "sha256": "44c14e10cf91bb545406a7cd9f4c3e0b9ef1d55ab26e938e9851e08ff8b0cc47"
+    },
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/raw.out",
+      "sha256": "7ad6470f0f4bd8cd1039be783be7edd1f870f2256468cd169546f46e6a5f52b2"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/reports/TEST-junit-jupiter.xml",
+      "sha256": "4b86c60864a40c82defea1ebf11de0e2dde757866517aa08e7e556252c31a27e"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/unit.exec",
+      "sha256": "45a67c96e8d6b5c5025f6c4d354fb93aeef97ceb9e2aaf7c9f0be248e3b9fcc9"
+    },
+    "class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43890-web-principal-value-five/classes/dev/codex/schubert/nk/web/session/SessionPrincipal.class",
+      "sha256": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49"
+    }
+  },
+  "related": [
+    "SS314",
+    "SSC-038",
+    "SSC-043",
+    "451"
+  ],
+  "remaining": [
+    "通常Web JARの同一byteと辞書の接続確認",
+    "Web全体の同一run・静的lint/型付き解析・全451",
+    "実認証とCHR"
+  ],
+  "formalAcceptanceId": null
+}
