@@ -1,0 +1,56 @@
+{
+  "run": "PG43510",
+  "source": "e7543a432fb674d2bb029a195fa1dd7fb9d2a634",
+  "terminalAtUTC": "2026-11-23T09:23:21.691338+00:00",
+  "actualExit": 0,
+  "trace": {
+    "owner": "WBS-P018-08.03/2",
+    "parent": "WBS-P018-08",
+    "source": "99a996692f9a67d0102ade9537d477116132fb00",
+    "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "tests": [
+      "PT-OPS-EXEC-CRC-009",
+      "PT-OPS-EXEC-CRC-010"
+    ],
+    "acceptedToolEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43328-p01808-later-class-name-probes-v1/manifest.json",
+      "sha256": "fd7107e8639ac317d31051cacbded7eedb45c7bcd08e9041ab3698c40acd9fc0"
+    },
+    "sourceInputs": [
+      {
+        "path": "tools/quality/jacoco_strict_original_order_test.py",
+        "sha256": "1f2f1944c0fae071b40d5dbb5ebdd7374c696655581f439b76969f9413cecf4d"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "603bc7f0b54093e35e78047a5f0cba349abf31616e17642540db7dcc920080b1"
+      }
+    ],
+    "originalFailRetained": true,
+    "localStreams": 2,
+    "toolCases": 2,
+    "submodes": 4,
+    "productNativeTestsAdded": 0,
+    "codeCoverageCountersAdded": 0,
+    "formalDelta": 0,
+    "formalAcceptanceId": null
+  },
+  "independentSpecification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5766_P01808追加coverage複数物理_工具試験仕様・結果.md",
+    "sha256": "82f8a71a07ef09f49296c2540d33393d9984c07b91df0b0d7b6f571693b8b123"
+  },
+  "criteria": [
+    "exact CRC with wrong type name",
+    "exact name and CRC with mismatched probe cardinality",
+    "no early measurement emitted in both modes"
+  ],
+  "remaining": [
+    "real current native environment stream session and evidence",
+    "actual product class/CRC whole-scope matching",
+    "451 and ending dependencies"
+  ]
+}

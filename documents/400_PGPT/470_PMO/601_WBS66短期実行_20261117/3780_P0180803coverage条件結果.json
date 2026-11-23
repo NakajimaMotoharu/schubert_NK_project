@@ -1,0 +1,148 @@
+{
+  "eventId": "PGPT-20261008-9225",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "e7543a432fb674d2bb029a195fa1dd7fb9d2a634",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P018-08.03/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-08.03/2",
+    "元行": "WBS-P018-08.03/2",
+    "費目": "B",
+    "主担当": "WBS-P018-08.03",
+    "状態": "計画",
+    "作業": "source/byte/noMatch判定・欠落streamのnegative／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計354・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "source/byte/noMatch判定・欠落streamのnegativeの対象別完了記録を確認",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 354",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+    "lineNumber": 742,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG43510",
+  "startEvent": "PGPT-20261008-9224",
+  "outcome": {
+    "owner": "WBS-P018-08.03/2",
+    "parent": "WBS-P018-08",
+    "source": "99a996692f9a67d0102ade9537d477116132fb00",
+    "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "tests": [
+      "PT-OPS-EXEC-CRC-009",
+      "PT-OPS-EXEC-CRC-010"
+    ],
+    "acceptedToolEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43328-p01808-later-class-name-probes-v1/manifest.json",
+      "sha256": "fd7107e8639ac317d31051cacbded7eedb45c7bcd08e9041ab3698c40acd9fc0"
+    },
+    "sourceInputs": [
+      {
+        "path": "tools/quality/jacoco_strict_original_order_test.py",
+        "sha256": "1f2f1944c0fae071b40d5dbb5ebdd7374c696655581f439b76969f9413cecf4d"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "603bc7f0b54093e35e78047a5f0cba349abf31616e17642540db7dcc920080b1"
+      }
+    ],
+    "originalFailRetained": true,
+    "localStreams": 2,
+    "toolCases": 2,
+    "submodes": 4,
+    "productNativeTestsAdded": 0,
+    "codeCoverageCountersAdded": 0,
+    "formalDelta": 0,
+    "formalAcceptanceId": null
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43510-current-coverage-probe-trace-v1/manifest.json",
+    "sha256": "09a5d845517501c24bc447187d11e225907e1b5ab8b512b33bc1a7e2d4be8a6d"
+  },
+  "nextEvidence": {
+    "workId": "WBS-P018-10.03/2",
+    "action": "Check admissible local StepObservation and InspectionAttempt value fixtures for same-candidate negative invariants. Do not run native or real inspection recipients."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T09:23:31+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 70,
+    "remainingPercent": 30,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "1f9963817df0adeeb25e663c2e16f856ef4105aa55d3daa7a73fa109dab74f7f",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T09:23:31+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 70,
+        "remainingPercent": 30,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T09:23:21.691338+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 70,
+    "remainingPercent": 30,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
