@@ -1,0 +1,62 @@
+{
+  "run": "PG43752",
+  "source": "0fd96624deae6d4eb4bd237174741baa90af8335",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "wbs": "WBS-C05",
+  "originalSource": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "predecessor": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43620-c05-tmpfiles-canonical-current-join/manifest.json",
+    "sha256": "30711996680fc0148544935cdf5f8b20ad60decb62df6296ad3704d2d30e3754"
+  },
+  "originalCaseRecords": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG6952-c05-tmpfiles-current-v1/manifest.json",
+    "sha256": "125698903dc0050477bb79ceb1ecc3e8666e5e5b1274603256a0465a21c8f0c9"
+  },
+  "bootDeclaration": {
+    "path": "src/deployment/tmpfiles/schubert-nk-maintenance.conf",
+    "sha256": "49656572415077cbb06c6449717c68275ae5c4e534665b64f3d1270bf65e1e9c",
+    "byteIdentical": true
+  },
+  "caseChecks": [
+    {
+      "testId": "PT-OPS-LOCK-008",
+      "method": "fixedProvisioningContract",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "originalFileSha256": "76d1c7218147666d40b4331538895d4925010054f2ca13e829e008bd2107864e",
+      "currentFileSha256": "f55f3b4cfa0dc0729b2a3fd7ec869286d610bf21fe71ca97716af196dd8d7310",
+      "originalMethodSha256": "0d15d7c61f6acdf38dbd45fe8ff16d2d2249aa0e8ab76ef6414638d3c40856da",
+      "currentMethodSha256": "c6964fea2859b57a9bd9b5aed3fb3852c3988cb98dfac476add9715f2a4012b0",
+      "methodBytesIdentical": false,
+      "exactAfterSingleConstantSubstitution": true,
+      "fixtureClosureCertified": false,
+      "batchFactoryBodyBytesIdentical": true,
+      "originalStatus": "PASS_ORIGINAL_XML",
+      "actualCurrentResult": null,
+      "outstanding": "full fixture helper closure and exact-input current result"
+    },
+    {
+      "testId": "fullBom010",
+      "method": "fullBom010OnlyFixedSignedBootProvisioningFileIsPermittedAndTamperRefuses",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java",
+      "originalFileSha256": "ba48ecd915597753ba3278c13e12cc08bf1f165b7c33b740c1d06a2620eeae51",
+      "currentFileSha256": "1b9d3abdf839e6e66c58e2c7e377b49901dff2361c575c06b6a5c4ffc5c2b338",
+      "originalMethodSha256": "905089cb04a83c751e129e0677b0eea456c090220098eb454d05c9fe3f7def4c",
+      "currentMethodSha256": "905089cb04a83c751e129e0677b0eea456c090220098eb454d05c9fe3f7def4c",
+      "methodBytesIdentical": true,
+      "exactAfterSingleConstantSubstitution": false,
+      "fixtureClosureCertified": false,
+      "batchFactoryBodyBytesIdentical": null,
+      "originalStatus": "PASS_ORIGINAL_XML",
+      "actualCurrentResult": null,
+      "outstanding": "fixed synthetic release fixture helper closure and exact-input current result"
+    }
+  ],
+  "testsExecuted": 0,
+  "windowsOrRuntimeOperations": 0,
+  "formalAccepted": false,
+  "terminalAtUTC": "2026-11-23T16:37:28.307973+00:00",
+  "firstCommandExitCode": 1,
+  "firstCommandFailure": "Final diagnostic passed a Path to the byte-digest helper after comparison assertions and manifest write. No source or worktree input changed.",
+  "firstWrittenManifestSha256": "19561696f8a0a1de920635d1858946d628c55c29bb2de4e71e8e570fca98e69c",
+  "manifestReadbackExitCode": 0
+}
