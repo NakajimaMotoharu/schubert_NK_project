@@ -1,0 +1,67 @@
+{
+  "run": "PG43528",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T09:40:07.167185+00:00",
+  "actualExit": 0,
+  "closedPlanning": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43524-current-batch-pmd-closed-value-scope-v1/manifest.json",
+    "sha256": "2052a6e90a6421638c3847f6d5c5859cc9464bbc3826f67eda614c7a78a0627b"
+  },
+  "originalRaw": {
+    "PG40482→PG41140": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/spotbugs.xml",
+      "sha256": "874cb9a84cc369d8979b063be2b7b17818435f60899368ecb77709d9df99b742"
+    },
+    "PG41142": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41142-f03-batch-current-typed-delta-static-v1/spotbugs.xml",
+      "sha256": "8306440e33a3b670287e2dbf78607fcda0f86ec23e410d1c73e1d913d9be1a6f"
+    }
+  },
+  "currentPmdScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43526-current-32-batch-value-pmd-v1/manifest.json",
+    "sha256": "8757386157217c0c13f57fd69d9c043701580d648a3b8cba4aa880db86cf1c5a"
+  },
+  "exactQualified": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43528-current-batch-43-classstats-reuse-v1/qualified-physical.json",
+    "sha256": "e200b81a0aee1ff6fdd5079dbad75320f9dc2df6bda7d996969e432c51b07dde"
+  },
+  "basis": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41718-f03-current-batch-scope-receipt-v1/manifest.json",
+      "sha256": "9f0c50db98e8f985dfec248d922b3f662e77097af63834dba7fbb48d10d7e33c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43482-batch-admitted-278-current-physical-delta-v1/manifest.json",
+      "sha256": "50f08875438e8892277f0d8c541f39b593e16491470861db5174cdf6a76be918"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41142-f03-batch-current-typed-delta-static-v1/manifest.json",
+      "sha256": "d810a10f6343e5a30a6273637f7a68d4657f4b2d012358c0690c7ef1d4d6b3fc"
+    }
+  ],
+  "scopeCounts": {
+    "PG40482→PG41140": 37,
+    "PG41142": 6
+  },
+  "result": {
+    "priorPhysicalAnalyzedAndExactlyMatched": 43,
+    "originalReportFindings": 0,
+    "missingNames": 0,
+    "spotbugsNewRun": 0,
+    "currentPmdQualifiedPaths": 32,
+    "previousSameContextPackageInfo": 1,
+    "productPtAdded": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "postComparisonCorrection": "First join attempted the old base ClassStats for all 43, and byte guard rejected MonitoringModePolicy. Second pre-publication join assumed that was the only later report owner; recorded named scope gives six. Subsequent join uses owner/byte per type. No analyzer rerun.",
+  "changedOwnerTypeComparedToFirstArchive": [
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class"
+  ],
+  "disjointHolds": [
+    "382 physical outside the previous explicit type set",
+    "32 held test cases, Root11 and QA-056",
+    "six product 451 and actual owner receipt"
+  ]
+}
