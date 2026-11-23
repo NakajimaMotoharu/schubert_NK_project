@@ -1,0 +1,67 @@
+{
+  "run": "PG43252-p002-msg007-codec-current-scope-v1",
+  "source": "3589fe9ce9dd8111e9490eba87c2fb06d19c4cc1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "P002再判定-b",
+  "requirement": "MSG-007",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:42:07.718262+00:00",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "design": [
+    {
+      "path": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+      "sha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+    }
+  ],
+  "normalCompleteProtocolReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42762-p01802-protocol-real-local-ci-v1/manifest.json",
+    "sha256": "93ccc017c908317d4ffe38456bd91027b90355386828ea2e27d621483518c7a5"
+  },
+  "lastRawProtocolReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+    "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+  },
+  "currentRegularPackageReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "separateMsg009SourceAudit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43102-msg009-release-resource-lf-v1/manifest.json",
+    "sha256": "0f314e346009abf9bc6b607f2583d5b5cb6f54fafd156bb4eaabac6565416416"
+  },
+  "priorDocumentJoinAbort": "SS322 uses a requirement range and an explicit send-rejection row rather than a literal isolated MSG-007 label",
+  "productBytePins": {
+    "dev/codex/schubert/nk/protocol/codec/FieldEncodingException.class": "a2c4b4dea8b57f89373960f015b72ba5786dbb035b214282c39b3e858f7a7fec",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class": "a78f21c6145a38d6449f1857dd0f98e88e3473c6e3e73596cc5864b4f184b212",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class": "97a648fe4bfb519ef36d61e2f582dc621a859340a6f73e40a6ccc2f10e70db77"
+  },
+  "fixtureSameSourceBytes": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+    "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+  },
+  "capability": "Fixed width codec emits no valid field on rejected value. This type does not call a send port.",
+  "independentTestOracles": {
+    "textEncodeNormalizesUtf8AndPadsWithAsciiSpace": "Four-byte scalar fits width 4, same scalar with ASCII suffix is rejected in width 4, and isolated UTF-16 surrogate rejects in strict encoding.",
+    "numericCodecChecksDigitsRangeAndOverflow": "Width 1 rejects value 10 even when numerical semantic range includes it. Values 0, 1, 999 encode independently into exact three bytes.",
+    "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput": "Typed diagnostic preserves non-sensitive malformed-input length and signed-long overflow cause; input buffers unchanged."
+  },
+  "originXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+    "sha256": "f2fa62d537b936d46231fcd9403e5789661b177654a2286b9d5312185affd9ec"
+  },
+  "fixedCodecCurrentCoverageRecognizedInScope": true,
+  "scopeOfIndependentOperationalSend": "Not observed current; dependent WebStartupException still QA056, actual JMS retained HOLD",
+  "senderTreeIdentity": "73daccff0462e639d718822dfc3426dbdea9160b",
+  "senderCompiledInitializedOrExecuted": 0,
+  "testExecutedNow": 0,
+  "otherFailuresOrNoSendPromoted": false,
+  "wholeMsg007": false,
+  "wholeMsg001": false,
+  "completeP002Reacceptance": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
