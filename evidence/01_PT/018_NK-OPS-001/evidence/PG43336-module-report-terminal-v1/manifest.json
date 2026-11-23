@@ -1,0 +1,109 @@
+{
+  "run": "PG43336-module-report-terminal-v1",
+  "source": "4ca4f94e74d3d96c2b4e47f27e9d530caf494393",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F02-b-b",
+  "terminalAtUTC": "2026-11-23T04:44:37.297270+00:00",
+  "terminalTimeBasis": "EXIT_ALREADY_OBSERVED",
+  "actualExit": 0,
+  "bug": "BUG-3696",
+  "horizontal": "YKT-2903",
+  "ledgerBeforeFix": "f1a183e49d1f388a5f21e6d8ac14e6394a98f8e6",
+  "design": [
+    "SS311 §§2–3, 5.2, 10",
+    "451",
+    "PG-D516"
+  ],
+  "tests": [
+    "PT-OPS-ARCH-OUTPUT-001",
+    "PT-OPS-ARCH-OUTPUT-002"
+  ],
+  "command": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_module_dependency_report.py -v",
+  "inputs": [
+    {
+      "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+      "sha256": "513eadfbbc6d50b0b1af3af870e6c89770b745f59c42503279671b840d089c0c"
+    },
+    {
+      "path": "tools/quality/tests/test_module_dependency_report.py",
+      "sha256": "e839bb4ca39339b7b81c268d3d0fca6060453c5e017b71a84d80eea66aa37ca1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar",
+      "sha256": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    }
+  ],
+  "historicalArchitectureReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43150-f02-current-storage-protocol-boundary-v1/manifest.json",
+    "sha256": "c6a78f50bf0f19e15ee10d3199dba0c3187ff82a34c200b128d25891eda97b97"
+  },
+  "attempts": [
+    {
+      "harnessExit": 1,
+      "reason": "The synthetic sink had not flushed the forwarded bytes; 19 instead of 30 observed. No program fix yet.",
+      "logs": [
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/before.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/before.stderr",
+          "sha256": "c52500fd9d69820740d6e83b491254830e14144d87510bac8cf022c55a586ebd"
+        }
+      ]
+    },
+    {
+      "harnessExit": 1,
+      "toolExitOnTruncatedOutput": 0,
+      "bytesForwarded": 30,
+      "normalPt": 1,
+      "failedPt": 1,
+      "logs": [
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/red.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/red.stderr",
+          "sha256": "7410a2ce3ad25642f73c3a87c90cc8cd0311ae46112400a241fe74869a596db5"
+        }
+      ]
+    },
+    {
+      "harnessExit": 0,
+      "toolExitOnTruncatedOutput": 1,
+      "bytesForwarded": 30,
+      "passPt": 2,
+      "failedPt": 0,
+      "logs": [
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/after.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG43336-module-report-terminal-v1/after.stderr",
+          "sha256": "d449a19ee6f4e108b1845867b0178b85a71aae0491864a6288dd79536e54146a"
+        }
+      ]
+    }
+  ],
+  "ordinaryOutputContract": "six explicit groups, six unique imported physical types, no FINDING rows, final INSPECTED",
+  "acceptedActiveProductJars": 0,
+  "productsExecuted": 0,
+  "externalAccess": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "relatedFixedTool": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43210-p0180803-coverage-output-terminal-v1/manifest.json",
+    "sha256": "9c95f740cf6ecba51ecd66c5a589cfd2204a1dc5e711077e2cb34a6647faa307"
+  }
+}
