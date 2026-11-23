@@ -5,6 +5,7 @@ import dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorder.Query;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
 /**
@@ -19,7 +20,7 @@ public final class DbQueryDurationMetricCollector {
     }
   }
 
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final Function<Query, Optional<Observation>> observation;
   private final DbQueryDurationMetricRecorder metrics;
 
@@ -32,7 +33,8 @@ public final class DbQueryDurationMetricCollector {
   /** Missing or failed acquisition is no event, never invented zero duration/SUCCESS/FAILURE. */
   public Optional<Observation> collect(Query query) {
     Objects.requireNonNull(query, "DB duration query");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return Optional.empty();
       Optional<Observation> supplied =
           Objects.requireNonNull(observation.apply(query), "DB duration observation");
@@ -41,6 +43,8 @@ public final class DbQueryDurationMetricCollector {
         metrics.record(query, value.outcome(), value.elapsedNanoseconds());
       }
       return supplied;
+    } finally {
+      lock.unlock();
     }
   }
 }

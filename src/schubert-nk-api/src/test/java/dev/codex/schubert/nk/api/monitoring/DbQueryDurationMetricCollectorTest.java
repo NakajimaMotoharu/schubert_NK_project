@@ -17,6 +17,7 @@ import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.Function;
 import org.junit.jupiter.api.Test;
 
@@ -329,7 +332,8 @@ class DbQueryDurationMetricCollectorTest {
       var entered = new CountDownLatch(1);
       var release = new CountDownLatch(1);
       var attempted = new CountDownLatch(1);
-      var contender = new AtomicReference<Thread>();
+      var firstThreadId = new AtomicLong();
+      var contenderThreadId = new AtomicLong();
       var calls = new AtomicInteger();
       var first = new Observation(Outcome.SUCCESS, 250000000);
       var second = new Observation(Outcome.FAILURE, 500000000);
@@ -337,6 +341,7 @@ class DbQueryDurationMetricCollectorTest {
           new DbQueryDurationMetricCollector(
               query -> {
                 if (calls.incrementAndGet() == 1) {
+                  firstThreadId.set(Thread.currentThread().threadId());
                   entered.countDown();
                   await(release);
                   return Optional.of(first);
@@ -353,15 +358,20 @@ class DbQueryDurationMetricCollectorTest {
         var b =
             executor.submit(
                 () -> {
-                  contender.set(Thread.currentThread());
+                  contenderThreadId.set(Thread.currentThread().threadId());
                   attempted.countDown();
                   return collector.collect(Query.ASYNC_JOB_STATE_COUNTS);
                 });
         await(attempted);
+        var threads = ManagementFactory.getThreadMXBean();
+        var waiter = threads.getThreadInfo(contenderThreadId.get());
         long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-        while (contender.get().getState() != Thread.State.BLOCKED && System.nanoTime() < deadline)
-          Thread.onSpinWait();
-        assertEquals(Thread.State.BLOCKED, contender.get().getState());
+        while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
+            && System.nanoTime() < deadline) {
+          LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+          waiter = threads.getThreadInfo(contenderThreadId.get());
+        }
+        assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
         assertEquals(1, calls.get());
         assertEquals(0, registry.records.get());
         release.countDown();
