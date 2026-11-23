@@ -457,7 +457,12 @@ final class GateContractValidator {
     byCase.fieldNames().forEachRemaining(actualCases::add);
     require(expectedCases.equals(actualCases), "REQ_CASE_ORDER", failures);
     for (String caseId : expectedCases) {
-      List<String> keys = strings(byCase.path(caseId));
+      JsonNode declaredFields = byCase.path(caseId);
+      if (!isNonblankTextArray(declaredFields)) {
+        failures.add("REQ_FIELDS:" + caseId);
+        continue;
+      }
+      List<String> keys = strings(declaredFields);
       require(
           keys.contains("caseId") && keys.contains(FIELD_STATUS), "REQ_CORE:" + caseId, failures);
       require(new HashSet<>(keys).size() == keys.size(), "REQ_DUPLICATE:" + caseId, failures);
@@ -472,7 +477,12 @@ final class GateContractValidator {
                   expectedCases.contains(entry.getKey()),
                   "REQ_SUPPLEMENTAL_CASE:" + entry.getKey(),
                   failures);
-              List<String> checks = strings(entry.getValue());
+              JsonNode declaredChecks = entry.getValue();
+              if (!isNonblankTextArray(declaredChecks)) {
+                failures.add("REQ_SUPPLEMENTAL_CHECKS:" + entry.getKey());
+                return;
+              }
+              List<String> checks = strings(declaredChecks);
               require(!checks.isEmpty(), "REQ_SUPPLEMENTAL_EMPTY:" + entry.getKey(), failures);
               require(
                   new HashSet<>(checks).size() == checks.size(),
@@ -493,9 +503,12 @@ final class GateContractValidator {
                 failures.add("REQ_NK_ONLY_CHECKS:" + entry.getKey());
                 return;
               }
+              JsonNode declaredChecks = supplemental.path(entry.getKey());
+              List<String> knownChecks =
+                  isNonblankTextArray(declaredChecks) ? strings(declaredChecks) : List.of();
               for (String check : strings(entry.getValue())) {
                 require(
-                    strings(supplemental.path(entry.getKey())).contains(check),
+                    knownChecks.contains(check),
                     "REQ_NK_ONLY_UNKNOWN:" + entry.getKey() + ":" + check,
                     failures);
               }
@@ -503,11 +516,15 @@ final class GateContractValidator {
   }
 
   private static boolean validNkOnlyChecks(JsonNode checks) {
-    if (!checks.isArray() || checks.isEmpty()) return false;
-    Set<String> names = new HashSet<>();
-    for (JsonNode check : checks) {
-      if (!check.isTextual() || check.textValue().isBlank() || !names.add(check.textValue()))
-        return false;
+    if (!isNonblankTextArray(checks) || checks.isEmpty()) return false;
+    List<String> names = strings(checks);
+    return new HashSet<>(names).size() == names.size();
+  }
+
+  private static boolean isNonblankTextArray(JsonNode values) {
+    if (!values.isArray()) return false;
+    for (JsonNode value : values) {
+      if (!value.isTextual() || value.textValue().isBlank()) return false;
     }
     return true;
   }
