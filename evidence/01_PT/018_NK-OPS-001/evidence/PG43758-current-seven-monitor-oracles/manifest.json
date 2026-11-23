@@ -1,0 +1,162 @@
+{
+  "run": "PG43758",
+  "source": "65ed19c988382957279f620771f6e8a8663c62a1",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "canonicalDesign": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "commit": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "wbs": [
+    "WBS-G03.05",
+    "WBS-F03/2-2-b",
+    "WBS-P018-09/2"
+  ],
+  "existingRuns": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43754-current-backup-weblog-sixteen/manifest.json",
+      "sha256": "8e2b5bfd97bd3018cdb33f79372ce3069751fecb4fa9c65052463919c6e36520"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43756-current-alert-consumers-fortythree/manifest.json",
+      "sha256": "f3b13e0a10d077a3cb5cbdcd2fb2809b09dc5b9122436c0c8dff424ed400f8b2"
+    }
+  ],
+  "cases": [
+    {
+      "ss351Alert": "Backup",
+      "designRowSha256": "d936a14051986eb7738f7dcd46e882a5a9f71f024c8eb0352c3654221d742333",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+      "fixtureSha256": "de51008518c99ed136f5f73c38378ddfded4cff118d965c1d2cad44395050c3c",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1683_Backup供給観測警報_単体テスト仕様書.md",
+        "sha256": "6f59d831b3d9ceed4f3eb287e668587f72acf282ad6dd10a6f0803203e1e85e0"
+      },
+      "exactKeyChecks": [
+        "backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent",
+        "backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning"
+      ],
+      "provedCondition": "当日成功なし、連続失敗2、原因確認と回復",
+      "remainingProductionCondition": "05:00の実行・実Backup結果、清掃skip",
+      "passedRun": "PG43754"
+    },
+    {
+      "ss351Alert": "Web log Queue/outbox",
+      "designRowSha256": "98ac4ab3561098007bfe2b07cdcbe9e1d7a820aa1fe9a94fd240242f60d7212c",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitorTest.java",
+      "fixtureSha256": "116f726c20c3edb8a86fb66ef117c7b37ccaac8da4c193058e61c9255346ae31",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1672_WebLog滞留警報_単体テスト仕様書.md",
+        "sha256": "9f73fbdc42412995bb550f5f9a9fdb12bd2f4ca0a1f0ef932ba01d7dcf8f8b20"
+      },
+      "exactKeyChecks": [
+        "webLog002ExactCountAndAgeBoundariesRaiseWithEitherKnownAbnormalInput",
+        "webLog004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause"
+      ],
+      "provedCondition": "件数5000/9000と経過5/30分、原因確認と回復",
+      "remainingProductionCondition": "実queue/outboxの同一時点観測と復旧",
+      "passedRun": "PG43754"
+    },
+    {
+      "ss351Alert": "Async Queue",
+      "designRowSha256": "a0cbec917c2ce0d4026dc5160305add2fbc54c7cbc3ee77298231663f1b5dda6",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitorTest.java",
+      "fixtureSha256": "3022f2f15d89860c9fc174b409be0bcea9413e6ea8bdb1ad57ced64ccd14e4b4",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1674_AsyncQueue警報_単体テスト仕様書.md",
+        "sha256": "b8052f8bdc506e3ce7ac607a96685b50d91fee4e6b8d597f9e5d6f961e127b3d"
+      },
+      "exactKeyChecks": [
+        "asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues",
+        "asyncQueue004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause"
+      ],
+      "provedCondition": "件数5000/9000と保存比率70/90%、原因確認と回復",
+      "remainingProductionCondition": "実broker由来の分母、質問受付9001",
+      "passedRun": "PG43756"
+    },
+    {
+      "ss351Alert": "DLQ",
+      "designRowSha256": "0135698bb9b41fad9e74573c9f7bca3021619356aceaedf8f3b0c3c0dc3939a6",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java",
+      "fixtureSha256": "4a0ab80de9f2b87320a295f5f054e0e0abbb06e241e8f7c1d76200dd7321eaab",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1689_DLQ供給観測警報_単体テスト仕様書.md",
+        "sha256": "635308ecdd7c5cfabd0141623a9dcc970ef1dc72a80064a2dae46e8d238d7a1e"
+      },
+      "exactKeyChecks": [
+        "dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys",
+        "dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical"
+      ],
+      "provedCondition": "件数1、増加・未調査の別、保持",
+      "remainingProductionCondition": "broker供給、実運用で自動削除・再投入なし",
+      "passedRun": "PG43756"
+    },
+    {
+      "ss351Alert": "Expiry",
+      "designRowSha256": "00ec0682770350d02f433e745c91b686b116793665be127667bc560a080850b6",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitorTest.java",
+      "fixtureSha256": "86698293f2c2c45a6c0fb77a470616778ebbfb110e3a07527e2b0115430a0b08",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1676_Expiry件数警報_単体テスト仕様書.md",
+        "sha256": "7e695969610798798d4008c7319f5a0d01cd219782433298001221d40f5a018c"
+      },
+      "exactKeyChecks": [
+        "expiryMon002ExactCountBoundariesHaveFixedSeverityAndKey",
+        "expiryMon004CriticalStaysStickyUntilTenNormalMinutesAndCauseConfirmed"
+      ],
+      "provedCondition": "件数1000/5000、原因確認と回復",
+      "remainingProductionCondition": "実件数・Morning purge・API起動停止",
+      "passedRun": "PG43756"
+    },
+    {
+      "ss351Alert": "Integrity/config",
+      "designRowSha256": "e9dbe835be31055cc9ea7279709b6cde975099b6e77d2cc5665184990255fcf8",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+      "fixtureSha256": "3ff7dc0dad30e7dc1ba6b7e640fad3c6cb1ebc640e3320f0899feb0b144b3810",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1687_Integrity供給観測警報_単体テスト仕様書.md",
+        "sha256": "fa8a4b925d01bc07e0309853d44418f9afe6c55afa3576f51ae78e7dc59544ef"
+      },
+      "exactKeyChecks": [
+        "integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity",
+        "integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose"
+      ],
+      "provedCondition": "異常1でCritical、正常値だけで解除しない",
+      "remainingProductionCondition": "実構成観測、配信とreadiness",
+      "passedRun": "PG43756"
+    },
+    {
+      "ss351Alert": "Restart",
+      "designRowSha256": "b7b761de0b4e4486e6cfcdfa0502dd4243cf17d2c5206f804ea96018df309caf",
+      "fixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+      "fixtureSha256": "0944cf9e5c9be4a5e22c3adea792f35fdfe53c7af77827138d0c17ab6e46e0ae",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1685_Restart供給観測・rateLimit是正_単体テスト仕様書.md",
+        "sha256": "f4156357ec77057ff1300434295975e1bbddd4663f64233e757c35342ddd9f47"
+      },
+      "exactKeyChecks": [
+        "restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix",
+        "restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation"
+      ],
+      "provedCondition": "回数1/5、rate limitの独立条件、原因確認と回復",
+      "remainingProductionCondition": "実Unit由来の10分窓と終端",
+      "passedRun": "PG43756"
+    }
+  ],
+  "twoAdditionalAsyncCompositionTests": [
+    "partialByteCriticalRequiresFreshContinuousRecoveryAndCauseConfirmation",
+    "simultaneousCriticalCountAndBytesCountAsOneObservation"
+  ],
+  "sourceAndSpecHashesVerified": 8,
+  "previousExecutionsChecked": 59,
+  "newTestExecutions": 0,
+  "coverageMerged": false,
+  "exitCode": 0,
+  "terminalAtUTC": "2026-11-23T16:43:16.221291+00:00",
+  "whole451": false,
+  "needs": [
+    "runtime observation providers and control postconditions",
+    "all required quality on the same release candidate"
+  ],
+  "formalAcceptanceId": null
+}
