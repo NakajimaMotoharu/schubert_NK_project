@@ -1,0 +1,82 @@
+{
+  "run": "PG43164-g09-codex-quota-bucket-identity-v1",
+  "source": "d69720b5a96825e4396bbfb03ba6883c27828a57",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:38:03.414000+00:00",
+  "wbs": "WBS-G09",
+  "related": [
+    "BUG-3678",
+    "YKT-2891",
+    "487"
+  ],
+  "fixtureChecks": {
+    "wrongOrUnidentified": 2,
+    "nullEmptyOrConflictingKeyed": 3,
+    "keyedWithoutInnerIdValid": true,
+    "explicitCodexFallbackValid": true
+  },
+  "before": {
+    "failureSubcases": 5,
+    "toolTests": 22,
+    "exit": 1
+  },
+  "after": {
+    "toolTests": 22,
+    "exit": 0,
+    "fail": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "command": "PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B -m unittest discover -s tools/quality/tests -p 'test_pmo_quota_binding*.py'",
+  "bindingShape": "PGPT_FRESH_QUOTA_V1",
+  "newestRealObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T00:38:31+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "independentLegacyEndPreserved": true,
+  "sourceInputs": [
+    {
+      "path": "tools/quality/pmo_quota_binding.py",
+      "sha256": "6c259f89870f67cc58750c3e0489526565852f1613b5d122e30a635bebace3d8"
+    },
+    {
+      "path": "tools/quality/tests/test_pmo_quota_binding.py",
+      "sha256": "89eef6f8b2bb6d1b5d4927c3126833176427e9342325394afafed26063a92de5"
+    },
+    {
+      "path": "tools/quality/tests/test_pmo_quota_binding_writer.py",
+      "sha256": "63cef18d1d4f043eeda1592751973fb7d5cd65c73bfd35f899fc1495330b6fd2"
+    }
+  ],
+  "private": [
+    {
+      "path": "../pgpt-runs/PG379/PG43164-g09-codex-quota-bucket-identity-v1/before.log",
+      "sha256": "7c8f78488bc7b32ec2d99b7e896717eacb73a8d592b4e2d30579ded5830b90fd"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43164-g09-codex-quota-bucket-identity-v1/before.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43164-g09-codex-quota-bucket-identity-v1/after.log",
+      "sha256": "084be0b897fc080ce8a21f517058490226856a5e50e6ac80365344d8d3872bf6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43164-g09-codex-quota-bucket-identity-v1/fresh-receipt.safe.json",
+      "sha256": "03a579ed93d4ff9838a1a47562ba5ae564b3be2b340ec3b28e9aeb925ce0af69"
+    }
+  ],
+  "noQuotaModification": true,
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
