@@ -1,0 +1,114 @@
+{
+  "run": "PG43604",
+  "source": "adccab6b19340b1a4c5359b27132cacfbc4417b3",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P019-03.02/2"
+  ],
+  "terminalAtUTC": "2026-11-23T11:39:37.005726+00:00",
+  "actualExit": 0,
+  "currentBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "artifactProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+    "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+  },
+  "exactCurrentPhysical": {
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class": "ff7c6bf1584c9882a999bd2687197aa4d877d5a08e667afda002d165f9dc9289",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109"
+  },
+  "prerequisiteIndependentCases": {
+    "SpeakerCopyRowTest": {
+      "caseNames": [
+        "speakerRow001SevenLiteralColumnsAndIndependentGolden()",
+        "speakerRow002NullEmptyAndLiteralCopyNullAreDistinct()",
+        "speakerRow003NameByteBoundariesAreUtf8NotCharacters()",
+        "speakerRow004NormalizedNameIsRetainedWithoutInventingDerivation()",
+        "speakerRow005CanonicalPositiveN12Boundaries()",
+        "speakerRow006OnlyTwoGameValues()",
+        "speakerRow007CanonicalBooleanTextWithoutImplicitDefault()",
+        "speakerRow008UtcYearAndMicrosecondBoundaries()",
+        "speakerRow009InvalidNoncanonicalOrExcessPrecisionTimes()",
+        "speakerRow010MissingBoundaryAndEveryRequiredElement()",
+        "speakerRow011WrongColumnCountsDoNotInventDefaults()",
+        "speakerRow012MalformedNamesAreRejectedWithoutNormalization()",
+        "speakerRow013NotesKeepPostgresTextAndRejectNulOrMalformedUnicode()",
+        "speakerRow014InputCollectionAndOutputBytesAreIndependent()",
+        "speakerRow015NullEncoderFixedDiagnosticAndSuccessAfterRejection()",
+        "speakerRow016FiniteParallelCopiesHaveIndependentBuffers()"
+      ],
+      "qualifyingFixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+        "sha256": "8a5a6ddd556c722c6f4a87d379392e2c23ab1d8e68bf6db7056c5409f0d8196b"
+      },
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+        "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+      },
+      "historicalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/manifest.json",
+        "sha256": "5142ceb61632fe077da3eea62be689e4789ff94ac40ed443740384660c0bb77e"
+      },
+      "typedProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41866-f03-speaker-row-fixture-static-close-v1/manifest.json",
+        "sha256": "269d6f6460036fb0bae20fe26c650feeb1f9020077585e73460e41959773dde8"
+      },
+      "fixtureEquivalence": "Prior reviewed checked throws declaration-only; not raw historical fixture equality.",
+      "currentMetadataJoin": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41862-p0190302-speaker-row-current-fixture-v1/manifest.json",
+        "sha256": "54f7653fb5823be5419592afa839e41e1e7947ca25e941af809aa61a1fa96269"
+      }
+    },
+    "ScenarioEntryCopyRowTest": {
+      "caseNames": [
+        "row001IndependentTwelveColumnsAndFullCopyBytes()",
+        "row002NarrationNullableFieldsAndEmptyValues()",
+        "row003N12AndGameBoundariesAtEachColumn()",
+        "row004IndexAndOptionalLineIntDomains()",
+        "row005ClosedTypeAndSpeakerPair()",
+        "row006IndependentUtf8ByteLimitsAndUnboundedRawBlock()",
+        "row007NfcScalarAndEveryControlDomain()",
+        "row008AllMandatoryNullAndRowWidthBoundaries()",
+        "row009CanonicalUtcFiniteYearAndMicroseconds()",
+        "row010SnapshotListColumnAndByteOwnership()",
+        "row011NoTrimSafeDiagnosticAndEncoderContract()",
+        "row012ConcurrentCopyAndValueOwnership()"
+      ],
+      "qualifyingFixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+        "sha256": "3af42982b3c8fbf4929fb0e268b9791f1dd7d82472ce30afbc3d393a58c032b1"
+      },
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+        "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+      },
+      "historicalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/manifest.json",
+        "sha256": "5142ceb61632fe077da3eea62be689e4789ff94ac40ed443740384660c0bb77e"
+      },
+      "typedProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41872-f03-entry-row-fixture-static-close-v1/manifest.json",
+        "sha256": "95663b3a254c854673cc7828913811cee96624419c12fc79d8d082fcd56aeda1"
+      },
+      "fixtureEquivalence": "Prior reviewed checked throws declaration-only; not raw historical fixture equality.",
+      "currentMetadataJoin": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41868-p0190302-entry-row-current-fixture-v1/manifest.json",
+        "sha256": "11fc5c2bd3dac232dc84d60fffe760062c489a95c52258a9e5d6b09e1fd16285"
+      }
+    }
+  },
+  "retainedApplicablePreexistingCases": 28,
+  "newProductExecutions": 0,
+  "oldExecImported": false,
+  "newCoverage": false,
+  "whole451": false,
+  "plannedUnverified": [
+    "SSC417 24 real driver/SDK tests",
+    "Actual owner/postconditions for COPY/DB/migration",
+    "Complete Bootstrap and six-product 451"
+  ],
+  "formalAcceptanceId": null
+}
