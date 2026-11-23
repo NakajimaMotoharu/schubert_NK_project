@@ -1,5 +1,11 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-24 Caddy起動依存と日次保守
+
+CaddyのAfter／RequiresにWebを指定した追跡設定を製造し、構成6件を再試験。現環境では同bootの実効Unit・親下のWeb ready・Caddy HTTPS・逆順停止を確認する。新しい配備又はenableを行う前に所有、当sourceの署名／BOM、既存役割の証跡を確認する。
+
+05:00 timerの受けUnitと再起動前の実行主体は未製造。再起動後Morningを受け口に使わず、承認の固定主体と既停止・更新・外部markerの試験境界を接続する。C02-b、F04、451は未成立。 [Caddy試験](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json) [日次保守の残条件](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43744-daily-timer-receiver-fixed-identity-gap/manifest.json)
+
 ## 2026-11-23 23:50 JST 監視と後続実測の追補
 
 Batch監視の局所入力の遷移・並行試験は現候補で成功。正規ownerから観測入力を供給したときの実filesystem/JVM/DB/JMSと監視出力、V031の実DB新規・V030更新、実CHRと全451が後続依存。QA-061は配布条件・担当とも未決。IT/ST開始と受入は未判定。 [現判定と根拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43716-current-phase-and-handoff-delta/manifest.json)

@@ -1,0 +1,111 @@
+{
+  "run": "PG43744",
+  "source": "76c05477294b56c9b7a6add6c644537d559a6a85",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "wbs": "WBS-C02-a",
+  "existingDefect": "BUG-3577",
+  "existingHorizontal": "YKT-2812",
+  "canonicalPins": {
+    "341": {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    "342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    },
+    "343": {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+    }
+  },
+  "fixedNameAndSeparation": {
+    "receiver": "| 停止/update | `schubert-nk-maintenance.service` | 60min |",
+    "startupAnchor": "root親の実行主体は固定schubert-nk-morning-controller.service",
+    "distinctFlows": "reboot後morningと05:00 update/rebootを混在させない。",
+    "deadline": "Maintenance開始から60分でreboot完了markerが更新されない場合、外部監視はcritical"
+  },
+  "timer": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "trackedReceiver": false,
+  "existingRootContextRegistration": {
+    "publicServiceNamesOnly": true,
+    "source": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java",
+      "sha256": "8281f715abd82572704c868764f642e10b19e10b4475fd0983735e0fbe340fa8"
+    },
+    "currentPostRebootName": "schubert-nk-morning-controller.service",
+    "scheduledPreRebootNameRecorded": false
+  },
+  "existingPureParts": [
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java",
+        "sha256": "7d39459c02a129a48bdf8329068f0befb24ee3fa7e0ca893f36545e0f0b7161f"
+      },
+      "scope": "S01..S05",
+      "ownRole": "ordered supplied stop/wait data; no service dispatch"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java",
+        "sha256": "662948403cdaa6540c045bdde654a0e846659b14b8f6974b47958704423b47cc"
+      },
+      "scope": "U01..U10",
+      "ownRole": "supplied update and safety result; no update/reboot dispatch"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
+        "sha256": "0b0dc37c470791f0b3fe4a7439b730728bb30b185320e011fe22ea7db47552d9"
+      },
+      "scope": "W01..W09",
+      "ownRole": "external marker decision; no boot dispatch"
+    }
+  ],
+  "preservedReceiptList": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+      "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42412-g1306-watch-packaged-cli-proof-v1/manifest.json",
+      "sha256": "9a712c899a20404d845c37ebbe1fee669c2221f8cf6c858823a65506390df990"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42420-g1306-maintenance-update-safety-v1/manifest.json",
+      "sha256": "6463018f09ec74638ec824b2f227ced08717b3019b65a0f59e39c1a98ebae1be"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42430-g1306-maintenance-stop-order-v1/manifest.json",
+      "sha256": "0dfd092b79554e720fcd78dcb34feb93b4a114cb229f504f7b95a39ae86241c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42530-g1306-stop-and-update-same-run-candidate-v1/manifest.json",
+      "sha256": "095971c11069bf3c26ce0e3f21b845715aa7ab7120769885fc3abb97312d02f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42986-maintenance-record-values-v1/manifest.json",
+      "sha256": "5f1d186f3340c84e338eb04fe42551f22d049a5175bdcf0594843e486683b131"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+      "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+    }
+  ],
+  "unresolved": [
+    "the fixed pre-reboot owner and effective same-unit provenance",
+    "durable same-run/disjoint pre- and post-reboot receipts",
+    "service assembly and approved active route",
+    "real authorized Linux postconditions and exact 451 proof"
+  ],
+  "noNewUserApprovalRequiredForDocumentReview": true,
+  "actualManagerOrPowerOperations": 0,
+  "sourceChange": 0,
+  "actualExit": 0,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-23T15:47:59.510062+00:00"
+}
