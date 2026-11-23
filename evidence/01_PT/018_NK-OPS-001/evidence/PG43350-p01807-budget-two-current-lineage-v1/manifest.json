@@ -1,0 +1,63 @@
+{
+  "run": "PG43350-p01807-budget-two-current-lineage-v1",
+  "source": "2c9e0b87a74caffe0e7d8cb1a944d1613c62aaf7",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "A1-25.03",
+  "terminalAtUTC": "2026-11-23T04:58:23.333669+00:00",
+  "actualExit": 0,
+  "originalSelected": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42172-a12503-injected-budget-current-selected-v1/manifest.json",
+    "sha256": "6f238ebbf5d45dff181e7f52d0d929c3c626204576f6512eea9db774087b4478"
+  },
+  "originalPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42170-a12503-budget-injected-preflight-v1/manifest.json",
+    "sha256": "3f92d6803eaf2c4099a72a56cb2d2ee998a3e42e7d001910ea0af45ff134138a"
+  },
+  "productArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "byteExactTypes": [
+    {
+      "path": "dev/codex/schubert/nk/batch/platform/MorningParentBudget.class",
+      "sha256": "dbd96262b775acfbf452fa7d6dff368821f1fc8e0cbb87afcef0fa573da4622b",
+      "exact": true
+    },
+    {
+      "path": "dev/codex/schubert/nk/batch/platform/MorningParentBudget$Clock.class",
+      "sha256": "e74252ef43f9c93a12541e4815fb571847b1fa93a76017f8819ffa421e1ef9db",
+      "exact": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java",
+      "sha256": "f59b7bd1461b04da66e7726d414a2128b6739e54f8e10d3e7e33f813d8e654eb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningParentBudgetTest.java",
+      "sha256": "9d33840ef9be792cbf4c52a684269d0488b96804b9f55f7c963b47ffa0d07f4a"
+    }
+  ],
+  "exactCandidateLocalEvidence": true,
+  "originalTestId": "PT-OPS-MBUDGET002",
+  "expectedLocal": [
+    "signed nano wrap retains monotonic elapsed interval",
+    "backward time is rejected",
+    "boundary expiry rejects without restarting budget"
+  ],
+  "originalPartialProbe": {
+    "crc": "a94890b686636f3a",
+    "hit": 15,
+    "count": 30
+  },
+  "notRunHeldOtherSiblings": [
+    "PT-OPS-MBUDGET001",
+    "nativeBorrowNeverRestartsParentDeadline"
+  ],
+  "liveCaddyOrNativeRun": 0,
+  "newPt": 0,
+  "ordinaryOwnerBootOrBudgetQualified": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
