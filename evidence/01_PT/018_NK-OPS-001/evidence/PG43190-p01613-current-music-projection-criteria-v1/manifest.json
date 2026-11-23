@@ -1,0 +1,78 @@
+{
+  "run": "PG43190-p01613-current-music-projection-criteria-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:12:20.012716+00:00",
+  "source": "65c4ace4cc8868581c592e1b577a726fd52c0412",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P016-13/2",
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  ],
+  "canonicalDesign": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "currentLocalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43188-f03-scr013-current-six-v1/manifest.json",
+    "sha256": "56ea0765bc8d9897b732d00bb8af8e4924127719739e3c57660f517bb70ade40"
+  },
+  "sixScopedCurrentCases": [
+    {
+      "reference": "UI235 §9.2, SS313",
+      "specificCondition": "Track order and ordinary fixed metadata, path link visible",
+      "exactObservedCase": "public001OrdinaryOrderUriAndMetadata()"
+    },
+    {
+      "reference": "UI235 §9.2, SS313",
+      "specificCondition": "Raw pair order and the main title precedence",
+      "exactObservedCase": "public002StoredPairOrderAndMainTitlePrecedence()"
+    },
+    {
+      "reference": "UI235 §9.2–9.3, SS313",
+      "specificCondition": "Declared count and affinity/order bounds",
+      "exactObservedCase": "public003CountAffinityIdentityLengthAndOrderBounds()"
+    },
+    {
+      "reference": "UI235 §9.2, SS313",
+      "specificCondition": "Incomplete/duplicate pair, exact valid link segments",
+      "exactObservedCase": "public004MissingPairDuplicateRoleAndLinkSegments()"
+    },
+    {
+      "reference": "SS313",
+      "specificCondition": "Null handling, projected immutable values, borrowed ownership assertions",
+      "exactObservedCase": "public005NullOwnershipAndClosedMap()"
+    },
+    {
+      "reference": "SS313",
+      "specificCondition": "Independent sixteen pure projections on four finite workers",
+      "exactObservedCase": "public006FiniteConcurrentProjectionsRemainIndependent()"
+    }
+  ],
+  "retainedCountProof": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json",
+      "sha256": "5c098d68a5d6f514372d59211c2b7a1390687a11f92095fe281b5ba6ab7eec1a"
+    },
+    "historicalRun": "PG41188-scr013-music-track-overclaimed-count-v1",
+    "fixedDeclared": 1,
+    "fixedObserved": 0,
+    "expected": "IllegalArgumentException",
+    "productClassBytesEqual": true,
+    "companionOriginalFixtureRefOnly": [
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java"
+    ],
+    "evidenceMerged": false
+  },
+  "noRerun": true,
+  "allHeldAndActualMediaUnobserved": true,
+  "pending": [
+    "Current real UI235 MVC/HTTP and actual media/readback",
+    "Dependencies P015-02, F02/F03 and applicable 451"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
