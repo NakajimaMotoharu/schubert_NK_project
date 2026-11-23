@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -88,7 +88,7 @@ public record BackupFailureSnapshot(
       }
       guard.check();
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new java.io.IOException("failed backup observation unavailable");
     }
     guard.check();
