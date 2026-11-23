@@ -1,0 +1,82 @@
+{
+  "run": "PG43810",
+  "source": "3341c839d057efb100807a5e528950df5ec1801c",
+  "terminalAtUTC": "2026-11-23T17:58:46.417051+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "related": "WBS-P018-09",
+  "caseRange": "PT-OPS-MQCONN001–008",
+  "tests": {
+    "executed": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "newCaseIds": 0
+  },
+  "firstOrdinaryAttemptPassed": true,
+  "coverage": {
+    "single": true,
+    "class": "MqPressureMetricCollector.class",
+    "line": 19,
+    "method": 3,
+    "classCounter": 1,
+    "branch": 4,
+    "rawInstructions": 88,
+    "missed": 0
+  },
+  "originalRawRules": [
+    [
+      "AvoidSynchronizedStatement",
+      30
+    ],
+    [
+      "AvoidCatchingGenericException",
+      38
+    ],
+    [
+      "AvoidCatchingGenericException",
+      38
+    ]
+  ],
+  "afterRawRules": [
+    [
+      "AvoidCatchingGenericException",
+      40
+    ],
+    [
+      "AvoidCatchingGenericException",
+      40
+    ]
+  ],
+  "afterAnalyzerExitCodes": {
+    "compile": 0,
+    "pmd": 4,
+    "checkstyle": 0,
+    "spotbugs": 0,
+    "compileFixture": 0,
+    "unit": 0,
+    "unfiltered": 0
+  },
+  "fixtureFormatterExit": 0,
+  "fixtureCheckstyleExit": 0,
+  "independentExpected": "Second test worker waits on first held supplier and reads first snapshot when it subsequently enters, keeps original six counter/gauge values, destination isolation, unknown and identical cause, and normal publication. Exact isolated Protocol enum from PG43646. No broker or JMS libraries in the runtime dependency of this local test.",
+  "proofs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43810-api-mq-before-v1/terminal.json",
+      "sha256": "f7a55a5936d1bab9d9854f8d5b899461be53fb6789e685f49eff2228105f0f3a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43810-api-mq-after-v1/terminal.json",
+      "sha256": "fd2ab2bdb93196715a78feacade28df30158e8f09dbdb2139fca0f7cce6fab12"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43810-api-mq-after-v1/fixture-style-terminal.json",
+      "sha256": "18223536b3fa01781b30f0e49d4ee04d54d7b272c0adabe95fadf6c19c655071"
+    }
+  ],
+  "bug": "BUG-3742",
+  "horizontal": "YKT-2929",
+  "externalOperations": 0,
+  "newFormalAcceptanceId": null,
+  "wholeF03": false,
+  "whole451": false
+}
