@@ -1,0 +1,209 @@
+{
+  "run": "PG43402-f03-storage-resource-static-scope-disposition-v1",
+  "source": "2a64c129d86914a77c444f9ceefff1d2367cea89",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T06:17:01.205355+00:00",
+  "actualExit": 0,
+  "typedOutput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42774-f03-storage-resource-fixtures-checked-scope-v1/manifest.json",
+    "sha256": "8bbedc3e34ebc713fd613ea46bc6abd21383a6d809d5852c34df0d27d021f2a0"
+  },
+  "ordinaryCurrent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43400-storage-resource-current-26-coverage-v1/manifest.json",
+    "sha256": "e1afd787eaa8235caa8348ef77db9c61528a1c3fa7f6f13eb1c2a54c1f8a593d"
+  },
+  "rawReports": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42774-two-storage-resource-fixtures-current-v1/spotbugs.xml",
+      "sha256": "8ed5694e2eb0f0353fc91726252d6cb6e93de28f6548ff38eceaf182d693d917"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42774-two-storage-resource-fixtures-current-v1/checkstyle.xml",
+      "sha256": "4c041d37e832b4da1febdd27c77a5753bd2345f8d132f0041d79c817bac281e8"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42774-two-storage-resource-fixtures-current-v1/pmd.xml",
+      "sha256": "625714d9058ebadaa97d7f932d09a28f1f2ec03d1a514f7887a36753f84ba6ca"
+    }
+  },
+  "exactFixtureSource": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "sha256": "3ac68f0bd1e95bfe3f95f522e460c3b4a978baf1a7e82d6e665a07b81af8871a"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "sha256": "ed73aa966d7999112a3d5291eb853327caabf87632e562ac0ca80cd1a8590a63"
+    }
+  ],
+  "exactCompiledFixtures": 4,
+  "spotBugsRawSites": [
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 639,
+      "reason": "Test-only injected RuntimeException must be rethrown as the exact instance to test primary priority. This is an intentionally independent adverse input."
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "file": "ResourceScopeTest.java",
+      "line": 275,
+      "reason": "Test-only injected RuntimeException must be rethrown as the exact instance to test primary priority. This is an intentionally independent adverse input."
+    }
+  ],
+  "pmdRawSites": [
+    {
+      "rule": "CloseResource",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 321,
+      "anchor": "newFixedThreadPool",
+      "endingLine": 334,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 321,
+      "anchor": "newFixedThreadPool",
+      "endingLine": 334,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 325,
+      "anchor": "submit",
+      "endingLine": 327,
+      "reason": "Each submitted synthetic work item is awaited with a fixed ten-second timeout. A finally block stops the owner and checks termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 326,
+      "anchor": "submit",
+      "endingLine": 328,
+      "reason": "Each submitted synthetic work item is awaited with a fixed ten-second timeout. A finally block stops the owner and checks termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 333,
+      "anchor": "shutdownNow",
+      "endingLine": 334,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 334,
+      "anchor": "awaitTermination",
+      "endingLine": 334,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 572,
+      "anchor": "Thread.currentThread().interrupt",
+      "endingLine": 573,
+      "reason": "Restores the interrupt flag for the bounded ten-second test latch before checked fixture failure."
+    },
+    {
+      "rule": "CloseResource",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 578,
+      "anchor": "newFixedThreadPool",
+      "endingLine": 615,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 578,
+      "anchor": "newFixedThreadPool",
+      "endingLine": 615,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 581,
+      "anchor": "submit",
+      "endingLine": 602,
+      "reason": "Each submitted synthetic work item is awaited with a fixed ten-second timeout. A finally block stops the owner and checks termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 592,
+      "anchor": "submit",
+      "endingLine": 603,
+      "reason": "Each submitted synthetic work item is awaited with a fixed ten-second timeout. A finally block stops the owner and checks termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 614,
+      "anchor": "shutdownNow",
+      "endingLine": 615,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "FactoryResourceScopeTest.java",
+      "line": 615,
+      "anchor": "awaitTermination",
+      "endingLine": 615,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "CloseResource",
+      "file": "ResourceScopeTest.java",
+      "line": 250,
+      "anchor": "newVirtualThreadPerTaskExecutor",
+      "endingLine": 261,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ResourceScopeTest.java",
+      "line": 250,
+      "anchor": "newVirtualThreadPerTaskExecutor",
+      "endingLine": 261,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ResourceScopeTest.java",
+      "line": 256,
+      "anchor": "submit",
+      "endingLine": 258,
+      "reason": "Each submitted synthetic work item is awaited with a fixed ten-second timeout. A finally block stops the owner and checks termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ResourceScopeTest.java",
+      "line": 260,
+      "anchor": "shutdownNow",
+      "endingLine": 261,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ResourceScopeTest.java",
+      "line": 261,
+      "anchor": "awaitTermination",
+      "endingLine": 261,
+      "reason": "Local executor lifecycle of an independent concurrency fixture. Every owning try exits through shutdownNow and a ten-second termination check, including failing assertions."
+    }
+  ],
+  "applicableAtExactSites": 0,
+  "unclassifiedAtExactSites": 0,
+  "addedSuppressions": 0,
+  "analysisReexecuted": 0,
+  "productTestsReexecuted": 0,
+  "wholeStorageStaticOrCoverage": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
