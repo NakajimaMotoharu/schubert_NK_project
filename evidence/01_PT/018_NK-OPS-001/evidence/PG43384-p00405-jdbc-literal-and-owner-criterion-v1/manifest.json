@@ -1,0 +1,89 @@
+{
+  "run": "PG43384-p00405-jdbc-literal-and-owner-criterion-v1",
+  "source": "7383389278931240d4a745056bffc595a3cdc3b8",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P004-05/2",
+  "planRowNumber": 21,
+  "terminalAtUTC": "2026-11-23T05:45:29.215569+00:00",
+  "actualExit": 0,
+  "canonical": [
+    "SS332 SSC056/473",
+    "SS343",
+    "451"
+  ],
+  "criterionStatus": [
+    {
+      "criterion": "JDBC42 UTC representation",
+      "scope": "SDK only",
+      "status": "CURRENT_VERSION_PIN_AND_INDEPENDENT_VECTOR_CONFIRMED",
+      "proof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43148-p00405-jdbc-utc-vendor-applicability-v1/manifest.json",
+          "sha256": "992762b408a8f43b12ba9288c0e8063613e96e8ca898d09ce7c7cde13538e92a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40608-p00405-jdbc42-vendor-row-independent-v1/manifest.json",
+          "sha256": "6a46eba63ad552fe49873e66993f19e6e4ce2d915b33350fd301f5d891e924aa"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/manifest.json",
+          "sha256": "dbc8d81e9639fc84c13a05d429b5fd2bfaabf2e78ed06d83b4628e7af9bb46a9"
+        }
+      ],
+      "projections": 54
+    },
+    {
+      "criterion": "SQL exception and resource close identity",
+      "scope": "Test-owned close actions and proxy, once and suppression order",
+      "status": "MATCHING_LOCAL_OPERANDS_ONLY",
+      "proof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43326-p00405-jdbc-eight-current-source-lineage-v1/manifest.json",
+          "sha256": "7861de77cac30af8d098856fb66bd98df0f9a7ebcfb9f8de00b3b48fec2b462e"
+        }
+      ],
+      "tests": 8
+    },
+    {
+      "criterion": "API and Web transaction and ownership",
+      "scope": "prior memory fixtures and selected closed DTO values",
+      "status": "REFERENCES_ONLY",
+      "proof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41740-p00405-outbox-local-current-evidence-v1/manifest.json",
+          "sha256": "a360a4b5ee8797d80797912a85b27c69b9078920148ed9f78460e8e2bfe6f166"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41750-p00405-required-column-current-value-v1/manifest.json",
+          "sha256": "da7418bb4ac165a16195abe6018d84878b215beb1c89a87337adb3a29b58048a"
+        }
+      ]
+    },
+    {
+      "criterion": "Same-source actual JdbcSyncRequestProcessor/ApiJdbcPool, DB TIMESTAMPTZ and session timezone, commit/rollback/ownership",
+      "status": "MISSING_AUTHORIZED_RUNTIME"
+    },
+    {
+      "criterion": "F02, F03 and 451 full acceptance",
+      "status": "MISSING_EXIT_DEPENDENCIES"
+    }
+  ],
+  "versionPomInputs": [
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    }
+  ],
+  "newProductTests": 0,
+  "reusedRawExecForOfficialGate": false,
+  "actualDB": 0,
+  "formalAcceptanceId": null
+}
