@@ -1,0 +1,95 @@
+{
+  "run": "PG43800",
+  "source": "2ff699391b0041727afee81ac250caaafd0b473f",
+  "wbs": "WBS-F03/2-2-b",
+  "status": "LOCAL_LOCK_REMEDIATION_VERIFIED",
+  "terminalAtUTC": "2026-11-23T17:39:27.426852+00:00",
+  "tests": {
+    "firstFixtureAttempt": {
+      "executed": 8,
+      "passed": 0,
+      "failed": 8
+    },
+    "verifiedRetest": {
+      "executed": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "newTestIds": 0,
+    "ids": "PT-OPS-POOLCONN001–008"
+  },
+  "coverageWithinOneExec": {
+    "scope": "DbPoolMetricCollector.class",
+    "line": [
+      19,
+      19
+    ],
+    "method": [
+      3,
+      3
+    ],
+    "class": [
+      1,
+      1
+    ],
+    "branch": [
+      4,
+      4
+    ],
+    "instruction": [
+      85,
+      85
+    ]
+  },
+  "quality": {
+    "AvoidSynchronizedStatement": 0,
+    "AvoidCatchingGenericException": 2,
+    "pmdExit": 4,
+    "pmdRuleSuppression": false,
+    "spotbugs": 0,
+    "checkstyle": 0,
+    "compileNullAwayExit": 0,
+    "spotlessSelectedMain": 4
+  },
+  "independentCases": [
+    "borrowed getters and exact gauge/counter expectations",
+    "exception identity, invalidation and subsequent good input",
+    "precondition preservation and STANDARD non-observation",
+    "parallel ordering and no additional gauge instances"
+  ],
+  "rawFindingsDecision": "The two diagnostic entries remain raw and gate remains unresolved. The existing requirement to clear the in-memory observation for either thrown RuntimeException or Error and rethrow the original value was verified by POOLCONN003. There is no result conversion, exception metadata inspection or logging. Formal disposition belongs to F03.",
+  "siblings": {
+    "exactDuration": "PG43796; exceptional snapshot line remains unmeasured",
+    "outbox": "resource-analysis findings are independent and preserved"
+  },
+  "externalOperations": 0,
+  "accepted": false,
+  "bug": [
+    "BUG-3736",
+    "BUG-3737",
+    "YKT-2929"
+  ],
+  "files": {
+    "unfiltered": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43798-api-pool-observation-current-eight-v2/unfiltered.out",
+      "sha256": "8b307fe6df87eff913222d556e484fb1c9caf1d16d19dee18d6db7467bbb0e1b"
+    },
+    "compile": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43798-api-pool-observation-current-eight-v1/begin.json",
+      "sha256": "df1864a417f59545f3b9abf1c6d438b55fecae234a0af353066fc3927dcf1dff"
+    },
+    "original failure": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43798-api-pool-observation-current-eight-v1/incomplete.safe.json",
+      "sha256": "894913e126ddccc5ec2e56b801bb5e8d54b86e0c513fa1549345fa6faa7671fb"
+    },
+    "reaudited static": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43800-api-pool-static-current-v1/terminal.json",
+      "sha256": "489fac3ca9cf9f4b7c8c755326c8752e01cc2185c4e807d00d5728a9890f2dd9"
+    },
+    "same compile rerun": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43798-api-pool-observation-current-eight-v2/terminal.json",
+      "sha256": "855d99a68880af3b4c9da437913d89677ae16d6324ee6015357dbe4eb48facc5"
+    }
+  }
+}
