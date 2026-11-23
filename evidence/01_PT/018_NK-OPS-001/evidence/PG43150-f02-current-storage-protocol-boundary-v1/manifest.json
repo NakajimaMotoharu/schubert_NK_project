@@ -1,0 +1,169 @@
+{
+  "run": "PG43150-f02-current-storage-protocol-boundary-v1",
+  "source": "6cdf726ddeacbfbd8981f012382d93912f78f63f",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-23T00:17:13.967560+00:00",
+  "wbs": "WBS-F02-b-a",
+  "design": [
+    "SS311",
+    "SS362"
+  ],
+  "realJars": {
+    "protocol": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+      },
+      "sourceTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+      "classes": 176
+    },
+    "storage": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "sourceTree": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+      "classes": 79
+    }
+  },
+  "syntheticPrivateAnchors": 4,
+  "typedFindings": [
+    [
+      "FRAMEWORK_FENCES",
+      "dev.codex.schubert.nk.storage.StorageIoException",
+      "java.sql.SQLException"
+    ]
+  ],
+  "oldLegacyKnown": [
+    {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    }
+  ],
+  "previousScope": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+      "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40578-f02-real-protocol-storage-vendor-edge-audit-v1/manifest.json",
+      "sha256": "b9566774ad9ea8efd7a3d97a4ed1664688296a425178a68fd613f991a9a12aee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43076-f02-file-backed-image-stream-boundary-v1/manifest.json",
+      "sha256": "60b245bf61e6c9654e6d5a1c6279955c8477b3d78584c0c899ab1e6b4fd5b7be"
+    }
+  ],
+  "ownedInputs": [
+    {
+      "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+      "sha256": "cfc900087b7fca179df29174a95dae61586d6318430ea23cbef65bbd161bf521"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar",
+      "sha256": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    }
+  ],
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/audit",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-anchors": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/compile-anchors.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/compile-anchors.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/classes",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/dev/codex/schubert/nk/api/Anchor.java",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/dev/codex/schubert/nk/web/Anchor.java",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/audit.stdout.txt",
+        "sha256": "1ec9ee89b653f1e8d9ea3b4d1c397dcb9814ac6de6afd76f45aaf389d4f9b587"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43150-f02-current-storage-protocol-boundary-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/tmp/pgpt-protocol-storage-architecture-xrgxaxho/audit:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/tmp/pgpt-protocol-storage-architecture-xrgxaxho/api.jar",
+        "batch=/tmp/pgpt-protocol-storage-architecture-xrgxaxho/batch.jar",
+        "bootstrap=/tmp/pgpt-protocol-storage-architecture-xrgxaxho/bootstrap.jar",
+        "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "web=/tmp/pgpt-protocol-storage-architecture-xrgxaxho/web.jar"
+      ]
+    }
+  },
+  "noModulesBeyondProtocolStorageRead": true,
+  "apiWebActualArtifacts": 0,
+  "realFileOrRuntimeActions": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "QA056 four types",
+    "normal API and Web full receipts",
+    "legacy responsibility resolution",
+    "current whole-module quality"
+  ],
+  "initialHarnessPreflight": {
+    "exit": 1,
+    "reason": "prior tool pin is a hash object; initial lookup used it as a Git revision",
+    "auditStarted": false,
+    "preservedResolution": "verified identical current Git bytes and exact prior tool hash before one execution"
+  }
+}
