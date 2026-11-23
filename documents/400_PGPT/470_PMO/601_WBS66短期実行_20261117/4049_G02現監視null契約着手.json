@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-9494",
+  "groupId": "g02-monitor-retained-compiler-negative-input-PG43792",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T17:19:11+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "1bb489d217d7237c31802d3314166d100d203c4e",
+    "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "run": "PG43792",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-G02"
+    ],
+    "previousCheckpoint": "4048",
+    "planRow": {
+      "ID": "WBS-G02",
+      "元行": "WBS-G02",
+      "費目": "F",
+      "主担当": "WBS-G02",
+      "状態": "計画",
+      "作業": "NPE静的解析と全boundary/null/unknown negative",
+      "残pp": "2.0",
+      "着手": "設計352・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "NullAway等static0と全境界/null/欠落/未知値negative PASS、NPE捕捉正常化0。",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G02",
+      "対象": "",
+      "範囲": "SS 352",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "21",
+      "楽観pp": "0.75",
+      "慎重pp": "4.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 352",
+      "lineNumber": 673,
+      "改訂残pp": "2.0"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "work": "現Batch正規compileのErrorProne/NullAway親規約とmonitoringのNullMarked、当候補のnull/欠落negativeを結合。",
+      "exitCondition": "同sourceのcompile終端と既現ローカルfixtureを個別requirementsに結ぶ。実DBと全NPE条件は別。"
+    },
+    "groupCapPp": 0.65,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.26,
+      "high": 0.65
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

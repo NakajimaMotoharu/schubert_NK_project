@@ -1,0 +1,115 @@
+{
+  "run": "PG43792",
+  "source": "1bb489d217d7237c31802d3314166d100d203c4e",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "initialHelperExit": 1,
+  "initialHelperReason": "Child Maven plugin has default lint arguments. The separate inherited default-compile execution overrides the defaults and sets NullAway ERROR.",
+  "compiler": {
+    "begin": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/begin.json",
+      "sha256": "a4746e0441d9a1fb51c50c84036473bd1a1543752c47d85ac74c95bca69dcb94"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/terminal.json",
+      "sha256": "1a0cdb47374fdbeb0579f347443baf1331b0e82669e5472c6fcbc751378c420d"
+    },
+    "parentPomSha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9",
+    "batchPomSha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "inheritedNullAwayConfiguration": "-Xplugin:ErrorProne -XepDisableAllChecks -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=dev.codex.schubert.nk -XepOpt:NullAway:JSpecifyMode=true -XepOpt:NullAway:JSpecifyJDKModels=true",
+    "compiledOwnedBatchMain": true,
+    "formatterPreviousReceiptsSeparate": true
+  },
+  "nullMarkedPackage": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+    "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+  },
+  "providedValueNegativeCases": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43754-current-backup-weblog-sixteen/manifest.json",
+        "sha256": "8e2b5bfd97bd3018cdb33f79372ce3069751fecb4fa9c65052463919c6e36520"
+      },
+      "fixture": "BackupHealthMonitorTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43754-current-backup-weblog-sixteen-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "3a7064d435613a5933f629e50b3f25457d9ac4b2f25945eb7c7e387d80f00511"
+      },
+      "method": "backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()",
+      "contract": "missing observation, missing count and bad elapsed"
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43754-current-backup-weblog-sixteen/manifest.json",
+        "sha256": "8e2b5bfd97bd3018cdb33f79372ce3069751fecb4fa9c65052463919c6e36520"
+      },
+      "fixture": "WebLogBacklogMonitorTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43754-current-backup-weblog-sixteen-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "3a7064d435613a5933f629e50b3f25457d9ac4b2f25945eb7c7e387d80f00511"
+      },
+      "method": "webLog006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()",
+      "contract": "missing count/age container, negative or reversed input"
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43766-current-monitor-status-lf-six/manifest.json",
+        "sha256": "91d7825412052d5e3892df554c3203f6a10d05eb3b4038e595b356c13e655e02"
+      },
+      "fixture": "MonitoringStatusTextTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43766-monitor-status-text-six-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "008f05e150f2c2c844411f36183301963b6251cac0bb54e7a86260465a52ed74"
+      },
+      "method": "monStatus004NullDuplicateClosedRejectedWithoutOwnerMutation()",
+      "contract": "null mode or event list, duplicate/closed alert"
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43778-current-alert-thresholds-fifteen/manifest.json",
+        "sha256": "978f3fef7e2ad02e6ab96f45c230a8be8388315fad0d5c1f436e641009dc1fd5"
+      },
+      "fixture": "AlertThresholdsTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43778-alert-thresholds-current-fifteen-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "5d2b9cf50affce525c8fa0387a9f17c4ab8e493c5f1dae747dadc173246a0035"
+      },
+      "method": "threshold013InvalidInputsNeverBecomeNormal()",
+      "contract": "invalid thresholds and durations"
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43774-current-batch-metric-text-thirtysix-single-exec/manifest.json",
+        "sha256": "4590a5221639407613f668950cbd31f37c8d2ca90809928ed058d5f927c8d087"
+      },
+      "fixture": "BatchMetricTextTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43774-current-batch-metric-text-thirtysix-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "9577afe9ede7ce94756d1e0c746cd412a7f5cf475fa29c46e73c02d75eace72c"
+      },
+      "method": "batchtext008NullSourceModeAndUnknownModeFail()",
+      "contract": "missing source/mode or invalid mode"
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43774-current-batch-metric-text-thirtysix-single-exec/manifest.json",
+        "sha256": "4590a5221639407613f668950cbd31f37c8d2ca90809928ed058d5f927c8d087"
+      },
+      "fixture": "BatchMetricTextTest",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43774-current-batch-metric-text-thirtysix-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "9577afe9ede7ce94756d1e0c746cd412a7f5cf475fa29c46e73c02d75eace72c"
+      },
+      "method": "batchfull004NullAndUnknownInputsFailBeforeStandardRead()",
+      "contract": "missing borrowed registry or mode, rejects before use"
+    }
+  ],
+  "actualNewTestExecutions": 0,
+  "invokedExternalOperations": 0,
+  "requiredUnresolved": [
+    "other modules and live provider boundaries",
+    "same-source whole451"
+  ],
+  "terminalAtUTC": "2026-11-23T17:20:14.326205+00:00",
+  "exitCode": 0,
+  "formalAcceptanceId": null
+}
