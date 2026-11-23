@@ -1,0 +1,130 @@
+{
+  "run": "PG43668",
+  "source": "412ca115bd31ab6f0fbfc8d0298fce09362d5d6d",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T13:25:19.410830+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P004-01.02/2",
+  "bug": "BUG-3723",
+  "horizontal": "YKT-2922",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43668-step-cleanup-append-inventory-before/manifest.json",
+    "sha256": "52b7c54acfe594947cba94103e729e41f0461e494bd998e222f4dfd3cd189240"
+  },
+  "correctTestId": "PT-DB-INBOX-266",
+  "initialShorthandRetained": "PT-DB-266",
+  "staticCheckIds": [
+    "PT-DB-ACL031-S01",
+    "PT-DB-ACL031-S02",
+    "PT-DB-ACL031-S03",
+    "PT-DB-ACL031-S04"
+  ],
+  "frozenOriginalHashes": 25,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43668-stepcleanup-inventory-qualified-v1/begin.json",
+    "sha256": "36dd3e34ae168c97c8a17ddef1474a01de0d991ecb057ccec96cad7ebad19356"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43668-stepcleanup-inventory-qualified-v1/terminal.json",
+    "sha256": "2824484ade012d8949d93798f9d239349ccb50485b91d0e1c58dc5dd52b1b9a2"
+  },
+  "testCompileSucceeded": true,
+  "independentRelabelProof": {
+    "path": "evidence/01_PT/004_NK-DAT-001/062_NK-DAT-001_原子cleanup_step_単体テスト仕様書.md",
+    "sha256": "d0287a2501dbfd2a0a089a883373c5e36c3fd86f6b71648bf6c0e962e9b7dfac"
+  },
+  "sourceChecked": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+      "sha256": "244fb56787989a39aaf9f786b80f06c73f7512d13f24ccf1de07077946de525c",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/NotificationStateMigrationTest.java",
+      "sha256": "b1f8e89a472f747f9517940bdff4290160b8a2447eecb57ec2dfd0ffbc21d0a4",
+      "disposition": "EXPLICIT_LEGACY_TARGET"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/QuestionDlqMigrationTest.java",
+      "sha256": "5e07150f3e52b9474332d6881ea437f3447252926dbc07018aa12ab59d1b681b",
+      "disposition": "EXPLICIT_LEGACY_TARGET"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/StartupSchemaProjectionTest.java",
+      "sha256": "e3ffc43080d1aaf201c1b44c808264969d408b837d78ac14716564e3c0379d53",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java",
+      "sha256": "8f2796e8d66e825055c64d2cd32c7c8c44a1fecfec8893976ec4fcd18742ed51",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/CleanupSafetyBoundaryTest.java",
+      "sha256": "45b0e345ac2503c0c9a3de24010079151d1c9299e39bb1ad0302efda5abde5fb",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest.java",
+      "sha256": "a7101d0e23ea387a1df5ce9a6e8956634d6b75a99f09e2da533a9e705dbc3b70",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest.java",
+      "sha256": "83d27ad616a9773ec9f1eda44d1663309e05a1ff1b761d80242d6bb1717242a1",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressBoundaryTest.java",
+      "sha256": "8a5a2f438b941266d14bb9b6ba4e382efac1c202c9af8bcb4f9be0344564b2e4",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxMaintenanceBoundaryTest.java",
+      "sha256": "1c8b2160f0221f6fc47369c79bc2456352ad1cf5e0b2b5f97a99b1a0634d940f",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionParentBoundaryTest.java",
+      "sha256": "2182652e532c596fad5b46efd60f1acb27421773419302bd8086cb5c006e11f2",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/LogCleanupProgressBoundaryTest.java",
+      "sha256": "7583cdbb9c8f5a265b053ec00c0eec369296fadb4c22fe5cd93a74af1dea3976",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/OutboxCleanupBoundaryTest.java",
+      "sha256": "9fab70eb1fe041eda8eb048f3b6aacb6c9cab867fe55072ecbd7bd5d84291c35",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+      "sha256": "36c8ae36afa132bb6b7ecf4cb5246120bfadaae51cfd7ed087c9688b54d49eba",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java",
+      "sha256": "85e026266d96833febb452ae6b163a0c499048b4d5a6faabf45dff06d3d4d919",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/RunReferenceBoundaryTest.java",
+      "sha256": "7ccb0bd042d728b6ff2c5ade570a90b6c2c6d9bb2bd216b3071962aabc7052d8",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/StepCleanupBoundaryTest.java",
+      "sha256": "5229884b2200752b465434c6647ec78756bce2e6f67947c55b08f2714a46b8cd",
+      "disposition": "INDEPENDENT_FULL_VERSION_ORACLE_CORRECTED"
+    }
+  ],
+  "sourceCount": 17,
+  "olderTargets": 2,
+  "independentFullOracle": 15,
+  "actualDbResult": "NOT_RUN",
+  "actualProductTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
