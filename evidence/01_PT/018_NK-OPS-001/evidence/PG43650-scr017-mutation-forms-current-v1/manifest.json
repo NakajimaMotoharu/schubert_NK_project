@@ -1,0 +1,359 @@
+{
+  "run": "PG43650",
+  "wbs": "WBS-P016-17/2",
+  "source": "56533edd1562a2114e3d7e22d81d20101dbbb3f6",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T12:40:42.262955+00:00",
+  "actualExit": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserChangeForm.java",
+      "sha256": "86c971c5eb84ba1fce0240b6a72238a05a0769f85af2a439a297d6ab3bd6550e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+      "sha256": "0853cfd076bcf75dd856c9da5c3d493ad7bca4e9730e70d64c5455113b7f7d2a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+      "sha256": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+      "sha256": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java",
+      "sha256": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+      "sha256": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "sha256": "1457344a74fbbd2bd07b443e002eb040be79028e94f9c5cfebfc2b0c51b0e2df"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a"
+    }
+  ],
+  "oldRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37928-web-form-owned-buffer33-unit-v1/manifest.json",
+    "sha256": "d71f5c43d62e29e784c47d59dbf8d3d8636c5191e59d663f1eb121d7fdc023bc"
+  },
+  "oldProofDeltas": {
+    "testSourceChanged": true,
+    "protocolFieldCodecChanged": true,
+    "mainSourceIdentical": true
+  },
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "regularWebJar": false,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/begin.json",
+    "sha256": "8b297a2429a1632627c17c3193481fa9b87b3606887c5fac8cd7028417a3e494"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/terminal.json",
+    "sha256": "fef0bd635bf1ca43446d884f3c2568ea8e4d1550978c873549b10a72bef134f3"
+  },
+  "scope": "SCR017 four pure local forms with a sealed public interface and one common input type. Independent fixed wire for the four operations; no use of API, DB or real authority",
+  "testIds": [
+    "PT-USER-CHANGE001",
+    "PT-USER-CHANGE002",
+    "PT-USER-CHANGE003",
+    "PT-USER-CHANGE004",
+    "PT-USER-CHANGE005",
+    "PT-USER-CHANGE006",
+    "PT-USER-CHANGE007",
+    "PT-USER-CHANGE008",
+    "PT-USER-CHANGE009",
+    "PT-USER-CHANGE010",
+    "PT-USER-CHANGE011",
+    "PT-USER-CHANGE012",
+    "PT-USER-CHANGE013",
+    "PT-USER-CHANGE014",
+    "PT-USER-CHANGE015",
+    "PT-USER-CHANGE016",
+    "PT-USER-CHANGE-INTERFACE001"
+  ],
+  "performed": 17,
+  "passed": 17,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "otherExecutions": 0,
+  "newTestIds": 0,
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "b3f87a528337055d91ec2fae4d9974bc6c246f602e8918bc4bb04ec598635113"
+  },
+  "testMethods": [
+    "change001StatusGolden()",
+    "change002RoleGolden()",
+    "change003UnlockGolden()",
+    "change004PasswordGoldenAndNoSecretProjection()",
+    "change005OperationAndUnknownFieldRejection()",
+    "change006PathAndHiddenIdentifier()",
+    "change007VersionSyntax()",
+    "change008ConfirmAndTokenSyntax()",
+    "change009ClosedRoleAndBoolean()",
+    "change010PasswordNfcCodepointByteBoundaries()",
+    "change011PasswordInvalidAndTrustedUsername()",
+    "change012NullMissingAndDuplicates()",
+    "change013ImmutableSnapshotAndRedaction()",
+    "change014TerminalCloseAndSeparateDto()",
+    "change015OneHundredIndependentParallelOperations()",
+    "change016InputCannotGrantApiAuthority()",
+    "change017SealedInterfacePreservesWireAndLifetime()"
+  ],
+  "oneExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/selected.exec",
+    "sha256": "8d3188422ce0ebdc5b7992d631c1aacb26b7ed51ab1f3864386772ad7e1a7890"
+  },
+  "classProof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/UserChangeForm.class",
+      "sha256": "e20ec408862dd749812cd4ef1bc82bbf83a5d779143c7f5155b6ee06dcd40643"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/UserMutationInput.class",
+      "sha256": "8bdfc010295648958d8b9ecd27d1996e379972023fbd76736a93efdd2d7c243b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/UserRoleForm.class",
+      "sha256": "af19dc6cc4b74f562d4a4c4f5fe91f4f706f7cdf41ffd519f01b3b4436130402"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/UserStatusForm.class",
+      "sha256": "24a6b15f2e4ed5e8cdacc0d41096bd9beeaff62caeb39e26452213ad01893d3a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/UserUnlockForm.class",
+      "sha256": "f26dbf8d50312316461aedd6002436fe1c731db2139d07816970bb30a0c83cfe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/main/dev/codex/schubert/nk/web/form/PasswordResetForm.class",
+      "sha256": "7eb915fc0ca762c312ed3e7ef1ab250af755b210a0cf517cc5bd183f3a9715b4"
+    }
+  ],
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43650-scr017-mutation-forms-current-v1/measure.out",
+    "sha256": "1d9d6d5f9f4c02fcc2fbe54c88e60cd72e233c6af4d7cc0fb1f29b7e6d9b4f38"
+  },
+  "counters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 746
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 70
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 155
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 83
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 48
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    }
+  },
+  "classes": {
+    "dev/codex/schubert/nk/web/form/UserChangeForm": {
+      "hasProbes": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/form/UserMutationInput": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 489
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 70
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 96
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 47
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/form/UserRoleForm": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 72
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/form/UserStatusForm": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 72
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 15
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/form/UserUnlockForm": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 55
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 13
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/form/PasswordResetForm": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 58
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 15
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "coverageMerged": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Regular Web package and six-product 451",
+    "Real ADMIN, GET/POST caller and operation authorization",
+    "Related CHR and /2 end criteria"
+  ],
+  "publicationCheck": "A staged generic-api-key match came from a file path immediately followed by its Git-verified SHA-256. Source path and digest are stored in separate fields and verified without an exclusion."
+}

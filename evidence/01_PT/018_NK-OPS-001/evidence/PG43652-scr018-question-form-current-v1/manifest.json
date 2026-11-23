@@ -1,0 +1,146 @@
+{
+  "run": "PG43652",
+  "wbs": "WBS-P016-18/2",
+  "source": "56533edd1562a2114e3d7e22d81d20101dbbb3f6",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T12:41:31.676901+00:00",
+  "actualExit": 0,
+  "sourceInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java": "68bf00a0ab6f97bae566af42f89867d167d473bfc57fde9b2c6f3ee116ed1415",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": "89c91096d53f692483d5c5f3029ede573ca8511e640842688b41ba7df3ee376f",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a"
+  },
+  "oldRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37928-web-form-owned-buffer33-unit-v1/manifest.json",
+    "sha256": "d71f5c43d62e29e784c47d59dbf8d3d8636c5191e59d663f1eb121d7fdc023bc"
+  },
+  "oldProofDeltas": {
+    "testSourceChanged": true,
+    "protocolFieldCodecChanged": true,
+    "mainSourceIdentical": true
+  },
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "regularWebJar": false,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/begin.json",
+    "sha256": "f0a6011f7205ea86261bb92bbc07ae67bff65cb82477a7d08b6ed6a586749390"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/terminal.json",
+    "sha256": "7ee9f4f8495c0efe6096e14de899ffab3a432c6427fe82f54cc40139cbb350cf"
+  },
+  "scope": "SCR018 pure form with fixed text, empty and null boundaries, UTF-8 NFC and independent wire. Canonical syntax check with synthetic values only",
+  "testIds": [
+    "PT-QST-FORM001",
+    "PT-QST-FORM002",
+    "PT-QST-FORM003",
+    "PT-QST-FORM004",
+    "PT-QST-FORM005",
+    "PT-QST-FORM006",
+    "PT-QST-FORM007",
+    "PT-QST-FORM008"
+  ],
+  "performed": 8,
+  "passed": 8,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "otherExecutions": 0,
+  "newTestIds": 0,
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "474d1d02123db36c1bbe6159f38b33a65add6a15ad04f35186941c662e905786"
+  },
+  "testMethods": [
+    "qstForm001IndependentGoldenAndNoQuestionTrimming()",
+    "qstForm002ByteBoundariesAfterNfcWithoutTruncation()",
+    "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed()",
+    "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization()",
+    "qstForm005ClosedBindingMissingDuplicateAndNullContracts()",
+    "qstForm006ImmutableSnapshotsAndRedaction()",
+    "qstForm007TerminalClosePreservesOtherOwners()",
+    "qstForm008ConcurrentIndependentBodiesAndTokens()"
+  ],
+  "oneExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/selected.exec",
+    "sha256": "a49b5dd0623a1a104ae9303926d3f93019eb954aed9e6ee1046fd70da45da0f7"
+  },
+  "classProof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/main/dev/codex/schubert/nk/web/form/QuestionSubmitForm.class",
+      "sha256": "059343430511c07ee50ec7bbd54c76b8cb641c48223f024da12a7e6b68b5ac92"
+    }
+  ],
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43652-scr018-question-form-current-v1/measure.out",
+    "sha256": "3bc9928d03eafc5406af04627dd521129e4fdd0c51a9193daa9d0a54486412e0"
+  },
+  "counters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 281
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 32
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 56
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 29
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "classes": {
+    "dev/codex/schubert/nk/web/form/QuestionSubmitForm": {
+      "hasProbes": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 281
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 32
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 56
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 29
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "coverageMerged": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Regular Web package and six-product 451",
+    "Actual GET/POST caller and operation token life cycle",
+    "Related CHR and /2 end criteria"
+  ]
+}
