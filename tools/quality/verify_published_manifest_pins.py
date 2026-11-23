@@ -52,7 +52,7 @@ def pins(value):
     if isinstance(value, dict):
         path, sha = value.get("path"), value.get("sha256")
         if isinstance(path, str) and isinstance(sha, str) and SHA256.fullmatch(sha):
-            yield path, sha, exact_source(value.get("source"))
+            yield path, sha, exact_source(value.get("source")), "source" in value
         for child in value.values():
             yield from pins(child)
     elif isinstance(value, list):
@@ -86,12 +86,23 @@ def audit(repo, start, end):
         content = json.loads(git(repo, "cat-file", "blob", f"{end}:{manifest}").stdout)
         parent_source = exact_source(content.get("source")) if isinstance(content, dict) else None
         references = set(pins(content))
-        for raw_path, expected, source in sorted(
-            references, key=lambda row: (row[0], row[1], row[2] or "")
+        for raw_path, expected, source, has_explicit_source in sorted(
+            references, key=lambda row: (row[0], row[1], row[2] or "", row[3])
         ):
             path = local_path(repo, raw_path)
             if path is None:
                 counts["externalOrProtected"] += 1
+                continue
+            if has_explicit_source and source is None:
+                unresolved.append(
+                    {
+                        "manifest": manifest,
+                        "path": path,
+                        "sha256": expected,
+                        "source": None,
+                        "reason": "INVALID_EXPLICIT_SOURCE",
+                    }
+                )
                 continue
             candidates = (source,) if source else (end, parent_source, start)
             actual = next(
