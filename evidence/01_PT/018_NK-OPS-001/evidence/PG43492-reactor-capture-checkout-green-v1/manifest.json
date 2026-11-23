@@ -1,0 +1,62 @@
+{
+  "run": "PG43492",
+  "wbs": "WBS-G09",
+  "related": "WBS-G08",
+  "terminalAtUTC": "2026-11-23T08:57:26.995832+00:00",
+  "targetCommit": "968a5f9fd1812770678dd03ff2ccdc34d40d70fd",
+  "actualToolTerminalAtUTC": "2026-11-23T08:56:25.655575+00:00",
+  "actualExit": 0,
+  "workBranch": "dev-foundation",
+  "python": "3.14.4",
+  "system": "Linux",
+  "git": "git version 2.53.0",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/quality/tests",
+    "-p",
+    "test_pgpt_reactor_junit.py",
+    "-v"
+  ],
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5807_Reactor新規証明のcheckout結合_単体テスト仕様.md",
+    "sha256": "d7e899cbab62410808ebf121e4114e8389b51038891b2c4eeb2c8c7320f310c4"
+  },
+  "preFixStaticProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43492-reactor-capture-head-static-before-v1/manifest.json",
+    "sha256": "802afbadab77441527d30041554a923cc91b882d9e01464a7d49056e99f8404d"
+  },
+  "actualInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43492-reactor-capture-checkout-green-v1/begin.json",
+    "sha256": "6f22cbae43edff9c7cdd8793918a0d3217ad6854e86797013ccb9dc09028928a"
+  },
+  "rawTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43492-reactor-capture-checkout-green-v1/terminal.json",
+    "sha256": "939a2b397b44dd09ba4590b9298e7bd8e061e637fb7adc09faa4834b6abafa6a"
+  },
+  "sanitizedResults": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43492-reactor-capture-checkout-green-v1/unit-cases.safe.json",
+    "sha256": "bc520b73e8deeac63caf429f19c89dfc04440afa6ee362536298d6c66e01013e"
+  },
+  "successfulToolTests": 28,
+  "newTests": {
+    "PT-OPS-G09-JUNIT018": "test_junit018_new_capture_requires_the_original_checkout_commit",
+    "PT-OPS-G09-JUNIT019": "test_junit019_capture_checks_the_checkout_after_reading_artifacts",
+    "PT-OPS-G09-JUNIT020": "test_junit020_original_receipt_still_verifies_after_an_unrelated_commit"
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "storeBeforeCaptureHeadCheck": "REQUIRED",
+  "storeAfterReadingHeadCheck": "REQUIRED",
+  "originalFollowupVerificationBehavior": "UNCHANGED",
+  "productionPt": 0,
+  "actualReactor": 0,
+  "fourCountersMeasured": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
