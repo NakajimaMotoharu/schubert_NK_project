@@ -28,7 +28,7 @@ def build(repo, root):
               for k in contract['source']}
     contract['source'] = source
     reports = root/'program/characterization/reports'
-    write(reports/'source-verification.json', dict(source,status='PASS',masterSymlinks=[]))
+    write(reports/'source-verification.json', dict(source,status='PASS',masterSymlinks=[],failures=[]))
     write(reports/'preflight.json',dict(status='PASS',failures=[],credentialPermission='0600',
         hostAllowlist=['localhost','127.0.0.1'],freeBytes=21474836480))
     write(reports/'review-record.json',dict(status='APPROVED',baselineCommit='843de94',
