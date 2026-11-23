@@ -1,0 +1,171 @@
+{
+  "run": "PG43302-p01810-retained-location-all-six-v1",
+  "source": "22b35340651c1cb33988f4d4bec1f6a8d2d2953d",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T03:55:31.644924+00:00",
+  "wbs": "WBS-P018-10.03/2",
+  "related": [
+    "WBS-P003-07",
+    "SSC-457",
+    "SS343",
+    "SS351"
+  ],
+  "previousAllCaseAndSingleRaw": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38490-ssc457-location-unit-v1/manifest.json",
+      "sha256": "8924fcc97ee7b3142242aa06b870d9a1ce81f76d1ff191038f6d770d68cbab6b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/manifest.json",
+      "sha256": "829c8b6e213697560c3841064ec86b9437cceaeeac84cc100ecff161527c8e6b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38498-p00307-credential-location-fixed-diagnostic-independent-v1/manifest.json",
+      "sha256": "1a3af9f31edc3425025c892cd69c0b0e0bf77357d04286c32faffdb27e2f8309"
+    }
+  ],
+  "previousOneCase3rdReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42594-p0181003-storage-unencodable-location-current-proof-v1/manifest.json",
+    "sha256": "0a8e5291dd8a1cc851a75055daca943af721ac0cadeb7985eb56ace80e4995dc"
+  },
+  "currentNormalStorage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "matchedDeclaredSource": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+      "sha256": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "sha256": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "sha256": "fad1b3c44ba57b7e00ae2052bc8830c4ec12f05dddd07984843a362ea2fe3591"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationDiagnosticTest.java",
+      "sha256": "49248c4f86cb8c0250e676c8bc47a4fdf1d067007eae86f2306d5eebd6ea21cf"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    }
+  ],
+  "samePhysical": [
+    {
+      "entry": "dev/codex/schubert/nk/storage/package-info.class",
+      "sha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583"
+    },
+    {
+      "entry": "dev/codex/schubert/nk/storage/ServiceCredentialLocation.class",
+      "sha256": "56e21c5c9ee875df347398614b1971153e684d329ef96903cb2d41f07163dfc9"
+    }
+  ],
+  "originalDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "jdk": "25.0.4",
+  "validatedExactLocalCases": {
+    "PT-OPS-CREDLOC-001": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention()"
+    ],
+    "PT-OPS-CREDLOC-002": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "opsCredloc002RejectsMissingEmptyRelativeAndRoot()"
+    ],
+    "PT-OPS-CREDLOC-006": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationDiagnosticTest",
+      "opsCredloc006RejectsUnencodableLocationWithOnlyFixedDiagnostic()"
+    ],
+    "PT-OPS-CREDLOC-004": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "opsCredloc004BoundsAndNullContracts()"
+    ],
+    "PT-OPS-CREDLOC-003": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "opsCredloc003RejectsAliasTraversalAndControlBytes()"
+    ],
+    "PT-OPS-CREDLOC-005": [
+      "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot()"
+    ]
+  },
+  "rawCaseScope": {
+    "INSTRUCTION": {
+      "covered": 99,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 26,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 24,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 18,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "originalXml": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/original-TEST-junit-platform-suite.xml",
+      "sha256": "288102dd5744805b83bf014fb98ca9c3bae7dcaf0be643d51390e995510aee76",
+      "resultCount": 0,
+      "originalHashRetained": "2bd2643dc99944db71742e815dee71c2022e52666222c90f7678d82c0fc018b5",
+      "sanitizedXml": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/original-TEST-junit-vintage.xml",
+      "sha256": "3df69eb582ba0decf4dd32d823aec676b01742b55e2551ac35f94b126218fa1f",
+      "resultCount": 0,
+      "originalHashRetained": "d3d07d360a8ac09849d09c95e57955750869ffa2dd988e793d0411956f141477",
+      "sanitizedXml": true
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "b8c8ddd8dc89c71e03513ecb2c7d39173782f0b1338a3c60b58d5f09401c2609",
+      "resultCount": 6,
+      "originalHashRetained": "6bf95a7f3dc2742a29a86a310ee4aa17263b5686a9020b925aa7443da57dc03d",
+      "sanitizedXml": true
+    }
+  ],
+  "priorWholeOriginalSource": "33d49561f48344c45f56ae19fb560b36409fe79a",
+  "preflightCorrection": "First read-only verifier compared published sanitized XML to the original digest. Both separate hashes are now tied to the independently recorded originals; raw XML not reopened.",
+  "archiveReusedAsSourceEvidenceNotNewRun": true,
+  "newProductTests": 0,
+  "actualCredentialAndFsOperations": 0,
+  "actualRuntimeEntryAndSinkQualification": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "publicationCorrection": {
+    "related": [
+      "BUG-3694",
+      "YKT-2901"
+    ],
+    "format": "Source and class identifiers are values with a separately labelled digest.",
+    "previousUnpublishedProofSha256": "9a4b02d7652e191d0860090262c348a31e2cebaa605d97e926e096577e1f464c",
+    "scannerInitialExit": 1,
+    "classifiedMetadataDigestMatches": 3,
+    "redactedReceipt": {
+      "path": "../pgpt-runs/PG379/PG43302-staged-scan-v1/gitleaks-redacted.json",
+      "sha256": "75fa28387e400487734b2106658e5c5db0a3157060edb8b39343d2fae84bae3e"
+    },
+    "scanRulesChanged": false
+  }
+}
