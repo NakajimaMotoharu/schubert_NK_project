@@ -1,0 +1,299 @@
+{
+  "run": "PG43776",
+  "source": "326ce607412ef1f9a1d7953a026f54d3b473bdc9",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "terminalAtUTC": "2026-11-23T17:05:13.556652+00:00",
+  "actualExit": 0,
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43690-batch-monitor-lock-final-72/manifest.json",
+    "sha256": "0f2bf61ee9a47ee95525886495c0086262e27d10307b392852c427435b0c6e8d"
+  },
+  "originalUnit": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/terminal.json",
+    "sha256": "ff36f4683451e8ea9dfb032db66078ae217b23939190364674ad83dba1084f8f"
+  },
+  "exactProduct": [
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit-main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+      "sha256": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9"
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit-main/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+      "sha256": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77"
+    }
+  ],
+  "actualOriginalExec": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit.exec",
+    "sha256": "160826c83c482a162fde8928138c4a90dcef34b4fc9fd99058c5756d8bf429e8"
+  },
+  "normalBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5450a2884f297fce02052a152763ec3dbce82f6fa4e8fc3348b7c2e1397dfc25"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/raw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--strict-original-exec",
+    "--line-deficits",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit-main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit-main/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class"
+  ],
+  "scopeCoverage": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine": {
+      "probeId": "3bed84c2f506392a",
+      "coverage": {
+        "INSTRUCTION": [
+          0,
+          199
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          36
+        ],
+        "COMPLEXITY": [
+          0,
+          17
+        ],
+        "METHOD": [
+          0,
+          17
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds": {
+      "probeId": "c7e8ebe7687f7b0f",
+      "coverage": {
+        "INSTRUCTION": [
+          10,
+          428
+        ],
+        "BRANCH": [
+          8,
+          102
+        ],
+        "LINE": [
+          0,
+          72
+        ],
+        "COMPLEXITY": [
+          8,
+          72
+        ],
+        "METHOD": [
+          0,
+          25
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "uncoveredMethodsOfThisRun": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds": [
+      {
+        "name": "transfer",
+        "descriptor": "(JJ)Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;",
+        "counts": {
+          "INSTRUCTION": [
+            0,
+            28
+          ],
+          "BRANCH": [
+            2,
+            6
+          ],
+          "LINE": [
+            0,
+            3
+          ],
+          "COMPLEXITY": [
+            2,
+            3
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "webLog",
+        "descriptor": "(JLjava/time/Duration;)Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;",
+        "counts": {
+          "INSTRUCTION": [
+            0,
+            28
+          ],
+          "BRANCH": [
+            2,
+            6
+          ],
+          "LINE": [
+            0,
+            5
+          ],
+          "COMPLEXITY": [
+            2,
+            3
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "dlq",
+        "descriptor": "(JZZ)Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;",
+        "counts": {
+          "INSTRUCTION": [
+            0,
+            22
+          ],
+          "BRANCH": [
+            1,
+            7
+          ],
+          "LINE": [
+            0,
+            2
+          ],
+          "COMPLEXITY": [
+            1,
+            4
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "backup",
+        "descriptor": "(ZZJ)Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;",
+        "counts": {
+          "INSTRUCTION": [
+            0,
+            18
+          ],
+          "BRANCH": [
+            1,
+            5
+          ],
+          "LINE": [
+            0,
+            2
+          ],
+          "COMPLEXITY": [
+            1,
+            3
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "duration",
+        "descriptor": "(Ljava/time/Duration;)V",
+        "counts": {
+          "INSTRUCTION": [
+            5,
+            8
+          ],
+          "BRANCH": [
+            1,
+            1
+          ],
+          "LINE": [
+            0,
+            3
+          ],
+          "COMPLEXITY": [
+            1,
+            1
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "durations",
+        "descriptor": "(Ljava/time/Duration;Ljava/time/Duration;)V",
+        "counts": {
+          "INSTRUCTION": [
+            5,
+            9
+          ],
+          "BRANCH": [
+            1,
+            1
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            1,
+            1
+          ],
+          "METHOD": [
+            0,
+            1
+          ],
+          "CLASS": [
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "unfilteredArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43776-current-engine-threshold-retained-exec-v1/raw.stdout",
+    "sha256": "0d5bef617da2cc76b7209734a43d48079680c8744abed76f73b960b22fed7234"
+  },
+  "merged": false,
+  "newTestExecutions": 0,
+  "currentProductionOperation": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
