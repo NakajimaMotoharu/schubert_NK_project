@@ -1,0 +1,577 @@
+{
+  "run": "PG43390-web-three-fixture-nullability-horizontal-v1",
+  "source": "a7911ba500b7f1d826f470be8927a870b6d83cc1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T06:01:52.314740+00:00",
+  "actualExit": 0,
+  "scope": [
+    "SCR-008/009",
+    "SCR-007",
+    "SCR-003 view state"
+  ],
+  "related": [
+    "BUG-3701",
+    "YKT-2907"
+  ],
+  "jitterBudgetUnchanged": true,
+  "workerCases": 1,
+  "totalizedDomSites": 3,
+  "production": {
+    "sourceFiles": 9,
+    "physicalSameBytes": 20,
+    "javaNullAway": 0,
+    "compilerWarnings": 0
+  },
+  "fixtures": {
+    "sourceFiles": 3,
+    "physicalFiles": 4,
+    "lintWarnings": 0
+  },
+  "priorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43370-animation-menu-list-current-eight-v1/manifest.json",
+      "sha256": "44913e44f1b6802f940a1c2b94fa2da2cfdc03c26ed931283b2c6cb314bdae3c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43382-scenario-detail-current-twelve-v1/manifest.json",
+      "sha256": "22c08f76dca5a8a12e9f8f33fdfcc47273ccbd8a5fbf04c4d25583cf4465720e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43376-scenario-search-two-models-current-sixteen-v2/manifest.json",
+      "sha256": "5a86d691a6dfa152a3ff930d8ef2e43b9c22d6251b7a2e5ab81662727e49f4eb"
+    }
+  ],
+  "unaffectedSearchResultFixtureNotReplayed": 8,
+  "junit": {
+    "tests": 28,
+    "success": 28,
+    "error": 0,
+    "failed": 0,
+    "skipped": 0,
+    "xml": {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "1732e900f1c29c386290b7ae986839436e8de55f077073c2fce738c99bf14882"
+    }
+  },
+  "selectedTestIds": {
+    "PT-WEB-230": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web230AnimationMenuCounts"
+    },
+    "PT-WEB-231": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web231MainGrouping"
+    },
+    "PT-WEB-232": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web232OvaAndBounds"
+    },
+    "PT-WEB-233": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web233RejectInconsistentGroups"
+    },
+    "PT-WEB-234": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web234NullAndOwnership"
+    },
+    "PT-WEB-235": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web235ClosedBeansAndRedaction"
+    },
+    "PT-WEB-236": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web236SyntheticHtmlEscaping"
+    },
+    "PT-WEB-237": {
+      "className": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+      "method": "web237ConcurrentProjection"
+    },
+    "PT-WEB-194": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web194HeaderAndNavigation"
+    },
+    "PT-WEB-195": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web195GroupingAndAudio"
+    },
+    "PT-WEB-196": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web196EmptyAndBounds"
+    },
+    "PT-WEB-197": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web197NullContracts"
+    },
+    "PT-WEB-198": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web198NavigationPairs"
+    },
+    "PT-WEB-199": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web199SequenceRejection"
+    },
+    "PT-WEB-200": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web200EntryMetadataConsistency"
+    },
+    "PT-WEB-201": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web201ImmutableSnapshot"
+    },
+    "PT-WEB-202": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web202ClosedBeanContract"
+    },
+    "PT-WEB-203": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web203SyntheticHtmlEscaping"
+    },
+    "PT-WEB-204": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web204ConcurrentProjection"
+    },
+    "PT-WEB-205": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+      "method": "web205RedactedDiagnostics"
+    },
+    "PT-WEB-222": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web222SuccessfulSnapshot"
+    },
+    "PT-WEB-223": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web223PaginationUrls"
+    },
+    "PT-WEB-224": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web224QueryEncoding"
+    },
+    "PT-WEB-225": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web225ResponseBindingAndBounds"
+    },
+    "PT-WEB-226": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web226InvalidFieldDisplay"
+    },
+    "PT-WEB-227": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web227NullAndOwnership"
+    },
+    "PT-WEB-228": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web228ClosedBeansAndRedaction"
+    },
+    "PT-WEB-229": {
+      "className": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+      "method": "web229ConcurrentSnapshots"
+    }
+  },
+  "currentCoverage": {
+    "singleExec": true,
+    "independentCrcAndProbeVerified": true,
+    "measuredFour": {
+      "LINE": 277,
+      "METHOD": 97,
+      "CLASS": 11,
+      "BRANCH": 98
+    },
+    "coveredProbes": 297,
+    "exec": {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/selected.exec",
+      "sha256": "25f756b8d059a984beb084129b9ffae9913bfb6a2206be7f6ea43bc4615f1c07"
+    },
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43390-web-three-fixture-nullability-horizontal-v1/coverage-unfiltered.tsv",
+      "sha256": "9d45be2a496ae6a7ff453eed5d13ceb274be26bac86d48fd40ef560c6a229fdf"
+    },
+    "physical": {
+      "dev/codex/schubert/nk/web/view/AnimationMenuViewModel": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/AnimationMenuViewModel.class",
+          "sha256": "5d044c7d01005b591e895392166f8f82bf45fbd295834e280bfc145cb0ac30ee"
+        },
+        "crc64": "7039413eb85b5f5a",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 74
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 19
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 10
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/AnimationListViewModel": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel.class",
+          "sha256": "edeecfd58336050ef3974102e26709cbbd30beb5a53423aaac4e0ef32ec18fe9"
+        },
+        "crc64": "883a6790e9efd733",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 257
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 40
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 49
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 29
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 9
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/AnimationListViewModel$Video": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel$Video.class",
+          "sha256": "14d941c7de5a22cde6ff2ab6f45ca894abc660c880a46508d5149b403111610c"
+        },
+        "crc64": "0d5ad2d2b88880f7",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 67
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 8
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 16
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 11
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 7
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/AnimationListViewModel$Row": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel$Row.class",
+          "sha256": "7ddef5b996033d8c7676889957ee848677e59a25c8a12d3f32bccb2337ae8cf1"
+        },
+        "crc64": "f8659487bb33ff38",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 17
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 7
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 4
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.class",
+          "sha256": "7ecec7ec4a62906b83b7cb176b0ff0eaaac78e2ab73e055839bbcf5a7ca5ead6"
+        },
+        "crc64": "4815ad0b35afc3d6",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 239
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 26
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 53
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 26
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 13
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Audio": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Audio.class",
+          "sha256": "4b4a87de393d3354969a19b776897d6ddb9fa04d8ac9acd0404fd282fdb2b198"
+        },
+        "crc64": "5dcb57b8ac9d65e7",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 31
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 11
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 7
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 7
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Entry": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Entry.class",
+          "sha256": "9c3f5ff9b457ed138861d937c77d4d2fba285c9faef1fc5890026b396c5ec4c7"
+        },
+        "crc64": "b55499c6eebd3697",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 104
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 28
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 13
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 11
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Navigation": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Navigation.class",
+          "sha256": "704cfe476ed3db3502f5f244eab4f34cb43d43a53b2cfa816dafe2c9550607f1"
+        },
+        "crc64": "70fd9fb17275a4d6",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 21
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 8
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioSearchViewModel.class",
+          "sha256": "4346bb0e36469e89e880e5a3db7d5d5223bc2c8613891297d0536c86fd086979"
+        },
+        "crc64": "4c85714513e055c3",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 257
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 14
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 56
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 27
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 20
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$FieldError": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$FieldError.class",
+          "sha256": "425b3d7d4c95731713f44160c69d25c62d3391986f2124abedb96ded3c631bcc"
+        },
+        "crc64": "e0a7bed464db7df0",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 70
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 14
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 6
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$Filters": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/target/classes/dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$Filters.class",
+          "sha256": "82aae1d21392f997ea8a2913532d96b5dffe2031143832f56189b1bd3acb439a"
+        },
+        "crc64": "0f9377a5e3974d27",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 74
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 16
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 8
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    }
+  },
+  "commandReceipt": [
+    {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/begin.json",
+      "sha256": "136ccb996fb8730e511ee8d34dde88d0ff310473ee0e13b43f85c4670c371960"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/compile.stdout",
+      "sha256": "8cb0b27eed958b55f4a45dd3023d6ff50c4c6a78aa991b291e891543837530f6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/resume.safe.json",
+      "sha256": "788a64bf97665aa6edc533a92dbb67e1125c79c4d00a6b15c2e87f97ff507149"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43390-web-three-fixture-nullability-horizontal-v1/terminal.json",
+      "sha256": "110bded6856cff6755d43711c2a2715850227007fd224342f31d1aa2f1092142"
+    }
+  ],
+  "newDefinitions": 0,
+  "externalOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

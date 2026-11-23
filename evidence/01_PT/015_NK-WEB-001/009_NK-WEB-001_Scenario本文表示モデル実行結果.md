@@ -19,3 +19,5 @@ source74c282c1＋PG195作業tree/dev-foundation。Ubuntu26.04.1/Linux7.0.0-31/am
 ## PG43382 現候補の本文表示
 
 PT-WEB-194～205の単一実行で12件成功。失敗、エラー、skippedは各0。本文とAudio/Entry/Navigationの生四指標は L100/M36/C4/B30で各100%。実ファイル・API・HTTP・実Browser・全451は別条件。公開manifest evidence/01_PT/018_NK-OPS-001/evidence/PG43382-scenario-detail-current-twelve-v1/manifest.json（SHA256 22c08f76dca5a8a12e9f8f33fdfcc47273ccbd8a5fbf04c4d25583cf4465720e）。
+
+PG43390／YKT-2907。fixture修正 a7911ba500、当変更三fixtureの28再試験成功の当箇所は12件。失敗・エラー・skipped各0。明示した表示文字列、URL、並行完了と意図的なnull入力を維持。製品9 sourceおよび依存含む20物理に差分なし。NullAwayと試験lintは各終了0。evidence/01_PT/018_NK-OPS-001/evidence/PG43390-web-three-fixture-nullability-horizontal-v1/manifest.json（SHA256 7cd285641df16792fdaa0de32047b25aa5bcf82b75e888a265400c9ae932b98f）。

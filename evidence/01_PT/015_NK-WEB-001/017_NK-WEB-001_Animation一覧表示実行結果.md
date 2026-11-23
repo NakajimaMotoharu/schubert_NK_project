@@ -16,3 +16,5 @@ PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f
 ## PG43370 現メニュー・一覧の選択試験
 
 UI235 §§4–5、SCR008／009、PT-WEB-230～237。現在のfixture・正規Protocol・現SDKを固定し、8/8成功、失敗・エラー・skip・未実行0。対象四物理の同一execで行91/91、メソッド28/28、クラス4/4、分岐52/52。111 probeと全CRCを独立照合した。旧全8件と狭い選択再試験は別の元証跡。実配信・HTTP・Browser、正式Web JARと全451は未受入。[PG43370](../018_NK-OPS-001/evidence/PG43370-animation-menu-list-current-eight-v1/manifest.json)
+
+PG43390／YKT-2907。fixture修正 a7911ba500、当変更三fixtureの28再試験成功の当箇所は8件。失敗・エラー・skipped各0。明示した表示文字列、URL、並行完了と意図的なnull入力を維持。製品9 sourceおよび依存含む20物理に差分なし。NullAwayと試験lintは各終了0。evidence/01_PT/018_NK-OPS-001/evidence/PG43390-web-three-fixture-nullability-horizontal-v1/manifest.json（SHA256 7cd285641df16792fdaa0de32047b25aa5bcf82b75e888a265400c9ae932b98f）。

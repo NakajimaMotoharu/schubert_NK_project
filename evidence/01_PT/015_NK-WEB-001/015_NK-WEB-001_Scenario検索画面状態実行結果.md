@@ -14,3 +14,5 @@ source5d8472f7＋PG200作業tree/dev-foundation。Ubuntu26.04.1/Linux7.0.0-31/am
 ## PG43376 現検索画面状態の選択試験
 
 PT-WEB-222～229は成功8/8。検索結果表示PT-WEB-206～213との同一選択で16件が成功した。該当六物理の生四指標、全selected ID、sourceとSDKは同じ実行証跡に固定した。旧証跡と合算せず、実Web・全451の正式受入を別に記録する。[PG43376](../018_NK-OPS-001/evidence/PG43376-scenario-search-two-models-current-sixteen-v2/manifest.json)
+
+PG43390／YKT-2907。fixture修正 a7911ba500、当変更三fixtureの28再試験成功の当箇所は8件。失敗・エラー・skipped各0。明示した表示文字列、URL、並行完了と意図的なnull入力を維持。製品9 sourceおよび依存含む20物理に差分なし。NullAwayと試験lintは各終了0。evidence/01_PT/018_NK-OPS-001/evidence/PG43390-web-three-fixture-nullability-horizontal-v1/manifest.json（SHA256 7cd285641df16792fdaa0de32047b25aa5bcf82b75e888a265400c9ae932b98f）。
