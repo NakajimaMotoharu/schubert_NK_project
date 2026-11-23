@@ -3,11 +3,13 @@ package dev.codex.schubert.nk.batch.repository;
 import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Data only, not an issuer/lock/worker certificate. Full latest failed pair observation.
@@ -70,13 +72,8 @@ public record BackupFailureSnapshot(
                 .equals(row.getObject("business_date", java.time.LocalDate.class))
             || !expected.step().name().equals(row.getObject("step", String.class))
             || !Integer.valueOf(expected.attempt()).equals(row.getObject("attempt", Integer.class))
-            || !expected
-                .startedAt()
-                .atOffset(java.time.ZoneOffset.UTC)
-                .equals(row.getObject("started_at", OffsetDateTime.class))
-            || !endedAt
-                .atOffset(java.time.ZoneOffset.UTC)
-                .equals(row.getObject("ended_at", OffsetDateTime.class))
+            || !matchesInstant(row, "started_at", expected.startedAt())
+            || !matchesInstant(row, "ended_at", endedAt)
             || !"FAILED".equals(row.getObject("status", String.class))
             || !Long.valueOf(1).equals(row.getObject("target_count", Long.class))
             || !Long.valueOf(0).equals(row.getObject("success_count", Long.class))
@@ -92,6 +89,13 @@ public record BackupFailureSnapshot(
       throw new java.io.IOException("failed backup observation unavailable");
     }
     guard.check();
+  }
+
+  /** SS332 SSC-056 / BUG-3754. Compare the JDBC 4.2 projection as an instant. */
+  private static boolean matchesInstant(ResultSet row, String column, Instant expected)
+      throws SQLException {
+    @Nullable OffsetDateTime timestamp = row.getObject(column, OffsetDateTime.class);
+    return timestamp != null && expected.equals(timestamp.toInstant());
   }
 
   @Override
