@@ -1,0 +1,59 @@
+{
+  "run": "PG43362-scope-metadata-json-v1",
+  "source": "b3cb11f5cfc4bdd8133f9d7b15b11f1405f196a9",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-23T05:14:49.665369+00:00",
+  "terminalTimeBasis": "EXIT_ALREADY_OBSERVED",
+  "actualExit": 0,
+  "defect": "BUG-3699",
+  "horizontal": "YKT-2905",
+  "related": [
+    "BUG-3674",
+    "BUG-3692",
+    "SS354",
+    "451"
+  ],
+  "testId": "PT-OPS-SRC-SCOPE011",
+  "originalGuard": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43322-f03-source-plan-scope-regression-v1/manifest.json",
+    "sha256": "dd3b3410c6608580d8122579d9460a2e31e5b6cbfce80374b5a3bca7d138498f"
+  },
+  "ledgerBeforeFix": "537fb6e7b715b2c3293ce6d1085bf560ca478057",
+  "sources": [
+    {
+      "path": "tools/quality/static_input_scope.py",
+      "sha256": "c754adf9c2cca1af3be162e63cf42990c89bac25161da46d7abdcfff808e4ddd"
+    },
+    {
+      "path": "tools/quality/tests/test_static_input_scope.py",
+      "sha256": "a14a1b9562d502c4dddc8cbcde09c93ff08c532511acd5fe3319b372fb65eb77"
+    }
+  ],
+  "pythonVersion": "3.14.4",
+  "before": {
+    "testExit": 1,
+    "failedSubcases": 3,
+    "command": "PYTHONPATH=tools/quality:tools/quality/tests python3 -B -m unittest -v test_static_input_scope.StaticInputScopeTest.test_non_json_constants_are_rejected_even_with_exact_digest",
+    "receipt": {
+      "path": "../pgpt-runs/PG379/PG43362-scope-metadata-json-v1/before.stderr",
+      "sha256": "62b4ea5df399998aab5a1270ce8b3a041ef84a2da02cc83cfdd84dcf4bb15df8"
+    }
+  },
+  "after": {
+    "testExit": 0,
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "command": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_static_input_scope.py -v",
+    "receipt": {
+      "path": "../pgpt-runs/PG379/PG43362-scope-metadata-json-v1/after.stderr",
+      "sha256": "450e8a10dc77a8cb76515620b9101f74065e15868497cb6668b8c07ede54ed6c"
+    }
+  },
+  "requirement": "Reject NaN, Infinity and -Infinity before evaluating a scope or receipt even when file digests match; preserve both plans with canonical grammar.",
+  "newProductPt": 0,
+  "actualAnalyzerOrProductFileReads": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
