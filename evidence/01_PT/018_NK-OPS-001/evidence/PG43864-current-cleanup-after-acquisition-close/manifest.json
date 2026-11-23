@@ -1,0 +1,149 @@
+{
+  "run": "PG43864",
+  "source": "a31f44b54065d056705d1e383350891f80ea0de5",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:11:57.964779+00:00",
+  "wbs": "A1-21.05",
+  "related": [
+    "WBS-P004-05/2",
+    "F02",
+    "F03",
+    "SS332",
+    "SSC-461",
+    "451"
+  ],
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43862-current-cleanup-jdbc-ownership/manifest.json",
+    "sha256": "1697f74cf1bf4a39da13b9e22bcb3c7eff6d176d4d682ca920bf0420cb701916"
+  },
+  "currentBatchClass": {
+    "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/scope/target/classes/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+    "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "sha256": "ae5ce35ea33a04648b6b7c6fb0a85a4eedfef3239b80ef59115d7be7047caf92"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5799_清掃終端の通常読取単体試験仕様.md",
+    "sha256": "ea1a1a69e95bab577ac95d56fe6720a658566e15fdf4a372e60f444c5202c6ce"
+  },
+  "tested": {
+    "PT-F02-CTERM-READ001": "ordinaryTerminalReadPreservesTheOriginalFatalErrorAfterClosingItsStatement",
+    "PT-F02-CTERM-READ002": "ordinaryTerminalReadReturnsTheFixedDiagnosticWithoutClosingTheBorrowedConnection",
+    "PT-F02-CTERM-READ003": "ordinaryTerminalReadProjectsTheSevenSuccessfulRowsInFixedOrder",
+    "PT-F02-CTERM-READ004": "ordinaryTerminalReadKeepsRuntimePrimaryAndRecordsTwoSanitizedCloseFailures",
+    "PT-F02-CTERM-READ005": "ordinaryTerminalReadRejectsAnOtherwiseCompleteReadWhenResultCloseFails",
+    "PT-F02-CTERM-READ006": "ordinaryTerminalReadKeepsAnOriginalCloseErrorOverTheKnownSqlFailure"
+  },
+  "counts": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newIds": [
+    "PT-F02-CTERM-READ004",
+    "PT-F02-CTERM-READ005",
+    "PT-F02-CTERM-READ006"
+  ],
+  "repeatedForChangedFixture": 3,
+  "coverageMissedCovered": {
+    "INSTRUCTION": [
+      894,
+      482
+    ],
+    "BRANCH": [
+      145,
+      27
+    ],
+    "LINE": [
+      204,
+      110
+    ],
+    "COMPLEXITY": [
+      92,
+      15
+    ],
+    "METHOD": [
+      9,
+      12
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "original": [
+    {
+      "path": "../pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/begin.json",
+      "sha256": "0872d58cdeae0c297eacbc1bfa83f6ebcc9e73b517f97bb4b0a1be2c0c5eb39d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/terminal.json",
+      "sha256": "f335cc173aa4473ab1cd683ce45dbc847d04cc7eda5270f707a8632bc13a431e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/reports/TEST-junit-jupiter.xml",
+      "sha256": "ca21e2e58c438f102d40f4ab96353ef5ed1b1fda0d38a0d12eead728ea7f7b76"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/unit.exec",
+      "sha256": "a0491a7ff8953d9e49fe57d81ec5a898f2cabbd066b30162f9819e40200a8508"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/class-load.log",
+      "sha256": "95d99869b2b7c7afa12a7e78d9cc9933557db6cb0e95c2a4a2daaccb4b5db620"
+    }
+  ],
+  "rawStatic": [
+    {
+      "path": "../pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/fixture-style-terminal.json",
+      "sha256": "ad8a4ad8c5d52b4476399bb0a666e979a13decbb1ebb4fab8568bfa6272fc79d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43864-current-cleanup-terminal-close-six/fixture-pmd-terminal.json",
+      "sha256": "d119c0194141b4f73e49da0cba414962da4ba166a6633f8d9241b27806d6fdda"
+    }
+  ],
+  "proofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/coverage.tsv",
+      "sha256": "9006c71261fe114072408e3e890604890c0e2940609560a051ae5b38fcc0e37e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43864-current-cleanup-after-acquisition-close/selected.tsv",
+      "sha256": "4129ecdfd59ce2030ea38cfb8fd5170e7554e9fd00df216c78260450fd5dc51e"
+    }
+  ],
+  "currentFixtureRaw": {
+    "findings": [
+      {
+        "line": 117,
+        "rule": "CloseResource",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      {
+        "line": 475,
+        "rule": "UseProperClassLoader",
+        "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+      }
+    ],
+    "unclassified": 0,
+    "added": 0,
+    "removed": 0,
+    "rawToolExit": 4,
+    "explanations": {
+      "CloseResource": "Existing test method borrows only a JDK Proxy representing a Connection; the tested contract requires zero connection close. Row and statement close calls are asserted.",
+      "UseProperClassLoader": "Existing helper defines proxy on a public JDK JDBC interface loader. This plain hosted fixture uses no J2EE classloaders and requires no context loader change."
+    }
+  },
+  "executionBeforeFirstCloseNeverActualDb": true,
+  "prodCodeChanges": 0,
+  "realDbOrFailedProfileExecuted": 0,
+  "combinedCoverageExecs": 0,
+  "coverageClosure": false,
+  "formalAcceptanceId": null,
+  "wholeF02": false,
+  "whole451": false
+}
