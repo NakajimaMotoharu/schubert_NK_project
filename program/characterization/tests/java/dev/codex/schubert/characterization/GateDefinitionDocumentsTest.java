@@ -59,6 +59,55 @@ final class GateDefinitionDocumentsTest {
     }
   }
 
+  /** PT-CHR-DEF-019: matching definitions cannot replace the SS355 browser constants. */
+  @Test
+  void browserDefinitionsMustMatchTheIndependentDesignEvenWhenTheyAgree() throws IOException {
+    assertEquals(List.of(), validate(fixture()));
+    List<Executable> checks = new ArrayList<>();
+    for (List<String> pair :
+        List.of(
+            List.of("playwrightJava", "1.54.0", "BROWSER_PLAYWRIGHT"),
+            List.of("browser", "firefox", "BROWSER_NAME"),
+            List.of("locale", "en-US", "BROWSER_LOCALE"),
+            List.of("timezone", "UTC", "BROWSER_TIMEZONE"))) {
+      String field = pair.get(0);
+      List<JsonNode> input = fixture();
+      ObjectNode contract = (ObjectNode) object(input, CONTRACT).path("browser");
+      ObjectNode browser = object(input, BROWSER);
+      contract.put(field, pair.get(1));
+      browser.put(field, pair.get(1));
+      List<String> expected = List.of(pair.get(2));
+      checks.add(() -> assertEquals(expected, validate(input), field));
+      List<JsonNode> missing = fixture();
+      ((ObjectNode) object(missing, CONTRACT).path("browser")).remove(field);
+      object(missing, BROWSER).remove(field);
+      checks.add(() -> assertEquals(expected, validate(missing), field + " absent"));
+    }
+
+    List<JsonNode> input = fixture();
+    ObjectNode contract = (ObjectNode) object(input, CONTRACT).path("browser");
+    ObjectNode browser = object(input, BROWSER);
+    contract.put("browserRevision", 1186);
+    browser.put("browserRevision", 1186);
+    contract.put("desktopWidth", 1280);
+    ((ObjectNode) browser.path("desktop")).put("width", 1280);
+    contract.put("mobileHeight", 800);
+    ((ObjectNode) browser.path("mobile")).put("height", 800);
+    contract.put("deviceScaleFactor", 2);
+    ((ObjectNode) browser.path("desktop")).put("deviceScaleFactor", 2);
+    ((ObjectNode) browser.path("mobile")).put("deviceScaleFactor", 2);
+    checks.add(
+        () ->
+            assertEquals(
+                List.of(
+                    "BROWSER_REVISION",
+                    "BROWSER_DESKTOP_VIEWPORT",
+                    "BROWSER_MOBILE_VIEWPORT",
+                    "BROWSER_DEVICE_SCALE"),
+                validate(input)));
+    assertAll(checks);
+  }
+
   @Test
   void acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()
       throws Exception {
