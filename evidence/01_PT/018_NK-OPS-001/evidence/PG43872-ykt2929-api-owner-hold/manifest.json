@@ -1,0 +1,67 @@
+{
+  "run": "PG43872",
+  "source": "cc3ca8769ba006a5c5c782e24b469675d995fdbc",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T19:24:30.336027+00:00",
+  "ykt": "YKT-2929",
+  "priorSourceOwnerEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43822-outbox-writer-qualification-hold/manifest.json",
+    "sha256": "3dc475b5fc4f57cd7706d21db3e0d75bd3d122d3c881001f01afd5771daeddc4"
+  },
+  "remainingFour": [
+    {
+      "ownerSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "sha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d"
+      },
+      "actualSourceEdge": "ApiReadOnlyObservationAttempt",
+      "edgeUse": "source observe(borrowed one-shot port)",
+      "then": [
+        "TemporaryInfrastructureException"
+      ],
+      "status": "HOLD_QA_056_APPLICATION_SCOPE"
+    },
+    {
+      "ownerSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java",
+        "sha256": "8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf"
+      },
+      "actualSourceEdge": "TemporaryInfrastructureException",
+      "edgeUse": "worker result categorization and worker callback lifecycle",
+      "then": [],
+      "status": "HOLD_QA_056_APPLICATION_SCOPE"
+    },
+    {
+      "ownerSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+        "sha256": "25eed3a03c68fd2f0bb7c68bf576239e238a2e2ecd4b4003ddc3d076348c2f41"
+      },
+      "actualSourceEdge": "ApiReadOnlyObservationAttempt",
+      "edgeUse": "typed attempt field/factory and retained lifecycle",
+      "then": [
+        "TemporaryInfrastructureException"
+      ],
+      "status": "HOLD_QA_056_APPLICATION_SCOPE"
+    },
+    {
+      "ownerSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+        "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea"
+      },
+      "actualSourceEdge": "TemporaryInfrastructureException",
+      "edgeUse": "direct admitted-failure catch for JDBC observation owner",
+      "then": [],
+      "status": "HOLD_QA_056_APPLICATION_SCOPE"
+    }
+  ],
+  "previouslyFixedCollectorSites": 10,
+  "rawStaticGreenCurrentForTheseFour": null,
+  "heldClassSourceOrByteOpened": false,
+  "typedCompiles": 0,
+  "testsExecuted": 0,
+  "prodChanged": 0,
+  "technicalHold": "Need recorded QA-056 scope plus current whole ownership and admission dependencies; compare third-party rules only after permitted compilation.",
+  "full451": false,
+  "formalAcceptanceId": null
+}
