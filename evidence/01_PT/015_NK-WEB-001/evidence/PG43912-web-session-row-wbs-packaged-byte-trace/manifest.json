@@ -1,0 +1,90 @@
+{
+  "run": "PG43912",
+  "source": "60847c8017f4088aa18e897cd95778c4e233640a",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:26:09.522598+00:00",
+  "totalJarsAccessed": 1,
+  "actualNamedEntriesRead": 3,
+  "heldEntryContentRead": 0,
+  "wbs": "WBS-P015-01",
+  "related": [
+    "WBS-F03/2-2-b",
+    "WBS-F02-b-a"
+  ],
+  "testSource": "59f3b0523f80d347457f91afa7fe1fda00ee04e6",
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionRowValueTest.java",
+    "sha256": "be6a86c4591a211171e14a87191df475b3e26dea2060ebc0286fc754addecac4"
+  },
+  "oracle": {
+    "path": "evidence/01_PT/015_NK-WEB-001/4694_WebSessionRow境界の単体仕様.md",
+    "sha256": "154cd563bca00cfc03d3a82fbe0b31a09118054bd988909d7ad4777868a0f541"
+  },
+  "ddl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+    "source": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+    "sha256": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+  },
+  "qualifiedScope": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG43910-web-session-row-pure-current/manifest.json",
+    "sha256": "d59605c1be3962c234f023899356da60641d93af5848bbdda759e8853c0dbfde"
+  },
+  "cases": [
+    {
+      "id": "PT-WEB-ROW001",
+      "method": "row001InclusiveBoundsAndEqualTimestampsAreAccepted"
+    },
+    {
+      "id": "PT-WEB-ROW002",
+      "method": "row002RejectsSubMicrosecondAndOutOfOrderMetadataSeparately"
+    },
+    {
+      "id": "PT-WEB-ROW003",
+      "method": "row003RejectsIdleAndVersionOutsideTheirOwnInclusiveBounds"
+    },
+    {
+      "id": "PT-WEB-ROW004",
+      "method": "row004EveryRequiredReferenceRejectsNullAtItsOwnBoundary"
+    },
+    {
+      "id": "PT-WEB-ROW005",
+      "method": "row005ValueEqualityAndGeneralDiagnosticHaveIndependentExpectations"
+    }
+  ],
+  "oldNormalPackageReference": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21398-invalid-row-base-constructor-method-v1/manifest.json",
+    "sha256": "001dc2b456dbd33a6813f2b0d54747b82b3237f9481d735212eed3dbdaa4c79d"
+  },
+  "namedPhysical": {
+    "WebSessionRow": {
+      "entry": "dev/codex/schubert/nk/web/session/WebSessionRow.class",
+      "oldHash": "bc03f2d0fd316bc4e511a0da9a0d6c15fbe716627ab561d05e002c1f9cd5a6b5",
+      "currentHash": "bc03f2d0fd316bc4e511a0da9a0d6c15fbe716627ab561d05e002c1f9cd5a6b5",
+      "byteIdentical": true
+    },
+    "SessionPayloadIdentity": {
+      "entry": "dev/codex/schubert/nk/web/session/SessionPayloadIdentity.class",
+      "oldHash": "f81df10ef608ece634d68467faeb233a30573e001ef652131644546dc0cb20e4",
+      "currentHash": "f81df10ef608ece634d68467faeb233a30573e001ef652131644546dc0cb20e4",
+      "byteIdentical": true
+    },
+    "EncryptedSessionPayload": {
+      "entry": "dev/codex/schubert/nk/web/session/EncryptedSessionPayload.class",
+      "oldHash": "3d9a2e68c4fb8c8a9a95e56b74ba67305e974adec0fc4e2e784db9ab1baa5682",
+      "currentHash": "3d9a2e68c4fb8c8a9a95e56b74ba67305e974adec0fc4e2e784db9ab1baa5682",
+      "byteIdentical": true
+    }
+  },
+  "formalAcceptanceId": null,
+  "completedOriginalRowPricePp": 0,
+  "whole451": false,
+  "missing": [
+    "New exact normal Web packaging with formally allowed full APIs",
+    "Actual independent product run and native qualification"
+  ]
+}
