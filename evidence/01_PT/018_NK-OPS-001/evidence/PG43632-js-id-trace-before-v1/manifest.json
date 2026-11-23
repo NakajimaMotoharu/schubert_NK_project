@@ -1,0 +1,199 @@
+{
+  "run": "PG43632",
+  "source": "54dc82fb46e6b3c88b33435b6add088a9fd7a0f1",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-G08"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T12:17:05.118570+00:00",
+  "targetSpecMismatchSubcases": [
+    "E",
+    "F",
+    "H"
+  ],
+  "parentToolRuleIsNotSubcase": true,
+  "sameCurrentResults": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43616-scr014-leading-bom-literal-contract/manifest.json",
+    "sha256": "1db1e19eb788f2731d602516222a4d8e27d2bfae1a46e47522589685183bc468"
+  },
+  "trackedFourFixtureCases": {
+    "SCR014": {
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/javascript/log-search-validation.test.cjs",
+        "sha256": "2a8044dc0a0e06cb2d7a85100a8d5e2c11fb992df7ebd0fb3062858ba5abac8b"
+      },
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/021_NK-WEB-002_Logブラウザ入力単体テスト仕様書.md",
+        "sha256": "b5c244a513ba7242aa1b894b0e6bf02c6e8aa0364837fb86c2d88de743d8a950"
+      },
+      "literalCaseDescriptions": [
+        [
+          "PT-SCR092-A",
+          "missing page stays inert"
+        ],
+        [
+          "PT-SCR092-B",
+          "fixed form structure"
+        ],
+        [
+          "PT-SCR092-C",
+          "ASCII boundary from UI225"
+        ],
+        [
+          "PT-SCR092-D",
+          "Unicode controls and malformed pairs"
+        ],
+        [
+          "PT-SCR092-E",
+          "NFC and ASCII trim byte vectors"
+        ],
+        [
+          "PT-SCR092-F",
+          "all invalid fields block native GET"
+        ],
+        [
+          "PT-SCR092-G",
+          "fixed Unicode byte edges"
+        ],
+        [
+          "PT-SCR092-H",
+          "corrected input permits submit"
+        ]
+      ]
+    },
+    "SCR003": {
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/javascript/search-speaker-submit.test.cjs",
+        "sha256": "22f9f1fbdff29f1cacc59a2c87366a079231238fd0dc4723632ce56d2b3ffe48"
+      },
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/005_NK-WEB-002_検索ブラウザ入力単体テスト仕様書.md",
+        "sha256": "4c29a7afc915637232c77278bf6a6376721ed8d00886e5468b30f06879b19521"
+      },
+      "literalCaseDescriptions": [
+        [
+          "PT-SCR025-A",
+          "absent form and registration"
+        ],
+        [
+          "PT-SCR025-B",
+          "missing template controls"
+        ],
+        [
+          "PT-SCR025-C",
+          "independent ASCII byte boundaries"
+        ],
+        [
+          "PT-SCR025-D",
+          "Unicode and forbidden controls"
+        ],
+        [
+          "PT-SCR025-E",
+          "NFC and Java ASCII trim compatibility"
+        ],
+        [
+          "PT-SCR025-F",
+          "all invalid fields stop submit"
+        ],
+        [
+          "PT-SCR025-G",
+          "input clears errors and permits valid submit"
+        ],
+        [
+          "PT-SCR025-H",
+          "game change uses native submission"
+        ]
+      ]
+    },
+    "question": {
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs",
+        "sha256": "869254f2f9b7b1a31d938d8f8537836a5b28f8813be99aaa60cbf4e5e7426f95"
+      },
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/067_NK-WEB-002_質問要求ブラウザ入力単体テスト仕様書.md",
+        "sha256": "9f06e76ef26ceacac7fc8fc4dd285035be7a34304d9463ac321a5c7d7a91eee5"
+      },
+      "literalCaseDescriptions": [
+        [
+          "PT-QST-JS001-A",
+          "absent form is inert"
+        ],
+        [
+          "PT-QST-JS001-B",
+          "closed required structure"
+        ],
+        [
+          "PT-QST-JS001-C",
+          "initial count and required validation"
+        ],
+        [
+          "PT-QST-JS001-D",
+          "ASCII byte boundary"
+        ],
+        [
+          "PT-QST-JS001-E",
+          "independent NFC and Unicode byte vectors"
+        ],
+        [
+          "PT-QST-JS001-F",
+          "controls and malformed pairs"
+        ],
+        [
+          "PT-QST-JS001-G",
+          "no trimming and trailing ASCII only"
+        ],
+        [
+          "PT-QST-JS001-H",
+          "fresh input/submit never auto resends"
+        ]
+      ]
+    },
+    "update": {
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/javascript/operation-post-submit.test.cjs",
+        "sha256": "1bab02dd52161343c7d6403abaf62b74dd044d02eac1b496bf2535917ba65f45"
+      },
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/104_更新POST_disabled横展開仕様.md",
+        "sha256": "a64e15b6399edffc777081b6604e03f6c6229aaa2dc5d01672598e882e7d35e8"
+      },
+      "literalCaseDescriptions": [
+        [
+          "PT-WEB-OPSJS2646-A",
+          "no update form leaves document inert"
+        ],
+        [
+          "PT-WEB-OPSJS2646-B",
+          "token/button structure is closed"
+        ],
+        [
+          "PT-WEB-OPSJS2646-C",
+          "valid keyboard submit disables every submit button and preserves token"
+        ],
+        [
+          "PT-WEB-OPSJS2646-D",
+          "invalid then corrected submit never locks invalid form"
+        ],
+        [
+          "PT-WEB-OPSJS2646-E",
+          "second submit is suppressed without reissuing operation"
+        ],
+        [
+          "PT-WEB-OPSJS2646-F",
+          "independent forms retain independent submission state"
+        ]
+      ]
+    }
+  },
+  "relevantSiblingSpecificationsConsideredNoIdSwaps": [
+    "SCR003",
+    "question",
+    "update"
+  ],
+  "newExecutions": 0,
+  "baselineOrSourceOracleEdited": false,
+  "full451": false,
+  "formalAcceptanceId": null
+}
