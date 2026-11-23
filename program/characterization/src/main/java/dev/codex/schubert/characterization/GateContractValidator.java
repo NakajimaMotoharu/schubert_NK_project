@@ -310,45 +310,44 @@ final class GateContractValidator {
   }
 
   private static void validateBrowser(JsonNode browser, JsonNode expected, List<String> failures) {
+    // SS355 §6 and §11 pin the reference environment independently of both input documents.
     require(
-        expected.path("playwrightJava").asText().equals(browser.path("playwrightJava").asText()),
+        matchesPinnedText(expected, browser, "playwrightJava", "1.55.0"),
         "BROWSER_PLAYWRIGHT",
         failures);
     require(
-        expected.path("browser").asText().equals(browser.path("browser").asText()),
+        matchesPinnedText(expected, browser, "browser", "chromium"),
         "BROWSER_NAME",
         failures);
     require(
-        matchingInteger(expected.path("browserRevision"), browser.path("browserRevision")),
+        matchesPinnedInteger(
+            expected.path("browserRevision"), browser.path("browserRevision"), 1187),
         "BROWSER_REVISION",
         failures);
     require(
-        expected.path("locale").asText().equals(browser.path("locale").asText()),
+        matchesPinnedText(expected, browser, "locale", "ja-JP"),
         "BROWSER_LOCALE",
         failures);
     require(
-        expected.path("timezone").asText().equals(browser.path("timezone").asText()),
+        matchesPinnedText(expected, browser, "timezone", "Asia/Tokyo"),
         "BROWSER_TIMEZONE",
         failures);
+    JsonNode desktop = browser.path("desktop");
+    JsonNode mobile = browser.path("mobile");
     require(
-        matchingInteger(expected.path("desktopWidth"), browser.path("desktop").path("width"))
-            && matchingInteger(
-                expected.path("desktopHeight"), browser.path("desktop").path("height")),
+        matchesPinnedInteger(expected.path("desktopWidth"), desktop.path("width"), 1366)
+            && matchesPinnedInteger(expected.path("desktopHeight"), desktop.path("height"), 768),
         "BROWSER_DESKTOP_VIEWPORT",
         failures);
     require(
-        matchingInteger(expected.path("mobileWidth"), browser.path("mobile").path("width"))
-            && matchingInteger(
-                expected.path("mobileHeight"), browser.path("mobile").path("height")),
+        matchesPinnedInteger(expected.path("mobileWidth"), mobile.path("width"), 390)
+            && matchesPinnedInteger(expected.path("mobileHeight"), mobile.path("height"), 844),
         "BROWSER_MOBILE_VIEWPORT",
         failures);
+    JsonNode scale = expected.path(FIELD_DEVICESCALEFACTOR);
     require(
-        matchingInteger(
-                expected.path(FIELD_DEVICESCALEFACTOR),
-                browser.path("desktop").path(FIELD_DEVICESCALEFACTOR))
-            && matchingInteger(
-                expected.path(FIELD_DEVICESCALEFACTOR),
-                browser.path("mobile").path(FIELD_DEVICESCALEFACTOR)),
+        matchesPinnedInteger(scale, desktop.path(FIELD_DEVICESCALEFACTOR), 1)
+            && integerEquals(mobile.path(FIELD_DEVICESCALEFACTOR), 1),
         "BROWSER_DEVICE_SCALE",
         failures);
     JsonNode fonts = browser.path("fonts");
@@ -368,11 +367,14 @@ final class GateContractValidator {
     return value.isIntegralNumber() && value.canConvertToInt() && value.intValue() == expected;
   }
 
-  private static boolean matchingInteger(JsonNode expected, JsonNode actual) {
-    return expected.isIntegralNumber()
-        && expected.canConvertToInt()
-        && expected.intValue() > 0
-        && integerEquals(actual, expected.intValue());
+  private static boolean matchesPinnedText(
+      JsonNode expected, JsonNode observed, String field, String pinned) {
+    return pinned.equals(expected.path(field).textValue())
+        && pinned.equals(observed.path(field).textValue());
+  }
+
+  private static boolean matchesPinnedInteger(JsonNode expected, JsonNode observed, int pinned) {
+    return integerEquals(expected, pinned) && integerEquals(observed, pinned);
   }
 
   private static void validateDifferences(
