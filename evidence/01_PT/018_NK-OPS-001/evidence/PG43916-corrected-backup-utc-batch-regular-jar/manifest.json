@@ -1,0 +1,118 @@
+{
+  "run": "PG43916",
+  "source": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "reportingHead": "d8233cfa630fc1f08b152d412bb3c0457901d71b",
+  "terminalAtUTC": "2026-11-23T20:39:12.699285+00:00",
+  "wbs": [
+    "WBS-F02-b-a",
+    "WBS-F03/2-2-b",
+    "WBS-P004-05/2",
+    "WBS-P017-06"
+  ],
+  "currentNormalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43916-current-batch-backup-utc-normal-offline-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "4e1eb51eb66bfc7e88b2ab23c8e236ef8db7ad8bc8aed6dd5bf5b70eb17bc01d"
+  },
+  "batchTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43916-current-batch-backup-utc-normal-offline-v2/terminal.json",
+    "sha256": "2cc6f30d99d53af192adadddc1ec64e0b5ee387c07e5169714266ca87ba7f0ee"
+  },
+  "typedTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43916-current-batch-backup-utc-normal-offline-v2/typed-terminal.json",
+    "sha256": "cbe791b277d82cb3a9fa814f340104f3516a8953402550a0ab0dd14f30a9b003"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43916-current-batch-backup-utc-normal-offline-v2/begin.json",
+    "sha256": "5e4cb2a39522ab2f5dde71fd25c68187aafedeba345604873b27083cefbf7bfa"
+  },
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43834-cleanup-terminal-batch-normal-jar/manifest.json",
+    "sha256": "2e47cd0d1bffaf46cc41fcf929d469737e9269f45d8cd9feb81b4e6efe51018a"
+  },
+  "unchangedOtherJarInputProofs": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+      },
+      "physicalClasses": 176,
+      "unchangedTrackedInputs": true,
+      "recompiledClassMetadataEqual": false
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "physicalClasses": 79,
+      "unchangedTrackedInputs": true,
+      "recompiledClassMetadataEqual": true
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "physicalClasses": 201,
+      "unchangedTrackedInputs": true,
+      "recompiledClassMetadataEqual": true
+    }
+  },
+  "newApiOrWebPackage": false,
+  "verifiedCompile": "normal Maven 3.9.12, root Java25 / NullAway / Werror compiler configured; packages selected explicitly; Spotless checked separately for changed sources",
+  "buildCommands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository",
+      "-pl",
+      "src/schubert-nk-batch",
+      "-am",
+      "-Dspotless.skip=true",
+      "compile"
+    ],
+    "jar": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository",
+      "-pl",
+      "src/schubert-nk-batch",
+      "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+    ]
+  },
+  "preflightFirst": {
+    "exitCode": 1,
+    "workNotLaunched": "initial comparison included test-only paths, no Maven or analysis invoked"
+  },
+  "regularFour": 4,
+  "scopeCount": 6,
+  "physicalBatch": 660,
+  "unchangedCrcAndSize": 659,
+  "changed": [
+    "dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class"
+  ],
+  "changedSha256": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3",
+  "exactOnScopedIndependentProof": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43914-backup-jdbc-time-instant-correctness/manifest.json",
+    "sha256": "189f6d2edb8f01230ba466bf21d3a79e7789daddcc2db57301a9981711d61abd"
+  },
+  "spotbugs": {
+    "BugInstance": 0,
+    "Error": 0,
+    "MissingClass": 0
+  },
+  "publicAbiUnchanged": true,
+  "productionTestsReexecuted": 0,
+  "acceptedFormalNone": true,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "API/Web regular build and QA-056, QA-062",
+    "Storage final physical isolation SSC-461",
+    "Same-source full 451, real DB and ownership receipt",
+    "P004-05 production transaction/DB integration"
+  ]
+}
