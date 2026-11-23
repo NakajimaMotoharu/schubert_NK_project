@@ -1,0 +1,534 @@
+{
+  "run": "PG43646",
+  "source": "2f2d7b7087347eb57c5602476f9031f065b634a5",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T12:35:01.456341+00:00",
+  "actualExit": 0,
+  "verificationExit": 0,
+  "environment": {
+    "os": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"",
+    "java": "25.0.4",
+    "maven": "3.9.12"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/mvnw",
+    "--offline",
+    "--batch-mode",
+    "--strict-checksums",
+    "--no-transfer-progress",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-Duser.home=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/home",
+    "-Dspotless.skip=true",
+    "-DskipTests=false",
+    "-Dmaven.test.skip=false",
+    "-Dmaven.test.failure.ignore=false",
+    "-DfailIfNoTests=true",
+    "-pl",
+    "src/schubert-nk-protocol",
+    "package",
+    "org.jacoco:jacoco-maven-plugin:0.8.15:report"
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/begin.json",
+    "sha256": "8875da948cbbab93e9ea933019df3d92799971038d9603ca8ae005a47c56afad"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/maven.terminal.json",
+    "sha256": "06befa157861e729afb375354338857c9f72475e523e1d7575aef2325ffe354d"
+  },
+  "snapshot": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/selected-source.tar",
+    "sha256": "7bd229e84e35a8ede2f6c1eb0ba1d09ea65442363b11a55519349d5d0e4c78ca"
+  },
+  "differentFilesFromPG42762": [
+    "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+    "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv",
+    "tools/quality/verify_protocol_ci.sh"
+  ],
+  "JUnit": {
+    "executed": 171,
+    "passed": 171,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "suites": {
+      "TEST-dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest.xml": {
+        "sha256": "9c4a005a7fe85db7e7f644ca54d6afef1c5bb4dd99942f8d303b341b71c3c092",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml": {
+        "sha256": "4f72381ce1cb23e96db51e0407b7d12dbfa127a748ccdf42c7f3e1d2a5a3835f",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest.xml": {
+        "sha256": "9f0bfbed81c68996e1db04e69dd7272e66a17472689046f624376591d566f746",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml": {
+        "sha256": "3c7ee8d0dfda56668c97d01553504d074414839ddcfc896c01f2843df50dc1dc",
+        "tests": 8,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest.xml": {
+        "sha256": "7db8a268c66ac0061b7f21cba4540606d5d1027e23f6fa90910157b9d89085b5",
+        "tests": 2,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": {
+        "sha256": "ae9532067509c947953e0e2d4afe9a7c41ace5be215036806568fa7337394fdd",
+        "tests": 7,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml": {
+        "sha256": "c252f8626f2e251d33423e9f7b662fc51eb13e28c8399fe8411bfa77532e8dca",
+        "tests": 8,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml": {
+        "sha256": "b560749b34470a5bbba5ae2146c2b7f8591e5a4c8d9634275a797dafd9c9bcb6",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest.xml": {
+        "sha256": "c58ceeafa920417f7820cf70d7530909f08ad99013d24b3c77dd1a31b6b22f9f",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml": {
+        "sha256": "5046b6f9cbbe07fe68cc7fa3078d25e6cb7cc1d989b78239cff249d62aa5d5ab",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest.xml": {
+        "sha256": "1a1764a5de2492d21477b3ee49245a8b8e4c4df5479a2804cf2a1ff32d92de28",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest.xml": {
+        "sha256": "0de04ecbd79fb11d28c64b9bc34efec67e66b1c0cb4dbbb2010ea3ae075dbf7e",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest.xml": {
+        "sha256": "9f1c8da9f552a92068f8736eb503dc6eb83c00b4b5f1a156ee79ad55cd3fa9ea",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml": {
+        "sha256": "6617aae6e0b43232d3635feb73e2e27bc165b144eaba8dbec0a6817a8a3697c8",
+        "tests": 7,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest.xml": {
+        "sha256": "984f2ed222fd9c6b4d8c226116d46ec6b123a4c11f5b0758a3abda8719bd5691",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml": {
+        "sha256": "506a2cf49dc2ab0cce0506002c8a684dc04b13c883e8b712da02234a003a23cc",
+        "tests": 7,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml": {
+        "sha256": "b636c3231fd6ff316a1624dad8d738816f946714956b31fb12457ac0b93da43b",
+        "tests": 7,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml": {
+        "sha256": "1f6b334532f838454ab716d40faef52a60c09ab90dfdcc983b612d3fe561bd84",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml": {
+        "sha256": "82a44cabcefa6b2bd35148830e24b0136fd5300488b53e5146e2fa921a786bba",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml": {
+        "sha256": "f87fabde4affe5c16bc60f34a9ad7250705b40c3435ba35167c56d61c45c415f",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml": {
+        "sha256": "1ccf08348e86b248ab82362355024689d2b8e6f404f7faa7df5da72cb23658f6",
+        "tests": 8,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest.xml": {
+        "sha256": "884672db4daaf72b62c1b0b9c77429098a83f19c101785addc4f178557e61188",
+        "tests": 1,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml": {
+        "sha256": "b140dc6bd34083dd0f5a28d6deefbbd051ccb051352a9d9d9da4c10f33e5234d",
+        "tests": 6,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest.xml": {
+        "sha256": "3b628ea2ea4f1a02c440c569d1a9e89f8991d6e3d2c0021612bcb29014b841b8",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest.xml": {
+        "sha256": "6db2b11a59dc56db6b86ef5865a1d23f599de9f9267fe7ec86195727a58c155b",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest.xml": {
+        "sha256": "5b8084af45727d66edac1f09c9ad364bda175045f6bc81db885e6ce1dd0680ba",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml": {
+        "sha256": "d1d20acca8bc73bb5940009ac89c6b862849d7897996a1f80f3af15139a13ca2",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml": {
+        "sha256": "ec9424ba5c7e13c6b7381d8966b0d897d3cff619088f440f2be5e0c1a9e35131",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest.xml": {
+        "sha256": "cb81af10d81a2cea39e4f7ace4eaec175d863d7800c8426afb5f0877f228da94",
+        "tests": 13,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest.xml": {
+        "sha256": "36f04652e0c881beafad5238b7b66ef0b2fbcffb6d19cfa49d82319e0e46b057",
+        "tests": 2,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest.xml": {
+        "sha256": "7d62fd099cadfc13547730165e73be70d51696d8679e6ec7c359e45eb6d2063c",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest.xml": {
+        "sha256": "de507b241036d82ea265418cadc1b8a4e7189cd2aa68f4772715729daaeb96ac",
+        "tests": 3,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest.xml": {
+        "sha256": "1638ddca2c7bee97db9934158b5a0a343ddad56545f30c412ab82b4ccb10c6e8",
+        "tests": 2,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml": {
+        "sha256": "3605de0687c74581e1e1b96e82259e489349d887e13507762b716347864711c9",
+        "tests": 5,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest.xml": {
+        "sha256": "1e5c4b638c6e79cc4b5859c99df489e40e937088918a1a789771aa5ae75f03a0",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml": {
+        "sha256": "ad11d6c022323743a61115b9c4626867d6e65159e1a94b10906ae23749bdd30c",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml": {
+        "sha256": "1f9be39d5552a73821f94b32e0c7f25c4b6179be5d89481f6f820fdeb3c2aa75",
+        "tests": 2,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest.xml": {
+        "sha256": "b73292098573d6fca808a144bc26e3a53b4ad18cf1a44d7c46f68636ce0f4e83",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest.xml"
+      },
+      "TEST-dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest.xml": {
+        "sha256": "959fdf97bc630eb1c61e562916ad3fac1af0d0628921e0d9b997b1a0c63cff1f",
+        "tests": 4,
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest.xml"
+      }
+    },
+    "expectedCaseRosterExact": true,
+    "otherModuleExecutions": 0,
+    "newlyDefinedTestIds": 0
+  },
+  "archive": {
+    "jar": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+    },
+    "oldJar": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+    },
+    "exactPhysicalClasses": 176
+  },
+  "coverage": {
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/jacoco.exec",
+      "sha256": "99b35c052cd9fc238cc4e37e004ff3db77b67ff3b2b5c17ff4375a31d322a782"
+    },
+    "standardReport": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/site/jacoco/jacoco.xml",
+      "sha256": "c5f05a1eaad4e0c8ffe03e394db1debcdc9614dcaf34207c53a61c2818e5c68e"
+    },
+    "standardCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17700
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1080
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3551
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1294
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 751
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 162
+      }
+    },
+    "rawReport": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/coverage.unfiltered.tsv",
+      "sha256": "64a4d0dea8ae775d4b39c2b4c7e77ae92541bcd8eed6a57d79ef83f60393f1ab"
+    },
+    "rawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 20363
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1080
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3639
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1975
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1432
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 162
+      }
+    },
+    "measuredClassFiles": 176,
+    "priorExecMerged": false,
+    "rawReader": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+    },
+    "rawReaderCommandUsed": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/reader:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/jacoco.exec"
+    ],
+    "classInputSet": [
+      "dev.codex.schubert.nk.protocol.codec.ExpectedRoute",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodec",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecRules",
+      "dev.codex.schubert.nk.protocol.codec.FieldEncodingException",
+      "dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder",
+      "dev.codex.schubert.nk.protocol.codec.FixedWidthEncoder",
+      "dev.codex.schubert.nk.protocol.codec.HeaderCodec",
+      "dev.codex.schubert.nk.protocol.codec.MessageEncodingException",
+      "dev.codex.schubert.nk.protocol.codec.PayloadCodec",
+      "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException",
+      "dev.codex.schubert.nk.protocol.codec.ProtocolValidator",
+      "dev.codex.schubert.nk.protocol.codec.TransportBodyType",
+      "dev.codex.schubert.nk.protocol.codec.TransportMetadata",
+      "dev.codex.schubert.nk.protocol.codec.package-info",
+      "dev.codex.schubert.nk.protocol.file.ContentDisposition",
+      "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+      "dev.codex.schubert.nk.protocol.file.LargeResultDescriptor",
+      "dev.codex.schubert.nk.protocol.file.LargeResultDigest",
+      "dev.codex.schubert.nk.protocol.file.LargeResultIoException",
+      "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodec",
+      "dev.codex.schubert.nk.protocol.file.MediaDescriptor",
+      "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator",
+      "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorRules",
+      "dev.codex.schubert.nk.protocol.file.MediaType",
+      "dev.codex.schubert.nk.protocol.file.package-info",
+      "dev.codex.schubert.nk.protocol.header.AuthenticationContext",
+      "dev.codex.schubert.nk.protocol.header.CommonHeader",
+      "dev.codex.schubert.nk.protocol.header.InteractionKind",
+      "dev.codex.schubert.nk.protocol.header.MessageKind",
+      "dev.codex.schubert.nk.protocol.header.ResultCode",
+      "dev.codex.schubert.nk.protocol.header.package-info",
+      "dev.codex.schubert.nk.protocol.layout.FieldArea",
+      "dev.codex.schubert.nk.protocol.layout.FieldDefinition",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue$Flag",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue$Numeric",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue$Text",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue$Unset",
+      "dev.codex.schubert.nk.protocol.layout.FieldValueSet",
+      "dev.codex.schubert.nk.protocol.layout.FixedPayload",
+      "dev.codex.schubert.nk.protocol.layout.LayoutDefinition",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$MutableFields",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFields",
+      "dev.codex.schubert.nk.protocol.layout.LayoutId",
+      "dev.codex.schubert.nk.protocol.layout.LayoutPayload",
+      "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+      "dev.codex.schubert.nk.protocol.layout.LayoutValidationException",
+      "dev.codex.schubert.nk.protocol.layout.Padding",
+      "dev.codex.schubert.nk.protocol.layout.PayloadData",
+      "dev.codex.schubert.nk.protocol.layout.PayloadRecord",
+      "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator",
+      "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$RecordMapping",
+      "dev.codex.schubert.nk.protocol.layout.PayloadValues",
+      "dev.codex.schubert.nk.protocol.layout.Presence",
+      "dev.codex.schubert.nk.protocol.layout.TypedFieldValues",
+      "dev.codex.schubert.nk.protocol.layout.TypedPayloadValues",
+      "dev.codex.schubert.nk.protocol.layout.UnsupportedLayoutException",
+      "dev.codex.schubert.nk.protocol.layout.WireMessage",
+      "dev.codex.schubert.nk.protocol.layout.WireType",
+      "dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserMutationResponseData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserRecord",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserRoleRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserStatusRequestData",
+      "dev.codex.schubert.nk.protocol.layout.admin.UserUnlockRequestData",
+      "dev.codex.schubert.nk.protocol.layout.auth.LoginRequestData",
+      "dev.codex.schubert.nk.protocol.layout.auth.LoginResponseData",
+      "dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData",
+      "dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData",
+      "dev.codex.schubert.nk.protocol.layout.common.PagedResponseData",
+      "dev.codex.schubert.nk.protocol.layout.log.LogRecord",
+      "dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData",
+      "dev.codex.schubert.nk.protocol.layout.log.WebLogEventData",
+      "dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData",
+      "dev.codex.schubert.nk.protocol.layout.media.AnimationMenuRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData",
+      "dev.codex.schubert.nk.protocol.layout.media.AnimationRecord",
+      "dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.MediaDescriptorData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRecord",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryResponseData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicSectionRecord",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData",
+      "dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData",
+      "dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData",
+      "dev.codex.schubert.nk.protocol.layout.package-info",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationCancelRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationRecord",
+      "dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord",
+      "dev.codex.schubert.nk.protocol.layout.question.QuestionWorkData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.GameListRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.GameRecord",
+      "dev.codex.schubert.nk.protocol.layout.scenario.RouteListRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.RouteListResponseData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.RouteRecord",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListResponseData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileRecord",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListRequestData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListResponseData",
+      "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AnswerState",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AsyncJobId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AudioId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition",
+      "dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode",
+      "dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryType",
+      "dev.codex.schubert.nk.protocol.layout.semantic.GameCode",
+      "dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode",
+      "dev.codex.schubert.nk.protocol.layout.semantic.IdValue",
+      "dev.codex.schubert.nk.protocol.layout.semantic.LogId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.LogLevel",
+      "dev.codex.schubert.nk.protocol.layout.semantic.LogType",
+      "dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType",
+      "dev.codex.schubert.nk.protocol.layout.semantic.NotificationErrorCode",
+      "dev.codex.schubert.nk.protocol.layout.semantic.NotificationId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.NotificationState",
+      "dev.codex.schubert.nk.protocol.layout.semantic.NotificationType",
+      "dev.codex.schubert.nk.protocol.layout.semantic.PairRole",
+      "dev.codex.schubert.nk.protocol.layout.semantic.PathSyntax",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.QuestionId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.RelativePath",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex",
+      "dev.codex.schubert.nk.protocol.layout.semantic.SpeakerId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.UserId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.UserRole",
+      "dev.codex.schubert.nk.protocol.layout.semantic.UserState",
+      "dev.codex.schubert.nk.protocol.layout.semantic.VideoCategory",
+      "dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition",
+      "dev.codex.schubert.nk.protocol.layout.semantic.WireEnum",
+      "dev.codex.schubert.nk.protocol.layout.semantic.package-info",
+      "dev.codex.schubert.nk.protocol.time.JstWireTimestamp",
+      "dev.codex.schubert.nk.protocol.time.package-info",
+      "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+      "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException",
+      "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException",
+      "dev.codex.schubert.nk.protocol.transport.package-info"
+    ]
+  },
+  "quality": {
+    "formalAcceptanceId": null,
+    "whole451": false,
+    "isolatedPackage": true,
+    "sourceFormatterRerun": false,
+    "spotBugsRerun": false,
+    "historicalIdenticalJavaInputEvidence": "PG42762",
+    "completeCIEntryRerun": false
+  }
+}
