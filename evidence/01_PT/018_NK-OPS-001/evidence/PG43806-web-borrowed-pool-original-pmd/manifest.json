@@ -1,0 +1,86 @@
+{
+  "run": "PG43806-before",
+  "source": "2ff699391b0041727afee81ac250caaafd0b473f",
+  "status": "ORIGINAL_MAIN_FINDING_CONFIRMED",
+  "wbs": "WBS-F03/2-2-b",
+  "bug": "BUG-3738",
+  "horizontal": "YKT-2929",
+  "terminalAtUTC": "2026-11-23T17:47:01.811245+00:00",
+  "codes": {
+    "compile": 0,
+    "pmd": 4,
+    "checkstyle": 0,
+    "spotbugs": 0
+  },
+  "rules": {
+    "rules": [
+      [
+        "AvoidSynchronizedStatement",
+        27
+      ],
+      [
+        "AvoidCatchingGenericException",
+        34
+      ],
+      [
+        "AvoidCatchingGenericException",
+        34
+      ]
+    ],
+    "pmdErrors": 0,
+    "spotbugsFindingsErrorsMissing": 0,
+    "checkstyleErrors": 0
+  },
+  "programFiles": {
+    "AsyncJobMetricCollector": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+      "sha256": "e1acec700e97398c11aa2a690a87b84f0a4df5d00b01a12ad9da2660d257e138",
+      "explicitMonitorStatements": 1,
+      "review": "source-design pattern only; typed disposition pending"
+    },
+    "DbPoolMetricCollector": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+      "sha256": "d07e461d4e27f4aa2de9290f1633cbb1812d3a7c6cc6a37f82448fdbf3ad9afe",
+      "explicitMonitorStatements": 0,
+      "review": "current API finding resolved under BUG-3736"
+    },
+    "MqPressureMetricCollector": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+      "sha256": "51493fa1068d31c0652e30f4b899b82103eb74f7471ba14c97c2e2c391e064ae",
+      "explicitMonitorStatements": 1,
+      "review": "source-design pattern only; typed disposition pending"
+    },
+    "OutboxMetricCollector": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "sha256": "db5801d5f2627d4dbbda16cdec6d75165e01a789101d77e732a6c7e3d35434ea",
+      "explicitMonitorStatements": 1,
+      "review": "source-design pattern only; typed disposition pending"
+    },
+    "MediaStreamsMetricCollector": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+      "sha256": "8361006db20fb7346ad0faa6adc3521dd8877ccd9866c3684f57109f0a60d4f6",
+      "explicitMonitorStatements": 1,
+      "review": "source-design pattern only; typed disposition pending"
+    },
+    "WebDbPoolMetricCollector": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java",
+      "sha256": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+      "explicitMonitorStatements": 1,
+      "review": "confirmed raw web finding current"
+    },
+    "WebOutboxMetricCollector": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+      "sha256": "110e730c16f77a5b87a6a2a31a49e4e82feb45da3eb6393c8336d7c0004b322a",
+      "explicitMonitorStatements": 1,
+      "review": "source-design pattern only; typed disposition pending"
+    }
+  },
+  "specification": "NK-OPS-001/1728 and SS351 same owner contract",
+  "typedToolResult": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-before-v1/terminal.json",
+    "sha256": "81a42de1b7b7d19045fc4889e19827d00d533cd382b1b4f5ad10b5fc9a3bc222"
+  },
+  "scopedProductExecution": 0,
+  "externalOperations": 0,
+  "formalAcceptanceId": null
+}
