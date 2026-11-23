@@ -1,0 +1,53 @@
+{
+  "run": "PG43682",
+  "source": "67f19085e0a58a3d3ce9a514356de97eb821a10b",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "startedAtUTC": "2026-11-23T13:50:09.374292+00:00",
+  "terminalAtUTC": "2026-11-23T13:50:11.895301+00:00",
+  "actualExit": 0,
+  "command": [
+    "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "git",
+    "--no-banner",
+    "--redact=100",
+    "--log-opts=a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69..67f19085e0a58a3d3ce9a514356de97eb821a10b",
+    "--report-format=json",
+    "--report-path=../pgpt-runs/PG379/PG43682-g07-v031-published-delta/report.json",
+    "."
+  ],
+  "rangeStart": "a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+  "rangeEnd": "67f19085e0a58a3d3ce9a514356de97eb821a10b",
+  "scannedPublicCommits": 45,
+  "changedTrackedPaths": 150,
+  "scanner": {
+    "path": "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "priorCursor": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43610-g07-new-published-delta/manifest.json",
+    "sha256": "19372e1543a32d5c365c9dab558f95dfedb68795b1b67f954c42add365339f69"
+  },
+  "secretFindings": 0,
+  "redactedReport": {
+    "path": "../pgpt-runs/PG379/PG43682-g07-v031-published-delta/report.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "redactedOutput": [
+    {
+      "path": "../pgpt-runs/PG379/PG43682-g07-v031-published-delta/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43682-g07-v031-published-delta/stderr.log",
+      "sha256": "2a42ed35ad40a752b048a82b848e044f2762070751c4786ccd9cda1de56b732b"
+    }
+  ],
+  "untrackedOrPrivateContentScanned": false,
+  "heldHistoricalUnclassified": 3280,
+  "allQualityConditions": false,
+  "formalAcceptanceId": null,
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG43682-g07-v031-published-delta/terminal.json",
+    "sha256": "ebda4734c1e950825eb4c8503e37e1d14bbfb58c3b652c569024bed04a9d469a"
+  }
+}
