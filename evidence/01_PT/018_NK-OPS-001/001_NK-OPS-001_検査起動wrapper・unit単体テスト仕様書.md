@@ -201,3 +201,20 @@ UI236 §4.1／6.3・SS322／323、YKT-2328 site19。UCRREQ01の65/256とUPWREQ01
 ## 依存境界監査の出力終端
 
 PT-OPS-ARCH-OUTPUT-001/002、WBS-F02-b-b、SS311 §§2–3／5.2／10、451、PG-D516、BUG-3696／YKT-2903。対象 `ModuleDependencyAudit.main`。合成interface一つずつを六つの自己所有JARへ格納する。正常出力には六module各1型・実取込6・違反0・末尾INSPECTEDを要求する。出力先が30 byteでIOExceptionを返す場合は、先頭だけ表示され、末尾が欠落し、固定診断と終了1になることを要求する。二件とも期待値は入力の手作成JAR数と固定端末条件で決める。製品JAR・実環境・正式受入に関する検査なし。[PG43336](evidence/PG43336-module-report-terminal-v1/manifest.json)
+
+## source入力メタデータの事前照合
+
+WBS-F03/2-2-b、SS354、451、BUG-3695／YKT-2902。対象 `static_input_scope.compare_source_scope`、試験は `SourceInputScopeTest`。固定の合成Git blob、ツール名・実体SHA-256、公開用pathだけを使う。元のbinary照合11件も実行し、工具21件成功。実施根拠、実コマンド、対象pathを別に確認する。[PG43322](evidence/PG43322-f03-source-plan-scope-regression-v1/manifest.json)
+
+| Test ID | method | 独立した期待値 |
+| --- | --- | --- |
+| PT-OPS-SRC-SCOPE001 | `test_cli_accepts_only_exact_tool_path_and_blob_metadata` | 固定の一致入力一件、終了0、照合1件 |
+| PT-OPS-SRC-SCOPE002 | `test_other_tool_receipt_is_rejected` | ツールが異なり `TOOL_MISMATCH` |
+| PT-OPS-SRC-SCOPE003 | `test_other_tool_artifact_is_rejected` | ツール名が一致し実体が異なり `TOOL_MISMATCH` |
+| PT-OPS-SRC-SCOPE004 | `test_old_source_receipt_is_rejected` | 別commitの `SOURCE_MISMATCH` |
+| PT-OPS-SRC-SCOPE005 | `test_later_held_path_invalidates_entire_batch` | 後続の保留がある入力全体を `HELD_SOURCE_PATH` |
+| PT-OPS-SRC-SCOPE006 | `test_unreviewed_path_is_rejected_even_when_in_inventory` | 収録済みで許可未確認の `UNASSESSED_SOURCE_PATH` |
+| PT-OPS-SRC-SCOPE007 | `test_missing_inventory_path_is_rejected` | 収録一覧にない `UNCATALOGUED_SOURCE_PATH` |
+| PT-OPS-SRC-SCOPE008 | `test_changed_blob_at_same_path_is_rejected` | 同一pathで別blobの `SOURCE_BLOB_MISMATCH` |
+| PT-OPS-SRC-SCOPE009 | `test_path_aliases_and_wildcards_are_rejected_even_if_listed` | 非正規path六種の `INVALID_SOURCE_PATH` |
+| PT-OPS-SRC-SCOPE010 | `test_unmodeled_arg_list_is_rejected` | 未定義の入力欄を `INVALID_SOURCE_PLAN_FIELDS` |
