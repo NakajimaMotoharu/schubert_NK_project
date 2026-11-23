@@ -1,4 +1,58 @@
 {
+  "currentWebPrincipalValueTracePG43892": {
+    "owner": "WBS-P015-01",
+    "traceWork": "WBS-G13.06",
+    "related": [
+      "WBS-F03/2-2-b",
+      "WBS-F02-b-a"
+    ],
+    "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+    "verificationSource": "870d1644d81895bf04d17fd32d7b72ab73bb2bca",
+    "newLocalTestIds": 5,
+    "fixture": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPrincipalValueTest.java",
+      "sha256": "dad8fca13c7c94598360b5f5cc06ab5e61e1fb91a65cec32d9c3b25d2c830974"
+    },
+    "oracle": {
+      "path": "evidence/01_PT/015_NK-WEB-001/4693_SessionPrincipal表示値の単体仕様.md",
+      "sha256": "2de5114e68269de90fdcfd2fc4a89d9cff3e468426803ffe2f0f04c3a55144b1"
+    },
+    "historicalTypedByteIdentityOnly": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41556-f03-log-user-receipt-display-v1/manifest.json",
+      "sha256": "66912c95c93400a9281fec559ed81ea899a76b627f19265ba3e3cdad8886b679"
+    },
+    "caseMethods": [
+      {
+        "id": "PT-WEB-PRINCIPAL001",
+        "method": "principal001NormalizesBeforeCheckingTheExactUtf8Width"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL002",
+        "method": "principal002RejectsEachInvalidDisplayNameWithTheFixedDiagnostic"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL003",
+        "method": "principal003EveryMissingFieldFailsAtItsOwnBoundary"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL004",
+        "method": "principal004FrameworkNameAndRedactedDiagnosticHaveDistinctContracts"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL005",
+        "method": "principal005EqualValuesHaveStableHashesAndRoleParticipatesInEquality"
+      }
+    ],
+    "proof": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG43892-web-principal-wbs-trace/manifest.json",
+      "sha256": "190ffe423eb03b3ae8f8854152631a2638d8acf7c422b85d1e68da5a4f50c581"
+    },
+    "formalAcceptanceId": null,
+    "whole451": false,
+    "formalAcceptanceDelta": 0,
+    "completedOriginalRowPricePp": 0,
+    "freshTestRunsInJoin": 0
+  },
   "currentCleanupJdbcDefensiveTracePG43870": {
     "owner": "WBS-P017-07",
     "related": [

@@ -1,4 +1,58 @@
 {
+  "currentWebPrincipalValueTracePG43892": {
+    "owner": "WBS-P015-01",
+    "traceWork": "WBS-G13.06",
+    "related": [
+      "WBS-F03/2-2-b",
+      "WBS-F02-b-a"
+    ],
+    "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+    "verificationSource": "870d1644d81895bf04d17fd32d7b72ab73bb2bca",
+    "newLocalTestIds": 5,
+    "fixture": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPrincipalValueTest.java",
+      "sha256": "dad8fca13c7c94598360b5f5cc06ab5e61e1fb91a65cec32d9c3b25d2c830974"
+    },
+    "oracle": {
+      "path": "evidence/01_PT/015_NK-WEB-001/4693_SessionPrincipal表示値の単体仕様.md",
+      "sha256": "2de5114e68269de90fdcfd2fc4a89d9cff3e468426803ffe2f0f04c3a55144b1"
+    },
+    "historicalTypedByteIdentityOnly": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41556-f03-log-user-receipt-display-v1/manifest.json",
+      "sha256": "66912c95c93400a9281fec559ed81ea899a76b627f19265ba3e3cdad8886b679"
+    },
+    "caseMethods": [
+      {
+        "id": "PT-WEB-PRINCIPAL001",
+        "method": "principal001NormalizesBeforeCheckingTheExactUtf8Width"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL002",
+        "method": "principal002RejectsEachInvalidDisplayNameWithTheFixedDiagnostic"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL003",
+        "method": "principal003EveryMissingFieldFailsAtItsOwnBoundary"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL004",
+        "method": "principal004FrameworkNameAndRedactedDiagnosticHaveDistinctContracts"
+      },
+      {
+        "id": "PT-WEB-PRINCIPAL005",
+        "method": "principal005EqualValuesHaveStableHashesAndRoleParticipatesInEquality"
+      }
+    ],
+    "proof": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG43892-web-principal-wbs-trace/manifest.json",
+      "sha256": "190ffe423eb03b3ae8f8854152631a2638d8acf7c422b85d1e68da5a4f50c581"
+    },
+    "formalAcceptanceId": null,
+    "whole451": false,
+    "formalAcceptanceDelta": 0,
+    "completedOriginalRowPricePp": 0,
+    "freshTestRunsInJoin": 0
+  },
   "currentCleanupJdbcDefensiveTracePG43870": {
     "owner": "WBS-P017-07",
     "related": [
@@ -10668,7 +10722,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "8df3184110eea383795eacfbcb1a1f50a192ae047e89d5ed1b2a4093ed88f54f",
+  "inventorySha256": "c44c1ffd484d0d17a6287733c540ed27eb9f95376fa1a45fe60d9c0155bb4030",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
