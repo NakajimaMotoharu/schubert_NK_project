@@ -1,0 +1,74 @@
+{
+  "run": "PG43762",
+  "source": "191188426f15d9fbf434c51d352a334d16bc685c",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "requirement": "MSG-009",
+  "terminalAtUTC": "2026-11-23T16:49:57.633529+00:00",
+  "firstPreflightExitCode": 1,
+  "firstPreflightFailure": "The local proof script treated the exact qualification directory as a variant prefix. No code, artifact or tests changed.",
+  "exitCode": 0,
+  "inspector": {
+    "original": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35563-ssc440-namespace39-post-join-v2/manifest.json",
+      "sha256": "eeff3dea2953a9d6e8950b135d72ba86e4976257add5ccb2c0b6401e314093e0"
+    },
+    "rawMeasurement": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35564-ssc440-namespace39-unfiltered-v2/manifest.json",
+      "sha256": "889ef0bf1f2e5babc8aa2c487fdf392f7e7349273d55137823a90aa9b6be6c69"
+    },
+    "sameProductClassSHA256": {
+      "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.class": "9944ba155d19917a4d3530bb20161ab90d5c27c5ee54dc56e56e694d784d3f7b",
+      "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    "testFixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "sha256": "8b8bfa361ca56fd5ec58e75b5a0276c4ba5fcaa8c79013833940fc577cb95109"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/009_NK-OPS-001_run環境file単体テスト仕様書.md",
+      "sha256": "e30fd4136de5b71581990a3d302fb84572580edf3637f2e3c680eb5a6ed71ba9"
+    },
+    "testIds": [
+      "PT-OPS-ENV-001",
+      "PT-OPS-ENV-002"
+    ],
+    "verified": [
+      "two lines with LF including the final byte",
+      "exact match accepts independent expected data",
+      "CRLF is rejected without conversion"
+    ],
+    "applicableBoundary": "encode and requireMatches for fixture values",
+    "actualPublication": false
+  },
+  "batchMetricText": {
+    "previous": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40902-batch-metric-text-current-37-v1/manifest.json",
+      "sha256": "e77c2501cb78acb073dc55033f2ba59107538e64c0569ca7a486ebc1daef140a"
+    },
+    "unchangedSourceInputs": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistration.java": "c568f95ff92ee209d87bd8146cdb0a783a01c17187f17a1f7dc3ce83b5f88c1a",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchJvmMetrics.java": "db67d6b34f746b3e118df49397d79cb9e7a9e22240e4f28967a4c931745739ec",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java": "ee933bc6a1237c89ffb8e6f92dabf05d9ed8010991e4460f7f72161d304c261a",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricLabelPolicy.java": "b0f223272358c324da36d01bf6ba76bf788aef21e11990895053361b0081048e",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricText.java": "fb97c042be19ccf1d56f0204fe74cb261b476a21527f6bf5d6d529adcd9af483",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java": "cab6971362c83e3a44c892baa4922d23a8b2001152053f33ad0d9d463657e891",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetrics.java": "ace9052e07b2c255d6911cd206bcdd50398b424e3031bf9754a45391e8fb5213",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchSystemMetrics.java": "f45551f03bf07f528dbe8d8316459d843aac1393d4fe02ba3a82621d4ee19339",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java": "056bb329bb251189434c73b8914141be9974b50686f7df227b8ef935e4bc93f8",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricTextTest.java": "5af8ac95117c524871208ce2f60ac7be3b96077125cc8cb9ac73a111ff4c450f"
+    },
+    "changedSourceInputs": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java": {
+        "previous": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73",
+        "current": "3f152853fbd798a28dd56d0566fd9f873a5c1bce6ec83f4004916ae3c4a745f3"
+      }
+    },
+    "equivalentWholeTest": false,
+    "nextProof": "Run the independent literal LF and DEBUG/STANDARD mode vectors on the current format/parse closure if they have no same-byte evidence."
+  },
+  "actualExternalActions": 0,
+  "newProductTests": 0,
+  "jarManifestScope": "QA-062 pending",
+  "formalAcceptanceId": null
+}

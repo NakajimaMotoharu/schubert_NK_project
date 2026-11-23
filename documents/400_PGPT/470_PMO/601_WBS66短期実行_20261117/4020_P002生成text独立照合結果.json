@@ -1,0 +1,112 @@
+{
+  "eventId": "PGPT-20261008-9465",
+  "workCategory": "REVIEW",
+  "source": "191188426f15d9fbf434c51d352a334d16bc685c",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "P002再判定-a"
+  ],
+  "planRow": {
+    "新版ID": "P002再判定-a",
+    "第58版ID": "WBS-P002-01/2（再確認）",
+    "費用主担当項目": "P002-01",
+    "計画窓": "第2窓",
+    "予定期間・週末": "12/1–12/6 18時",
+    "作業・成果物": "現Protocolの数値全byte検査順、修正後の独立試験と要求を同候補に結ぶ",
+    "先行ID・着手条件": "PG41300と現候補の一致",
+    "担当": "Protocol・品質担当",
+    "旧短期残pp": "0",
+    "改訂残pp": "0.3",
+    "終了条件": "現Protocolの数値全byte検査順、修正後の独立試験と要求を同候補に結ぶ",
+    "元項目の正式受入に必要な証拠": "正式な再受入時に全体へ1件復帰。指定12件の新規受入への加算は0。",
+    "参照する元項目": "P002-01",
+    "lineNumber": 66
+  },
+  "run": "PG43762",
+  "startEvent": "PGPT-20261008-9464",
+  "outcome": {
+    "result": "OWNED_LF_VECTOR_REUSED_AND_CHANGED_METRIC_DEPENDENCY_IDENTIFIED",
+    "inspectorExactProductTypes": 2,
+    "sourceInputsEqual": 11,
+    "changedDependency": "MonitoringModePolicy.java",
+    "newTestExecutions": 0,
+    "formalDelta": 0
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43762-msg009-owned-output-line-ending-oracles/manifest.json",
+    "sha256": "7fbc9ded6c61efe819189e36fe450f20f127ab983673e45485bf19c82c1dfa2c"
+  },
+  "nextEvidence": {
+    "work": "F03でBatchMetricTextの現DEBUG/STANDARD/無効値と独立LF出力既存6件を選択し、変更したparse経路だけを検証。"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T16:50:04+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 82,
+    "remainingPercent": 18,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "16af85ad53630e74f7acb7de2452aae72fdfc47a1c7856f10ba8e36284c01fe7",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T16:50:04+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 82,
+        "remainingPercent": 18,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T16:49:57.633529+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 82,
+    "remainingPercent": 18,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
