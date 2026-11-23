@@ -1,0 +1,39 @@
+{
+  "run": "PG43806-after-v1",
+  "source": "adcb63f28202215d9af88663459a20ed64d3bf1d",
+  "stage": "original test retained before oracle refinement",
+  "beforeFixtureCorrection": true,
+  "junit": {
+    "tests": 8,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "counts": {
+    "executed": 8,
+    "success": 7,
+    "failed": 1
+  },
+  "changedMainQualifiedByWholeScope": false,
+  "failureId": "PT-OPS-WEBPOOLCONN006",
+  "reason": "Existing test determined ownership from JVM monitor-specific BLOCKED. Same second worker waits in WAITING with an explicit lock. Preserve the business assertion of exclusive access and assert actual wait owner from the two fixture threads.",
+  "staticOriginalToolResult": [
+    [
+      "AvoidCatchingGenericException",
+      36
+    ],
+    [
+      "AvoidCatchingGenericException",
+      36
+    ]
+  ],
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-after-v1/terminal.json",
+    "sha256": "50cd6634458b713097312a660663674e94fe3a7d41ecd6e699db9f0258079e1f"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-after-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "ce22a7d1249cfe3769f030a3d0a844b27fb144288ff04f828548f22c101716a2"
+  },
+  "formalAcceptanceId": null
+}
