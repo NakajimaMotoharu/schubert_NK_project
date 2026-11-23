@@ -1,0 +1,53 @@
+{
+  "run": "PG43668",
+  "source": "5121c20a426b22e89048c744313112be0231d266",
+  "terminalAtUTC": "2026-11-23T13:22:33.048070+00:00",
+  "actualExit": 0,
+  "beforeFix": true,
+  "bug": "BUG-3723",
+  "horizontal": "YKT-2922",
+  "wbs": "WBS-P004-01.02/2",
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/StepCleanupBoundaryTest.java",
+    "sha256": "c5f6ac7bc18d92a75284b62ca9e3d252de16478ef958b93a46641aaacd4d7096",
+    "matched": {
+      "inventory": [
+        {
+          "line": 785,
+          "match": "MigrationInventory.VERSIONS"
+        }
+      ],
+      "target": [],
+      "migrationResult": [
+        {
+          "line": 809,
+          "match": "migrationsExecuted"
+        }
+      ],
+      "successCount": [
+        {
+          "line": 791,
+          "match": "flyway_schema_history where success"
+        },
+        {
+          "line": 791,
+          "match": "flyway_schema_history where success"
+        }
+      ]
+    }
+  },
+  "testId": "PT-DB-266",
+  "representedCurrentVersions": 31,
+  "oldFixtureClaims": 29,
+  "sourceConditions": [
+    "ordinary all-version resource count 29",
+    "asserts V029 is last",
+    "asserts a second 001-029 exact list",
+    "asserts SQL history 29 and separately SCHEMA 1"
+  ],
+  "terminalDatabaseTests": "NOT_RUN",
+  "runEvidence": {
+    "path": "../pgpt-runs/PG379/PG43668-migration-inventory-fixture-review/findings.json",
+    "sha256": "13f6a844a9da83e4f3d5c3642b5fd6953a4e1e1398c39071af949b44a4ad0022"
+  }
+}
