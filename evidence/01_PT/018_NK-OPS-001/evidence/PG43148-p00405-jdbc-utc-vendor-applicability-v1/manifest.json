@@ -1,0 +1,85 @@
+{
+  "run": "PG43148-p00405-jdbc-utc-vendor-applicability-v1",
+  "source": "d5809e670e71da72b21b5428a0c7de733ef53013",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:14:03.305490+00:00",
+  "wbs": "WBS-P004-05/2",
+  "approved": [
+    "SS332",
+    "SS343",
+    "SSC473"
+  ],
+  "priorIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40608-p00405-jdbc42-vendor-row-independent-v1/manifest.json",
+    "sha256": "6a46eba63ad552fe49873e66993f19e6e4ce2d915b33350fd301f5d891e924aa"
+  },
+  "priorActualVendor": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/manifest.json",
+    "sha256": "dbc8d81e9639fc84c13a05d429b5fd2bfaabf2e78ed06d83b4628e7af9bb46a9"
+  },
+  "modulePins": [
+    {
+      "module": "api",
+      "version": "42.7.13",
+      "expression": "${postgresql.jdbc.version}",
+      "pom": {
+        "path": "src/schubert-nk-api/pom.xml",
+        "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+      }
+    },
+    {
+      "module": "batch",
+      "version": "42.7.13",
+      "expression": "42.7.13",
+      "pom": {
+        "path": "src/schubert-nk-batch/pom.xml",
+        "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+      }
+    },
+    {
+      "module": "bootstrap",
+      "version": "42.7.13",
+      "expression": "42.7.13",
+      "pom": {
+        "path": "src/schubert-nk-bootstrap/pom.xml",
+        "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+      }
+    }
+  ],
+  "exactVendorArtifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar",
+      "sha256": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+      "sha256": "857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.pom",
+      "sha256": "3957417ecaee342521b61310fdc21bd37fcb8bba3f7547ece9b78fd03cd53f26"
+    }
+  ],
+  "sourceFixturePath": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/153_PgTemporalRowContract.java",
+    "sha256": "b5d1299cbf1826269e6075ceadc70d693f18f6ba4d47b5d3459175afcd646c6b"
+  },
+  "vectorFixturePath": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/154_PgTemporalRowVectors.tsv",
+    "sha256": "6b203307fcbb156cc0f2f3e10f9687bf7421176cb552b1c6787b4e977f07dccc"
+  },
+  "reusedDistinctVendorProjections": 54,
+  "queryCandidateBackendVerification": false,
+  "readOnlyLiveDatabaseActions": 0,
+  "productTestsReplayed": 0,
+  "addedProductCoverage": 0,
+  "reusedWholeGate": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "real JDBC TIMESTAMPTZ input and bind/read transaction",
+    "connection ownership, pool and session",
+    "held QA056 and F02/F03"
+  ]
+}
