@@ -1151,6 +1151,7 @@ final class DatabaseMigrationTest {
             "migration/V028__retained_success_progress_seals.sql",
             "migration/V029__strict_nullable_compound_checks.sql",
             "migration/V030__preserve_current_audio_role.sql",
+            "migration/V031__restrict_routine_default_privileges.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1943,11 +1944,11 @@ final class DatabaseMigrationTest {
   @Order(33)
   @DisplayName("PT-DB-NULL340-014 V029 validates and all five checks remain validated")
   void strictMigrationIsAppliedValidatedAndIdempotent() throws SQLException {
-    assertEquals(30, firstMigration.migrationsExecuted);
+    assertEquals(MIGRATION_VERSIONS.size(), firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
     assertEquals(0, flyway.migrate().migrationsExecuted);
     assertEquals(
-        29L,
+        (long) MIGRATION_VERSIONS.size(),
         queryLong(
             ADMIN,
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
@@ -2034,6 +2035,31 @@ final class DatabaseMigrationTest {
       action.run(c);
       c.rollback();
     }
+  }
+
+  @Test
+  @Order(35)
+  @DisplayName("PT-DB-ACL031-001 only the owner retains default routine execution")
+  void routineDefaultsRetainOwnerExecutionWithoutPublicExecution() throws SQLException {
+    String ownerRoutineDefaults =
+        """
+        select defaclrole, defaclacl
+          from pg_catalog.pg_default_acl
+         where defaclrole = 'nk_owner'::regrole
+           and defaclnamespace = 0
+           and defaclobjtype = 'f'
+        """;
+    assertEquals(
+        1L, queryLong(ADMIN, "select count(*) from (" + ownerRoutineDefaults + ") defaults"));
+
+    String executionEntries =
+        "select count(*) from ("
+            + ownerRoutineDefaults
+            + ") defaults cross join lateral pg_catalog.aclexplode(defaults.defaclacl) acl"
+            + " where acl.privilege_type = 'EXECUTE'";
+    assertEquals(
+        1L, queryLong(ADMIN, executionEntries + " and acl.grantee = defaults.defaclrole"));
+    assertEquals(0L, queryLong(ADMIN, executionEntries + " and acl.grantee = 0"));
   }
 
   private static String strictMediaInsert() {
