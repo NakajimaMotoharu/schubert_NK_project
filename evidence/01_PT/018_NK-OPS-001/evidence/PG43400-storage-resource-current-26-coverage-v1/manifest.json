@@ -1,0 +1,411 @@
+{
+  "run": "PG43400-storage-resource-current-26-coverage-v1",
+  "source": "645af01b72bf6714a3204ffe2701cab0e4675fd5",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G03.01",
+  "terminalAtUTC": "2026-11-23T06:14:14.560855+00:00",
+  "actualExit": 0,
+  "originalSameFixtureNoExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42774-f03-storage-resource-fixtures-checked-scope-v1/manifest.json",
+    "sha256": "8bbedc3e34ebc713fd613ea46bc6abd21383a6d809d5852c34df0d27d021f2a0"
+  },
+  "regularStorageArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+  },
+  "exactBinaryClosure": 7,
+  "affectedTestsSource": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "sha256": "3ac68f0bd1e95bfe3f95f522e460c3b4a978baf1a7e82d6e665a07b81af8871a"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "sha256": "ed73aa966d7999112a3d5291eb853327caabf87632e562ac0ca80cd1a8590a63"
+    }
+  ],
+  "xml": {
+    "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "e06ac07ae90319b3e15a9d2e322928273394f636fe64a9d000967a2456b1aefe"
+  },
+  "roster": [
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory002EveryNullPortFailsBeforeAcquire"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "successfulOwnership"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "nestedScopes"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "concurrentScopes"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "knownIoFailures"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "unknownBodyFailures"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "knownBodyUnknownCleanup"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "nullAndNullableContracts"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+      "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "unknownCompoundFailures"
+    }
+  ],
+  "executed": 26,
+  "passed": 26,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newDefinitions": 0,
+  "currentCoverage": {
+    "physical": {
+      "dev/codex/schubert/nk/storage/ResourceScope$Acquire": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+          "sha256": "e50a2e03b678c0f47f0d00190542b7f1e8f631acb27055d49e4c969b1cd31a91"
+        },
+        "crc64": "1c34210267385aba",
+        "disposition": "INTERFACE_NO_EXECUTABLE_CODE",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/ResourceScope$Action": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+          "sha256": "3d6e9dc674275dce70291887b24fbb95cc15617a31ac49a6328cff3f2f5e3291"
+        },
+        "crc64": "f3538b9d8bcdfe63",
+        "disposition": "INTERFACE_NO_EXECUTABLE_CODE",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+          "sha256": "5942d0b8d678b791ae99e042d65552ebcd657030b6637bb80754d36aaf83bf83"
+        },
+        "crc64": "437d12e381b1ebd3",
+        "disposition": "INTERFACE_NO_EXECUTABLE_CODE",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/ResourceScope$Release": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+          "sha256": "c9f519c33f71a3eb4f120bcd6f22592c7b5efc3ff05164591f904b98d508f96c"
+        },
+        "crc64": "db9e2262a7b0b30b",
+        "disposition": "INTERFACE_NO_EXECUTABLE_CODE",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/ResourceScope": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/ResourceScope.class",
+          "sha256": "022bdb594175f51e2554e42564db54015f675beba0c11c781b89aa9a4c2d13d2"
+        },
+        "crc64": "971cc33e5efe25ef",
+        "disposition": "MEASURED",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 172
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 20
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 52
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 15
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+          "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+        },
+        "crc64": "a64b044af8a34f92",
+        "disposition": "MEASURED",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 45
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 4
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "physical": {
+          "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/production/dev/codex/schubert/nk/storage/StorageIoException.class",
+          "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+        },
+        "crc64": "1271c02831786cbb",
+        "disposition": "MEASURED",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 80,
+            "covered": 13
+          },
+          "BRANCH": {
+            "missed": 12,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 19,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 9,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 3,
+            "covered": 2
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "measurement": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43400-storage-resource-current-26-coverage-v1/coverage-unfiltered.tsv",
+      "sha256": "1f3ab3b9309e17b883482afaff01fd572ed2e4da70a71a38f5557e0d87587e87"
+    },
+    "stream": {
+      "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/selected.exec",
+      "sha256": "ce9da6979d716682598780a7a8aa16617adbec38fb816dcc24a52751ac8241af"
+    },
+    "singleOriginal": true,
+    "codeRuntimeRecords": 3,
+    "interfacesWithNoCode": 4,
+    "resourceScopeOnlyFourComplete": true,
+    "supportExceptionResidualPreserved": true,
+    "mergedExecs": 0
+  },
+  "actualFileDbNative": 0,
+  "knownStorageHeldContextsStillHeld": true,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "commandReceipt": {
+    "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/begin.json",
+    "sha256": "384d07f62df826d8925d6d7128fb747d0baa81356bc8a8486b5c36bcda571efa"
+  },
+  "terminalReceipt": {
+    "path": "../pgpt-runs/PG379/PG43400-storage-resource-current-26-coverage-v1/terminal.json",
+    "sha256": "177ffbea60374bf4316ea46376e32ed538d536586ebdd6277201c62e5d57d44c"
+  }
+}

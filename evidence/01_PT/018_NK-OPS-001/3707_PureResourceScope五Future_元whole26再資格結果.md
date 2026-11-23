@@ -9,3 +9,5 @@ source1c75c8a40572ddce1305fcd21dbeab34eda87512/Main7aed。BUG2464のFactory4/Res
 Storage全29は不変27+変更2のhash/新XML位置を対応しraw82不変、当9Thread siteを各methodと実完了/所有へ分類。既25+9=34分類/未分類57→48、全29静的engine再演0。有限wait BUG2464/YKT2202の五siteは再試験CLOSED、YKT2177既知28sourcefixed=動的25+Question1/Storage2HOLD3・全索引型未確定OPEN。
 
 既26再資格/新unique-whole-leaf0、unique438/whole94/正式1964-53/工数null/QA051final不変。対象Code四100をstorage全体100や451全合格へ一般化しない。
+
+PG43400（現候補、WBS-G03.01）。元PG42774の現fixture通常26は計測を伴わなかったため、既安全な二クラスと使用七物理だけで一回測定。26成功、失敗・エラー・skipped各0。対象ResourceScopeのL52/M5/C1/B20はmiss0、四interfaceの自然0/0と補助例外の未到達は明記。異なるexecを合算せず、実資源・DB・native・全451の受入に使わない。evidence/01_PT/018_NK-OPS-001/evidence/PG43400-storage-resource-current-26-coverage-v1/manifest.json（SHA256 e1afd787eaa8235caa8348ef77db9c61528a1c3fa7f6f13eb1c2a54c1f8a593d）。
