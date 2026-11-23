@@ -1,0 +1,113 @@
+{
+  "eventId": "PGPT-20261008-9404",
+  "workCategory": "SELECTED_TEST",
+  "source": "e3eda856b4b0e9a35ef9c6bae6268f81670e275f",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-P020-01.03/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P020-01.03/2",
+    "第58版ID": "WBS-P020-01.03/2",
+    "費用主担当項目": "P020-01",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-17までの計画週",
+    "作業・成果物": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+    "先行ID・着手条件": "WBS-P020-01.03/1、閉/WBS-P020-01.02",
+    "担当": "環境・比較担当",
+    "旧短期残pp": "0.488",
+    "改訂残pp": "0.488",
+    "終了条件": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+    "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+    "参照する元項目": "P020-01",
+    "lineNumber": 57
+  },
+  "run": "PG43702",
+  "startEvent": "PGPT-20261008-9403",
+  "outcome": {
+    "result": "TEN_DEFINITION_AND_EVIDENCE_TOOL_CASES_PASS",
+    "cases": 10,
+    "failed": 0,
+    "skipped": 0,
+    "productExecuted": 0,
+    "wholeG01_G06": false
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43702-current-gate-definitions-evidence-ten-v1/manifest.json",
+    "sha256": "b2b6b4839b2c1a0f56fc7ba74c17d3c751ff4b979eba89ac49048dd27428ecb5"
+  },
+  "nextEvidence": {
+    "work": "F02-b-aでPG43690通常Batch JARへ旧四包装の証拠を更新する。新JDK stdlib importのみ、外部artifact、JAR manifest実値を確認。QA-056と実Storageは保留。",
+    "firstEvidence": "最新origin QA-056/QA-061の受領・F02記録／当source JAR、現在四条件を照合。"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T14:33:31+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 79,
+    "remainingPercent": 21,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "4bd6b757350ef92d65d57c4d5bdcc1ce337aaa3551f23ce8eca79d5ebe9c3bcc",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T14:33:31+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 79,
+        "remainingPercent": 21,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T14:32:15.663996+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 79,
+    "remainingPercent": 21,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
