@@ -1,0 +1,184 @@
+{
+  "run": "PG43386-web-local-test-screen-trace-v3",
+  "source": "951b824c398018af9df74730bab9af30c851ff8b",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.05",
+  "design": [
+    "UI221 §3",
+    "UI225 §2",
+    "SS313",
+    "451"
+  ],
+  "terminalAtUTC": "2026-11-23T05:50:01.502533+00:00",
+  "actualExit": 0,
+  "reproducer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/verify-trace.py",
+    "sha256": "d5dbadd3faf8380ea510538b0a35aae0ccfe317fbbbe12c64f4bad0c77ba8ad2"
+  },
+  "trace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/test-trace.tsv",
+    "sha256": "45e1d97bfc0c97413a3842fb546adf8d11e05f182ee8981f99c2cf47c29b5db8"
+  },
+  "execution": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/verification.json",
+    "sha256": "0944071041b6e69603bb49dcdf904741bec608a6448cc7214ddde95a8a571e8d"
+  },
+  "invocation": [
+    "python3",
+    "-B",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/verify-trace.py",
+    "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/test-trace.tsv"
+  ],
+  "metadataPreflightFailures": [
+    {
+      "path": "../pgpt-runs/PG379/PG43386-web-trace-mixed-ui-sections-preflight-v1/preflight.safe.txt",
+      "sha256": "fd3d7614eeb13b84e3b7dfe53133415ea5d3b11de3dc8cacc0b64c89fcfbe81f"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43386-web-trace-regex-spanned-ui-rows-preflight-v2/preflight.safe.txt",
+      "sha256": "c57283b34611f935f6904b7c21d90fb563d04ac09bc47923023755d56565d077"
+    }
+  ],
+  "originals": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/3647_F03ログ検索16選択開始.json",
+      "sha256": "714f00c334fda8ae043c6c6e4c84d05a37a4f4bc3b1054d86f5324cd5ff1adeb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43378-log-search-current-sixteen-v1/manifest.json",
+      "sha256": "e5b7d3de6ae40ef10746fd2c9b668e16acbf5df181f1c71d5e4b492e581066a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43372-scenario-hierarchy-current-twelve-v1/manifest.json",
+      "sha256": "d4b7d44555f9915db5bc4c59b7df99b936fd4e227d70bea468ba3c43c7bdf405"
+    }
+  ],
+  "corrections": [
+    {
+      "run": 43378,
+      "prior": [
+        "SCR-016"
+      ],
+      "current": [
+        "SCR-014"
+      ],
+      "sameJunit": true
+    },
+    {
+      "run": 43372,
+      "prior": [
+        "SCR-003",
+        "SCR-004",
+        "SCR-005"
+      ],
+      "current": [
+        "SCR-004",
+        "SCR-005",
+        "SCR-006"
+      ],
+      "sameJunit": true
+    }
+  ],
+  "independentSpecFiles": 9,
+  "referencedTests": 80,
+  "verifiedRuns": 7,
+  "newProductPt": 0,
+  "originalBuildOrExecRepeated": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "related": [
+    "BUG-3700",
+    "YKT-2906"
+  ],
+  "canonicalUi221Sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "groups": [
+    {
+      "run": 43366,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43366-page-eight-current-one-exec-v1/manifest.json",
+      "sha256": "f16b8aba9123ae8ef9ccba5efe2bb0f60db31651fa52804f792c089576eabe1b",
+      "source": "8aaa4037d2760aa9b35dbf8705f426c2c41a88d4",
+      "canonicalScreenIds": [],
+      "qualifiedCases": 8,
+      "junitXmlSha256": "67f79373bfdeef0b499fd502f8c174976915f373128073d89b9fb90b3e121e25"
+    },
+    {
+      "run": 43368,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43368-current-music-hierarchy-eight-v2/manifest.json",
+      "sha256": "5bc5406ec2fdbf35b38ff8b62699feafba2ed94c1d0b136c0ab168e16c7e1bb0",
+      "source": "2c3ca865041c59efcae4a35eeed324caf09e5733",
+      "canonicalScreenIds": [
+        "SCR-011",
+        "SCR-012"
+      ],
+      "qualifiedCases": 8,
+      "junitXmlSha256": "86d5dbb9b95a7cc5d6de9e6c7a2afd873913253fc6b047703d5c3aa572f387c2"
+    },
+    {
+      "run": 43370,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43370-animation-menu-list-current-eight-v1/manifest.json",
+      "sha256": "44913e44f1b6802f940a1c2b94fa2da2cfdc03c26ed931283b2c6cb314bdae3c",
+      "source": "d31078d387849be7790884a245569eb739535614",
+      "canonicalScreenIds": [
+        "SCR-008",
+        "SCR-009"
+      ],
+      "qualifiedCases": 8,
+      "junitXmlSha256": "842c8908f38c4bf90349bdb8631f34a02652747e31b2d1602129937c523eef19"
+    },
+    {
+      "run": 43372,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43372-scenario-hierarchy-current-twelve-v1/manifest.json",
+      "sha256": "d4b7d44555f9915db5bc4c59b7df99b936fd4e227d70bea468ba3c43c7bdf405",
+      "source": "c0ba5e9f42966878224188b3185d5ecb44b39d02",
+      "canonicalScreenIds": [
+        "SCR-004",
+        "SCR-005",
+        "SCR-006"
+      ],
+      "qualifiedCases": 12,
+      "junitXmlSha256": "10f88bed8a5d10528d860d57e110ee2d52b51aa77a132ff7a5554a5c70f96b00"
+    },
+    {
+      "run": 43376,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43376-scenario-search-two-models-current-sixteen-v2/manifest.json",
+      "sha256": "5a86d691a6dfa152a3ff930d8ef2e43b9c22d6251b7a2e5ab81662727e49f4eb",
+      "source": "87054307e6cc7b9ad162ddb2a203b3996edf5897",
+      "canonicalScreenIds": [
+        "SCR-003"
+      ],
+      "qualifiedCases": 16,
+      "junitXmlSha256": "8223ba4cc94438578a58871ebe837e6592ed483f48f16d623a454bfcc41df621"
+    },
+    {
+      "run": 43378,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43378-log-search-current-sixteen-v1/manifest.json",
+      "sha256": "e5b7d3de6ae40ef10746fd2c9b668e16acbf5df181f1c71d5e4b492e581066a9",
+      "source": "43bcce03058cf53f410598ec9b2661d163341732",
+      "canonicalScreenIds": [
+        "SCR-014"
+      ],
+      "qualifiedCases": 16,
+      "junitXmlSha256": "6d2a0bf32ae201b33537e48f3a9f7a4b48028fbe8b17695540eea21d96bb916c"
+    },
+    {
+      "run": 43382,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43382-scenario-detail-current-twelve-v1/manifest.json",
+      "sha256": "22c08f76dca5a8a12e9f8f33fdfcc47273ccbd8a5fbf04c4d25583cf4465720e",
+      "source": "9ca23e640c14310aa7de3f39010de089e6ab29c2",
+      "canonicalScreenIds": [
+        "SCR-007"
+      ],
+      "qualifiedCases": 12,
+      "junitXmlSha256": "9c59023a040e4b285038470dc4933f9dd0392c9838e02f544510207c65d53249"
+    }
+  ],
+  "wrongScreenChecksRejected": 2,
+  "independentSameBytesRepeat": {
+    "exitCode": 0,
+    "traceEqual": true,
+    "verificationEqual": true,
+    "productTestsRerun": 0
+  }
+}

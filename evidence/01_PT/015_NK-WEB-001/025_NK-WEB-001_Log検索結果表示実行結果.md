@@ -21,3 +21,5 @@ PG42362／試験source c9b95413be15f435a4fbf50c70947d94df8655cb、Java Core 1e4e
 ## PG43378 現候補の二表示
 
 PT-WEB-262～269、286～293の単一実行で16件成功。失敗、エラー、skippedは各0。表示二本体と内側三型の生四指標は L138/M55/C5/B30 で各100%。ログ保管、実検索、HTTP、実Browser、全451は別条件。公開manifest evidence/01_PT/018_NK-OPS-001/evidence/PG43378-log-search-current-sixteen-v1/manifest.json（SHA256 e5b7d3de6ae40ef10746fd2c9b668e16acbf5df181f1c71d5e4b492e581066a9）。
+
+PG43386 証跡の画面ID訂正。PG43378の対象はUI221・UI225のSCR-014。元manifestの「SCR016」を訂正する。SCR-016は利用者追加。 [BUG-3700／YKT-2906証拠](../018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/manifest.json)

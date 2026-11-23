@@ -23,3 +23,5 @@ PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f
 ## PG43372 現候補のScenario階層表示
 
 UI223 §4、UI234 §§5・8・9、SS313 §§4・6。PT-WEB-182～193は、現fixture・現Protocol正規JAR・現SDKで12/12成功。Game／Route／ScenarioFileの表示と各Cardの六物理を単一execに固定し、行85/85、メソッド42/42、クラス6/6、分岐10/10。81 probeと物理CRCを独立照合した。実ページ組立、認証、HTTP、実NK CHRと全451は未受入。[PG43372](../018_NK-OPS-001/evidence/PG43372-scenario-hierarchy-current-twelve-v1/manifest.json)
+
+PG43386 証跡の画面ID訂正。PG43372の対象はUI221のSCR-004／005／006。元manifestの「SCR003/SCR004/SCR005」を訂正する。12件のJUnitと測定値は維持。 [BUG-3700／YKT-2906証拠](../018_NK-OPS-001/evidence/PG43386-web-local-test-screen-trace-v3/manifest.json)
