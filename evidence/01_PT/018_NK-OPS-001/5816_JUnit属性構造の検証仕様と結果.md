@@ -7,4 +7,4 @@ WBS-G09／G08、SS354、451、BUG-3718／YKT-2918。Surefire 3.5.4ではproperti
 | PT-OPS-G09-JUNIT023 | 容器の重複、未知の子、value欠落、子を持つproperty | 全形で収録を拒否し終端JSONを作らない |
 | PT-OPS-G09-JUNIT024 | 容器なし、空、name/valueを持つ二要素（空valueとescaped文字を含む） | 各試験一件、元SHA-256を保存して同じ原本を検証 |
 
-PG43606の修正前は合成負例4形が受理された。修正 、PG43608の工具32件が成功し、元Protocol二群の各39 XMLと171件を個別に保存値と照合。元試験の再実行0、製品PT追加0、正式受入0。実行command・tool／原本hashは[PG43608](evidence/PG43608-reactor-property-shape-after-v1/manifest.json)。
+PG43606の修正前は合成負例4形が受理された。修正 `e70191abdca80a4cbf308baa8db43d82512f2d8e`、PG43608の工具32件が成功し、元Protocol二群の各39 XMLと171件を個別に保存値と照合。元試験の再実行0、製品PT追加0、正式受入0。実行command・tool／原本hashは[PG43608](evidence/PG43608-reactor-property-shape-after-v1/manifest.json)。
