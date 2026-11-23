@@ -1,0 +1,1152 @@
+{
+  "run": "PG43742",
+  "source": "c3f6a64ce29b6c8e16acb312ccbb0796c978f2b4",
+  "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43352-g12-short-wbs-exit-dependency-join-v1/manifest.json",
+    "sha256": "051b7d1e95f0ee450a74c74a9b27e988c48bc9c9c4fbb5355a372ed73c3c945f"
+  },
+  "formalSource": {
+    "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+    "sha256": "b01863b8e77ba70531350803d3515c082cfb892740bb5c15d048c58cc28b4e35"
+  },
+  "plan": {
+    "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+    "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+  },
+  "originalThresholdsReference": {
+    "path": "../PMO/hourly-monitor/更新判断-20261207/更新判定基準.json",
+    "sha256": "e1a0d6309be727f0bb30fdb7c878dee2b8b2e514f3e019b0a694dc22ea645515"
+  },
+  "handoff": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+    "sha256": "c7d7564417769b879fe06f67c164638cb02ea583b3b4e3c7b9dc4a8fc2121158"
+  },
+  "support": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43704-f02-current-four-jar-receipts/manifest.json",
+      "sha256": "25e49b924f8e1e861d0c7f5844b5ae521e1cd928a05721733041825ded5a9672"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43730-current-browser-definition-wbs-trace/manifest.json",
+      "sha256": "484d3981b57bef302438f85346e542fc41bbcba61822e9a8ed15f11685b966ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43732-batch-monitor-parent-spotless-current/manifest.json",
+      "sha256": "f367e0398c5f9f9885e81baa40239cdadde3decfc8d9d6642a01c2fe30efb20a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+      "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43736-caddy-declaration-and-maintenance-trace/manifest.json",
+      "sha256": "1db2a592b19651fe4b9bed2633a685965479ade6ba371f4b8202e5cdc41ef881"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43738-caddy-parent-arithmetic-method-receipt/manifest.json",
+      "sha256": "bf8d4f5ad82bd77de1d02b2d173575e6c133b92d4d4eb3d0ca5c6beb37595034"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43740-caddy-unit-fixture-checkstyle/manifest.json",
+      "sha256": "89819f425af953b9b6988a08b56b0f6189b71f9f8a7ca4e95de841e07a3f5a2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    }
+  ],
+  "rows": [
+    {
+      "line": 2,
+      "id": "WBS-F02-b-a",
+      "lane": "F02",
+      "owner": "ビルド・アーキテクチャ担当",
+      "beginCondition": "WBS-F02-a",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "QA-056四型の判断・現候補を受領し、API/Webの実JARとStorage境界の証跡を揃える",
+      "nextEvidence": "QA-056未回答、正規APIとWeb二包装、Storage実JDBC、六製品現同源の証跡・担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.5"
+    },
+    {
+      "line": 3,
+      "id": "WBS-F02-b-b",
+      "lane": "F02",
+      "owner": "ビルド・アーキテクチャ担当",
+      "beginCondition": "WBS-F02-b-a、六製品のruntime・品質終端",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "6 JAR・13要求・契約と品質証拠を照合し担当判定を保存",
+      "nextEvidence": "QA-056未回答、正規APIとWeb二包装、Storage実JDBC、六製品現同源の証跡・担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 4,
+      "id": "WBS-F03/2-2-a",
+      "lane": "F03",
+      "owner": "品質担当",
+      "beginCondition": "WBS-F03/1、WBS-F03/2-1",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "既存4製品の証跡を再利用しAPI/Webと保留32テストの適用範囲を固定",
+      "nextEvidence": "全六製品の同source/run 451、保留32試験/Root11、型付き／四指標、担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.2"
+    },
+    {
+      "line": 5,
+      "id": "WBS-F03/2-2-b",
+      "lane": "F03",
+      "owner": "品質担当",
+      "beginCondition": "WBS-F03/2-2-a",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "許可済みの型付き品質検査を差分実行。失敗・未検査・適用外と実際の終端を記録",
+      "nextEvidence": "全六製品の同source/run 451、保留32試験/Root11、型付き／四指標、担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "3.6"
+    },
+    {
+      "line": 6,
+      "id": "WBS-F03/2-3-a",
+      "lane": "F03",
+      "owner": "品質担当",
+      "beginCondition": "WBS-F03/1、WBS-F03/2-2",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "6製品の検査結果とRoot11等の保留処置を同候補へ結合",
+      "nextEvidence": "全六製品の同source/run 451、保留32試験/Root11、型付き／四指標、担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.2"
+    },
+    {
+      "line": 7,
+      "id": "WBS-F03/2-3-b",
+      "lane": "F03",
+      "owner": "品質担当",
+      "beginCondition": "WBS-F03/2-3-a",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "個別criteriaと451の終了条件を照合し、署名付き判定を保存",
+      "nextEvidence": "全六製品の同source/run 451、保留32試験/Root11、型付き／四指標、担当終端",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.8"
+    },
+    {
+      "line": 8,
+      "id": "A1-15.01",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 9,
+      "id": "A1-15.02",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 10,
+      "id": "A1-15.03",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 11,
+      "id": "A1-15.04",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 12,
+      "id": "A1-15.05",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 13,
+      "id": "候補再資格-03.01",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "A1-15、WBS-P004-03/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 14,
+      "id": "候補再資格-31.01",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "A1-15、WBS-P004-03/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.15"
+    },
+    {
+      "line": 15,
+      "id": "WBS-P004-03/2",
+      "lane": "P004-03",
+      "owner": "DB・資源管理担当",
+      "beginCondition": "A1-15、WBS-P004-03/1、候補再資格-03.01、候補再資格-31.01、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "参照原本DAO・保持・退役：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "nextEvidence": "実原本の保持・参照・退役、実FileStore、DB、正規APIと終了依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.423"
+    },
+    {
+      "line": 16,
+      "id": "A1-02.01",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 17,
+      "id": "A1-02.02",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 18,
+      "id": "A1-02.03",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 19,
+      "id": "A1-02.04",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 20,
+      "id": "A1-02.05",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 21,
+      "id": "WBS-P004-05/2",
+      "lane": "P004-05",
+      "owner": "API・DB担当",
+      "beginCondition": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "nextEvidence": "実JDBC UTC・commit/rollback後条件、実pool、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.423"
+    },
+    {
+      "line": 22,
+      "id": "A1-27.01",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 23,
+      "id": "A1-27.02",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 24,
+      "id": "A1-27.03",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 25,
+      "id": "A1-27.04",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 26,
+      "id": "A1-27.05",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 27,
+      "id": "A2-28.01",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "3.9"
+    },
+    {
+      "line": 28,
+      "id": "A2-28.02",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "3.0"
+    },
+    {
+      "line": 29,
+      "id": "WBS-P018-08.01/2",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "A1-27、A2-28、WBS-P018-08.01/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "native公開入口/所有/stop-checkpointのhost driver契約の対象別完了記録を確認",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 30,
+      "id": "WBS-P018-08.02/2",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "A1-27、A2-28、WBS-P018-08.02/1、閉/WBS-P018-08.01",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-08.01",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "正常/例外/中断の採取driverと拒否・非再用の対象別完了記録を確認",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 31,
+      "id": "WBS-P018-08.03/2",
+      "lane": "P018-08",
+      "owner": "native試験担当",
+      "beginCondition": "A1-27、A2-28、WBS-P018-08.03/1、閉/WBS-P018-08.02",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-08.02",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "source/byte/noMatch判定・欠落streamのnegativeの対象別完了記録を確認",
+      "nextEvidence": "実nativeの現boot・root所有・終端・JaCoCo生行、終端依存",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 32,
+      "id": "WBS-C02-b",
+      "lane": "C02",
+      "owner": "環境・サービス担当",
+      "beginCondition": "WBS-C02-a",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "実効値、真正終了、個別判定を保存。実機費用は元N担当",
+      "nextEvidence": "現bootの実効Unitと所有・真正終端、timer受けservice、実Caddy・Inspector・451",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.8"
+    },
+    {
+      "line": 33,
+      "id": "WBS-P018-10.01/2-照合",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.01/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "既存/1を読み、残る差分・受入に使える範囲・実行担当を保存。実装や回帰は元主担当",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 34,
+      "id": "WBS-P018-10.01/2",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.01/1、WBS-P018-10.01/2-照合、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "command/logの秘密入力catalogと境界inventoryの対象別完了記録を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 35,
+      "id": "再提出/WBS-P018-10.01",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "差戻判断/WBS-P018-10.01",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "差分への当sourceの証跡、独立期待値、再提出receipt。次の判断担当が成立を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.0"
+    },
+    {
+      "line": 36,
+      "id": "WBS-P018-10.02/2-照合",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.02/1、閉/WBS-P018-10.01",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-10.01",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "既存/1を読み、残る差分・受入に使える範囲・実行担当を保存。実装や回帰は元主担当",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 37,
+      "id": "WBS-P018-10.02/2",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.02/1、WBS-P018-10.02/2-照合、閉/WBS-P018-10.01",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-10.01",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "redaction固定vector/独立出力と全入口fixtureの対象別完了記録を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 38,
+      "id": "再提出/WBS-P018-10.02",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "差戻判断/WBS-P018-10.02",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "差分への当sourceの証跡、独立期待値、再提出receipt。次の判断担当が成立を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.0"
+    },
+    {
+      "line": 39,
+      "id": "WBS-P018-10.03/2-照合",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.03/1、閉/WBS-P018-10.02",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-10.02",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "既存/1を読み、残る差分・受入に使える範囲・実行担当を保存。実装や回帰は元主担当",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 40,
+      "id": "WBS-P018-10.03/2",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "WBS-P018-10.03/1、WBS-P018-10.03/2-照合、閉/WBS-P018-10.02",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P018-10.02",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "例外/欠落/collection/null・秘密非漏洩のnegativeの対象別完了記録を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 41,
+      "id": "再提出/WBS-P018-10.03",
+      "lane": "P018-10",
+      "owner": "診断・監査担当",
+      "beginCondition": "差戻判断/WBS-P018-10.03",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "差分への当sourceの証跡、独立期待値、再提出receipt。次の判断担当が成立を確認",
+      "nextEvidence": "F02/F03、実運用診断、歴史G07未分類3280及びsource-bound binary22",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.0"
+    },
+    {
+      "line": 42,
+      "id": "A1-26.01",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 43,
+      "id": "A1-26.02",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 44,
+      "id": "A1-26.03",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 45,
+      "id": "A1-26.04",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 46,
+      "id": "A1-26.05",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 47,
+      "id": "候補再資格-23.01",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "A1-26、WBS-P018-02/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 48,
+      "id": "候補再資格-64.01",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "A1-26、WBS-P018-02/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.15"
+    },
+    {
+      "line": 49,
+      "id": "WBS-P018-02/2",
+      "lane": "P018-02",
+      "owner": "配布・基盤担当",
+      "beginCondition": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+      "nextEvidence": "QA-061で配布条件・承認担当未決、同候補signed release・正規実artifact証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 50,
+      "id": "A1-01.01",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 51,
+      "id": "A1-01.02",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 52,
+      "id": "A1-01.03",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 53,
+      "id": "A1-01.04",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 54,
+      "id": "A1-01.05",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 55,
+      "id": "WBS-P004-02/2",
+      "lane": "P004-02",
+      "owner": "Inbox・DB担当",
+      "beginCondition": "A1-01、WBS-P004-02/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "Inbox参照保護・summaryのSQL契約：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "nextEvidence": "役割付きDBのInbox参照保護とsummary後条件、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.423"
+    },
+    {
+      "line": 56,
+      "id": "WBS-P020-01.02/2",
+      "lane": "P020-01",
+      "owner": "環境・比較担当",
+      "beginCondition": "WBS-P020-01.02/1、閉/WBS-P020-01.01",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P020-01.01",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "比較/DIFマスク・未登録差分・欠落caseのnegativeの対象別完了記録を確認",
+      "nextEvidence": "haruka現所有とFileStore、比較の実Browser/Current/NK、QA-051と全範囲の証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.488"
+    },
+    {
+      "line": 57,
+      "id": "WBS-P020-01.03/2",
+      "lane": "P020-01",
+      "owner": "環境・比較担当",
+      "beginCondition": "WBS-P020-01.03/1、閉/WBS-P020-01.02",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-P020-01.02",
+          "recordedState": null,
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+      "nextEvidence": "haruka現所有とFileStore、比較の実Browser/Current/NK、QA-051と全範囲の証拠",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.488"
+    },
+    {
+      "line": 58,
+      "id": "A1-25.01",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 59,
+      "id": "A1-25.02",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 60,
+      "id": "A1-25.03",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 61,
+      "id": "A1-25.04",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.95"
+    },
+    {
+      "line": 62,
+      "id": "A1-25.05",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "1.65"
+    },
+    {
+      "line": 63,
+      "id": "A2-25.01",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "3.0"
+    },
+    {
+      "line": 64,
+      "id": "A2-25.02",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "対象・所有・許可を確認",
+      "explicitPriorClose": [],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "3.0"
+    },
+    {
+      "line": 65,
+      "id": "WBS-P018-07/2",
+      "lane": "P018-07",
+      "owner": "Caddy・環境担当",
+      "beginCondition": "A1-25、A2-25、WBS-P018-07/1、閉/WBS-F02、閉/WBS-F03",
+      "explicitPriorClose": [
+        {
+          "id": "WBS-F02",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        },
+        {
+          "id": "WBS-F03",
+          "recordedState": "NOT_ACCEPTED",
+          "confirmed": false
+        }
+      ],
+      "formalState": "NOT_ACCEPTED",
+      "endEvidence": "Caddy同parent deadline・TLS/ready：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "nextEvidence": "同parent/所有を保持した実ready・TLS・終端、F02/F03",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.65"
+    },
+    {
+      "line": 66,
+      "id": "P002再判定-a",
+      "lane": "P002-01",
+      "owner": "Protocol・品質担当",
+      "beginCondition": "PG41300と現候補の一致",
+      "explicitPriorClose": [],
+      "formalState": "RECHECK_REQUIRED",
+      "endEvidence": "現Protocolの数値全byte検査順、修正後の独立試験と要求を同候補に結ぶ",
+      "nextEvidence": "現Protocolの順序・純試験は別認定、終了依存と451及び実JMS／CHR",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.3"
+    },
+    {
+      "line": 67,
+      "id": "P002再判定-b",
+      "lane": "P002-01",
+      "owner": "Protocol・品質担当",
+      "beginCondition": "P002再判定-a、該当する現品質証跡",
+      "explicitPriorClose": [],
+      "formalState": "RECHECK_REQUIRED",
+      "endEvidence": "残る全451・終了依存を確認し、再受入又は不足条件を判定票に記録",
+      "nextEvidence": "現Protocolの順序・純試験は別認定、終了依存と451及び実JMS／CHR",
+      "localIndependentWorkAdmission": "INDIVIDUAL_PROOF_AND_SCOPE_REQUIRED",
+      "pricePp": "0.5"
+    }
+  ],
+  "summary": {
+    "shortRows": 66,
+    "bothMandatoryGateRows": [
+      "候補再資格-03.01",
+      "候補再資格-31.01",
+      "WBS-P004-03/2",
+      "WBS-P004-05/2",
+      "WBS-P018-08.01/2",
+      "WBS-P018-10.01/2-照合",
+      "WBS-P018-10.01/2",
+      "候補再資格-23.01",
+      "候補再資格-64.01",
+      "WBS-P018-02/2",
+      "WBS-P004-02/2",
+      "WBS-P018-07/2"
+    ],
+    "otherExplicitClosedRows": [
+      "WBS-P018-08.02/2",
+      "WBS-P018-08.03/2",
+      "WBS-P018-10.02/2-照合",
+      "WBS-P018-10.02/2",
+      "WBS-P018-10.03/2-照合",
+      "WBS-P018-10.03/2",
+      "WBS-P020-01.02/2",
+      "WBS-P020-01.03/2"
+    ],
+    "rowsWithoutAnExplicitCloseExpression": 46,
+    "accepted": 16,
+    "total": 190,
+    "deltaVs17": -1,
+    "acceptedPriority": 0,
+    "priorityTotal": 5,
+    "acceptedPlanned": 0,
+    "plannedTotal": 12,
+    "minimumEndOfWindowAccepted": 27,
+    "gapToEndOfWindowMinimum": 11,
+    "shortPlanRevisedRowSumPp": "85.645",
+    "originalShortPlanReferencePp": "143.371",
+    "exclusiveCost": null,
+    "effortRate": null,
+    "originalRequiredItems": [
+      "F02",
+      "F03",
+      "P004-03",
+      "P004-05",
+      "P018-08"
+    ],
+    "zeroAdditionalCostReference": "P019-02"
+  },
+  "noInferredLocalAuthorization": true,
+  "actualOwnerHandoffReceipt": null,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T15:45:56.103952+00:00"
+}
