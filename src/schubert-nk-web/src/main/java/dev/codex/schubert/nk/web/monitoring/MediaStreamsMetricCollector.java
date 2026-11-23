@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.protocol.file.MediaType;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import java.util.OptionalLong;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
 /**
@@ -11,7 +12,7 @@ import java.util.function.Function;
  * RD171/UI252/SS333351;1704/MEDIACONN001..008.
  */
 public final class MediaStreamsMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final Function<MediaType, OptionalLong> source;
   private final MediaStreamsMetricRecorder metrics;
 
@@ -25,7 +26,8 @@ public final class MediaStreamsMetricCollector {
   /** Serialize this owner's read/publication; unknown and failure affect only the selected type. */
   public OptionalLong collect(MediaType type) {
     Objects.requireNonNull(type, "media type");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return OptionalLong.empty();
       try {
         var supplied = Objects.requireNonNull(source.apply(type), "media stream observation");
@@ -36,6 +38,8 @@ public final class MediaStreamsMetricCollector {
         metrics.missing(type);
         throw unavailableObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 

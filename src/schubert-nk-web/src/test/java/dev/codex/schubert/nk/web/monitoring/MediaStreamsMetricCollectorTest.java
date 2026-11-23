@@ -2,7 +2,6 @@ package dev.codex.schubert.nk.web.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +11,7 @@ import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -24,7 +24,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -259,12 +261,16 @@ class MediaStreamsMetricCollectorTest {
       try {
         var entered = new CountDownLatch(1);
         var release = new CountDownLatch(1);
+        var contenderReady = new CountDownLatch(1);
         var calls = new AtomicInteger();
+        var firstThreadId = new AtomicLong();
+        var contenderThreadId = new AtomicLong();
         var collector =
             new MediaStreamsMetricCollector(
                 type -> {
                   int call = calls.incrementAndGet();
                   if (call == BLOCKED_READ_ORDINAL) {
+                    firstThreadId.set(Thread.currentThread().threadId());
                     entered.countDown();
                     await(release);
                   }
@@ -275,19 +281,24 @@ class MediaStreamsMetricCollectorTest {
         collector.collect(MediaType.AUDIO);
         var first = executor.submit(() -> collector.collect(MediaType.AUDIO));
         await(entered);
-        var contender = new AtomicReference<Thread>();
         var second =
             executor.submit(
                 () -> {
-                  contender.set(Thread.currentThread());
+                  contenderThreadId.set(Thread.currentThread().threadId());
+                  contenderReady.countDown();
                   return collector.collect(MediaType.VIDEO);
                 });
         try {
+          await(contenderReady);
+          var threads = ManagementFactory.getThreadMXBean();
+          var waiter = threads.getThreadInfo(contenderThreadId.get());
           long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-          while ((contender.get() == null || contender.get().getState() != Thread.State.BLOCKED)
-              && System.nanoTime() < deadline) Thread.onSpinWait();
-          assertNotNull(contender.get());
-          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+          while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
+              && System.nanoTime() < deadline) {
+            LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+            waiter = threads.getThreadInfo(contenderThreadId.get());
+          }
+          assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
           assertEquals(2, calls.get());
           assertFalse(first.isDone());
           assertFalse(second.isDone());
