@@ -165,10 +165,20 @@ def _serialize(snapshot):
     return (json.dumps(snapshot, sort_keys=True, indent=2) + "\n").encode()
 
 
+def _require_capture_head(repo, commit):
+    head = subprocess.check_output(
+        ["git", "rev-parse", "--verify", "HEAD"], cwd=repo, text=True,
+    ).strip()
+    if head != commit:
+        raise ValueError("reactor capture checkout commit does not match")
+
+
 def capture_reactor_junit(repo, run, commit, directory=Path("/tmp")):
     """Called only on a successful build, before publishing its terminal exit marker."""
     manifest = _run_path(directory, run, ".junit.json")
+    _require_capture_head(repo, commit)
     content = _serialize(_snapshot(repo, run, commit, directory))
+    _require_capture_head(repo, commit)
     with manifest.open("xb") as stream:
         stream.write(content)
     return _digest(content)

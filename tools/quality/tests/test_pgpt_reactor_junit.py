@@ -6,13 +6,14 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 import xml.etree.ElementTree as ET
 
+import pgpt_reactor_junit
 from pgpt_reactor_junit import capture_reactor_junit, verify_reactor_junit
 
 
 RUN = "PT-WEB-SYNTHETIC-01"
-SOURCE = "a" * 40
 BRANCH = "dev-fixture"
 MODULES = (
     "program/characterization",
@@ -39,10 +40,11 @@ class ReactorJunitTest(unittest.TestCase):
         self.repo = root / "repo"
         self.repo.mkdir()
         self.git("init", "-q", f"--initial-branch={BRANCH}")
+        self.source = self.commit_fixture("original reactor fixture")
         self.runs = root / "runs"
         self.runs.mkdir()
         for suffix, value in (
-            (".commit", SOURCE),
+            (".commit", self.source),
             (".branch", BRANCH),
             (".started", "2026-11-23T00:00:00+09:00"),
             (".completed", "2026-11-23T00:01:00+09:00"),
@@ -73,11 +75,21 @@ class ReactorJunitTest(unittest.TestCase):
     def git(self, *args):
         return subprocess.run(["git", *args], cwd=self.repo, capture_output=True, check=True)
 
+    def commit_fixture(self, title):
+        self.git(
+            "-c", "user.name=Reactor Fixture",
+            "-c", "user.email=reactor@example.invalid",
+            "-c", "commit.gpgSign=false",
+            "-c", "core.hooksPath=/dev/null",
+            "commit", "--allow-empty", "-q", "-m", title,
+        )
+        return self.git("rev-parse", "--verify", "HEAD").stdout.decode().strip()
+
     def capture(self):
-        return capture_reactor_junit(self.repo, RUN, SOURCE, self.runs)
+        return capture_reactor_junit(self.repo, RUN, self.source, self.runs)
 
     def verify(self):
-        return verify_reactor_junit(self.repo, RUN, SOURCE, self.runs)
+        return verify_reactor_junit(self.repo, RUN, self.source, self.runs)
 
     def success(self):
         self.capture()
@@ -103,7 +115,10 @@ class ReactorJunitTest(unittest.TestCase):
         self.success()
         content = self.verify()
         output = json.loads(content)
-        self.assertEqual((RUN, SOURCE, BRANCH), (output["runId"], output["targetCommit"], output["branch"]))
+        self.assertEqual(
+            (RUN, self.source, BRANCH),
+            (output["runId"], output["targetCommit"], output["branch"]),
+        )
         self.assertEqual(
             {
                 path.relative_to(self.repo).as_posix(): {
@@ -344,6 +359,35 @@ class ReactorJunitTest(unittest.TestCase):
                 receipt.write_text(json.dumps(old, sort_keys=True, indent=2) + "\n")
                 with self.assertRaisesRegex(ValueError, "differs"):
                     self.verify()
+
+    def test_junit018_new_capture_requires_the_original_checkout_commit(self):
+        self.assertNotEqual(self.source, self.commit_fixture("next fixture on the same branch"))
+
+        with self.assertRaisesRegex(ValueError, "capture checkout commit does not match"):
+            self.capture()
+
+        self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_junit019_capture_checks_the_checkout_after_reading_artifacts(self):
+        original_snapshot = pgpt_reactor_junit._snapshot
+
+        def snapshot_then_advance(*args):
+            snapshot = original_snapshot(*args)
+            self.assertNotEqual(self.source, self.commit_fixture("fixture checkout moved"))
+            return snapshot
+
+        with patch.object(pgpt_reactor_junit, "_snapshot", side_effect=snapshot_then_advance):
+            with self.assertRaisesRegex(ValueError, "capture checkout commit does not match"):
+                self.capture()
+
+        self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_junit020_original_receipt_still_verifies_after_an_unrelated_commit(self):
+        self.success()
+        expected = self.marker(".junit.json").read_bytes()
+        self.assertNotEqual(self.source, self.commit_fixture("later evidence-only checkpoint"))
+
+        self.assertEqual(expected, self.verify())
 
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()
