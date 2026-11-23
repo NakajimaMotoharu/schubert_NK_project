@@ -1,0 +1,187 @@
+{
+  "run": "PG43862",
+  "source": "ad0c87a5b5057729b88f02497feed374f681c5af",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:09:09.359313+00:00",
+  "wbs": "WBS-P004-05/2",
+  "related": [
+    "A1-21.05",
+    "WBS-F02-b-a",
+    "SS332",
+    "SSC-461",
+    "451"
+  ],
+  "inputs": {
+    "source": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sha256": "8cb51b0a9e1d9a743450ca239a134680b7035b40d5847962bd97ade4deff55af"
+    },
+    "exactCandidateClass": {
+      "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/scope/target/classes/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+      "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+    },
+    "sameClassInRegularBatch": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43834-cleanup-terminal-batch-normal-jar/manifest.json",
+      "sha256": "2e47cd0d1bffaf46cc41fcf929d469737e9269f45d8cd9feb81b4e6efe51018a"
+    },
+    "currentRawProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43832-cleanup-terminal-sql-adapter-two-sites/manifest.json",
+      "sha256": "445136ae4938a90b103379083c287d48958cc69bffbde1c207e9d9b77dad4618"
+    },
+    "originalRaw": {
+      "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/main-pmd.xml",
+      "sha256": "27f3eb1ee8c04fc3f93d74e110745b662763a3298f6178e72c10b1cd99838d0e"
+    },
+    "previousNonMergedInspection": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG3948-jdbc-finally-assessment-v1/manifest.json",
+      "sha256": "d54f9b93a362edb1232da84ea461f021d9e2e728cfb7d8d543d5ec786666e13f"
+    },
+    "baselinePureFixture": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43208-a12105-cleanup-terminal-ordinary-projection-v1/manifest.json",
+      "sha256": "77340586ca62d957599750b5a9a769043f323e03e81ec4c4265e9dbd8f9b0734"
+    }
+  },
+  "localCurrentTests": {
+    "PT-F02-CTERM-READ001": "ordinaryTerminalReadPreservesTheOriginalFatalErrorAfterClosingItsStatement",
+    "PT-F02-CTERM-READ002": "ordinaryTerminalReadReturnsTheFixedDiagnosticWithoutClosingTheBorrowedConnection",
+    "PT-F02-CTERM-READ003": "ordinaryTerminalReadProjectsTheSevenSuccessfulRowsInFixedOrder"
+  },
+  "tests": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "knownCoreLogicalStability": [
+    "READ001 query fatal preserved by exact position",
+    "READ002 fixed diagnostic and borrowed owner retained",
+    "READ003 seven ordered fixed fixture rows, acquired close order, second owner check"
+  ],
+  "runtimeProof": [
+    {
+      "path": "../pgpt-runs/PG379/PG43862-current-cleanup-terminal-normal-three/begin.json",
+      "sha256": "06849684fc4b44a193b84cda43fba1750c9184f2661d673638d4be6c1cbaec10"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43862-current-cleanup-terminal-normal-three/terminal.json",
+      "sha256": "3ba423756dd46d870219cb7b6909fc42bfa0291e21945fc590efc8c0a0d799bc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43862-current-cleanup-terminal-normal-three/reports/TEST-junit-jupiter.xml",
+      "sha256": "ed2711144c5443b254461a677db74145292bdb454faa957bfaef36ee88c77ef7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43862-current-cleanup-terminal-normal-three/unit.exec",
+      "sha256": "2e4c631f3eebebbbe8cdfbd117fd660406163def29643b18fdd75a426227a2e4"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43862-current-cleanup-terminal-normal-three/class-load.log",
+      "sha256": "23fd1dd22fb9f75cb0f9eb46adca04fed4448d89ee659adc8f5bae4365e95029"
+    }
+  ],
+  "independentProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43862-current-cleanup-jdbc-ownership/raw-dispositions.tsv",
+      "sha256": "a651d77219d7a8900fa319fc1befb5fd23bb66e09626c5488a0b1bdb80cf4c64"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43862-current-cleanup-jdbc-ownership/coverage.tsv",
+      "sha256": "dfdbc688a228bf7c7521a98a9ca3af0748cf278ee863fd81e18ae90e22fae50e"
+    }
+  ],
+  "localSingleExecMissedCovered": {
+    "INSTRUCTION": [
+      923,
+      453
+    ],
+    "BRANCH": [
+      150,
+      22
+    ],
+    "LINE": [
+      212,
+      102
+    ],
+    "COMPLEXITY": [
+      93,
+      14
+    ],
+    "METHOD": [
+      9,
+      12
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "realDbAndFailedProfileExecuted": 0,
+  "scannerReplayed": 0,
+  "originalRaw48StillPresent": true,
+  "classificationTableRows": 48,
+  "readExactOwnerLocations": {
+    "read/PreparedStatement": {
+      "owner": "statement",
+      "alias": "query",
+      "primaryLine": 219,
+      "closeLine": 225,
+      "priorityLine": 227
+    },
+    "read/ResultSet": {
+      "owner": "rows",
+      "alias": "row",
+      "primaryLine": 207,
+      "closeLine": 213,
+      "priorityLine": 215
+    },
+    "references/PreparedStatement": {
+      "owner": "statement",
+      "alias": "query",
+      "primaryLine": 325,
+      "closeLine": 331,
+      "priorityLine": 333
+    },
+    "references/ResultSet": {
+      "owner": "rows",
+      "alias": "row",
+      "primaryLine": 313,
+      "closeLine": 319,
+      "priorityLine": 321
+    },
+    "progressSeal/PreparedStatement": {
+      "owner": "statement",
+      "alias": "checked",
+      "primaryLine": 395,
+      "closeLine": 401,
+      "priorityLine": 403
+    },
+    "progressSeal/ResultSet": {
+      "owner": "rows",
+      "alias": "row",
+      "primaryLine": 384,
+      "closeLine": 390,
+      "priorityLine": 392
+    },
+    "readRejected/PreparedStatement": {
+      "owner": "statement",
+      "alias": "query",
+      "primaryLine": 533,
+      "closeLine": 539,
+      "priorityLine": 541
+    },
+    "readRejected/ResultSet": {
+      "owner": "rows",
+      "alias": "row",
+      "primaryLine": 521,
+      "closeLine": 527,
+      "priorityLine": 529
+    }
+  },
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "needs": [
+    "Current repository nested primary/secondary fault cases for all 4 methods",
+    "references explicit IOException on row and statement paths retains prior unresolved status",
+    "actual authorised same-source JDBC/transaction runtime for P004-05"
+  ]
+}
