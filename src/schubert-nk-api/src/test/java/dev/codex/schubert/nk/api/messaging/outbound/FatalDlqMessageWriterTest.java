@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.messaging.outbound;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.messaging.guard.GuardedJmsMessage;
@@ -120,6 +121,22 @@ final class FatalDlqMessageWriterTest {
         FatalDlqMetadata.DetectedBy.API_WEB_LOG,
         FatalDlqMetadata.DetectedBy.valueOf("API_WEB_LOG"));
     assertEquals(FatalDlqMetadata.DetectedBy.API_WORK, FatalDlqMetadata.DetectedBy.values()[1]);
+  }
+
+  /** PT-MSG-DLQ-METADATA-001. */
+  @Test
+  void fatalMetadataRetainsOnlyTheSpecifiedNonSecretValues() {
+    var actor = FatalDlqMetadata.DetectedBy.API_SYNC;
+    var metadata = new FatalDlqMetadata("INVALID_HEADER", actor, Instant.EPOCH);
+    assertEquals(new FatalDlqMetadata("INVALID_HEADER", actor, Instant.ofEpochSecond(0)), metadata);
+    assertNotEquals(new FatalDlqMetadata("INVALID_HEADER", actor, Instant.ofEpochSecond(1)), metadata);
+    assertEquals(
+        "FatalDlqMetadata[errorCode=INVALID_HEADER, detectedBy=API_SYNC,"
+            + " detectedAt=1970-01-01T00:00:00Z]",
+        metadata.toString());
+    // JDK 25 record fold of the declared components. The epoch Instant has component hash zero.
+    int expectedHash = 31 * (31 * "INVALID_HEADER".hashCode() + System.identityHashCode(actor));
+    assertEquals(expectedHash, metadata.hashCode());
   }
 
   @Test

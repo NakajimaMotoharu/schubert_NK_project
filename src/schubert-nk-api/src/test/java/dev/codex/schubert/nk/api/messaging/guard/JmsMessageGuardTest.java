@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.guard;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,6 +72,24 @@ final class JmsMessageGuardTest {
     assertEquals("GuardedJmsMessage[<redacted>]", guarded.toString());
     assertThrows(NullPointerException.class, () -> new GuardedJmsMessage(null, guarded.metadata()));
     assertThrows(NullPointerException.class, () -> new GuardedJmsMessage(new byte[0], null));
+  }
+
+  /** PT-MSG-GUARD-SNAPSHOT-001. */
+  @Test
+  void retainedSnapshotRemainsFindableAfterCallerCopiesChange() throws JMSException {
+    var metadata = GUARD.read(bytesMessage(validRequest()), REQUEST_ROUTE).metadata();
+    byte[] supplied = {12, 34};
+    var snapshot = new GuardedJmsMessage(supplied, metadata);
+    var retained = new HashMap<GuardedJmsMessage, String>();
+    retained.put(snapshot, "retained");
+
+    supplied[0] = 99;
+    byte[] returned = snapshot.body();
+    returned[1] = 98;
+
+    assertArrayEquals(new byte[] {12, 34}, snapshot.body());
+    assertEquals("retained", retained.get(snapshot));
+    assertNotEquals(snapshot, new GuardedJmsMessage(new byte[] {12, 35}, metadata));
   }
 
   @Test
