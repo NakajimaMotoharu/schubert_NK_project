@@ -1,0 +1,143 @@
+{
+  "run": "PG43426-g0305-clock-and-poll-handoff-v1",
+  "source": "3ac2bb13dee45796ae6c2ff67794f7b8b7add157",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G03.05",
+  "terminalAtUTC": "2026-11-23T06:56:07.339356+00:00",
+  "actualExit": 0,
+  "affectedOwner": "WBS-P018-09",
+  "sharedOtherOwners": [
+    "WBS-C07",
+    "WBS-F03/2-2-b"
+  ],
+  "handoffPath": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+  "canonicalDesignCommit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "design": [
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    }
+  ],
+  "verifiedCandidates": [
+    {
+      "clazz": "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sourceSha256": "0cb35d7ad440546bb2d182c2c339849b57e1cd1dca6b0d981080cbec24a5c946",
+      "owner": "WBS-P018-09",
+      "tests": [
+        "PT-OPS-OBSCLOCK003",
+        "PT-OPS-OBSCLOCK004",
+        "PT-OPS-OBSCLOCK005"
+      ],
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43422-current-clock-boundaries-v1/manifest.json",
+        "sha256": "c24a76cf3f547a8add72bf2b331f641d2fc5becbf64bff5ff11778a79af3e691"
+      },
+      "counters": {
+        "LINE": [
+          0,
+          19
+        ],
+        "METHOD": [
+          0,
+          2
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          4
+        ]
+      },
+      "caseOracle": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1586_監視Clock時系列_単体テスト仕様書.md",
+        "sha256": "52016e42f668640ddf8360fd80611814599d232e047710947cc924f1b861bc9e"
+      },
+      "classSha256": "3e4ccfbd83e8bf28cde448b8ac493008416e915553f1c26610619fb2e2e95b1a",
+      "execReceipt": {
+        "path": "../pgpt-runs/PG379/PG43422-current-clock-boundaries-v1/selected.exec",
+        "sha256": "1328ed2daa7f57f92c059bd34c117879a7eeab1a6143312bba906524a20318da"
+      },
+      "omittedCases": [
+        "001",
+        "002",
+        "006",
+        "007",
+        "008"
+      ]
+    },
+    {
+      "clazz": "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+      "owner": "WBS-P018-09",
+      "tests": [
+        "PT-OPS-POLL001",
+        "PT-OPS-POLL003",
+        "PT-OPS-POLL004",
+        "PT-OPS-POLL005",
+        "PT-OPS-POLL006"
+      ],
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43424-current-poller-boundaries-v2/manifest.json",
+        "sha256": "40cb8213e936c64982e068d7cdc6c758d425641c3947512fa5df15a106bc7cdb"
+      },
+      "counters": {
+        "LINE": [
+          0,
+          36
+        ],
+        "METHOD": [
+          0,
+          4
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          8
+        ]
+      },
+      "caseOracle": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1599_監視Poll・Heap結線_単体テスト仕様書.md",
+        "sha256": "8bd26f7741f382368f8cc4d9542bfe7ca81f4a82f8cd22a0ee4ee090b36edb1e"
+      },
+      "classSha256": "417e264c4f703f02968f7d619978e9d8aba9a65ce5e64f7e950ed8eb42ae3024",
+      "execReceipt": {
+        "path": "../pgpt-runs/PG379/PG43424-current-poller-boundaries-v2/selected.exec",
+        "sha256": "db3a671302a685847241d6bc9b144bc07fa9ea6b29071801ef3d9f672c1ae98c"
+      },
+      "omittedCases": [
+        "002",
+        "007",
+        "008"
+      ]
+    }
+  ],
+  "ownerInput": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+    "sha256": "63d057be0aa0f821deeadc6f80579d5beab5b998617f792fd8453e7e1389d012"
+  },
+  "independentExecutionCount": 2,
+  "priorSingleMonitoringRunUnmerged": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43420-g0305-monitoring-scope-current-base-v1/manifest.json",
+    "sha256": "dea0b33fa7ddc79cde24f73754500d16c368b6a36332b5a8f5e9d8bd3db59d11"
+  },
+  "newPTExecutionCount": 0,
+  "duplicateSuccessCredit": 0,
+  "formalAcceptanceId": null,
+  "recipientReceipt": null,
+  "remaining": [
+    "Live collector and filesystem conditions",
+    "F03 six officially admitted products and retained HOLD",
+    "P018-09 remaining requirement and completion dependencies"
+  ]
+}
