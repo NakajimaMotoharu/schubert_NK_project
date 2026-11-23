@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-8972",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "f3be5950f0829b4a1f8f986473bea57d5a00e86b",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P016-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P016-01/2",
+    "元行": "WBS-P016-01/2",
+    "費目": "B",
+    "主担当": "WBS-P016-01",
+    "状態": "計画",
+    "作業": "SCR001 Login画面・操作・title／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計313・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "SCR001 Login画面・操作・title：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 313",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-WEB-002、SS 313",
+    "lineNumber": 459,
+    "改訂残pp": "0.39"
+  },
+  "run": "PG43258",
+  "startEvent": "PGPT-20261008-8971",
+  "outcome": {
+    "currentTemplateExact": true,
+    "retainedRenderingCases": 4,
+    "exactOutputHashes": 21,
+    "testSDKsIdentical": 16,
+    "newTests": 0,
+    "liveLoginAndRetryAfterObserved": false,
+    "actualCurrentA01": false,
+    "whole451": false
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43258-p01601-qa045-055-current-display-v1/manifest.json",
+    "sha256": "ab36bcd775e805fc2301e06b42c2bf69b5803fc66f6e78be59ea3e739062f5d6"
+  },
+  "nextEvidence": {
+    "managementWorkId": "WBS-F03/2-2-b",
+    "object": "Identify the next concrete permitted current raw deficiency from the existing proof backlog, with emphasis on direct testable product effects. Skip existing exact wins and dependent protected/operational cases",
+    "hold": "Actual browser, login, DB, protected 32/Root11 and QA056/057"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T02:47:38+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 59,
+    "remainingPercent": 41,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "91b81e1790c2845e4ce357726163475b3c5daed5f3dbebc369a9da47a7349c04",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T02:47:38+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 59,
+        "remainingPercent": 41,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T02:47:15.049144+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 59,
+    "remainingPercent": 41,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
