@@ -189,6 +189,7 @@ public final class ModuleDependencyAudit {
         failures += entry.getValue().size();
       }
       System.out.println("INSPECTED\t" + dependencies + "\t" + calls);
+      if (System.out.checkError()) throw new IOException("architecture audit output incomplete");
       if (failures != 0) System.exit(1);
     } finally {
       for (int index = jars.size() - 1; index >= 0; index--) jars.get(index).close();

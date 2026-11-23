@@ -198,3 +198,6 @@ PT-P01810-CATALOG-044C／044D追補。各8アクセサーの固定入力と位�
 ### PT-PRO-USER-WIRE-001〜004 管理向け二電文のUTF-8境界
 
 UI236 §4.1／6.3・SS322／323、YKT-2328 site19。UCRREQ01の65/256とUPWREQ01の13/256に独立hexを挿入。128二byteと64四byteで有効256byteを受理し、Role/Enabled、User ID/Versionを保持。各欄の不正surrogate・終端欠落・非NFCを固定診断で拒否。PG40294に対象JAR・実scope・coverage・JUnitを保存。合成値以外の認証情報、実操作なし。
+## 依存境界監査の出力終端
+
+PT-OPS-ARCH-OUTPUT-001/002、WBS-F02-b-b、SS311 §§2–3／5.2／10、451、PG-D516、BUG-3696／YKT-2903。対象 `ModuleDependencyAudit.main`。合成interface一つずつを六つの自己所有JARへ格納する。正常出力には六module各1型・実取込6・違反0・末尾INSPECTEDを要求する。出力先が30 byteでIOExceptionを返す場合は、先頭だけ表示され、末尾が欠落し、固定診断と終了1になることを要求する。二件とも期待値は入力の手作成JAR数と固定端末条件で決める。製品JAR・実環境・正式受入に関する検査なし。[PG43336](evidence/PG43336-module-report-terminal-v1/manifest.json)
