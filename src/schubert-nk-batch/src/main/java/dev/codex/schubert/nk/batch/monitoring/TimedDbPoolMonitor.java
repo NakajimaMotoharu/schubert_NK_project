@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Supplied pool values only, no JDBC/provider sampling or control. RD171/UI252/SS351;
@@ -21,7 +22,7 @@ public final class TimedDbPoolMonitor {
     }
   }
 
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final AlertThresholds thresholds = new AlertThresholds();
   private final ContinuousConditionWindow warning = new ContinuousConditionWindow();
   private final AlertLifecycle lifecycle;
@@ -45,7 +46,9 @@ public final class TimedDbPoolMonitor {
     Objects.requireNonNull(context, "observation context");
     Severity immediate = thresholds.dbPool(percent.orElse(0), Duration.ZERO, pending, timeouts);
     Duration elapsed = context.elapsed();
-    synchronized (lock) {
+    final ReentrantLock held = lock;
+    held.lock();
+    try {
       if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
@@ -65,6 +68,8 @@ public final class TimedDbPoolMonitor {
               : thresholds.dbPool(percent.orElseThrow(), above80.orElseThrow(), pending, timeouts);
       return new Evaluation(
           percent.isPresent(), lifecycle.observeWindowed(level, aboveWarning, context));
+    } finally {
+      held.unlock();
     }
   }
 

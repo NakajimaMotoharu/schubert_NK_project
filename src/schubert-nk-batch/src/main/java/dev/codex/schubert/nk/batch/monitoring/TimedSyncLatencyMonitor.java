@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Supplied p95 only, not a percentile calculator or real endpoint. RD171/UI252/SS351;
@@ -21,7 +22,7 @@ public final class TimedSyncLatencyMonitor {
     }
   }
 
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final AlertThresholds thresholds = new AlertThresholds();
   private final ContinuousConditionWindow warning = new ContinuousConditionWindow();
   private final ContinuousConditionWindow critical = new ContinuousConditionWindow();
@@ -39,7 +40,9 @@ public final class TimedSyncLatencyMonitor {
     if (seconds.isPresent())
       thresholds.syncP95(seconds.orElseThrow(), Duration.ZERO, Duration.ZERO);
     Duration elapsed = context.elapsed();
-    synchronized (lock) {
+    final ReentrantLock held = lock;
+    held.lock();
+    try {
       if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
@@ -63,6 +66,8 @@ public final class TimedSyncLatencyMonitor {
           thresholds.syncP95(
               seconds.orElseThrow(), above2.orElseThrow(), above2Point5.orElseThrow());
       return new Evaluation(true, lifecycle.observeWindowed(level, aboveWarning, context));
+    } finally {
+      held.unlock();
     }
   }
 

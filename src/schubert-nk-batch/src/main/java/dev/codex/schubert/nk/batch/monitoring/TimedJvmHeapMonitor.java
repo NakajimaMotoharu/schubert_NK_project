@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Supplied heap observations/reports only, never catches real OOM or grants process control.
@@ -21,7 +22,7 @@ public final class TimedJvmHeapMonitor {
     }
   }
 
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final AlertThresholds thresholds = new AlertThresholds();
   private final ContinuousConditionWindow warning = new ContinuousConditionWindow();
   private final AlertLifecycle lifecycle;
@@ -42,7 +43,9 @@ public final class TimedJvmHeapMonitor {
     if (percent.isPresent())
       thresholds.jvmHeap(percent.orElseThrow(), Duration.ZERO, outOfMemoryReported);
     Duration elapsed = context.elapsed();
-    synchronized (lock) {
+    final ReentrantLock held = lock;
+    held.lock();
+    try {
       if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
@@ -62,6 +65,8 @@ public final class TimedJvmHeapMonitor {
               : thresholds.jvmHeap(percent.orElseThrow(), above75.orElseThrow(), false);
       return new Evaluation(
           percent.isPresent(), lifecycle.observeWindowed(level, aboveWarning, context));
+    } finally {
+      held.unlock();
     }
   }
 

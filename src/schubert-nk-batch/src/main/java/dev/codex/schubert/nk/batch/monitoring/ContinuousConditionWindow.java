@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -16,7 +17,7 @@ public final class ContinuousConditionWindow {
     UNKNOWN
   }
 
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private @Nullable Duration previous;
   private Optional<Duration> violationStart = Optional.empty();
 
@@ -24,7 +25,9 @@ public final class ContinuousConditionWindow {
   public Optional<Duration> observe(State state, Duration elapsed, boolean consecutive) {
     Objects.requireNonNull(state, "observation state");
     Objects.requireNonNull(elapsed, "observation elapsed");
-    synchronized (lock) {
+    final ReentrantLock held = lock;
+    held.lock();
+    try {
       if (elapsed.isNegative() || (previous != null && elapsed.compareTo(previous) < 0))
         throw new IllegalArgumentException("invalid observation sequence");
       previous = elapsed;
@@ -37,6 +40,8 @@ public final class ContinuousConditionWindow {
         return Optional.of(Duration.ZERO);
       }
       return Optional.of(elapsed.minus(violationStart.orElseThrow()));
+    } finally {
+      held.unlock();
     }
   }
 }
