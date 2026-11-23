@@ -205,7 +205,8 @@ final class BackupFailureUtcProjectionTest {
                 }
                 case "setString" -> {
                   assertEquals(2, args[0]);
-                  assertEquals(position == FIRST_BACKUP_QUERY ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
+                  assertEquals(
+                      position == FIRST_BACKUP_QUERY ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
                   yield null;
                 }
                 case "executeQuery" ->
