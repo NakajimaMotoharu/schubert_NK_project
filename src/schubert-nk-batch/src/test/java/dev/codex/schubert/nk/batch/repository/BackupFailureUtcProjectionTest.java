@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.repository;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -44,6 +45,11 @@ final class BackupFailureUtcProjectionTest {
     EMPTY_RESULT_SET,
     EXTRA_RESULT_ROW,
     BOTH_CLOSES_AFTER_REJECTION,
+    REPEATED_ROW_FAILURE,
+    REPEATED_STATEMENT_FAILURE,
+    DISTINCT_CLOSES_AFTER_RUNTIME,
+    ROW_CLOSE_ONLY,
+    STATEMENT_CLOSE_ONLY,
     INITIAL_INCONSISTENT_RUN,
     FINAL_INCONSISTENT_RUN
   }
@@ -124,6 +130,35 @@ final class BackupFailureUtcProjectionTest {
     rejectsProjection(fixture(ReadFault.BOTH_CLOSES_AFTER_REJECTION), COMPLETE.subList(0, 4));
   }
 
+  /** PT-BAT-BACKUP-UTC008. */
+  @Test
+  void utc008SameProviderExceptionFromUseAndReleaseKeepsFixedDiagnostic() {
+    var row = fixture(ReadFault.REPEATED_ROW_FAILURE);
+    rejectsProjection(row, COMPLETE.subList(0, 4));
+    assertEquals(0, row.repeated.getSuppressed().length);
+    var statement = fixture(ReadFault.REPEATED_STATEMENT_FAILURE);
+    rejectsProjection(statement, List.of("row-1", "stmt-1", FIRST_BACKUP_STATEMENT));
+    assertEquals(0, statement.repeated.getSuppressed().length);
+  }
+
+  /** PT-BAT-BACKUP-UTC009. */
+  @Test
+  void utc009DistinctCloseFailuresRemainOrderedOnTheOriginalRuntimeFailure() {
+    var fixture = fixture(ReadFault.DISTINCT_CLOSES_AFTER_RUNTIME);
+    var actual = assertThrows(IllegalStateException.class, fixture::verify);
+    assertSame(fixture.primaryRuntime, actual);
+    assertEquals(List.of(fixture.rowClose, fixture.statementClose), List.of(actual.getSuppressed()));
+    assertEquals(COMPLETE.subList(0, 4), fixture.closed);
+  }
+
+  /** PT-BAT-BACKUP-UTC010. */
+  @Test
+  void utc010EachCloseOnlyFailureUsesTheFixedDiagnosticAfterBothReleases() {
+    for (ReadFault fault : List.of(ReadFault.ROW_CLOSE_ONLY, ReadFault.STATEMENT_CLOSE_ONLY)) {
+      rejectsProjection(fixture(fault), COMPLETE.subList(0, 4));
+    }
+  }
+
   private static Fixture fixture(ReadFault fault) {
     return new Fixture(DISPLAY_START, DISPLAY_END, fault, null);
   }
@@ -146,6 +181,11 @@ final class BackupFailureUtcProjectionTest {
     private final ReadFault fault;
     private final @Nullable String missingColumn;
     private final List<String> closed = new ArrayList<>();
+    private final SQLException repeated = new SQLException("synthetic repeat failure");
+    private final SQLException rowClose = new SQLException("synthetic result close failure");
+    private final SQLException statementClose = new SQLException("synthetic statement close failure");
+    private final IllegalStateException primaryRuntime =
+        new IllegalStateException("synthetic row read failure");
     private int prepared;
 
     Fixture(@Nullable OffsetDateTime start, @Nullable OffsetDateTime end) {
@@ -209,15 +249,16 @@ final class BackupFailureUtcProjectionTest {
                       position == FIRST_BACKUP_QUERY ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
                   yield null;
                 }
-                case "executeQuery" ->
-                    position == FIRST_BACKUP_QUERY && fault == ReadFault.MISSING_RESULT_SET
-                        ? null
-                        : rows(position, identity);
+                case "executeQuery" -> {
+                  if (position == FIRST_BACKUP_QUERY && fault == ReadFault.REPEATED_STATEMENT_FAILURE)
+                    throw repeated;
+                  yield position == FIRST_BACKUP_QUERY && fault == ReadFault.MISSING_RESULT_SET
+                      ? null
+                      : rows(position, identity);
+                }
                 case "close" -> {
                   closed.add("stmt-" + position);
-                  if (position == FIRST_BACKUP_QUERY
-                      && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
-                    throw new SQLException("synthetic statement close failure");
+                  if (position == FIRST_BACKUP_QUERY) checkStatementClose();
                   yield null;
                 }
                 default -> throw new AssertionError("unexpected statement operation");
@@ -238,6 +279,7 @@ final class BackupFailureUtcProjectionTest {
           (ignored, method, args) ->
               switch (method.getName()) {
                 case "next" -> {
+                  if (position == FIRST_BACKUP_QUERY) checkRowRead();
                   advanced[0]++;
                   yield advanced[0] <= expectedRows;
                 }
@@ -247,13 +289,37 @@ final class BackupFailureUtcProjectionTest {
                         : field(position, (String) args[0]);
                 case "close" -> {
                   closed.add("row-" + position);
-                  if (position == FIRST_BACKUP_QUERY
-                      && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
-                    throw new SQLException("synthetic result close failure");
+                  if (position == FIRST_BACKUP_QUERY) checkRowClose();
                   yield null;
                 }
                 default -> throw new AssertionError("unexpected result operation " + method);
               });
+    }
+
+    private void checkStatementClose() throws SQLException {
+      switch (fault) {
+        case REPEATED_STATEMENT_FAILURE -> throw repeated;
+        case BOTH_CLOSES_AFTER_REJECTION, DISTINCT_CLOSES_AFTER_RUNTIME, STATEMENT_CLOSE_ONLY ->
+            throw statementClose;
+        default -> {}
+      }
+    }
+
+    private void checkRowRead() throws SQLException {
+      switch (fault) {
+        case REPEATED_ROW_FAILURE -> throw repeated;
+        case DISTINCT_CLOSES_AFTER_RUNTIME -> throw primaryRuntime;
+        default -> {}
+      }
+    }
+
+    private void checkRowClose() throws SQLException {
+      switch (fault) {
+        case REPEATED_ROW_FAILURE -> throw repeated;
+        case BOTH_CLOSES_AFTER_REJECTION, DISTINCT_CLOSES_AFTER_RUNTIME, ROW_CLOSE_ONLY ->
+            throw rowClose;
+        default -> {}
+      }
     }
 
     private boolean identityValue(int position, String name) {
