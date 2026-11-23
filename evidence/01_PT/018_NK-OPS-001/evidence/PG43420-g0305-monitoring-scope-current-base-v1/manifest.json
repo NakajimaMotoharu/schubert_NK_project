@@ -1,0 +1,529 @@
+{
+  "run": "PG43420-g0305-monitoring-scope-current-base-v1",
+  "source": "a3c75588cdef29c1bdf5a9941fa069c2a28a5f85",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T06:47:58.208573+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G03.05",
+  "relatedWithoutAdditionalCost": [
+    "WBS-P018-09",
+    "WBS-C07",
+    "WBS-F03/2-2-b"
+  ],
+  "originalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43028-current-monitor-window-single-coverage-v1/manifest.json",
+    "sha256": "dc58786178d83f8b4ec69f17fd025c1a1f9471d7fbc460c21e5bfab5c1747d50"
+  },
+  "candidateBatchArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43028-current-monitor-window-single-coverage-v1/unit.exec",
+    "sha256": "63981af845dbf82c19eba2fdccfa446de2eef4bc226ef0742759346ad00667fb"
+  },
+  "fixtureSourceSha256": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java": "a0bd8efc24fd8062d77966e82251af46c2511245ec62f469df6dc1c31c546936",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java": "4c4bda479a43021bd08338dd1ef7896ed4b6eba7d4eb10217169fe04c522ea93",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java": "f66f5eefe7409adf245a148a7f7fda9428ee15a83adad610d0fde54a34bd006f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java": "257a6f62b8386c709fc29c6260c77287c9171cc341b60fcbce567c00517cead9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/GeneratedBatchValueContractTest.java": "3dd71d87a53a2764c6c26a672d718fc345adf0045e0a9eb649d546ede9924e6e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java": "10adc166e30eff4ba501560f7f075b049a5d69ba5eb3b0e569a430890b32ca95",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java": "3256f3e096c1f89b59e5d03bb2b128b4f158ac9cca10ee1b4dae3054b9ce8695"
+  },
+  "regularArchiveScope": {
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Status.class": "04eea81c82f2f3ebe325fb98b562bd6b3f534d7c10ab757790836c802dfbeed9",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Counts.class": "423ee9fb32f0c0ef09ab95dd504694861c56ddd84cf71253cd6eaa31db1d0f2a",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.class": "930fb2d0f0b625fed4bb48fc9aabeea2dfb1f6aaf70d302e4290f27a64a30bae",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class": "ca314ebd93bda5f4b3db6b8d9652dec54b9976a75a0fcc9ed7fdef670a73d3c8",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix.class": "f0d311b18e46b9340b57c284991829715b2d5144fd4acaac02d863ce495ba355",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class": "7e474de22e95e3a301771ec1c4c9cef6a7c423910fe5efe6e4952799ae233c29",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class": "3437405816efa5b8685e06f6af4f27f647085a92c16ef44d38bbca651761ffdc",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor$Evaluation.class": "4f7ad9c97774b3667fe7e096108071de561c540c008b74f7e004ef879696fd22",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class": "e514f0288d13ce61ba7dbc20b543e3a5135bedfcd61466c86d38ce457d835ed2",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.class": "31acf6df095f2e777e7b8cc5f27f0c096407b474eb14a7e41a25ad543f4936c2",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class": "d9d9886b991ddff12ecfab23913058b1890107cffd6ec49e8bed83a9ad8ab0b2",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class": "49cb8a9e392e02e9467f25927d61c6f01fc97e4136178690dc4c167f91fb6e1d",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step.class": "577169daf95bbd68e6bd847af9ec446bae7fd4731557f1bd7b304ddb83bccf97",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract.class": "452824388b2830e531c85f63e6b8d2c41e05d1b441c882eeeb4439045ac54688",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class": "55420e9becb1c63c8fdba673e1b7ef41e1ed5d2b66670df4afdc205a825c6dca",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.class": "6bedbe3fa4e9bb08b73fd91afde4586f56c077752d9440df830a5387e8760044"
+  },
+  "physical": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sourceSha256": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978",
+      "classSha256": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "3bed84c2f506392a",
+        "capacity": 42,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            199
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            36
+          ],
+          "COMPLEXITY": [
+            0,
+            17
+          ],
+          "METHOD": [
+            0,
+            17
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sourceSha256": "298f2f0606634a77ba1a95f6f12479249229bcbe671a08f3a0c154510391728b",
+      "classSha256": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "ea599fe453d09e26",
+        "capacity": 7,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            29
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            0,
+            6
+          ],
+          "METHOD": [
+            0,
+            6
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sourceSha256": "298f2f0606634a77ba1a95f6f12479249229bcbe671a08f3a0c154510391728b",
+      "classSha256": "7e474de22e95e3a301771ec1c4c9cef6a7c423910fe5efe6e4952799ae233c29",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "b0e79a72060f7016",
+        "capacity": 40,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            165
+          ],
+          "BRANCH": [
+            0,
+            22
+          ],
+          "LINE": [
+            0,
+            30
+          ],
+          "COMPLEXITY": [
+            0,
+            14
+          ],
+          "METHOD": [
+            0,
+            3
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sourceSha256": "95b886a2f181d819a143edb7fa8c7dcc5503127e965ced432b6f4ced876c2d79",
+      "classSha256": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "96e6625da0ae776d",
+        "capacity": 7,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            29
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            0,
+            6
+          ],
+          "METHOD": [
+            0,
+            6
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sourceSha256": "95b886a2f181d819a143edb7fa8c7dcc5503127e965ced432b6f4ced876c2d79",
+      "classSha256": "55420e9becb1c63c8fdba673e1b7ef41e1ed5d2b66670df4afdc205a825c6dca",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "285fa6b2f21c7ad7",
+        "capacity": 40,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            178
+          ],
+          "BRANCH": [
+            0,
+            14
+          ],
+          "LINE": [
+            0,
+            36
+          ],
+          "COMPLEXITY": [
+            0,
+            10
+          ],
+          "METHOD": [
+            0,
+            3
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sourceSha256": "8e47b08bdba1ed7d44722ed8d1714838f486b8d656584b55ec2af8852db2f160",
+      "classSha256": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "fac77a1fd844ed37",
+        "capacity": 7,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            29
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            0,
+            6
+          ],
+          "METHOD": [
+            0,
+            6
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sourceSha256": "8e47b08bdba1ed7d44722ed8d1714838f486b8d656584b55ec2af8852db2f160",
+      "classSha256": "49cb8a9e392e02e9467f25927d61c6f01fc97e4136178690dc4c167f91fb6e1d",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "aa1b73a4b32db1b0",
+        "capacity": 42,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            163
+          ],
+          "BRANCH": [
+            0,
+            24
+          ],
+          "LINE": [
+            0,
+            31
+          ],
+          "COMPLEXITY": [
+            0,
+            15
+          ],
+          "METHOD": [
+            0,
+            3
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sourceSha256": "657015dd025b60ada2bdb2e5fe08b483c92896f10ae6cfcca9aae0af5cfd32ad",
+      "classSha256": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "79bbbe9614bfd2e0",
+        "capacity": 7,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            29
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            0,
+            6
+          ],
+          "METHOD": [
+            0,
+            6
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sourceSha256": "657015dd025b60ada2bdb2e5fe08b483c92896f10ae6cfcca9aae0af5cfd32ad",
+      "classSha256": "d9d9886b991ddff12ecfab23913058b1890107cffd6ec49e8bed83a9ad8ab0b2",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "4410794c18c1e5ae",
+        "capacity": 46,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            182
+          ],
+          "BRANCH": [
+            0,
+            24
+          ],
+          "LINE": [
+            0,
+            35
+          ],
+          "COMPLEXITY": [
+            0,
+            15
+          ],
+          "METHOD": [
+            0,
+            3
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sourceSha256": "629d0591d16c34dc84df36760d998d1f28bc1efb0d559c22d7aeb8caaf87331f",
+      "classSha256": "e514f0288d13ce61ba7dbc20b543e3a5135bedfcd61466c86d38ce457d835ed2",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "bc79ea14ab43b2b3",
+        "capacity": 23,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            89
+          ],
+          "BRANCH": [
+            0,
+            14
+          ],
+          "LINE": [
+            0,
+            17
+          ],
+          "COMPLEXITY": [
+            0,
+            9
+          ],
+          "METHOD": [
+            0,
+            2
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sourceSha256": "629d0591d16c34dc84df36760d998d1f28bc1efb0d559c22d7aeb8caaf87331f",
+      "classSha256": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+      "owner": "WBS-P018-09",
+      "raw": {
+        "crc": "5533be2633f1412a",
+        "capacity": 8,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            50
+          ],
+          "BRANCH": [
+            0,
+            0
+          ],
+          "LINE": [
+            0,
+            4
+          ],
+          "COMPLEXITY": [
+            0,
+            5
+          ],
+          "METHOD": [
+            0,
+            5
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    }
+  },
+  "rawTotals": {
+    "LINE": 205,
+    "METHOD": 60,
+    "CLASS": 11,
+    "BRANCH": 98
+  },
+  "qualifiedPreviousSameBytes": 54,
+  "executedHere": 0,
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43028-current-monitor-window-single-coverage-v1/sanitized-junit.xml",
+    "sha256": "d0774feb82000b6bcbc388ea158697d4a611cb5412152fd4e060f67a75094db0"
+  },
+  "originalOracle": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1561_ContinuousConditionWindow_単体テスト仕様書.md",
+      "sha256": "dbd817d61bf4ab922d16b3a4d231c0c241e2422b9ceabe117978d242fb941ed7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md",
+      "sha256": "b3be89b8c107c81d2daae1ab39f973dc27660483fd56670e23be02e26ad2bd69"
+    }
+  ],
+  "canonicalDesignCommit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "canonicalDesign": [
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    }
+  ],
+  "testLinks": {
+    "winTestIds": {
+      "PT-OPS-MONWINDOW001": "monWindow001FirstContinuousAndSameTimestampBoundaries",
+      "PT-OPS-MONWINDOW002": "monWindow002NormalBreaksViolationHistory",
+      "PT-OPS-MONWINDOW003": "monWindow003UnknownIsAbsentAndBreaksHistory",
+      "PT-OPS-MONWINDOW004": "monWindow004ExplicitGapNeverBridgesOldPeriod",
+      "PT-OPS-MONWINDOW005": "monWindow005RejectedSequenceLeavesStateUnchanged",
+      "PT-OPS-MONWINDOW006": "monWindow006WholeNonnegativeDurationDomain",
+      "PT-OPS-MONWINDOW007": "monWindow007ConcurrentSamePointHasOneOrigin",
+      "PT-OPS-MONWINDOW008": "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations"
+    },
+    "existingFactoryMethods": [
+      "genBatch004ModeContinuityAndSuffixFactoriesCannotShareReturnedArrays",
+      "genBatch006AllFiveEvaluationRecordsHaveEveryFieldInValueContracts"
+    ],
+    "gen004ModeAndSuffixCountsNotPartOfMeasured11": true
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "live collection and continuity, unmeasured product types, combined whole-source 451, other G03.05 criteria"
+  ],
+  "protectedActions": 0
+}
