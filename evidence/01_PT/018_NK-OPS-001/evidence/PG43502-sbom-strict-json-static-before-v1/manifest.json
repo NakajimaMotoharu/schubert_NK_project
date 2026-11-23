@@ -1,0 +1,41 @@
+{
+  "run": "PG43502",
+  "source": "034460d25eb2cb190eac3ecdad9d6bba92127ece",
+  "terminalAtUTC": "2026-11-23T09:10:43.409662+00:00",
+  "actualExit": 0,
+  "qualification": "STATIC_INPUT_CODEC_FINDING",
+  "requirementSource": {
+    "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+    "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+  },
+  "readerSource": [
+    {
+      "path": "tools/quality/verify_maven_sbom.py",
+      "sha256": "39f17c171c3d94efde974ea1892eb545e529586e225999021ba1258a8894d8d9"
+    },
+    {
+      "path": "tools/quality/verify_maven_advisories.py",
+      "sha256": "be0dbf2ebcf110da7003f5795d8f9ba1ec321881e200cd0c0efec71adf490ea6"
+    }
+  ],
+  "relatedStrictParsers": [
+    {
+      "path": "tools/quality/static_input_scope.py",
+      "sha256": "c754adf9c2cca1af3be162e63cf42990c89bac25161da46d7abdcfff808e4ddd"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "2fca14075518e59cf4a766a5e5f08b625ba59ae87648ab07bb7dff4300f7a3d6"
+    }
+  ],
+  "affectedReads": [
+    "local BOM CLI",
+    "advisory helper local BOM",
+    "advisory helper result"
+  ],
+  "expected": "Standards-compliant JSON before inspecting declarations, hashes and observations.",
+  "observed": "All three readers reject duplicate fields but leave Python default parsing of non-JSON numeric constants enabled.",
+  "engineRuns": 0,
+  "externalActions": 0,
+  "dependencyOrLegalDecisionModified": 0
+}
