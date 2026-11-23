@@ -31,7 +31,7 @@ final class StorageReasonValueContractTest {
     }
     StorageIoException.Reason[] copy = StorageIoException.Reason.values();
     assertNotSame(reasons, copy);
-    copy[0] = null;
+    copy[0] = StorageIoException.Reason.MISSING;
     assertSame(StorageIoException.Reason.COLLISION, StorageIoException.Reason.values()[0]);
     for (String unknown : List.of("", "collision", "COLLISION ", "UNKNOWN")) {
       assertThrows(
