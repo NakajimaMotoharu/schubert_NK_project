@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-9201",
+  "workCategory": "SELECTED_TEST",
+  "source": "77dcd9670b6bfbe4491e62506d02822721554b0a",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P018-09/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-09/2",
+    "元行": "WBS-P018-09/2",
+    "費目": "B",
+    "主担当": "WBS-P018-09",
+    "状態": "計画",
+    "作業": "Log/ACTION/REQUEST・metric/error catalog／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計351・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Log/ACTION/REQUEST・metric/error catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-008,MON-001,MON-002,MON-003,MON-004,MON-005,MON-006,MON-007,MON-008,MON-009,MON-010,MON-011,MON-012,MON-013",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-008、MON-001、MON-002、MON-003、MON-004、MON-005、MON-006、MON-007",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "3",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 563,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG43486",
+  "startEvent": "PGPT-20261008-9200",
+  "outcome": {
+    "newActualPt": 12,
+    "newAppliedSuccess": 12,
+    "drawnFromExistingIndependentCases": 12,
+    "compiledExistingFixtures": 4,
+    "initialCompileFailure": "BUG-3710",
+    "streams": [
+      11,
+      1
+    ],
+    "sourceIdentical": true,
+    "rawTargetsJVMFsSeparate": true,
+    "whole451": false,
+    "technicalOrdinary": 3118,
+    "technicalApplied": 3070
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-current-two-supplied-monitors-ordinary-v2-v3/manifest.json",
+    "sha256": "a342d08899d530cb602a9a50a366545b276563c5878635a8f1e7f6ac82d716f1"
+  },
+  "nextEvidence": {
+    "workId": "WBS-F03/2-2-b",
+    "action": "Run exact current typed SpotBugs and PMD for the two already admitted supplied monitor wrappers. Use the exact selected 24-class prior-qualified compiler closure and allowed SDK, not a whole Batch jar."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T08:46:32+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 69,
+    "remainingPercent": 31,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "7368d4cc48143f778f8b62e35eed8063be61346b738b94f3c215a0f1eaf4a3b5",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T08:46:32+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 69,
+        "remainingPercent": 31,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T08:46:11.347274+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 69,
+    "remainingPercent": 31,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

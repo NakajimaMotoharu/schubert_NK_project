@@ -1,0 +1,325 @@
+{
+  "run": "PG43486",
+  "wbs": "WBS-P018-09/2",
+  "terminalAtUTC": "2026-11-23T08:46:11.347274+00:00",
+  "actualExit": 0,
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "testSource": "8ae106e9327be5ca75f8df3f9cef1453bfebc9d0",
+  "firstCompileError": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-health-fixture-compile-before-v1/manifest.json",
+    "sha256": "381cba158bb6b0aeeb2d83d9ee7a99207175094ce5d276733e4bddd075a6c0e6"
+  },
+  "initialCompileJUnitInvocations": 0,
+  "correctionCommit": "8ae106e9327be5ca75f8df3f9cef1453bfebc9d0",
+  "approvedSourceFixtureClosure": [
+    "FilesystemHealthObservationTest.java",
+    "JvmHeapHealthMonitorTest.java",
+    "JvmHeapHealthObservationTest.java",
+    "MonitoringObservationClockTest.java"
+  ],
+  "testIds": [
+    "FSINPUT008",
+    "FSINPUT009",
+    "FSINPUT010",
+    "HEAPCONN001",
+    "HEAPCONN002",
+    "HEAPCONN003",
+    "HEAPCONN004",
+    "HEAPCONN005",
+    "HEAPCONN006",
+    "HEAPCONN007",
+    "HEAPCONN008",
+    "OBSCLOCK008"
+  ],
+  "specifications": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1582_FilesystemHealth観測_単体テスト仕様書.md",
+      "sha256": "8823be14b15049f20229a2262a28c94e9e435ac8a374ce15acc71d55d47f5e35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1599_監視Poll・Heap結線_単体テスト仕様書.md",
+      "sha256": "8bd26f7741f382368f8cc4d9542bfe7ca81f4a82f8cd22a0ee4ee090b36edb1e"
+    }
+  ],
+  "testResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5806_合成FileStore・Heap監視現候補_実行結果.md",
+    "sha256": "6a4f158ac5cf50ab3dc7a5091513d2675f592d648c8aa6e5e7848a992c4d038f"
+  },
+  "runs": {
+    "v2": {
+      "source": "8ae106e9327be5ca75f8df3f9cef1453bfebc9d0",
+      "tests": 11,
+      "session": "PG43486-HEALTH11-V2",
+      "scopedCounter": {
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor": {
+          "INSTRUCTION": {
+            "missed": 20,
+            "covered": 43
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 2,
+            "covered": 8
+          },
+          "COMPLEXITY": {
+            "missed": 2,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 2,
+            "covered": 4
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 65
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 10
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 6
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 6
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "crcAndProbes": {
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor": {
+          "crc64": "38c1bae608b06097",
+          "probeCount": 9,
+          "hitProbeIds": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            6,
+            8
+          ],
+          "missedProbeIds": [
+            5,
+            7
+          ]
+        },
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor": {
+          "crc64": "d5685c1ba602ae2e",
+          "probeCount": 9,
+          "hitProbeIds": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "missedProbeIds": []
+        }
+      },
+      "originalExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-two-supplied-health-monitors-current-v2/selected.exec",
+        "sha256": "bbbb0ce3c6bf7e46580007d228d894c4bfd24a82caa45fab3e5b31415c258187"
+      },
+      "originalXML": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-two-supplied-health-monitors-current-v2/reports/TEST-junit-jupiter.xml",
+        "sha256": "223069b434235226ddb19950c8f973fd47967300241b003bf484fd9cbe751258"
+      },
+      "redactedXML": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-current-two-supplied-monitors-ordinary-v2-v3/v2-selected-junit.redacted.xml",
+        "sha256": "32a52ab59324c21574f262f9d1c75d59c203aa8d96215930750240306954fdb9"
+      },
+      "rawCounterOutput": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-current-two-supplied-monitors-ordinary-v2-v3/v2-raw-counters.tsv",
+        "sha256": "e893628f51f660c4d9c17700f127dd9d4eeaf957b0ff9a05425eb68015627df4"
+      },
+      "validatedInitNames": [
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State",
+        "dev/codex/schubert/nk/batch/monitoring/AlertThresholds",
+        "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow",
+        "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest$FixtureStore",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest$UnformattableIOException",
+        "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio",
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest",
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation",
+        "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest$Fixture",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$FixtureClock",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller",
+        "dev/codex/schubert/nk/batch/monitoring/ObservationContext",
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation",
+        "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation"
+      ],
+      "toolInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-two-supplied-health-monitors-current-v2/begin.json",
+        "sha256": "ae7411bfd20a5af973c56b3de7e12f3704732b88e8f94e29ae2f5ba98c551392"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-two-supplied-health-monitors-current-v2/terminal.json",
+        "sha256": "23ee16664af5175b9599dee43a4253ac0ed0d5b9a2c1860f1e8589a2638cb0a6"
+      }
+    },
+    "v3": {
+      "source": "8ae106e9327be5ca75f8df3f9cef1453bfebc9d0",
+      "tests": 1,
+      "session": "PG43486-FS-NOW-ONE",
+      "scopedCounter": {
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 63
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 10
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 6
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 6
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "crcAndProbes": {
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor": {
+          "crc64": "38c1bae608b06097",
+          "probeCount": 9,
+          "hitProbeIds": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "missedProbeIds": []
+        }
+      },
+      "originalExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-filesystem-observe-now-current-v3/selected.exec",
+        "sha256": "125131fc6b1e8ffb8a306ca7fdee85323cc3caeccb756cfe9917ddf71e870f72"
+      },
+      "originalXML": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-filesystem-observe-now-current-v3/reports/TEST-junit-jupiter.xml",
+        "sha256": "6b7cfefb9236bfa20e9a4de97a1b2bf50100046c193c74b790c7b3936d97e72e"
+      },
+      "redactedXML": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-current-two-supplied-monitors-ordinary-v2-v3/v3-selected-junit.redacted.xml",
+        "sha256": "e5079d39a87f05571ed1c74d559e4fe848507e9a26586a7783302111bd6499d7"
+      },
+      "rawCounterOutput": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43486-current-two-supplied-monitors-ordinary-v2-v3/v3-raw-counters.tsv",
+        "sha256": "60db905beaae32b60e9230c5b65b349126b3e33b36e07b664bad43679f330a70"
+      },
+      "validatedInitNames": [
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State",
+        "dev/codex/schubert/nk/batch/monitoring/AlertThresholds",
+        "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow",
+        "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation",
+        "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest$FixtureStore",
+        "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$FixtureClock",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$UnformattableFailure",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller",
+        "dev/codex/schubert/nk/batch/monitoring/ObservationContext",
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor",
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation"
+      ],
+      "toolInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-filesystem-observe-now-current-v3/begin.json",
+        "sha256": "ba6ae667f9948200de057a7a01f9651bdc6e3dc7fcb3e23d44e7b2393b329421"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43486-filesystem-observe-now-current-v3/terminal.json",
+        "sha256": "434facf23afbc0d4c7be97b47fa6d14a1fee8160fa51fe5b7211ecfe5d385535"
+      }
+    }
+  },
+  "totalOrdinary": 12,
+  "errors": 0,
+  "failures": 0,
+  "skips": 0,
+  "newDefinitions": 0,
+  "technicalOrdinaryExecutions": 3118,
+  "technicalApplicableSuccess": 3070,
+  "measuredTargets": {
+    "FileSystem": {
+      "whichRun": "v3",
+      "line": 10,
+      "method": 6,
+      "class": 1,
+      "naturalBranches": 0
+    },
+    "JvmHeap": {
+      "whichRun": "v2",
+      "line": 10,
+      "method": 6,
+      "class": 1,
+      "naturalBranches": 0
+    }
+  },
+  "mergedExec": false,
+  "actualEnvironmentActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
