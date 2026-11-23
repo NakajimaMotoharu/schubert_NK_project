@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.ToDoubleFunction;
 import org.junit.jupiter.api.Test;
 
-/** EXDUR001..010/1723/BUG1678; literal CDF vectors, owned SDK and threads only. */
+/** EXDUR001..011/1723/BUG1678/BUG3734; literal CDF vectors and owned SDK and threads. */
 class ExactDurationMeterRegistryTest {
   private static final String SECONDS_UNIT = "seconds";
   private static final String NAME = "nk_db_query_duration_seconds";
@@ -163,6 +163,33 @@ class ExactDurationMeterRegistryTest {
       assertEquals(1, first.total());
       assertEquals(1, first.max());
       cdf(summary, 0, 0, 0, 1, 2);
+    }
+  }
+
+  @Test
+  void exDur011RejectedObservationReleasesStateToAnotherThread()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    try (var registry = registry()) {
+      var summary = summary(registry);
+      assertThrows(IllegalArgumentException.class, () -> summary.record(Double.NaN));
+      var executor = Executors.newSingleThreadExecutor(Thread.ofVirtual().factory());
+      try {
+        var snapshot =
+            executor
+                .submit(
+                    () -> {
+                      summary.record(.1);
+                      return summary.takeSnapshot();
+                    })
+                .get(5, TimeUnit.SECONDS);
+        assertEquals(1, snapshot.count());
+        assertEquals(.1, snapshot.total());
+        assertEquals(.1, snapshot.max());
+        cdf(summary, 0, 0, 1, 1, 1);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 

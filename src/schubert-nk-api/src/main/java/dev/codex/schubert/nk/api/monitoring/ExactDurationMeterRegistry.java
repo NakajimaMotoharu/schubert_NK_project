@@ -14,6 +14,7 @@ import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 /** SS351/1723/BUG1678: exact cumulative finite SLO counts, without HDR range quantization. */
 public final class ExactDurationMeterRegistry extends SimpleMeterRegistry
@@ -60,7 +61,7 @@ public final class ExactDurationMeterRegistry extends SimpleMeterRegistry
   /** Constant memory; one private lock makes count/total/max/all buckets a single observation. */
   private static final class ExactSummary implements DistributionSummary {
     private final Meter.Id id;
-    private final Object stateLock = new Object();
+    private final ReentrantLock stateLock = new ReentrantLock();
     private final long[] buckets = new long[BOUNDARIES.length];
     private long sampleCount;
     private double total;
@@ -77,14 +78,17 @@ public final class ExactDurationMeterRegistry extends SimpleMeterRegistry
 
     @Override
     public void record(double amount) {
-      // All accepted inputs are finite nonnegative scalar nanoseconds converted to seconds.
-      if (!(amount >= 0 && amount <= 9.223372036854776E9))
-        throw new IllegalArgumentException("invalid duration");
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
+        // All accepted inputs are finite nonnegative scalar nanoseconds converted to seconds.
+        if (!(amount >= 0 && amount <= 9.223372036854776E9))
+          throw new IllegalArgumentException("invalid duration");
         sampleCount++;
         total += amount;
         maximum = Math.max(maximum, amount);
         for (int i = 0; i < BOUNDARIES.length; i++) if (amount <= BOUNDARIES[i]) buckets[i]++;
+      } finally {
+        stateLock.unlock();
       }
     }
 
@@ -105,12 +109,15 @@ public final class ExactDurationMeterRegistry extends SimpleMeterRegistry
 
     @Override
     public HistogramSnapshot takeSnapshot() {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         var counts = new CountAtBucket[BOUNDARIES.length];
         for (int i = 0; i < counts.length; i++)
           counts[i] = new CountAtBucket(BOUNDARIES[i], buckets[i]);
         return new HistogramSnapshot(
             sampleCount, total, maximum, new ValueAtPercentile[0], counts, null);
+      } finally {
+        stateLock.unlock();
       }
     }
   }

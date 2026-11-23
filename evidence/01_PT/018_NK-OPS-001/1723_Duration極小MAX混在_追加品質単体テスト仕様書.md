@@ -19,3 +19,9 @@ SDK内部のdynamic range調整・最初の大/小観測からの順序依存と
 予定は新2＋必要既API162を当164/20で実行し、同sourceの四100/CRC/static・正常六compile・全1788physical/135delta-119physicalを検証する。今回Mainは不変更、前sourceのWeb77/Batch261/正式1964を合算せず、二Test fileの編集anchorを明示する。元追加製造/追加品質/既再資格/発見・手戻り/tool費を分離する。1724結果へsource/run/環境/command/exit/期待値/実際/counter/関連BUG/hashを結合する。
 
 開始0.5/1.5/4pp上限10/fresh12残88/reset1793382075・PG7960 fresh receipt→event1947。原-v4-v5/旧markerlast27区間/共有累積・専有N-T/工数null/90再基底化0、正式/原190新受入0/QA051final/PTALT0/whole451-native-CHR/全actualHOLDを維持する。SQL/DB/MQ/時計/VM/Root/配備/鍵等の実操作0。
+
+## EXDUR011 拒否後に別workerから記録できること
+
+BUG-3734、YKT-2929、WBS-F03/2-2-b／P018-09、RD171／UI252／SS351 §6。前提は空の自己所有Micrometer registry、固定clock、正規の5境界。ExactSummary.recordにNaNを一回渡して拒否を確認する。続いて別のテスト所有workerが0.1秒を一件記録し、takeSnapshotを5秒以内に返す。独立期待は件数1、合計・最大値0.1秒、CDFは0/0/1/1/1。NaNの算入、失敗後の排他残存、snapshotの不整合を検出する。workerにはvirtual threadを使い、finallyでshutdownNowと10秒の終了確認を行う。入力は固定値と自己所有registryのみ。
+
+収録範囲は元EXDUR001～010およびEXDUR011。元10件の期待値は維持する。Java25、Mavenローカル固定依存、選択Test ID、実行commit、NullAway・書式・Checkstyle・PMD・SpotBugs・単一exec四指標、実JUnitの終端は再試験manifestに結ぶ。全製品の正規包装・全451は別の条件。
