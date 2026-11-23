@@ -1,0 +1,210 @@
+{
+  "run": "PG43170-g01-physical-class-counter-cardinality-v1",
+  "wbs": "WBS-G01",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:47:26.340992+00:00",
+  "core": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "originalToolSource": "9cce0b779a29d84aa958a671873cdf65ef4919d7",
+  "fixedToolSource": "c1660a8fd147c6ba23a1f33bc3efc2172465c7b0",
+  "bug": "BUG-3679",
+  "ykt": "YKT-2892",
+  "tool": {
+    "path": "tools/quality/class_counter_applicability.py",
+    "sha256": "2b7e0e5236abbd463e858546658dfebd7f59c1aeec3ed40f18cca5076b7b78c2"
+  },
+  "independentFixture": {
+    "path": "tools/quality/tests/test_class_counter_applicability.py",
+    "sha256": "1069a80ce6a8dffe2a2b62917d4631f6e79717c2e40b8da2a4a0cf479eefd3af"
+  },
+  "command": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_class_counter_applicability.py -v",
+  "testIds": [
+    "PT-OPS-CARD001",
+    "PT-OPS-CARD002",
+    "PT-OPS-CARD003",
+    "PT-OPS-CARD004",
+    "PT-OPS-CARD005",
+    "PT-OPS-CARD006",
+    "PT-OPS-CARD007",
+    "PT-OPS-CARD008"
+  ],
+  "before": {
+    "exit": 1,
+    "topLevelTests": 8,
+    "unexpectedAccepts": 3,
+    "privateLogSha256": "391fd8eca9918e5432099f8d6f8680a776c83dae904474accd12941b537931c8"
+  },
+  "after": {
+    "exit": 0,
+    "topLevelTests": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "privateLogSha256": "9ac38e5fbe5e4480a44bab8f1709574f2eb6bd9ea393032e1b5627064d55a01c"
+  },
+  "callerImportSites": [
+    {
+      "path": "tools/quality/pg10046_user_sql_post.py",
+      "sha256": "09b84869f654b94dc30db5c3963b570961e9576d5dc15f83c8ba32e36e8bb9e2"
+    },
+    {
+      "path": "tools/quality/pg10047_user_sql_post_v2.py",
+      "sha256": "ae6442e69b54c99176b2c8971f8230e9101dc40c433c4ee1cc8f7dd58663e972"
+    },
+    {
+      "path": "tools/quality/pg10068_log_sql_post.py",
+      "sha256": "3f58fa135f2d07ef6a514196ce346799698af0b0eb480afd7ad7c97bf683d416"
+    },
+    {
+      "path": "tools/quality/pg10082_question_sql_post.py",
+      "sha256": "59d7e5948a27cecb40fed7b2f26b36953b3989ff29713004a35e174496b2389f"
+    },
+    {
+      "path": "tools/quality/pg10106_query_batch_post.py",
+      "sha256": "4f1f338ec7f8752872480158f176182a9be4296eb1db651d94c22a5d5f95ab18"
+    },
+    {
+      "path": "tools/quality/pg10134_uid_oracle_post.py",
+      "sha256": "6cb27c6790f1d6589f1af46f375ee02ba115a0bf4a5392b9c92832139d63f01a"
+    },
+    {
+      "path": "tools/quality/pg10135_uid_oracle_post_v2.py",
+      "sha256": "2bbb1e4416431cb1cf3db36b6cbc3d0bb1faa059c694fded35db51b9376eea83"
+    },
+    {
+      "path": "tools/quality/pg10160_credloc_oracle_post.py",
+      "sha256": "22f8f101fc22cc5eeb17f0295c397606194c9d26a557ca4d8b4b003f7111ce06"
+    },
+    {
+      "path": "tools/quality/pg10174_cancel_wire_post.py",
+      "sha256": "b3bc6546ecdfd854c5e1e311e2998b011ca3b0544f93bbba4279e0673040cf91"
+    },
+    {
+      "path": "tools/quality/pg10190_protocol_module_post.py",
+      "sha256": "9956c2982c896a1cd3f1db982050be44843f4b3a45ab68985d5b2c5b60a47dab"
+    },
+    {
+      "path": "tools/quality/pg10194_protocol_source_quality_post.py",
+      "sha256": "8350c4516d2d98b389d7f421a1a5753091be0ebad47daad317d0ddfc538db01c"
+    },
+    {
+      "path": "tools/quality/pg10195_protocol_current_result_binding.py",
+      "sha256": "444c430fe6558828269a5b6dc9465f96323cf2f0a98cf3710e1771270d9cbfcb"
+    },
+    {
+      "path": "tools/quality/pg10208_pre_sql_boundary_post.py",
+      "sha256": "adb6a095cccc1fedb0af03722745b038ecbf51fcfdf3679393089c96586a7b6d"
+    },
+    {
+      "path": "tools/quality/pg10232_header_profile_post.py",
+      "sha256": "89abe3d3aed8e57330d3ab5dfbbc55b06df0e71d3c80908e8e600aa406c357db"
+    },
+    {
+      "path": "tools/quality/pg10266_scenario_media_boundary_post.py",
+      "sha256": "c975b2999558e1270f6289a9da5bde8be62a6a409909220a0127d95b3ee1def9"
+    },
+    {
+      "path": "tools/quality/pg10402_role_view_post.py",
+      "sha256": "bd1ad3d35f1eba029307fa2860b7768c5b2da46a42076dfb4c32694a5fd8e903"
+    },
+    {
+      "path": "tools/quality/pg10440_pure_view_post.py",
+      "sha256": "08c4d21be7efa69370c8f69a388dd0aa36009dd7da588f1363d35267a997388f"
+    },
+    {
+      "path": "tools/quality/pg10454_pure_view_boundaries_post.py",
+      "sha256": "3bc21e588beece20d342904d282d57de44fe87d1ed861a0a289cc61695717e7b"
+    },
+    {
+      "path": "tools/quality/pg10468_topbar_contract_post.py",
+      "sha256": "0682d923cb3397da1a11091bb3cec7242e9fa0f9905e779994638203beee9b80"
+    },
+    {
+      "path": "tools/quality/pg10490_public_template_post.py",
+      "sha256": "47cf9fa8922e3817660e34be3eedc6e1bc0b8b251eca5d3c467fd1910c17afc7"
+    },
+    {
+      "path": "tools/quality/pg10544_trace_oracle_post.py",
+      "sha256": "6312eeeda6c8eaa489c7cd077d953a9cae6a4eeabab661fc8216eb19c857aaac"
+    },
+    {
+      "path": "tools/quality/pg10564_trace_context_post.py",
+      "sha256": "9cd0975ed45a576ca664783eafbcdb1615f660696a119d3f4a01acbc1aef1e50"
+    },
+    {
+      "path": "tools/quality/pg9728_protocol_counter_count_correction.py",
+      "sha256": "28b03d193ebfe2844d55c1a873676dab71ec57e9348f0ce97554c3bd3d5a9110"
+    },
+    {
+      "path": "tools/quality/pg9742_storage_pure_post.py",
+      "sha256": "adf67a0b97a1caec6e185625a293424d22e8447a65488ee561a6eaba6cd9da36"
+    },
+    {
+      "path": "tools/quality/pg9756_outbox_value_post.py",
+      "sha256": "88fdb5fb014ef9a3ff2cbd82921bd006e10c8979660cf77066a211b64d4fd254"
+    },
+    {
+      "path": "tools/quality/pg9756_outbox_value_post_v2.py",
+      "sha256": "42860182faacbd4aa49e6022966236ab0d127cc413ef70a79fc948640168f69d"
+    },
+    {
+      "path": "tools/quality/pg9756_outbox_value_post_v3.py",
+      "sha256": "c99cca60d1109d80d13be38bcc4a97c3666fca92fb164e701f3cbc35962ba03d"
+    },
+    {
+      "path": "tools/quality/pg9786_batch_value_post.py",
+      "sha256": "98d40d2c96688de3514dcdc99bc1d51397e2c47abfe76b1dd0e6fb05ae99853b"
+    },
+    {
+      "path": "tools/quality/pg9798_batch_boundary_post.py",
+      "sha256": "9d50329ff81f36f17413c2c9950daf22ac0ef61de0e43b8604f3da4780990660"
+    },
+    {
+      "path": "tools/quality/pg9816_cleanup_values_post.py",
+      "sha256": "1cd6eb5e5d000b985b6fb36de888a00cd22d64d6fb1f0203c3ec42c5e122db84"
+    },
+    {
+      "path": "tools/quality/pg9870_snapshot_nonce_post.py",
+      "sha256": "8145c75ff6eb033dffcfbaac42ab01a24e2e8974ad0efafb02b3c9eb56143738"
+    },
+    {
+      "path": "tools/quality/pg9930_user_query_response_post.py",
+      "sha256": "db01eb06ddbecff6999871c3d3583f54695d305b39a18a47cd0bf09da5c47529"
+    },
+    {
+      "path": "tools/quality/pg9938_user_query_response_post.py",
+      "sha256": "b57acda5ae72c3d9584448f73898672564d240e1c6403d3f6f439d22429a5401"
+    },
+    {
+      "path": "tools/quality/pg9974_plain_core_fixed_post.py",
+      "sha256": "70927c97eca1d5432709d16ec5fd73326cb12150822f073bec15395f7d984a28"
+    },
+    {
+      "path": "tools/quality/pg9998_query_pair_post.py",
+      "sha256": "511248550ec10334dba84f43fa6b345cff87f6e7d6560a815b9ac86f6f724b46"
+    }
+  ],
+  "callersReplayed": 0,
+  "publishedCounterInputs": [
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/evidence/provisional/PG9724-protocol-module-post-v2/whole-module-counters.json",
+      "sha256": "7d88a2dad8af07a7b84bd3b0a4e1dd1a1756fcb1fa1670d135f7734990daa4e8"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/evidence/provisional/PG9716-typed-boundaries-component-post-v1/source-unit-counters.json",
+      "sha256": "a5a957e50a98556e399d37caa93eeba8ebf80846023b1fee045ed94437541902"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG10190-protocol-module-post-v1/whole-module-counters.json",
+      "sha256": "7d88a2dad8af07a7b84bd3b0a4e1dd1a1756fcb1fa1670d135f7734990daa4e8"
+    }
+  ],
+  "genuineDistinctPublishedRows": 244,
+  "sameDigestCopyRows": 169,
+  "classesWithCorrectedHistoricCounts": 0,
+  "negativeMultiClassInputs": 3,
+  "productsChanged": 0,
+  "productTestExecutions": 0,
+  "nativeExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
