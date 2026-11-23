@@ -1,0 +1,983 @@
+{
+  "run": "PG43882",
+  "source": "504e9ae445b30f51ca7f62f72f654ccdf6f5f74f",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:38:59.924407+00:00",
+  "wbs": "WBS-F02-b-b",
+  "related": [
+    "SS311",
+    "SS332",
+    "SS333",
+    "SSC-461",
+    "BUG-3233",
+    "YKT-2680",
+    "451"
+  ],
+  "priorInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40438-f02-ssc461-exact-current-callers-v1/manifest.json",
+    "sha256": "e79cbfbcdc9c2ebe645b74f86875db19d7a35252d5c8961600075eb38bfd6ea5"
+  },
+  "explicitSourceFiles": 52,
+  "legacyCandidateModuleCounts": {
+    "schubert-nk-api": 3,
+    "schubert-nk-batch": 40,
+    "schubert-nk-bootstrap": 5,
+    "schubert-nk-storage": 3
+  },
+  "allLexicalOneArgCandidateCount": 51,
+  "localNewlyProvenNamedSqlSites": 3,
+  "storageExplicitRemainingSiteCount": 3,
+  "siteStatuses": {
+    "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED": 21,
+    "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH": 28,
+    "WHOLE_FIXTURE_HOLD_NO_OPERATION_OR_EXTRACTION": 2,
+    "STORAGE_FILE_OPERATION_CONTRACT_RELEASE_BLOCKING": 1
+  },
+  "rows": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "module": "schubert-nk-api",
+      "sourceSHA": "5b079eff7dcf99c8e6d0c0c291000e0a4ac680b5571d77c3732e01b4546e2777",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        86,
+        147
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+      "module": "schubert-nk-api",
+      "sourceSHA": "0574334962482029ca32faa87d6eff10df522bb8d5412c4ad216524372fad134",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        348
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        49,
+        50,
+        59
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        78,
+        82,
+        142,
+        143,
+        200,
+        201,
+        292
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        74,
+        77,
+        121,
+        122
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        246,
+        336,
+        571
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "f27b4c2e07af42bdcb153b1d6cffed031bad97b87580cd5edeb16e34350a138b",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        167,
+        341
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "0c838614e4f41bd12640a8fd7c73f606696b0906fe237fafb7950306e8f74aae",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        121
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "0555b9361b179ae5d8400857b2e18edab0c131f9a07e55b668f7a72723ca509c",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 5,
+      "lexicalCurrentDirectOneArgCandidates": [
+        76,
+        92,
+        93,
+        101,
+        102
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "afabfa84361284127fd15a65ea4f50838b4e7c49d55061be147a60369d945853",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        178,
+        263,
+        270
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "a451738bbe7590a7f0a736e3feb53ab14632002144edbffcba9c68ddba40cc39",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        168,
+        262,
+        290
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "6ee015e4ad65dfbe2fd4f5cc7627c6941c3b107f58592933acc9c8e0328727ba",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        184
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "f58490e311cbc9556dbe7c5f0c6396b172bc85214d79ee834215d809212a164d",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        125
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "d7282a5101871995e6cf8e33b9f8a50409739db4098b164abb74a24ce7551fd7",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        65,
+        81
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "a2551cf269b67fd205515e17d2b41380b0dfcde4072e424635340ba9a1fe26e2",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        269,
+        304
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "d8148f4faf7a5c752e643277d90f058761ffcca7ada8cbc6e0bd4c9156aa5a18",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        294
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "49c10b9ec43d14d412fe5492a9e2513ffd93e1b078cee17c4e994ec69faaafe9",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        291
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "6c6afac131d994f8f37d7dfd88e4d93421c0b5ef9a07b7686bc2b1ff5f28cc0b",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        423,
+        567
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "e6e1b637427e2120e97d8c882cfd3b0bcbd10d020dd43960494c122d4edfebcd",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        750
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupRoots.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "5ddf37a1f4ab3d4b764f8ad73d077d415be51aca0eac7ed3876f17dc2acd7ca2",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        148
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "89bbde8e7045f9531dfd077d1d9d3848b266b2a740ada985069b0b68d67441de",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        121,
+        133
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "9bcafdc62563fe490e2e76db981737d49f9523713e6fedfb14656d823c823a8e",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [
+        285
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "677bbe13b5da1d31d1904d154b9719c814b0e2b38d4b39e7e371a3cf63643503",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        127
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "785b91611ea048cd4bcdc1256a077ad62693138e0b5615217a7be6b4f84ffcc7",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        103
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "2fb20dad702a22849e2ec72cab79ee57e20e16fa3622a6070558a8849ea0e053",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        70,
+        119
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        110,
+        289
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "556db3fefee71036bc1ed98843e7574f7269f6fee767de610cf6f2033fb441ff",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        83
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "9c746311ae9ffb743f1c0b2137572412cfacb3859579888686a49d494528d829",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        208
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "2125485619fbeba72cdaa7543b04a39489f1c7c47d3b3c3391c8c95177b00819",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        137,
+        162
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        94,
+        140
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "f9609e88a54aaeb5151e50d6b245be7d69bfbaebda72cb92a51e812498dd0db5",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        249,
+        319,
+        324
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "WHOLE_FIXTURE_HOLD_NO_OPERATION_OR_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "09481db85c7f81e3202ad90191977fbe0ea9f2e17c6e925df7c76447243d4c1e",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 2,
+      "lexicalCurrentDirectOneArgCandidates": [
+        88,
+        93
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "WHOLE_FIXTURE_HOLD_NO_OPERATION_OR_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "e962046fdaafaf004d6542d32854049e0368e8534f89bd5ace2cc50c1a5d59dd",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 1,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        91
+      ],
+      "oldToNewRawDirectDelta": 1,
+      "localNewlyProven": 1,
+      "newProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43828-backup-sql-diagnostic-migration/manifest.json",
+        "sha256": "ac3ca9480dfc164ad477d276d02720961f2747e34b8f9ed96d374cad6edf0d2a"
+      },
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        169
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        210,
+        331,
+        332
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        111,
+        150
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        91
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "8cb51b0a9e1d9a743450ca239a134680b7035b40d5847962bd97ade4deff55af",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        237,
+        357,
+        551
+      ],
+      "oldToNewRawDirectDelta": 3,
+      "localNewlyProven": 2,
+      "newProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43832-cleanup-terminal-sql-adapter-two-sites/manifest.json",
+        "sha256": "445136ae4938a90b103379083c287d48958cc69bffbde1c207e9d9b77dad4618"
+      },
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 4,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        157,
+        197,
+        266,
+        342
+      ],
+      "oldToNewRawDirectDelta": 4,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        19,
+        20
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "7fa3b68ce5beac06082e6b993cc5a1a91093c802821f617d5cdf7d525554a972",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        20
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "module": "schubert-nk-batch",
+      "sourceSHA": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        76
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "5bc27f0fddf5098f96a094b092598655baf517edc396cb70a0d11bcaeb8e3b22",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        125,
+        172
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "6d871af1d619b414d7d6c56d83ac97ff583ea9a6aa36c6f263362cc6389cae92",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        32,
+        34
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        130
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        77
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        89,
+        96
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 5,
+      "lexicalCurrentDirectOneArgCandidates": [
+        70,
+        86,
+        144,
+        164,
+        193
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "ed84f2265e7270fc0efc93d578debcf31ef80a3f9e9c86de71fee0208dd9940f",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        206,
+        240,
+        252
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "e1b732ec8736ca5ef5661e42aa62f3d723c0b940666cd39dbd64f9b9bb20eae1",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        56
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "module": "schubert-nk-bootstrap",
+      "sourceSHA": "612d92a60eb5c2ccb23992768f795d5ccc9f7b93eacd18eb2aa6ee370023aaf3",
+      "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+      "priorLegacy": 0,
+      "lexicalCurrentDirectOneArgCandidates": [],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [
+        119,
+        168
+      ],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "NO_DIRECT_ONE_ARG_CANDIDATE_IN_INVENTORIED_PATH"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "module": "schubert-nk-storage",
+      "sourceSHA": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+      "priorScope": "OWNED_FILE_OPERATION_CONVERSION",
+      "priorLegacy": 3,
+      "lexicalCurrentDirectOneArgCandidates": [
+        343,
+        346,
+        349
+      ],
+      "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+      "lexicalCurrentBootstrapAdapterCandidates": [],
+      "oldToNewRawDirectDelta": 0,
+      "localNewlyProven": 0,
+      "newProof": null,
+      "remainingDecision": "STORAGE_FILE_OPERATION_CONTRACT_RELEASE_BLOCKING"
+    }
+  ],
+  "method": "Count direct class-qualified calls on the 52 fixed admitted paths and classify invocations by the top-level argument count. Runtime reachability, future source additions and full F02 remain unverified.",
+  "unmatchedRemainder": [
+    "Storage FileOperation owner contract",
+    "QA and safe exact eligibility by remaining upper call site",
+    "Normal API/Web package, owned integration and whole 451"
+  ],
+  "buildOrTestActions": 0,
+  "realOperations": 0,
+  "complete": false,
+  "formalAcceptanceId": null,
+  "upperCurrentDirectLexicalCandidates": 48,
+  "earlierMigrationFive": {
+    "sourceOnlyCountForHistoricalDelta": 5,
+    "priorExpiryFour": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+      "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+    },
+    "sameNamed23PhysicalCurrentExpiry31": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42958-expiry-audit-current-regular-maven-v1/manifest.json",
+      "sha256": "2dbc7d341290db82c16dddb8e01c502d1adcb21fd6eddbac66f30a89361d8cf8"
+    },
+    "priorCleanupReferenceOne": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+      "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+    },
+    "exactExpiryNamedPhysical": {
+      "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+      "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult.class": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "dev/codex/schubert/nk/batch/repository/SuccessRunLookup.class": "ba6a3cd7a9d176ed849112546d0ad7bf3aebc9d22a4527c0bfd834247adfc525",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.class": "977ec26b8b12d01f5a252ddf54892712b222b9d8a1469b9e9ce0223b3851b28f",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class": "2394756c3a558df38394db0e03b2bb27c031812e13ed361c7b126d63a611aa97",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior.class": "48f91fc8d3240de710b61c1fc2988d97bf09c33f26f7e67401f0c29f427e67c4",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.class": "1e9bd6959698e28f0213098be7c8909bd5573786e6eedb88fa85b85c153c3a8e",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.class": "c298098ef1fb8aa9aeb21680df29bc093ee0bebb4156678779fcf51796f7fd9e",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.class": "9fedde7f8fd2ceda99d2604384b72209ae3005228b7bc423f9488a19fdc69c51",
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93",
+      "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class": "cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea"
+    },
+    "addToNewThisTurn": 0
+  }
+}
