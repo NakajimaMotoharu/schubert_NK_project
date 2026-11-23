@@ -1,0 +1,68 @@
+{
+  "run": "PG43904",
+  "source": "9952d2b04d452edcc027d79ed80acbe367ef9050",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:16:45,013889031+00:00",
+  "wbs": "WBS-G08",
+  "related": [
+    "SS354",
+    "451",
+    "BUG-3752",
+    "YKT-2931"
+  ],
+  "tool": {
+    "path": "tools/quality/verify_published_manifest_pins.py",
+    "sha256": "ebe6ef568a72078ac149cffc31d8ebffbf6c20b7f52036cd28c7c5fb5a980126"
+  },
+  "test": {
+    "path": "tools/quality/tests/test_verify_published_manifest_pins.py",
+    "sha256": "eab63fa3217bc3aae41e28ccaee9f5ef39370e71e5153d4a656847640b7544f4"
+  },
+  "newIds": {
+    "PT-OPS-G08-PINS006": "test_explicit_source_must_name_a_full_commit_without_implicit_fallback",
+    "PT-OPS-G08-PINS007": "test_tree_object_id_cannot_substitute_for_a_source_commit"
+  },
+  "before": [
+    {
+      "cases": 6,
+      "failedInputs": 4,
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43904-explicit-source-pin-before/unit.out",
+        "sha256": "142a5ecf1b0a7ec8a04a0bc6189e5cb2310e5ceb74fdec6cf64bd8a02807eca0"
+      }
+    },
+    {
+      "cases": 7,
+      "failedInputs": 1,
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43904-explicit-source-tree-before/unit.out",
+        "sha256": "c45b499860ed5c8870818d22c79721b423e8e39722433ff10092a04cc683565d"
+      }
+    }
+  ],
+  "firstCorrection": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43904-explicit-source-pin-after/unit.out",
+    "sha256": "92ff2cc6c582b89a3009e329b5905746d2e0f3c1603080baa05c427eb40585aa"
+  },
+  "final": {
+    "unitCount": 7,
+    "failures": 0,
+    "unit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43904-explicit-source-pin-final/unit.out",
+      "sha256": "e0231b44f4db091dbc3a2a0b5c3bef844102baee295afdf46e07279fe6c24899"
+    },
+    "rawExit": [
+      0,
+      0,
+      0
+    ],
+    "publishedManifestCount": 43,
+    "ranges": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43904-exact-source-object-validation/verified-ranges.json",
+      "sha256": "41003c58c68615a65c646a98328b844a6ad6f90a31f7b62554682694acf7a9b3"
+    }
+  },
+  "qualifies": "local published reference identity only",
+  "productionPt": 0,
+  "formalAcceptanceId": null
+}
