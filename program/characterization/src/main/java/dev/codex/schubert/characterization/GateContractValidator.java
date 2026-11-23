@@ -315,19 +315,13 @@ final class GateContractValidator {
         matchesPinnedText(expected, browser, "playwrightJava", "1.55.0"),
         "BROWSER_PLAYWRIGHT",
         failures);
-    require(
-        matchesPinnedText(expected, browser, "browser", "chromium"),
-        "BROWSER_NAME",
-        failures);
+    require(matchesPinnedText(expected, browser, "browser", "chromium"), "BROWSER_NAME", failures);
     require(
         matchesPinnedInteger(
             expected.path("browserRevision"), browser.path("browserRevision"), 1187),
         "BROWSER_REVISION",
         failures);
-    require(
-        matchesPinnedText(expected, browser, "locale", "ja-JP"),
-        "BROWSER_LOCALE",
-        failures);
+    require(matchesPinnedText(expected, browser, "locale", "ja-JP"), "BROWSER_LOCALE", failures);
     require(
         matchesPinnedText(expected, browser, "timezone", "Asia/Tokyo"),
         "BROWSER_TIMEZONE",
