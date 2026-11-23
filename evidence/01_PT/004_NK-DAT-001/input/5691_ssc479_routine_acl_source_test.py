@@ -53,6 +53,16 @@ class RoutineDefaultsSourceTest(unittest.TestCase):
             r"where success and version is not null\"\)\)",
         )
 
+    def test_pt_db_acl031_s04_cleanup_uses_the_independent_full_inventory(self):
+        maintenance = FIXTURES.parent / "maintenance"
+        source = (maintenance / "StepCleanupBoundaryTest.java").read_text(encoding="utf-8")
+        fixture = source.split("void appendOnlyMigrationInventory()", 1)[1]
+        fixture = fixture.split("\n  static long id", 1)[0]
+        self.assertIn("assertEquals(MigrationInventory.VERSIONS, resourceVersions);", fixture)
+        self.assertIn('MigrationInventory.COUNT_TEXT + "|1"', fixture)
+        self.assertNotIn("files.getLast()", fixture)
+        self.assertIn('"V029__strict_nullable_compound_checks.sql", files.get(28)', fixture)
+
 
 if __name__ == "__main__":
     unittest.main()

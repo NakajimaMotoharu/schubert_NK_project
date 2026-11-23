@@ -756,7 +756,13 @@ final class StepCleanupBoundaryTest {
     try (var stream = Files.list(migrations)) {
       files = stream.sorted().toList();
     }
-    assertEquals(29, files.size());
+    List<String> resourceVersions = new ArrayList<>(files.size());
+    for (Path file : files) {
+      String name = file.getFileName().toString();
+      assertTrue(name.matches("V[0-9]{3}__[a-z0-9_]+\\.sql"), name);
+      resourceVersions.add(name.substring(1, 4));
+    }
+    assertEquals(MigrationInventory.VERSIONS, resourceVersions);
     for (int i = 0; i < 24; i++)
       assertEquals(
           expected.get(i),
@@ -776,16 +782,10 @@ final class StepCleanupBoundaryTest {
     assertEquals(
         "V028__retained_success_progress_seals.sql", files.get(27).getFileName().toString());
     assertEquals(
-        "V029__strict_nullable_compound_checks.sql", files.getLast().getFileName().toString());
-    assertEquals(
-        List.of(
-            "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-            "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024",
-            "025", "026", "027", "028", "029"),
-        MigrationInventory.VERSIONS);
+        "V029__strict_nullable_compound_checks.sql", files.get(28).getFileName().toString());
     try (var c = db.admin()) {
       assertEquals(
-          "29|1",
+          MigrationInventory.COUNT_TEXT + "|1",
           scalar(
               c,
               "select (select count(*) from schubert_meta.flyway_schema_history where success and type='SQL' and version is not null)||'|'||(select count(*) from schubert_meta.flyway_schema_history where success and type='SCHEMA' and version is null)"));
