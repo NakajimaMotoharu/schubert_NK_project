@@ -1,0 +1,61 @@
+{
+  "run": "PG43662",
+  "source": "213578156878a672c3a59cf2cb730c59cfbc3b57",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T13:14:46.273068+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P004-01.02/2",
+  "relatedDefects": [
+    "BUG-3721",
+    "BUG-3722"
+  ],
+  "baseline": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43658-ssc479-routine-acl-source-v1/manifest.json",
+    "sha256": "1353d9b4a617083903a4c4d6d6805d4d87ab2325ab27b77ebb839ce49fd4ff04"
+  },
+  "resource": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+    "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3",
+    "independentSourceCrc": 1880247817
+  },
+  "compileOnly": true,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43662-ssc479-role-upgrade-fixture-v1/begin.json",
+    "sha256": "ab7428592bfc694860e1184a8a21eb043a637ae9c06e24e33e403d3f9ed1bbf5"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43662-ssc479-role-upgrade-fixture-v1/terminal.json",
+    "sha256": "9413174ce4202c32e52ccc3bbc838b4108e8b8385fd1de111137dc8629d1ae9d"
+  },
+  "resultingFixtureClassFiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43662-ssc479-role-upgrade-fixture-v1/classes/dev/codex/schubert/nk/api/database/DatabaseMigrationTest$StrictNullableAction.class",
+      "sha256": "23de64f4e543079231518315a16cd272c870c99d6c74b0c79b999a73b84575ea"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43662-ssc479-role-upgrade-fixture-v1/classes/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.class",
+      "sha256": "20cde6de06dadbd300d3dd2c7b123633294abaa2318cc1505f6626d06f9bd78a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43662-ssc479-role-upgrade-fixture-v1/classes/dev/codex/schubert/nk/api/database/MigrationInventory.class",
+      "sha256": "bbb08ee68905fed21d1d1447e7842148e818960fef196e6c155a10199ca9641d"
+    }
+  ],
+  "testIds": [
+    "PT-DB-ACL031-001",
+    "PT-DB-ACL031-002"
+  ],
+  "actualDbComponentTests": "NOT_RUN",
+  "runtimeDBInvocations": 0,
+  "productTestExecutions": 0,
+  "complete451": false,
+  "formalAcceptanceId": null,
+  "approvedExpectedTests": [
+    "V030 initial 30 and missing domain global ACL in isolated database",
+    "one V031 with fixed migration history fields and independent CRC",
+    "prior individual routine ACLs and other defaults exactly preserved",
+    "owner default execute present and PUBLIC default execute absent",
+    "validate succeeds and re-apply migrates zero"
+  ],
+  "remaining": "Actual PostgreSQL18 isolated fixture needs authority and owned environment; F02/F03/current release analysis remains distinct."
+}

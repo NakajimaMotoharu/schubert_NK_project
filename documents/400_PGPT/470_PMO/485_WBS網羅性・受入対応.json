@@ -1,4 +1,71 @@
 {
+  "currentDefaultRoutinePrivilegesPG43658PG43660PG43662": {
+    "owner": "WBS-P004-01",
+    "workIds": [
+      "WBS-G13.02",
+      "WBS-P004-01.02/2",
+      "WBS-P019-01.02/2"
+    ],
+    "source": "213578156878a672c3a59cf2cb730c59cfbc3b57",
+    "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "requirement": "DAT-009",
+    "relatedSsc": "SSC-479",
+    "bugIds": [
+      "BUG-3721",
+      "BUG-3722"
+    ],
+    "horizontalIds": [
+      "YKT-2921",
+      "YKT-2922"
+    ],
+    "newSql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+      "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3",
+      "independentSourceCrc": 1880247817
+    },
+    "oldVersionedSqlUnchanged": 30,
+    "staticPtIds": [
+      "PT-DB-ACL031-S01",
+      "PT-DB-ACL031-S02",
+      "PT-DB-ACL031-S03"
+    ],
+    "actualPureProductPt": [
+      "PT-OPS-SCHEMA016"
+    ],
+    "actualDatabasePtPending": [
+      "PT-DB-ACL031-001",
+      "PT-DB-ACL031-002",
+      "PT-DB-NULL340-014"
+    ],
+    "proof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43658-ssc479-routine-acl-source-v1/manifest.json",
+        "sha256": "1353d9b4a617083903a4c4d6d6805d4d87ab2325ab27b77ebb839ce49fd4ff04"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43660-ssc479-flyway-local-history-v1/manifest.json",
+        "sha256": "ab860648297ef60ba3b4abbb380f35eabb81a8b08956864b444039de8bd4695d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43662-ssc479-role-upgrade-fixture-v1/manifest.json",
+        "sha256": "855ffecc98ea887609ef8cb71fb3795ef3d86f7a07f65f9fbaf2984261e01a9e"
+      }
+    ],
+    "spec": [
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/5691_SSC479関数の既定ACL単体テスト仕様書.md",
+        "sha256": "ada7cb894ddcfdc76b22946047c750ffb18c96b0d4f24fc1f944251eff11636b"
+      },
+      {
+        "path": "evidence/01_PT/019_NK-MIG-001/170_V031履歴新旧と固定checksum単体仕様.md",
+        "sha256": "e7cd3c80284162cdf1d832ac7514f4a4df2ff5a8659467c1296609b93e592bf8"
+      }
+    ],
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "acceptedRowsNew": 0
+  },
   "currentSurefirePropertyVerificationPG43608": {
     "owner": "WBS-G09",
     "verificationRefs": [
@@ -537997,6 +538064,29 @@
     }
   ],
   "artifacts": [
+    {
+      "kind": "DDL",
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+      "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3",
+      "state": "DDL_SOURCE_STATIC_REVIEWED_RUNTIME_NOT_RUN_HOLD",
+      "acceptance": "NOT_RUN",
+      "historicalPath": null,
+      "relatedSsc": "SSC-479",
+      "relatedBug": "BUG-3721",
+      "relatedYkt": "YKT-2921",
+      "program": "NK-DAT-001",
+      "requirements": [
+        "DAT-009"
+      ],
+      "testIds": "PT-DB-ACL031-S01..S03; PT-DB-ACL031-001..002",
+      "sourceEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43658-ssc479-routine-acl-source-v1/manifest.json",
+        "sha256": "1353d9b4a617083903a4c4d6d6805d4d87ab2325ab27b77ebb839ce49fd4ff04"
+      },
+      "runtimeCoverage": null
+    },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
       "kind": "JAVA",
