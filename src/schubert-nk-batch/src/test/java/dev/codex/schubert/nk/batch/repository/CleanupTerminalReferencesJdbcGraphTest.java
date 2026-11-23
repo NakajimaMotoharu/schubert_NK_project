@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.IntUnaryOperator;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
@@ -319,6 +321,65 @@ final class CleanupTerminalReferencesJdbcGraphTest {
     assertEquals(EXPECTED_ACQUIRED_CLOSE_CALLS, calls);
   }
 
+  /** PT-F02-CTERM-READ007. */
+  @Test
+  void ordinaryTerminalReadRejectsAnAbsentStatementWithoutClosingUnownedHandles() {
+    var calls = new ArrayList<String>();
+    var repository =
+        new CleanupTerminalRepository(
+            connection(
+                TERMINAL_READ_SQL,
+                () -> {
+                  calls.add(TERMINAL_QUERY);
+                  return null;
+                },
+                calls),
+            () -> 5_000_000_000L);
+
+    assertFixedDiagnostic(
+        assertThrows(BatchRepositoryException.class, () -> repository.read(RUN, ENDED)));
+    assertEquals(
+        List.of(IDENTITY_CHECK, IDENTITY_ROWS_CLOSE, IDENTITY_STATEMENT_CLOSE, TERMINAL_QUERY),
+        calls);
+  }
+
+  /** PT-F02-CTERM-READ008. */
+  @Test
+  void ordinaryTerminalReadRejectsAbsentRowsAndClosesOnlyItsStatement() {
+    var calls = new ArrayList<String>();
+    var repository =
+        new CleanupTerminalRepository(terminalConnection(() -> null, calls), () -> 5_000_000_000L);
+
+    assertFixedDiagnostic(
+        assertThrows(BatchRepositoryException.class, () -> repository.read(RUN, ENDED)));
+    assertEquals(EXPECTED_READ_CALLS, calls);
+  }
+
+  /** PT-F02-CTERM-READ009. */
+  @Test
+  void ordinaryTerminalReadRejectsARepeatedStepAndClosesBothOwnedHandles() {
+    var calls = new ArrayList<String>();
+    var highestProjectedRow = new AtomicInteger(-1);
+    var repository =
+        new CleanupTerminalRepository(
+            terminalConnection(
+                () ->
+                    projectedTerminalRows(
+                        calls,
+                        () -> {},
+                        index -> {
+                          highestProjectedRow.accumulateAndGet(index, Math::max);
+                          return index == 1 ? 0 : index;
+                        }),
+                calls),
+            () -> 5_000_000_000L);
+
+    assertFixedDiagnostic(
+        assertThrows(BatchRepositoryException.class, () -> repository.read(RUN, ENDED)));
+    assertEquals(1, highestProjectedRow.get());
+    assertEquals(EXPECTED_ACQUIRED_CLOSE_CALLS, calls);
+  }
+
   private static void assertFixedDiagnostic(BatchRepositoryException failure) {
     assertEquals("batch repository operation failed", failure.getMessage());
     assertNull(failure.getCause());
@@ -406,12 +467,12 @@ final class CleanupTerminalReferencesJdbcGraphTest {
 
   @FunctionalInterface
   private interface StatementSupplier {
-    PreparedStatement prepare() throws SQLException;
+    @Nullable PreparedStatement prepare() throws SQLException;
   }
 
   @FunctionalInterface
   private interface RowsSupplier {
-    ResultSet read() throws SQLException;
+    @Nullable ResultSet read() throws SQLException;
   }
 
   @FunctionalInterface
@@ -445,15 +506,22 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   }
 
   private static ResultSet successfulTerminalRows(List<String> calls, CloseAction closeAction) {
+    return projectedTerminalRows(calls, closeAction, index -> index);
+  }
+
+  private static ResultSet projectedTerminalRows(
+      List<String> calls, CloseAction closeAction, IntUnaryOperator rowOrder) {
     var cursor = new AtomicInteger(-1);
     return proxy(
         ResultSet.class,
         (unused, method, args) ->
             switch (method.getName()) {
               case NEXT_METHOD -> cursor.incrementAndGet() < EXPECTED_STEPS.size();
-              case "getString" -> terminalColumn(cursor.get(), (String) args[0]);
+              case "getString" ->
+                  terminalColumn(rowOrder.applyAsInt(cursor.get()), (String) args[0]);
               case "getObject" ->
-                  ((Class<?>) args[1]).cast(terminalColumn(cursor.get(), (String) args[0]));
+                  ((Class<?>) args[1])
+                      .cast(terminalColumn(rowOrder.applyAsInt(cursor.get()), (String) args[0]));
               case CLOSE_METHOD -> {
                 calls.add(TERMINAL_ROWS_CLOSE);
                 closeAction.close();
