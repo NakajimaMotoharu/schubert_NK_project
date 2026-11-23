@@ -1,0 +1,327 @@
+{
+  "run": "PG43816",
+  "source": "b82c7b62ee4dbbcf094760be9022e8fd62a6a3fa",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "terminalAtUTC": "2026-11-23T18:08:26.684343+00:00",
+  "exitCode": 0,
+  "wbs": "WBS-G13.06",
+  "also": [
+    "WBS-F03/2-2-b",
+    "WBS-P018-09/2"
+  ],
+  "retainedApprovedDesign": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+    "sections": [
+      "6 Metric catalog",
+      "8 DEBUG/STANDARD",
+      "10 Test and quality gate"
+    ]
+  },
+  "rows": [
+    {
+      "program": "ExactDurationMeterRegistry",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_mq_processing_duration_seconds",
+      "testIds": {
+        "prefix": "EXDUR",
+        "first": 1,
+        "last": 11
+      },
+      "independentOracle": "Duration registry release for existing compatible producers",
+      "sourcePinnedInRun": "65f5c3748f32a41917d711fc8ae332c1833b308d",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+        "sha256": "8d1961d0ec2e51b4970102b5a3b810c9fbdc8d1398059de460249274d3bad01a"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+        "sha256": "334cbb38a7207b8715bceb248f426c54cd951cd31442a14b3c531432dc1749f9"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1723_Duration極小MAX混在_追加品質単体テスト仕様書.md",
+        "sha256": "6f7caf7b23de95761a071141b7c82dccf03196e6b71c0050fb734b2ef5cbede1"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43796-api-duration-lock-current-closure/manifest.json",
+        "sha256": "868c52467539954fdff3bc0b5f2c74f4e00d80b518dd4b97936d8278f307b8e3"
+      },
+      "localOrdinarySuccessCount": 11,
+      "resolvedRuleOccurrences": 2,
+      "issue": "BUG-3734",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "DbPoolMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_db_pool_connections",
+      "testIds": {
+        "prefix": "POOLCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Read and publication under borrowed supplied getters",
+      "sourcePinnedInRun": "2ff699391b0041727afee81ac250caaafd0b473f",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+        "sha256": "d07e461d4e27f4aa2de9290f1633cbb1812d3a7c6cc6a37f82448fdbf3ad9afe"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+        "sha256": "a37cd62312e68185d7f22131ae29839af7a25e329ad5538c1eb394e231ea4d6d"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1639_APIPool観測結線_単体テスト仕様書.md",
+        "sha256": "308294fa5d6259da4217807c334ad5eb46b88ea9565290465f28319303fa233a"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43800-api-pool-lock-closure/manifest.json",
+        "sha256": "ce2fe83f8c161820c348a809653cd41371fb0c20bd4ef8b785bdfbc0561bd528"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3736",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "WebDbPoolMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_db_pool_connections",
+      "testIds": {
+        "prefix": "WEBPOOLCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Read and publication under borrowed supplied getters",
+      "sourcePinnedInRun": "b6eeb4843c566d85efff5b144aa886035c582954",
+      "production": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java",
+        "sha256": "09aa7d096277683268794b0a6575f458fd0a5abfe0d5ad37afdf37fa40052b9b"
+      },
+      "tests": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+        "sha256": "e4ab7ef5f99a68758b07eddf19e8f285ef7a600cf0ba30c73d293c6e9b241a46"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1728_WebPool観測結線_単体テスト仕様書.md",
+        "sha256": "e86c11f12ecd1ed60fb6be3998a8f20c01d6dfc4bb2ad6deddb3538d3de2baba"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43806-web-pool-lock-and-fixture-closure/manifest.json",
+        "sha256": "ffab21fc53142436e3f52a2947c07e99a626460b1a3aadea87cfff56c31557a5"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3738",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "MediaStreamsMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_media_streams",
+      "testIds": {
+        "prefix": "MEDIACONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Owner and selected media type isolation",
+      "sourcePinnedInRun": "4b00cc3e15cc3c7b6415d2784acfcfccf2d793ad",
+      "production": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+        "sha256": "76e21fa3d5ef9af86a23b41616aab4201b6bf998b7286c284fe0e603b7ac84a2"
+      },
+      "tests": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+        "sha256": "71b944e289ffd8e985872068b59f77883948ee08be5f7094f0cb1003679e3e16"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1704_WebMediaStream取得結線_単体テスト仕様書.md",
+        "sha256": "8996414314990db227fc434c541facff68aeebc0c99c75b5271171e6f897d9b0"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43808-media-owner-lock-closure/manifest.json",
+        "sha256": "56c0807ab330443318e21b85cc99438245a6281405a283aaff811d366fea1ba3"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3741",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "MqPressureMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_mq_queue_messages",
+      "testIds": {
+        "prefix": "MQCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Selected destination and complete gauge tuple",
+      "sourcePinnedInRun": "3341c839d057efb100807a5e528950df5ec1801c",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+        "sha256": "52ac3392ec528b30edc59dd3add2d74fdb578fbe2642e81b08d3b00cd284b964"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollectorTest.java",
+        "sha256": "bac6651af1696022eb028fbbb216b3abc8d44af7849f63a881b47cfebd311433"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1697_MQ圧力取得結線_単体テスト仕様書.md",
+        "sha256": "138835631efbabb580e01ea83cdd52de15a615dece22bcae412027fca4976abe"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43810-mq-pressure-owner-lock-closure/manifest.json",
+        "sha256": "faa56bc039a5bffc35e66462ac3277ef995df2e8b11b46c842801182e4bd97b9"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3742",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "AsyncJobMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_async_jobs",
+      "testIds": {
+        "prefix": "ASYNCCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Borrowed result cleanup and publication",
+      "sourcePinnedInRun": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+        "sha256": "73f21152e53b0c511e6dd4b2750d000aa09555c05fa670134d388ac3e443fead"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java",
+        "sha256": "6377ab4703425dd9015760e369c4deb839e1c1c5a5ddf8a4d76c1a10f68c15d9"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1631_APIAsyncCountMetric結線_単体テスト仕様書.md",
+        "sha256": "a8b206e6e67be4b3928328b7b9caa52384ca11cd79f4b21700e1462aa94bfdee"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43812-three-local-monitor-owner-lock-closure/manifest.json",
+        "sha256": "a908ec5409a28b622c8dfbb95613daea06f0beaafad7afc03f8ed14b381115d4"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3743",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "OutboxMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_outbox_rows",
+      "testIds": {
+        "prefix": "OUTBOXCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Borrowed result cleanup and both count and age publication",
+      "sourcePinnedInRun": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+        "sha256": "13b06cf3427ee808690a294df631f3593affcd949ed09a6e30cf6419c8f53d23"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+        "sha256": "6da731e49ec76e444e8f4c71a7c2a82982c4ff40e9a2a264996a42e78d089c98"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1668_APIOutboxMetric結線_単体テスト仕様書.md",
+        "sha256": "b85644c1d116721b47e3c8466d79f9a607300039775668d36c3107c1b79ada8f"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43812-three-local-monitor-owner-lock-closure/manifest.json",
+        "sha256": "a908ec5409a28b622c8dfbb95613daea06f0beaafad7afc03f8ed14b381115d4"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3744",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "WebOutboxMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_outbox_rows",
+      "testIds": {
+        "prefix": "WEBOBXCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Borrowed closure and fixed Web observation tuple",
+      "sourcePinnedInRun": "e96dc656517455ba7bf38eab100f8ff3a05229d0",
+      "production": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+        "sha256": "e5555372be4ee6227ca3ba017d62cfc838658b7eeb3b82c125541fbac2111595"
+      },
+      "tests": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+        "sha256": "1f93771700b7243bb3f2d0eef683ccae3b8f5c4b19e031265f49af2399c15cb4"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1721_WebOutbox観測経路_単体テスト仕様書.md",
+        "sha256": "13c19c811ce3ceb17157a82bed2085b4f64d25053e59801bae241f154800a980"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43812-three-local-monitor-owner-lock-closure/manifest.json",
+        "sha256": "a908ec5409a28b622c8dfbb95613daea06f0beaafad7afc03f8ed14b381115d4"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3745",
+      "noCrossScopeCoverage": true
+    },
+    {
+      "program": "DbQueryDurationMetricCollector",
+      "criterion": "WBS-P018-09:quality / WBS-F03/2-2-b",
+      "designMetric": "nk_db_query_duration_seconds",
+      "testIds": {
+        "prefix": "DBCONN",
+        "first": 1,
+        "last": 8
+      },
+      "independentOracle": "Positive and failure samples; no event for missing",
+      "sourcePinnedInRun": "b82c7b62ee4dbbcf094760be9022e8fd62a6a3fa",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java",
+        "sha256": "bdedaea6e5a6caa6dc84cc581d999792399c222cdea2cf86670489438461103c"
+      },
+      "tests": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollectorTest.java",
+        "sha256": "15b9865ee2bb4da1dd074ded8f3c0a6f421e62562f86bcf23aeaea119290ecd8"
+      },
+      "ptSpecification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1714_DbQueryDuration取得結線_単体テスト仕様書.md",
+        "sha256": "a198182e3e506b9a97b99c178e56e0fd26397bc7b4f4a90b066151123ff20436"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43814-api-duration-observation-lock-closure/manifest.json",
+        "sha256": "25bc82f15feab7105d322d491333ecd45cbd0f189881dd9306611f69abe029d7"
+      },
+      "localOrdinarySuccessCount": 8,
+      "resolvedRuleOccurrences": 1,
+      "issue": "BUG-3748",
+      "noCrossScopeCoverage": true
+    }
+  ],
+  "oldAttemptNotCombined": true,
+  "ordinaryExecutedInThisGroup": 0,
+  "publicReferencesMatched": 9,
+  "separateTraceCaseTotal": 75,
+  "resolvedLockFindings": 10,
+  "remaining": [
+    "ExactDuration snapshot exception line",
+    "generic catch raw occurrences where required by scope",
+    "four lifecycle comparator scopes in YKT-2929",
+    "current complete six product package and 451",
+    "business runtime ownership and receiver disposition"
+  ],
+  "sourceIsolatedEvidence": true,
+  "actualPaidPp": null,
+  "originalCompletedPp": 0,
+  "formalAcceptanceId": null
+}
