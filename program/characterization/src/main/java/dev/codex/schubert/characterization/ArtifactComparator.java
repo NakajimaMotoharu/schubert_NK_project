@@ -322,7 +322,8 @@ public final class ArtifactComparator {
       valid &= require(rule != null, "OBSERVATION_UNKNOWN_DIF:" + id, failures);
       valid &=
           require(expectedCases.contains(caseId), "OBSERVATION_UNKNOWN_CASE:" + caseId, failures);
-      valid &= require(validPointer(pointer), "OBSERVATION_POINTER:" + observationKey, failures);
+      boolean pointerValid = validPointer(pointer);
+      valid &= require(pointerValid, "OBSERVATION_POINTER:" + observationKey, failures);
       valid &=
           require(
               observation.has("expectedCurrent"),
@@ -335,7 +336,7 @@ public final class ArtifactComparator {
           rule != null
               & currentByCase.containsKey(caseId)
               & nkByCase.containsKey(caseId)
-              & validPointer(pointer);
+              & pointerValid;
       if (!comparable) {
         continue;
       }
@@ -585,11 +586,24 @@ public final class ArtifactComparator {
     return caseId + ":" + pointer;
   }
 
-  private static boolean validPointer(String pointer) {
-    return pointer.startsWith("/")
-        && !pointer.contains("*")
-        && !pointer.contains("..")
-        && !pointer.endsWith("/");
+  static boolean validPointer(String pointer) {
+    if (pointer == null
+        || !pointer.startsWith("/")
+        || pointer.contains("*")
+        || pointer.contains("..")
+        || pointer.endsWith("/")) {
+      return false;
+    }
+    for (int index = pointer.indexOf('~'); index >= 0; index = pointer.indexOf('~', index + 2)) {
+      if (index + 1 == pointer.length()) {
+        return false;
+      }
+      char escape = pointer.charAt(index + 1);
+      if (escape != '0' && escape != '1') {
+        return false;
+      }
+    }
+    return true;
   }
 
   private static boolean sessionActivityMatches(JsonNode artifact, boolean oldestActive) {
