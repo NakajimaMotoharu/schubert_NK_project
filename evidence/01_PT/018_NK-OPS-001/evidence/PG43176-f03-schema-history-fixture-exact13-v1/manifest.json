@@ -1,0 +1,366 @@
+{
+  "run": "PG43176-f03-schema-history-fixture-exact13-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:56:15.650455+00:00",
+  "source": "fdbfc3ff25c66425c84c547f08c76055cfdfc9ce",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "platform": "7.0.0-43-generic",
+  "jdk": "25.0.4",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P019-01.02/2"
+  ],
+  "design": "SS331 SSC396; SS343 SSC396/SSC461; SS354; 451",
+  "independentOracle": "Exact borrowed query text and timeout, 1 row and 1 statement and 0 borrowed connection closes; explicit expected 029/030 script/checksum tuples, four wrong tail vectors; per-case other expectations are fixed locally in 5791 fixture and original test spec.",
+  "criterion": "Scope selected by class from the two named normal product archives; only fixed in-memory JDK proxies",
+  "bug": [
+    "BUG-3680",
+    "BUG-3681"
+  ],
+  "ykt": "YKT-2893",
+  "fixture": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+    "sha256": "e13b23b8dbc6adacfecfec6ae04bf5d256039d6c518c252bca3fc9e152b3914b"
+  },
+  "main": {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "sha256": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79"
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "exactPhysical": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+      "sha256": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+      "sha256": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+      "sha256": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/package-info.class",
+      "sha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583"
+    }
+  ],
+  "originalBefore": {
+    "formatExit": 1,
+    "compileNotRun": true,
+    "staticAndDynamicNotRun": true,
+    "pin": {
+      "actualExit": 1,
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43174-f03-schema-history-fixture-checked-v1/begin.json",
+        "sha256": "a65202fff03d93065ed7dc168c4fa4daa03cef3eace7f99a79f143b04d82d0b3"
+      },
+      "result": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43174-f03-schema-history-fixture-checked-v1/format.stdout",
+        "sha256": "406d24a3745ad2e7dbba9be1a935ad7d18e381fc1686aae89f6f213f4d25d850"
+      }
+    }
+  },
+  "scopedStaticBefore": {
+    "virtualRun": "PG43174-f03-schema-history-fixture-checked-v2",
+    "actualStages": {
+      "fixture": 0,
+      "style": 0,
+      "spotbugs": 1,
+      "pmd": 4
+    },
+    "spotBugs": [
+      [
+        "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "opsSchema001ExactFixedQueryAndBorrowedOwner"
+      ],
+      [
+        "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "opsSchema004ExpectedProfileOrderingAndDefensiveCopy"
+      ],
+      [
+        "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "opsSchema008IndependentConcurrentOwners"
+      ],
+      [
+        "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose"
+      ],
+      [
+        "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+        "throwIf"
+      ]
+    ],
+    "pmd": [
+      [
+        "AvoidDuplicateLiterals",
+        112
+      ],
+      [
+        "AvoidDuplicateLiterals",
+        158
+      ],
+      [
+        "AvoidLiteralsInIfCondition",
+        621
+      ],
+      [
+        "AvoidLiteralsInIfCondition",
+        622
+      ],
+      [
+        "CloseResource",
+        417
+      ],
+      [
+        "DoNotUseThreads",
+        372
+      ],
+      [
+        "DoNotUseThreads",
+        375
+      ],
+      [
+        "DoNotUseThreads",
+        378
+      ],
+      [
+        "DoNotUseThreads",
+        384
+      ],
+      [
+        "DoNotUseThreads",
+        387
+      ],
+      [
+        "DoNotUseThreads",
+        407
+      ],
+      [
+        "DoNotUseThreads",
+        410
+      ],
+      [
+        "DoNotUseThreads",
+        417
+      ],
+      [
+        "DoNotUseThreads",
+        423
+      ],
+      [
+        "DoNotUseThreads",
+        433
+      ],
+      [
+        "DoNotUseThreads",
+        434
+      ],
+      [
+        "DoNotUseThreads",
+        541
+      ],
+      [
+        "DoNotUseThreads",
+        549
+      ],
+      [
+        "DoNotUseThreads",
+        564
+      ],
+      [
+        "UseConcurrentHashMap",
+        513
+      ],
+      [
+        "UseProperClassLoader",
+        603
+      ]
+    ],
+    "junitExecuted": 0,
+    "privateTerminal": {
+      "path": "../pgpt-runs/PG379/PG43174-f03-schema-history-fixture-checked-v2/terminal.json",
+      "sha256": "fffb97ce19ca62cb8a2b3f3e1a75ef04a6d27a8393f5261a8f65b7b23198e812"
+    }
+  },
+  "stageExits": {
+    "format": 0,
+    "fixture": 0,
+    "junit": 0,
+    "style": 0,
+    "spotbugs": 1,
+    "pmd": 4,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "actualLocalTests": 13,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newDefinitions": 0,
+  "spotBugs": [
+    [
+      "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "throwIf"
+    ]
+  ],
+  "pmdRaw": [
+    [
+      "AvoidDuplicateLiterals",
+      115
+    ],
+    [
+      "AvoidDuplicateLiterals",
+      161
+    ],
+    [
+      "AvoidLiteralsInIfCondition",
+      625
+    ],
+    [
+      "AvoidLiteralsInIfCondition",
+      626
+    ],
+    [
+      "CloseResource",
+      421
+    ],
+    [
+      "DoNotUseThreads",
+      375
+    ],
+    [
+      "DoNotUseThreads",
+      378
+    ],
+    [
+      "DoNotUseThreads",
+      381
+    ],
+    [
+      "DoNotUseThreads",
+      387
+    ],
+    [
+      "DoNotUseThreads",
+      390
+    ],
+    [
+      "DoNotUseThreads",
+      410
+    ],
+    [
+      "DoNotUseThreads",
+      413
+    ],
+    [
+      "DoNotUseThreads",
+      421
+    ],
+    [
+      "DoNotUseThreads",
+      427
+    ],
+    [
+      "DoNotUseThreads",
+      437
+    ],
+    [
+      "DoNotUseThreads",
+      438
+    ],
+    [
+      "DoNotUseThreads",
+      545
+    ],
+    [
+      "DoNotUseThreads",
+      553
+    ],
+    [
+      "DoNotUseThreads",
+      568
+    ],
+    [
+      "UseConcurrentHashMap",
+      517
+    ],
+    [
+      "UseProperClassLoader",
+      607
+    ]
+  ],
+  "retainedFindingReason": "The fixture models the Throwable permitted by JDK InvocationHandler; reviewed original thrown instance equality, retains raw diagnostic pending qualification, with no suppression.",
+  "coverage": {
+    "line": {
+      "covered": 93,
+      "missed": 0
+    },
+    "method": {
+      "covered": 15,
+      "missed": 3
+    },
+    "physicalClass": {
+      "covered": 2,
+      "missed": 0
+    },
+    "branch": {
+      "covered": 72,
+      "missed": 0
+    },
+    "pending": [
+      "Row toString",
+      "Row hashCode",
+      "Row success accessor"
+    ]
+  },
+  "sourceVerifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5791_f03_schema_history_fixture_local.py",
+    "sha256": "1954089c55cc990da5a7a125ab9dc684a43e928db02d57b1133c337abb8b6d09"
+  },
+  "command": "python3 -B evidence/01_PT/018_NK-OPS-001/input/5791_f03_schema_history_fixture_local.py --corrected",
+  "originalArtifacts": {
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43176-f03-schema-history-fixture-exact13-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "9c2f9705cc0199ad54ef61bcedd8dddf35ba87ebee532ae598a3394818367a1d"
+    },
+    "execData": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43176-f03-schema-history-fixture-exact13-v1/unit.exec",
+      "sha256": "80d6a01b504e1a7c1d210e01e627f352da0dc08dcdbe732c1dbf5632405d3b74"
+    },
+    "rawCounters": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43176-f03-schema-history-fixture-exact13-v1/unfiltered.stdout",
+      "sha256": "555353fad114d7dd6a0191bf46d05f3b18a260719eb6a85a961683c62839d63c"
+    }
+  },
+  "commandManifest": {
+    "path": "../pgpt-runs/PG379/PG43176-f03-schema-history-fixture-exact13-v1/begin.json",
+    "sha256": "d0f5d45819419437a4e042476de26c8a454bf5de97111f86ea26caf22a5df153"
+  },
+  "sanitized": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43176-f03-schema-history-fixture-exact13-v1/sanitized-junit.json",
+      "sha256": "34075329227346f776af0269ab0118958e55921c3ab9850ea0c0f0c1ba3c2037"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43176-f03-schema-history-fixture-exact13-v1/coverage-unfiltered.tsv",
+      "sha256": "e7050323a1dcc269008b6a3ea86f86df69919626f825d79b4319aa6775a86f70"
+    }
+  ],
+  "executedDatabase": 0,
+  "jdbcConnections": 0,
+  "authOperations": 0
+}
