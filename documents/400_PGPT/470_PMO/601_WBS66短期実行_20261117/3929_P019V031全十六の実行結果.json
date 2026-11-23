@@ -1,0 +1,126 @@
+{
+  "eventId": "PGPT-20261008-9374",
+  "workCategory": "SELECTED_TEST",
+  "source": "4538228d9a5a1fe7eb77bfc58808caecbd144d88",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-P019-01.02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P019-01.02/2",
+    "元行": "WBS-P019-01.02/2",
+    "費目": "B",
+    "主担当": "WBS-P019-01.02",
+    "状態": "計画",
+    "作業": "一致/不一致/旧版/未知版の独立判定fixture／同source証拠による受入判定",
+    "残pp": "0.52",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "一致/不一致/旧版/未知版の独立判定fixtureの対象別完了記録を確認",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 343",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.195",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-MIG-001、SS 343",
+    "lineNumber": 758,
+    "改訂残pp": "0.52"
+  },
+  "run": "PG43672",
+  "startEvent": "PGPT-20261008-9373",
+  "outcome": {
+    "NewSqlTailCoverage": {
+      "line": 93,
+      "method": 18,
+      "class": 2,
+      "branch": 72,
+      "missed": 0
+    },
+    "localCurrentCases": 16,
+    "priorCasesWithExactInventory": 15,
+    "retainedPriorExecSeparate": true,
+    "noNewDefinitionsInThisRun": 0,
+    "productCumulativeExecutions": 3474,
+    "applicablePasses": 3426,
+    "docsDefect": "BUG-3724",
+    "formalAcceptanceId": null
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43672-current-v031-sixteen-single-exec/manifest.json",
+    "sha256": "13dabd8ceca9f4d6d3d09dad04983d89ea1216f94b97c4ae8fe25f5de7752bfd"
+  },
+  "nextEvidence": "Synchronize the current interim PG, PT, PGPT and IT/ST handoff from the exact named source/run receipts, and continue an eligible typed quality condition.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T13:33:07+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 78,
+    "remainingPercent": 22,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "37a2fcb3e410f5d80439595b9465271cd9378edad4c1f5485babde1dd6f2264a",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T13:33:07+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 78,
+        "remainingPercent": 22,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T13:32:45.948477+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 78,
+    "remainingPercent": 22,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

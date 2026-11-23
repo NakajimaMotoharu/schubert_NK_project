@@ -1,5 +1,9 @@
 # V031 履歴照合の局所実行結果
 
+## 原runの件数訂正（BUG-3724）
+
+PG43292の真正JUnitは既存15件・15成功。本文の「従来の14件」は旧runのディレクトリ名を件数として表示した誤り。元のPG43660で実際に追加実行した新規1件と、その生coverageは同じ。原XML、現16件の集合との比較を下記の訂正根拠に固定する。 [PG43672](../018_NK-OPS-001/evidence/PG43672-current-v031-sixteen-single-exec/manifest.json)
+
 PG43660、PT-OPS-SCHEMA016、WBS-P019-01.02/2。試験source `c2e391a14d2dd2ca9c2132bd1073f12fc46e9b7e`、V031本体 `5d6b7ca00a095d648c32d59228dbac671a30b55c`。実行時はJDK25.0.4、Flyway 13.4、JUnit 1.13.4。
 
 - 既存V030の固定CRCとV031の独立計算値を使用。V031のFlyway資源checksumは `1880247817`。合成V031の正規六列は受け入れ、旧版止まり・checksum差・script差・未知版の四入力は拒否した。行・文を各1回解放し、借用connectionは保持。
