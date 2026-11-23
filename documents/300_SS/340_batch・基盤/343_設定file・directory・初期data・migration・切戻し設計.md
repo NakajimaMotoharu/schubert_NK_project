@@ -2307,6 +2307,8 @@ SSC474（BUG-3376/YKT-2721、SS331 §3.3）：借用Connectionの固定六列照
 実装時の実version番号は上記責務順を崩さず、1つの巨大migrationへ集約しない。
 `CREATE INDEX CONCURRENTLY`等のtransaction外DDLが必要な場合は個別migrationに分離し、失敗/再開手順を追記。
 
+SSC-479（BUG-3721／YKT-2921）。V031 `V031__restrict_routine_default_privileges.sql` を既適用V001～V030の後に追記する。対象は専用owner `nk_owner` のroutine既定ACLのみ。既存role provisioning、既存SQL、明示許可を保持する。従来のFlyway transactionと限定SET ROLEを使用し、適用完了と同releaseの期待履歴の全行照合を公開条件とする。切戻しでは履歴・releaseの整合と対象DBの制限を保持する。失敗時はV031のtransaction結果を採取し、既存の履歴判定に従う。
+
 ## 10. 現行data移行・inventory
 
 | 対象 | Current baseline | NKの検証 |
