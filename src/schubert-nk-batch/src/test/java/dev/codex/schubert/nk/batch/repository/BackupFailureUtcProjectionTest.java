@@ -34,6 +34,7 @@ final class BackupFailureUtcProjectionTest {
       OffsetDateTime.parse("2026-09-12T21:00:03.654321-05:00");
   private static final List<String> COMPLETE =
       List.of("row-1", "stmt-1", "row-2", "stmt-2", "row-3", "stmt-3", "row-4", "stmt-4");
+  private static final int FIRST_BACKUP_QUERY = 2;
   private static final String FIRST_BACKUP_STATEMENT = "stmt-2";
 
   private enum ReadFault {
@@ -188,7 +189,7 @@ final class BackupFailureUtcProjectionTest {
       boolean identity = position == 1 || position == 4;
       String table = identity ? "maintenance_read_run_references" : "from schubert.batch_runs";
       assertTrue(sql.contains(table));
-      if (position == 2 && fault == ReadFault.MISSING_STATEMENT) return null;
+      if (position == FIRST_BACKUP_QUERY && fault == ReadFault.MISSING_STATEMENT) return null;
       return proxy(
           PreparedStatement.class,
           (ignored, method, args) ->
@@ -204,16 +205,17 @@ final class BackupFailureUtcProjectionTest {
                 }
                 case "setString" -> {
                   assertEquals(2, args[0]);
-                  assertEquals(position == 2 ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
+                  assertEquals(position == FIRST_BACKUP_QUERY ? "BACKUP_DB" : "BACKUP_CONFIG", args[1]);
                   yield null;
                 }
                 case "executeQuery" ->
-                    position == 2 && fault == ReadFault.MISSING_RESULT_SET
+                    position == FIRST_BACKUP_QUERY && fault == ReadFault.MISSING_RESULT_SET
                         ? null
                         : rows(position, identity);
                 case "close" -> {
                   closed.add("stmt-" + position);
-                  if (position == 2 && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
+                  if (position == FIRST_BACKUP_QUERY
+                      && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
                     throw new SQLException("synthetic statement close failure");
                   yield null;
                 }
@@ -223,7 +225,7 @@ final class BackupFailureUtcProjectionTest {
 
     private ResultSet rows(int position, boolean identity) {
       int rowCount = 1;
-      if (position == 2) {
+      if (position == FIRST_BACKUP_QUERY) {
         if (fault == ReadFault.EMPTY_RESULT_SET || fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
           rowCount = 0;
         if (fault == ReadFault.EXTRA_RESULT_ROW) rowCount = 2;
@@ -244,7 +246,8 @@ final class BackupFailureUtcProjectionTest {
                         : field(position, (String) args[0]);
                 case "close" -> {
                   closed.add("row-" + position);
-                  if (position == 2 && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
+                  if (position == FIRST_BACKUP_QUERY
+                      && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
                     throw new SQLException("synthetic result close failure");
                   yield null;
                 }
@@ -261,10 +264,10 @@ final class BackupFailureUtcProjectionTest {
     private @Nullable Object field(int position, String name) {
       if (name.equals(missingColumn)) return null;
       return switch (name) {
-        case "id" -> position == 2 ? 7L : 8L;
+        case "id" -> position == FIRST_BACKUP_QUERY ? 7L : 8L;
         case "run_id" -> RUN_ID;
         case "business_date" -> LocalDate.parse("2026-09-13");
-        case "step" -> position == 2 ? "BACKUP_DB" : "BACKUP_CONFIG";
+        case "step" -> position == FIRST_BACKUP_QUERY ? "BACKUP_DB" : "BACKUP_CONFIG";
         case "attempt" -> 4;
         case "started_at" -> start;
         case "ended_at" -> end;
