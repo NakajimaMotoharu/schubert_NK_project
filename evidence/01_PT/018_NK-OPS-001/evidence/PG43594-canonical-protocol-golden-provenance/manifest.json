@@ -1,0 +1,131 @@
+{
+  "run": "PG43594",
+  "source": "3a8e1fefa0a452e0d823ec8071c80d090331a5ca",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesign": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "wbs": [
+    "WBS-G03.01"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T11:22:54.782655+00:00",
+  "scripts": [
+    {
+      "path": "tools/quality/pg3284_protocol_canonical_fixtures.py",
+      "sha256": "39a0b7c117f7e7517b6102c4c4f1c7eb8407c223e2238824c140a9171b779906"
+    },
+    {
+      "path": "tools/quality/pg3292_protocol_golden_canonical.py",
+      "sha256": "086f181770321a1e71654d7dedc4a1af83b4682be83fd6b37e416a0785a4b665"
+    }
+  ],
+  "method": "Historical canonical parser/golden routines, no Product invocation",
+  "canonicalInputs": {
+    "documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb",
+    "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+    "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+    "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+    "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+  },
+  "fixtureInputs": {
+    "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv": "30e2c52a92603e3b80bed0bab50271319507f0a66fd93a404e36baa4c12b35a2",
+    "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76",
+    "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839"
+  },
+  "layoutCount": 64,
+  "fieldCount": 389,
+  "areaWidthChecks": 128,
+  "namedMappings": 64,
+  "independentlyRebuiltDigests": 287,
+  "compatibleVectorPolicy": "WLGEVT01 synthetic REQUEST byte vector uses explicit valid REQUEST log type as input. Canonical M presence remains intact.",
+  "separateQa054Semantics": "WebLogActionContractTest current retained test input and archived result, not derived by generic vector generator.",
+  "priorResults": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43564-protocol-current-reader-original-171-v1/manifest.json",
+    "sha256": "075b3caf5c9c660949ffd911a17dac82772cb9993308caf4fde99fe623e990f1"
+  },
+  "existingCases": [
+    {
+      "original": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+        "sha256": "ebfbf76050c1d47ea78b79194ca7ababca25081018d81cd9689afe8543cedc15"
+      },
+      "existingPassedMethods": [
+        "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+        "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+        "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+      ],
+      "copiedFixtureBytesMatch": true
+    },
+    {
+      "original": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest.xml",
+        "sha256": "8e87cffb4574e23b4a5f132da0674671240a89bc09049a6b6b349689f70f9de0"
+      },
+      "existingPassedMethods": [
+        "everyCanonicalConstructorReferenceRejectsNull",
+        "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+        "omittedActionIsAllowedForRequestOnly",
+        "missingBlankUnknownAndWrongCaseCategoryFail",
+        "explicitRequestActionKeepsItsOwnClosedPair",
+        "existingHttpMetadataAndReservedRulesRemainEnforced",
+        "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire",
+        "legacyRequestMatchesIndependentOriginalBytes",
+        "menuActionMatchesIndependentOffsetsAndRoundTrips",
+        "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+        "everyOtherCategoryIsRejectedByNamedBoundary",
+        "recordFieldsAreCompleteImmutableAndRedacted",
+        "independentConcurrentCallersDoNotMixCategories"
+      ],
+      "copiedFixtureBytesMatch": true
+    }
+  ],
+  "metadataLinks": [
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "input": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "declared": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "actual": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "matches": true
+    },
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "input": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "declared": "67fa2bed07055caf3ba4343245aebf378ef1ac2e3217a6c513289caa01c6033e",
+      "actual": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+      "matches": false
+    },
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "input": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "declared": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+      "actual": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+      "matches": true
+    },
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv",
+      "input": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "declared": "b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b",
+      "actual": "30e2c52a92603e3b80bed0bab50271319507f0a66fd93a404e36baa4c12b35a2",
+      "matches": false
+    }
+  ],
+  "provenanceFailures": [
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "input": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "declared": "67fa2bed07055caf3ba4343245aebf378ef1ac2e3217a6c513289caa01c6033e",
+      "actual": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+      "matches": false
+    },
+    {
+      "fixture": "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv",
+      "input": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "declared": "b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b",
+      "actual": "30e2c52a92603e3b80bed0bab50271319507f0a66fd93a404e36baa4c12b35a2",
+      "matches": false
+    }
+  ],
+  "newProductTestExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
