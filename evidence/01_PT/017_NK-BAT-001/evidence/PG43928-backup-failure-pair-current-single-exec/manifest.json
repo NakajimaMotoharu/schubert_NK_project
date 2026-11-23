@@ -1,0 +1,130 @@
+{
+  "run": "PG43928",
+  "source": "8b8d4892b7f1a06ba64fe2e763dfc9d81a08a474",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "terminalAtUTC": "2026-11-23T20:49:14.452925+00:00",
+  "wbs": [
+    "WBS-P017-06",
+    "WBS-P004-05/2",
+    "WBS-F03/2-2-b"
+  ],
+  "oracle": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4750_Backup失敗ペア不変値の単体仕様.md",
+    "sha256": "72b18e6c62e9cf03090b53ab405e10e14e9bb13f4dae744d3f1009a6337ea113"
+  },
+  "selected": [
+    [
+      "BackupFailureUtcProjectionTest",
+      "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck"
+    ],
+    [
+      "BackupFailureUtcProjectionTest",
+      "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail"
+    ],
+    [
+      "BackupFailureUtcProjectionTest",
+      "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose"
+    ],
+    [
+      "BackupFailureSqlDiagnosticTest",
+      "bf001OrdinarySqlFailureKeepsOnlyFixedDiagnosticAndClosesOwnedResources"
+    ],
+    [
+      "BackupFailureSqlDiagnosticTest",
+      "bf002SqlNextEdgePreservesOriginalFatalObject"
+    ],
+    [
+      "BackupFailureSqlDiagnosticTest",
+      "bf003OrdinaryCauseHasPriorityOverSqlNext"
+    ],
+    [
+      "BackupFailureSqlDiagnosticTest",
+      "bf004RepeatedNonfatalGraphStillReturnsFixedDiagnostic"
+    ],
+    [
+      "BackupFailureSnapshotValueTest",
+      "pair001PairKeepsIdentityAndAllowsTheSharedStartBoundary"
+    ],
+    [
+      "BackupFailureSnapshotValueTest",
+      "pair002MisplacedStepsSharedIdsAndSkippedEitherSideRejectIndependently"
+    ],
+    [
+      "BackupFailureSnapshotValueTest",
+      "pair003MismatchedRunStartAndEarlierEndRejectSeparately"
+    ],
+    [
+      "BackupFailureSnapshotValueTest",
+      "pair004RequiredReferencesAndEndPrecisionHaveExplicitBoundaries"
+    ]
+  ],
+  "newIds": [
+    {
+      "id": "PT-BAT-BFSVALUE001",
+      "method": "pair001PairKeepsIdentityAndAllowsTheSharedStartBoundary"
+    },
+    {
+      "id": "PT-BAT-BFSVALUE002",
+      "method": "pair002MisplacedStepsSharedIdsAndSkippedEitherSideRejectIndependently"
+    },
+    {
+      "id": "PT-BAT-BFSVALUE003",
+      "method": "pair003MismatchedRunStartAndEarlierEndRejectSeparately"
+    },
+    {
+      "id": "PT-BAT-BFSVALUE004",
+      "method": "pair004RequiredReferencesAndEndPrecisionHaveExplicitBoundaries"
+    }
+  ],
+  "reexecuted7ForCurrentSingleExec": true,
+  "counts": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exitCodes": {
+    "compileFixture": 0,
+    "unit": 0,
+    "raw": 0
+  },
+  "exactNamedNormalClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/product/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class",
+    "sha256": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3"
+  },
+  "normalJarProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43916-corrected-backup-utc-batch-regular-jar/manifest.json",
+    "sha256": "649dfe3d0042c66c3be36b6c2047b83f2385165e65eb0eb9e960269a7f17d0fa"
+  },
+  "wholeCoverageRaw": "CLASS\tdev/codex/schubert/nk/batch/repository/BackupFailureSnapshot\t0a5870c3f2826205\ttrue\t106\t65585\tINSTRUCTION:23:338\tBRANCH:22:46\tLINE:2:63\tCOMPLEXITY:22:22\tMETHOD:0:10\tCLASS:0:1",
+  "constructorRaw": "METHOD\tdev/codex/schubert/nk/batch/repository/BackupFailureSnapshot\t<init>\t(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ljava/time/Instant;)V\t1\tINSTRUCTION:0:67\tBRANCH:0:16\tLINE:0:15\tCOMPLEXITY:0:9\tMETHOD:0:1\tCLASS:0:0",
+  "rawPath": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/raw.out",
+    "sha256": "3261c2b9415df99c08dbe8b52a08d1de63d12b35c191cee2853ec19f312452ef"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/begin.json",
+    "sha256": "59d36b878c2a5691535ed284283eed56190c0c6706d722cbfc8b3c0e27b65fad"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/reports/TEST-junit-jupiter.xml",
+    "sha256": "f90d679bd85360751d4edd0b83b9f0c98bcd41353f6404ede329fe794eb6daff"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/unit.exec",
+    "sha256": "c1ded53ee3a3ac136510a1f0737c6eef3a7d46ac7bd084b3b0af8c6b1618b038"
+  },
+  "style": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/fixture-style-terminal.json",
+    "sha256": "5ccb0f265e7f273051099c0e615fc84f5f5ff19eb40bb8bc36df21425ddb0795"
+  },
+  "pmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/fixture-pmd-terminal.json",
+    "sha256": "cfe7b171c0fccd6ecbc82f6488448d6fa3ac3d777fca4605e1304ace70f1975c"
+  },
+  "formalAcceptanceId": null,
+  "remaining": [
+    "verifyLatest and verifyRow have 22 local branch and two line deficits in the current combined exec",
+    "Real DB and current whole product 451"
+  ]
+}
