@@ -348,7 +348,6 @@ class LogSearchResultsViewModelTest {
                   assertEquals("shared", p.getRows().getFirst().getMessage());
                   assertEquals(1, p.getPage().getTotalCount());
                   assertEquals(1, p.getRows().size());
-                  return null;
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);

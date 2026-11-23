@@ -349,7 +349,7 @@ class LogSearchViewModelTest {
     var context = new Context();
     context.setVariable("view", v);
     var html = Jsoup.parse(engine.process("<p th:text='${view.filters.q}'></p>", context));
-    assertEquals(text, html.selectFirst("p").text());
+    assertEquals(List.of(text), html.select("p").eachText());
     assertTrue(html.select("script").isEmpty());
     assertFalse(html.html().contains("a".repeat(64)));
   }
