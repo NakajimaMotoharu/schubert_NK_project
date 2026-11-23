@@ -1,0 +1,109 @@
+{
+  "run": "PG43700",
+  "source": "e0ef21fad77f8a37cba9a8b9af58cda87239002e",
+  "productCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "terminalAtUTC": "2026-11-23T14:30:14.743432+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P020-01.03/2",
+  "validatorSource": "503fefe038ca3502d526c6363bcb187beb8b2cd9",
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/begin.json",
+    "sha256": "474b9ed67c93e956d3b65fe5830217cfe4c866f1c75b3e6cd5f1c156b643678b"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/terminal.json",
+    "sha256": "fbe677895c4fb615e340fdcf2fa8d162bc0804fff35a404d82722fe205ff59e1"
+  },
+  "testCaseNames": {
+    "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "validSnapshotUsesExactProvidedCountsAndIsImmutable()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "concurrentIndependentSnapshotsNeverShareUnknownValues()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail()": "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+    "javaNullAndNegativeProvidedCountsFailWithoutNpe()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()": "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "schemaAndBrowserIntegersRejectTextFractionAndOverflow()": "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+    "equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero()": "dev.codex.schubert.characterization.GateDefinitionNumericTest"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "68bce4e442a7f4e5ffaaa8b3bf6cdeb9cdd47ee7349b5c92b28bddbf9e5ee825"
+  },
+  "newToolExecutions": 9,
+  "realCurrentOrNkOrGateOnProduct": 0,
+  "productCoverage": null,
+  "publicDefinitions": {
+    "program/characterization/tests/resources/cases/dif-allowlist.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    "program/characterization/tests/resources/cases/catalog.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    "program/characterization/tests/resources/cases/case-requirements.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/cases/case-requirements.json",
+      "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+    },
+    "program/characterization/tests/resources/cases/gate-contract.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/cases/gate-contract.json",
+      "sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9"
+    },
+    "program/characterization/tests/resources/cases/schema.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/cases/schema.json",
+      "sha256": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8"
+    },
+    "program/characterization/tests/resources/browser/manifest.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources/browser/manifest.json",
+      "sha256": "470febbeabe77bbd7b8835baf4cb283c472775c15fa88df89db40bc05c6dbec3"
+    }
+  },
+  "commands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "-g",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/tests",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/fixtures/GateMetricsCountTest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/fixtures/GateDefinitionNumericTest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/fixtures/GateDefinitionDocumentsTest.java"
+    ],
+    "unit": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/owned-temp",
+      "-Djunit.jupiter.extensions.autodetection.enabled=false",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-banner",
+      "--disable-ansi-colors",
+      "--fail-if-no-tests",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/resources:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43700-current-gate-metadata-nine-v1/reports",
+      "--select-class",
+      "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "--select-class",
+      "dev.codex.schubert.characterization.GateDefinitionNumericTest"
+    ]
+  },
+  "vectorsFromExistingSpec": {
+    "rejectedCoercion": 45,
+    "rejectedMatchedInvalid": 24,
+    "acceptedIntegralRepresentations": 45,
+    "rejectedOtherIntegers": 15
+  },
+  "allG01toG06": false,
+  "formalAcceptanceId": null
+}
