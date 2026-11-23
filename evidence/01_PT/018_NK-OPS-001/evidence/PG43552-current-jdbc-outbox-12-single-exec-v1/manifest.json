@@ -1,0 +1,357 @@
+{
+  "run": "PG43552",
+  "wbs": "WBS-P004-05/2",
+  "source": "4c3c96d35a1131ac116dea039a5ebb3451749ca9",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T10:15:12.698987+00:00",
+  "actualExit": 0,
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    }
+  ],
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "begin": {
+    "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/begin.json",
+    "sha256": "bdab03906a766abbda30ee0be76628bfd6cd8661470a305fca6ec0cd0f793080"
+  },
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/terminal.json",
+    "sha256": "4ec02a937580b1c627479ef9bd04356381b8d2c06c39cf2883b139d3c92e6b32"
+  },
+  "junit": [
+    {
+      "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "5bca11a0aa0ee0febba0937fe47263a86b51461ef9ae6d66f70e7998be293a64"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/xml/TEST-junit-platform-suite.xml",
+      "sha256": "1d6baa178109292239ff38dccb85d2453194cc4a3be16a253a9c7c4513143c63"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/xml/TEST-junit-vintage.xml",
+      "sha256": "71dab9e3a5a6e767fa04e3b506835e2078bf4fb6de5e4f81c2ebc51a9e63d6c5"
+    }
+  ],
+  "trace": {
+    "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/class-init.log",
+    "sha256": "b0c9b74ebb51bf97e031b3bfffb865c03c6378398726a91e4c376475fd23488a"
+  },
+  "execData": {
+    "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/selected.exec",
+    "sha256": "ebefe99bdfc957a5b538ba86bdbaeaea3e7f6d1f0bc1f0fd85f35d421fd3b299"
+  },
+  "measurement": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43552-current-jdbc-outbox-12-single-exec-v1/unfiltered.tsv",
+    "sha256": "408d27fac7f0f993dcbeb6434ea260bea30e2b895e2ac9e52ef1297da5a09d3f"
+  },
+  "cases": {
+    "PT-OUT-JDBC001": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "enqueueBindsExactUtcAndOptionalDlqWithoutOwningTransaction",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC002": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "claimUsesBoundedLeaseStableOrderAndImmutableRowBody",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC003": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "requiredAndInvalidRowsFailClosedIncludingNullableAttempt",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC004": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "dlqMetadataIsAllOrNoneAndPreservesClosedProjection",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC008": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC010": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "requiredStatementNullStopsAllFourOperationsBeforeBinding",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC011": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "requiredRowsNullClosesTheAlreadyAcquiredStatementExactlyOnce",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC012": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "jdbcPrimarySuppressionAndJdkSelfFailureCloseRowsBeforeStatement",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC005": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "sentAndFailureCompareAndSetUseIndependentRetryTableAndCap",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC006": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "argumentsAndTransactionsPreventSqlAndRespectErrorBounds",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC007": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxPortTest",
+      "method": "ordinarySqlFaultsCloseOnlyRepositoryResourcesAndRemainFailures",
+      "result": "PASS"
+    },
+    "PT-OUT-JDBC009": {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxReturningIdContractTest",
+      "method": "sqlNullReturningIdentifierCannotBecomeSuccessfulZero",
+      "result": "PASS"
+    }
+  },
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sha256": "1db71eadabee0bb1ae3de1bc8e04930e97a6d1c68d30f01362c6acaa915c2173"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sha256": "97e9737bf3afd955019405f713355de62da50dfba9f96a9e7d549ce9568cf5aa"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sha256": "d0ba9bbf396af4cba3b912a87a37f9cc3162130cb5c8423c39ddc1f9c92e9f02"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+      "sha256": "56a5f3af8ccf296acef3aa0991920755756862223d6ea1c111e248448d63941a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java",
+      "sha256": "b2173a4f8d686f429b7252e180d479896d8e09f326033d14fac7b9b83cfc0ce5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "sha256": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "sha256": "a2b97f85348f8f5f9eea61f734e5093fdcad1d8e27e14e6cfb31b9e2ce130ef9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sha256": "02c2b2bcd516450620ccccd81d822bf6a8e6de44e957a4d5b6e5b163c098ab0a"
+    }
+  ],
+  "productClassHashes": {
+    "dev/codex/schubert/nk/api/database/package-info.class": {
+      "sha256": "3cca901840ef72be16132784cbf33e12e200e334b58e3807a4a03d0cdb2ef69a",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn.class": {
+      "sha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class": {
+      "sha256": "adbf88229a5f9ee9450d663b40d1c14d8cb2fdb7ab284d1e033ea2efb0007350",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class": {
+      "sha256": "25fc2bfed69e1dcee0b9213f8448a45e3f3cc8eba3ed20d1cfdb31d0503284db",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info.class": {
+      "sha256": "8b27ff9b19d5dc8b5889a1a4fe3488ce50fb6dc83ddd543b38e5f2cbc212bb9e",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": {
+      "sha256": "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.class": {
+      "sha256": "aaa42a91d293116e9a25e9d8c8f51641acdd75572a56d403ada8e45acef3a190",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class": {
+      "sha256": "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class": {
+      "sha256": "974d34dc68a2ff9b13a9b32a8fda4e72e09640440c4ac64577e0538b148c91b7",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class": {
+      "sha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+      "samePrevious": true
+    }
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.class": "d7b792adb83f6bb8c13344a576c02b8d5584406b534957765d0d020a6d48a32a",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest$RepositoryCall.class": "4304f4b8cac2c05d0fde70ccff7c7e58f59794331d0d9877a88c1a117e112fd7",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest$Fixture.class": "951bf5fe5e030870b9a6c6a6c8c8af559414a23de97493abe2abb37b17b75ff8",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.class": "88c30c1fa8257498c94ea3b1856921a7b76d5e51a53aabeade4da340e1c2c8f4"
+  },
+  "session": {
+    "labelBytesHex": "504734333535322d4f5554424f5831322d4649584544",
+    "startMillis": 1795428911793,
+    "endMillis": 1795428912516
+  },
+  "classRecords": 2,
+  "initializedProjectClasses": [
+    "dev/codex/schubert/nk/api/database/RequiredColumn",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest$Fixture",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest"
+  ],
+  "countersMissedCovered": {
+    "JdbcOutboxRepository": {
+      "INSTRUCTION": [
+        0,
+        699
+      ],
+      "BRANCH": [
+        0,
+        40
+      ],
+      "LINE": [
+        0,
+        178
+      ],
+      "COMPLEXITY": [
+        0,
+        33
+      ],
+      "METHOD": [
+        0,
+        13
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "RequiredColumn": {
+      "INSTRUCTION": [
+        7,
+        10
+      ],
+      "BRANCH": [
+        0,
+        2
+      ],
+      "LINE": [
+        2,
+        3
+      ],
+      "COMPLEXITY": [
+        1,
+        2
+      ],
+      "METHOD": [
+        1,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "originalIndependentRuns": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43436-current-returned-outbox-null-v1/manifest.json",
+      "sha256": "2b42369d220bbd5398649414b12634aeb312e51ef1f14665cd9dd891469b5b86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+      "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43440-current-outbox-resource-three-v1/manifest.json",
+      "sha256": "1ac23c711da2e60d07eacbf30244bfe64f0af2c982841b90cd3515075ad5b4d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/manifest.json",
+      "sha256": "ccf42d35d79a96df95f4441a0b67df4066e90462c180068b24dec965e1908022"
+    }
+  ],
+  "methodsMissed": {
+    "RequiredColumn": "<init>()V"
+  },
+  "caseAccounting": {
+    "executed": 12,
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "newTestDefinitions": 0,
+    "newDistinctCases": 0,
+    "totalOperationalProductExecutions": 3172,
+    "totalApplicableProductSuccesses": 3124
+  },
+  "relatedDefects": [
+    "SSC-471"
+  ],
+  "formal": {
+    "acceptedOriginal": 16,
+    "totalOriginal": 190,
+    "newFormalAcceptance": 0,
+    "formalAcceptanceId": null,
+    "officialTests": 1964,
+    "officialScopes": 53,
+    "effortRate": null
+  },
+  "quality": "LOCAL_REPOSITORY_FOUR_COUNTERS_CLOSED_SHARED_HELPER_AND_PRODUCT_451_OPEN",
+  "runtime": "JDK_MOCK_JDBC_PROXIES_ONLY",
+  "realDriverOrDB": false,
+  "mergedExec": false
+}
