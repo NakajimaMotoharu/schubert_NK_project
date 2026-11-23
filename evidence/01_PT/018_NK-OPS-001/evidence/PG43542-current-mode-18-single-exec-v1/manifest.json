@@ -1,0 +1,200 @@
+{
+  "run": "PG43542",
+  "wbs": "WBS-C07",
+  "source": "78d16f1496ee21caaf8afce1f7de4c6135764b9b",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T10:01:11.278624+00:00",
+  "actualToolTerminalAtUTC": "2026-11-23T10:00:16.665197+00:00",
+  "actualExit": 0,
+  "tool": {
+    "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+    "jdk": "25.0.4",
+    "jacoco": "0.8.15"
+  },
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43542-c07-mode-four-18-current-v1/begin.json",
+    "sha256": "5236ef8a35b5ae3b3ad01e530122842878b4e6e53fe7154dafd1de9f7326054c"
+  },
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43542-c07-mode-four-18-current-v1/terminal.json",
+    "sha256": "114e941560d1821e28d84b0e3f1387c698d6a13ed6aee55372cccbbe08cd8dba"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43542-c07-mode-four-18-current-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "2dd18b999edbc5bb3eab94ed12ab45ff45935f7a36243c3a2a65874516cf0bbe"
+  },
+  "execData": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43542-c07-mode-four-18-current-v1/selected.exec",
+    "sha256": "a73deb44e85e8b4b80fd2bc9376efc8c33928178ee4a5db67e24733dc7c1bd8f"
+  },
+  "measurement": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43542-current-mode-18-single-exec-v1/unfiltered.tsv",
+    "sha256": "91ddba5dcadec10a3b874bc4b1641ca59cd41b4d5adeeb3a8c6e377e26a1eb7e"
+  },
+  "singleSession": {
+    "labelBytesHex": "504734333534322d4330372d4d4f44453138",
+    "startMillis": 1795428015840,
+    "endMillis": 1795428016480
+  },
+  "cases": {
+    "PT-OPS-MONMODE-001": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode001ApprovedLiteralSettings"
+    },
+    "PT-OPS-MONMODE-002": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode002MatchingObservationsNotMutated"
+    },
+    "PT-OPS-MONMODE-003": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode003AllThirtyTwoServiceStates"
+    },
+    "PT-OPS-MONMODE-004": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode004MissingObservationNeverMeansHealthy"
+    },
+    "PT-OPS-MONMODE-005": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode005NullContractsAreNotNormalObservations"
+    },
+    "PT-OPS-MONMODE-006": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode006UnknownAndAliasedInputIsRedacted"
+    },
+    "PT-OPS-MONMODE-007": {
+      "fixture": "MonitoringModePolicyTest",
+      "method": "monMode007ConcurrentCallersCannotChangePolicy"
+    },
+    "GENBATCH004": {
+      "fixture": "GeneratedBatchValueContractTest",
+      "method": "genBatch004ModeContinuityAndSuffixFactoriesCannotShareReturnedArrays"
+    },
+    "GENBATCH005": {
+      "fixture": "GeneratedBatchValueContractTest",
+      "method": "genBatch005ObservationContextGeneratedContractsUseIndependentPlatformHashes"
+    },
+    "RETCONF001": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf001ExactApprovedDebugAndStandardConfigurationsPassWithoutMutation"
+    },
+    "RETCONF002": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf002DebugRejectsEachIndependentDayAndByteMismatchWithoutRounding"
+    },
+    "RETCONF003": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf003MissingNeverBecomesValidStandardZeroAndNonzeroStandardIsDrift"
+    },
+    "RETCONF004": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf004NegativeInvariantsAndNullOptionalAreRejectedNotUnknownSuccess"
+    },
+    "RETCONF005": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf005MaximumValuesRemainExactAndCannotOverflowIntoApprovedLimits"
+    },
+    "RETCONF006": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf006RetentionAndCompleteServiceObservationsRemainSeparateImmutableContracts"
+    },
+    "RETCONF007": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration"
+    },
+    "RETCONF008": {
+      "fixture": "MonitoringRetentionConfigurationTest",
+      "method": "retConf008GeneratedConfigurationUsesIndependentIntegerLongHashAndFixedTextOracles"
+    },
+    "MONPIPE001": {
+      "fixture": "MonitoringPolicyEngineTest",
+      "method": "monPipe001ObservationContextInvariantsAndImmutableValues"
+    }
+  },
+  "rawPerType": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy": {
+      "LINE": 29,
+      "METHOD": 11,
+      "CLASS": 1,
+      "BRANCH": 16
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService": {
+      "LINE": 5,
+      "METHOD": 5,
+      "CLASS": 1,
+      "BRANCH": 0
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration": {
+      "LINE": 4,
+      "METHOD": 6,
+      "CLASS": 1,
+      "BRANCH": 4
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext": {
+      "LINE": 7,
+      "METHOD": 7,
+      "CLASS": 1,
+      "BRANCH": 2
+    }
+  },
+  "ultimateOrigin": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1541_MonitoringModePolicy_単体テスト仕様書.md",
+      "sha256": "a9ac649576d6cc98461009cab351fc902e5f6f25a252c76b1dd7267a508b7da7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1549_MonitoringPolicyEngine_単体テスト仕様書.md",
+      "sha256": "eb70f77ff5ac9f821185153b2f7e99779b2cd77fcb1855b7e4bebc6121795b80"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md",
+      "sha256": "b3be89b8c107c81d2daae1ab39f973dc27660483fd56670e23be02e26ad2bd69"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1700_保持設定完全観測_単体テスト仕様書.md",
+      "sha256": "1d543253c802cedf6c77fe45d805ad040a12761af7b5d3abf9c02e55b607c4fa"
+    }
+  ],
+  "originalLimitedNine": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43540-current-mode-nine-partial-four-v1/manifest.json",
+    "sha256": "239e37d431593793845b8ee1568c398877ddeaec4317778ddabcb54b11d5532e"
+  },
+  "latestSupport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43482-batch-admitted-278-current-physical-delta-v1/manifest.json",
+    "sha256": "50f08875438e8892277f0d8c541f39b593e16491470861db5174cdf6a76be918"
+  },
+  "productInit": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix"
+  ],
+  "initialPreflight": "The first metadata equality assertion stopped before any compiler or test. The prior throws clause was already on a continuation line, and the corrected reverse comparison preserves this newline.",
+  "result": {
+    "actualExecutions": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "previousNineSameTargetReplay": 9,
+    "newDistinctCorrectiveWitnesses": 9,
+    "productOrdinaryExecutionsCumulative": 3160,
+    "productApplicableSuccessesCumulative": 3112,
+    "rawFour": {
+      "LINE": 45,
+      "METHOD": 29,
+      "CLASS": 4,
+      "BRANCH": 22
+    },
+    "exactCurrentCoveredPhysical": 4,
+    "nativeOrOperatingAction": 0,
+    "oldExecUnion": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "remaining": [
+    "actual mode/retention observation and external services",
+    "whole F03 and 451 formal"
+  ]
+}
