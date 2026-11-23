@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 四正規製品の配布依存メタデータ
+
+外部36座標のcacheを同一SHAで照合。取得元POMでライセンスの直接欄19、直接欄のないPOM17。18 archiveの通知・ライセンス名候補は旧記録のpath/hashを同一バイトから参照した。製品配布条件・承認担当はQA-061の回答どおり未決。署名付き全六製品と実配布クラスパスを照合してから判定する。 [PG43498](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43498-current-four-external-license-inputs-v1/manifest.json)
+
 ## 2026-11-23 現四モデルの外部archiveの技術証拠
 
 四正規製品の既存有効モデルに外部36座標があり、同じ保全cache内の36実ファイルのSHA-256を元証跡と照合した。外部compile 40・runtime 6 edge。保全cache側の証拠であり、署名付き実配布クラスパスと配布条件・承認担当は未決。 [PG43428](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43428-four-model-cache-byte-provenance-v1/manifest.json)
