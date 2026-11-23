@@ -350,7 +350,8 @@ final class GateContractValidator {
                 browser.path("mobile").path(FIELD_DEVICESCALEFACTOR)),
         "BROWSER_DEVICE_SCALE",
         failures);
-    require(!strings(browser.path("fonts")).isEmpty(), "BROWSER_FONTS", failures);
+    JsonNode fonts = browser.path("fonts");
+    require(isNonblankTextArray(fonts) && !fonts.isEmpty(), "BROWSER_FONTS", failures);
     require(
         "document.fonts.status=loaded".equals(browser.path("fontReady").asText()),
         "BROWSER_FONT_READY",
@@ -974,7 +975,10 @@ final class GateContractValidator {
       return List.of();
     }
     List<String> values = new ArrayList<>();
-    node.forEach(value -> values.add(value.asText()));
+    for (JsonNode value : node) {
+      if (!value.isTextual()) return List.of();
+      values.add(value.textValue());
+    }
     return List.copyOf(values);
   }
 
