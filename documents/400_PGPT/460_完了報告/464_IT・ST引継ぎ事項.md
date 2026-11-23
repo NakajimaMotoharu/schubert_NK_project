@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 15:23 JST 正規四製品のMaven依存とQA-061
+
+Protocol／Storage／Bootstrap／Batchの実効compile/runtimeモデルを現埋込POMと照合。外部36座標に該当する過去宣言36、通知名候補18、該当名観測なし18。署名付き同候補、正規API／Web、配布条件・承認担当、実配布class pathの照合を次の判定に要する。 [PG43404](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43404-four-regular-runtime-tree-offline-v2/manifest.json) [PG43406](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43406-current-four-models-labeled-license-metadata-v1/manifest.json)
+
 ## 2026-11-23 短期WBSの終了依存とLinux側の引渡し
 
 短期66行のうち、着手条件欄にF02・F03の正式終了を明記した行は延べではなく12行。F02は12行、F03は12行で、両方を要するのは12行。担当へ渡す局所証拠の作成は、各作業の実施許可と入力が揃う範囲で継続する。正式受入16/190、開始17件に対して純減1件、指定0/12、中核0/5。12月6日18:00 JSTの元基準27件へ現時点から11件。原計画・改訂計画・共有消費の管理は既記録を参照する。
