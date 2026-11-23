@@ -1,0 +1,58 @@
+{
+  "run": "PG43606",
+  "source": "e74305a6f025f8cb386a801421ad359b7e108395",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-G09"
+  ],
+  "terminalAtUTC": "2026-11-23T11:43:02.108043+00:00",
+  "actualExit": 0,
+  "bugReproduced": true,
+  "malformedAccepted": 4,
+  "readTool": {
+    "path": "tools/quality/pgpt_reactor_junit.py",
+    "sha256": "cfd026fc9e546fb9da6018bb9aeee3c819e54f67f0f0d7291cdda6188ef20d4c"
+  },
+  "oracle": "Apache Maven Surefire 3.5.4 XML property structure; optional one properties container with property name/value and no child elements",
+  "oracleLink": "https://raw.githubusercontent.com/apache/maven-surefire/surefire-3.5.4/maven-surefire-plugin/src/site/resources/xsd/surefire-test-report.xsd",
+  "samples": {
+    "normal": {
+      "report": {
+        "sha256": "05820f04ec9541177a5c47c9d20fdbb3ceb241e538306f15b40ba094a1e6c432",
+        "tests": 1
+      },
+      "expected": true
+    },
+    "unknown-child": {
+      "report": {
+        "sha256": "aaf3472f9cf33a051f5c4415fb94d9b4d0a0e1bbfb1235fbbbdfe1bc9762e3b5",
+        "tests": 1
+      },
+      "expected": false
+    },
+    "required-value-missing": {
+      "report": {
+        "sha256": "b40108db5299f5a07f2abba2611f1582ab7ba185ffb9ff6a2a0690acc33bc3c7",
+        "tests": 1
+      },
+      "expected": false
+    },
+    "nested-property": {
+      "report": {
+        "sha256": "ddb03bc702b692337ade67411978125623902c037a90f0f6e6b51d7369ea6bba",
+        "tests": 1
+      },
+      "expected": false
+    },
+    "duplicate-containers": {
+      "report": {
+        "sha256": "c2b13743d23209889481c2028dfe64b99453477c42c5d812d4243c1b26d81de1",
+        "tests": 1
+      },
+      "expected": false
+    }
+  },
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
