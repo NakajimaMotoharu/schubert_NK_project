@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.protocol.layout.LayoutDefinition;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.TextMessage;
 import java.lang.reflect.Proxy;
@@ -55,7 +56,7 @@ final class JmsMessageGuardTest {
           MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
 
   @Test
-  void validBytesMessageProducesAnImmutableRedactedSnapshot() throws Exception {
+  void validBytesMessageProducesAnImmutableRedactedSnapshot() throws JMSException {
     Map<String, Object> values = validRequest();
     byte[] providerBody = (byte[]) values.get(BODY_FIELD);
     GuardedJmsMessage guarded = GUARD.read(bytesMessage(values), REQUEST_ROUTE);
@@ -91,7 +92,7 @@ final class JmsMessageGuardTest {
   }
 
   @Test
-  void destinationMustBePermanentArtemisUnqualifiedAndExact() throws Exception {
+  void destinationMustBePermanentArtemisUnqualifiedAndExact() throws JMSException {
     Destination foreign = new Destination() {};
     assertRejected(with(validRequest(), DESTINATION_FIELD, foreign), REQUEST_ROUTE);
     assertRejected(
@@ -117,7 +118,7 @@ final class JmsMessageGuardTest {
   }
 
   @Test
-  void replyToMustMatchPresenceAndPermanentAllowlistedAddress() throws Exception {
+  void replyToMustMatchPresenceAndPermanentAllowlistedAddress() throws JMSException {
     assertRejected(with(validRequest(), REPLY_TO_FIELD, null), REQUEST_ROUTE);
     assertRejected(with(validRequest(), REPLY_TO_FIELD, new Destination() {}), REQUEST_ROUTE);
     assertRejected(
@@ -151,7 +152,7 @@ final class JmsMessageGuardTest {
   }
 
   @Test
-  void identityPropertiesMustRetainExactLowercaseCanonicalUuidText() throws Exception {
+  void identityPropertiesMustRetainExactLowercaseCanonicalUuidText() throws JMSException {
     // BUG2263/YKT2008; UI232 §6 and SS321 §8 require exact wire/property identity.
     String messageId = "0000000a-000b-000c-000d-00000000000e";
     String correlationId = "0000000f-0010-0011-0012-000000000013";
@@ -213,7 +214,7 @@ final class JmsMessageGuardTest {
         new IllegalArgumentException(PROVIDER_FAILURE),
         new NullPointerException(PROVIDER_FAILURE),
         new AssertionError(PROVIDER_FAILURE),
-        new jakarta.jms.JMSException(PROVIDER_FAILURE)
+        new JMSException(PROVIDER_FAILURE)
       };
       for (Throwable failure : failures) {
         BytesMessage message = faultingMessage(validRequest(), site[0], site[1], failure);

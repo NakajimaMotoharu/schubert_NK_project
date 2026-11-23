@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
 import java.lang.reflect.Proxy;
 import java.time.Instant;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ final class FatalDlqMessageWriterTest {
   private static final Instant DETECTED_AT = Instant.parse("2026-09-03T00:00:00Z");
 
   @Test
-  void writerCopiesBodyAndOnlyApprovedBoundedMetadata() throws Exception {
+  void writerCopiesBodyAndOnlyApprovedBoundedMetadata() throws JMSException {
     Capture capture = new Capture();
     byte[] sourceBody = {1, 2, 3};
     GuardedJmsMessage rejected = rejected(sourceBody, "ID:provider-1");
@@ -122,7 +123,7 @@ final class FatalDlqMessageWriterTest {
   }
 
   @Test
-  void exactPrintable128AndErrorCode32BoundariesAreRetainedWithoutTrimming() throws Exception {
+  void exactPrintable128AndErrorCode32BoundariesAreRetainedWithoutTrimming() throws JMSException {
     // SS321 section11: independently authored exact maxima, including ASCII space and tilde.
     for (String transport : new String[] {"!" + " ".repeat(126) + "~", "~".repeat(128)}) {
       for (String code : new String[] {"A", "A" + "Z".repeat(31)}) {
