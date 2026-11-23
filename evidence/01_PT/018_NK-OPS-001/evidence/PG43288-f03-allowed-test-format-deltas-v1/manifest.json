@@ -1,0 +1,390 @@
+{
+  "run": "PG43288-f03-allowed-test-format-deltas-v1",
+  "source": "338ae9193ba6b43e5c51f7f2dc1fe12164b1ea55",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "start": "2026-11-23T03:33:29.469969+00:00",
+  "allowedScopeReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43260-f03-allowed-source-style-delta-v2/manifest.json",
+      "sha256": "5349d24e7d16649a28052b5410fead651526b722e867a510aa269bac94d5c11c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43266-f03-admitted-changed-fixture-style-v1/manifest.json",
+      "sha256": "959176c70aaa76ab98a9c266c126b27f4821a24ad82c57a53db4077674d95890"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43268-f03-admitted-followup-fixture-style-v1/manifest.json",
+      "sha256": "20e00fde3c240ceae4827b94ad7636abe57326f7c00f04433116709e5dbd1955"
+    }
+  ],
+  "previousFormatProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43286-f03-admitted-test-format-retained-v1/manifest.json",
+    "sha256": "15d193a660987adf573e6207f4f02d00dd7a827a00b5394040dee38fab138aa0"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Xmx768m",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+    "--skip-reflowing-long-strings",
+    "--dry-run",
+    "--set-exit-if-changed",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistryTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/RequestContextContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsRawContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsRawContractTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorderTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorderTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceAssessmentRecordContractTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorderTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/NonSecretYamlMalformedUnicodeTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowComponentsTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchScriptTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/OperationPostScriptTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchScriptTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java"
+  ],
+  "tool": {
+    "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+    "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+  },
+  "reusedPriorInThisSlice": [],
+  "alreadyCountedScope": 4,
+  "exactSelected": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistryTest.java",
+      "sha256": "a88a4af250c82787c458073caab370f4d048c3b67d0846c4acff6281e5b71ce5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/RequestContextContractTest.java",
+      "sha256": "33e633cb3eb7397271bab29fb6b01f5400e13e062f7eef79c9e543aad7d3304c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsRawContractTest.java",
+      "sha256": "6f0af98b85c3409b60a365937c5718313adfb776a9363b9f5ca2136e8e6c38df"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "sha256": "51e71dd1bdaec0dd3ea1b0bc5f05391a67348fbe525d993ef41943b2eae16b0f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+      "sha256": "9dbb5e57812cc258e719c3e0d107abbc370da2792ccb3afe7a607469f0c1e69e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+      "sha256": "bc5afc5553a4e86f4605c9e9a74734b04eef6ad4cc8598d7bc4cff33d7cee3a6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "sha256": "c35b604dd71fd4f04482adaf3bc80bbf37583b48e80a676992c9fd41c5319fe5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "sha256": "fc0501f18c1fe090748364d11958fac7f780b3da3119d281a0f4188f6e5ddf22"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "sha256": "a4f43d80101f219192c9edb1d34b5206b1677d9825ff7dbd1bd8700e99575972"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java",
+      "sha256": "5e5150554b54968ddde04564fd468c92a62081ac43076151e72400913bcbd424"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "601852935ea1d092bab0f8cf3b7f77a5aed998c64914b6683f9ff0cf6dd3cff3"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+      "sha256": "df6f2d0f84810f1c21350307d391359921a6ff06f9925a810b3061016986f334"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsRawContractTest.java",
+      "sha256": "c22feed1441ae7b4d505800ecd1a3dc235c3e2f8c4113920b594ad00491c6438"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+      "sha256": "976b0d8f1631d6959771d8a94b7665a6e3d6ef2a8f10a418432875e51a4e507a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "sha256": "a145d01d84b29b9af0abac650898b64e434297c4463071ca71ac3e54f25c4a7e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorderTest.java",
+      "sha256": "08cba847188c1f2b63d04cf918c1c6acf5ae78ec242abbb54cfebeca8ec86437"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+      "sha256": "3256f3e096c1f89b59e5d03bb2b128b4f158ac9cca10ee1b4dae3054b9ce8695"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "sha256": "adbf77d02398cecb4881e65405a6551bacb1e616c7d7f4096e160efa276d693d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorderTest.java",
+      "sha256": "d13471260e090684e477c9f88917735e7a18f894f593771fcb701434a221abe7"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceAssessmentRecordContractTest.java",
+      "sha256": "9c42fdb9405bdc482876fdda7c522818ecc9f0983246fe2dac586c0ef7a82474"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "sha256": "d1c23014fc0e162c9c2e341a3ad6a2b69869efa91f9f1bcb25d158beccb5690e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+      "sha256": "257a6f62b8386c709fc29c6260c77287c9171cc341b60fcbce567c00517cead9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+      "sha256": "5686e480c3ed1f0dd6b14c0e55ca4657726823204f6aeeb63524cd9b57e6f485"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorderTest.java",
+      "sha256": "66282c456d4b5afbc366f0821ecdbf2c043e6081fd6341456ddb426876a0fd2e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java",
+      "sha256": "10adc166e30eff4ba501560f7f075b049a5d69ba5eb3b0e569a430890b32ca95"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+      "sha256": "2719e5449004c295237670777baa4a35147865e2ad87676c3d240661e07656e5"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunAuditPortTest.java",
+      "sha256": "83969ab2c3858a5c89317dcc003254a131873028fbacce7c5f7848cf0f3077bb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "sha256": "2b36e357ffecd6d255e44fc0be5045390c165d963592ed793529ca6e32057c23"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "sha256": "bdf86fd694565cefedccdb5b18c4a3404f5aa67ed8f960a592551a0c17f07cf9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+      "sha256": "eece7afbb79d532317a8529463d958a60597c1105fcca4f3fc5a0ad49f74634f"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+      "sha256": "1486f92001db2158f2888fe33226a330a2a1e8f7eb9ae809fa8d1d8a62aa8715"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/NonSecretYamlMalformedUnicodeTest.java",
+      "sha256": "1f40e6ed9ad15beda6099563e64c2c8b42486658bafad94570a692a85eab8ba9"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "sha256": "e13b23b8dbc6adacfecfec6ae04bf5d256039d6c518c252bca3fc9e152b3914b"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowComponentsTest.java",
+      "sha256": "eef8474e91e216d18f4f3b5ac919602cd79d72193ae100543cf05f0e47504235"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
+      "sha256": "999277aea438b42317954b8f654b9117c8f2dbfca27b8ded98909d8929f87c29"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "sha256": "ed73aa966d7999112a3d5291eb853327caabf87632e562ac0ca80cd1a8590a63"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "sha256": "3ac68f0bd1e95bfe3f95f522e460c3b4a978baf1a7e82d6e665a07b81af8871a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "sha256": "65c2a6a0e218c8c14777e75f9f979d11b053dad684a4e6e295f790b33c780e3e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "sha256": "1457344a74fbbd2bd07b443e002eb040be79028e94f9c5cfebfc2b0c51b0e2df"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "sha256": "d236882a6f42c543510d2e52c16c44c911843842628ccfe64ac13f90f6dffd94"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "sha256": "538bc2eae1405d88306c878fc17500d6e677c5d45ae31c6a00c507abe9813baa"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java",
+      "sha256": "8f4b023365ba795dd34b5f21c2249c13e5f27ea12823af67ba102e2401d5ccfc"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+      "sha256": "44963d294bfd8301aba246ff887ab92652d7926e149055e9d464be9e13e488f8"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+      "sha256": "92f8e530c88ffc587b1e185f34885af6766dc9975d2c910072527700a34a742a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java",
+      "sha256": "75fbc9e3286d25bf13aa5b04a8127ea00a92f4830d359d2a687a119bc5e815c4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "sha256": "816c36016e4281007ea32a6e4103c245a05ff7c868d9492c9a61069c17b4ff3b"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchScriptTest.java",
+      "sha256": "d6046d96f621c5860b8d95206e5a9879febfcfd7ebdb8f5c6b4dcb8be086f5ac"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+      "sha256": "1df3944b7d3e684cc1f677087e3bbcb50f8dacbe723fd3000a8b1bf289e6be48"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "sha256": "c56b145cde7fc2aae07764be4e92f976c19721c86b565f9c24b78116f472f1a4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+      "sha256": "24211090f5551351c66dfd78c95fea4acbf1645b10ae9a244344176c486607e9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java",
+      "sha256": "0266a77b28645930f65edfc7e2c40b998a78f8a7cb0277715154a30d48b1204d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java",
+      "sha256": "988ac589b0acd9a66f9bef641d4c0530ebf0581d4b8017ca57485a995d86f993"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java",
+      "sha256": "09424b6acc49735ac19f159a12f21a12bf54e8a67e1f5608f338e418cf778856"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/OperationPostScriptTest.java",
+      "sha256": "a9f72adbfba352c846ff3d4cafe543ff1dcd5156709462cac5fbb6870652047c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java",
+      "sha256": "6c3327b6210137d49b64663f34819dd294ed68d0944e6899ec43a282d249a274"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java",
+      "sha256": "c50a2c62bde7ed4458c7ac88125f8a792f56833de1a693cf41c02f86992926fc"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+      "sha256": "e57778cd081e151ce23143108b29d00f8bc83effce4d6e90f558e3a5b4b00c14"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+      "sha256": "7ccbac38504d7b538a25dc6a1c4565cab660eb3559686f57793245601711e097"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModelTest.java",
+      "sha256": "b19c081e9a67c1781532bd74f4f25cd2d816f9bf7dc2e745766e6db8801f2aa8"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchScriptTest.java",
+      "sha256": "9f94f7b0003db3c7214f22addeea8824b542364e3202d4513fbe0020106bfb07"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
+      "sha256": "df518145351e0d8ecffa42afbe43a43cb4aef531944fbb8b0ed3c8333f93aaeb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "sha256": "5a418f09da8fc7f158267ad667b662a1688c9ae2c198255e317ba0aa9912ccb9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java",
+      "sha256": "83507176450460200da378b15c5fbc7ed906580da410ea68faebecaa8a97df0e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java",
+      "sha256": "dbd37d699119f02d57c17d4da407fa7cec9a1164e4c48a6a9d8d27458f13dacd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java",
+      "sha256": "8349e4310b2ecf720d35bcc81a1797d2d47ed505a0340fb5bfb6f9df6dbf0a33"
+    }
+  ],
+  "initialPreflight": "Prior findings are a per-file map rather than a numeric count. First check stopped before any formatter invocation.",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T03:33:31.161195+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalReceipt": {
+    "path": "../pgpt-runs/PG379/PG43288-f03-allowed-test-format-deltas-v1/terminal.json",
+    "sha256": "818a609ffbaeffbd9ac950434b9bfb1073065a452f73fa2128006e51db68b3ba"
+  },
+  "commandReceipt": {
+    "path": "../pgpt-runs/PG379/PG43288-f03-allowed-test-format-deltas-v1/begin.json",
+    "sha256": "c74940d81a1429ece2736dc4eb87d29b9928eee1f778c1d109bc64614ee626ea"
+  },
+  "matchedBeforeRun": 54,
+  "selectedNewDryRun": 65,
+  "scopePreviouslyCounted": 4,
+  "scopeNewlyMatchedHistorical": 0,
+  "eligibleWithFormatProof": 119,
+  "admittedTestTotal": 1135,
+  "heldTestFiles": 32,
+  "heldFilesRead": 0,
+  "sourceOnly": true,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
