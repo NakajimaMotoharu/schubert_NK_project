@@ -5,13 +5,14 @@ import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
 /**
  * Owner-local supplied observation publication, no actual broker/management connection. SS351;1697.
  */
 public final class MqPressureMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final Function<BrokerTopology, Optional<Snapshot>> observation;
   private final MqPressureMetricRecorder metrics;
 
@@ -27,7 +28,8 @@ public final class MqPressureMetricCollector {
   /** One complete result before publication; unknown/failure clears only this destination. */
   public Optional<Snapshot> collect(BrokerTopology destination) {
     Objects.requireNonNull(destination, "MQ destination");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return Optional.empty();
       try {
         var supplied =
@@ -39,6 +41,8 @@ public final class MqPressureMetricCollector {
         metrics.missing(destination);
         throw unavailableObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 

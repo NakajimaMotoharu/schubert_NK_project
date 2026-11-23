@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -317,7 +320,8 @@ class MqPressureMetricCollectorTest {
         var entered = new CountDownLatch(1);
         var release = new CountDownLatch(1);
         var attempted = new CountDownLatch(1);
-        var contender = new AtomicReference<Thread>();
+        var firstThreadId = new AtomicLong();
+        var contenderThreadId = new AtomicLong();
         var owner = new AtomicReference<MqPressureMetricCollector>();
         var firstSample = new Snapshot(1, 2, 3, 4, true, 5);
         var secondSample = new Snapshot(7, 8, 9, 10, false, 11);
@@ -326,6 +330,7 @@ class MqPressureMetricCollectorTest {
                 destination -> {
                   int call = calls.incrementAndGet();
                   if (call == FIRST_READ_ORDINAL) {
+                    firstThreadId.set(Thread.currentThread().threadId());
                     entered.countDown();
                     await(release);
                     return Optional.of(firstSample);
@@ -342,16 +347,21 @@ class MqPressureMetricCollectorTest {
           var second =
               executor.submit(
                   () -> {
-                    contender.set(Thread.currentThread());
+                    contenderThreadId.set(Thread.currentThread().threadId());
                     attempted.countDown();
                     return collector.collect(BrokerTopology.ASYNC_WORK);
                   });
           await(attempted);
+          var threads = ManagementFactory.getThreadMXBean();
+          var waiter = threads.getThreadInfo(contenderThreadId.get());
           long until = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-          while (contender.get().getState() != Thread.State.BLOCKED
+          while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
               && !second.isDone()
-              && System.nanoTime() < until) Thread.onSpinWait();
-          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+              && System.nanoTime() < until) {
+            LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+            waiter = threads.getThreadInfo(contenderThreadId.get());
+          }
+          assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
           assertEquals(1, calls.get());
           assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
           unknown(registry, ASYNC_ADDRESS);
