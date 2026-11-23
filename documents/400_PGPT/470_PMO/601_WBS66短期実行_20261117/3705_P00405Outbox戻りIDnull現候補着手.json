@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-9150",
+  "groupId": "WBS66-3705",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T07:13:48+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "7380f47b9a15495d9dcbfc0196e6d778a2e281b6",
+    "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "run": "PG43436",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-P004-05/2"
+    ],
+    "previousCheckpoint": 3704,
+    "planRow": {
+      "新版ID": "WBS-P004-05/2",
+      "第58版ID": "WBS-P004-05/2",
+      "費用主担当項目": "P004-05",
+      "計画窓": "繰越",
+      "予定期間・週末": "2026-12-20までの計画週",
+      "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+      "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+      "担当": "API・DB担当",
+      "旧短期残pp": "0.423",
+      "改訂残pp": "0.423",
+      "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+      "参照する元項目": "P004-05",
+      "lineNumber": 21
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "scope": "Effective source delta in OutboxEntry/OutboxRequest prevents applying original PT-OUT-JDBC009. One synthetic borrowed JDBC proxy case, no live DB/driver/JMS.",
+      "exit": "Fixed returned row SQL NULL -> SQLSTATE 22004 and no transaction ownership grab; current inputs and distinct original session/raw counters audit",
+      "nextCandidate": "If evidence closes only the generated ID null outcome, keep real DB/P004-05 formal dependencies and choose next independently admitted operand"
+    },
+    "groupCapPp": 0.95,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.38,
+      "high": 0.95
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
