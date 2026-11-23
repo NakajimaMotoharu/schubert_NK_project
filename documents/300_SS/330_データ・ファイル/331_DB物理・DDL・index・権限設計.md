@@ -100,6 +100,12 @@ Booleanと状態の不整合はCHECKで防ぐ。例えば`is_deleted=false`な�
 - Backup roleはSELECTできるためciphertext自体は取得可能だが、AES keyを一切配布せず不透明dataとして保全する。
   対話利用をDB権限だけで禁止できるとは記述せず、専用OS user、credential mode、固定unit、監査で補強する。
 
+#### SSC-479 専用ownerが作成するroutineの既定権限
+
+PostgreSQL 18ではroutine作成時のPUBLIC EXECUTEがDB内の全体既定値に由来する。schema単位で指定する既定権限は全体値へ加算される。V031は既存の限定SET ROLEで `nk_owner` として、対象DBにおける同ownerの将来のroutineに対するPUBLIC EXECUTEを全体既定権限から取り除く。新規・更新ともV031完了を含むreleaseの履歴照合後に公開する。個別routineの許可は各migrationの固定列挙が正本で、既存の個別ACL、table・sequenceの既定権限、他ownerの既定権限を保持する。
+
+PT-DB-ACL031-001は `pg_default_acl` のowner／global／routine行とACL内のPUBLIC EXECUTEを独立確認し、既存の明示許可は元のrole fixtureで確認する。V001～V030の改変による既適用履歴の不整合を避け、既存履歴と手順はSS343 §9に従う。 [PostgreSQL 18の既定権限](https://www.postgresql.org/docs/18/sql-alterdefaultprivileges.html)
+
 ### 3.3 Batch maintenance function
 
 SSC095/PG312: 起動schema照合は引数なし `schubert_meta.startup_schema_history()` の六列installed_rank/version/type/script/checksum/successだけとする。SQL STABLE SECURITY DEFINER、owner nk_owner、search_path pg_catalog,pg_temp、history完全修飾、PUBLIC全revoke→app/web/batchへmetaUSAGE＋完全signature EXECUTEのみを同一migration transactionで配備する。失敗行/NULL versionをfilterしない。履歴tableのSELECT/任意metadata function/CREATE/owner追加はしない。V005は変更せずV023 append-only、DB fixtureで許可/禁止権限と全行を独立照合する。
