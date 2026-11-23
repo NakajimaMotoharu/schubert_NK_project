@@ -1,4 +1,61 @@
 {
+  "currentBackupFailureJdbcUtcTracePG43918": {
+    "owner": "WBS-P017-06",
+    "traceWork": "WBS-G13.06",
+    "linked": [
+      "WBS-P004-05/2",
+      "WBS-F02-b-a",
+      "WBS-F03/2-2-b"
+    ],
+    "core": "23a7874f01b432a01256ee0e58823f8038fca59a",
+    "testSource": "a15240fbf7f6810b914ed07f3b075cf1ab7909d0",
+    "approvedSS": {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    },
+    "oracle": {
+      "path": "evidence/01_PT/017_NK-BAT-001/4748_Backup失敗行の時刻瞬間照合単体仕様.md",
+      "sha256": "ed5fa11716c028ef3c88e1728fbb7298b85bcf5cca68f3613c47d44485a94457"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java",
+      "sha256": "d1ebf416a82f82ac09d65516cee2799be44da3c17f226a7906d6430d125a68de"
+    },
+    "unit": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43914-backup-jdbc-time-instant-correctness/manifest.json",
+      "sha256": "189f6d2edb8f01230ba466bf21d3a79e7789daddcc2db57301a9981711d61abd"
+    },
+    "package": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43916-corrected-backup-utc-batch-regular-jar/manifest.json",
+      "sha256": "649dfe3d0042c66c3be36b6c2047b83f2385165e65eb0eb9e960269a7f17d0fa"
+    },
+    "cases": [
+      {
+        "id": "PT-BAT-BACKUP-UTC001",
+        "method": "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck"
+      },
+      {
+        "id": "PT-BAT-BACKUP-UTC002",
+        "method": "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail"
+      },
+      {
+        "id": "PT-BAT-BACKUP-UTC003",
+        "method": "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose"
+      }
+    ],
+    "matchedChangedPhysical": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3",
+    "remaining": [
+      "Full P004-05 DB/UTC/transaction integration, six modules 451 and regular API/Web"
+    ],
+    "localPreviouslyCounted": true,
+    "completedOriginalRowPricePp": 0,
+    "formalAcceptanceId": null,
+    "proof": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43918-backup-utc-source-wbs-trace/manifest.json",
+      "sha256": "2514bc5fb4a24cff2bd437dc87c3929942cf2d4a7f70071fc503bb4188aac259"
+    }
+  },
   "currentWebSessionRowTracePG43912": {
     "wbs": "WBS-P015-01",
     "related": [
