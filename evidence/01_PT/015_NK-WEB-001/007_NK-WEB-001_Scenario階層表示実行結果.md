@@ -20,3 +20,6 @@ BUG212再現は3constructorの保持式をStream.toListの直接代入にした�
 ## 2026-11-22 現候補の例外宣言再試験
 
 PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f3cb8b9435b28cba472。PT-WEB-188/190の2件成功、F/E/skip 0。独立の表示・Bean・並行期待を維持し、型付きSpotBugs 0。有限workerのPMD生指摘を保持。残りの元試験は同じ理由で再演していない。BUG-3581／YKT-2816、evidence/01_PT/018_NK-OPS-001/evidence/PG42382-f03-two-views-four-current-v1/manifest.json SHA256 2b645964726a54149e518e23159bc1386e043ce55b1e778d239820f638c8edfc。
+## PG43372 現候補のScenario階層表示
+
+UI223 §4、UI234 §§5・8・9、SS313 §§4・6。PT-WEB-182～193は、現fixture・現Protocol正規JAR・現SDKで12/12成功。Game／Route／ScenarioFileの表示と各Cardの六物理を単一execに固定し、行85/85、メソッド42/42、クラス6/6、分岐10/10。81 probeと物理CRCを独立照合した。実ページ組立、認証、HTTP、実NK CHRと全451は未受入。[PG43372](../018_NK-OPS-001/evidence/PG43372-scenario-hierarchy-current-twelve-v1/manifest.json)
