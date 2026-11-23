@@ -1,0 +1,385 @@
+{
+  "source": "75845c7a653b05cb69d7c4042455f542c0d321b8",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "methodTrace": [
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+        "sha256": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+        "declaredLine": 27,
+        "method": "read"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4577_SSC457Storage位置固定診断・単体テスト仕様書.md",
+        "sha256": "1aac2b9fed153d48f5ae955b323af50bff3fbe9844e50fefe95e469384f72042"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43302-p01810-retained-location-all-six-v1/manifest.json",
+        "sha256": "3ba2826002e2d5ada3e891113e937e0f74d6e00fb8ff5735fb677e6da2c7ff46"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDLOC-001",
+          "method": "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-002",
+          "method": "opsCredloc002RejectsMissingEmptyRelativeAndRoot()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-003",
+          "method": "opsCredloc003RejectsAliasTraversalAndControlBytes()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-004",
+          "method": "opsCredloc004BoundsAndNullContracts()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-005",
+          "method": "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-006",
+          "method": "opsCredloc006RejectsUnencodableLocationWithOnlyFixedDiagnostic()"
+        }
+      ],
+      "criterion": "all six fixed null, bounds, syntax and diagnostic cases"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+        "sha256": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+        "declaredLine": 52,
+        "method": "directory"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4577_SSC457Storage位置固定診断・単体テスト仕様書.md",
+        "sha256": "1aac2b9fed153d48f5ae955b323af50bff3fbe9844e50fefe95e469384f72042"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43302-p01810-retained-location-all-six-v1/manifest.json",
+        "sha256": "3ba2826002e2d5ada3e891113e937e0f74d6e00fb8ff5735fb677e6da2c7ff46"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDLOC-001",
+          "method": "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention()"
+        },
+        {
+          "testId": "PT-OPS-CREDLOC-005",
+          "method": "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot()"
+        }
+      ],
+      "criterion": "value and independently computed concurrent JDK Path"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+        "sha256": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+        "declaredLine": 57,
+        "method": "toString"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4577_SSC457Storage位置固定診断・単体テスト仕様書.md",
+        "sha256": "1aac2b9fed153d48f5ae955b323af50bff3fbe9844e50fefe95e469384f72042"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43302-p01810-retained-location-all-six-v1/manifest.json",
+        "sha256": "3ba2826002e2d5ada3e891113e937e0f74d6e00fb8ff5735fb677e6da2c7ff46"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDLOC-001",
+          "method": "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention()"
+        }
+      ],
+      "criterion": "fixed diagnostic only"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+        "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+        "declaredLine": 53,
+        "method": "forService"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4575_SSC456Storage固定名称・単体テスト仕様書.md",
+        "sha256": "0e5691a32f0a8d50acf18942782f088609f2af1f3c769593f32f43b4d142f3ad"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43304-p00307-current-fixed-catalog-original-seven-v1/manifest.json",
+        "sha256": "5c701df5f208268cbe57c6f1037d6f9cba13260a384b93b567fdb80a653bcb16"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDID-001",
+          "method": "opsCredid001ApiExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-OPS-CREDID-002",
+          "method": "opsCredid002WebExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-OPS-CREDID-003",
+          "method": "opsCredid003ServicesAreDisjointAndImmutable"
+        },
+        {
+          "testId": "PT-OPS-CREDID-004",
+          "method": "opsCredid004NullServiceRejected"
+        }
+      ],
+      "criterion": "two independent ordered sets, disjointness and missing service"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+        "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+        "declaredLine": 59,
+        "method": "service"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4575_SSC456Storage固定名称・単体テスト仕様書.md",
+        "sha256": "0e5691a32f0a8d50acf18942782f088609f2af1f3c769593f32f43b4d142f3ad"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43304-p00307-current-fixed-catalog-original-seven-v1/manifest.json",
+        "sha256": "5c701df5f208268cbe57c6f1037d6f9cba13260a384b93b567fdb80a653bcb16"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDID-003",
+          "method": "opsCredid003ServicesAreDisjointAndImmutable"
+        },
+        {
+          "testId": "PT-F03-ENUM-STO001",
+          "method": "sto001FixedCredentialCatalogKeepsNamesOwnersKindsAndOrdering"
+        }
+      ],
+      "criterion": "actor is one of the declared owners"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+        "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+        "declaredLine": 63,
+        "method": "fileName"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4575_SSC456Storage固定名称・単体テスト仕様書.md",
+        "sha256": "0e5691a32f0a8d50acf18942782f088609f2af1f3c769593f32f43b4d142f3ad"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43304-p00307-current-fixed-catalog-original-seven-v1/manifest.json",
+        "sha256": "5c701df5f208268cbe57c6f1037d6f9cba13260a384b93b567fdb80a653bcb16"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDID-001",
+          "method": "opsCredid001ApiExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-OPS-CREDID-002",
+          "method": "opsCredid002WebExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-F03-ENUM-STO001",
+          "method": "sto001FixedCredentialCatalogKeepsNamesOwnersKindsAndOrdering"
+        }
+      ],
+      "criterion": "fixed filename label with no input-driven path"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+        "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+        "declaredLine": 67,
+        "method": "kind"
+      },
+      "requirements": [
+        "SYS-002",
+        "SYS-004"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4575_SSC456Storage固定名称・単体テスト仕様書.md",
+        "sha256": "0e5691a32f0a8d50acf18942782f088609f2af1f3c769593f32f43b4d142f3ad"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43304-p00307-current-fixed-catalog-original-seven-v1/manifest.json",
+        "sha256": "5c701df5f208268cbe57c6f1037d6f9cba13260a384b93b567fdb80a653bcb16"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-CREDID-001",
+          "method": "opsCredid001ApiExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-OPS-CREDID-002",
+          "method": "opsCredid002WebExactlyFiveRequiredIds"
+        },
+        {
+          "testId": "PT-OPS-CREDID-006",
+          "method": "opsCredid006KindVocabularyIsClosedWithAnIndependentValuesArray"
+        },
+        {
+          "testId": "PT-F03-ENUM-STO001",
+          "method": "sto001FixedCredentialCatalogKeepsNamesOwnersKindsAndOrdering"
+        }
+      ],
+      "criterion": "selected strict enum values"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+        "declaredLine": 20,
+        "method": "StorageIoException"
+      },
+      "requirements": [
+        "SYS-005"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5652_F02Storage追加辺の呼出順単体仕様.md",
+        "sha256": "5c19665909062535db313dcf5b7374fc6839e696bd97eea334657217eb25328c"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43310-f02-storage-extra-edge-exact-current-v1/manifest.json",
+        "sha256": "26361425ee8ab4c71df13b85210af37805d71a73fd592c6dd592cd7a6babeeff"
+      },
+      "testLinks": [
+        {
+          "testId": null,
+          "method": "fixedReasonsAndNullContract"
+        },
+        {
+          "testId": null,
+          "method": "reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract"
+        }
+      ],
+      "criterion": "fixed reason and redacted diagnostic from explicit literals"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+        "declaredLine": 25,
+        "method": "reason"
+      },
+      "requirements": [
+        "SYS-005"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5652_F02Storage追加辺の呼出順単体仕様.md",
+        "sha256": "5c19665909062535db313dcf5b7374fc6839e696bd97eea334657217eb25328c"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43310-f02-storage-extra-edge-exact-current-v1/manifest.json",
+        "sha256": "26361425ee8ab4c71df13b85210af37805d71a73fd592c6dd592cd7a6babeeff"
+      },
+      "testLinks": [
+        {
+          "testId": null,
+          "method": "fixedReasonsAndNullContract"
+        },
+        {
+          "testId": null,
+          "method": "reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract"
+        }
+      ],
+      "criterion": "reason is the selected exact catalog instance"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+        "declaredLine": 30,
+        "method": "preserveFatal:Throwable"
+      },
+      "requirements": [
+        "SYS-005"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5652_F02Storage追加辺の呼出順単体仕様.md",
+        "sha256": "5c19665909062535db313dcf5b7374fc6839e696bd97eea334657217eb25328c"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43310-f02-storage-extra-edge-exact-current-v1/manifest.json",
+        "sha256": "26361425ee8ab4c71df13b85210af37805d71a73fd592c6dd592cd7a6babeeff"
+      },
+      "testLinks": [
+        {
+          "testId": null,
+          "method": "directCauseAndSuppressedIdentityAndOrder"
+        },
+        {
+          "testId": null,
+          "method": "sqlNextAndMixedEdgesRetainIdentity"
+        },
+        {
+          "testId": null,
+          "method": "nonFatalCyclesAndDuplicateEdgesFinishWithoutMutation"
+        }
+      ],
+      "criterion": "retained original boundary and exception identity"
+    },
+    {
+      "target": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+        "declaredLine": 38,
+        "method": "preserveFatal:Throwable,Function"
+      },
+      "requirements": [
+        "SYS-005"
+      ],
+      "independentSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5652_F02Storage追加辺の呼出順単体仕様.md",
+        "sha256": "5c19665909062535db313dcf5b7374fc6839e696bd97eea334657217eb25328c"
+      },
+      "currentEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43310-f02-storage-extra-edge-exact-current-v1/manifest.json",
+        "sha256": "26361425ee8ab4c71df13b85210af37805d71a73fd592c6dd592cd7a6babeeff"
+      },
+      "testLinks": [
+        {
+          "testId": "PT-OPS-STGRAPH-GENERIC-001",
+          "method": "injectedGraphVisitsEachNonFatalObjectOnceInBreadthFirstEdgeOrder"
+        },
+        {
+          "testId": "PT-OPS-STGRAPH-GENERIC-002",
+          "method": "injectedGraphStopsBeforeFatalOrLaterNodesCanInvokeTheEdge"
+        },
+        {
+          "testId": null,
+          "method": "injectedGraphRejectsNullInputsBeforeCallingTheEdge"
+        }
+      ],
+      "criterion": "private fixed graph: order, one visit per object, identity, null"
+    }
+  ],
+  "distinctOriginalScopedTestCases": 21,
+  "originalRunsIndependent": true
+}
