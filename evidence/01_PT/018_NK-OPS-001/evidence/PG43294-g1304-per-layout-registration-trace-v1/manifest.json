@@ -1,0 +1,83 @@
+{
+  "run": "PG43294-g1304-per-layout-registration-trace-v1",
+  "source": "635f9056b5052824116da74691505bb77b643472",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.04",
+  "related": [
+    "WBS-P005-03",
+    "SSC-477",
+    "MQ-003",
+    "MQ-006",
+    "UI232",
+    "UI233",
+    "SS311",
+    "SS323"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T03:46:29.146229+00:00",
+  "earlierProofs": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42726-ssc477-typed-layout-handler-registry-v1/manifest.json",
+      "sha256": "e4ac8ba7dee14881be8f38b7843a2bfb8a95f64af4f1c83549b56b9d0ac2293b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42728-g1307-ssc477-ownership-and-proof-trace-v1/manifest.json",
+      "sha256": "093343d223d1ac94677d6a1f2d8149df70078caadb2f611a2c42e3281dce68a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42546-g1304-api-31-method-level-source-bindings-v1/manifest.json",
+      "sha256": "84288b932fd33d387042021265009a73f43c23e6059550f11d8a89f1758023b5"
+    }
+  ],
+  "registeredTypesWithPerLayoutSourceTrace": 31,
+  "originalRegistrationTestsMapped": 6,
+  "originalCaseToMethod": {
+    "PT-JMS-HREG001": "registersAllApprovedRequestTypesExactlyOnce",
+    "PT-JMS-HREG002": "preservesRegisteredHandlersAfterCallerListChanges",
+    "PT-JMS-HREG003": "rejectsIncompleteAndDuplicateRegistration",
+    "PT-JMS-HREG004": "rejectsIncorrectTypeForAnApprovedLayout",
+    "PT-JMS-HREG005": "rejectsResponsesInternalEventsAndUnknownLayouts",
+    "PT-JMS-HREG006": "rejectsNullEntriesAndNullMetadataExplicitly"
+  },
+  "originalTechnicalCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 117
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 26
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 11
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 5
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "originalScopeXmlSha256": "e9a86877d0407520ae850f893b31b051cc040de9f3b039a8a31d52239c82751e",
+  "perLayout": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43294-g1304-per-layout-registration-trace-v1/layout-to-test.json",
+    "sha256": "87d9111663fdaeffd7a29345588f31b3d82ccfafa75d502568c2726ffcd6e914"
+  },
+  "internalEventExcludedFromSynchronousRegistration": [
+    "QWKREQ01"
+  ],
+  "actualDispatcherWithAllRealBindingsQualified": false,
+  "networkOrDbActions": 0,
+  "dynamicTestReruns": 0,
+  "approvedQA056ScopeChanged": false,
+  "evidenceChargedOnce": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
