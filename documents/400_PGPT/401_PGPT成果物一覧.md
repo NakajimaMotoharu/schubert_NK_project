@@ -1,5 +1,11 @@
 # PGPT成果物一覧・進捗
 
+## 2026-11-24 02:12 JST 現候補の試験・工程判定
+
+現Batch JARの通常試験を122回実行し、全件成功。うち6件は単一exec測定のため再実行。今回検証した一意の既存試験は116件。新規Test IDは0。累計3,765実行、3,717適用成功。 正式16/190（8.4%）、中核0/5、指定0/12。正式認定PT-WEB-20260925-24の1,964件／53領域を維持。工数完成率は未較正。
+
+F02は正規4/6 JAR、現POMに一致するAPI/Web依存モデル86ノード。API/Web正規JAR、QA-056、StorageのSSC-461と実JDBC、同候補六製品全451、C02/F04実環境、QA-061の配布判断とQA-062のマニフェスト改行判断が残る。 [単体テストの実績](../../evidence/01_PT/018_NK-OPS-001/evidence/PG43774-current-batch-metric-text-thirtysix-single-exec/manifest.json) [F02の依存モデル](../../evidence/01_PT/018_NK-OPS-001/evidence/PG43770-current-api-web-runtime-model-identity/manifest.json)
+
 ## 2026-11-24 00:50 JST 現況
 
 Java製品CoreとCaddyの設定候補を区別。設定通常PT6・固有新規1を加え、製品側は累計3,643実行／適用3,595成功。正式受入16/190、重点0/5、指定0/12、工数完成率は未較正。PG・PT・PGPT各報告およびLinux引継ぎを現状に更新。 [461～464](460_完了報告/) [短期66行の受入条件](../../evidence/01_PT/018_NK-OPS-001/evidence/PG43742-short66-current-acceptance-prerequisites/manifest.json)

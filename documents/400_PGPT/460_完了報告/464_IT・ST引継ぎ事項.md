@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-24 02:12 JST Linux引継ぎの未実測条件
+
+監視しきい値・状態表示・生成メトリクスの合成値は局所確認済み。実観測の供給元、実プロセスのSDK観測、実CPU・DB・JMS・FileStore、Caddyの同boot実効設定と、日次保守の固定受けに対する真正な終端・逆順停止は後段の別証拠が必要。正式PG/PTとIT/STの開始・完了判定を個別に行う。 [監視状態の型付き証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43780-monitor-status-spotbugs-current/manifest.json)
+
 ## 2026-11-24 Caddy起動依存と日次保守
 
 CaddyのAfter／RequiresにWebを指定した追跡設定を製造し、構成6件を再試験。現環境では同bootの実効Unit・親下のWeb ready・Caddy HTTPS・逆順停止を確認する。新しい配備又はenableを行う前に所有、当sourceの署名／BOM、既存役割の証跡を確認する。

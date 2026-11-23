@@ -1,5 +1,9 @@
 # PGPTフェーズ完了報告
 
+## 2026-11-24 02:12 JST 工程中間判定
+
+正式16/190（8.4%）、中核0/5、指定0/12。正式認定PT-WEB-20260925-24の1,964件／53領域を維持。工数完成率は未較正。 今回の技術的な前進は監視116個別試験の現候補確認、単一execの局所coverage、二つのAPI/Web依存モデル。**正式受入の追加は0件。** F02は正規4/6 JAR、現POMに一致するAPI/Web依存モデル86ノード。API/Web正規JAR、QA-056、StorageのSSC-461と実JDBC、同候補六製品全451、C02/F04実環境、QA-061の配布判断とQA-062のマニフェスト改行判断が残る。 [PTのcheckpoint](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43774-current-batch-metric-text-thirtysix-single-exec/manifest.json)
+
 ## 2026-11-24 00:50 JST 現況
 
 正式16/190（8.4%）、短期0/12・中核0/5、正式認定1,964件／53領域。QA-061配布条件・担当未決、F02/F03・全451・正式終端は未成立。 [Caddyの証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json)
