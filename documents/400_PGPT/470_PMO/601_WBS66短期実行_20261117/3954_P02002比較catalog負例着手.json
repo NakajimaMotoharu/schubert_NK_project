@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-9399",
+  "groupId": "P0200102-COMPARATOR-CATALOG-MISSING-UNREGISTERED-SYNTHETIC",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T14:26:44+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "ebe64b85cd5b06c67b3ec9a223263b0753616c38",
+    "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "run": "PG43698",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "previousCheckpoint": "3953",
+    "planRow": {
+      "新版ID": "WBS-P020-01.02/2",
+      "第58版ID": "WBS-P020-01.02/2",
+      "費用主担当項目": "P020-01",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-17までの計画週",
+      "作業・成果物": "比較/DIFマスク・未登録差分・欠落caseのnegative／同source証拠による受入判定",
+      "先行ID・着手条件": "WBS-P020-01.02/1、閉/WBS-P020-01.01",
+      "担当": "環境・比較担当",
+      "旧短期残pp": "0.488",
+      "改訂残pp": "0.488",
+      "終了条件": "比較/DIFマスク・未登録差分・欠落caseのnegativeの対象別完了記録を確認",
+      "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+      "参照する元項目": "P020-01",
+      "lineNumber": 56
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "work": "現ArtifactComparatorの8定義不備、承認外差分と必須証拠欠落の合成10を、公開catalog/allowlistの作業領域コピーで確認。",
+      "startDependency": "PG43628の現compiled comparatorとGit source、PG43548の合成fixture閉包、独立期待。Current baselineは入力外。",
+      "endCriterion": "10個別Test ID・独立失敗分類・actual終端、二固定JSON・compiled hash。旧空JSON/QA055は再演せず。実CHR・haruka・DB・Browserなし。"
+    },
+    "groupCapPp": 0.8,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.34,
+      "high": 0.8
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

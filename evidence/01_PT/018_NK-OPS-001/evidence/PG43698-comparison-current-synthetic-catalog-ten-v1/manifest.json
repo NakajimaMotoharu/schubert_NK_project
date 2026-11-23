@@ -1,0 +1,90 @@
+{
+  "run": "PG43698",
+  "source": "ebe64b85cd5b06c67b3ec9a223263b0753616c38",
+  "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "comparisonSource": "503fefe038ca3502d526c6363bcb187beb8b2cd9",
+  "terminalAtUTC": "2026-11-23T14:27:38.694741+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P020-01.02/2",
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/begin.json",
+    "sha256": "a80bd230507628a1a27126b2010c6e98f8d49bbc0158d7e990d5198cf71338ae"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/terminal.json",
+    "sha256": "e9081460aafef2e003742b5e07cea1b3fa4e4990a3819d680c92224c879a1b03"
+  },
+  "testXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "b70f3fe32a4ff1cc548a0fc5e00a303c22e5f825ed26daa4e064090c0c832059"
+  },
+  "syntheticComparisonCases": [
+    "leavesNonBrandTitleChangeUnregistered",
+    "rejectsAnUnapprovedCaseAtTheSameCatalogSize",
+    "rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize",
+    "rejectsCurrentRunCaseReportedAsNkOnly",
+    "rejectsNkOnlyCaseReportedAsCurrentRun",
+    "rejectsNonArrayComparisonDefinitions",
+    "rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare",
+    "rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch",
+    "rejectsUnrecognizedComparisonDefinitionVersions",
+    "requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference"
+  ],
+  "syntheticComparisonFailures": 0,
+  "realProductExecutions": 0,
+  "productCoverage": null,
+  "originalChrBaselineGitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "expectedIndependent": "既存fixtureが検査する固定識別子・欠落観測・未承認差分。24件実CHRの結果ではない。",
+  "evidenceInputs": {
+    "program/characterization/tests/resources/cases/catalog.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/defs/program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    "program/characterization/tests/resources/cases/dif-allowlist.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/defs/program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    }
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Djava.awt.headless=true",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djunit.jupiter.extensions.autodetection.enabled=false",
+    "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/defs",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/owned-root",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/init.log",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "execute",
+    "--class-path",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/product:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/tests:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/reports",
+    "--disable-banner",
+    "--fail-if-no-tests",
+    "--details",
+    "summary",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsUnrecognizedComparisonDefinitionVersions",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsNonArrayComparisonDefinitions",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsCurrentRunCaseReportedAsNkOnly",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsNkOnlyCaseReportedAsCurrentRun",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsAnUnapprovedCaseAtTheSameCatalogSize",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference",
+    "--select-method",
+    "dev.codex.schubert.characterization.ArtifactComparatorTest#leavesNonBrandTitleChangeUnregistered"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}

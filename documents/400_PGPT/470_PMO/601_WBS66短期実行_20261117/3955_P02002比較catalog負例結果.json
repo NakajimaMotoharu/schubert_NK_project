@@ -1,0 +1,113 @@
+{
+  "eventId": "PGPT-20261008-9400",
+  "workCategory": "SELECTED_TEST",
+  "source": "ebe64b85cd5b06c67b3ec9a223263b0753616c38",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-P020-01.02/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P020-01.02/2",
+    "第58版ID": "WBS-P020-01.02/2",
+    "費用主担当項目": "P020-01",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-17までの計画週",
+    "作業・成果物": "比較/DIFマスク・未登録差分・欠落caseのnegative／同source証拠による受入判定",
+    "先行ID・着手条件": "WBS-P020-01.02/1、閉/WBS-P020-01.01",
+    "担当": "環境・比較担当",
+    "旧短期残pp": "0.488",
+    "改訂残pp": "0.488",
+    "終了条件": "比較/DIFマスク・未登録差分・欠落caseのnegativeの対象別完了記録を確認",
+    "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+    "参照する元項目": "P020-01",
+    "lineNumber": 56
+  },
+  "run": "PG43698",
+  "startEvent": "PGPT-20261008-9399",
+  "outcome": {
+    "result": "TEN_TOOL_NEGATIVES_PASS",
+    "cases": 10,
+    "failed": 0,
+    "skipped": 0,
+    "newDynamicProductPT": 0,
+    "unregisteredDifferenceAndMissingObservationTested": true
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43698-comparison-current-synthetic-catalog-ten-v1/manifest.json",
+    "sha256": "0e31657e2ea5578cf5270399e50d049d0b493297d7e1616194ce3a2364b1a1d3"
+  },
+  "nextEvidence": {
+    "work": "WBS-P020-01.03/2のGateMetricsCountTest／GateDefinitionNumericTestをPG42116／PG41906と当工具sourceで比較。変化した依存だけ普通の合成値検査。",
+    "held": "実Current/NK、signed runtime・haruka FileStore、全451。"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T14:28:12+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 79,
+    "remainingPercent": 21,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "43f08757bc3a320a7d8127684b13be71d2aa6dee282eb7832b6574e2afea2284",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T14:28:12+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 79,
+        "remainingPercent": 21,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T14:27:38.694741+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 79,
+    "remainingPercent": 21,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
