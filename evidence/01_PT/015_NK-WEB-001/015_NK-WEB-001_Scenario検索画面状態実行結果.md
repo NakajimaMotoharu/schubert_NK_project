@@ -11,3 +11,6 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 ```
 
 source5d8472f7＋PG200作業tree/dev-foundation。Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12/JUnit5.13.4/JaCoCo0.8.15。新toolなし。入力/独立期待は014/public synthetic fixture、実際値は表示scalar/候補順/URL literal/例外/合成DOM/並行assertで確認。固定6条件URLとUTF8 percent vector、page補正と要求応答binding、candidate10/500上限、全field/error、null/不変/閉bean/redaction、64並行を検証。collector015で8Test ID/2source hash/014・015、019独立inventoryで欠落/余分/未知method拒否。正式command/commit/時刻/exit/環境/coverage/hashは次回manifestへ固定する。
+## PG43376 現検索画面状態の選択試験
+
+PT-WEB-222～229は成功8/8。検索結果表示PT-WEB-206～213との同一選択で16件が成功した。該当六物理の生四指標、全selected ID、sourceとSDKは同じ実行証跡に固定した。旧証跡と合算せず、実Web・全451の正式受入を別に記録する。[PG43376](../018_NK-OPS-001/evidence/PG43376-scenario-search-two-models-current-sixteen-v2/manifest.json)

@@ -13,3 +13,6 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 source bec65458＋PG198作業tree/dev-foundation。Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12/JUnit5.13.4/JaCoCo0.8.15。新toolなし。
 
 入力と独立期待は010/public synthetic fixture。実際値はgetter、合成DOM、例外、並行結果のassertで検証。両game/role、literal表示ラベル、API順序、固定numeric URL、page0/100/最終/最大、件数不一致、audio全8組、null/immutable/closed bean/redaction、64並行投影を確認。collector015で8Test ID・source2hash・010/011を収集し、019で欠落/余分/未知methodを拒否。正式実行commit/時刻/終了code/環境/coverage/evidence hashは次回manifestで固定する。
+## PG43376 現検索結果表示を画面状態と一括検証
+
+UI222／223／234、SS313／323。現候補・現SDKの通常PTは、結果表示のPT-WEB-206～213と画面状態のPT-WEB-222～229を合わせ16/16成功。六製品物理の対象生coverageは行143/143、メソッド59/59、クラス6/6、分岐28/28。同一execに含まれた二つの試験クラスは測定対象の製品カウンタと区別した。実検索・配信、正規Webと全451は未受入。[PG43376](../018_NK-OPS-001/evidence/PG43376-scenario-search-two-models-current-sixteen-v2/manifest.json)
