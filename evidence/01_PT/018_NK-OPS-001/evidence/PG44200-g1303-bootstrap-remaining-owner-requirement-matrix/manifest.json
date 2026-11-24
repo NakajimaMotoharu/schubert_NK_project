@@ -1,0 +1,151 @@
+{
+  "run": "PG44200",
+  "source": "a74eff8b044cb95de015e9d958eaae807b99d173",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G13.03",
+  "terminalAtUTC": "2026-11-24T16:21:02.318102+00:00",
+  "actualExit": 0,
+  "traceSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+    "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+  },
+  "alreadyQualifiedSourceHashDelta": 12,
+  "pendingSourceHashDeltaCount": 17,
+  "pendingSourceMatrix": [
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java",
+      "qualification": "CREDENTIAL_OWNER_HELD",
+      "concreteAbsentEvidence": "approved owner runtime; no prior key inputs transferred",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+      "qualification": "CURRENT_BOOT_IDENTITY",
+      "concreteAbsentEvidence": "same-boot active child and exact parent evidence",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+      "qualification": "NATIVE_HELD",
+      "concreteAbsentEvidence": "native boot and raw stream owner",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+      "qualification": "APPROVED_EFFECTIVE_HOST_IDENTITY",
+      "concreteAbsentEvidence": "authorized owner proof; no native runtime",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java",
+      "qualification": "CREDENTIAL_OWNER_HELD",
+      "concreteAbsentEvidence": "current owned credential lifecycle; no key anywhere in public proof",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "qualification": "CREDENTIAL_OWNER_HELD",
+      "concreteAbsentEvidence": "current approved credential path and ownership with protected operations",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44190-f02-ssc461-current-21-exact-application-conditions/manifest.json",
+        "sha256": "0f5417cfb6649fffdb8481e6e46c85d14fc3e8009ae971d2307abcb7040945e5"
+      }
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "qualification": "CREDENTIAL_OWNER_HELD",
+      "concreteAbsentEvidence": "current owned credential lifecycle; no key anywhere in public proof",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "qualification": "CURRENT_BOOT_IDENTITY",
+      "concreteAbsentEvidence": "current authorized maintenance owner and close",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java",
+      "qualification": "NATIVE_HELD",
+      "concreteAbsentEvidence": "current source file capability and native run owner",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "qualification": "SIGNED_FILE_OWNER",
+      "concreteAbsentEvidence": "fresh same-owner approved runtime read and terminal",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44140-g1303-public-release-type-and-partial-trace/manifest.json",
+        "sha256": "ca633f90b8e26c6da6969e21fa4fb28fdc8f6d90412ecb21f05246f6bf4a47de"
+      }
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "qualification": "PARTIAL_CURRENT_RECORD_AND_METHOD",
+      "concreteAbsentEvidence": "actual JDBC version/ownership; Row has five explicit method bindings",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44144-schema-row-five-individual-methods/manifest.json",
+        "sha256": "65d3e6e4eecc1992b9efd22b91b906e665c6b35ed1dd537ae863c77cb3834135"
+      }
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+      "qualification": "CREDENTIAL_OWNER_HELD",
+      "concreteAbsentEvidence": "current approved service credentials owner",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "qualification": "CURRENT_DB_PROTOCOL",
+      "concreteAbsentEvidence": "same-source JDBC same-owner proofs and applicability boundary",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44142-g1303-current-schema-and-jdbc-admission-lineage/manifest.json",
+        "sha256": "a33cc59b591707972f2b64c8b1889d812345467fa60b5ffe0fd8703105d71142"
+      }
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "qualification": "CURRENT_DB_PROTOCOL",
+      "concreteAbsentEvidence": "same-source runtime datasource binding qualification",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44142-g1303-current-schema-and-jdbc-admission-lineage/manifest.json",
+        "sha256": "a33cc59b591707972f2b64c8b1889d812345467fa60b5ffe0fd8703105d71142"
+      }
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+      "qualification": "CURRENT_BOOT_IDENTITY",
+      "concreteAbsentEvidence": "current ordinary resource lifecycle; local parts alone do not qualify whole type",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java",
+      "qualification": "CURRENT_BOOT_IDENTITY",
+      "concreteAbsentEvidence": "current application start/stop associated ownership",
+      "priorWithoutNewQualification": null
+    },
+    {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+      "qualification": "PARTIAL_LOCAL_CONTENTS",
+      "concreteAbsentEvidence": "actual release/version/config-owned reads",
+      "priorWithoutNewQualification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44140-g1303-public-release-type-and-partial-trace/manifest.json",
+        "sha256": "ca633f90b8e26c6da6969e21fa4fb28fdc8f6d90412ecb21f05246f6bf4a47de"
+      }
+    }
+  ],
+  "pendingReasonCounts": {
+    "CREDENTIAL_OWNER_HELD": 5,
+    "CURRENT_BOOT_IDENTITY": 4,
+    "NATIVE_HELD": 2,
+    "APPROVED_EFFECTIVE_HOST_IDENTITY": 1,
+    "SIGNED_FILE_OWNER": 1,
+    "PARTIAL_CURRENT_RECORD_AND_METHOD": 1,
+    "CURRENT_DB_PROTOCOL": 2,
+    "PARTIAL_LOCAL_CONTENTS": 1
+  },
+  "originValuesNotChanged": true,
+  "heldOrPrivateBodiesRead": 0,
+  "realOperations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

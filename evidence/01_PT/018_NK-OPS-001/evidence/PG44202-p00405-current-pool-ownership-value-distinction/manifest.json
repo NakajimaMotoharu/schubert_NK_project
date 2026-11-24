@@ -1,0 +1,91 @@
+{
+  "run": "PG44202",
+  "source": "a74eff8b044cb95de015e9d958eaae807b99d173",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-24T16:22:34.265976+00:00",
+  "actualExit": 0,
+  "criterionBase": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37116-p00405-current-criteria-return-v1/manifest.json",
+    "sha256": "a6de3d893717b247062bbfb805649231d0a6bc1a469cbb94cc1fba172ed677b6"
+  },
+  "priorLocalEight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43800-api-pool-lock-closure/manifest.json",
+    "sha256": "ce2fe83f8c161820c348a809653cd41371fb0c20bd4ef8b785bdfbc0561bd528"
+  },
+  "localInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+      "sha256": "d07e461d4e27f4aa2de9290f1633cbb1812d3a7c6cc6a37f82448fdbf3ad9afe"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java",
+      "sha256": "9e3ef2251b559d4905787fe5ebf2154857e9190b03f54f0f26bb7363ddd78cfc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+      "sha256": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sha256": "a37cd62312e68185d7f22131ae29839af7a25e329ad5538c1eb394e231ea4d6d"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java",
+      "sha256": "238a440449f9b0cb5302514261a290adf21749073dccfdde7eddf2ed0c5025df"
+    }
+  ],
+  "existingValueCoverage": {
+    "scope": "DbPoolMetricCollector.class",
+    "line": [
+      19,
+      19
+    ],
+    "method": [
+      3,
+      3
+    ],
+    "class": [
+      1,
+      1
+    ],
+    "branch": [
+      4,
+      4
+    ],
+    "instruction": [
+      85,
+      85
+    ]
+  },
+  "currentBatchBorrowed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44082-p00405-current-batch-utc-and-vendor-identity/manifest.json",
+    "sha256": "d7e6664e4b55a00ef87e5a53cb54d7c48fa468169a0f26331d19bd4d91b0be6e"
+  },
+  "currentCloseLogic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43326-p00405-jdbc-eight-current-source-lineage-v1/manifest.json",
+    "sha256": "7861de77cac30af8d098856fb66bd98df0f9a7ebcfb9f8de00b3b48fec2b462e"
+  },
+  "localConditionalOwnerSatisfied": [
+    "independent gauge and borrowed state value only"
+  ],
+  "remaining": [
+    "PG43800 applies only to DbPoolMetricCollector",
+    "ApiJdbcPool whole3 requires real PostgreSQL fixture/role/lifetime HOLD",
+    "JdbcSyncRequestProcessor requires QA-056 and same normal owner transaction",
+    "real DB/broker/postconditions",
+    "F02/F03 plus 451"
+  ],
+  "initialMetadataAttempts": [
+    "script syntax corrected before execution",
+    "source map enumerated using its keyed structure"
+  ],
+  "existingQualityResultsKeptSeparate": true,
+  "whole451": false,
+  "dynamicNew": 0,
+  "formalAcceptanceId": null
+}

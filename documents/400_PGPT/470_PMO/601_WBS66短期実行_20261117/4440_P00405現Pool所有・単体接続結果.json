@@ -1,0 +1,103 @@
+{
+  "eventId": "PGPT-20261008-9883",
+  "source": "a74eff8b044cb95de015e9d958eaae807b99d173",
+  "productionCoreMain": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P004-05/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P004-05/2",
+    "第58版ID": "WBS-P004-05/2",
+    "費用主担当項目": "P004-05",
+    "計画窓": "繰越",
+    "予定期間・週末": "2026-12-20までの計画週",
+    "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+    "担当": "API・DB担当",
+    "旧短期残pp": "0.423",
+    "改訂残pp": "0.423",
+    "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 21
+  },
+  "run": "PG44202",
+  "startEvent": "PGPT-20261008-9882",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "API Pool計測の六入力を現Git hashに接続。局所8はDbPoolMetricCollectorのみ、実Pool/取引は未成立。P004-05全受入なし。",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44202-p00405-current-pool-ownership-value-distinction/manifest.json",
+    "sha256": "1ca7e5845cea8bff1afa5df48ba57c787c0fa169d45ebdd8d907998e3d8eea3c"
+  },
+  "nextEvidence": "WBS-G08: BUG3768の公開Git pin不備をcommit前に検出できるよう、同じ検証規則にGit staging snapshotを追加。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T16:23:21+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 8,
+      "remainingPercent": 92,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 8,
+    "remainingPercent": 92,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "6c1cc855879c4f2365f9070a793d7c709178e80bd4b85123ea2321a37d41510e",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-24T16:23:21+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 8,
+        "remainingPercent": 92,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-24T16:22:34.265976+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 8,
+    "remainingPercent": 92,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}

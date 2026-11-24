@@ -1,0 +1,114 @@
+{
+  "run": "PG44194",
+  "source": "a74eff8b044cb95de015e9d958eaae807b99d173",
+  "baselineJavaCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-24T16:16:50.807869+00:00",
+  "actualExit": 0,
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java",
+    "sha256": "d31903c0f5ecf0826e00036177a65e5733ae9a108f9e47991b2b7cb80bb11f43"
+  },
+  "localDom": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44192-search-media-fragment-context/manifest.json",
+    "sha256": "4dbe4939394ec09bdc715083952345a733f8698f421505bfee1c1860b142a02c"
+  },
+  "testIds": [
+    "PT-WEB-FRAG-003"
+  ],
+  "validatedInputBindings": {
+    "spotless-maven": {
+      "scopeMatch": true,
+      "tool": "spotless-maven",
+      "files": 1
+    },
+    "checkstyle": {
+      "scopeMatch": true,
+      "tool": "checkstyle",
+      "files": 1
+    },
+    "pmd": {
+      "scopeMatch": true,
+      "tool": "pmd",
+      "files": 1
+    },
+    "google-java-format": {
+      "scopeMatch": true,
+      "tool": "google-java-format",
+      "files": 1
+    }
+  },
+  "existingCanonical": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44164-current-log-template-fixture-static/manifest.json",
+    "sha256": "dfeda83882e8f5efe0799ec449d73d442ed463b379afcf647c7d4dd2762b12eb"
+  },
+  "cleanNew": 1,
+  "cacheSkipped": 0,
+  "currentCanonicalTestScope": 1152,
+  "pmdRaw": 5,
+  "pmdCurrentDisposition": "FIVE_SAME_PRIOR_JUNIT_OWNED_THREADS",
+  "pmdProcessingErrors": 0,
+  "checkstyle": 0,
+  "exits": {
+    "spotless": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "formatter": 0
+  },
+  "commandReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44194-web-search-context-fixture-static/begin.json",
+    "sha256": "e0487b4b5d09072599dc92e4a54ec69913fea1bca6dd6ddac131434c6d993d9f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44194-web-search-context-fixture-static/terminal.json",
+    "sha256": "f2a3880c87600d0a49b50bbb19f7731dc006750f6185e6502f138bf4ac25ac28"
+  },
+  "newProductTests": 0,
+  "allSixTyped": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "pmdApplicable": 0,
+  "rawReport": {
+    "path": "../pgpt-runs/PG379/PG44194-web-search-context-fixture-static/pmd.xml",
+    "sha256": "6a1fc7ae65462cb99050adcca205f025eb0e8d2009a81b652c063a3134f55974"
+  },
+  "priorComparison": {
+    "original": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42648-six-resource-fixture-43-current-v1/manifest.json",
+      "sha256": "4855375c4745623c581be4872e5fae38557753a669a8c6d3d60fb01eec801127"
+    },
+    "originalPmd": {
+      "path": "../pgpt-runs/PG379/PG42648-six-resources-current-43-v1/pmd.xml",
+      "sha256": "b75dba10eaa25e0a2b3f533473b5f2ef61cce9efb04f5a6557c776a0ab21f88e"
+    },
+    "sites": [
+      {
+        "rule": "CloseResource",
+        "oldLine": 325,
+        "currentLine": 341
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "oldLine": 325,
+        "currentLine": 341
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "oldLine": 331,
+        "currentLine": 347
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "oldLine": 347,
+        "currentLine": 363
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "oldLine": 348,
+        "currentLine": 364
+      }
+    ],
+    "independentCriteria": "unchanged JUnit-owned shutdownNow/awaitTermination and bounded Future use; PMD J2EE application thread restriction is not applied to this isolated fixture",
+    "exclusionsAdded": 0
+  }
+}
