@@ -1,0 +1,172 @@
+{
+  "run": "PG44274",
+  "wbs": [
+    "WBS-G13.04",
+    "WBS-F03/2-2-b"
+  ],
+  "source": "70499fa8d699c5b1839af63da682a099372a2d3a",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T17:37:37.618714+00:00",
+  "actualExit": 0,
+  "approvedDesign": [
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  ],
+  "exactCurrentFiveJavaInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+      "sha256": "11c7d766aa67847d77b2a6c69e96f167316a751e27744758be327e557920f7ac"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java",
+      "sha256": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "sha256": "4f82f83938dc0ef254756c3f38bbfe78b792620045d840cc15bb01535740d1f3"
+    }
+  ],
+  "exactExternalJars": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "previousDiagnosticSevenSeparatelyRecorded": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42128-p0181003-canonical-value-diagnostic-current-v1/manifest.json",
+    "sha256": "f64a4bc0d70f36c34bddd5c91588e60ebca9c07a8ca924f773514bc11e9e250d"
+  },
+  "receipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38566-ssc460-actor-boundary-prepare-v2/manifest.json",
+      "sha256": "93c04eddd06cc5e0c45e82af5580ba7a20bf6fe1dd79b290a42523a3349f5047"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38572-ssc460-actor-boundary-unit-v2/manifest.json",
+      "sha256": "f68f1882071747854949e16ff9eb752353ab9a5241cf658d10e5f8c88c728908"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38574-ssc460-actor-boundary-post-v2/manifest.json",
+      "sha256": "0ff625fed17b8337c59a695dab4451a76490a2b876f6654a7fa53c8ac0add2d3"
+    }
+  ],
+  "sanitizedXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38574-ssc460-actor-boundary-post-v2/original-TEST-junit-jupiter.xml",
+    "sha256": "61e742bd49d258a57be80d6f04b08a501ffaa72f3b3dffba61aa8ec4993946b9"
+  },
+  "originalXmlHashOnly": {
+    "path": "../pgpt-runs/PG379/pg38572-ssc460-actor-boundary-unit-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "49d0116bf03b300d01d7ba7c384a6dc75fafbdd740431f126f069f16333d8652"
+  },
+  "originalXmlPrivacyProjectionSeparate": true,
+  "explicitSelectedCriteria": [
+    {
+      "testId": "PT-IDEM-CANONVALUE001",
+      "expected": "defensive copies of admitted fields and terminal wipe; absent differs from empty"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE002",
+      "expected": "fixed UTF-8 and signed-number hex vectors; invalid inputs rejected"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE003",
+      "expected": "NFC before admission; fixed layout identity and mandatory text"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE004",
+      "expected": "snapshot keeps declared field order and owner cleanup"
+    }
+  ],
+  "originalSuccessfulCandidates": [
+    "canonicalValue001RawNullableFieldMetadataCopyingAndTerminalWipeRemainDistinct()",
+    "canonicalValue002TextAndSignedNumberFactoriesMatchIndependentFixedHexAndErrorPaths()",
+    "canonicalValue003RequiredTextAndLayoutMetadataApplyNfcBeforeAdmittingCanonicalData()",
+    "canonicalValue004OrderedImmutableSnapshotAndAllRecordComponentsKeepOwnerCleanupObservable()"
+  ],
+  "defaultReportedCountersFromSeventeenCaseStream": {
+    "dev/codex/schubert/nk/api/idempotency/CanonicalField": {
+      "INSTRUCTION": {
+        "covered": 114,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 16,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 22,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 16,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/idempotency/CanonicalRequest": {
+      "INSTRUCTION": {
+        "covered": 100,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 23,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 11,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "rawNotReassigned": true,
+  "streamsMerged": false,
+  "actualJdbcMqAuthenticationOrKeyActions": 0,
+  "heldFixturesExamined": 0,
+  "newTestsExecuted": 0,
+  "remaining": [
+    "active typed registration and transport connection",
+    "whole API Maven compile and 451",
+    "real replay and owner integration"
+  ],
+  "originalRowDone": false,
+  "formalAcceptanceId": null
+}

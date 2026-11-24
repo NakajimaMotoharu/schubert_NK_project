@@ -1,0 +1,193 @@
+{
+  "run": "PG44284",
+  "source": "25a936f9211ec5ffd52adc31a25820058f8636cc",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T17:44:26.006349+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-P016-10/2",
+    "WBS-F03/2-2-b"
+  ],
+  "testIds": [
+    "PT-WATCH-DOM001",
+    "PT-WATCH-DOM002",
+    "PT-WATCH-DOM003",
+    "PT-WATCH-DOM004"
+  ],
+  "testSpec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4972_SCR010投影と共通媒体の接続単体仕様.md",
+    "sha256": "09af4abb2b42b75669478af0555f173fb900bfbe3a3c778ea7f833b012d45d1b"
+  },
+  "finalUnit": 4,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newDefinitions": 1,
+  "localTier": "closed UI view-to-rendered-HTML, no service",
+  "exactSdk": 20,
+  "resourceStageExact": 3,
+  "projectProtocolInputsExact": 11,
+  "modelPhysicalSame": 3,
+  "exactFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java",
+    "sha256": "100e82062b79ee462ef726ef484664fd17f78ea025564ad56ded412d1d7ffe91"
+  },
+  "templates": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+      "sha256": "381da2cbdaaa95a83e62f61c3bbc4b762b19b302e1ac8af95a7cd96c3641c8f7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/media.html",
+      "sha256": "1786ec016b9d981269e2112d5918f2743ee3573247a3d7453da5601bd38065ea"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    }
+  ],
+  "checks": {
+    "format": 0,
+    "spotless": 0,
+    "checkstyle": 0,
+    "compileTest": 0,
+    "pmd": 4,
+    "unit": 0
+  },
+  "pmdRaw5": [
+    {
+      "rule": "CloseResource",
+      "line": 235,
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "applicable": false,
+      "basis": "Pre-existing JUnit-owned finite local two workers, all eight joined, shutdown and await in finally; same method body except attribute literal. No product thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 235,
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "applicable": false,
+      "basis": "Pre-existing JUnit-owned finite local two workers, all eight joined, shutdown and await in finally; same method body except attribute literal. No product thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 241,
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "applicable": false,
+      "basis": "Pre-existing JUnit-owned finite local two workers, all eight joined, shutdown and await in finally; same method body except attribute literal. No product thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 256,
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "applicable": false,
+      "basis": "Pre-existing JUnit-owned finite local two workers, all eight joined, shutdown and await in finally; same method body except attribute literal. No product thread."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 257,
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "applicable": false,
+      "basis": "Pre-existing JUnit-owned finite local two workers, all eight joined, shutdown and await in finally; same method body except attribute literal. No product thread."
+    }
+  ],
+  "pmdApplicable": 0,
+  "newExcludedRules": 0,
+  "spotbugs": {
+    "actualExit": 0,
+    "source": "25a936f9211ec5ffd52adc31a25820058f8636cc",
+    "run": "PG44282",
+    "terminalAtUTC": "2026-11-24T17:43:29.162063+00:00",
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44282-watch-projection-fixture-typed-two/spotbugs.xml",
+      "sha256": "e8b41d88c61fda7c18f9f51cfe62df677e5738724ea0993b3eaffc70794eb5de"
+    },
+    "warnings": [],
+    "missing": 0,
+    "errors": 0,
+    "count": 2
+  },
+  "spotbugsTargets": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/fixture/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest$CatalogRow.class",
+      "sha256": "553c10957ced76d55e0a3afea522ec35ddc8b372e951d55698e2546a8e4c501a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/fixture/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.class",
+      "sha256": "cda5507e33e5861a64deee240ac277abd72217422a2c997232bd67cc22895641"
+    }
+  ],
+  "formatSelected": 1,
+  "ordinaryInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/begin.json",
+    "sha256": "3fe04f20aa284ef6b0a3f409e5902e6ff17b949a4600bd70b986d564da186600"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/terminal.json",
+    "sha256": "609dbfae308c354ad7ca0c1e2386b51e1f65300f5a733359ead5a1e3972bc956"
+  },
+  "toolLaunchOnlyFailed": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44278-watch-projection-template-final-four/terminal.json",
+    "sha256": "0a31a5e0abf94e46396812969fe5d9a756ccfc82d7d0203e73f12ddf4fdadbad"
+  },
+  "typedInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44282-watch-projection-fixture-typed-two/begin.json",
+    "sha256": "c7ea81a78417eeb1692ec9f808112fa4662652d40ec621b3d089bf0b12c4b320"
+  },
+  "typedTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44282-watch-projection-fixture-typed-two/terminal.json",
+    "sha256": "cd2d4dcd45d19417cd8c51e6a6a5d5bc88458836b56379013c154df5cc47c54d"
+  },
+  "checkstyle": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/checkstyle.xml",
+    "sha256": "1b15ab2e9001eac1c12e4669aa5f544b4ed56e8c1c3a36839c8a54e67abcb65c"
+  },
+  "pmdReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/pmd.xml",
+    "sha256": "66cee2f377aa99e8b1c8ed0914c014860c9650df3c27da21a57bf93a1a1b5ced"
+  },
+  "output": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/owned/WV004.html",
+    "sha256": "571b71cc21b06903b8f0f72958adb77233b1b8d71d201e5b11d267c1074d5cb8"
+  },
+  "caseReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44280-watch-projection-template-final-four/xml/TEST-junit-jupiter.xml",
+    "sha256": "1e3f538a2e4f770445aa456178a908af06000b5c8902d9738f3860e2d9e3108c"
+  },
+  "relatedOriginals": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41448-scr010-watch-pure-display-evidence-v1/manifest.json",
+      "sha256": "5d63681714ad9dfb07a7bf1cdb3a532917a5a3ed3704b1bf90a68f131720a115"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41654-p01610-animation-watch-runtime-comparison-v1/manifest.json",
+      "sha256": "c3d13c2556be00e27d3c1671ea7a47c1d68710e94e886a04cebfe211f955ccff"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42648-six-resource-fixture-43-current-v1/manifest.json",
+      "sha256": "4855375c4745623c581be4872e5fae38557753a669a8c6d3d60fb01eec801127"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44162-web-shared-template-67-final/manifest.json",
+      "sha256": "b9ee7ee53c0d1cc753318cd15ea349c0177a20fb2febef3702349f9555b76f8a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44262-web-only-maven-resources-byte-matches/manifest.json",
+      "sha256": "bd260f48d0b3b82e215a4be8b36ca555089b804e2332f3bc10f3b97aa99d723e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44276-watch-projection-template-ordinary-four/manifest.json",
+      "sha256": "5c543a78fd53cb8e935094c88165adf08236cb3c05b2479d5fd7ac6623e55eed"
+    }
+  ],
+  "originalModelFourRerun": 0,
+  "sameByteModelCertifiedOnSeparateHistoricalRun": true,
+  "countersCombined": false,
+  "whole451": false,
+  "remaining": [
+    "actual SCR010 route, service and Browser approvals",
+    "regular Web JAR and whole six-product 451"
+  ],
+  "formalAcceptanceId": null,
+  "codeFix": "25a936f9211ec5ffd52adc31a25820058f8636cc"
+}
