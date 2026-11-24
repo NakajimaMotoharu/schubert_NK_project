@@ -21,6 +21,7 @@ class QuestionAcceptedViewModelTest {
   private static final String RECEIPT = "01K00000000000000000000000";
   private static final String OTHER_RECEIPT = "01K00000000000000000000001";
   private static final String OWNER = "fixture-reader";
+  private static final String QUESTION_FIELD = "question";
   private static final long QUESTION = 19L;
   private static final Instant REFERENCE_AT = Instant.parse("2026-11-24T15:04:05.123Z");
   private static final Instant RESPONSE_AT = Instant.parse("2026-11-24T15:04:05.123Z");
@@ -35,7 +36,7 @@ class QuestionAcceptedViewModelTest {
   void accepted001RendersOnlyTheApprovedFieldsAndJstTime() {
     var model = model(fresh(QUESTION, RECEIPT, OWNER, "見本の質問", RESPONSE_AT));
     assertEquals(
-        Map.of("receiptId", RECEIPT, "submittedAt", "2026-11-25 00:04:05", "question", "見本の質問"),
+        Map.of("receiptId", RECEIPT, "submittedAt", "2026-11-25 00:04:05", QUESTION_FIELD, "見本の質問"),
         model.getValues());
     assertEquals("schubert NK", model.getTopBar().getBrand());
     assertEquals(OWNER, model.getTopBar().getUsername());
@@ -51,12 +52,14 @@ class QuestionAcceptedViewModelTest {
     String exactly = below + "𠮷";
     assertEquals(
         below,
-        model(fresh(QUESTION, RECEIPT, OWNER, below, RESPONSE_AT)).getValues().get("question"));
+        model(fresh(QUESTION, RECEIPT, OWNER, below, RESPONSE_AT)).getValues().get(QUESTION_FIELD));
     assertEquals(
         exactly,
-        model(fresh(QUESTION, RECEIPT, OWNER, exactly, RESPONSE_AT)).getValues().get("question"));
+        model(fresh(QUESTION, RECEIPT, OWNER, exactly, RESPONSE_AT))
+            .getValues()
+            .get(QUESTION_FIELD));
     var longResponse = fresh(QUESTION, RECEIPT, OWNER, exactly + "後", RESPONSE_AT);
-    assertEquals(exactly, model(longResponse).getValues().get("question"));
+    assertEquals(exactly, model(longResponse).getValues().get(QUESTION_FIELD));
   }
 
   /** PT-WEB-SCR019-VM003. */
