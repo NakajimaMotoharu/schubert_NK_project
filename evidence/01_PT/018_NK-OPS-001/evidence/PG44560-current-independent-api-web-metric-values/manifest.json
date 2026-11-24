@@ -1,0 +1,500 @@
+{
+  "run": "PG44560",
+  "source": "2192f5b81b344c2ff2c18f8ac11ce7dd41b7fc00",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-24T21:17:04.063273+00:00",
+  "initialSetupFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values/terminal.json",
+    "sha256": "ab0a41a382f3d45c7bbdfe32800adae61256d5748cde4b78fd0b5ecd1cbf1339"
+  },
+  "boundariesOutsideIndependentCheck": [
+    "ApiCustomMetricPayload",
+    "WebCustomMetricPayload",
+    "DbPoolMetricObservation",
+    "WebDbPoolMetricObservation"
+  ],
+  "sourceMainsUnchanged": true,
+  "actualUniqueScopedInputSummary": {
+    "api": 45,
+    "apiCountedAgainst": "Only two new verified compiler envelopes, not repository-wide tally",
+    "previousWeb": 51,
+    "web": 66
+  },
+  "scopes": {
+    "api": {
+      "inputs": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java",
+          "sha256": "8c60f981ee23028f0566d61447fb2bffdad75008d3bb0e206c3e91d4cac1e6af"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java",
+          "sha256": "c3d1fc99a2679fa8ef4e8ce19c4da32da376efba8cfb8c1dc8291ce8d0202979"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java",
+          "sha256": "5f37aad0fd0717c025cdda2a00b372c98e649bdfeb90f50917edc97b93dde1be"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java",
+          "sha256": "08f9ab87b7cd994f70fbb47c352d1e22def6dd787ab73625e73e6779527999ff"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java",
+          "sha256": "bcbe814f37ba7a9cdba482369fa7ab70c5688713249ab780c35b6eeba3190cd6"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+          "sha256": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+          "sha256": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+          "sha256": "8d1961d0ec2e51b4970102b5a3b810c9fbdc8d1398059de460249274d3bad01a"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+          "sha256": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java",
+          "sha256": "e3a039040d777390abdb6e20e9157f50b0d638b695d34e89f87d26da5a4a9121"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java",
+          "sha256": "80db82e8f57592a5b5cc1aded30fd72a3c8fe9d3ff813ac2c6fb45f832460b2f"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java",
+          "sha256": "ff09f8d1258c04d3b6d59136310a8d9681fe7f6172258d08d079c36f972d204d"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+          "sha256": "6446a7eb3accec378ceeeb0f4c85bfd6f4f1a39af82bce866333794dacbd986b"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java",
+          "sha256": "0f83ae3cc38efc4f5b0b96dac3623023a96393a6da61365111d4d3c29fb6c05c"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java",
+          "sha256": "74cef118229b3163b561702d8001e9cd0509bcc6ff6d6a56d2ccccf98de9de55"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+          "sha256": "dd027385f27bbe03bebbd5e7dd67a78626d8e27550eb1ed7428e876fc3ab9700"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+          "sha256": "c0d709475517e31192afe8486be24f7a88232a87dd43d0db4e77ce34dd78a7d5"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+          "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+        }
+      ],
+      "configuredNullAwayExit": 0,
+      "diagnostics": 0,
+      "compiledPhysical": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.class",
+          "sha256": "a972f89ae3c63655d9c24e6d56f8eaf6190799e4d99b1f1fc50cf91d070574b1"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.class",
+          "sha256": "24e1578ed56a5486bc58b85680432ece958e75031ae67b3ae31140062acf97ac"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.class",
+          "sha256": "89062f1505283df397dc507b07b849a3da422d00c25f88edc85d7534e3415a90"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.class",
+          "sha256": "c464e00588c4da73a966d9204ca51609a5c2542f76ed2827ffde2837075739ef"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$Snapshot.class",
+          "sha256": "6cda15a434650f9719d6702b35eb3f09c0f09dd6ed534e81b5a0b066242151d8"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$State.class",
+          "sha256": "adf7c0fa477eadea1ad0c564e218f19bb28e9a7c719c2b1a88851f75ed031dc6"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.class",
+          "sha256": "1a70b58558e71a9cb67d1a80bd45a4afbbecd713a0e234e7eb97934fecf1b32f"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts.class",
+          "sha256": "ff4f3d1fdad3b2a3259f4308910956510098dd41545c0a2402682fe849846f47"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State.class",
+          "sha256": "d9baa87093cc828ae23ab0b17bcc7a7a1fec80f519afd2356901d295a2c21b7e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.class",
+          "sha256": "58a88a076e477ae7719a1fe9be444b19ba5789030eccd438e53958a950b35c87"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder$Outcome.class",
+          "sha256": "3fe93e9445772ac1ee278965b6298946b3b7db3170d7f4798bf15489100ce826"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder$Query.class",
+          "sha256": "0173f88e96340d585579ae526ccf498765b7de9125d31789d3b80c2c64ae36c9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.class",
+          "sha256": "5633f30f058ef2175939be7b0ac721dfc77d537ab859265d7657e352f8ce752f"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary.class",
+          "sha256": "37c495db984b850d52ac53d05051774e52213aff111353ca7f02756194c8d0d8"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.class",
+          "sha256": "eee7509f0361813becdfa74927c8ea9bc05f5eeb2733ca36fdf705457edb2f18"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.class",
+          "sha256": "5c64fe9b31a22473313f874867b01cb3a1ce3013eae82012813b68ff30e38b50"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.class",
+          "sha256": "e44229fa281ae586c49a696a224ce013207d1d65a7fc7831bd2bb7e5e4ff0897"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder$Stage.class",
+          "sha256": "5b24dcd06cabda30daf8067e31dd95b31f110143f6b909bb21239d044daabf08"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.class",
+          "sha256": "f10738768aa83507bbe896755fdd4cd8838b6d9dba536afe7ba2878d11a8919a"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder$Snapshot.class",
+          "sha256": "0d7c6e6396c30777a995e2f54fdf42e10371a859d99ed13cb6f03c4e5f748f6b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.class",
+          "sha256": "ee1313586390205a5919203e4123b666b2c897ded021de9c2d87722e21e4fe2a"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder$Outcome.class",
+          "sha256": "3e17ebad5a667d7bb0a4702e2847d9196d91d15cbc4bd72c2009de9d32ba7e54"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.class",
+          "sha256": "f2e58c40f2b0e8b4564060db88017e8eef7fb44e2046e5086371d77fb86334b2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.class",
+          "sha256": "1f219b455a9c94115a967486fb85dbe5e09dd54527751993dc1cfb047f1a005e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder$Operation.class",
+          "sha256": "c071274b8bb2da9b36bc310adbb379e5d454dc1567785ac4f0c523cb83da31fb"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.class",
+          "sha256": "7422ebef187752d3a7b0d2397eed4c9e0d990e0bc267ae945e55e0019880afaf"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder$Ages.class",
+          "sha256": "6a2fc10b63065bb36fa04236eccfef34c4ea06449f0cffb214fce03ae5ee467e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.class",
+          "sha256": "b1fa45f1cbfa8b7601debed886de243d1d767cf787ea0f3be9ef260226e4ef2d"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts.class",
+          "sha256": "fc7dd9e1bcba005f001133e0651f84f5b41e34ba6fa9808389c0c529d32bfc87"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status.class",
+          "sha256": "aab37e0bc9e508a9fd6c4ef0cece55243b164e5a21a5f06c2322c725e0678d9f"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.class",
+          "sha256": "7840c3ad181234aebf3a5f2b3fef404a08087b253f9d3b160aaec3f8d34493e3"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/target/classes/dev/codex/schubert/nk/api/monitoring/package-info.class",
+          "sha256": "2c267c3a7f4cb2eb0e04e2e459ad4658735b02d04c64967861f7f1ba8b39eaae"
+        }
+      ],
+      "inputCount": 18,
+      "physicalCount": 32,
+      "mavenOutput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/api/maven.out",
+        "sha256": "e7f5f7f7be2c41dc8dd1ce5b618cbb36531463046b779fb3fa123bd19fdf680c"
+      },
+      "newToPreviousWebAudit": null
+    },
+    "web": {
+      "inputs": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+          "sha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java",
+          "sha256": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder.java",
+          "sha256": "e15d13589cf2a7e4faf0583ff2b6343847eaa357f79a2e215252bcc0be4ae413"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder.java",
+          "sha256": "e8caeff091b9ba3820cad256db365949bc277254651e01246193da4c534acd15"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java",
+          "sha256": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java",
+          "sha256": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java",
+          "sha256": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java",
+          "sha256": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java",
+          "sha256": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java",
+          "sha256": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java",
+          "sha256": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java",
+          "sha256": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java",
+          "sha256": "08425aad41ff6a7d17b0a2307392e888a8bbebf21189515573a301439eeae8eb"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+          "sha256": "ab404d162153fac50ce66667f87ab2bcad0c83339b48d8c4700eff9d815a6b03"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+          "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d"
+        }
+      ],
+      "configuredNullAwayExit": 0,
+      "diagnostics": 0,
+      "compiledPhysical": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels.class",
+          "sha256": "027eebec184d100c8e2ce1d77e0255fdf373caa70667a55ef8f3d36d71366093"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method.class",
+          "sha256": "295b08827d1342f21a403f93478f96f41524b4cd8bf9c6357c05c0cca7b795b1"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric.class",
+          "sha256": "bd0fab310b53f0cde5dcde5eb9f2d3eb411ba184fba0402c6c22616093a9b481"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route.class",
+          "sha256": "84a897107a84c6cf18686887fc910bb1c79546ae2c6f756614e91dd22729dc55"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status.class",
+          "sha256": "9c4f6916d4fe1dfe592dc05b1468a7e177ee72d6a730045befa5d177f217265c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.class",
+          "sha256": "75d77ef38c7733b739c54098d58f915d0c6992d2bcaaec2429c51e461b8d0cec"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.class",
+          "sha256": "dac47924fc0874167392d6b0ad6295197ed77f91b111720cb5bce1ab3e94df19"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder$Mode.class",
+          "sha256": "cbe7d46268c067b75eb5f00d8d0906ffaca332c8188ebd34234a12d02b5c92b2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder.class",
+          "sha256": "8f748e1b31696a6df1ee553d77f9dc5ca0a229efe68c2feaf6d300ebd55d49a6"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder.class",
+          "sha256": "01bedef70eadd33e42830ed90789ffb0a0dcc0af07a7385b746bc99e1d20cb79"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.class",
+          "sha256": "c545360982f18702d72d59234c4f7a30e3b6e56fd3a8ba1db7205e9024b631f5"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry$OverflowSafeTimer.class",
+          "sha256": "07a4c7cce39c2fd97f263ef2389b3a6bb1fb5cffc610e0cbb69b3aa5ce43ab6e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.class",
+          "sha256": "944cb2f10d8460daa4dcc4a31909c9ab73f0dece8642afad0f331974cfae57c8"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.class",
+          "sha256": "fea6b614ddc076bcc51a1a523f66cde6d7935452981d94fe44bba6c8c19a6660"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+          "sha256": "08bdc4bb9936469f62ae641bc6110dd685015c6027d89eab524529ef44e52ff3"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class",
+          "sha256": "b29aa6a4fe33b1358769f6416940f16ff7ea9c338c261a1386b62971910e12de"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+          "sha256": "e981ce38bee829a734ff43e058296360802f845884be366080c94a61f72e2418"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.class",
+          "sha256": "214c1a1af586892d1defc1e87b3c85793f09d484063cb9455e7ce80d224e33f0"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.class",
+          "sha256": "ec274b7ad44a26d464a8ccb317659d54ec302ba9b8a6f314f007daad43a13c5e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.class",
+          "sha256": "2bb199935869b53d3c8abc1dbfe678a289e18573f8aba5e5ffad31e0230f85c9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.class",
+          "sha256": "7a743eb0cd8d726362a19e122b1e0dc2d1bb25729fdac162a07fdd4651081888"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebMetricText.class",
+          "sha256": "f42bd4f3ad7ba624f04fc9a1154c1aade216f4a6613227b0a7a7f6d4754d6c7a"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Observation.class",
+          "sha256": "3d5aedbd411c1f8326cddf3fbfb760a258bd55b2270763bc61dbeba4692f6bd8"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Status.class",
+          "sha256": "57a65e1d45e1eb532f952762b1e544de941408856f7d77133a59a66b60564ca2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.class",
+          "sha256": "d532d33ad4ae574ec28e6fd773cf82769a2b0c39641ffa745c4e7000d20bdb1b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/target/classes/dev/codex/schubert/nk/web/monitoring/package-info.class",
+          "sha256": "7334c9f1dec9e978b793bc29b27709ec5871138508d8fd0056374aa1cc4cd9f8"
+        }
+      ],
+      "inputCount": 15,
+      "physicalCount": 26,
+      "mavenOutput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/web/maven.out",
+        "sha256": "3067ba948adad228fd045424d3fbb5189996e45b6ed1a8458709172d8ad7d0d6"
+      },
+      "newToPreviousWebAudit": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+          "sha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java",
+          "sha256": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder.java",
+          "sha256": "e15d13589cf2a7e4faf0583ff2b6343847eaa357f79a2e215252bcc0be4ae413"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder.java",
+          "sha256": "e8caeff091b9ba3820cad256db365949bc277254651e01246193da4c534acd15"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java",
+          "sha256": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java",
+          "sha256": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java",
+          "sha256": "a2524762cdc76d3f430cc76a6caf884cef86f39e61d341f399251006dee551d2"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java",
+          "sha256": "a57917dc639fc2b920a22e97abae60e48cb0ca590e917737acef1902dfa3f49c"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java",
+          "sha256": "63804a5937d78024748f2013e9f74fc5293e4174137599d5dfee4790dab00022"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java",
+          "sha256": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java",
+          "sha256": "8eede3e2f4e31276765a6b9eb13eac2da118102aad8fef73647d0c08e10031d0"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricText.java",
+          "sha256": "082d4e882e21f430d8ccac9e01b7796ea722103fc144465f4ccc64aebf23d375"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java",
+          "sha256": "08425aad41ff6a7d17b0a2307392e888a8bbebf21189515573a301439eeae8eb"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+          "sha256": "ab404d162153fac50ce66667f87ab2bcad0c83339b48d8c4700eff9d815a6b03"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+          "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d"
+        }
+      ]
+    }
+  },
+  "apiPrevious": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44558-current-api-inbox-and-command-value-nullaway/manifest.json",
+    "sha256": "c6517e11927943999aed349c2b99efea5a17ca8a7d57eb3f6dce31637aa595e8"
+  },
+  "webPrevious": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44556-current-menu-admin-question-web-view-nullaway/manifest.json",
+    "sha256": "51a0b71b825409d7579527ae3677546c5e1c36bcfd3523bffb66d5561d9c0899"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/begin.json",
+    "sha256": "acd6419dc87a0a98139ffc163b6c56a66f355bc346745dc7fd2b182067345d5f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44560-current-independent-api-web-metric-values-v2/terminal.json",
+    "sha256": "665065a48159e92b668c60f341748248d3b155417a59b70cab85c3fb9a410190"
+  },
+  "newJUnitCount": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
