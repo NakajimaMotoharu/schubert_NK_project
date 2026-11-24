@@ -613,6 +613,7 @@ public final class GateCli {
         Stream::close,
         files -> {
           return files
+              .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
               .filter(
                   path ->
                       ArtifactComparator.requiredArtifactFileName(path)
