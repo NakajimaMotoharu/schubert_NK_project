@@ -1,0 +1,207 @@
+{
+  "run": "PG44494",
+  "source": "35c09b8a14689945b91883d089f1de4893ca3e2b",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T19:55:24.782036+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P016-25.04/2",
+  "approvedDesign": [
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9"
+    }
+  ],
+  "newSpec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4992_管理三一覧の狭幅スクロール単体試験.md",
+    "sha256": "c1610476c90fa687e720f2123d6b01338a2a182d508ff7e83e4ce05ace41458f"
+  },
+  "resources": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44484-web-maven-resource-stage-after-narrow-tables/manifest.json",
+    "sha256": "898b442abf2e141d9073e1b9a3c747ef5a498e42c6767c94517cccbff262e647"
+  },
+  "previousRed": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44482-narrow-table-before/begin.json",
+      "sha256": "55d657624cf259a0f78f4592c2679f227c27102e7a7a69d138a60e7cf6c0fede"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44482-narrow-table-before/terminal.json",
+      "sha256": "fddd06b02d7c96438561dc41e0de209860a22153668455d57c5ce9b6255f8ca8"
+    },
+    "outcome": {
+      "compileExit": 0,
+      "testExit": 1,
+      "terminalAtUTC": "2026-11-24T19:52:26.963990+00:00",
+      "source": "9f9de415d2e9c52e19fc4d298c5ac9f18ec23f84",
+      "tests": 4,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44482-narrow-table-before/xml/TEST-junit-jupiter.xml",
+        "sha256": "08082a810f6fa32521cfe1244e6819690d3a8516696ffd75c79afb8142975751"
+      },
+      "names": [
+        {
+          "case": "questionListKeepsItsColumnsAndTheAdminOnlyOwnerColumn()",
+          "message": "questions/list ==> expected: <1> but was: <0>"
+        },
+        {
+          "case": "sharedStyleContainsHorizontalOverflowAtTheApprovedBreakpoint()",
+          "message": "expected: <true> but was: <false>"
+        },
+        {
+          "case": "userListKeepsAllEightColumnHeaders()",
+          "message": "admin/user-list ==> expected: <1> but was: <0>"
+        },
+        {
+          "case": "notificationListKeepsAllSixColumnHeaders()",
+          "message": "notifications/list ==> expected: <1> but was: <0>"
+        }
+      ]
+    }
+  },
+  "previousFixtureFormat": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44486-narrow-table-source-quality/begin.json",
+      "sha256": "d7661c62d0f0d7f254bd65d7a4f7471ffa4e63b38ce7c05841cb86fc898ffa49"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44486-narrow-table-source-quality/terminal.json",
+      "sha256": "9847ef21d3722f738242be758c2701455cff497867cbb2c578984370210998de"
+    },
+    "outcome": {
+      "run": "PG44486",
+      "source": "b49e0d342463f6f047b646b88d68e748bbae8557",
+      "terminalAtUTC": "2026-11-24T19:53:51.349186+00:00",
+      "exits": {
+        "google-java-format": 1,
+        "spotless": 1,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "ordinaryRenderedSix": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/begin.json",
+      "sha256": "63da7fc1cbd4ce92aa6319315c55017d5cdcc0eb9aef1231e8bec183f3cdd79a"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/terminal.json",
+      "sha256": "c0d42849021fc686d8ef25f15083bcbda7522eddf362907ce59f6e82defe5323"
+    },
+    "outcome": {
+      "source": "b49e0d342463f6f047b646b88d68e748bbae8557",
+      "terminalAtUTC": "2026-11-24T19:54:14.975670+00:00",
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/xml/TEST-junit-jupiter.xml",
+        "sha256": "446f275010281874a8c48b7e0a9a4815ebbde725cbd06f272f35156e2d03522f"
+      },
+      "actualExit": 0,
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "finalNewFour": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44490-narrow-table-current-package/begin.json",
+      "sha256": "d3ec3678711d30dff8ef6f025d35930cd4aba9ae9d0a4981825ad974d541b0ad"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44490-narrow-table-current-package/terminal.json",
+      "sha256": "9b19d83e1f183fc8ac5f76f18c85a8ba1d51ab7d0d1ca013132c909cf2e6aaf2"
+    },
+    "outcome": {
+      "compileExit": 0,
+      "testExit": 0,
+      "terminalAtUTC": "2026-11-24T19:54:47.910507+00:00",
+      "source": "35c09b8a14689945b91883d089f1de4893ca3e2b",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44490-narrow-table-current-package/xml/TEST-junit-jupiter.xml",
+        "sha256": "f91dba13e213f472d735a58edbaa7c5ef4f910acf64191e1fd1ff0eb034f44a9"
+      },
+      "names": [
+        {
+          "case": "questionListKeepsItsColumnsAndTheAdminOnlyOwnerColumn()",
+          "message": null
+        },
+        {
+          "case": "sharedStyleContainsHorizontalOverflowAtTheApprovedBreakpoint()",
+          "message": null
+        },
+        {
+          "case": "userListKeepsAllEightColumnHeaders()",
+          "message": null
+        },
+        {
+          "case": "notificationListKeepsAllSixColumnHeaders()",
+          "message": null
+        }
+      ]
+    }
+  },
+  "finalFixtureStatic": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44492-narrow-table-source-quality/begin.json",
+      "sha256": "2ed852faac37ca21096208940a5f156da57e1ccb82c91d573853d43e0668596e"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44492-narrow-table-source-quality/terminal.json",
+      "sha256": "de8b8d245904dcb80fcb3a1bd33bad2ac95b5e6c558c99541c9dfdc76c26f0ae"
+    },
+    "outcome": {
+      "run": "PG44492",
+      "source": "35c09b8a14689945b91883d089f1de4893ca3e2b",
+      "terminalAtUTC": "2026-11-24T19:54:49.644876+00:00",
+      "exits": {
+        "google-java-format": 0,
+        "spotless": 0,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "sourceRelativeVersions": {
+    "webAssets": "5e45698c10b98f8974de76875d5fd33516cc1b07",
+    "finalTest": "35c09b8a14689945b91883d089f1de4893ca3e2b"
+  },
+  "related": [
+    "BUG-3790",
+    "BUG-3791",
+    "YKT-2956"
+  ],
+  "differentRunsAggregatedFor451": false,
+  "confirmedScopeCssAndDomOnly": true,
+  "newProductTests": 4,
+  "existingNecessaryRegression": 6,
+  "realBrowser": false,
+  "newProductionJava": 0,
+  "actualFullCoverage": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
