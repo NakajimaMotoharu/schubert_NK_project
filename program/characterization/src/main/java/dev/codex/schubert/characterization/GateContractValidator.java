@@ -240,12 +240,19 @@ final class GateContractValidator {
         strings(schema.path("required")).equals(List.of(FIELD_VERSION, FIELD_CASES)),
         "SCHEMA_REQUIRED",
         failures);
-    JsonNode cases = schema.path("properties").path(FIELD_CASES);
+    JsonNode properties = schema.path("properties");
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(properties.path(FIELD_VERSION).path("const")),
+        "SCHEMA_VERSION_CONST",
+        failures);
+    JsonNode cases = properties.path(FIELD_CASES);
+    require("array".equals(cases.path("type").textValue()), "SCHEMA_CASES_TYPE", failures);
     require(integerEquals(cases.path("minItems"), 24), "SCHEMA_MIN_ITEMS", failures);
     require(integerEquals(cases.path("maxItems"), 24), "SCHEMA_MAX_ITEMS", failures);
+    JsonNode item = cases.path("items");
+    require("object".equals(item.path("type").textValue()), "SCHEMA_CASE_ITEM_TYPE", failures);
     require(
-        strings(cases.path("items").path("required"))
-            .equals(List.of("id", "group", FIELD_CURRENT, "nk")),
+        strings(item.path("required")).equals(List.of("id", "group", FIELD_CURRENT, "nk")),
         "SCHEMA_CASE_REQUIRED",
         failures);
   }

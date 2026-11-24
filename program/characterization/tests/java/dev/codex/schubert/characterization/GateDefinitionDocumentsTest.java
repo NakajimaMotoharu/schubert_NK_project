@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.InputStream;
@@ -255,6 +256,61 @@ final class GateDefinitionDocumentsTest {
         "SCHEMA_MIN_ITEMS",
         "SCHEMA_MAX_ITEMS",
         "SCHEMA_CASE_REQUIRED");
+  }
+
+  /** PT-CHR-DEF-SCHEMA001 / BUG-3805. */
+  @Test
+  void fixedSchemaVersionAndContainerTypesAreCheckedIndependently() throws Exception {
+    assertEquals(List.of(), validate(fixture()));
+    assertAll(
+        () ->
+            rejectSchemaValue(
+                "/properties/version",
+                "const",
+                JSON.getNodeFactory().textNode("1"),
+                "SCHEMA_VERSION_CONST"),
+        () ->
+            rejectSchemaValue(
+                "/properties/version",
+                "const",
+                JSON.getNodeFactory().numberNode(2),
+                "SCHEMA_VERSION_CONST"),
+        () ->
+            rejectSchemaValue(
+                "/properties/version", "const", MissingNode.getInstance(), "SCHEMA_VERSION_CONST"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases",
+                "type",
+                JSON.getNodeFactory().textNode("object"),
+                "SCHEMA_CASES_TYPE"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases", "type", MissingNode.getInstance(), "SCHEMA_CASES_TYPE"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases/items",
+                "type",
+                JSON.getNodeFactory().textNode("array"),
+                "SCHEMA_CASE_ITEM_TYPE"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases/items",
+                "type",
+                MissingNode.getInstance(),
+                "SCHEMA_CASE_ITEM_TYPE"));
+  }
+
+  private static void rejectSchemaValue(String pointer, String key, JsonNode value, String diagnostic)
+      throws IOException {
+    List<JsonNode> input = fixture();
+    ObjectNode container = object(input, SCHEMA).withObject(pointer);
+    if (value.isMissingNode()) {
+      container.remove(key);
+    } else {
+      container.set(key, value);
+    }
+    assertEquals(List.of(diagnostic), validate(input));
   }
 
   @Test
