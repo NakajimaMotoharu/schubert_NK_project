@@ -28,10 +28,10 @@
       <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${form.token})}">
       <ul th:replace="~{fragments/error-summary :: validationList(${form.issues})}"></ul>
       <div th:if="${form.operation == 'STATUS'}"><input type="hidden" name="enabled" th:value="${form.fields.enabled}"><span th:text="${form.fields.enabled ? '有効化' : '無効化'}"></span></div>
-      <label th:if="${form.operation == 'ROLE'}">Role<select name="role"><option value="USER" th:selected="${form.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${form.fields.role == 'ADMIN'}">ADMIN</option></select></label>
-      <div th:if="${form.operation == 'PASSWORD'}"><label>新Password<input type="password" name="password" required autocomplete="new-password"></label><label>Password確認<input type="password" name="password_confirmation" required autocomplete="new-password"></label></div>
+      <label th:if="${form.operation == 'ROLE'}">Role（必須）<select name="role" required><option value="USER" th:selected="${form.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${form.fields.role == 'ADMIN'}">ADMIN</option></select></label>
+      <div th:if="${form.operation == 'PASSWORD'}"><label>新Password（必須）<input type="password" name="password" required autocomplete="new-password"></label><label>Password確認（必須）<input type="password" name="password_confirmation" required autocomplete="new-password"></label></div>
       <span th:if="${form.operation == 'UNLOCK'}">Lock解除</span>
-      <label><input type="checkbox" name="confirm" value="true" required>確認</label>
+      <label><input type="checkbox" name="confirm" value="true" required>確認（必須）</label>
       <button type="submit">実行</button>
     </form>
   </section>
