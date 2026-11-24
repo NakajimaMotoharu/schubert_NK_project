@@ -1,0 +1,109 @@
+{
+  "run": "PG44476",
+  "source": "454ed5c7cc37f43b546c6040671fa30575928080",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-24T19:46:58.495937+00:00",
+  "actualExit": 0,
+  "related": [
+    "BUG-3787",
+    "BUG-3788",
+    "YKT-2955"
+  ],
+  "inputs": [
+    {
+      "path": "tools/quality/wbs_index_binding.py",
+      "sha256": "9f3596583e39aadadb6d6da2075d88d100e001d38b80bad78155f157c4d73221"
+    },
+    {
+      "path": "tools/quality/tests/test_wbs_index_binding.py",
+      "sha256": "c507eab94441249dc55db04752919e8c8d5aedc3bf5fe39589d428a3703ee2a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/580_wbs_inventory_reference_guard.py",
+      "sha256": "cfc95c15e4d2de59bfc91211d60766be6e877713799c078027084726878e58ce"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "46a9278ceb0155cad0f62df613ac79f9a819985251dd2076f81756c952708a46"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "8b3737de4aef22cdeec5a9851af3caa2a089a2b4fa90a48ebf796ced2d14cd1b"
+    }
+  ],
+  "commands": {
+    "unittest": [
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/quality/tests",
+      "-p",
+      "test_wbs_index_binding.py",
+      "-v"
+    ],
+    "bind-only": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/wbs_index_binding.py"
+    ],
+    "bind-and-roster": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/wbs_index_binding.py",
+      "--check-java-roster"
+    ]
+  },
+  "genuineBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44476-java-main-roster-tool/begin.json",
+    "sha256": "0b7535d606a93980a80ed2dfd3624607493ed7ec5dd79cd6fe78e84703e3b7a5"
+  },
+  "genuineTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44476-java-main-roster-tool/terminal.json",
+    "sha256": "c08392eee03e3abe5b708e4f33c5638b1b726ebddc3f37c84cabb6393cde6cdc"
+  },
+  "testResult": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44476-java-main-roster-tool/unittest.err",
+    "sha256": "842a881b3b128defdc80b59e10f1dd1849c1f9ca066420177155160207de4186"
+  },
+  "existingGuard": {
+    "bindingValid": true,
+    "inventorySha256": "46a9278ceb0155cad0f62df613ac79f9a819985251dd2076f81756c952708a46",
+    "productTestsExecuted": 0
+  },
+  "currentRoster": {
+    "bindingValid": true,
+    "inventorySha256": "46a9278ceb0155cad0f62df613ac79f9a819985251dd2076f81756c952708a46",
+    "productTestsExecuted": 0,
+    "trackedJavaMain": 1033,
+    "javaMainByModule": {
+      "protocol": 169,
+      "storage": 25,
+      "bootstrap": 88,
+      "api": 286,
+      "web": 262,
+      "batch": 203
+    }
+  },
+  "testsPassed": [
+    "test_both_matching_changes_are_admitted",
+    "test_java_roster_reads_staged_names_and_ignores_test_paths_and_worktree_edits",
+    "test_java_roster_rejects_duplicate_ownerless_or_wrong_module_rows",
+    "test_java_roster_rejects_symlink_without_reading_its_target",
+    "test_java_roster_reports_missing_and_retired_active_entries_together",
+    "test_missing_staged_snapshot_is_reported",
+    "test_non_json_constants_are_rejected_at_both_publication_entry_points",
+    "test_partial_add_fails_even_when_worktree_hash_matches",
+    "test_unchanged_staged_pair_ignores_dirty_worktree"
+  ],
+  "syntheticToolTestCount": 9,
+  "productTests": 0,
+  "noJdkJavaOrBackendReading": true,
+  "heldTypeBodiesRead": 0,
+  "noApplicationOrRemoteOperations": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
