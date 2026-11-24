@@ -1,0 +1,191 @@
+{
+  "run": "PG44538",
+  "source": "d0235bed43737ef08dc62ddcc8b9f09cb890296b",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T20:54:25.872059+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P006-01/2",
+  "sourceAndFixture": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+      "sha256": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java",
+      "sha256": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "sha256": "b6c9f88c29168356f36c4a11018716ff67f96788224bcf8cbba330372c488e10"
+    }
+  ],
+  "exactCompilePhysical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/target/classes/dev/codex/schubert/nk/api/idempotency/CanonicalField.class",
+      "sha256": "abfc749fc15c277e162a6e967fa0cd56aaba29c48d7f16cf47046a3e47d434e1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/target/classes/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.class",
+      "sha256": "d65f2dfc6c167569561d789d16e67d244eed7c424022321aa272f0fda968b620"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/target/classes/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.class",
+      "sha256": "5c27a9e8350a7df2ce3b67d8ae33619468c0515e02aa87b7316313501d0fc5be"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/target/classes/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.class",
+      "sha256": "7deac310c1ca5399ea3cc1d8ad2d392097adaadd0abb191799fc1bfcfbcd2faf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/target/classes/dev/codex/schubert/nk/api/idempotency/package-info.class",
+      "sha256": "403adc29e1ba04649770c841d9eb0fe31a0edb25e3f8453cca87709129877910"
+    }
+  ],
+  "ptSection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/4056_Canonical_UTF16・NKOP1_単体テスト仕様書.md",
+    "sha256": "064e63795390a070fa0518978745c14bf85f5eb50a8b613053018ddc6f0536b9"
+  },
+  "independentCriteria": [
+    "PT-IDEM-001 fixed canonical and HmacSHA256 outputs",
+    "PT-IDEM-002 NFC and absent versus empty fields"
+  ],
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "sha256": "f9381d0cb98abaaf9592dae421eddc497e84ed9bfb723b84c111d1350863c3a2"
+    }
+  ],
+  "rootPOM": {
+    "path": "pom.xml",
+    "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+  },
+  "compileNullAway": 0,
+  "actualCount": 2,
+  "results": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "oldSetupFail": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two/terminal.json",
+    "sha256": "64ad4ae9dca72c244122b97958fca4f184276735bb64b1e47e42c9473e4b97f4"
+  },
+  "setupFailureNotProductDefect": "Declared support source was missing from first scratch copy.",
+  "rawTwoTypesMissedCovered": {
+    "dev/codex/schubert/nk/api/idempotency/OperationFingerprint": {
+      "INSTRUCTION": [
+        49,
+        167
+      ],
+      "BRANCH": [
+        1,
+        5
+      ],
+      "LINE": [
+        4,
+        42
+      ],
+      "COMPLEXITY": [
+        3,
+        10
+      ],
+      "METHOD": [
+        2,
+        8
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream": {
+      "INSTRUCTION": [
+        42,
+        56
+      ],
+      "BRANCH": [
+        2,
+        2
+      ],
+      "LINE": [
+        9,
+        16
+      ],
+      "COMPLEXITY": [
+        4,
+        5
+      ],
+      "METHOD": [
+        2,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "olderReferenceResults": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26646-canonical-whole10-v2/manifest.json",
+      "sha256": "8cb825de45e190b646b3dca47f7ace92bba6253cbb4606a66db7ed569a56ac23"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44070-current-two-canonical-spotless-fixtures/manifest.json",
+      "sha256": "dd0b8e139784b122145362177d5142675bcbb1bd59dc4afa08afda11b0b5a3b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44274-api-canonical-value-current-four-input-criteria/manifest.json",
+      "sha256": "81303064b18ca92155ed0ec4ebf36e6370d51ce41b128b4c42b83312984471df"
+    }
+  ],
+  "commands": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/begin.json",
+    "sha256": "91c5229f9bfb97e412d47e7afa0f898635e3029caa9c14ae27767e34ec26ac19"
+  },
+  "testTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/terminal.json",
+    "sha256": "913a7a1ac0386af79f9064681755ec28d6a83624d8aa82b986f62a8b6f85f2b5"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "fc177f617e90fd3d1fe8b94af6f80a80f0dcba40637688a97ce52039d016225d"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/selected.exec",
+    "sha256": "dd568a2358ce275312d28e89b95355637591c0afb9e8273a0ab56e18bbb3d35b"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44538-canonical-fixed-current-input-two-v2/raw.stdout",
+    "sha256": "733e477be4c8ff4bdb9f1edd3d041959beba4dd27bdd2a36e841b2b414f144e0"
+  },
+  "realSecretDbJmsOrProviderMutationActions": 0,
+  "additionalFormalAcceptance": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

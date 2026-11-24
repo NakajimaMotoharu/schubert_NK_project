@@ -1,0 +1,114 @@
+{
+  "eventId": "PGPT-20261008-10074",
+  "source": "d0235bed43737ef08dc62ddcc8b9f09cb890296b",
+  "productionCoreMain": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P006-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P006-01/2",
+    "元行": "WBS-P006-01/2",
+    "費目": "B",
+    "主担当": "WBS-P006-01",
+    "状態": "計画",
+    "作業": "Inbox原子的処理・同一結果replay／同source証拠による受入判定",
+    "残pp": "0.423",
+    "着手": "設計324・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Inbox原子的処理・同一結果replay：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-103",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-103",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.163",
+    "慎重pp": "0.845",
+    "要求設計の版差": "PT基準仕様 NK-MSG-002、SS 324",
+    "lineNumber": 333,
+    "改訂残pp": "0.423",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44540",
+  "startEvent": "PGPT-20261008-10073",
+  "workCategory": "SELECTED_TEST",
+  "outcome": "同現物で独立4件全成功。短い公開合成入力の拒否と補助文字vectorを追加し、OperationFingerprint生B6/6到達。生L43/46・M8/10、別Buffer B2/4は未達。別execを結合せず実鍵・provider変更・DB未実施。",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44540-canonical-boundaries-single-exec/manifest.json",
+    "sha256": "3527d09c5b82963be14dfd503ee0e83d8c9d0369112649f540bc2bdedc97a5ab"
+  },
+  "nextEvidence": "G13.07の独立補助作業として、4197以降の非Web Java試験差分11と比較工具3を元証跡／書式のみ／業務環境保留に分ける。次いでF03の欠測を通常PTで補う。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T20:55:57+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 19,
+      "remainingPercent": 81,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 19,
+    "remainingPercent": 81,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "acc37b49c9d34ce217faacbecb0b3c5a0154c2ca19ad9e59127db2378e8f3637",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-24T20:55:57+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 19,
+        "remainingPercent": 81,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 1,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-24T20:55:48.987070+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 18,
+    "remainingPercent": 82,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
