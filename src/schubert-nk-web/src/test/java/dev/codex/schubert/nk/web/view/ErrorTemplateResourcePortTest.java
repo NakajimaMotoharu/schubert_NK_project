@@ -3,10 +3,15 @@ package dev.codex.schubert.nk.web.view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -26,7 +31,7 @@ final class ErrorTemplateResourcePortTest {
   private static final String DISPLAY_NAME = "利用者 <表示> & 確認";
   private static final String NAV = "header.topbar nav a";
 
-  private static Document render(int status, String message, Optional<Map<String, String>> topBar) {
+  private static Document render(ErrorViewModel page) {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setMethod("GET");
@@ -42,8 +47,6 @@ final class ErrorTemplateResourcePortTest {
     resolver.setCacheable(false);
     var engine = new SpringTemplateEngine();
     engine.setTemplateResolver(resolver);
-    var page =
-        Map.of("topBar", topBar, "status", status, "message", message, "requestId", REQUEST_ID);
     return Jsoup.parse(
         engine.process(
             "error/error", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
@@ -51,7 +54,10 @@ final class ErrorTemplateResourcePortTest {
 
   @Test
   void displaysOnlyAnonymousNavigationAndFixedErrorText() {
-    var document = render(404, NOT_FOUND, Optional.empty());
+    var document =
+        render(
+            ErrorViewModel.of(
+                ErrorViewModel.Status.NOT_FOUND, UUID.fromString(REQUEST_ID), Optional.empty()));
 
     assertEquals("エラー - schubert NK", document.title());
     assertEquals("ja", document.select("html").attr("lang"));
@@ -68,8 +74,19 @@ final class ErrorTemplateResourcePortTest {
   @Test
   void displaysEscapedIdentityAndLogoutForEitherDisplayRole() {
     for (String role : List.of("USER", "ADMIN")) {
-      var topBar = Map.of("brand", "schubert NK", "username", DISPLAY_NAME, "role", role);
-      var document = render(403, FORBIDDEN, Optional.of(topBar));
+      var displayPrincipal =
+          new SessionPrincipal(
+              DISPLAY_NAME,
+              UserRole.valueOf(role),
+              AuthenticationContext.of("12".repeat(32)),
+              Instant.EPOCH);
+      var topBar = TopBarViewModel.from(displayPrincipal);
+      var document =
+          render(
+              ErrorViewModel.of(
+                  ErrorViewModel.Status.FORBIDDEN,
+                  UUID.fromString(REQUEST_ID),
+                  Optional.of(topBar)));
 
       assertEquals(List.of("/", "/notifications"), document.select(NAV).eachAttr("href"));
       assertEquals(List.of("メニュー", "通知"), document.select(NAV).eachText());
