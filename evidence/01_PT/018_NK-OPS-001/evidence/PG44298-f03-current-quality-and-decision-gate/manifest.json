@@ -1,0 +1,147 @@
+{
+  "run": "PG44298",
+  "source": "af91c82fdbb95f363928d6535a9f6bbb37977b0b",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T17:51:29.490636+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-F02-b-a"
+  ],
+  "originalSixReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44184-f03-four-role-six-product-current-review-matrix/manifest.json",
+    "sha256": "b57e97e7221fce94ffc85dca95d43feba7b747bea14711a4a7d3f6ce7ecad3db"
+  },
+  "currentCriteriaSource": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "1612ea760b1802d217977060fd0a0f6fc8230121d2af0497c075d0941151d828"
+  },
+  "decisions": [
+    {
+      "id": "F03/2-2-a",
+      "condition": "admissibility of held types/test inputs",
+      "decision": "INCOMPLETE",
+      "owner": "品質・承認担当",
+      "admittedMain": 1028,
+      "heldMain": 5,
+      "heldTestFiles": 32,
+      "heldRoot11": "separate"
+    },
+    {
+      "id": "F03/2-2-b",
+      "condition": "current typed checks and exact endings",
+      "decision": "MEASURED_PARTIAL",
+      "owner": "品質担当",
+      "verifiedChangedWebTestFiles": 2,
+      "typedClasses": 3,
+      "finalUnitCases": 13
+    },
+    {
+      "id": "F03/2-3-a",
+      "condition": "whole collection from the same candidate",
+      "decision": "DEPENDENCIES_NOT_FULFILLED",
+      "owner": "品質・ビルド担当",
+      "verifiedConventionalCompileMain": 485,
+      "pendingRegularApiWebMain": 548
+    },
+    {
+      "id": "F03/2-3-b",
+      "condition": "effective owner acceptance with all 451",
+      "decision": "NOT_ACCEPTED",
+      "owner": "品質担当",
+      "officialAcceptanceId": null
+    },
+    {
+      "id": "F02-b-a",
+      "condition": "six normal packages plus storage ownership",
+      "decision": "MEASURED_PARTIAL",
+      "owner": "ビルド・アーキテクチャ／Storage担当",
+      "normalArchiveCount": 4,
+      "currentResourceMembers": 66
+    }
+  ],
+  "formattingScope": {
+    "mainCurrent": 1028,
+    "mainTotal": 1033,
+    "testCurrent": 1153,
+    "testTotal": 1185,
+    "heldTestFiles": 32
+  },
+  "normalClassCounts": {
+    "protocol": 176,
+    "storage": 79,
+    "bootstrap": 201,
+    "batch": 660,
+    "api": null,
+    "web": null
+  },
+  "batchTypedLineage": {
+    "admitted": 278,
+    "outsideCurrentComparison": 382,
+    "sameWhole451Run": false
+  },
+  "witnessDelta": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44228-current-batch-typed-candidate-278-after-format/manifest.json",
+      "sha256": "5fbb0d5ffe5dda1d3e1ab4116acaed9814a5e225fbd005f46f735cbeba523949"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44252-claimed-row-independent-current-quality/manifest.json",
+      "sha256": "b491d800dfb97781497c009837c25c759b310c75aa3aa9b8bfa92f842fa1c64b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44262-web-only-maven-resources-byte-matches/manifest.json",
+      "sha256": "bd260f48d0b3b82e215a4be8b36ca555089b804e2332f3bc10f3b97aa99d723e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44264-api-only-maven-resources-byte-matches/manifest.json",
+      "sha256": "e9eb1d2488aac2b1aba889274d4199612b07b635af7ea1d06d4f26bc9cdbd69d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44274-api-canonical-value-current-four-input-criteria/manifest.json",
+      "sha256": "81303064b18ca92155ed0ec4ebf36e6370d51ce41b128b4c42b83312984471df"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44284-watch-projection-template-and-static/manifest.json",
+      "sha256": "4574390b4dfab5b38f078c4cb02125eb3f12d245cf01dc1faa6b0c589c2f2721"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44294-music-pair-template-and-static-evidence/manifest.json",
+      "sha256": "03b2a4b0539911013e5446110c75c031c1cfde9ee9da0e33569f923739f27ee0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44296-music-hierarchy-current-two-owner-display/manifest.json",
+      "sha256": "8c0084c4b7c16f2f1d42c8076f6f223cc18f9b72c39114de2f70461ede9203aa"
+    }
+  ],
+  "requirementsMissing": [
+    {
+      "input": "QA-056 three API and one Web types; separate Bootstrap scope",
+      "owner": "承認・品質担当",
+      "received": null
+    },
+    {
+      "input": "QA-062 artifact CRLF scope",
+      "owner": "設計・基盤担当",
+      "received": null
+    },
+    {
+      "input": "SSC-461 Storage three sites, legacy 21, two held fixtures",
+      "owner": "Storage／API・Batch・Bootstrap担当",
+      "received": null
+    },
+    {
+      "input": "same source six package, all true terminal, independent coverage and signature",
+      "owner": "ビルド・品質担当",
+      "received": null
+    }
+  ],
+  "allowedEvidenceReuseNotFormal": true,
+  "sameRunAssembled": false,
+  "whole451": false,
+  "namedOriginalRowsClosed": 0,
+  "newRunCount": 0,
+  "scheduledJudgmentJST": "2026-12-02T23:29:00+09:00",
+  "handoffDueJST": "2026-11-25T23:29:00+09:00",
+  "formalAcceptanceId": null
+}
