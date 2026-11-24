@@ -22,7 +22,8 @@ final class CleanupRejectedValueTest {
   private static final BatchRun RUN = new BatchRun(new UUID(0, 30), CUTOFF);
   private static final BatchRun OTHER_RUN = new BatchRun(new UUID(0, 31), CUTOFF);
   private static final BatchStepResult SUCCESS =
-      new BatchStepResult(BatchStepResult.Status.SUCCESS, 11, 11, 0, 135, BatchStepResult.Reason.NONE);
+      new BatchStepResult(
+          BatchStepResult.Status.SUCCESS, 11, 11, 0, 135, BatchStepResult.Reason.NONE);
   private static final BatchStepResult SKIPPED =
       new BatchStepResult(
           BatchStepResult.Status.SKIPPED, 0, 0, 0, 0, BatchStepResult.Reason.BACKUP_UNAVAILABLE);
@@ -31,8 +32,7 @@ final class CleanupRejectedValueTest {
 
   @Test
   void keepsSuccessfulRunningSkippedAndAbsentSlotsDistinct() {
-    var success =
-        terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS);
+    var success = terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS);
     var running =
         new RejectedEntry(
             attempt(22, RUN, BatchStep.CLEAN_SESSION, false), Optional.empty(), Optional.empty());
@@ -68,7 +68,9 @@ final class CleanupRejectedValueTest {
 
     var foreign = sevenSlots();
     foreign.set(
-        0, Optional.of(terminal(attempt(21, OTHER_RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS)));
+        0,
+        Optional.of(
+            terminal(attempt(21, OTHER_RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS)));
     assertInvalidSnapshot(foreign);
 
     var duplicate = sevenSlots();
@@ -116,12 +118,10 @@ final class CleanupRejectedValueTest {
     missing.set(4, null);
     assertThrows(NullPointerException.class, () -> new RejectedSnapshot(RUN, missing));
     assertThrows(
-        NullPointerException.class,
-        () -> new RejectedEntry(attempt, null, Optional.of(SUCCESS)));
+        NullPointerException.class, () -> new RejectedEntry(attempt, null, Optional.of(SUCCESS)));
   }
 
-  private static BatchStepAttempt attempt(
-      long id, BatchRun run, BatchStep step, boolean skipped) {
+  private static BatchStepAttempt attempt(long id, BatchRun run, BatchStep step, boolean skipped) {
     return new BatchStepAttempt(id, run, step, 1, START, skipped);
   }
 
