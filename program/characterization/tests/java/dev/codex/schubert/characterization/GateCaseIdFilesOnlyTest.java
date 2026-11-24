@@ -22,4 +22,9 @@ final class GateCaseIdFilesOnlyTest {
 
     assertEquals(List.of("CHR-A03", "CHR-L01"), GateCli.caseIds(artifacts));
   }
+
+  @Test
+  void caseIdsIsEmptyWhenTheArtifactDirectoryIsAbsent() throws IOException {
+    assertEquals(List.of(), GateCli.caseIds(artifacts.resolve("missing")));
+  }
 }
