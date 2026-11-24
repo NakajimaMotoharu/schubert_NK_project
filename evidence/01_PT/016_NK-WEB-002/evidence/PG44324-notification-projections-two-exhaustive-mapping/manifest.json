@@ -1,0 +1,269 @@
+{
+  "run": "PG44324",
+  "source": "4e711266e83bf9e38024bf067011994d373857be",
+  "productionCore": "4e711266e83bf9e38024bf067011994d373857be",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P016-20/2",
+    "WBS-P016-21/2"
+  ],
+  "terminalAtUTC": "2026-11-24T18:10:03.461360+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3778",
+  "horizontal": "YKT-2950",
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4976_通知表示の固定対応表と全状態の単体仕様.md",
+    "sha256": "d3b19287f9e44661c37f34b1f5b2cd01eb852801f32602a83b894eb547d10c15"
+  },
+  "relatedPrior": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44132-current-scr020-notification-list-values/manifest.json",
+      "sha256": "3a2d942b0f6c0bc013cd605962d3a81a9a6b3c459481354d63e609ce741313b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44134-current-notification-typed-and-detail-raw-lineage/manifest.json",
+      "sha256": "49f61e29e6828abdfedc42baff8f4fa006d6289f2c420e65a299b4f3433ce3ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41608-f03-notification-list-detail-typed-v1/manifest.json",
+      "sha256": "40d3252ca76787c5096e353b451f8eec62a45ce9bc5abb128d6374d2722f98ef"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41640-p01621-notification-detail-current-eight-v1/manifest.json",
+      "sha256": "b567d781d9102152e0ccc4d36bf49c34c2cf01344710fae9544234c3b9665a5a"
+    }
+  ],
+  "mainDeltaOnlyTwo": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java",
+      "sha256": "9a8a0a926aa49e0bcce2d59534442a51408623dc7c1f0887fcc2f4fe63cf64af"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java",
+      "sha256": "fa9806f5b2148fb877694412eacfd00d1f2825291585fb1f8dc5f64b2efe38b1"
+    }
+  ],
+  "ordinary22": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scopes": {
+    "NotificationListProjectionPortTest": {
+      "approvedTestIds": [
+        "PT-WEB-NLIST001",
+        "PT-WEB-NLIST002",
+        "PT-WEB-NLIST003",
+        "PT-WEB-NLIST004",
+        "PT-WEB-NLIST005",
+        "PT-WEB-NLIST006",
+        "PT-WEB-NLIST007",
+        "PT-WEB-NLIST008",
+        "PT-WEB-NLIST009",
+        "PT-WEB-NLIST010",
+        "PT-WEB-NLIST011",
+        "PT-WEB-NLIST012",
+        "PT-WEB-NLIST013",
+        "PT-WEB-NLIST014"
+      ],
+      "actualMethods": [
+        "invalidFormsStayUnpaginated()",
+        "copiedInputDoesNotChangeRows()",
+        "parallelViewsKeepActorsSeparate()",
+        "allStatesProduceApprovedLabels()",
+        "rowCountMismatchRejects()",
+        "wrongEffectivePageRejects()",
+        "orderRulesAreIndependent()",
+        "unicodeSummaryBoundaryAndDeletedLiteral()",
+        "pagingLinksKeepFiltersAndClamp()",
+        "nullBoundariesReject()",
+        "inconsistentStateAndDeletedSummaryReject()",
+        "outputCollectionsAreImmutable()",
+        "emptyReturnsPlainView()",
+        "duplicateIdsReject()"
+      ]
+    },
+    "NotificationDetailProjectionPortTest": {
+      "approvedTestIds": [
+        "PT-WEB-NDETAIL001",
+        "PT-WEB-NDETAIL002",
+        "PT-WEB-NDETAIL003",
+        "PT-WEB-NDETAIL004",
+        "PT-WEB-NDETAIL005",
+        "PT-WEB-NDETAIL006",
+        "PT-WEB-NDETAIL007",
+        "PT-WEB-NDETAIL008"
+      ],
+      "actualMethods": [
+        "completedHasExactFields()",
+        "unicodeAndMarkupStayText()",
+        "targetNullAndSemanticMismatchReject()",
+        "completedMayHaveEmptyAnswer()",
+        "immutableRedactedProjection()",
+        "parallelProjectionKeepsActorsSeparate()",
+        "allStatesHaveLiteralLabelsAndTimes()",
+        "deletedQuestionsRetireAnswerAndLink()"
+      ]
+    }
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/report/TEST-junit-jupiter.xml",
+    "sha256": "4f7566d468c35233be5512cdf5dca726e947391110044837ec0e398599ed36e0"
+  },
+  "sameStream": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/selected.exec",
+    "sha256": "4023202a196fa10086e46ad1bcabf1ab98c558f66585e19552d062eb217679cc"
+  },
+  "unfilteredReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/raw.out",
+    "sha256": "296d3c07e1f11c1069766e5f44be358281445d20c5332161e915d60d780a96f1"
+  },
+  "measured": {
+    "NotificationListViewModel": {
+      "crc": "941bb7e7b2347f02",
+      "unfiltered": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 400
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 73
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 33
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 16
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "NotificationDetailViewModel": {
+      "crc": "c8e0af59922c89a1",
+      "unfiltered": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 261
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 47
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "olderStreamsMerged": false,
+  "publicAbiUnchanged": {
+    "NotificationListViewModel": {
+      "publicAbi": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44324-notification-display-public-abi/NotificationListViewModel.txt",
+        "sha256": "8eef00d40953a993c56085787e3bc10cb546f376f5ea4e5de70e16b259c70b7d"
+      },
+      "old": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44132-scr020-current-projection/product/dev/codex/schubert/nk/web/view/NotificationListViewModel.class",
+        "sha256": "e01956991b7f7d9c3fa7f66374c6e7c7c7f7b1bc24561ca2b899bbc2d80371c2"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/target/classes/dev/codex/schubert/nk/web/view/NotificationListViewModel.class",
+        "sha256": "dcbfa042c19abde4fd59846d47e559b80561d95dd377529c29bbe73ff4464db4"
+      }
+    },
+    "NotificationDetailViewModel": {
+      "publicAbi": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44324-notification-display-public-abi/NotificationDetailViewModel.txt",
+        "sha256": "330710d6fbd8089d03395887c9371b4b46a6b8bf285e0b320ff49246f00f7386"
+      },
+      "old": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41640-p01621-notification-detail-current-eight-v1/main/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.class",
+        "sha256": "98240088ebddf2149e8b4cb828c9103892d66f7d1ea0c98f181ef76ab52341ae"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/target/classes/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.class",
+        "sha256": "e676000923b4431ab03a5af7c5a2c1cf6233b7a0eb8df92f96d5645726acb6cf"
+      }
+    }
+  },
+  "removedPredecessorGeneratedSwitchMaps": 2,
+  "explicitCoverageExclusion": 0,
+  "productNullAwaySixAndRuleExit": {
+    "format": 0,
+    "spotless": 0,
+    "checkstyle": 0,
+    "mvnNullAway": 0,
+    "compileFixtures": 0,
+    "pmd": 0,
+    "unit": 0,
+    "raw": 0
+  },
+  "spotbugs": {
+    "source": "4e711266e83bf9e38024bf067011994d373857be",
+    "run": "PG44322",
+    "terminalAtUTC": "2026-11-24T18:08:58.104675+00:00",
+    "actualExit": 0,
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44322-notification-projections-typed-two/spot.xml",
+      "sha256": "88bf4ca091e5a0339488835ac0b5205eda3e6104933466a3008852b6b75562b2"
+    },
+    "bugCount": 0,
+    "missing": 0,
+    "errors": 0,
+    "total": 2
+  },
+  "sameByteFourOwnedAuxiliaries": {
+    "dev/codex/schubert/nk/web/form/NotificationSearchForm.class": "2ce24ffe0622d0b5522f41e58b3990b605f4d44f244134f05f937d6290840c77",
+    "dev/codex/schubert/nk/web/session/SessionPrincipal.class": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+    "dev/codex/schubert/nk/web/view/PageViewModel.class": "79f1a49b217008d873518ba2da6f5e871ed0a2e5f13f74ca9336675a65fd6a21",
+    "dev/codex/schubert/nk/web/view/TopBarViewModel.class": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+  },
+  "execution": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/begin.json",
+      "sha256": "ecfb9d8f81532e267eb419b300652bb0492d3a405d3f417b6fbd7e5315ad338c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44320-notification-projections-fixed-mapping-scope/terminal.json",
+      "sha256": "86679ac31a3fa5d086504e352288c500127a2f373b12f04a29b798c33a857a6d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44322-notification-projections-typed-two/begin.json",
+      "sha256": "c4b0124766a1ac72637e064932c4a76bf9329661b1b787a82eba33220fb21050"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44322-notification-projections-typed-two/terminal.json",
+      "sha256": "a1a025f5de8632b89629cef8cafc0a665c997e9120d113142c204361d17dcd0b"
+    }
+  ],
+  "regularProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "wholeProductGate": false,
+  "actualBusinessSideEffects": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
