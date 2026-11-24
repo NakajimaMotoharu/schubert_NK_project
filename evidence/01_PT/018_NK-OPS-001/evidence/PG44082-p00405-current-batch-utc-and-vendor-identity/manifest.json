@@ -1,0 +1,110 @@
+{
+  "run": "PG44082",
+  "source": "e45924a0c99ca5f32ddc28e3bed504f450a7e5fb",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-24T14:44:35.407609+00:00",
+  "oldCriterionTable": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43384-p00405-jdbc-literal-and-owner-criterion-v1/manifest.json",
+    "sha256": "d45a69b046219d7881bd12823e117aa02ab727e1259cc999567a6c72f1a43b19"
+  },
+  "exactVendorEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43148-p00405-jdbc-utc-vendor-applicability-v1/manifest.json",
+    "sha256": "992762b408a8f43b12ba9288c0e8063613e96e8ca898d09ce7c7cde13538e92a"
+  },
+  "jdbc42DriverVersion": "42.7.13",
+  "poms": [
+    {
+      "mod": "api",
+      "version": "42.7.13",
+      "input": {
+        "path": "src/schubert-nk-api/pom.xml",
+        "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+      }
+    },
+    {
+      "mod": "batch",
+      "version": "42.7.13",
+      "input": {
+        "path": "src/schubert-nk-batch/pom.xml",
+        "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+      }
+    },
+    {
+      "mod": "bootstrap",
+      "version": "42.7.13",
+      "input": {
+        "path": "src/schubert-nk-bootstrap/pom.xml",
+        "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+      }
+    }
+  ],
+  "vendorProjections": 54,
+  "regularBatch": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+    "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+  },
+  "currentSynthetic": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43954-ssc481-error-checked-and-pmd-site-evidence/manifest.json",
+    "sha256": "57189c0b7b5b806e2febe56a54d7404379ac17ebf91903cbef2e2f5503a285fa"
+  },
+  "currentSyntheticIndependentMethods": [
+    {
+      "method": "utc009DistinctCloseFailuresRemainOrderedOnTheOriginalRuntimeFailure()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc005MissingHandlesAndUnexpectedRowCountsRetainOnlyOwnedCloses()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc007ProjectionAndBothOwnedCloseFailuresKeepOneFixedDiagnostic()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc004EveryOtherRequiredProjectionColumnRejectsNullIndependently()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc012CheckedGuardFailureAfterRowCloseSurvivesStatementClose()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc010EachCloseOnlyFailureUsesTheFixedDiagnosticAfterBothReleases()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc008SameProviderExceptionFromUseAndReleaseKeepsFixedDiagnostic()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc006RunIdentityMustRemainConsistentBeforeAndAfterBothRows()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    },
+    {
+      "method": "utc011RepeatedErrorRemainsPrimaryAndKeepsDistinctStatementFailure()",
+      "classname": "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest"
+    }
+  ],
+  "selectedCaseXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+    "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+  },
+  "noDuplicateCount": "PG43954 includes the 18 rerun plus two added; projection fixture is a subset, no new test run here.",
+  "actualDriverServerSession": 0,
+  "actualConnectionTransactionOrDbPost": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

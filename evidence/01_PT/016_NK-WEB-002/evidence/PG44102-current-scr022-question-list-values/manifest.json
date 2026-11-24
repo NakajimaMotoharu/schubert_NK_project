@@ -1,0 +1,209 @@
+{
+  "run": "PG44102",
+  "source": "adae3458ce2c82263512d6e07b14cb7e4824d672",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": [
+    "WBS-P016-22/2",
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-24T15:00:24.133136+00:00",
+  "design": [
+    "UI224",
+    "UI236",
+    "SS313",
+    "SS323",
+    "SS332"
+  ],
+  "requirements": [
+    "FUN-012",
+    "QST-006",
+    "QST-008"
+  ],
+  "cases": [
+    {
+      "testId": "PT-WEB-QLIST001",
+      "method": "emptyReturnsPlainView",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST002",
+      "method": "allStatesHaveIndependentRows",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST003",
+      "method": "userPagingLinksAndClamp",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST004",
+      "method": "adminAndUserFilteredLinksAreLiteral",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST005",
+      "method": "invalidFormsStayUnpaginated",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST006",
+      "method": "roleMismatchRejectsBothDirections",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST007",
+      "method": "wrongEffectivePageRejects",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST008",
+      "method": "rowCountMismatchRejects",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST009",
+      "method": "duplicateIdsReject",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST010",
+      "method": "ownerScopeAndSummaryLimitReject",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST011",
+      "method": "inconsistentAnswerTimestampRejects",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST012",
+      "method": "orderRulesAreIndependent",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST013",
+      "method": "nullBoundariesReject",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST014",
+      "method": "outputSnapshotIsImmutable",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST015",
+      "method": "unicodeBoundaryAndAdminCrossOwnerAreValid",
+      "result": "PASS"
+    },
+    {
+      "testId": "PT-WEB-QLIST016",
+      "method": "parallelViewsKeepActorsSeparate",
+      "result": "PASS"
+    }
+  ],
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "sameLabelAux": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44098-current-scr023-question-detail-values/manifest.json",
+    "sha256": "c7142cd3f49a17e7ebd49a9b51ff4211bfdd298fdb96559a57eb66e2a5859d78"
+  },
+  "firstAttempt": {
+    "path": "../pgpt-runs/PG379/PG44100-scr022-current-projection/terminal.json",
+    "sha256": "c9b0411c1a0279a5d9864cd4d1c46acb7b6b6acb5fd35544e64a32f6a297bc58"
+  },
+  "historicalUnit": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20288-question-list-sixteen-v1/manifest.json",
+    "sha256": "b3612ef210d63e1627400adf8b846971ff693b9358f25ead1dc5bec84650e378"
+  },
+  "priorTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/manifest.json",
+    "sha256": "62ccdd2a796cb77de0527433db1e0706ad3e31771cccc56e7df83c1573ac9f0f"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListProjectionPortTest.java",
+    "sha256": "c0242ae7c2cb9592a5f56da86712721b513ff086d669c7023f85ca212e31e592"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java",
+      "sha256": "eef4e7d0a88a56f5209e5ece2ceec9cb5abd57dc292cd8b380816419b583f497"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java",
+      "sha256": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java",
+      "sha256": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/124_質問一覧pure表示単体仕様.md",
+    "sha256": "fea721537eda4896af57247360c593b70308e9482303e8c22153c19fb97a0647"
+  },
+  "result": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4962_SCR022質問一覧表示現候補実行結果.md",
+    "sha256": "41c188b645826ea611aee9853092d23d51ecadd4c322fb8e96ec12a60557edbd"
+  },
+  "commands": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/begin.json",
+    "sha256": "7a3e3a9e8a8325d36f388a7955b8d1810cd0666fa5bca945b8490e3eef8964a2"
+  },
+  "independentProofs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/terminal.json",
+      "sha256": "b3393cf2f2d73c12996da942424ef46c1aa682f4be0a0afde70d4dae5dcd2230"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/raw.out",
+      "sha256": "b3cc8d892bac9a881d410d300bb86458e6e50e32a424f4b66eefa916f3a1ae79"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/unit.exec",
+      "sha256": "00762a88a50e10f68d08636d59aaecf182c24618046a1bc7f187adea2f8c2081"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/init.log",
+      "sha256": "5c9f09f90188b1468df69950fea611a89620bf3701306a5fb3a57700eaa4246f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/reports/TEST-junit-jupiter.xml",
+      "sha256": "43e3d6ce891f7898b1c872ed8b417810402dd679775fb6c8f5cc9eefa233a791"
+    }
+  ],
+  "target": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44102-scr022-current-projection/product/dev/codex/schubert/nk/web/view/QuestionListViewModel.class",
+    "sha256": "0eeb3a6f72f31acdcde7054112c67d56005d258efa9e6e23785b49c52cb40a5b"
+  },
+  "coverage": {
+    "LINE": {
+      "covered": 77,
+      "total": 77
+    },
+    "METHOD": {
+      "covered": 16,
+      "total": 16
+    },
+    "CLASS": {
+      "covered": 1,
+      "total": 1
+    },
+    "BRANCH": {
+      "covered": 38,
+      "total": 38
+    }
+  },
+  "realRuntime": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,91 @@
+{
+  "run": "PG44084",
+  "source": "e45924a0c99ca5f32ddc28e3bed504f450a7e5fb",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P020-01.03/2",
+  "terminalAtUTC": "2026-11-24T14:47:22.039272+00:00",
+  "historicalSameMethod": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "historicalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "unchangedToolInputs": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "86522adf1d130eca810e9e26ddda249b14706e1498256cae482be09c8796b157"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java",
+      "sha256": "d7e8b55e261aa185237fc68544030baec7b559a42560dea128c7b313d22180ef"
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+    }
+  ],
+  "pomComparison": {
+    "current": {
+      "path": "pom.xml",
+      "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+    },
+    "historicalBlob": "217d10374c0a3149d69d7e4a0844cf9611211606",
+    "managedUnusedJackson3": [
+      "jackson-core",
+      "jackson-databind"
+    ],
+    "firstFullRootPomEqualityCheckFailed": true,
+    "exactOtherRootPomStructure": true
+  },
+  "historicalExactRegularTool": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "classMembers": [
+    {
+      "member": "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "sha256": "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812"
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "sha256": "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74"
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "sha256": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f"
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "sha256": "b6ce1e4494583aa2dd04f5938dca4e8489d330208bd214cb36ee0bf45c2c65d1"
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "sha256": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c"
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateCli.class",
+      "sha256": "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3"
+    }
+  ],
+  "originalPassingMethods": [
+    "cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased()",
+    "failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim()",
+    "nestedSameOutputIsRejectedWithoutReleasingOuterClaim()",
+    "nullPortIsRejectedBeforeAnyOutputClaim()"
+  ],
+  "applicability": "Same checked-in source and relevant inputs for the injected output method; archived synthetic outcome only.",
+  "reviewedOracle": [
+    "phase ordering, original exception identity",
+    "cleanup precedence and claim release",
+    "same destination contention leaves outer ownership",
+    "null injected port fails before claim"
+  ],
+  "actualTestExecutions": 0,
+  "realPathIo": 0,
+  "actualChr": 0,
+  "currentCoverageAdded": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
