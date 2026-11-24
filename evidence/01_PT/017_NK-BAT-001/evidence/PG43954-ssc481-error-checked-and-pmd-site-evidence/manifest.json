@@ -1,0 +1,286 @@
+{
+  "run": "PG43954",
+  "source": "4a473381f1151ec8fb6401f4a7ff1ff9cc407e66",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:27:25.177472+00:00",
+  "packageProof": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+    "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+  },
+  "currentRegularClass": "bbb31f9553a0cb3da6ecc222175324148d6776fe8f4dbd1b9af13789a77dcc87",
+  "scope": "Same standard Batch class; one unit session; no real connection or operations.",
+  "tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exitCodes": {
+    "compileFixture": 0,
+    "unit": 0,
+    "raw": 0
+  },
+  "trace": {
+    "testIds": {
+      "PT-BAT-BACKUP-UTC011": "utc011RepeatedErrorRemainsPrimaryAndKeepsDistinctStatementFailure",
+      "PT-BAT-BACKUP-UTC012": "utc012CheckedGuardFailureAfterRowCloseSurvivesStatementClose"
+    },
+    "sourceFile": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java",
+      "sha256": "d7d6697543b803b05830a2393b87ad201b955101e4bd1b3fd00c80e5666290a5"
+    },
+    "oracle": {
+      "path": "evidence/01_PT/017_NK-BAT-001/4753_Backup解放のErrorとguard単体仕様.md",
+      "sha256": "eb6ceb8b1423c3ec24ffa865e2af5db1ff088318e251f7b50af937beddb32bd2"
+    },
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+      "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+    }
+  },
+  "coverage": {
+    "line": [
+      91,
+      91
+    ],
+    "method": [
+      14,
+      14
+    ],
+    "branch": [
+      68,
+      68
+    ],
+    "clazz": [
+      1,
+      1
+    ],
+    "raw": {
+      "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/raw.out",
+      "sha256": "5f7fbe7d3b28506709100ebf71e87d06f285072f59837dd6a2784bd1dd1fa31d"
+    }
+  },
+  "quality": {
+    "spotbugsReused": {
+      "BugInstance": 0,
+      "Error": 0,
+      "MissingClass": 0
+    },
+    "fixtureStyle": {
+      "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/fixture-style-terminal.json",
+      "sha256": "7c1b68fbd3bd79ad26948170707e637e4a56822e5a4f658d107a88d020e08734"
+    },
+    "pmdRaw": [
+      {
+        "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/pmd-terminal.json",
+        "sha256": "070627dd676a63f6780eaf3799f36e4e405c9ae6f2f739ce652ff8c9fc7bb667"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/pmd-terminal.json",
+        "sha256": "902eb81c31be9e42c2b76363d0290eee29fb40cd9a2a1d07275ff83daf138833"
+      }
+    ],
+    "rawCode": [
+      4,
+      4
+    ],
+    "rawTotal": 12,
+    "localApplicable": 0,
+    "classification": [
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 63,
+        "rule": "CloseResource",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Explicit finally and one close per owned prepared statement/result set. Guard/read/absent-handle paths and independent close order verified. The rule does not account for the named closer method.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC005",
+          "PT-BAT-BACKUP-UTC008",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 70,
+        "rule": "CloseResource",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Explicit finally and one close per owned prepared statement/result set. Guard/read/absent-handle paths and independent close order verified. The rule does not account for the named closer method.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC005",
+          "PT-BAT-BACKUP-UTC008",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 75,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 75,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 82,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 82,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 119,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 119,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 128,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 128,
+        "rule": "AvoidCatchingGenericException",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Both primary catch sites retain and immediately throw the exact object. Close catches append distinct exceptions to a retained primary or throw each when it is the sole failure. Design mandates the exception kinds and exact TWR priority.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC010",
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+        "line": 136,
+        "rule": "CompareObjectsWithEquals",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "Identity is mandated for Throwable self-suppression. SQL and Error same-reference cases plus distinct ordered exceptions asserted independently.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC008",
+          "PT-BAT-BACKUP-UTC009",
+          "PT-BAT-BACKUP-UTC011"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java",
+        "line": 391,
+        "rule": "UseProperClassLoader",
+        "rawStatus": "RETAINED",
+        "localReview": "NOT_APPLICABLE_TO_SPOT_PROOF",
+        "qualityOwnerReviewStatus": "PENDING",
+        "reason": "JDK synthetic interface proxy for standalone unit tests; no container, user loader, service or J2EE context.",
+        "testEvidence": [
+          "PT-BAT-BACKUP-UTC011",
+          "PT-BAT-BACKUP-UTC012"
+        ]
+      }
+    ],
+    "ownerAccepted": null,
+    "whole451": false
+  },
+  "runProof": [
+    {
+      "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/begin.json",
+      "sha256": "a26b3e8a7138132635650833faff08970c9512f674de3c381e4ac9268198bd12"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/terminal.json",
+      "sha256": "160f121d0804304113bf0bed30503d9ae2c153c3458652d6273d926d323a9e17"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/unit.out",
+      "sha256": "ad10862f46b4421182704d753fe98b23f61b50e32a3963289232368eec5f07ba"
+    }
+  ],
+  "formalAcceptanceId": null
+}

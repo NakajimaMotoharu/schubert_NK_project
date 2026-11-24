@@ -1,4 +1,53 @@
 {
+  "ssc481BackupPrimaryKindsTracePG43954": {
+    "source": "4a473381f1151ec8fb6401f4a7ff1ff9cc407e66",
+    "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+    "owner": "WBS-P017-06",
+    "traceLeaf": "WBS-G13.06",
+    "related": [
+      "WBS-P004-05/2",
+      "WBS-F03/2-2-b"
+    ],
+    "rd": [
+      "BAK-001",
+      "OPS-009"
+    ],
+    "ui": [
+      "UI251"
+    ],
+    "ss": [
+      "SS332/SSC-481",
+      "SS341",
+      "SS343"
+    ],
+    "tests": {
+      "testIds": {
+        "PT-BAT-BACKUP-UTC011": "utc011RepeatedErrorRemainsPrimaryAndKeepsDistinctStatementFailure",
+        "PT-BAT-BACKUP-UTC012": "utc012CheckedGuardFailureAfterRowCloseSurvivesStatementClose"
+      },
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java",
+        "sha256": "d7d6697543b803b05830a2393b87ad201b955101e4bd1b3fd00c80e5666290a5"
+      },
+      "oracle": {
+        "path": "evidence/01_PT/017_NK-BAT-001/4753_Backup解放のErrorとguard単体仕様.md",
+        "sha256": "eb6ceb8b1423c3ec24ffa865e2af5db1ff088318e251f7b50af937beddb32bd2"
+      },
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+        "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+      }
+    },
+    "testRun": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43954-ssc481-error-checked-and-pmd-site-evidence/manifest.json",
+      "sha256": "57189c0b7b5b806e2febe56a54d7404379ac17ebf91903cbef2e2f5503a285fa"
+    },
+    "regularPackaging": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+      "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+    },
+    "formalAcceptanceId": null
+  },
   "ssc481BackupOwnedCloseTracePG43952": {
     "source": "ca5c4559d15f7147b351d848d8cd8d20c98d8b26",
     "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
@@ -11209,7 +11258,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "578c4079bc0b6176147850d42e0972d2262b602d4bf94af1a6ac233e82f63526",
+  "inventorySha256": "db8f8fd05614b6965f84f1889b7c8b126c3b9c906fe24d045796a2b2477b33f3",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
