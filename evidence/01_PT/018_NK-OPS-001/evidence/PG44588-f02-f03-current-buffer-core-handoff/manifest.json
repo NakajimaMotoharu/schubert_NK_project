@@ -1,0 +1,569 @@
+{
+  "run": "PG44588",
+  "source": "4782dfa80a63e20d9273f4637edcbe4b6fca6ff8",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F02-b-a",
+  "terminalAtUTC": "2026-11-24T21:51:52.278534+00:00",
+  "relatedWbs": [
+    "WBS-F03/2-2-b",
+    "A1-15.01",
+    "A1-15.02"
+  ],
+  "inputParentPom": {
+    "path": "pom.xml",
+    "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+  },
+  "originalReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44456-four-owner-current-evidence-for-formal-decision/manifest.json",
+    "sha256": "a9a41c9803a246fd9a9323e1050f780dfb4494b2277d7320ac5e8825ae7aa999"
+  },
+  "relatedRequirements": [
+    {
+      "id": "SYS-001",
+      "confirmed": "現テンプレートのNK題名と承認DIF-001の一致",
+      "remaining": "実Browserの全名義／DOM／CHR-A01終端",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+          "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-002",
+      "confirmed": "現候補JDK25の4module compileと全Main Checkstyle",
+      "remaining": "API/Web実compile・稼働、Ubuntu標準JDK実環境",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38258-wbs66-current-checkstyle-and-batch-spotbugs-v1/manifest.json",
+          "sha256": "cb70fcb5f88912ba218060f8b210ede1182a7c6b213d843dcf23ffc4b629d695"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "protocol",
+        "storage",
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "protocol": "NORMAL_HOST_JAR_ONLY",
+        "storage": "NORMAL_HOST_JAR_ONLY",
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-003",
+      "confirmed": "旧環境引渡しを保存",
+      "remaining": "現Ubuntu Server release、owner、稼働後条件",
+      "evidence": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "bootstrap",
+        "batch"
+      ],
+      "currentProductArtifactScope": {
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-004",
+      "confirmed": "旧PG18.6整備票のみ",
+      "remaining": "現owner／DB版・対象schema／実際のSQL契約",
+      "evidence": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "storage",
+        "api",
+        "batch"
+      ],
+      "currentProductArtifactScope": {
+        "storage": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-005",
+      "confirmed": "六宣言／明示依存9方向、四module実compile",
+      "remaining": "型全量ArchUnitと実Web→API Artemis、接続真正終端",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+          "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38240-current-six-source-reference-edges-v1/manifest.json",
+          "sha256": "62dfcbbfdf393b0a7895c2f09fcf546be99d5f4ef4702fbf0e536c8f4947800a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "protocol",
+        "api",
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "protocol": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-006",
+      "confirmed": "A01の10基準fieldと固定ソース属性",
+      "remaining": "各実画面／DOM／承認DIF／現Browserと結果",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+          "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "web",
+        "protocol"
+      ],
+      "currentProductArtifactScope": {
+        "web": "DEPENDENCY_MODEL_ONLY",
+        "protocol": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-007",
+      "confirmed": "現compile限定とSSのソース契約",
+      "remaining": "利用者操作ごとのE2E同等と復旧後条件",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "web",
+        "api",
+        "batch",
+        "protocol"
+      ],
+      "currentProductArtifactScope": {
+        "web": "DEPENDENCY_MODEL_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY",
+        "protocol": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-008",
+      "confirmed": "専用直接OSの旧整備引渡し",
+      "remaining": "本番の設計どおりのホスト・拠点と稼働",
+      "evidence": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-009",
+      "confirmed": "六moduleの宣言と従来の直接OS構築方針",
+      "remaining": "現行実機の構成とon-prem運用の照合",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+          "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-010",
+      "confirmed": "RDのlocal保管契約を維持",
+      "remaining": "業務データの実配置・所有と引渡し証拠",
+      "evidence": [],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "storage",
+        "bootstrap",
+        "api",
+        "batch"
+      ],
+      "currentProductArtifactScope": {
+        "storage": "NORMAL_HOST_JAR_ONLY",
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-012",
+      "confirmed": "現Caddyfileの55160設定ソース",
+      "remaining": "有効Unitと同ownerの実入口・port・通信",
+      "evidence": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "currentProductArtifactScope": {
+        "bootstrap": "NORMAL_HOST_JAR_ONLY",
+        "batch": "NORMAL_HOST_JAR_ONLY",
+        "api": "DEPENDENCY_MODEL_ONLY",
+        "web": "DEPENDENCY_MODEL_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-013",
+      "confirmed": "現Caddyfileの内部TLS設定ソース",
+      "remaining": "稼働Caddy、実TLS／HTTP／公開証明書の照合",
+      "evidence": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "web",
+        "bootstrap"
+      ],
+      "currentProductArtifactScope": {
+        "web": "DEPENDENCY_MODEL_ONLY",
+        "bootstrap": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    },
+    {
+      "id": "SYS-014",
+      "confirmed": "現Caddyfileの入口とreverse proxy宣言",
+      "remaining": "入口・証明書を交換可能とする正規配備契約の確認",
+      "evidence": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "formalAccepted": false,
+      "relatedProducts": [
+        "web",
+        "bootstrap"
+      ],
+      "currentProductArtifactScope": {
+        "web": "DEPENDENCY_MODEL_ONLY",
+        "bootstrap": "NORMAL_HOST_JAR_ONLY"
+      },
+      "candidateRequirementAccepted": false
+    }
+  ],
+  "modules": {
+    "protocol": {
+      "physical": 176,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+      },
+      "normalArchiveAppliedAsExactInputs": true,
+      "mainTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+      "modulePom": {
+        "path": "src/schubert-nk-protocol/pom.xml",
+        "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+      },
+      "formalAcceptanceId": null
+    },
+    "storage": {
+      "physical": 79,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "normalArchiveAppliedAsExactInputs": true,
+      "mainTree": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+      "modulePom": {
+        "path": "src/schubert-nk-storage/pom.xml",
+        "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+      },
+      "formalAcceptanceId": null
+    },
+    "bootstrap": {
+      "physical": 201,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "normalArchiveAppliedAsExactInputs": true,
+      "mainTree": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+      "modulePom": {
+        "path": "src/schubert-nk-bootstrap/pom.xml",
+        "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+      },
+      "formalAcceptanceId": null
+    },
+    "batch": {
+      "physical": 660,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+      },
+      "normalArchiveAppliedAsExactInputs": true,
+      "mainTree": "f713469ccd0424baf6339dd4748c043f23e4725e",
+      "modulePom": {
+        "path": "src/schubert-nk-batch/pom.xml",
+        "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+      },
+      "formalAcceptanceId": null
+    }
+  },
+  "actualFourNormalArchiveCount": 4,
+  "fullPhysical": 1116,
+  "resources": {
+    "api": {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44264-api-only-maven-resources-byte-matches/manifest.json",
+        "sha256": "e9eb1d2488aac2b1aba889274d4199612b07b635af7ea1d06d4f26bc9cdbd69d"
+      },
+      "actual": 32,
+      "currentEquivalentInputs": true,
+      "normalArchive": null
+    },
+    "web": {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44498-web-maven-resource-stage-after-warning-buttons/manifest.json",
+        "sha256": "a52620db2acb5bcb44a1c42ca318bee770aec02bd2a4daba44c67056980575fa"
+      },
+      "actual": 34,
+      "currentEquivalentInputs": true,
+      "normalArchive": null
+    }
+  },
+  "properAPIWebJavaArchives": 0,
+  "backupFirst18": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43942-ssc481-backup-close-before-format/manifest.json",
+    "sha256": "72964d0f1fdeeed545e9aa996ae4eb1276b54833915df8bbbd5721581638077e"
+  },
+  "sameBatchArchiveQualification": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+    "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+  },
+  "quality": {
+    "existingLocalEvidence": {
+      "44560": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44560-current-independent-api-web-metric-values/manifest.json",
+        "sha256": "f0560c79b9b6975622b67c77dbf1ec67220349638148c41e055b4582f5c102d2"
+      },
+      "44568": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44568-current-metric-classfiles-spotbugs/manifest.json",
+        "sha256": "9cb7375c4b4dcaa20a3adf12b43c7d0260a6466984629bb0684d287ea0ec7796"
+      },
+      "44570": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44570-current-web-and-api-value-classfiles-spotbugs/manifest.json",
+        "sha256": "20f602212a3f4031b2ae73ac329eb409e25637ee6cc1223dc33ebf286661e06b"
+      },
+      "44572": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44572-web-user-mutation-caller-package-complete/manifest.json",
+        "sha256": "32815074b4fb46a63ea2cb394d1a2e6ac76a8e7ddaf1498ea67ede9e59a7eda2"
+      },
+      "44574": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44574-web-value-static-55-correct-closure/manifest.json",
+        "sha256": "dabdfb2d90385979563d4a6a8842a11fc9da212884540e93fe84f315bc3ad551"
+      },
+      "44576": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44576-source-metric-pmd-current-api-web/manifest.json",
+        "sha256": "4617c6be24b8fdf1131bf653e4ef9731613facb86955b0e9a7b47d7d42c19723"
+      },
+      "44578": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44578-current-api-web-value-pmd-seven-dispositions/manifest.json",
+        "sha256": "767816bdc482cfc4f4526c18f27f1bbcc4992667e84dd8b35cf3cd896d91ff22"
+      },
+      "44582": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44582-current-buffer-constant-diagnostic-owned-monitor/manifest.json",
+        "sha256": "ea518765b63d48d72091a033dd87f6ac9d037ab87f0465ffe88efbcfd80c5292"
+      }
+    },
+    "webScopedNullAway": 71,
+    "apiScopedNullAwayTwoGroups": 45,
+    "remainingMainHeld": 5,
+    "remainingTestHeld": 32,
+    "root11Separate": true,
+    "heldTypeBodyReadOrToolAction": 0,
+    "changedApiQualification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44582-current-buffer-constant-diagnostic-owned-monitor/manifest.json",
+      "sha256": "ea518765b63d48d72091a033dd87f6ac9d037ab87f0465ffe88efbcfd80c5292"
+    },
+    "unmeasuredCurrentBatchesRemain": true,
+    "whole451": false
+  },
+  "remainingByOwner": [
+    {
+      "row": "WBS-F02-b-a",
+      "owner": "ビルド・アーキテクチャ／Storage担当",
+      "remaining": [
+        "QA-056四型の判断",
+        "API/Webの正規JAR",
+        "SSC-461 Storage 3件と上位21件・保留2件",
+        "QA-062・当候補runtime"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-F02-b-b",
+      "owner": "ビルド・アーキテクチャ担当",
+      "remaining": [
+        "6正規JARとSYS13要求の個別終端",
+        "署名付き担当判定"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-F03/2-2-a",
+      "owner": "品質・承認担当",
+      "remaining": [
+        "保留Main5・試験32（API4、Batch26、Storage2）・Root11の承認条件"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-F03/2-2-b",
+      "owner": "品質担当",
+      "remaining": [
+        "未測定の型付き差分を確認",
+        "PMD過去45を正式scopeで個別判定",
+        "全六製品の終了と451収束"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-F03/2-3-a",
+      "owner": "品質・ビルド担当",
+      "remaining": [
+        "同候補で全六の型・終了依存",
+        "DB・JMS・native・実経路の正式証拠"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-F03/2-3-b",
+      "owner": "品質担当",
+      "remaining": [
+        "同一run四指標100%、独立結果・trace・秘密scan",
+        "署名付き判定"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "WBS-C02-b",
+      "owner": "運用・Unit担当",
+      "remaining": [
+        "専用保守受けUnit・実所有・最新bootの実Caddy/TLS/再起動後の終端"
+      ],
+      "requestReceivedAtJST": null
+    },
+    {
+      "row": "F04",
+      "owner": "基盤・haruka利用担当",
+      "remaining": [
+        "利用権限・同候補FileStoreとBrowserの実証"
+      ],
+      "requestReceivedAtJST": null
+    }
+  ],
+  "handoffDocumentPrior": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/4327_11月25日四担当引渡し現候補・12月2日判定資料.md",
+    "sha256": "b58b7bfca93b5be4796f1c0e7f28654c0ef5cfa46ee68621caaae516867bd853"
+  },
+  "handoffDeadline": "2026-11-25T23:29:00+09:00",
+  "formalDue": "2026-12-02T23:29:00+09:00",
+  "ownerAcknowledgementsReceived": 0,
+  "qualifiedWorkItemDelta": 0,
+  "actualProductTests": 0,
+  "formalAcceptanceId": null
+}
