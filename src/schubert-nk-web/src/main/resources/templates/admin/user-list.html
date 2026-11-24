@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/layout :: head('Users')}"></head>
 <body><main class="page user-page">
   <header class="topbar"><h1>Users</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
-  <nav><a th:href="@{/admin/users/new}">User追加</a></nav>
+  <nav aria-label="利用者一覧のナビゲーション"><a th:href="@{/admin/users/new}">User追加</a></nav>
   <div id="user-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}" th:text="${issue.value}"></li></ul></div>
   <form method="get" th:action="@{/admin/users}">
     <label>Username<input name="username" th:value="${page.filters.username}" aria-describedby="user-errors"></label>

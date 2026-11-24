@@ -8,7 +8,7 @@
       <div class="subtitle" th:text="|${page.values.category} / ${page.values.displayPath}|"></div>
     </div><div class="topbar-actions">
       <div th:replace="~{fragments/layout :: userActions(${page.values.topBar})}"></div>
-      <nav class="nav-links"><a th:href="@{/animation}">アニメ視聴</a>
+      <nav class="nav-links" aria-label="アニメ視聴画面のナビゲーション"><a th:href="@{/animation}">アニメ視聴</a>
         <a th:href="${page.values.backHref}" th:text="${page.values.backLabel}"></a>
       </nav>
     </div></header>

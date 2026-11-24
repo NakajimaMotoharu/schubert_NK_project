@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/layout :: head('User詳細')}"></head>
 <body><main class="page user-detail">
   <header class="topbar"><h1>User詳細</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
-  <nav><a th:href="@{/admin/users}">User一覧</a></nav>
+  <nav aria-label="利用者詳細のナビゲーション"><a th:href="@{/admin/users}">User一覧</a></nav>
   <dl>
     <dt>Username</dt><dd class="username" th:text="${page.values.username}"></dd>
     <dt>Role</dt><dd class="role" th:text="${page.values.role}"></dd>

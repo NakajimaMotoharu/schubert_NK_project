@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/layout :: head('User追加')}"></head>
 <body><main class="page user-new">
   <header class="topbar"><h1>User追加</h1><div th:replace="~{fragments/layout :: userActions(${page.values.topBar})}"></div></header>
-  <nav><a th:href="@{/admin/users}">User一覧</a></nav>
+  <nav aria-label="利用者追加のナビゲーション"><a th:href="@{/admin/users}">User一覧</a></nav>
   <p role="alert" th:if="${!page.values.message.empty}" th:text="${page.values.message}"></p>
   <ul th:replace="~{fragments/error-summary :: validationList(${page.values.issues})}"></ul>
   <form method="post" data-operation-submit th:action="@{/admin/users/new}">
