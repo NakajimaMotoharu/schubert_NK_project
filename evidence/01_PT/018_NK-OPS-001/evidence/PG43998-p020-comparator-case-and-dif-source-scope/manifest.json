@@ -1,0 +1,62 @@
+{
+  "run": "PG43998",
+  "actualExit": 0,
+  "source": "c5c01377534b16d9ef23705e76bd3f0618ec2a8b",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P020-01.02/1",
+  "terminalAtUTC": "2026-11-24T13:19:32.262897+00:00",
+  "cases": [
+    "leavesNonBrandTitleChangeUnregistered",
+    "rejectsAnUnapprovedCaseAtTheSameCatalogSize",
+    "rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize",
+    "rejectsCurrentRunCaseReportedAsNkOnly",
+    "rejectsNkOnlyCaseReportedAsCurrentRun",
+    "rejectsNonArrayComparisonDefinitions",
+    "rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare",
+    "rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch",
+    "rejectsUnrecognizedComparisonDefinitionVersions",
+    "requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference"
+  ],
+  "originalSyntheticInputs": {
+    "program/characterization/tests/resources/cases/catalog.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/defs/program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    "program/characterization/tests/resources/cases/dif-allowlist.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43698-comparison-current-synthetic-catalog-ten-v1/defs/program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    }
+  },
+  "priorOriginalTests": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43698-comparison-current-synthetic-catalog-ten-v1/manifest.json",
+    "sha256": "0e31657e2ea5578cf5270399e50d049d0b493297d7e1616194ce3a2364b1a1d3"
+  },
+  "previousEmptyJson": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43628-current-empty-comparison-local/manifest.json",
+    "sha256": "71d861ccbbb6b7709d52525332a0f5ccb1aae5fb5c16ec012c22b2332d0f4dfe"
+  },
+  "originalQA055": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43630-qa055-lock-ui-current-comparator/manifest.json",
+    "sha256": "d959cecacf76268a0063aaafdec7d53c0cdb442c81c405af1f2c0de341d8dcd2"
+  },
+  "gateValidatorChangedMethods": [
+    "validateBrowser",
+    "matchingInteger",
+    "matchesPinnedText",
+    "matchesPinnedInteger"
+  ],
+  "scope": "Comparator source and its direct reachable input helpers; separate browser entry not ported. Original 10 test outcomes remain on PG43698.",
+  "firstAuditAttempt": {
+    "exitCode": 1,
+    "reason": "git unsuffixed Java diff headers identified the class rather than method names",
+    "testOrAnalyzerRun": false
+  },
+  "newTestsRun": 0,
+  "realChr": 0,
+  "currentBaselineModified": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Actual Current/NK captures, Browser and FileStore",
+    "451 and owning exit dependencies"
+  ]
+}
