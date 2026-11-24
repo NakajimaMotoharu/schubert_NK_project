@@ -94,8 +94,8 @@ SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみ�
 
 | SCR | Method/URL | Template | Controller.method | Form / View Model | Fixed IF | Role・追跡 |
 |---|---|---|---|---|---|---|
-| 001 | GET `/login` | `login.html` | `LoginController.show(LoginQuery,Model)` | `LoginForm` / `LoginViewModel` | なし | 未認証、UI 226、FUN-001 |
-| 001 | POST `/login` | redirect/再表示 | Spring Security `MqAuthenticationProvider` | `LoginForm` | IF-001 | 未認証、AUT-004、MQ-021 |
+| 001 | GET `/login` | `login.html` | `LoginController.login()` | なし（表示専用） | なし | 未認証、UI 226、FUN-001 |
+| 001 | POST `/login` | redirect/再表示 | Spring Security `MqAuthenticationProvider` | `LoginFormAuthenticationConverter.convert` | IF-001 | 未認証、AUT-004、MQ-021 |
 | 002 | GET `/` | `menu.html` | `MenuController.show(Principal,Model)` | `MenuViewModel` | なし | USER/ADMIN、UI 223、FUN-002 |
 | 003 | GET `/search` | `search.html` | `ScenarioController.search(ScenarioSearchForm,Model)` | `ScenarioSearchForm` / `ScenarioSearchViewModel` | IF-003～005 | USER/ADMIN、FUN-003 |
 | 004 | GET `/scenarios` | `scenarios.html` | `ScenarioController.games(Model)` | `GameListViewModel` | IF-003 | USER/ADMIN、FUN-004 |
@@ -162,7 +162,7 @@ Client-side `maxlength`は補助であり、UTF-8 byte validatorをWeb/API双方
 
 | Form | 主field | Validation/error key |
 |---|---|---|
-| `LoginForm` | username 1～64 byte、password 1～256 byte | `login.invalid`は不存在/不一致/disabled共通 |
+| ログイン入力（SS314の認証処理） | username 1～64 byte、password 1～256 byte | `login.invalid`は不存在/不一致/disabled共通 |
 | `ScenarioSearchForm` | q 256、speaker 128、chapter 256、page 1～999999 | 空をnullへmap、全条件AND |
 | `LogSearchForm` | q 256、action 64、path 256、enum、31日、page | USER送信はController到達前403 |
 | `UserCreateForm` | username regex/64、password 12～128文字かつ256 byte、確認、role/enabled | Password確認はWebだけ、電文へ1つだけ |
