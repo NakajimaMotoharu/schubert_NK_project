@@ -1,0 +1,72 @@
+{
+  "run": "PG44014",
+  "actualExit": 0,
+  "source": "42e16386ead3e93d51ba207e1a1b91f71c6f1439",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-02/1",
+  "terminalAtUTC": "2026-11-24T13:34:31.482442+00:00",
+  "sameDeclarationInputs": {
+    "V010__full_inbox_scan_and_restricted_deletion.sql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+      "sha256": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0"
+    },
+    "V012__durable_inbox_inspection_progress.sql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+      "sha256": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411"
+    },
+    "V015__question_query_inbox_deletion.sql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+      "sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b"
+    },
+    "V016__question_mutation_inbox_references.sql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8"
+    },
+    "V019__parent_inbox_inspection_summary.sql": {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+      "sha256": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a"
+    }
+  },
+  "oldStaticDefinitionChecks": 7,
+  "oldHarnessNegativeChecks": 5,
+  "oldSourceTestIds": [
+    "PT-DB-INBOX-DECL001",
+    "PT-DB-INBOX-DECL002",
+    "PT-DB-INBOX-DECL003",
+    "PT-DB-INBOX-DECL004",
+    "PT-DB-INBOX-DECL005"
+  ],
+  "currentSqlMigrationCount": 31,
+  "onlyMigrationDelta": [
+    "A\tsrc/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql"
+  ],
+  "admittedCurrentStaticEvidence": {
+    "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG42548-p00402-summary-and-reference-declaration-fixture-v1/manifest.json",
+    "sha256": "428a013dc7db674e7ae8a530ac1c3bf21b3de60798d18d5286cbafc1d62e2091"
+  },
+  "currentCanonicalDesignBlobs": {
+    "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md": "23a126174d5055b95d957212b8286ad4f809db5d",
+    "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md": "f98e727f1a4731dacae7c916532a6ecbc009f047"
+  },
+  "separateAddition": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+    "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3"
+  },
+  "separateDefaultPrivilegesEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43662-ssc479-role-upgrade-fixture-v1/manifest.json",
+    "sha256": "855ffecc98ea887609ef8cb71fb3795ef3d86f7a07f65f9fbaf2984261e01a9e"
+  },
+  "priorIndependentValueEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43464-p00402-current-inspection-summary-three-values-v1/manifest.json",
+    "sha256": "da5ff06b193fd9758281c0dfd6e2cca4a62533f03f12d6b7e31572bf5c71499d"
+  },
+  "newProductJUnit": 0,
+  "newDbCommands": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Current applied SQL/grants as observed by current roles",
+    "Authoritative DB/original invariants and transaction ownership",
+    "F02/F03 and formal quality"
+  ]
+}

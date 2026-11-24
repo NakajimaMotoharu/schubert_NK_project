@@ -1,0 +1,91 @@
+{
+  "run": "PG44018",
+  "source": "42e16386ead3e93d51ba207e1a1b91f71c6f1439",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-24T13:37:26.369321+00:00",
+  "originalRawSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41556-f03-log-user-receipt-display-v1/manifest.json",
+    "sha256": "66912c95c93400a9281fec559ed81ea899a76b627f19265ba3e3cdad8886b679"
+  },
+  "originalTypedXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41556-f03-log-user-receipt-display-v1/spotbugs.xml",
+    "sha256": "8aea416632813dff8b4403d4368f4b05e88d6de633f48e77dc84f22993131f09"
+  },
+  "preservedOriginalExit": 1,
+  "separateCompleteLocalAnalyzer": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42678-user-change-form-17-current-v1/manifest.json",
+    "sha256": "94ab84b83064060a563e3193147ca14414032182df5cad58fe5814008126173d"
+  },
+  "separateCompleteTypedXml": {
+    "path": "../pgpt-runs/PG379/PG42678-user-mutation-form-fixture-current-v1/spotbugs.xml",
+    "sha256": "e421b8a4a42a46caa9aeef9404c73a8263f582bf318ea3d119dea40f0780160a"
+  },
+  "sourceSameInBothScopeAndCurrent": true,
+  "physicalKeptSeparate": {
+    "priorSha256": "8bdfc010295648958d8b9ecd27d1996e379972023fbd76736a93efdd2d7c243b",
+    "later": {
+      "path": "../pgpt-runs/PG379/PG42678-user-mutation-form-fixture-current-v1/classes/dev/codex/schubert/nk/web/form/UserMutationInput.class",
+      "sha256": "cd1cfe2597df9a023cc37a8f5b337637fe61514c75a50f05b274076e227cb02c"
+    },
+    "exactBytes": false
+  },
+  "actualSourceReferences": {
+    "UserMutationInput": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+      "sha256": "0853cfd076bcf75dd856c9da5c3d493ad7bca4e9730e70d64c5455113b7f7d2a"
+    },
+    "UserStatusForm": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+      "sha256": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081"
+    },
+    "UserRoleForm": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+      "sha256": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec"
+    },
+    "UserUnlockForm": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java",
+      "sha256": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c"
+    },
+    "PasswordResetForm": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+      "sha256": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d"
+    }
+  },
+  "actualReaders": {
+    "enabled": [
+      "UserStatusForm"
+    ],
+    "role": [
+      "UserRoleForm"
+    ],
+    "token": [
+      "UserStatusForm",
+      "UserRoleForm",
+      "UserUnlockForm",
+      "PasswordResetForm"
+    ]
+  },
+  "priorScopeOmittedReadingTypes": [
+    "UserStatusForm",
+    "UserRoleForm",
+    "UserUnlockForm",
+    "PasswordResetForm"
+  ],
+  "originalRawFindings": 3,
+  "locallyApplicable": 0,
+  "verificationPreflight": {
+    "exitCode": 1,
+    "reason": "Independent runs use different classfile bytes despite exact current Java source; no analyzer or unit invoked during join"
+  },
+  "interpretation": "The current source has explicit member reads in separate form classes outside the original target list, and the independent larger local analyzer had zero raw findings. This classfile mismatch does not justify transplanting either tool result wholesale.",
+  "suppressionsAdded": 0,
+  "testOrRuntimeExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Owner acknowledgement of applicability disposition",
+    "Whole candidate six-module typed scope, QA-056 and 451"
+  ]
+}
