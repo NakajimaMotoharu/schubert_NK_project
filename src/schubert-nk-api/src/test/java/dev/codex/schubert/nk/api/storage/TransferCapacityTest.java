@@ -303,7 +303,7 @@ class TransferCapacityTest {
             TransferCapacity.Level.WARNING,
             TransferCapacity.Level.CRITICAL);
     assertEquals(expected, Set.of(levels));
-    levels[0] = null;
+    levels[0] = levels[1];
     assertEquals(expected, Set.of(TransferCapacity.Level.values()));
     assertSame(TransferCapacity.Level.CRITICAL, TransferCapacity.Level.valueOf("CRITICAL"));
     assertThrows(IllegalArgumentException.class, () -> TransferCapacity.Level.valueOf("UNKNOWN"));
