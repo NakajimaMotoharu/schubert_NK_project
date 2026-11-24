@@ -1,0 +1,101 @@
+{
+  "run": "PG43972",
+  "source": "b8366b0d158818ee96f1768bbe5c1c0b7c9b6da4",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:52:35.806529+00:00",
+  "description": "SCR090 (start bookkeeping called it SCR003). Current pure display status/error, no request dispatch/policy execution.",
+  "related": [
+    "WBS-F03/2-2-b",
+    "WBS-P015-07",
+    "PT-WEB-148"
+  ],
+  "cases": [
+    "errorValue001AllTwelveResultCodesHaveIndependentHttpClassification",
+    "errorValue002ClassificationRejectsMissingResultCode",
+    "errorValue003FactoryUsesNineFixedStatusesAndMissingStatusMeans404",
+    "errorValue004ForeignAndUnknownStatusRemain503WithoutNumericStringConversion",
+    "errorValue005EveryClosedDisplayHasOnlyPublicRequestIdAndApprovedMessagePurpose",
+    "errorValue006RequiredValuesRejectNullAndOptionalDisplaySnapshotIsRetained",
+    "errorValue007PublicStatusCatalogIsClosedAndEachNameRetainsItsHttpStatus"
+  ],
+  "fixture": {
+    "path": "tools/quality/architecture/ErrorValueContractTest.java",
+    "sha256": "11d2ad00b9dc679a3fc8fd35ccaf4de32259eff742aa0d26d5ca471759cfd712"
+  },
+  "counts": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "sameSingleExec": {
+    "line": [
+      63,
+      63
+    ],
+    "method": [
+      17,
+      17
+    ],
+    "clazz": [
+      4,
+      4
+    ],
+    "branch": [
+      14,
+      14
+    ],
+    "raw": {
+      "path": "../pgpt-runs/PG379/PG43972-current-web-error-values/raw.out",
+      "sha256": "8b404b8d91a96c0365bc27b9f413f9c87ad844d7e3f36991887b8c69c2e105e7"
+    }
+  },
+  "immutableEvidence": [
+    {
+      "path": "../pgpt-runs/PG379/PG43972-current-web-error-values/begin.json",
+      "sha256": "c64948e9d77d2dc89b9ba275907479de930d679cdca94c7f238788b603164158"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43972-current-web-error-values/terminal.json",
+      "sha256": "bfa9ef81df0ab81bc82102b1da07715ad4b689ef49f3f9fbf676a5d4dc429137"
+    }
+  ],
+  "bytePins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43972-current-web-error-values/product/dev/codex/schubert/nk/web/error/ProblemViewFactory.class",
+      "sha256": "63914cf27b7c14c8b89c151f18b741241fda821f2d172da8f2b8bec59310867c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43972-current-web-error-values/product/dev/codex/schubert/nk/web/error/WebResultMapper.class",
+      "sha256": "aafc7e8a46fa34a61b2ae6d5696415ed2eea2e49f0ac3e9201a309e9cffecdf4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43972-current-web-error-values/product/dev/codex/schubert/nk/web/view/ErrorViewModel.class",
+      "sha256": "043c9dc242708337b6109ac44f046ce5386847da1055a473e1104cd12a15c3d2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43972-current-web-error-values/product/dev/codex/schubert/nk/web/view/ErrorViewModel$Status.class",
+      "sha256": "ad635b2543ace6e929b89b1d5b8b0ca0b76df6af6a9db9cb7b28f25fe70284b0"
+    }
+  ],
+  "retestWhy": "Current ErrorValueContractTest bytes differ from PG28024; coverage is limited to four current local classes.",
+  "targetForms": {
+    "previous": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42324-f03-target-form-eight-four-counters-v1/manifest.json",
+      "sha256": "e5f8dbca677ec74e8bde6ff511e8cda2372cd7daa4abcac85a29762475cee25e"
+    },
+    "sameSourceFourPaths": [
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/TargetOperationFormTest.java"
+    ],
+    "protocolComparedClassFiles": 176,
+    "protocolClassByteDiff": [],
+    "currentExtraExec": 0,
+    "exactDynamicApplicable": true,
+    "actualOperationExcluded": true
+  },
+  "wholeWebJAR": false,
+  "formalAcceptanceId": null
+}

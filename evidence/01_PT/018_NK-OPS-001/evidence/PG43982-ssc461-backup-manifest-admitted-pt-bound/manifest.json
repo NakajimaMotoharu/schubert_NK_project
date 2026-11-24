@@ -1,0 +1,47 @@
+{
+  "run": "PG43982",
+  "source": "b8366b0d158818ee96f1768bbe5c1c0b7c9b6da4",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:58:55.074365+00:00",
+  "owner": "Batch Backup実装／品質担当、正規native実行の所有担当",
+  "authority": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43882-ssc461-current-published-legacy-caller-matrix/manifest.json",
+    "sha256": "5051c8734ee51bc99125bf7fb380e390eec7a312d8a30fefb2a4b662c86823a0"
+  },
+  "site": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+    "module": "schubert-nk-batch",
+    "sourceSHA": "f27b4c2e07af42bdcb153b1d6cffed031bad97b87580cd5edeb16e34350a138b",
+    "priorScope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW",
+    "priorLegacy": 2,
+    "lexicalCurrentDirectOneArgCandidates": [
+      167,
+      341
+    ],
+    "lexicalCurrentCallerSuppliedEdgeCandidates": [],
+    "lexicalCurrentBootstrapAdapterCandidates": [],
+    "oldToNewRawDirectDelta": 0,
+    "localNewlyProven": 0,
+    "newProof": null,
+    "remainingDecision": "SEPARATE_TYPED_SCOPE_AND_INDEPENDENT_PT_REQUIRED"
+  },
+  "scopeFiles": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "sha256": "f27b4c2e07af42bdcb153b1d6cffed031bad97b87580cd5edeb16e34350a138b"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupArtifactFixture.java",
+      "sha256": "62a55866ed181dd886a8b5988fa5922675259b261ad31133a601c7b8361dcbf4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestReaderTest.java",
+      "sha256": "0a197e216f1b4291e829956cb90b2b585ad982ad31df29b6057b1d3c6b45585e"
+    }
+  ],
+  "priorSourceAgreement": "Two identical legacy invocations on runtime failure before fixed diagnostic. Both package under admitted Main only.",
+  "remaining": "Exact current BackupArtifactFixture uses LinuxDirectoryCalls on owned test directories. This turn no existing current native runtime authorization/receipt for those two paths was confirmed. No rewritten/split substitute used.",
+  "currentProductionEdits": 0,
+  "dynamicTests": 0,
+  "formalAcceptanceId": null
+}
