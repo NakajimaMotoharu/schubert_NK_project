@@ -1,0 +1,265 @@
+{
+  "run": "PG44362",
+  "source": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T18:32:12.125354+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P016-23/2",
+    "WBS-P016-22/2"
+  ],
+  "bug": "BUG-3780",
+  "horizontal": "YKT-2952",
+  "priorResults": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44098-current-scr023-question-detail-values/manifest.json",
+      "sha256": "c7142cd3f49a17e7ebd49a9b51ff4211bfdd298fdb96559a57eb66e2a5859d78"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44102-current-scr022-question-list-values/manifest.json",
+      "sha256": "82a952635de62e27057a2068162af9e5b361626511a2082c52c936e0ef824f45"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/manifest.json",
+      "sha256": "62ccdd2a796cb77de0527433db1e0706ad3e31771cccc56e7df83c1573ac9f0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44326-f02-new-core-four-packages-and-two-resources/manifest.json",
+      "sha256": "fe5dd390c56c1a1f9735798b491a884b811e7613cbee123eb3da575c17a8f83d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44336-web-only-maven-resources-byte-matches/manifest.json",
+      "sha256": "c450ca1f58e9f04d2a19835af3a21910a882a202a48a2d191394ad08a5ab2f08"
+    }
+  ],
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4978_質問の状態ラベルと一覧呼出元の単体仕様.md",
+    "sha256": "c3ed10f8bcd87115ce5454e4f51fd4ba6d2a5f7d0702016d91fb91aa1a827778"
+  },
+  "result": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4979_質問の状態ラベルと一覧呼出元の実行結果.md",
+    "sha256": "c4cafcb69ebfc6fc7f03d35df74662b8192e1669c6b85c36f76fb671ef1a372a"
+  },
+  "normalTests": {
+    "passCount": 24,
+    "detail": 8,
+    "caller": 16,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0
+  },
+  "independentIds": {
+    "answeredProjectionHasExactFields": "PT-WEB-QDETAIL001",
+    "unansweredAndErrorHaveNoAnswer": "PT-WEB-QDETAIL002",
+    "adminMayViewAnotherOwner": "PT-WEB-QDETAIL003",
+    "summaryUsesOneHundredCodePoints": "PT-WEB-QDETAIL004",
+    "targetOwnerAndBodyReject": "PT-WEB-QDETAIL005",
+    "nullBoundaryRejects": "PT-WEB-QDETAIL006",
+    "immutableRedactedProjection": "PT-WEB-QDETAIL007",
+    "parallelProjectionDoesNotLeakOwners": "PT-WEB-QDETAIL008",
+    "emptyReturnsPlainView": "PT-WEB-QLIST001",
+    "allStatesHaveIndependentRows": "PT-WEB-QLIST002",
+    "userPagingLinksAndClamp": "PT-WEB-QLIST003",
+    "adminAndUserFilteredLinksAreLiteral": "PT-WEB-QLIST004",
+    "invalidFormsStayUnpaginated": "PT-WEB-QLIST005",
+    "roleMismatchRejectsBothDirections": "PT-WEB-QLIST006",
+    "wrongEffectivePageRejects": "PT-WEB-QLIST007",
+    "rowCountMismatchRejects": "PT-WEB-QLIST008",
+    "duplicateIdsReject": "PT-WEB-QLIST009",
+    "ownerScopeAndSummaryLimitReject": "PT-WEB-QLIST010",
+    "inconsistentAnswerTimestampRejects": "PT-WEB-QLIST011",
+    "orderRulesAreIndependent": "PT-WEB-QLIST012",
+    "nullBoundariesReject": "PT-WEB-QLIST013",
+    "outputSnapshotIsImmutable": "PT-WEB-QLIST014",
+    "unicodeBoundaryAndAdminCrossOwnerAreValid": "PT-WEB-QLIST015",
+    "parallelViewsKeepActorsSeparate": "PT-WEB-QLIST016"
+  },
+  "sameExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44354-question-projections-exact-runtime/selected.exec",
+    "sha256": "e737323be1d3bf6a059ec1cf5a3175edf3cb60a680fe0851bf736f8890aeb163"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44354-question-projections-exact-runtime/report/TEST-junit-jupiter.xml",
+    "sha256": "90dc5e49f30d275b4a4647959024b951ffdf25ea505e0534e46c7257aab348e4"
+  },
+  "firstAttempt": {
+    "passed": 22,
+    "failed": 2,
+    "failedMethods": [
+      "userPagingLinksAndClamp()",
+      "adminAndUserFilteredLinksAreLiteral()"
+    ],
+    "receipts": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/report/TEST-junit-jupiter.xml",
+      "sha256": "fdf756758d14daaa483b4377cf2120237fe052349567a573449092adb07d7dd2"
+    },
+    "cause": "Two previously approved Spring libraries were absent from the scoped JVM classpath."
+  },
+  "rawTargetSelectionFirstFailure": "Fixture filename supplied in place of the product type; recovered valid exec without running tests again.",
+  "rawFourCounters": {
+    "QuestionDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 231
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionListViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 434
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 38
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 77
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "manualExcludes": [],
+  "rawProducts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/target/classes/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.class",
+      "sha256": "001c492b29162282586126b24243e88b4d03f7b61ea6518b3851a07fbdf4cf5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/target/classes/dev/codex/schubert/nk/web/view/QuestionListViewModel.class",
+      "sha256": "0eeb3a6f72f31acdcde7054112c67d56005d258efa9e6e23785b49c52cb40a5b"
+    }
+  ],
+  "abiAndExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44358-question-projections-correct-product-coverage/begin.json",
+    "sha256": "f08885f8b43bef11b353ceb04dd3f41d39193dd6a4509dba4f5242ba2b8040ff"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44358-question-projections-correct-product-coverage/raw.out",
+    "sha256": "ad239c35b2789dde7529ac892dda993f1ad44ba8603e338c433141f7f2c56ba1"
+  },
+  "initialBoundCommands": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/begin.json",
+      "sha256": "0ebbc36aba8b6a9b0c7a6f5ba02f925d0d5067f436c34f8be437878e2faaa470"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44354-question-projections-exact-runtime/begin.json",
+      "sha256": "24792cee003f20607241b935b20882ad6cf78b5ec51342eeb24eb169b402d7fc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44358-question-projections-correct-product-coverage/begin.json",
+      "sha256": "f08885f8b43bef11b353ceb04dd3f41d39193dd6a4509dba4f5242ba2b8040ff"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44360-question-projections-typed-two/begin.json",
+      "sha256": "2f773113e1806b3aabd3c2bd33314296b842fae7398672515dfa94b6cf0bdfea"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/terminal.json",
+      "sha256": "e08efc772af1a05caad45709a1e870160be47e4356ba9464b0f70181092a23f8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44354-question-projections-exact-runtime/terminal.json",
+      "sha256": "eadef0fcf967fb2ecf1f7cb68a8fbc2915290b0fea8610dc376516cefa055b3d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44358-question-projections-correct-product-coverage/terminal.json",
+      "sha256": "daa8a9175c9e1fe0960393b993cafbc143eb7234c68f346c7a7f835e074a37d5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44360-question-projections-typed-two/terminal.json",
+      "sha256": "34fcf6fb6fe4e6ce3beca2eaa78d03a2c03ec733d77b5c3593af17a313beac98"
+    }
+  ],
+  "regularProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "scopedSpotBugs": {
+    "source": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "run": "PG44360",
+    "terminalAtUTC": "2026-11-24T18:31:27.745711+00:00",
+    "actualExit": 0,
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44360-question-projections-typed-two/spot.xml",
+      "sha256": "4f1678e7224e5c149559fa2eae89df121fee2b101be1413bf7a84a8118d46aa1"
+    },
+    "bugCount": 0,
+    "missing": 0,
+    "errors": 0,
+    "total": 2
+  },
+  "scopedNullAway": {
+    "typedMain": 6,
+    "exit": 0
+  },
+  "pmd": {
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44352-question-projections-fixed-mapping-scope/pmd.xml",
+      "sha256": "4b2475def1c791196c9a768ad024084d26b957c9943ab4a2f5987c42fd8fa823"
+    },
+    "violations": [
+      {
+        "rule": "CloseResource",
+        "line": 198
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 198
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 204
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 220
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 221
+      }
+    ],
+    "applicableProduction": 0,
+    "fixtureRaw": 5,
+    "wholeQualityRulingUnchanged": true
+  },
+  "actualDbHttpJmsOrSessionSideEffects": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

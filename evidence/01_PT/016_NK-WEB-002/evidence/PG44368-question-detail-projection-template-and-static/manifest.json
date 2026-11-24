@@ -1,0 +1,118 @@
+{
+  "run": "PG44368",
+  "source": "ed3ae8db741a46a206a8bafb681e1ddc78ed9765",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T18:34:30.403672+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-P016-23/2",
+    "WBS-F03/2-2-b"
+  ],
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4980_質問回答明細の表示接続単体仕様.md",
+    "sha256": "7195da2ff70e80acbfedbdbab1b7bb54734f1e9213ef0767b3f267901bde7c71"
+  },
+  "result": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4981_質問回答明細の表示接続実行結果.md",
+    "sha256": "492c97e0b21493bd1ce6a00e13c143a77ab11ccca4b92fe3cfcf7a6e14cfdcff"
+  },
+  "inputFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailRenderingTest.java",
+    "sha256": "4c3c8f0d881a12b1d09a351657ff8c93e66351ed630b1fc6118e34ec5a1e4e7e"
+  },
+  "independentTests": {
+    "unansweredOwnerSeesQuestionAndNoAnswer": "PT-WEB-QDETAIL-DOM001",
+    "adminSeesOwnerAndTheEmptyAnswerLiteral": "PT-WEB-QDETAIL-DOM002",
+    "errorRendersItsLabelWithoutAnswerOrDeleteConfirmation": "PT-WEB-QDETAIL-DOM003"
+  },
+  "testCount": 3,
+  "passed": 3,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "exactNormalResourceScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44336-web-only-maven-resources-byte-matches/manifest.json",
+    "sha256": "c450ca1f58e9f04d2a19835af3a21910a882a202a48a2d191394ad08a5ab2f08"
+  },
+  "copiedResourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+      "sha256": "03c75ff00987215517218429b98484539a7cb85aa4d9cb83b937630f435728d7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/error-summary.html",
+      "sha256": "8fa5afe1b38ed63d9fc78508778f9e6e6c5c1328967a5a3d866bf1aa324efb42"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/forms.html",
+      "sha256": "28e727880a7f6fc7d4c805f0b36119f72d73ad3a647623c53b4d2f5ad4a78232"
+    }
+  ],
+  "sameProductUnitProof": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44362-question-state-labels-and-caller/manifest.json",
+    "sha256": "4a0eaddb4b64438f5ac26201587c21e571bab4313d4358cfcfd026e6a95f6a65"
+  },
+  "artifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/classes/dev/codex/schubert/nk/web/session/SessionPrincipal.class",
+      "sha256": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/classes/dev/codex/schubert/nk/web/view/TopBarViewModel.class",
+      "sha256": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/classes/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.class",
+      "sha256": "001c492b29162282586126b24243e88b4d03f7b61ea6518b3851a07fbdf4cf5c"
+    }
+  ],
+  "regularProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/xml/TEST-junit-jupiter.xml",
+    "sha256": "e8858def0c6bea3dd65eadfe607887417576646d3f25835c1ab8e237464d8b35"
+  },
+  "staticSpotBugs": {
+    "actualExit": 0,
+    "source": "ed3ae8db741a46a206a8bafb681e1ddc78ed9765",
+    "run": "PG44366",
+    "terminalAtUTC": "2026-11-24T18:33:39.660476+00:00",
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44366-question-read-only-fixture-typed-one/spotbugs.xml",
+      "sha256": "03df862a13655e03ac678d9a8d11fdd7489607b6de10889bb672fa46501edef9"
+    },
+    "warnings": [],
+    "missing": 0,
+    "errors": 0,
+    "count": 1
+  },
+  "ordinaryTerminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/terminal.json",
+      "sha256": "6a01f1a0c7f1c218a1b32e17b0e511badc412469bc0331eecdca0faa0c0cba11"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44366-question-read-only-fixture-typed-one/terminal.json",
+      "sha256": "ecf6cf8dbe56e8d8fa001c3c5038088bda4947d7fbb1b1516b0f21fb125f6b77"
+    }
+  ],
+  "exactCommands": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44364-question-detail-read-only-three/begin.json",
+      "sha256": "bc57a27f2593316afdd055c9b7eb5b058a37f26c0a85a79de6a12c2fa026a9d5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44366-question-read-only-fixture-typed-one/begin.json",
+      "sha256": "bdcb4e503e0e600027ed6e004f2609560aff8d40a2a4cf859284cc147da76ee3"
+    }
+  ],
+  "realServiceOrDelete": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
