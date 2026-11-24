@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -72,19 +73,7 @@ def validate_resource_suite(suite):
 
 
 def validate_coverage(report, subject):
-    classes = [element for element in report.iter("class") if element.get("name") == subject]
-    if len(classes) != 1:
-        raise ValueError("vertical Log production class missing")
-    counters = {c.get("type"): {"covered": int(c.get("covered")),
-                                 "missed": int(c.get("missed"))}
-                for c in classes[0].findall("counter")}
-    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS")
-    if (not set(required).issubset(counters)
-            or any(counters[k]["covered"] <= 0 or counters[k]["missed"] != 0
-                   for k in required)
-            or ("BRANCH" in counters and counters["BRANCH"]["missed"] != 0)):
-        raise ValueError("vertical Log production coverage below 100%")
-    return counters
+    return validate_selected_class_coverage(report, subject, require_branch=False)
 
 
 def main():

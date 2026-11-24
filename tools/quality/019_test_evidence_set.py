@@ -384,6 +384,19 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 log_vertical.validate_resource_suite(wrong)
 
+    @staticmethod
+    def _selected_class_report(subject):
+        report = ET.Element("report")
+        package = ET.SubElement(report, "package", name=subject.rpartition("/")[0])
+        cls = ET.SubElement(package, "class", name=subject)
+        method = ET.SubElement(cls, "method", name="execute", desc="()V")
+        for kind, covered in {"INSTRUCTION": 8, "METHOD": 1, "BRANCH": 2}.items():
+            for element in (cls, method):
+                ET.SubElement(element, "counter", type=kind, missed="0", covered=str(covered))
+        for kind in ("LINE", "CLASS"):
+            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        return report
+
     def test_jms_resource_compound_inventory_and_coverage(self):
         self.assertEqual(("PT-JMS-021", "PT-IDEM-010-R01", "PT-IDEM-010-R02",
                           "PT-IDEM-010-R03", "PT-IDEM-010-R04", "PT-IDEM-010-R05",
@@ -417,14 +430,12 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], "failure")
             with self.assertRaises(ValueError):
                 jms_compounds.validate_suite(wrong, class_name, method, count)
-            report = ET.Element("report")
-            cls = ET.SubElement(report, "class", name=subject)
-            for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+            report = self._selected_class_report(subject)
+            cls = report.find("package/class")
             self.assertEqual(5, len(jms_compounds.validate_coverage(report, subject)))
             for counter in cls.findall("counter"):
                 wrong = copy.deepcopy(report)
-                next(c for c in wrong.iter("counter") if c.get("type") == counter.get("type")).set("missed", "1")
+                wrong.find(f"package/class/counter[@type='{counter.get('type')}']").set("missed", "1")
                 with self.assertRaises(ValueError):
                     jms_compounds.validate_coverage(wrong, subject)
 
@@ -636,15 +647,39 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): vertical.validate_suite(wrong)
         wrong = copy.deepcopy(suite); wrong[0].set("name", "unlisted")
         with self.assertRaises(ValueError): vertical.validate_suite(wrong)
-        report = ET.Element("report")
-        candidate = ET.SubElement(report, "class", name=vertical.SUBJECTS[0][1])
-        for counter in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(candidate, "counter", type=counter, covered="1", missed="0")
-        self.assertEqual(5, len(vertical.validate_coverage(report, vertical.SUBJECTS[0][1])))
-        bad = copy.deepcopy(report); bad[0][4].set("missed", "1")
-        with self.assertRaises(ValueError): vertical.validate_coverage(bad, vertical.SUBJECTS[0][1])
-        branchless = copy.deepcopy(report); branchless[0].remove(branchless[0][4])
-        self.assertEqual(4, len(vertical.validate_coverage(branchless, vertical.SUBJECTS[0][1])))
+        subject = vertical.SUBJECTS[0][1]
+        report = self._selected_class_report(subject)
+        self.assertEqual(5, len(vertical.validate_coverage(report, subject)))
+        bad = copy.deepcopy(report)
+        bad.find("package/class/counter[@type='BRANCH']").set("missed", "1")
+        with self.assertRaises(ValueError):
+            vertical.validate_coverage(bad, subject)
+        branchless = copy.deepcopy(report)
+        for element in (branchless.find("package/class"), branchless.find("package/class/method")):
+            element.remove(element.find("counter[@type='BRANCH']"))
+        self.assertEqual(4, len(vertical.validate_coverage(branchless, subject)))
+        with self.assertRaises(ValueError):
+            jms_compounds.validate_coverage(branchless, subject)
+
+    def test_selected_class_coverage_rejects_missing_or_inconsistent_methods(self):
+        vertical = module("log_replay_vertical", "040_collect_log_replay_vertical.py")
+        for collector in (jms_compounds, vertical):
+            for variant in ("missing-method", "missed-method", "duplicate-method", "duplicate-counter"):
+                with self.subTest(collector=collector.__name__, variant=variant):
+                    subject = "fixture/scope/Unit"
+                    report = self._selected_class_report(subject)
+                    cls = report.find("package/class")
+                    method = cls.find("method")
+                    if variant == "missing-method":
+                        cls.remove(method)
+                    elif variant == "missed-method":
+                        method.find("counter").set("missed", "1")
+                    elif variant == "duplicate-method":
+                        cls.append(copy.deepcopy(method))
+                    else:
+                        cls.append(copy.deepcopy(cls.find("counter")))
+                    with self.assertRaises(ValueError):
+                        collector.validate_coverage(report, subject)
 
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")

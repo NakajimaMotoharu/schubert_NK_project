@@ -2,7 +2,6 @@
 """Certify Scenario PT using allowlisted metadata; reject failed, skipped, flaky and partial coverage."""
 
 import argparse
-from collections import Counter
 import hashlib
 import json
 import platform
@@ -18,6 +17,7 @@ from pgpt_reactor_junit import (
     MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record, verify_reactor_junit,
 )
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import REQUIRED_COVERAGE, add_covered, coverage_rows, validate_class_detail
 from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
@@ -29,35 +29,6 @@ def scenario_storage_suite(name):
         "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
         "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
         "dev.codex.schubert.nk.storage.ResourceScopeTest"}
-
-
-REQUIRED_COVERAGE = frozenset(("LINE", "METHOD", "CLASS", "BRANCH"))
-JACOCO_COUNTERS = REQUIRED_COVERAGE | {"INSTRUCTION", "COMPLEXITY"}
-
-
-def _coverage_rows(element):
-    counters = {}
-    for counter in element.findall("counter"):
-        metric = counter.get("type")
-        missed = counter.get("missed", "")
-        covered = counter.get("covered", "")
-        if (
-            metric not in JACOCO_COUNTERS
-            or metric in counters
-            or not re.fullmatch(r"[0-9]+", missed)
-            or not re.fullmatch(r"[0-9]+", covered)
-        ):
-            raise ValueError("invalid or duplicated JaCoCo counter")
-        counters[metric] = {"missed": int(missed), "covered": int(covered)}
-    return counters
-
-
-def _add_covered(nodes, counters, omitted=()):
-    totals = Counter()
-    for node in nodes:
-        totals.update({metric: row["covered"] for metric, row in counters[node].items()
-                       if metric not in omitted})
-    return totals
 
 
 def _coverage_class_names(physical_classes):
@@ -76,7 +47,7 @@ def _coverage_class_names(physical_classes):
 
 def validate_module_coverage(report, expected_classes):
     """Require complete module coverage with the actual compile roster and detail."""
-    counters = {element: _coverage_rows(element) for element in report.iter()}
+    counters = {element: coverage_rows(element) for element in report.iter()}
     root = counters[report]
     packages = report.findall("package")
     names = [package.get("name") for package in packages]
@@ -93,7 +64,7 @@ def validate_module_coverage(report, expected_classes):
     aggregate_nodes = {report, *packages}
     if any(row["missed"] for node in packages for row in counters[node].values()):
         raise ValueError("JaCoCo report contains missed package counters")
-    if _add_covered([report], counters) != _add_covered(packages, counters):
+    if add_covered([report], counters) != add_covered(packages, counters):
         raise ValueError("module JaCoCo counters disagree with package totals")
     if any(row["missed"] for element, rows in counters.items() if element not in aggregate_nodes
            for row in rows.values()):
@@ -125,13 +96,13 @@ def validate_module_coverage(report, expected_classes):
                         or not re.fullmatch(r"[0-9]+", line.get("cb", ""))):
                     raise ValueError("JaCoCo report contains incomplete or missed line detail")
                 numbers.add(number)
-            if _add_covered([file], counters)["LINE"] != len(lines):
+            if add_covered([file], counters)["LINE"] != len(lines):
                 raise ValueError("source file JaCoCo line count disagrees with detail")
             source_lines.update(lines)
         # Several classes can share a source line. Only sourcefile lines are additive here.
-        expected = _add_covered(members, counters, omitted=("LINE",))
-        expected["LINE"] = _add_covered(files, counters)["LINE"]
-        if _add_covered([package], counters) != expected:
+        expected = add_covered(members, counters, omitted=("LINE",))
+        expected["LINE"] = add_covered(files, counters)["LINE"]
+        if add_covered([package], counters) != expected:
             raise ValueError("package JaCoCo counters disagree with class or source detail")
     if (not expected_classes or classes.keys() != expected_classes
             or set(report.iter("class")) != set(classes.values())
@@ -141,20 +112,7 @@ def validate_module_coverage(report, expected_classes):
 
     reported_methods = set()
     for cls in classes.values():
-        methods = cls.findall("method")
-        signatures = [(method.get("name"), method.get("desc")) for method in methods]
-        if (any(not all(signature) for signature in signatures)
-                or len(signatures) != len(set(signatures))):
-            raise ValueError("missing or duplicated JaCoCo method signature")
-        reported_methods.update(methods)
-        for method in methods:
-            method_values = _add_covered([method], counters)
-            if method_values["METHOD"] != 1 or not method_values["INSTRUCTION"]:
-                raise ValueError("missing executable JaCoCo method counters")
-        expected = _add_covered(methods, counters, omitted=("LINE",))
-        expected["CLASS"] = int(bool(methods))
-        if _add_covered([cls], counters, omitted=("LINE",)) != expected:
-            raise ValueError("class JaCoCo counters disagree with method detail")
+        reported_methods.update(validate_class_detail(cls, counters))
     if set(report.iter("method")) != reported_methods:
         raise ValueError("misplaced JaCoCo method detail")
     return root
