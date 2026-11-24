@@ -1,0 +1,145 @@
+{
+  "run": "PG44078",
+  "source": "42f969c8a2fc7c6ad70d54fceaa18c33625d38fb",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "designSource": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "terminalAtUTC": "2026-11-24T14:41:52.356107+00:00",
+  "dueHandoffJST": "2026-11-25T23:29:00+09:00",
+  "dueDecisionsJST": "2026-12-02T23:29:00+09:00",
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43946-four-owner-six-product-and-13-sys/manifest.json",
+    "sha256": "646d6bc5d55184b7063156be37f35ddaaba5e6748eb907b96eee6f84282b2a24"
+  },
+  "receipt": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/4327_11月25日四担当引渡し現候補・12月2日判定資料.md",
+    "sha256": "f1946449199a20f6c51e402c7e9bef795598ab8af51f1f72ade92e3f59edbadc"
+  },
+  "areaConditions": [
+    {
+      "item": "F02",
+      "owner": "ビルド・アーキテクチャ／API・Web／Storage担当",
+      "evidence": "正規4包装（Protocol176、Storage79、Bootstrap201、Batch660物理）、元票のSYS 13件、API/Webのruntime依存モデル",
+      "remaining": "QA-056四型の判断、API/Webの正規JAR2件、SSC-461 JDBC境界の責務と同候補実証、QA-062判断、13要求の所要終端と451。署名付き判定",
+      "roleAcknowledged": null
+    },
+    {
+      "item": "F03",
+      "owner": "品質／保留の判断担当",
+      "evidence": "許可試験1,149/1,149に現Java書式・Checkstyle証跡。許可Mainの書式1,028/1,028、Checkstyle1,029。Batch Backup18・追加4・StartupOriginal4の現対象証拠",
+      "remaining": "QA-056・保留32試験・Root11の適用処置、全六型付き静的、451の同source同runの四指標と終了依存。正式署名",
+      "roleAcknowledged": null
+    },
+    {
+      "item": "C02",
+      "owner": "運用・Unit担当",
+      "evidence": "公開Caddy順序、親期限、設定宣言、05:00前の専用受けUnitの不足",
+      "remaining": "実効Unit・同boot所有・Caddy TLS/Inspector/保守サービスの実終端。専用受けUnitの正本上の入口と実設定",
+      "roleAcknowledged": null
+    },
+    {
+      "item": "F04",
+      "owner": "基盤・haruka利用担当",
+      "evidence": "元引渡しと対象版を継承",
+      "remaining": "現所有・作業権限と同候補FileStore／実Browser。環境および利用条件の承認済み証票",
+      "roleAcknowledged": null
+    }
+  ],
+  "originalSSC447": {
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "passed": 152,
+    "failed": 0,
+    "errors": 0,
+    "skips": 0,
+    "notRun": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    "currentFullCandidateCredit": 0
+  },
+  "standardBuildArtifacts": [
+    {
+      "module": "protocol",
+      "physical": 176,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+      },
+      "mainTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "module": "storage",
+      "physical": 79,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "mainTree": "a24ff61c25ac27746921f1fabbf66c63a957f7db"
+    },
+    {
+      "module": "bootstrap",
+      "physical": 201,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "mainTree": "d601666ae00a963c5f57da4d7842eb42a637c3e8"
+    },
+    {
+      "module": "batch",
+      "physical": 660,
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+      },
+      "mainTree": "f713469ccd0424baf6339dd4748c043f23e4725e"
+    }
+  ],
+  "systemCriterionIds": [
+    "SYS-001",
+    "SYS-002",
+    "SYS-003",
+    "SYS-004",
+    "SYS-005",
+    "SYS-006",
+    "SYS-007",
+    "SYS-008",
+    "SYS-009",
+    "SYS-010",
+    "SYS-012",
+    "SYS-013",
+    "SYS-014"
+  ],
+  "currentSystemAcceptance": 0,
+  "pfRetry": {
+    "first": "Contiguous numbering assertion failed",
+    "closedBy": "Original tracked listed IDs verified before new files",
+    "testsRun": 0
+  },
+  "files": {
+    "checkstyleEligibleMain": 1029,
+    "formatConfirmedMain": 1028,
+    "formatEligibleMain": 1028,
+    "formatAndCheckstyleConfirmedTest": 1149,
+    "heldTest": 32
+  },
+  "currentNewTechnical": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44070-current-two-canonical-spotless-fixtures/manifest.json",
+      "sha256": "dd0b8e139784b122145362177d5142675bcbb1bd59dc4afa08afda11b0b5a3b6"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44076-current-maintenance-startup-original-value/manifest.json",
+      "sha256": "d99a3dced19df2744bd6af3dd1afc2be3ecd6921b05d54f20a0a4622a45f0a7a"
+    }
+  ],
+  "officialCounts": {
+    "accepted": 16,
+    "total": 190,
+    "formalPt": 1964,
+    "formalScope": 53
+  },
+  "newProductPt": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
