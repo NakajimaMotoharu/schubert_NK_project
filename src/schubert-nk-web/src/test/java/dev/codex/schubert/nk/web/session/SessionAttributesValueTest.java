@@ -29,7 +29,8 @@ final class SessionAttributesValueTest {
     assertEquals(List.of(), empty.operationTokens());
 
     var principal =
-        new SessionPrincipal("fixture", UserRole.USER, AuthenticationContext.of("b".repeat(64)), NOW);
+        new SessionPrincipal(
+            "fixture", UserRole.USER, AuthenticationContext.of("b".repeat(64)), NOW);
     var request = SavedRequestTarget.fromGet("GET", "/search?q=fixture");
     for (int length : new int[] {64, 128}) {
       var csrf = "a0_-".repeat(length / 4);
@@ -76,8 +77,7 @@ final class SessionAttributesValueTest {
       assertEquals(
           "session CSRF value is invalid",
           assertThrows(
-                  IllegalArgumentException.class,
-                  () -> attributes(Optional.of(value), List.of()))
+                  IllegalArgumentException.class, () -> attributes(Optional.of(value), List.of()))
               .getMessage());
     }
   }
