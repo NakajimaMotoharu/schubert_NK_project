@@ -1,0 +1,189 @@
+{
+  "run": "PG44530",
+  "source": "9fc66596cfb0abc0ba438a096d015dd1546055e8",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-P015-05/2",
+  "terminalAtUTC": "2026-11-24T20:40:54.876191+00:00",
+  "actualExit": 0,
+  "testResults": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testIds": [
+    "OPS-RVR-FATAL004",
+    "OPS-RVR-FATAL005"
+  ],
+  "otherMethodsOfFixtureNotSelected": 3,
+  "scopes": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b"
+    }
+  ],
+  "relatedBug": "BUG-2709",
+  "fixedOracle": "A direct fatal is by identity; a nested Error remains the primary and receives row/statement close failures by identity in that order. Borrowed connection untouched.",
+  "historicalReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27510-revocation25-independent-v1/manifest.json",
+    "sha256": "dcc2f6f187d46fbe51a819e2b36d0a6512b9400f34bed5412c9e0aae889ac7aa"
+  },
+  "currentExactProductPortCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44514-revocation-schedule-current-port-counters/manifest.json",
+    "sha256": "75867b32c6e022056090a03b75abb55b615957bea4d6d823db41917c7b1b9fe5"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationFatalPortTest.java",
+    "sha256": "a0648d8a509249964f1a28b047c7196e6c79319df8269d3aa5edd454b3e673da"
+  },
+  "productCompileMavenAndNullAwayReuse": true,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java",
+      "sha256": "c11388734f03a3263f0c53097d5ce3e1c79d5f17416bdbf569a4cbd4d9fe4f7b"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/ClaimedRevocation.java",
+      "sha256": "0d62d5d5c749ed7db388e0d96aacfda7bd8cc74edb07326abd945c61b33e2d4f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java",
+      "sha256": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java",
+      "sha256": "e4e1611f0cf10d61f4caf359175c95d6b273e86288c1d71fe9dc7d53f7dbba82"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java",
+      "sha256": "7619c5d7d7f1e7904d5379123512e6a829691ab1eb2a06dd1305d44bdc7d6fe7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/package-info.java",
+      "sha256": "785d98841334b52c27cf6c3a1625a06bf0a8a7c61776214c0ad9375a09c18549"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+      "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+      "sha256": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java",
+      "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+    }
+  ],
+  "exactPhysicalInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/ClaimedRevocation.class",
+      "sha256": "d1735f90d98fc4729c13faf0ee058afa5a31510af1298beb4a55483b6cb4b081"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.class",
+      "sha256": "2c13c760b4229ed26d12b18a927fa15bf2a172fa3e69e58f59d212fb0d484e84"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.class",
+      "sha256": "ff1998fd650d1ba1b8b67e32cad961a378e5c5fdd555b51ed526923e75538fcf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.class",
+      "sha256": "83a5fa435fe616a83039b7f835ddd83998e0bcf0e58070389a05a7501d58f4dc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.class",
+      "sha256": "821c45024d249eae55565d71b85a6760bb409859bab39eb9391bf9e5874d9478"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/revocation/package-info.class",
+      "sha256": "6f626a106ca6202efe19fd103b8dd72fb00e4481d68d8bd930cb8113208ca40f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/session/InvalidSessionRowException.class",
+      "sha256": "b69afa5decd303c72293c68ba918d06c40d8a64b3d8a3e55189291620f5ec1a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/session/SessionStoreException.class",
+      "sha256": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44514-current-revocation-memory-sixteen/target/classes/dev/codex/schubert/nk/web/session/package-info.class",
+      "sha256": "3fe914022b11d62e8a2782b393443c76c17914fda383f41dab62bd2feb23518a"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    }
+  ],
+  "originalRawRepositoryCoverageNotCombined": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44514-revocation-schedule-current-port-counters/manifest.json",
+    "sha256": "75867b32c6e022056090a03b75abb55b615957bea4d6d823db41917c7b1b9fe5"
+  },
+  "newSelectedRawMissedCovered": {
+    "INSTRUCTION": [
+      475,
+      114
+    ],
+    "BRANCH": [
+      53,
+      8
+    ],
+    "LINE": [
+      91,
+      26
+    ],
+    "COMPLEXITY": [
+      37,
+      6
+    ],
+    "METHOD": [
+      6,
+      6
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "commands": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44530-current-revocation-fatal-close-two/begin.json",
+    "sha256": "deb6c19a617191a17bf25db8f405bbaaa08f597a8dd784f80f25410984ea5ab8"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44530-current-revocation-fatal-close-two/terminal.json",
+    "sha256": "c6094924b56d18238361545aaad786cff520a5afb53b66fc6eec61b53370781f"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44530-current-revocation-fatal-close-two/reports/TEST-junit-jupiter.xml",
+    "sha256": "8d7b76a5d7460511f6a1e3bb5a0d89ea0808a70245c2f0bfaf2a24fe413f4442"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44530-current-revocation-fatal-close-two/unit.exec",
+    "sha256": "f5d34ff28905a82512095a1b0a1dd16aeba5073b54f147471114788029a7e0e2"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44530-current-revocation-fatal-close-two/raw.stdout",
+    "sha256": "ea7b2200b4d524fd869cb1495a891067b41a3193107602b0f211d90247dd6846"
+  },
+  "realDbOrBrokerOrSecretAccess": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
