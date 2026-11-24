@@ -27,7 +27,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
-/** PT-WEB-NDETAIL-DOM001..003; SCR021, UI224/236, SS313. Read-only display. */
+/** PT-WEB-NDETAIL-DOM001..004; SCR021, UI224/236, SS313. Read-only display. */
 final class NotificationDetailRenderingTest {
   private static final String STATE = "dd.state";
   private static final String NO_CANCEL = "form.cancel-form";
@@ -82,6 +82,34 @@ final class NotificationDetailRenderingTest {
     assertEquals("SYSTEM_UNAVAIL", document.select(".error-code").text());
     assertEquals(ERROR_TEXT, document.select(".user-facing-error").text());
     assertTrue(document.select(".answer-body,.question-detail").isEmpty());
+    assertTrue(document.select(NO_CANCEL).isEmpty());
+  }
+
+  @Test
+  void cancelledNotificationShowsReceiptAndCancellationWithoutQuestionBody() {
+    var input =
+        new NotificationDetailResponseData(
+            ID,
+            RECEIPT,
+            NotificationType.ACCEPTED,
+            NotificationState.CANCELLED,
+            AT,
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.of(AT.plusSeconds(4)),
+            false,
+            Optional.of(QUESTION),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.of(new QuestionId(99)));
+    var document = render(input);
+    assertEquals("取消済み", document.select(STATE).text());
+    assertEquals(RECEIPT, document.select("dd.receipt").text());
+    assertEquals("2026-11-01 09:00:04", document.select("dd.cancelled-at").text());
+    assertTrue(
+        document.select(".question-body,.answer-body,.question-detail,.error-detail").isEmpty());
     assertTrue(document.select(NO_CANCEL).isEmpty());
   }
 
