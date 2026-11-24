@@ -176,6 +176,19 @@ class PublishedManifestPinsTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit(self.repo, "HEAD", end)
 
+    def test_malformed_json_observations_are_rejected_before_counting_pins(self):
+        cases = (
+            ("duplicate field", b'{"observation": 1, "observation": 2}'),
+            ("non-finite number", b'{"observation": NaN}'),
+            ("negative infinity", b'{"observation": -Infinity}'),
+        )
+        for label, raw in cases:
+            with self.subTest(label=label):
+                self.write(MANIFEST, raw)
+                end = self.commit()
+                with self.assertRaises(ValueError):
+                    audit(self.repo, self.original, end)
+
 
 if __name__ == "__main__":
     unittest.main()
