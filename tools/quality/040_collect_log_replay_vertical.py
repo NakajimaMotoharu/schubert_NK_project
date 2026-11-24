@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -47,26 +48,21 @@ def digest(path):
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
-    if (suite.get("name") != CLASS or suite.get("tests") != "1"
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    cases = validate_passing_surefire_suite(suite)
+    if (suite.get("name") != CLASS
             or len(cases) != 1 or cases[0].get("classname") != CLASS
-            or cases[0].get("name") != METHOD
-            or any(child.tag not in ("system-out", "system-err") for child in cases[0])):
+            or cases[0].get("name") != METHOD):
         raise ValueError("missing, failed, flaky, or unlisted vertical Log PT")
     return {"PT-IDEM-016": CLASS + "#" + METHOD}
 
 
 def validate_resource_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != RESOURCE_CLASS or suite.get("tests") != "9"
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (suite.get("name") != RESOURCE_CLASS
             or len(cases) != 9 or len(set(names)) != 9
             or any(names.count(name) != 1 for name in RESOURCE_METHODS.values())
-            or any(case.get("classname") != RESOURCE_CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != RESOURCE_CLASS for case in cases)):
         raise ValueError("missing or nonpassing Web Log JDBC Resource PT")
     return {test_id: RESOURCE_CLASS + "#" + name
             for test_id, name in RESOURCE_METHODS.items()}

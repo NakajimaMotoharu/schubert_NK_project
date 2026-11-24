@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """PT-QA-TRACE-002/003 independent inventory/run/failure canaries; no production secrets."""
 import copy
+import contextlib
 import ast
 import hashlib
 import importlib.util
@@ -804,6 +805,75 @@ class EvidenceSetTest(unittest.TestCase):
                             ET.SubElement(bad, "properties")
                         with self.assertRaisesRegex(ValueError, "reactor JUnit"):
                             reader.validate_suite(bad)
+
+    def test_junit_scope002_rejects_incomplete_selected_surefire_envelopes(self):
+        class_name = "fixture.Independent"
+        all_names = tuple(f"test-{i}" for i in range(9))
+        simple = {"CLASS": class_name, "METHODS": all_names[:1]}
+        readers = (
+            ("034_collect_api_messaging_runtime.py", "validate_suite", simple, 1, ()),
+            ("035_collect_log_path_router.py", "validate_suite", simple, 1, ()),
+            ("036_collect_api_log_path_runtime.py", "validate_suite", simple, 1, ()),
+            (
+                "036_collect_api_log_path_runtime.py", "validate_ready_suite",
+                {"READY_CLASS": class_name, "READY_METHODS": all_names[:1]}, 1, (),
+            ),
+            (
+                "038_collect_request_sender_resource.py", "validate_suite",
+                {"CLASS": class_name, "BASE_METHODS": all_names[:6],
+                 "METHODS": {"FIXTURE-SENDER": all_names[6]}}, 7, (),
+            ),
+            (
+                "039_collect_jms_resource_compounds.py", "validate_suite",
+                {}, 2, (class_name, all_names[0], 2),
+            ),
+            (
+                "040_collect_log_replay_vertical.py", "validate_suite",
+                {"CLASS": class_name, "METHOD": all_names[0]}, 1, (),
+            ),
+            (
+                "040_collect_log_replay_vertical.py", "validate_resource_suite",
+                {"RESOURCE_CLASS": class_name, "RESOURCE_METHODS": {"FIXTURE-RESOURCE": all_names[0]}},
+                9, (),
+            ),
+        )
+        for filename, function, constants, total, arguments in readers:
+            reader = module("independent_surefire_shape_fixture", filename)
+            validate = getattr(reader, function)
+            valid = ET.Element(
+                "testsuite", name=class_name, tests=str(total), failures="0", errors="0", skipped="0",
+            )
+            props = ET.SubElement(valid, "properties")
+            ET.SubElement(props, "property", name="fixture", value="true")
+            ET.SubElement(valid, "system-out").text = "synthetic"
+            for name in all_names[:total]:
+                ET.SubElement(valid, "testcase", name=name, classname=class_name)
+            with patch.multiple(reader, **constants) if constants else contextlib.nullcontext():
+                self.assertTrue(validate(valid, *arguments))
+                for defect in (
+                    "failures", "errors", "skipped", "zero", "root", "unknown",
+                    "nested", "duplicatedProperties", "malformedProperty", "propertyText",
+                ):
+                    with self.subTest(collector=filename, function=function, defect=defect):
+                        bad = copy.deepcopy(valid)
+                        if defect in ("failures", "errors", "skipped"):
+                            del bad.attrib[defect]
+                        elif defect == "zero":
+                            bad.set("skipped", "00")
+                        elif defect == "root":
+                            bad.tag = "summary"
+                        elif defect == "unknown":
+                            ET.SubElement(bad, "unverified")
+                        elif defect == "nested":
+                            ET.SubElement(bad.find("system-out"), "nested")
+                        elif defect == "duplicatedProperties":
+                            ET.SubElement(bad, "properties")
+                        elif defect == "malformedProperty":
+                            del bad.find("properties/property").attrib["value"]
+                        else:
+                            bad.find("properties").text = "unexpected"
+                        with self.assertRaisesRegex(ValueError, "reactor JUnit"):
+                            validate(bad, *arguments)
 
     def test_api_web_log_consumer_inventory_and_coverage(self):
         log = module("api_web_log_consumer_collector", "033_collect_api_web_log_consumers.py")

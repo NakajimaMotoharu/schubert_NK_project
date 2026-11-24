@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -46,30 +47,24 @@ def digest(path):
 
 
 def validate_suite(root):
-    cases = root.findall("testcase")
+    cases = validate_passing_surefire_suite(root)
     names = [case.get("name") for case in cases]
-    if (root.get("name") != CLASS or root.get("tests") != str(len(METHODS))
-            or any(int(root.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (root.get("name") != CLASS
             or len(names) != len(METHODS) or len(set(names)) != len(METHODS)
             or set(names) != set(METHODS)
-            or any(case.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != CLASS for case in cases)):
         raise ValueError("missing, nonpassing, or unlisted API Log-path runtime PT")
     return {"PT-JMS-018-" + chr(ord("A") + index): CLASS + "#" + name
             for index, name in enumerate(METHODS)}
 
 
 def validate_ready_suite(root):
-    cases = root.findall("testcase")
+    cases = validate_passing_surefire_suite(root)
     names = [case.get("name") for case in cases]
-    if (root.get("name") != READY_CLASS or root.get("tests") != str(len(READY_METHODS))
-            or any(int(root.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (root.get("name") != READY_CLASS
             or len(names) != len(READY_METHODS) or len(set(names)) != len(READY_METHODS)
             or set(names) != set(READY_METHODS)
-            or any(case.get("classname") != READY_CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != READY_CLASS for case in cases)):
         raise ValueError("missing, nonpassing, or unlisted API dependency readiness PT")
     return {("PT-JMS-019-" + chr(ord("A") + index) if index < 5
              else "PT-JMS-022-" + chr(ord("A") + index - 5) if index < 8

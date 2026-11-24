@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -56,15 +57,12 @@ def digest(path):
 
 
 def validate_suite(root, class_name, expected_method, total):
-    cases = root.findall("testcase")
+    cases = validate_passing_surefire_suite(root)
     names = [case.get("name") for case in cases]
-    if (root.get("name") != class_name or root.get("tests") != str(total)
-            or any(int(root.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (root.get("name") != class_name
             or len(cases) != total or len(set(names)) != total
             or names.count(expected_method) != 1
-            or any(case.get("classname") != class_name or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != class_name for case in cases)):
         raise ValueError("missing or nonpassing JMS compound PT")
     return class_name + "#" + expected_method
 
