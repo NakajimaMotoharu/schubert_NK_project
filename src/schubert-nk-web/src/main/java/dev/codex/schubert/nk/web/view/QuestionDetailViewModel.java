@@ -22,6 +22,11 @@ public final class QuestionDetailViewModel {
   private static final DateTimeFormatter TIME =
       DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss", Locale.ROOT)
           .withZone(ZoneOffset.ofHours(9));
+  private static final Map<AnswerState, String> STATE_LABELS =
+      Map.of(
+          AnswerState.ANSWERED, "回答済み",
+          AnswerState.UNANSWERED, "未回答",
+          AnswerState.ERROR, "エラー");
   private final TopBarViewModel topBar;
   private final Map<String, Object> values;
 
@@ -72,11 +77,7 @@ public final class QuestionDetailViewModel {
   }
 
   static String label(AnswerState state) {
-    return switch (state) {
-      case ANSWERED -> "回答済み";
-      case UNANSWERED -> "未回答";
-      case ERROR -> "エラー";
-    };
+    return Objects.requireNonNull(STATE_LABELS.get(state), "unsupported answer state");
   }
 
   public TopBarViewModel getTopBar() {

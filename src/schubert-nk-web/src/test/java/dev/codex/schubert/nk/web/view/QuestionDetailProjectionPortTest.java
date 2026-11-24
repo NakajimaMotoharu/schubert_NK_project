@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -87,6 +88,9 @@ final class QuestionDetailProjectionPortTest {
 
   @Test
   void unansweredAndErrorHaveNoAnswer() {
+    assertEquals(
+        Set.of(AnswerState.ANSWERED, AnswerState.UNANSWERED, AnswerState.ERROR),
+        Set.of(AnswerState.values()));
     for (AnswerState state : List.of(AnswerState.UNANSWERED, AnswerState.ERROR)) {
       var values = model(state).getValues();
       assertEquals(state == AnswerState.UNANSWERED ? "未回答" : "エラー", values.get("stateLabel"));
