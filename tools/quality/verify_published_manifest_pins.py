@@ -9,6 +9,8 @@ from pathlib import Path, PurePosixPath
 import re
 import subprocess
 
+from static_input_scope import invalid_constant, unique_object
+
 
 COMMIT = re.compile(r"[0-9a-f]{40}")
 SHA256 = re.compile(r"[0-9a-f]{64}")
@@ -101,7 +103,11 @@ def audit(repo, start, end):
         return git(repo, "log", "--format=%H", span, "--", path).stdout.decode().splitlines()
 
     for manifest in manifests:
-        content = json.loads(git(repo, "cat-file", "blob", f"{end}:{manifest}").stdout)
+        content = json.loads(
+            git(repo, "cat-file", "blob", f"{end}:{manifest}").stdout,
+            object_pairs_hook=unique_object,
+            parse_constant=invalid_constant,
+        )
         parent_source = exact_source(content.get("source")) if isinstance(content, dict) else None
         references = set(pins(content))
         for raw_path, expected, source, has_explicit_source in sorted(
