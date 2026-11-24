@@ -1,0 +1,223 @@
+{
+  "run": "PG44694",
+  "source": "e18a5c946a1c47a979fb93560c562f95c69cd326",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-P016-22/2",
+  "relatedWbs": [
+    "WBS-P016-20/2",
+    "WBS-P016-15/2"
+  ],
+  "terminalAtUTC": "2026-11-24T23:56:40.071443+00:00",
+  "actualExit": 0,
+  "tests": 38,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "coverage": {
+    "INSTRUCTION": [
+      0,
+      1126
+    ],
+    "BRANCH": [
+      0,
+      138
+    ],
+    "LINE": [
+      0,
+      204
+    ],
+    "COMPLEXITY": [
+      0,
+      107
+    ],
+    "METHOD": [
+      0,
+      38
+    ],
+    "CLASS": [
+      0,
+      3
+    ]
+  },
+  "perClass": {
+    "NotificationSearchForm": {
+      "INSTRUCTION": [
+        0,
+        360
+      ],
+      "BRANCH": [
+        0,
+        44
+      ],
+      "LINE": [
+        0,
+        68
+      ],
+      "COMPLEXITY": [
+        0,
+        34
+      ],
+      "METHOD": [
+        0,
+        12
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "QuestionSearchForm": {
+      "INSTRUCTION": [
+        0,
+        458
+      ],
+      "BRANCH": [
+        0,
+        60
+      ],
+      "LINE": [
+        0,
+        82
+      ],
+      "COMPLEXITY": [
+        0,
+        43
+      ],
+      "METHOD": [
+        0,
+        13
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "UserSearchForm": {
+      "INSTRUCTION": [
+        0,
+        308
+      ],
+      "BRANCH": [
+        0,
+        34
+      ],
+      "LINE": [
+        0,
+        54
+      ],
+      "COMPLEXITY": [
+        0,
+        30
+      ],
+      "METHOD": [
+        0,
+        13
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/main/dev/codex/schubert/nk/web/form/NotificationSearchForm.class",
+      "sha256": "2ce24ffe0622d0b5522f41e58b3990b605f4d44f244134f05f937d6290840c77"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/main/dev/codex/schubert/nk/web/form/QuestionSearchForm.class",
+      "sha256": "cd20a7058dc003246cf695a99facaa334b5fccb993220a7acdb26555f2a88523"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/main/dev/codex/schubert/nk/web/form/UserSearchForm.class",
+      "sha256": "0ef33fd6aa2b7e4523d52d4ca24e80a2d63166e6c35d0285b35f12ec26bc9a3a"
+    }
+  ],
+  "newDefinitionCount": 0,
+  "actualProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "actualChangedDependency": {
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class": {
+      "prior": "b0d33d917c2441b23497e9a6ac8e8736830a85153d5faa0fc3ac84a3fe52b9ec",
+      "current": "97a648fe4bfb519ef36d61e2f582dc621a859340a6f73e40a6ccc2f10e70db77"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.class": {
+      "prior": "5d0be93464feb0eccad72a0b04ec4e30204feb4a07d67a96e4cdc03338324bcf",
+      "current": "23f4c16579d9fdb31e8cef45a9e286b049158c8e6bb1a5769dd70a89ce081b19"
+    }
+  },
+  "firstPreflightCorrectedReason": "TypedFieldValues identical to former combined proof; two actual changed classes identified before test",
+  "relatedOriginalAcrossOldProtocol": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37950-search-three-current38-independent-v1/manifest.json",
+    "sha256": "eac4731267158fe36cdee3c41b48e97738a771fe5ff06123fb1372907654e326"
+  },
+  "correctCases": [
+    "NotificationSearchInputContractTest#ntform001DefaultsHaveNoOwnerOrDates()",
+    "NotificationSearchInputContractTest#ntform002OnlyThreeNotificationTypesBecomeEnums()",
+    "NotificationSearchInputContractTest#ntform003PageClampAndUpperBoundaryHaveLiteralResults()",
+    "NotificationSearchInputContractTest#ntform004InvalidAndOverflowPagesRemainFailures()",
+    "NotificationSearchInputContractTest#ntform005IndependentJstUtcPairsAndMissingSides()",
+    "NotificationSearchInputContractTest#ntform006SameDayAnd366DayMinusMillisecondAreAllowedNotTheNextDay()",
+    "NotificationSearchInputContractTest#ntform007StrictDatesRejectInvalidYearFormatAndCalendar()",
+    "NotificationSearchInputContractTest#ntform008UnknownOwnerAndNonSingleParametersAreNeverIgnored()",
+    "NotificationSearchInputContractTest#ntform009ControlAndSurrogateChecksPrecedeTrimWhileSpacesRemainOptional()",
+    "NotificationSearchInputContractTest#ntform010NullMapKeyListAndElementNeverCreateAForm()",
+    "NotificationSearchInputContractTest#ntform011SnapshotsAndIssueMapsAreImmutableCopies()",
+    "NotificationSearchInputContractTest#ntform012ConversionFailureAndDiagnosticRemainValueFree()",
+    "QuestionSearchInputContractTest#qsform001EmptyInputsHaveClosedRoleSpecificDefaults()",
+    "QuestionSearchInputContractTest#qsform002UserCannotSupplyEvenEmptyUsernameButAdminCanFilter()",
+    "QuestionSearchInputContractTest#qsform003NfcAndIndependentByteWidthsRespectBothLimits()",
+    "QuestionSearchInputContractTest#qsform004StatesMapOnlyTheThreeFixedEnums()",
+    "QuestionSearchInputContractTest#qsform005ValidPageValuesHaveIndependentLiteralResults()",
+    "QuestionSearchInputContractTest#qsform006InvalidAndOverflowPagesCannotConvert()",
+    "QuestionSearchInputContractTest#qsform007JstDatesUseFixedUtcGoldensWithMissingSides()",
+    "QuestionSearchInputContractTest#qsform008InclusiveEndOfDayDefinesThe366DayAndReverseBounds()",
+    "QuestionSearchInputContractTest#qsform009StrictDatesRejectYearZeroFormatAndImpossibleDays()",
+    "QuestionSearchInputContractTest#qsform010UnknownAndNonSingleParametersKeepExplicitFailures()",
+    "QuestionSearchInputContractTest#qsform011ControlAndSurrogateValidationIsBeforeNormalization()",
+    "QuestionSearchInputContractTest#qsform012NullBoundariesDoNotCreatePartialForms()",
+    "QuestionSearchInputContractTest#qsform013CopiesAndRoleSnapshotsCannotBeMutatedByCallers()",
+    "QuestionSearchInputContractTest#qsform014InvalidConversionAndDiagnosticsDoNotRetainInput()",
+    "UserSearchInputContractTest#usrform001DefaultsDoNotConferAuthentication()",
+    "UserSearchInputContractTest#usrform002RoleAndStateLiteralsAreIndependentOptionalEnums()",
+    "UserSearchInputContractTest#usrform003NormalizationPrecedesByteValidationAndOuterTrim()",
+    "UserSearchInputContractTest#usrform004Utf8BoundariesUseIndependentOneTwoAndFourByteWidths()",
+    "UserSearchInputContractTest#usrform005PageClampAndUpperBoundHaveLiteralExpectations()",
+    "UserSearchInputContractTest#usrform006MalformedUpperAndOverflowPageNeverBecomeARequest()",
+    "UserSearchInputContractTest#usrform007UnknownAndNonSingleFieldsHaveExplicitIssueKeys()",
+    "UserSearchInputContractTest#usrform008ControlAndSurrogateRejectionIsNotUnicodeRejection()",
+    "UserSearchInputContractTest#usrform009UnknownEnumsAreFieldFailuresWithoutGrant()",
+    "UserSearchInputContractTest#usrform010NullAtEveryCollectionBoundaryIsRejected()",
+    "UserSearchInputContractTest#usrform011CallerMutationCannotAlterTheCapturedRequest()",
+    "UserSearchInputContractTest#usrform012InvalidConversionAndDiagnosticsStayValueFree()"
+  ],
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4197_検索三form現全三十八仕様.md",
+    "sha256": "226e80310e7a346026cfb6960f1b222bc4da38643fa77ff15b678a336cdf1981"
+  },
+  "oneExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/unit.exec",
+    "sha256": "2c16ae0754eb6c9f0f7cf96f4f849b41e1450adeb695b616ea77ad342dea1e7c"
+  },
+  "execIdentity": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/exec-catalog.txt",
+    "sha256": "341e0a33788e9c5995cf297ba1d54135976d91be221d23655a44f9604676401c"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/reports/TEST-junit-jupiter.xml",
+    "sha256": "036bfa3a6cf43a6c3dff8e48170c431f84bf065b75ce5cca1fb9d2b8f19cc046"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/begin.json",
+    "sha256": "bd8e4fc386ea69f98cf5657ec599f2f793f8dfcc6054d95f4a8d4355a6a14924"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44694-current-three-search-forms-38/terminal.json",
+    "sha256": "6ccf52d2837c81b48b803fb25c1632a78086a31f08a7876ad05ad235e149dd1d"
+  },
+  "actualDatabaseOrHttp": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
