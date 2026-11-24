@@ -1,0 +1,178 @@
+{
+  "run": "PG44652",
+  "source": "e3abd432bc3e2a076c5fcabda24003f4f74fe325",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-02/2",
+    "WBS-P018-10.03/2"
+  ],
+  "terminalAtUTC": "2026-11-24T23:14:58.415311+00:00",
+  "actualExit": 0,
+  "admittedSourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java",
+      "sha256": "a6386577f68382a34d5f58bfd81f5bd50746622c610511af3c49c110063e44af"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java",
+      "sha256": "fe4338f4db6a24eb7c33ffe8da1b208d677caa90c29cd064b3a094dca15a58f3"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java",
+      "sha256": "7db64d61edb32a3df73d75d163c098eda5954afef235e1428d28b8d1e3ab8575"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionStep.java",
+      "sha256": "836d977e800c43bc27e8d844fc1def103b70ea074c9407d180fec92d87bb4f98"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException.java",
+      "sha256": "db4f04b21728a88b23ef1ffe8ca1e1792b12ca113f26dede9f486979e0abe861"
+    }
+  ],
+  "classes": 7,
+  "actualPmdProcessed": 5,
+  "rawFindings": 0,
+  "exactRoster": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-spotbugs/independent-stat-roster.json",
+    "sha256": "11e09ff3b258e30f979fc95c9782e97d0470915724abf092392f10e9a29f9784"
+  },
+  "firstAttempt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway/terminal.json",
+    "sha256": "75d255b938dd21194ad2ae4b58bc2ca5d4b0e59c999642aac5717b8f5050a79a"
+  },
+  "classifiedStandaloneDependency": "InspectorSettings calls InspectorDatabaseConnections; excluded from final source selection",
+  "tools": {
+    "compile": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/begin.json",
+        "sha256": "5eea0af3148bec0bbb48a19aea31361db5c700489b9dfcee0fd9749fe2ac557e"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/terminal.json",
+        "sha256": "e912c2ed8972a5715cdc038be6b5fd092a2f3de50cc3d60a20be9967448c714d"
+      }
+    },
+    "spotbugs": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-spotbugs/begin.json",
+        "sha256": "a01d99a6db1d27d4487d0a005a4714ee4a9da5bbecc0a5db769a611c4ad36447"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-spotbugs/terminal.json",
+        "sha256": "0ea73baa8055e53f2fd263ef5b242f75a4737c9838e485a7ac6075c2d06e1fba"
+      }
+    },
+    "pmd": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-pmd/begin.json",
+        "sha256": "9e8815992f78e20417c3a48d33854e9d92743b37ea84a50d16832e4e70c467f5"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-pmd/terminal.json",
+        "sha256": "e1540fe78637913846eb398bcb44dbf28e3fd5dd846c952e46812f07e45b6259"
+      }
+    }
+  },
+  "priorEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43446-inspection-fixed-value-trace-current-core-v1/manifest.json",
+    "sha256": "2c008d8d80de08629ce1114c793094e19d2910ff6cd454b3e7a3145ec4af1cce"
+  },
+  "priorValueTests": [
+    {
+      "caseCount": 4,
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "de264b201016a3489712b5f6949869306c895f22feefd4db35018c5ffa9bb999"
+      },
+      "expectedPhysicalCount": 3,
+      "samePhysical": {
+        "dev/codex/schubert/nk/api/maintenance/InspectionRun.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+          "sha256": "d8af97cf742bf608982655bf5a24351c255234827053ee0a45707ba89fb0e551"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionStep.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionStep.class",
+          "sha256": "0420163b6064aa2a4f513b5892560cc2c60f99127e2004b2afdbf363e0f70e12"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome.class",
+          "sha256": "e9329a6a5226e772e22cdf88950f5088cdd33cdac7e4544f3f1eb5a9a1a33787"
+        }
+      },
+      "sourcePinsExact": true,
+      "priorRawCoverage": {
+        "LINE": {
+          "covered": 22,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 3,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 10,
+          "missed": 0
+        }
+      },
+      "reusedApplicable": 4
+    },
+    {
+      "caseCount": 5,
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38380-ssc453-inspection-outcome-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "b08bdb6ac618ec3037829f118a7a14e65cdba6c2b0968502fa3a49955d4c8827"
+      },
+      "expectedPhysicalCount": 4,
+      "samePhysical": {
+        "dev/codex/schubert/nk/api/maintenance/InspectionRun.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+          "sha256": "d8af97cf742bf608982655bf5a24351c255234827053ee0a45707ba89fb0e551"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionProgress.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionProgress.class",
+          "sha256": "352976ca1f7c1dc2d7da21037419654bbc1569c64b5a9f1d096f7232b1d75e21"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionExecution.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionExecution.class",
+          "sha256": "cb71561e1a2607aae44d7e64c16cbdf3fad141b7a377e199f722399cb17742ad"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44652-current-inspection-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.class",
+          "sha256": "2acf0311299db325a39bc619e56573eee6847fedf2ff017d81a6772d3cbe6bad"
+        }
+      },
+      "sourcePinsExact": true,
+      "priorRawCoverage": {
+        "LINE": {
+          "missed": 0,
+          "covered": 32
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 23
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 26
+        }
+      },
+      "reusedApplicable": 5
+    }
+  ],
+  "preexistingApiDenominator": 286,
+  "knownBoundedCountNotAddedWithoutDedupe": 72,
+  "newProductTests": 0,
+  "actualBackendOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
