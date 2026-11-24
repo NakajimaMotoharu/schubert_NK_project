@@ -26,8 +26,7 @@ final class UserDetailDisplayValueTest {
   @Test
   void displaysTheFixedDetailColumnsWithSeparateTimestamps() {
     var view =
-        UserDetailViewModel.from(
-            actor(UserRole.ADMIN), ID, detail(TARGET, UserState.LOCKED, 2));
+        UserDetailViewModel.from(actor(UserRole.ADMIN), ID, detail(TARGET, UserState.LOCKED, 2));
 
     assertEquals(
         Map.ofEntries(
@@ -83,12 +82,14 @@ final class UserDetailDisplayValueTest {
     assertEquals(
         INVALID,
         assertThrows(
-                IllegalArgumentException.class, () -> UserDetailViewModel.from(actor, requested, data))
+                IllegalArgumentException.class,
+                () -> UserDetailViewModel.from(actor, requested, data))
             .getMessage());
   }
 
   private static SessionPrincipal actor(UserRole role) {
-    return new SessionPrincipal(VIEWER, role, AuthenticationContext.of("c".repeat(64)), Instant.EPOCH);
+    return new SessionPrincipal(
+        VIEWER, role, AuthenticationContext.of("c".repeat(64)), Instant.EPOCH);
   }
 
   private static UserDetailResponseData detail(String username, UserState state, int sessions) {
