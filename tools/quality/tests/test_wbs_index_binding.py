@@ -11,6 +11,9 @@ from wbs_index_binding import ACCEPTANCE, INVENTORY, _GUARD, validate_index
 
 
 class WbsIndexBindingTest(unittest.TestCase):
+    API = "src/schubert-nk-api/src/main/java/sample/ApiType.java"
+    BATCH = "src/schubert-nk-batch/src/main/java/sample/BatchType.java"
+
     def setUp(self):
         temp = self.enterContext(TemporaryDirectory(prefix="wbs-index-"))
         self.root = Path(temp)
@@ -76,3 +79,71 @@ class WbsIndexBindingTest(unittest.TestCase):
                     with self.subTest(document=doc, literal=token.decode(), entry=check.__name__):
                         with self.assertRaisesRegex(ValueError, "non-JSON numeric constant"):
                             check(self.root)
+
+    def stage_product_java(self, path):
+        target = self.root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("package sample;\n")
+        self.git("add", "--", path)
+        return target
+
+    def stage_roster(self, artifacts):
+        value = json.dumps({"artifacts": artifacts}).encode()
+        self.inventory.write_bytes(value)
+        self.set_reference(value)
+        self.git("add", "--", INVENTORY, ACCEPTANCE)
+
+    def test_java_roster_reads_staged_names_and_ignores_test_paths_and_worktree_edits(self):
+        old_api = self.stage_product_java(self.API)
+        self.stage_product_java(self.BATCH)
+        self.stage_product_java(self.API.replace("/main/", "/test/"))
+        self.stage_roster(
+            [
+                dict(path=self.API, module="api", owner="WBS-A", costOwner="WBS-A"),
+                dict(path=self.BATCH, owner="WBS-B", costOwner="WBS-B"),
+                {"path": "src/deployment/example.conf"},
+            ]
+        )
+        old_api.unlink()
+        self.inventory.write_bytes(b'{"artifacts": []}')
+
+        result = validate_index(self.root, check_java_roster=True)
+
+        self.assertEqual(2, result["trackedJavaMain"])
+        populated = {
+            module: count for module, count in result["javaMainByModule"].items() if count
+        }
+        self.assertEqual({"api": 1, "batch": 1}, populated)
+
+    def test_java_roster_reports_missing_and_retired_active_entries_together(self):
+        self.stage_product_java(self.API)
+        self.stage_roster([dict(path=self.BATCH, owner="WBS-B", costOwner="WBS-B")])
+
+        expected = "Java roster mismatch: missing=.*ApiType.java.*obsolete=.*BatchType.java"
+        with self.assertRaisesRegex(ValueError, expected):
+            validate_index(self.root, check_java_roster=True)
+
+    def test_java_roster_rejects_duplicate_ownerless_or_wrong_module_rows(self):
+        self.stage_product_java(self.API)
+        row = dict(path=self.API, module="api", owner="WBS-A", costOwner="WBS-A")
+        cases = [
+            ([row, row], "duplicate Java registration"),
+            ([dict(row, owner="")], "missing Java owner"),
+            ([dict(row, costOwner=None)], "missing Java costOwner"),
+            ([dict(row, module="web")], "incorrect Java module registration"),
+        ]
+        for items, expected in cases:
+            with self.subTest(expected=expected):
+                self.stage_roster(items)
+                with self.assertRaisesRegex(ValueError, expected):
+                    validate_index(self.root, check_java_roster=True)
+
+    def test_java_roster_rejects_symlink_without_reading_its_target(self):
+        link = self.root / self.API
+        link.parent.mkdir(parents=True)
+        link.symlink_to("absent.java")
+        self.git("add", "--", self.API)
+        self.stage_roster([dict(path=self.API, owner="WBS-A", costOwner="WBS-A")])
+
+        with self.assertRaisesRegex(ValueError, "expected one regular stage-0 Java entry"):
+            validate_index(self.root, check_java_roster=True)
