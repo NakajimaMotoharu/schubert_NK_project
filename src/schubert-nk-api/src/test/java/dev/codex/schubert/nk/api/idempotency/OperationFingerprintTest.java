@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,6 +14,7 @@ import java.security.Security;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-001/002 independent NKOP1 golden vectors and boundary cases. */
@@ -49,6 +51,19 @@ class OperationFingerprintTest {
           GOLDEN_HMAC, HEX.formatHex(OperationFingerprint.INSTANCE.calculate(request, key)));
       assertEquals("CanonicalRequest[<redacted>]", request.toString());
     }
+  }
+
+  @Test
+  @DisplayName("PT-IDEM-FPR-CATALOG001 public fingerprint catalogue")
+  void fingerprintCatalogueHasOneExactNameAndIndependentSnapshots() {
+    var catalogue = OperationFingerprint.values();
+    assertEquals(1, catalogue.length);
+    assertEquals("INSTANCE", catalogue[0].name());
+    assertEquals(catalogue[0], OperationFingerprint.valueOf("INSTANCE"));
+    assertNotSame(catalogue, OperationFingerprint.values());
+    assertThrows(IllegalArgumentException.class, () -> OperationFingerprint.valueOf("UNKNOWN"));
+    assertThrows(IllegalArgumentException.class, () -> OperationFingerprint.valueOf("instance"));
+    assertThrows(NullPointerException.class, () -> OperationFingerprint.valueOf(null));
   }
 
   @Test
