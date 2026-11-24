@@ -56,7 +56,7 @@ final class NotificationPaginationContractTest {
   private static void validate(PagedResponseData data, int recordCount) {
     var rows =
         IntStream.rangeClosed(1, recordCount)
-            .mapToObj(
+            .<PayloadRecord>mapToObj(
                 id ->
                     new NotificationRecord(
                         new NotificationId(id),
