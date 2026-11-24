@@ -45,6 +45,7 @@ final class MusicListTemplateResourcePortTest {
   private static final String PAIRS = "pairs";
   private static final String PLAYER = "audio";
   private static final String SRC = "src";
+  private static final String NO_INSTRUMENTAL = "インストなし";
   private static final String ROW = ".music-row";
   private static final String STRONG = ".music-info strong";
   private static final String SUBTITLE = ".subtitle";
@@ -159,7 +160,7 @@ final class MusicListTemplateResourcePortTest {
         List.of("/music/download/voice%2B7", "/music/download/inst-7"),
         rows.getFirst().select("a.download").eachAttr(HREF));
     assertEquals(List.of("/music/media/solo-7"), rows.getLast().select(PLAYER).eachAttr(SRC));
-    assertEquals("インストなし", rows.getLast().select(".song-player-placeholder").text());
+    assertEquals(NO_INSTRUMENTAL, rows.getLast().select(".song-player-placeholder").text());
   }
 
   private static MusicTrackRecord song(
@@ -209,7 +210,7 @@ final class MusicListTemplateResourcePortTest {
     assertEquals(List.of("both", "main-only", "inst-only", "neither"), d.select(STRONG).eachText());
     assertEquals(4, d.select(PLAYER).size());
     assertEquals(
-        List.of("インストなし", "メインなし", "メインなし", "インストなし"),
+        List.of(NO_INSTRUMENTAL, "メインなし", "メインなし", NO_INSTRUMENTAL),
         d.select(".song-player-placeholder").eachText());
     assertEquals(List.of("メイン", "インスト", "メイン", "インスト"), d.select(".song-player > span").eachText());
     assertTrue(d.select(META).isEmpty());
@@ -279,7 +280,7 @@ final class MusicListTemplateResourcePortTest {
     songs.put(TRACKS, null);
     var s = render("MDOM007-b", songs);
     assertEquals("pair", s.select(STRONG).text());
-    assertEquals("インストなし", s.select(".song-player-placeholder").text());
+    assertEquals(NO_INSTRUMENTAL, s.select(".song-player-placeholder").text());
   }
 
   @Test
