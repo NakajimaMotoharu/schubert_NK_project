@@ -23,7 +23,7 @@ class QuestionAcceptedViewModelTest {
   private static final String OWNER = "fixture-reader";
   private static final long QUESTION = 19L;
   private static final Instant REFERENCE_AT = Instant.parse("2026-11-24T15:04:05.123Z");
-  private static final Instant RESPONSE_AT = Instant.parse("2026-11-24T15:04:05.123456Z");
+  private static final Instant RESPONSE_AT = Instant.parse("2026-11-24T15:04:05.123Z");
   private static final ReceiptReference REFERENCE =
       new ReceiptReference(RECEIPT, QUESTION, REFERENCE_AT);
   private static final SessionPrincipal ACTOR =
@@ -100,6 +100,17 @@ class QuestionAcceptedViewModelTest {
             RESPONSE_AT,
             Optional.of(RESPONSE_AT));
     assertThrows(LayoutValidationException.class, () -> model(invalid));
+  }
+
+  /** PT-WEB-SCR019-VM006. */
+  @Test
+  void accepted006RejectsFinerPrecisionThanTheResponseWireFormat() {
+    var invalidTime = Instant.parse("2026-11-24T15:04:05.123456Z");
+    var failure =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> model(fresh(QUESTION, RECEIPT, OWNER, "質問", invalidTime)));
+    assertEquals("wire timestamp requires millisecond precision", failure.getMessage());
   }
 
   private static void assertMismatch(QuestionDetailResponseData data) {
