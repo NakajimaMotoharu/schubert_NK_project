@@ -62,8 +62,7 @@ final class RequiredFormLabelResourceTest {
         RequiredFormLabelResourceTest.class.getResourceAsStream("/static/css/schubert.css")) {
       assertNotNull(input);
       var css = new String(input.readAllBytes(), StandardCharsets.UTF_8);
-      var declaration =
-          Pattern.compile(Pattern.quote(WARNING) + "\\s*\\{([^}]*)}").matcher(css);
+      var declaration = Pattern.compile(Pattern.quote(WARNING) + "\\s*\\{([^}]*)}").matcher(css);
       assertTrue(declaration.find());
       var properties = declaration.group(1);
       assertTrue(
