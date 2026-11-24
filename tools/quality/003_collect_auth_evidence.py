@@ -12,6 +12,8 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import coverage_class_names, validate_module_coverage
+from pgpt_reactor_junit import compiled_class_paths
 
 
 RESOURCE_METHODS = {
@@ -89,11 +91,8 @@ def main():
                 ET.ElementTree(clean).write(evidence / "output" / report.name,
                                             encoding="UTF-8", xml_declaration=True)
         jacoco = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
-        counters = {counter.get("type"): {"missed": int(counter.get("missed")),
-                                         "covered": int(counter.get("covered"))}
-                    for counter in jacoco.findall("counter")}
-        if not counters or any(value["missed"] for value in counters.values()):
-            raise SystemExit("coverage is not 100 percent")
+        physical = compiled_class_paths(target / "classes")
+        counters = validate_module_coverage(jacoco, coverage_class_names(physical))
         shutil.copyfile(target / "site/jacoco/jacoco.csv", evidence / "coverage" / (module + "-jacoco.csv"))
         static = "not configured for characterization runner"
         if module != "characterization":

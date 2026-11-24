@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import validate_selected_class_coverage
 
 CLASS = "dev.codex.schubert.nk.web.session.ScenarioControllerTest"
 LOG_TEMPLATE_CLASS = "dev.codex.schubert.nk.web.view.LogSearchTemplateTest"
@@ -287,22 +288,13 @@ def validate_traces(traces):
 
 
 def validate_coverage(report):
+    branchless = {SUBJECTS[index] for index in (1, 2, 4, 6, 8, 9, 12, 13)}
     result = {}
-    for cls in report.iter("class"):
-        if cls.get("name") in SUBJECTS:
-            counters = {counter.get("type"): {
-                "missed": int(counter.get("missed")), "covered": int(counter.get("covered"))
-            } for counter in cls.findall("counter")}
-            # Configuration and the one-constructor exception class are branchless; no exclusion.
-            if cls.get("name") in (SUBJECTS[1], SUBJECTS[2], SUBJECTS[4], SUBJECTS[6], SUBJECTS[8], SUBJECTS[9], SUBJECTS[12], SUBJECTS[13]):
-                counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
-            result[cls.get("name")] = counters
-    if set(result) != set(SUBJECTS) or any(
-            not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
-            or any(value["missed"] for value in counters.values())
-            or any(counters[kind]["covered"] <= 0 for kind in ("LINE", "METHOD", "CLASS"))
-            for counters in result.values()) or any(result[name]["BRANCH"]["covered"] <= 0 for name in (SUBJECTS[0], SUBJECTS[3], SUBJECTS[5], SUBJECTS[7], SUBJECTS[10], SUBJECTS[11], SUBJECTS[14])):
-        raise ValueError("missing or incomplete hierarchy screen coverage")
+    for subject in SUBJECTS:
+        counters = validate_selected_class_coverage(report, subject, require_branch=subject not in branchless)
+        if subject in branchless:
+            counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
+        result[subject] = counters
     return result
 
 

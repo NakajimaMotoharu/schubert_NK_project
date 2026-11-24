@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 
 import bootstrap_ownership
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import validated_class_rows
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -56,6 +57,23 @@ def validate_trace(out, manifest, certified):
         if (not item.resolve().is_relative_to(out.resolve()) or not item.is_file()
                 or hashlib.sha256(item.read_bytes()).hexdigest() != entry["sha256"]):
             raise ValueError("invalid local evidence reference")
+
+
+def validate_inspection_coverage(report, expected_classes):
+    classes = [cls for package in report.findall("package") for cls in package.findall("class")
+               if cls.get("name") in expected_classes]
+    if len(classes) != len(expected_classes) or {cls.get("name") for cls in classes} != expected_classes:
+        raise ValueError("missing or duplicated inspection class coverage")
+    counters = {}
+    for cls in classes:
+        for metric, row in validated_class_rows(cls).items():
+            bucket = counters.setdefault(metric, {"missed": 0, "covered": 0})
+            for key in bucket:
+                bucket[key] += row[key]
+    if (not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
+            or any(values["missed"] or not values["covered"] for values in counters.values())):
+        raise ValueError("inspection coverage below 100 percent")
+    return counters
 
 
 def main():
@@ -280,19 +298,7 @@ def main():
                              ("InboxCleanup", "InboxCleanup$Candidate", "InboxCleanup$LoadedProgress",
                               "InspectionRun", "InspectionStep", "InspectionStep$Outcome",
                               "InspectionProgress", "InboxMaintenanceException")}
-    classes = [c for p in coverage_xml.findall("package") for c in p.findall("class")
-               if c.get("name") in expected_classes]
-    if not args.sql and {c.get("name") for c in classes} != expected_classes:
-        raise SystemExit("missing inspection class coverage")
-    counters = {}
-    for cls in ([] if args.sql else classes):
-        for counter in cls.findall("counter"):
-            counts = counters.setdefault(counter.get("type"), {"missed": 0, "covered": 0})
-            for key in ("missed", "covered"):
-                counts[key] += int(counter.get(key))
-    if not args.sql and (not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
-                        or any(v["missed"] or not v["covered"] for v in counters.values())):
-        raise SystemExit("inspection coverage below 100 percent")
+    counters = {} if args.sql else validate_inspection_coverage(coverage_xml, expected_classes)
     folder = "authentication-inspection" if args.authentication else "inbox-inspection"
     if args.sql:
         folder = "inspection-sql"

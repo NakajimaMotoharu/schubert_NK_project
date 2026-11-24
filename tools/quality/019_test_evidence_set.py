@@ -706,6 +706,27 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     validate_class_family_coverage(wrong, subject)
 
+    def test_inspection_coverage_requires_all_expected_class_details(self):
+        inspector = module("inbox_coverage_collector", "016_collect_inbox_inspection_evidence.py")
+        subject = "fixture/scope/Unit"
+        report = self._selected_class_report(subject)
+        expected = {subject}
+        self.assertEqual({"missed": 0, "covered": 2},
+                         inspector.validate_inspection_coverage(report, expected)["BRANCH"])
+        for variant in ("uncovered-method", "duplicate-type", "missing-type"):
+            with self.subTest(variant=variant):
+                wrong = copy.deepcopy(report)
+                package = wrong.find("package")
+                cls = package.find("class")
+                if variant == "uncovered-method":
+                    cls.find("method/counter").set("missed", "1")
+                elif variant == "duplicate-type":
+                    package.append(copy.deepcopy(cls))
+                else:
+                    package.remove(cls)
+                with self.assertRaises(ValueError):
+                    inspector.validate_inspection_coverage(wrong, expected)
+
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
         names = (
@@ -1428,28 +1449,20 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = dict(expected); wrong[key] = b"PASS"
             with self.assertRaises(ValueError): screen.validate_traces(wrong)
         report = ET.Element("report")
-        for name in ("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration",
+        for index, name in enumerate(("controller/ScenarioController", "config/ScenarioMvcConfiguration", "config/WebMvcConfiguration",
                      "controller/AnimationController", "config/AnimationMvcConfiguration",
                      "controller/MusicController", "config/MusicMvcConfiguration",
                      "controller/LogController", "config/LogMvcConfiguration",
                      "controller/LoginController", "bootstrap/WebHttpServer",
                      "bootstrap/WebDependencyReadiness", "bootstrap/WebStartupException",
-                     "bootstrap/WebApplication", "bootstrap/WebLogApplicationRuntime"):
-            cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/web/" + name)
-            for kind in ("LINE", "METHOD", "CLASS"):
-                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
-        ET.SubElement(report[0], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[3], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[5], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[7], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[10], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[11], "counter", type="BRANCH", missed="0", covered="1")
-        ET.SubElement(report[14], "counter", type="BRANCH", missed="0", covered="1")
+                     "bootstrap/WebApplication", "bootstrap/WebLogApplicationRuntime")):
+            self._add_selected_class(report, "dev/codex/schubert/nk/web/" + name,
+                                     with_branches=index in (0, 3, 5, 7, 10, 11, 14))
         self.assertEqual(15, len(screen.validate_coverage(report)))
         for cls_index in range(15):
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])
             with self.assertRaises(ValueError): screen.validate_coverage(wrong)
-            for counter_index in range(len(report[cls_index])):
+            for counter_index in range(len(report[cls_index].findall("counter"))):
                 for attribute, value in (("missed", "1"), ("covered", "0")):
                     wrong = copy.deepcopy(report); wrong[cls_index][counter_index].set(attribute, value)
                     with self.assertRaises(ValueError): screen.validate_coverage(wrong)

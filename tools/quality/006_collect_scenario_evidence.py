@@ -5,19 +5,18 @@ import argparse
 import hashlib
 import json
 import platform
-import re
 from pathlib import Path
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
-from classfile_code_metadata import decode as decode_classfile
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_reactor_junit import (
     MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record, verify_reactor_junit,
 )
 from pgpt_evidence_destination import evidence_output_root
-from pgpt_jacoco_contract import REQUIRED_COVERAGE, add_covered, coverage_rows, validate_class_detail
+from pgpt_jacoco_contract import coverage_class_names as _coverage_class_names
+from pgpt_jacoco_contract import validate_module_coverage
 from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
@@ -29,93 +28,6 @@ def scenario_storage_suite(name):
         "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
         "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
         "dev.codex.schubert.nk.storage.ResourceScopeTest"}
-
-
-def _coverage_class_names(physical_classes):
-    """Return the XML class roster; package-info has no executable methods."""
-    names = set()
-    for binary_name, path in physical_classes.items():
-        name = binary_name.replace(".", "/")
-        if name.rsplit("/", 1)[-1] != "package-info":
-            names.add(name)
-            continue
-        metadata = decode_classfile(path.read_bytes(), name + ".class")
-        if any(method["hasCode"] for method in metadata["methods"]):
-            raise ValueError("package-info unexpectedly contains executable code")
-    return names
-
-
-def validate_module_coverage(report, expected_classes):
-    """Require complete module coverage with the actual compile roster and detail."""
-    counters = {element: coverage_rows(element) for element in report.iter()}
-    root = counters[report]
-    packages = report.findall("package")
-    names = [package.get("name") for package in packages]
-    if (
-        report.tag != "report"
-        or not packages
-        or None in names
-        or len(names) != len(set(names))
-        or not REQUIRED_COVERAGE <= root.keys()
-        or any(root[metric]["covered"] == 0 for metric in REQUIRED_COVERAGE)
-        or any(values["missed"] for values in root.values())
-    ):
-        raise ValueError("incomplete or nonpassing module JaCoCo report")
-    aggregate_nodes = {report, *packages}
-    if any(row["missed"] for node in packages for row in counters[node].values()):
-        raise ValueError("JaCoCo report contains missed package counters")
-    if add_covered([report], counters) != add_covered(packages, counters):
-        raise ValueError("module JaCoCo counters disagree with package totals")
-    if any(row["missed"] for element, rows in counters.items() if element not in aggregate_nodes
-           for row in rows.values()):
-        raise ValueError("JaCoCo report contains missed detail counters")
-    classes = {}
-    source_files = set()
-    source_lines = set()
-    for package in packages:
-        package_name = package.attrib["name"]
-        members = package.findall("class")
-        for cls in members:
-            name = cls.get("name", "")
-            if not name or name.rpartition("/")[0] != package_name or name in classes:
-                raise ValueError("missing, misplaced or duplicated JaCoCo class name")
-            classes[name] = cls
-        files = package.findall("sourcefile")
-        file_names = [file.get("name") for file in files]
-        if not all(file_names) or len(file_names) != len(set(file_names)):
-            raise ValueError("missing or duplicated JaCoCo source file name")
-        source_files.update(files)
-        for file in files:
-            lines = file.findall("line")
-            numbers = set()
-            for line in lines:
-                number = line.get("nr", "")
-                if (not re.fullmatch(r"[1-9][0-9]*", number) or number in numbers
-                        or (line.get("mi"), line.get("mb")) != ("0", "0")
-                        or not re.fullmatch(r"[1-9][0-9]*", line.get("ci", ""))
-                        or not re.fullmatch(r"[0-9]+", line.get("cb", ""))):
-                    raise ValueError("JaCoCo report contains incomplete or missed line detail")
-                numbers.add(number)
-            if add_covered([file], counters)["LINE"] != len(lines):
-                raise ValueError("source file JaCoCo line count disagrees with detail")
-            source_lines.update(lines)
-        # Several classes can share a source line. Only sourcefile lines are additive here.
-        expected = add_covered(members, counters, omitted=("LINE",))
-        expected["LINE"] = add_covered(files, counters)["LINE"]
-        if add_covered([package], counters) != expected:
-            raise ValueError("package JaCoCo counters disagree with class or source detail")
-    if (not expected_classes or classes.keys() != expected_classes
-            or set(report.iter("class")) != set(classes.values())
-            or set(report.iter("sourcefile")) != source_files
-            or set(report.iter("line")) != source_lines):
-        raise ValueError("JaCoCo class roster or source placement differs from measured scope")
-
-    reported_methods = set()
-    for cls in classes.values():
-        reported_methods.update(validate_class_detail(cls, counters))
-    if set(report.iter("method")) != reported_methods:
-        raise ValueError("misplaced JaCoCo method detail")
-    return root
 
 
 def main():
