@@ -1,0 +1,52 @@
+{
+  "run": "PG44114",
+  "source": "34b7fce211e0a3ba9a61626225d757e6a863dc51",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P018-10.03/2",
+  "terminalAtUTC": "2026-11-24T15:07:42.254340+00:00",
+  "currentOriginal": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43954-ssc481-error-checked-and-pmd-site-evidence/manifest.json",
+    "sha256": "57189c0b7b5b806e2febe56a54d7404379ac17ebf91903cbef2e2f5503a285fa"
+  },
+  "fixedCurrentPhysical": "bbb31f9553a0cb3da6ecc222175324148d6776fe8f4dbd1b9af13789a77dcc87",
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+    "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+  },
+  "trace": [
+    {
+      "testId": "PT-BAT-BACKUP-UTC003",
+      "method": "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose",
+      "independentWitness": "required time missing, fixed diagnostic, owned closes"
+    },
+    {
+      "testId": "PT-BAT-BACKUP-UTC004",
+      "method": "utc004EveryOtherRequiredProjectionColumnRejectsNullIndependently",
+      "independentWitness": "separate nullable/required-column boundary"
+    },
+    {
+      "testId": "PT-BAT-BACKUP-UTC007",
+      "method": "utc007ProjectionAndBothOwnedCloseFailuresKeepOneFixedDiagnostic",
+      "independentWitness": "failure followed by owned cleanup has only fixed diagnostic"
+    },
+    {
+      "testId": "PT-BAT-SSC461-BF001",
+      "method": "bf001OrdinarySqlFailureKeepsOnlyFixedDiagnosticAndClosesOwnedResources",
+      "independentWitness": "exception retains fixed diagnostic, no private inner message"
+    },
+    {
+      "testId": "PT-BAT-BFSVALUE001",
+      "method": "pair001PairKeepsIdentityAndAllowsTheSharedStartBoundary",
+      "independentWitness": "rendering this value returns fixed redacted representation"
+    }
+  ],
+  "actualReruns": 0,
+  "productTechnicalAdded": 0,
+  "actualProductionSinkOrLogsRead": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "all live callers and sinks",
+    "remaining QAs and same-candidate 451"
+  ]
+}

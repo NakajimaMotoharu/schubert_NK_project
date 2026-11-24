@@ -1,0 +1,142 @@
+{
+  "run": "PG44122",
+  "source": "161c7f5464ef54c6d32d610777dc0568868d1b07",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P017-05/2",
+  "terminalAtUTC": "2026-11-24T15:13:11.760879+00:00",
+  "fixtures": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java",
+      "sha256": "c772bc0da0f2e22edae6c8727a299aece6e6c5bbef275548291a7b3c39d77e89"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "sha256": "62aca8b47fa5e1bdb52424329127f583a4427ffc6f236721625fe476fbe22bd3"
+    }
+  ],
+  "specification": {
+    "path": "evidence/01_PT/017_NK-BAT-001/033_NK-BAT-001_backup_manifest値_単体テスト仕様書.md",
+    "sha256": "99803516650353d3eaa5fa63c3a30db98fbad2ab0891aa8a8bbd2e56bc45b7e7"
+  },
+  "result": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4975_BackupManifest固定値現候補実行結果.md",
+    "sha256": "78cc8861058dd6d79988bfa58bd7a5142bd130794a3dcb457924f8e0c331d941"
+  },
+  "currentRegularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "exactClassfiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+      "sha256": "fb610109423526e8bff897cf647626204fb0a6219db5efe0d08fa0c79228bb01"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/backup/BackupManifest.class",
+      "sha256": "2bd9b8c79b4ce859c4356197a171e705550b2185cb4068bf3ba3b45cc6d02af1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/backup/BackupFileDigest.class",
+      "sha256": "a1ec5379964ee9a19476438c6bf90aa8c511ac49a90a2210435361fb2fc95494"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/repository/BatchStep.class",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/product/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+    }
+  ],
+  "previousTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42014-f03-backup-codec-declarations-closed-v1/manifest.json",
+    "sha256": "3c58d096ed93ab0dfbfe0a2612e4cfbf6df6ec7310d40a5a7b4cb1486b61b976"
+  },
+  "methods": [
+    {
+      "testId": "PT-BAT-178",
+      "method": "completeIdentityAndDirectoryName"
+    },
+    {
+      "testId": "PT-BAT-179",
+      "method": "fileDigestBoundsAndOverflow"
+    },
+    {
+      "testId": "PT-BAT-180",
+      "method": "versionTokenBoundaries"
+    },
+    {
+      "testId": "PT-BAT-181",
+      "method": "stepAndRunBinding"
+    },
+    {
+      "testId": "PT-BAT-182",
+      "method": "timeAndPrecisionBoundaries"
+    },
+    {
+      "testId": "PT-BAT-183",
+      "method": "nullAndRedaction"
+    },
+    {
+      "testId": "PT-BAT-184",
+      "method": "immutableAccessors"
+    },
+    {
+      "testId": "PT-BAT-185",
+      "method": "concurrentValueUse"
+    }
+  ],
+  "passed": 8,
+  "testRequalificationAlreadyApplicable": 1,
+  "sameRunRaw": {
+    "LINE": {
+      "covered": 60,
+      "total": 60
+    },
+    "METHOD": {
+      "covered": 37,
+      "total": 37
+    },
+    "CLASS": {
+      "covered": 3,
+      "total": 3
+    },
+    "BRANCH": {
+      "covered": 38,
+      "total": 38
+    }
+  },
+  "command": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/begin.json",
+    "sha256": "d2955bf27450aa36a21b369e9523d6f8303923493902dd4a5900b5e0d149cfdd"
+  },
+  "proofs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/terminal.json",
+      "sha256": "daf972318b6a7796b1b7d159d46afc3f887964197fb136fb7f358cf8de6e6275"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/raw.out",
+      "sha256": "33f3277c4c6cfbbbef2d93e48938d78088728d55ec74c9b8a4d39adcd669644c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/unit.exec",
+      "sha256": "86608053fc4f6b8f73b92e16f37d9238be1596d7c49cf97bc90bc43e1f405605"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/init.log",
+      "sha256": "2d4d8c27a6bc196241885630e616ad5bb2e555927d152a1740921cbcceb38cfb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44122-current-backup-manifest-value-suite/reports/TEST-junit-jupiter.xml",
+      "sha256": "2432a4e23ab714b7bde08aadf5aad3503e5ed82302dc52e6202fc3a97a2fd628"
+    }
+  ],
+  "externalActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

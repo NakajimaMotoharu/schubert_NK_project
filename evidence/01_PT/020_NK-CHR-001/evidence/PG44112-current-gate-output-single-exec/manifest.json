@@ -1,0 +1,154 @@
+{
+  "run": "PG44112",
+  "source": "34b7fce211e0a3ba9a61626225d757e6a863dc51",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P020-01.03/2",
+  "terminalAtUTC": "2026-11-24T15:06:18.855996+00:00",
+  "newTestId": "PT-CHR-OUTPUT-NULL-001",
+  "sourceInputs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputRootValueTest.java",
+      "sha256": "b0c8166fefa05e8fe2579fd82433bd7260a54c8172d14527293f535ba0a227f1"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputNullValueTest.java",
+      "sha256": "d4cf61143f004f2a699b2cd3bd2dc7befec5be96c941fd78b4c6e8706acb6342"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java",
+      "sha256": "d7e8b55e261aa185237fc68544030baec7b559a42560dea128c7b313d22180ef"
+    }
+  ],
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43824-current-packaged-gate-metadata-eight/approved-app-tool-classfile-only.jar",
+    "sha256": "449d9bf834684d6ef5d2db60cbd42eb3a52abd3772fc6bc64c3998ac07af9bdc"
+  },
+  "caseSelections": [
+    [
+      "GateOutputRootValueTest",
+      "destinationWithoutParentDoesNotInvokeOutputPort"
+    ],
+    [
+      "GateOutputNullValueTest",
+      "missingDestinationDoesNotInvokeOutputPort"
+    ],
+    [
+      "GateOutputFailureContractTest",
+      "failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim"
+    ],
+    [
+      "GateOutputFailureContractTest",
+      "cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased"
+    ],
+    [
+      "GateOutputFailureContractTest",
+      "nestedSameOutputIsRejectedWithoutReleasingOuterClaim"
+    ],
+    [
+      "GateOutputFailureContractTest",
+      "nullPortIsRejectedBeforeAnyOutputClaim"
+    ]
+  ],
+  "result": {
+    "path": "evidence/01_PT/020_NK-CHR-001/086_比較工具出力port同一execの実行結果.md",
+    "sha256": "af58bc52810d832e23fd4935dab9e0f619754f6936c86cfc49018100dcf76e95"
+  },
+  "specification": {
+    "path": "evidence/01_PT/020_NK-CHR-001/085_比較工具出力port同一execの単体仕様.md",
+    "sha256": "7f18f6a313a1f19f45cff9b311e51688b9681a875a13ede6dfe6423bd8d1ae4f"
+  },
+  "rawSameMethod": {
+    "INSTRUCTION": {
+      "covered": 89,
+      "total": 89
+    },
+    "BRANCH": {
+      "covered": 6,
+      "total": 6
+    },
+    "LINE": {
+      "covered": 18,
+      "total": 18
+    },
+    "COMPLEXITY": {
+      "covered": 4,
+      "total": 4
+    },
+    "METHOD": {
+      "covered": 1,
+      "total": 1
+    },
+    "CLASS": {
+      "covered": 0,
+      "total": 0
+    }
+  },
+  "wholeClassCounters": {
+    "INSTRUCTION": {
+      "covered": 110,
+      "total": 2349
+    },
+    "BRANCH": {
+      "covered": 6,
+      "total": 230
+    },
+    "LINE": {
+      "covered": 26,
+      "total": 452
+    },
+    "COMPLEXITY": {
+      "covered": 5,
+      "total": 191
+    },
+    "METHOD": {
+      "covered": 2,
+      "total": 71
+    },
+    "CLASS": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  "actualToolExecutionCount": 6,
+  "previousMethodsReused": 5,
+  "newProductPt": 0,
+  "actualChr": 0,
+  "actualOutputPortHostWrites": 0,
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/terminal.json",
+    "sha256": "2145457c68b556f51eb3b89fd07db66972ca634814eeb1b8a04255692a765f1a"
+  },
+  "command": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/begin.json",
+    "sha256": "ec98ad29d7ac7a74a0faa7aefa7156cfc32aeddb7bd94f4d85dbe351422db19f"
+  },
+  "firstNoTestCompileAttempt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44108-comparison-output-port-same-method-exec/terminal.json",
+    "sha256": "9133ae61de49cd580c68942afff8643b2ad5b4527151a375918206283e993f41"
+  },
+  "secondMetadataAttempt": "PG44110 browser-specific archive did not contain compile-only named adapter; no command was started",
+  "evidence": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/raw.out",
+      "sha256": "8545389067d5f0cc486a1d414bbdbd918fe01247d3bb0e3ef0b8510f853d71a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/unit.exec",
+      "sha256": "dd29ad8e2ef81009393e0751263341e19a6bed8a3572cab26eca69dbc4623f42"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/init.log",
+      "sha256": "414489125b78acf8868aad0b2457cb06d2959435fb5f9cea101446d78cb554b8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/checkstyle.xml",
+      "sha256": "651bdf39f68ef47ed93da50418390773ac13d7ad641e0b43be7492211f09d446"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44112-comparison-output-port-same-method-exec/reports/TEST-junit-jupiter.xml",
+      "sha256": "9f518d7bfc62fa1486f9282f6ceb04ff6885eb123427c831afbf46b0341adb85"
+    }
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
