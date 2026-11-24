@@ -1,5 +1,16 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-25 02:13 JST 現候補をLinuxへ渡す条件
+
+基準は製品Java Core `4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349`。正規4製品のうちBatchは整形後18試験と同じ対象クラスを照合した。環境担当が現署名付き全artifact、BOM、boot・実効Unit、DB／FileStoreの所有と権限を確認し、工程担当がPG/PT受入とIT/ST着手可否を判定する。API/Webの正規JAR、QA-056／062、SSC-461、全451、担当受領が未成立。QA-061の配布条件と担当は未決。 [正規Batchの選択証拠](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json)
+
+| 確認担当・対象 | 当PG/PTで確認した条件 | Linuxで残る実測 |
+| --- | --- | --- |
+| 基盤／DB・SYS-010、参照保護 | 資産・転送・Backupのローカル設定、Unitごとの宣言、独立設定4。Inbox純値3・集計値3・代理13。 [SYS-010](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG44230-f02-sys010-local-storage-design-and-candidate/manifest.json) [Inbox／Batch](../../../evidence/01_PT/004_NK-DAT-001/evidence/PG44224-p00402-current-reference-summary-closure/manifest.json) | 当releaseでmount・FileStore・owner/modeとDB適用権限を同時点で固定。集計の同run・別run、単一呼出し、原本不変と借用資源の終了を観測する。 |
+| Web／API・SCR017 | 変更フォーム17、表示値3、資源DOM8を個別に接続。 [現SCR017](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG44244-current-scr017-twelve-explicit-role-and-tests/manifest.json) | 4操作を許可された実Browser/HTTPで実行し、role・対象・更新競合・監査・自己password更新後のsession終端を、改訂前提を固定して確認する。 |
+| Web／DB・QA-050 | 初期5秒／30秒／5分と15分、試行100後も再試行。再送行の3件は現1型の四指標100%。 [再送行の純値](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG44252-claimed-row-independent-current-quality/manifest.json) | 既定の負荷条件で通常／再試行混在を比較。lease一意、JMS待機中の接続解放、検証済応答だけの削除、未確定・期限経過の保持、停止順と性能を記録する。 |
+| 基盤／Web・転送 | 容量予約8。値と分岐は確認済み。呼出中の例外解放1行は未測定。 [容量証拠](../../../evidence/01_PT/008_NK-SCN-001/evidence/PG44238-transfer-capacity-values-final/manifest.json) | ファイル、バイト、同時配信の警告・止めどころを当Linuxで測る。既承認データと所有権で、5GB境界、対象tempと確定後の保全を観測する。 |
+
 ## 2026-11-24 05:59 JST IT・STへ引き継ぐ現候補の未実測条件
 
 同候補BatchのBackup読取時刻は合成JDBC入力をInstantへ変換する局所試験で確認した。Linuxでは正規署名候補とDB所有を確定し、二時刻のµs・切替、両FAILED行の再確認、借用接続、取得資源の終了を実環境の結果と照合する。C02の実効Unitと公開、F04のFileStore・ブラウザ、実CHRと全451はPG/PTの残条件やIT/STの開始条件として区分して扱う。Backupの同時例外順位は対象読取固有の設計確認を残す。 [局所証拠](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG43930-backup-projection-current-single-exec/manifest.json) [例外順位の検討記録](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43934-backup-owned-close-design-review/manifest.json) [Caddy静的証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43906-caddy-unit-fixture-pmd/manifest.json)

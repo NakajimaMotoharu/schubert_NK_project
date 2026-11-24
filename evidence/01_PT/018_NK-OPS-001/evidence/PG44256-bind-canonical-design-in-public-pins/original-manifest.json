@@ -1,0 +1,84 @@
+{
+  "run": "PG44246",
+  "source": "54b1a142d9fe39685ce1ce29d868f4ef72e2cb0c",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P015-05/2",
+  "terminalAtUTC": "2026-11-24T17:08:03.743262+00:00",
+  "actualExit": 0,
+  "subjectSources": {
+    "ClaimedRevocation": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/ClaimedRevocation.java",
+      "sha256": "0d62d5d5c749ed7db388e0d96aacfda7bd8cc74edb07326abd945c61b33e2d4f"
+    },
+    "RevocationPayloadIdentity": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java",
+      "sha256": "e4e1611f0cf10d61f4caf359175c95d6b273e86288c1d71fe9dc7d53f7dbba82"
+    },
+    "EncryptedRevocationPayload": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java",
+      "sha256": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94"
+    },
+    "PendingRevocationRepository": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java",
+      "sha256": "c11388734f03a3263f0c53097d5ce3e1c79d5f17416bdbf569a4cbd4d9fe4f7b"
+    },
+    "LocalLogoutCoordinator": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java",
+      "sha256": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a"
+    },
+    "RevocationRetryCoordinator": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+      "sha256": "974e90ecfa4daafb035c801940593ef63f48d0caf49f11fc355265ca1afe04b2"
+    },
+    "RevocationRetryWorker": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+      "sha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3"
+    }
+  },
+  "approvedDesign": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "origin": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+  },
+  "existing": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27510-revocation25-independent-v1/manifest.json",
+      "sha256": "dcc2f6f187d46fbe51a819e2b36d0a6512b9400f34bed5412c9e0aae889ac7aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27520-revocation-retry-contract-v1/manifest.json",
+      "sha256": "e5a5aed8a39aa342c0f926c9374426ec031c2a1b36679c718ea7834d194a69f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34696-revocation-value5-component-join-v1/manifest.json",
+      "sha256": "792296f7526458b65c18ba7227c8a41a7d48aac7a81b2398484fd77725376227"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44206-qa050-logout-retry-operating-cadence/manifest.json",
+      "sha256": "234c870984fdb76d6a24757f7946b18d64d739afbc9ed432b2f3c043faa952c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44208-qa050-current-synthetic-retry-two/manifest.json",
+      "sha256": "f5bf84fb7b73a2dce915f05f281137a32e8de855619d54a8ee667af6b1d46e55"
+    }
+  ],
+  "currentSqlPortCases": [
+    "OPS-RVR-PORT-001",
+    "OPS-RVR-PORT-010"
+  ],
+  "originalQualifiedResponsesNotReplayed": true,
+  "historicalClaimedTargetCounters": {},
+  "currentNoIndependentLeaseRecordCover": true,
+  "concreteNext": [
+    "lease/identity and known expiry must be precise after requestedAt",
+    "attempt limits inclusive; expiry unknown remains absent; lease owner in the value is metadata"
+  ],
+  "blocked": [
+    "live unique CAS and independent observation of released connection during JMS wait",
+    "verified receipt deletion and key/old context ownership, live stop/join, IT/ST load"
+  ],
+  "currentBackendOperations": 0,
+  "newTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

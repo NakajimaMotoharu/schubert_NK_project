@@ -1,0 +1,248 @@
+{
+  "run": "PG44244",
+  "source": "54b1a142d9fe39685ce1ce29d868f4ef72e2cb0c",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": [
+    "WBS-P016-17/2",
+    "WBS-G13.05"
+  ],
+  "terminalAtUTC": "2026-11-24T17:06:45.533129+00:00",
+  "actualExit": 0,
+  "canonSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "canonicalDocSha256": {
+    "documents/100_RD/120_機能要件/121_機能要件定義.md": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+    "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd",
+    "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+  },
+  "currentMappedOwnedArtifacts": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java",
+      "sha256": "9a0131aad87ee4373e6cf7ffe19a171380d1d514f601e463e848f7a28b6702f6",
+      "functions": "composition of admitted User business controller",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-BIZ001..012",
+      "proofScope": "local graph lineage; actual ingress pending"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java",
+      "sha256": "b7f00a8a6a8ffa84b4d756e25d985e0b516571d11635fe22e96ff4872ba19d24",
+      "functions": "read and update route registration",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-DETAIL001..009",
+      "proofScope": "local graph lineage; regular package pending"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+      "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+      "functions": "detail and four operation dispatch",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-DETAIL001..009; PT-USER-BIZ001..012",
+      "proofScope": "actual authorization, version conflict, commit and audit pending"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+      "sha256": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d",
+      "functions": "revalidate and conceal new password",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE001..016",
+      "proofScope": "current 17 pure form scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserChangeForm.java",
+      "sha256": "86c971c5eb84ba1fce0240b6a72238a05a0769f85af2a439a297d6ab3bd6550e",
+      "functions": "closed binding and value routing",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE-INTERFACE001",
+      "proofScope": "current pure closed interface scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+      "sha256": "0853cfd076bcf75dd856c9da5c3d493ad7bca4e9730e70d64c5455113b7f7d2a",
+      "functions": "fixed same target, version and form values",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE001..016",
+      "proofScope": "current 17 pure form scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+      "sha256": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec",
+      "functions": "USER/ADMIN value and confirmation",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE001..016",
+      "proofScope": "current 17 pure form scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+      "sha256": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081",
+      "functions": "active value and confirmation",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE001..016",
+      "proofScope": "current 17 pure form scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java",
+      "sha256": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c",
+      "functions": "locked-only action with confirmation",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-USER-CHANGE001..016",
+      "proofScope": "current 17 pure form scope"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java",
+      "sha256": "fefe8a3a47ac916e0b869b82753701f8204f0a175870c81bb3638d7871cec006",
+      "functions": "fixed request/reply mapping",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-WEB-S3WIRE001..008",
+      "proofScope": "regular API/Web and live typed roundtrip pending"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserDetailViewModel.java",
+      "sha256": "c4d5545b5424c3fabc6b5563bd77e29f507a3f97c69ac2ae89ba34c680e902e3",
+      "functions": "independent version, state, exact display fields",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-WEB-SCR017-VM001..003",
+      "proofScope": "current three pure values"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "sha256": "e1d76a91a6feb683781c0dfa533b8d158185c21638cd7f9cf2af1d61a0ff184b",
+      "functions": "display, hidden identity, action control and non-retention",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "testIdScope": "PT-UDETAIL-DOM001..008",
+      "proofScope": "current eight resource-only render cases"
+    }
+  ],
+  "priorDesignCorrespondence": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4153_P01617User詳細更新原十二artifact契約対応.md",
+    "sha256": "458929501d8783cdb9eca4d50683fbe5138aeb5a544a0f643a576cbcf0c939c2"
+  },
+  "roots": {
+    "41650": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41650-p01617-user-change-form-current-seventeen-v1/manifest.json",
+      "sha256": "15d15ed92b4cec8255ceba666af0d5076e0e92bc96778c9df594c7a6cf77b242"
+    },
+    "42528": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42528-scr017-all-form-only-current-reuse-v1/manifest.json",
+      "sha256": "943061d0fec20bfbde558b12e2cf50e392644080641728c0d5333696c06e5843"
+    },
+    "43650": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43650-scr017-mutation-forms-current-v1/manifest.json",
+      "sha256": "351be047d48c75205541f71312de017a7a33a864e76bc6efb0867eb79a8fdfab"
+    },
+    "44012": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44012-current-scr017-display-values/manifest.json",
+      "sha256": "982243e10caf28d536d432a3944888e9eadd314d7b2a05ced5df7b047c0aea87"
+    },
+    "44162": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44162-web-shared-template-67-final/manifest.json",
+      "sha256": "b9ee7ee53c0d1cc753318cd15ea349c0177a20fb2febef3702349f9555b76f8a"
+    }
+  },
+  "protocolArtifacts": {
+    "current": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+    },
+    "original": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "aedd35881ba99acb407cdcdc99b2bb0648863b891ec42d6e717a8d8a3867083f"
+    }
+  },
+  "preflight": [
+    "previous fixture path same but checked declaration SHA changed",
+    "same 17 Test IDs ordered differently by run"
+  ],
+  "oldFixtureIsHistorical": true,
+  "currentFormRun": "PG43650",
+  "pureFormsReused": 17,
+  "displayProjectionReused": 3,
+  "renderResourceReused": 8,
+  "currentExactProtocolMembers": [
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class",
+    "dev/codex/schubert/nk/protocol/codec/FieldEncodingException.class",
+    "dev/codex/schubert/nk/protocol/codec/MessageEncodingException.class",
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind.class",
+    "dev/codex/schubert/nk/protocol/header/MessageKind.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldArea.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Flag.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Text.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset.class",
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet.class",
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFields.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutPayload.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry.class",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException.class",
+    "dev/codex/schubert/nk/protocol/layout/Padding.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadData.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadValues.class",
+    "dev/codex/schubert/nk/protocol/layout/Presence.class",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class",
+    "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.class",
+    "dev/codex/schubert/nk/protocol/layout/WireType.class",
+    "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.class",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.class",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.class",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/IdValue.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserId.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class"
+  ],
+  "sameRunClaim": false,
+  "newOrdinaryExecutions": 0,
+  "actualServices": 0,
+  "remaining": [
+    "actual GET/POST and owner/authority for each operation",
+    "transaction version/audit/session invalidation and live exit",
+    "QA-056, formal Web JAR, full 451 and accountable decision"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
