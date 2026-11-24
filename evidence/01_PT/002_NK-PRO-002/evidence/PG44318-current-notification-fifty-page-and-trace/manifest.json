@@ -1,0 +1,142 @@
+{
+  "run": "PG44318",
+  "source": "80cefca1253310182bc0f130faa6190a732d8185",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T18:05:04.291184+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-P013-01/2",
+    "WBS-F03/2-2-b"
+  ],
+  "provedSeparateCriteria": [
+    "notification page size fifty",
+    "50+1 split",
+    "maximum page 999999 and exact 49999950",
+    "wrong size, offset and record count rejected"
+  ],
+  "currentSources": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+      "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+      "sha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e"
+    }
+  ],
+  "testIds": [
+    "PT-PRO-002-NPAGE001",
+    "PT-PRO-002-NPAGE002",
+    "PT-PRO-002-NPAGE003"
+  ],
+  "normal3": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "outputXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44314-notifications-protocol-page-three/xml/TEST-junit-jupiter.xml",
+    "sha256": "f44c3c8553e216bd8a368dae08994e48546e520170386b06b5033739466a0eb6"
+  },
+  "normalProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "spec": {
+    "path": "evidence/01_PT/002_NK-PRO-002/112_通知50件ページ境界の単体仕様.md",
+    "sha256": "ff712cd27051d6a0fd405018e524c67e624b514ab3df46c7c013120a16d21b0d"
+  },
+  "oldSearch100ReusedForNotification": false,
+  "previousCompileOnly": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44312-notifications-protocol-page-three/terminal.json",
+    "sha256": "cdc2f31c1e68ad96ddd03b9fbae394766f86665dcc42c505da9e45ce5622ac86"
+  },
+  "formatterAndPMD": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44314-notifications-protocol-page-three/terminal.json",
+    "sha256": "5001042b9eb079b5c97524ae1d7c0c111c5b05b7a6502e65497a33290d2eb57a"
+  },
+  "scopedReceipts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44314-notifications-protocol-page-three/begin.json",
+      "sha256": "de14914c5bbceab4f1b2258563ea7dc40bc50683418022af752a8264291e7cfa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44316-notification-protocol-fixture-typed-one/begin.json",
+      "sha256": "f41a220b1cf1063b443e3b30b03f8a89e15ac9c0e5d0ea32036f9b79fc580ddc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44316-notification-protocol-fixture-typed-one/terminal.json",
+      "sha256": "c755ac7d70144ee88d918875bf0c3dac755dd5e7dcb8588b3c0cf1643a2bf9bc"
+    }
+  ],
+  "spotbugs": {
+    "actualExit": 0,
+    "source": "80cefca1253310182bc0f130faa6190a732d8185",
+    "run": "PG44316",
+    "terminalAtUTC": "2026-11-24T18:04:28.790651+00:00",
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44316-notification-protocol-fixture-typed-one/spotbugs.xml",
+      "sha256": "e14a9af71cfe2fe4ce6884d3b98d7a4dc43a2802b2d2d2e0277240e230bef684"
+    },
+    "warnings": [],
+    "missing": 0,
+    "errors": 0,
+    "count": 1
+  },
+  "sqlDeclarationAndIndexOnly": {
+    "ordering": "order by updated_at desc,id desc limit 50 offset (p.effective-1)*50",
+    "outerOrder": "on true order by x.updated_at desc,x.id desc",
+    "account": "from projected where owner_user_id=?",
+    "detail": "from projected where id=? and owner_user_id=?"
+  },
+  "viewOrderOriginal": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44132-current-scr020-notification-list-values/manifest.json",
+    "sha256": "3a2d942b0f6c0bc013cd605962d3a81a9a6b3c459481354d63e609ce741313b9"
+  },
+  "nonUnionRaw": {
+    "className": "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+    "crc": "6cdfe20cf9320f49",
+    "counts": {
+      "INSTRUCTION": {
+        "missed": 1217,
+        "covered": 328
+      },
+      "BRANCH": {
+        "missed": 204,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 261,
+        "covered": 71
+      },
+      "COMPLEXITY": {
+        "missed": 149,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 28,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "rawReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44314-notifications-protocol-page-three/raw.out",
+    "sha256": "3bb76a71f333c41539ecb9da7c8921ffa5cbc0bcbf6bf8933f28d354b1d0387c"
+  },
+  "wholeProtocolReplayed": 0,
+  "heldApiClassReadOrUsed": 0,
+  "actualDB": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "QA-056 typed shared repository and actual owned DB query",
+    "same candidate signed F03 and 451"
+  ]
+}
