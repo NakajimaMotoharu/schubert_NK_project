@@ -7,3 +7,6 @@
 <div th:fragment="questionValidation(issues)" class="validation-summary" role="alert" th:if="${!issues.empty}">
   <ul><li th:each="issue : ${issues}"><a href="#question" th:text="${issue.value}"></a></li></ul>
 </div>
+<div th:fragment="queryErrors(id, errors)" th:id="${id}" class="error-panel" role="alert" th:hidden="${errors.empty}">
+  <ul><li th:each="error : ${errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
+</div>

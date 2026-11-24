@@ -12,9 +12,7 @@
              th:text="${page.results.orElseThrow().page.totalCount + ' results / page ' + page.results.orElseThrow().page.effectivePage + ' of ' + page.results.orElseThrow().page.totalPages}"></div>
       </div>
     </header>
-    <div id="search-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
-      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
-    </div>
+    <div th:replace="~{fragments/error-summary :: queryErrors('search-errors', ${page.errors})}"></div>
     <form class="filters" method="get" th:action="@{/search}">
       <label><span>本文</span>
         <input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="search-errors">
@@ -54,7 +52,7 @@
       </label>
       <button type="submit">検索</button>
     </form>
-    <nav th:replace="~{fragments/pagination :: search(${page}, false)}"></nav>
+    <nav th:replace="~{fragments/pagination :: results(${page}, false, 'search pagination')}"></nav>
     <section class="results" th:if="${page.results.present}">
       <p class="empty-results" th:if="${page.results.orElseThrow().page.empty}">該当するデータはありません</p>
       <article class="result" th:each="row : ${page.results.orElseThrow().rows}">
@@ -78,7 +76,7 @@
         </div>
       </article>
     </section>
-    <nav th:replace="~{fragments/pagination :: search(${page}, true)}"></nav>
+    <nav th:replace="~{fragments/pagination :: results(${page}, true, 'search pagination')}"></nav>
     <script defer th:src="@{/js/search-speaker-submit.js}"></script>
   </main></body>
 </html>

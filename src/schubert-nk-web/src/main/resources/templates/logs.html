@@ -9,9 +9,7 @@
       <div class="count" th:if="${page.results.present}"
            th:text="${page.results.orElseThrow().page.totalCount + ' logs / page ' + page.results.orElseThrow().page.effectivePage + ' of ' + page.results.orElseThrow().page.totalPages}"></div>
     </div></header>
-    <div id="log-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
-      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
-    </div>
+    <div th:replace="~{fragments/error-summary :: queryErrors('log-errors', ${page.errors})}"></div>
     <form class="filters log-filters" method="get" th:action="@{/logs}">
       <label><span>メッセージ</span><input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="log-errors"></label>
       <label><span>種別</span><select name="log_type" aria-describedby="log-errors">
@@ -30,7 +28,7 @@
       <label><span>To</span><input type="datetime-local" step="0.001" name="to" th:value="${page.filters.to}" aria-describedby="log-errors"></label>
       <button type="submit">検索</button>
     </form>
-    <nav th:replace="~{fragments/log-pagination :: logs(${page}, false)}"></nav>
+    <nav th:replace="~{fragments/pagination :: results(${page}, false, 'log pagination')}"></nav>
     <section class="log-results" th:if="${page.results.present}">
       <p class="empty-results" th:if="${page.results.orElseThrow().page.empty}">該当するデータはありません</p>
       <article class="log-row" th:each="log : ${page.results.orElseThrow().rows}">
@@ -53,7 +51,7 @@
         <details class="log-details"><summary>details</summary><pre th:text="${log.details}"></pre></details>
       </article>
     </section>
-    <nav th:replace="~{fragments/log-pagination :: logs(${page}, true)}"></nav>
+    <nav th:replace="~{fragments/pagination :: results(${page}, true, 'log pagination')}"></nav>
     <script defer th:src="@{/js/log-search-validation.js}"></script>
   </main></body>
 </html>

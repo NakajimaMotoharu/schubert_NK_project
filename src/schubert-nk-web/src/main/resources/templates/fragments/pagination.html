@@ -1,8 +1,8 @@
 <!doctype html>
-<!-- NK-WEB-001/002/FUN003; UI222/223; SS313; PG202/PT-SCR028. -->
+<!-- NK-WEB-001/002/FUN003/008; UI222/223/225; SS313; PG202/216, PT-SCR028/086. -->
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"><body>
-  <nav th:fragment="search(page, bottom)" class="pagination" th:classappend="${bottom} ? 'bottom-nav' : ''"
-       th:aria-label="${bottom} ? 'search pagination bottom' : 'search pagination'"
+  <nav th:fragment="results(page, bottom, label)" class="pagination" th:classappend="${bottom} ? 'bottom-nav' : ''"
+       th:aria-label="${bottom} ? ${label + ' bottom'} : ${label}"
        th:if="${page.results.present and !page.results.orElseThrow().page.empty}">
     <a th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前の100件</a>
     <span th:if="${!page.previousHref.present}">前の100件</span>
