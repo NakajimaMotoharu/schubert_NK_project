@@ -1,0 +1,154 @@
+{
+  "run": "PG44034",
+  "actualExit": 0,
+  "source": "847f6c23d0c361a7521d0d0ed095edc113a1f423",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-24T13:58:40.198292+00:00",
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRejectedValueTest.java",
+    "sha256": "49b72c106dab0b091420828b0aa5ba9c1bd0679eb88b709958a55418f876e349"
+  },
+  "testIds": [
+    "PT-BAT-REJVAL001",
+    "PT-BAT-REJVAL002",
+    "PT-BAT-REJVAL003",
+    "PT-BAT-REJVAL004",
+    "PT-BAT-REJVAL005"
+  ],
+  "methods": [
+    "keepsSuccessfulRunningSkippedAndAbsentSlotsDistinct",
+    "rejectsWrongSlotForeignRunAndDuplicateIdIndependently",
+    "rejectsNonCleanupInconsistentPhaseAndTime",
+    "refusesWrongWidthAndMissingRequiredValues",
+    "equivalentReportsHaveValueIdentityAndRedactedDiagnostics"
+  ],
+  "regularBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+      "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class",
+      "sha256": "1bfccf90181228ee61621e42803c5304919e46bb2a0e5d7c7d241f24051fc3aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class",
+      "sha256": "460475c8fa92b04b533600da6f541f44e3bf8540d5aa1b9bef48bb71e4bf5099"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchStep.class",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+      "sha256": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+      "sha256": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+      "sha256": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/product/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    }
+  ],
+  "originalSpecs": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4970_Cleanup拒否結果値の単体仕様.md",
+      "sha256": "ada8cb3105299cba93d999ec28b1ab10c75331fea8789266a8914eaf2bfb7ec4"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4971_Cleanup拒否結果の等値と診断単体仕様.md",
+      "sha256": "20d87bb64ed5963d06cdcbf887e55bcd3da6f8305d0e227887b093da63d87eee"
+    }
+  ],
+  "tests": {
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0
+  },
+  "previousExactFour": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44032-current-cleanup-rejected-immutable-values/manifest.json",
+    "sha256": "2b26563b6f52db8c41caa8ef1ad3ebfa1985804054099d0ae59b8de092f39e8b"
+  },
+  "rereadFourToKeepOneExec": true,
+  "scopedCoverage": {
+    "LINE": [
+      32,
+      32
+    ],
+    "METHOD": [
+      14,
+      14
+    ],
+    "CLASS": [
+      2,
+      2
+    ],
+    "BRANCH": [
+      24,
+      24
+    ]
+  },
+  "staticResults": {
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 0
+  },
+  "trace": [
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/begin.json",
+      "sha256": "e21338d545037e66307dc9e2501911ad5882235e0753a516b33518fbd6972983"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/terminal.json",
+      "sha256": "dc4f14d4447e004fd3e717fe242db67a8cfabd226191f468d68f58a66e60212e"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/raw.out",
+      "sha256": "1a3c42145b11cad322ac78f6125a2b10b61df73856ce3031503e05a77c515760"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/unit.exec",
+      "sha256": "78562574611f9fd24379325c7a3d74d471df79adc8aea98b01352b8f41d61231"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/fixture-style-terminal.json",
+      "sha256": "6e0c219541d7698ef4cf95e077945b017fc6da67543f9e09e49b53fbf549bb43"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/pmd-terminal.json",
+      "sha256": "d48c9f0051bd8dae409ea16051463100cb5a9af5baa4ba731e53820607635595"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44034-current-cleanup-rejected-complete-value-coverage/reports/TEST-junit-jupiter.xml",
+      "sha256": "381283e3c1e1a68e46809794d128a8321db79597f96eda462bb5ca91628f0465"
+    }
+  ],
+  "scopeInitializationScope": "The owned ten value classes and fixture only. The outer repository initializer supplies the immutable known step enum.",
+  "actualReadRejectedDbOperations": 0,
+  "actualReleaseOrSourceOperations": 0,
+  "oldExecCombined": false,
+  "committedFixtureAllCurrent": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

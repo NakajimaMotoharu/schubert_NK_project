@@ -1,4 +1,81 @@
 {
+  "currentCleanupRejectionReportValuesPG44034": {
+    "source": "847f6c23d0c361a7521d0d0ed095edc113a1f423",
+    "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+    "owner": "WBS-P004-05/2",
+    "related": [
+      "WBS-F03/2-2-b",
+      "WBS-P017-07"
+    ],
+    "rd": [
+      "OPS-009"
+    ],
+    "ui": [
+      "UI251"
+    ],
+    "ss": [
+      "SS332",
+      "SS341"
+    ],
+    "testIds": [
+      "PT-BAT-REJVAL001",
+      "PT-BAT-REJVAL002",
+      "PT-BAT-REJVAL003",
+      "PT-BAT-REJVAL004",
+      "PT-BAT-REJVAL005"
+    ],
+    "methods": [
+      "keepsSuccessfulRunningSkippedAndAbsentSlotsDistinct",
+      "rejectsWrongSlotForeignRunAndDuplicateIdIndependently",
+      "rejectsNonCleanupInconsistentPhaseAndTime",
+      "refusesWrongWidthAndMissingRequiredValues",
+      "equivalentReportsHaveValueIdentityAndRedactedDiagnostics"
+    ],
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRejectedValueTest.java",
+      "sha256": "49b72c106dab0b091420828b0aa5ba9c1bd0679eb88b709958a55418f876e349"
+    },
+    "independentOracles": [
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/4970_Cleanup拒否結果値の単体仕様.md",
+        "sha256": "ada8cb3105299cba93d999ec28b1ab10c75331fea8789266a8914eaf2bfb7ec4"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/4971_Cleanup拒否結果の等値と診断単体仕様.md",
+        "sha256": "20d87bb64ed5963d06cdcbf887e55bcd3da6f8305d0e227887b093da63d87eee"
+      }
+    ],
+    "terminal": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44034-cleanup-rejected-pure-report-final/manifest.json",
+      "sha256": "84cdfdf9356c0da2df7557708d22253e23791bee6cb5d4a1ff977b564d4080f6"
+    },
+    "results": {
+      "path": "evidence/01_PT/017_NK-BAT-001/4972_Cleanup拒否報告値の単体結果.md",
+      "sha256": "94a5336cc0660601a5c8cf84af9ef695828d3d13c71e2405830e4d73d9280221"
+    },
+    "formalAcceptanceId": null,
+    "whole451": false
+  },
+  "sourceFormatInventorySanitizedCurrentPG44036": {
+    "source": "9bb94293442b48f40fe37194041e7745bfa99cb5",
+    "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+    "owner": "WBS-G08",
+    "related": [
+      "WBS-F03/2-2-b"
+    ],
+    "terminal": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44036-current-five-receipts-delta-verification/manifest.json",
+      "sha256": "9a34aa343ee8e25d966943898c793470a2ab581ea460728b20ed2c21a40ba6f9"
+    },
+    "validatedPublicArtifact": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44026-current-test-formatter-original-input-reuse/format-records.json",
+      "sha256": "f276472ad2a8a63c205360712fbeea0b231bad74f24b570dfef3dc6f839b114e"
+    },
+    "bug": "BUG-3762",
+    "horizontal": "YKT-2938",
+    "formalAcceptanceId": null,
+    "whole451": false
+  },
   "currentScr017DetailViewValueTracePG44012": {
     "source": "42e16386ead3e93d51ba207e1a1b91f71c6f1439",
     "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
@@ -11634,7 +11711,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "77e2b0d8172e972f6fa734eb3cc8193adb3129c5a3eeb2659f9a40ce3513c07b",
+  "inventorySha256": "bb32f3c09df778f93db8ca7f60859176ca7cad2c597bbc62709ffc5b401d669e",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",

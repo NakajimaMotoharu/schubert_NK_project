@@ -1,0 +1,86 @@
+{
+  "run": "PG44028",
+  "actualExit": 0,
+  "source": "be5e3682178575c9d4b50ac23f5e9b1b78b4a775",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-C02-b",
+  "terminalAtUTC": "2026-11-24T13:50:36.116554+00:00",
+  "owner": "operations-and-unit",
+  "canonicalDesignCommit": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "canonicalPins": {
+    "341": {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    "342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    },
+    "343": {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+    }
+  },
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43744-daily-timer-receiver-fixed-identity-gap/manifest.json",
+    "sha256": "1922dceb3b61d9ae53eaffeaaa2b0909fb5e2f8268b5b3c6ae24370e9af89727"
+  },
+  "fixedTimer": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "existingIndependentlyTestedTimer": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+      "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42370-g1306-daily-timer-explicit-values-v1/manifest.json",
+      "sha256": "801fd1f4e9088c490fb74ecc0b7491ea41257d6347b020f72ce4d6fee785d6c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42388-g1306-systemd-timer-verify-offline-v1/manifest.json",
+      "sha256": "eeadc0d9caae4dcecce1b2609bdc050098fbc024114856b0d7080cafda182f76"
+    }
+  ],
+  "verifiedAbsentCommittedService": "schubert-nk-maintenance.service",
+  "postRebootUnitIsSeparate": true,
+  "finiteValueParts": [
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java",
+        "sha256": "7d39459c02a129a48bdf8329068f0befb24ee3fa7e0ca893f36545e0f0b7161f"
+      },
+      "scope": "S01..S05",
+      "ownRole": "ordered supplied stop/wait data; no service dispatch"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java",
+        "sha256": "662948403cdaa6540c045bdde654a0e846659b14b8f6974b47958704423b47cc"
+      },
+      "scope": "U01..U10",
+      "ownRole": "supplied update and safety result; no update/reboot dispatch"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
+        "sha256": "0b0dc37c470791f0b3fe4a7439b730728bb30b185320e011fe22ea7db47552d9"
+      },
+      "scope": "W01..W09",
+      "ownRole": "external marker decision; no boot dispatch"
+    }
+  ],
+  "unresolved": [
+    "No verified pre-reboot production entrypoint with its own unit identity and durable same-run boundary",
+    "Current owner and actual effective units, and definitive independent terminal",
+    "C02/451 complete on that candidate"
+  ],
+  "candidateReleaseClaim": false,
+  "manufacturingApplied": false,
+  "unitOrHostActions": 0,
+  "newTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "reason": "The approved timer and state analyzers cannot supply a production receiver. Binding a template to the post-reboot Morning entry would violate the approved split."
+}

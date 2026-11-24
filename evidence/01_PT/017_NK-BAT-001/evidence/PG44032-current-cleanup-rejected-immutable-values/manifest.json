@@ -1,0 +1,118 @@
+{
+  "run": "PG44032",
+  "actualExit": 0,
+  "source": "25db95b78b485a3c21896186c78edfadc9f4af4e",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-24T13:56:59.037522+00:00",
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRejectedValueTest.java",
+    "sha256": "40472a77802ca91d34122d5a837946be6a7914618ff7d9193bf3e36029f9dd5f"
+  },
+  "testIds": [
+    "PT-BAT-REJVAL001",
+    "PT-BAT-REJVAL002",
+    "PT-BAT-REJVAL003",
+    "PT-BAT-REJVAL004"
+  ],
+  "methods": [
+    "keepsSuccessfulRunningSkippedAndAbsentSlotsDistinct",
+    "rejectsWrongSlotForeignRunAndDuplicateIdIndependently",
+    "rejectsNonCleanupInconsistentPhaseAndTime",
+    "refusesWrongWidthAndMissingRequiredValues"
+  ],
+  "regularBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "result": {
+    "passCount": 4,
+    "failCount": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "line": [
+      32,
+      32
+    ],
+    "method": [
+      9,
+      14
+    ],
+    "clazz": [
+      2,
+      2
+    ],
+    "branch": [
+      24,
+      24
+    ]
+  },
+  "missingGeneratedMethods": [
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry",
+      "toString",
+      "()Ljava/lang/String;"
+    ],
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry",
+      "hashCode",
+      "()I"
+    ],
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry",
+      "equals",
+      "(Ljava/lang/Object;)Z"
+    ],
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot",
+      "hashCode",
+      "()I"
+    ],
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot",
+      "equals",
+      "(Ljava/lang/Object;)Z"
+    ]
+  ],
+  "actualDbOrExternalOperations": 0,
+  "productCoreUnchanged": true,
+  "independentOracle": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4970_Cleanup拒否結果値の単体仕様.md",
+    "sha256": "ada8cb3105299cba93d999ec28b1ab10c75331fea8789266a8914eaf2bfb7ec4"
+  },
+  "static": {
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 0
+  },
+  "inputAndOutput": [
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/begin.json",
+      "sha256": "3b5d7be540c5366f5c573b349c0edcaf59f8a454f7d975a883376b3822e77345"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/terminal.json",
+      "sha256": "be9f08950e25fc09023f030779f848dc70588a5e6ed739c450ed94ce236f6221"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/raw.out",
+      "sha256": "c304163187436983d43a32771cd3d7a90182db5e1932b5964a0fd12b4d7db8b0"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/reports/TEST-junit-jupiter.xml",
+      "sha256": "8bda167defc90b93234add6707b59d6decfc4819ebf79c52350fe82616391186"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/fixture-style-terminal.json",
+      "sha256": "3f60cfb1b4ea5aefcab343fd6136066498b5bfa6a6d138b15cf1db7d0f9f933f"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44032-current-cleanup-rejected-immutable-values/pmd-terminal.json",
+      "sha256": "15a44c49591b80fb936054afd560b09456195b39b3a7ab8b6a63e41a752fbe11"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

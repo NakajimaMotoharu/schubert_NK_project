@@ -1,0 +1,85 @@
+{
+  "run": "PG44036",
+  "actualExit": 0,
+  "source": "9bb94293442b48f40fe37194041e7745bfa99cb5",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-24T14:02:24.301103+00:00",
+  "manifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44026-current-test-formatter-original-input-reuse/manifest.json",
+      "sha256": "6f96984c5ade18476598bd006a9912eb660e710ab893283d193b7cb871288828"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44028-c02-maintenance-receiver-dependency/manifest.json",
+      "sha256": "727aa66d7b407eaae768f65f0f4238278f5c48a40011f78e81d3845394d96135"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44030-current-regular-copy-row-original-raw-counters/manifest.json",
+      "sha256": "f5449955ba0a35e788bb7453f55a20849562442f79409fd71f6f17057f3c6744"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44032-current-cleanup-rejected-immutable-values/manifest.json",
+      "sha256": "2b26563b6f52db8c41caa8ef1ad3ebfa1985804054099d0ae59b8de092f39e8b"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44034-cleanup-rejected-pure-report-final/manifest.json",
+      "sha256": "84cdfdf9356c0da2df7557708d22253e23791bee6cb5d4a1ff977b564d4080f6"
+    }
+  ],
+  "verifications": {
+    "localHashesExact": 65,
+    "sourceByGitCommit": 1,
+    "unknownReferences": []
+  },
+  "rangeCompared": "be5e3682178575c9d4b50ac23f5e9b1b78b4a775..9bb94293442b48f40fe37194041e7745bfa99cb5",
+  "javaMainModified": 0,
+  "changedFixture": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupRejectedValueTest.java"
+  ],
+  "scanTool": {
+    "path": "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "scanArguments": [
+    "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "dir",
+    "--redact=100",
+    "--no-banner",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44036-current-pending-redacted-trace-v4/public"
+  ],
+  "scannedPaths": 23,
+  "scanExit": 0,
+  "scanSanitizedOutput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44036-current-pending-redacted-trace-v4/error",
+    "sha256": "e08ceb39ab4a5af327dc9cd8abeab4cc2a4c939b9a5f603060454bdd9bf9054c"
+  },
+  "preflights": [
+    {
+      "exitCode": 1,
+      "reason": "Git quoted Japanese file names; fixed by explicit NUL delimiters",
+      "scannerStarted": false
+    },
+    {
+      "exitCode": 1,
+      "reason": "BUG-3762 fixed fields replace dynamic digest-map keys; original raw flags preserved",
+      "scannerStarted": true
+    }
+  ],
+  "fixedPublicArtifact": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44026-current-test-formatter-original-input-reuse/format-records.json",
+    "sha256": "f276472ad2a8a63c205360712fbeea0b231bad74f24b570dfef3dc6f839b114e"
+  },
+  "integrity": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44026-current-test-formatter-original-input-reuse/format-records-integrity.json",
+    "sha256": "996eb5025aa784b83b16bbc2afc3dc66c9d0a43b5e5918f9286b113df4a5636d"
+  },
+  "olderWholeLedgerFlags": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44036-public-filename-digest-raw-gitleaks/legacy-ledger-scope-check.json",
+    "sha256": "cb01099f9d891ff6f38d43401a1aa4422bfbc52e1f57b88a022f768c884bfe9f"
+  },
+  "oldHistoryRescan": false,
+  "wholeG08": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
