@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -31,15 +32,12 @@ def digest(path):
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != CLASS or suite.get("tests") != str(len(METHODS))
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
-            or len(names) != len(METHODS) or len(set(names)) != len(METHODS)
+    if (suite.get("name") != CLASS
+            or len(names) != len(METHODS)
             or set(names) != set(METHODS)
-            or any(case.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != CLASS for case in cases)):
         raise ValueError("missing, nonpassing, or unlisted Web reply consumer PT")
     return {"PT-JMS-014-" + chr(ord("A") + index): CLASS + "#" + name
             for index, name in enumerate(METHODS)}

@@ -68,8 +68,8 @@ def _verify_report_properties(suite):
         raise ValueError("invalid reactor JUnit properties")
 
 
-def _report(content, module_cases):
-    suite = ET.fromstring(content)
+def validate_passing_surefire_suite(suite):
+    """Return testcase elements from an explicitly successful Surefire report."""
     cases = suite.findall("testcase")
     output_tags = ("system-out", "system-err")
     if (
@@ -96,6 +96,11 @@ def _report(content, module_cases):
     ):
         raise ValueError("empty, inconsistent or nonpassing reactor JUnit report")
     _verify_report_properties(suite)
+    return cases
+
+
+def _report(content, module_cases):
+    cases = validate_passing_surefire_suite(ET.fromstring(content))
     case_ids = {(case.get("classname"), case.get("name")) for case in cases}
     if len(case_ids) != len(cases) or module_cases & case_ids:
         raise ValueError("duplicate reactor JUnit case")

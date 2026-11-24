@@ -759,6 +759,52 @@ class EvidenceSetTest(unittest.TestCase):
                 matching.set(field, value)
                 with self.assertRaises(ValueError): parent.validate_coverage(wrong)
 
+    def test_junit_scope001_limited_collectors_require_an_explicit_passing_surefire_suite(self):
+        filenames = (
+            "030_collect_sync_consumers.py",
+            "031_collect_web_reply_consumers.py",
+            "032_collect_web_log_worker.py",
+            "033_collect_api_web_log_consumers.py",
+        )
+        for filename in filenames:
+            reader = module("isolated_surefire_scope_fixture", filename)
+            with patch.object(reader, "CLASS", "fixture.Selected"), patch.object(
+                reader, "METHODS", ("passing",)
+            ):
+                valid = ET.fromstring(
+                    '<testsuite name="fixture.Selected" tests="1" failures="0" errors="0" '
+                    'skipped="0"><properties><property name="fixture" value="true"/></properties>'
+                    '<testcase classname="fixture.Selected" name="passing">'
+                    '<system-out>synthetic</system-out></testcase></testsuite>'
+                )
+                self.assertEqual(["fixture.Selected#passing"], list(reader.validate_suite(valid).values()))
+                for violation in (
+                    "failures",
+                    "errors",
+                    "skipped",
+                    "formattedZero",
+                    "root",
+                    "unknownChild",
+                    "nestedOutput",
+                    "repeatedProperties",
+                ):
+                    with self.subTest(collector=filename, violation=violation):
+                        bad = copy.deepcopy(valid)
+                        if violation in ("failures", "errors", "skipped"):
+                            del bad.attrib[violation]
+                        elif violation == "formattedZero":
+                            bad.set("errors", "00")
+                        elif violation == "root":
+                            bad.tag = "summary"
+                        elif violation == "unknownChild":
+                            ET.SubElement(bad, "incomplete")
+                        elif violation == "nestedOutput":
+                            ET.SubElement(bad.find("testcase/system-out"), "nested")
+                        else:
+                            ET.SubElement(bad, "properties")
+                        with self.assertRaisesRegex(ValueError, "reactor JUnit"):
+                            reader.validate_suite(bad)
+
     def test_api_web_log_consumer_inventory_and_coverage(self):
         log = module("api_web_log_consumer_collector", "033_collect_api_web_log_consumers.py")
         names = (
