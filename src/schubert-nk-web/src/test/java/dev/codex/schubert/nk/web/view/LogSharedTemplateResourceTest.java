@@ -57,7 +57,8 @@ final class LogSharedTemplateResourceTest {
     for (var pager : rendered.select("nav.pagination")) {
       assertEquals(List.of("前の100件", "次の100件"), pager.select("a").eachText());
       assertEquals(
-          List.of("/logs?q=ready&page=1", "/logs?q=ready&page=3"), pager.select("a").eachAttr("href"));
+          List.of("/logs?q=ready&page=1", "/logs?q=ready&page=3"),
+          pager.select("a").eachAttr("href"));
     }
     assertEquals(1, rendered.select(LOG_ERRORS + "[hidden][role=alert]").size());
     assertEquals(7, rendered.select("form.log-filters [aria-describedby=log-errors]").size());
@@ -74,9 +75,9 @@ final class LogSharedTemplateResourceTest {
                 Map.of("name", "from", "message", "先に入力 <A&B>"),
                 Map.of("name", "to", "message", "末尾の入力")));
 
-    assertEquals(List.of("error-from", "error-to"), rendered.select(LOG_ERRORS + " li").eachAttr("id"));
     assertEquals(
-        List.of("先に入力 <A&B>", "末尾の入力"), rendered.select(LOG_ERRORS + " li").eachText());
+        List.of("error-from", "error-to"), rendered.select(LOG_ERRORS + " li").eachAttr("id"));
+    assertEquals(List.of("先に入力 <A&B>", "末尾の入力"), rendered.select(LOG_ERRORS + " li").eachText());
     assertTrue(rendered.select(LOG_ERRORS + " li *").isEmpty());
     assertFalse(rendered.select(LOG_ERRORS).hasAttr("hidden"));
     assertTrue(rendered.select("nav.pagination,.log-row").isEmpty());
@@ -101,7 +102,9 @@ final class LogSharedTemplateResourceTest {
     var engine = new SpringTemplateEngine();
     engine.setTemplateResolver(resolver);
     var filters =
-        Map.of("q", "ready", "logType", "", "action", "", "path", "", "level", "", "from", "", "to", "");
+        Map.of(
+            "q", "ready", "logType", "", "action", "", "path", "", "level", "", "from", "", "to",
+            "");
     var topBar = Map.of("username", "reviewer", "role", "ADMIN");
     var page =
         Map.of(
