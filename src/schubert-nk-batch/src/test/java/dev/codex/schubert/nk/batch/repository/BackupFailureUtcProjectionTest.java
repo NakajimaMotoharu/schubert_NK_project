@@ -48,6 +48,8 @@ final class BackupFailureUtcProjectionTest {
     REPEATED_ROW_FAILURE,
     REPEATED_STATEMENT_FAILURE,
     DISTINCT_CLOSES_AFTER_RUNTIME,
+    REPEATED_ROW_ERROR,
+    GUARD_FAILURE_AFTER_ROW,
     ROW_CLOSE_ONLY,
     STATEMENT_CLOSE_ONLY,
     INITIAL_INCONSISTENT_RUN,
@@ -160,6 +162,26 @@ final class BackupFailureUtcProjectionTest {
     }
   }
 
+  /** PT-BAT-BACKUP-UTC011. */
+  @Test
+  void utc011RepeatedErrorRemainsPrimaryAndKeepsDistinctStatementFailure() {
+    var fixture = fixture(ReadFault.REPEATED_ROW_ERROR);
+    var actual = assertThrows(AssertionError.class, fixture::verify);
+    assertSame(fixture.primaryError, actual);
+    assertEquals(List.of(fixture.statementClose), List.of(actual.getSuppressed()));
+    assertEquals(COMPLETE.subList(0, 4), fixture.closed);
+  }
+
+  /** PT-BAT-BACKUP-UTC012. */
+  @Test
+  void utc012CheckedGuardFailureAfterRowCloseSurvivesStatementClose() {
+    var fixture = fixture(ReadFault.GUARD_FAILURE_AFTER_ROW);
+    var actual = assertThrows(IOException.class, fixture::verify);
+    assertSame(fixture.primaryGuard, actual);
+    assertEquals(List.of(fixture.statementClose), List.of(actual.getSuppressed()));
+    assertEquals(COMPLETE.subList(0, 4), fixture.closed);
+  }
+
   private static Fixture fixture(ReadFault fault) {
     return new Fixture(DISPLAY_START, DISPLAY_END, fault, null);
   }
@@ -188,6 +210,8 @@ final class BackupFailureUtcProjectionTest {
         new SQLException("synthetic statement close failure");
     private final IllegalStateException primaryRuntime =
         new IllegalStateException("synthetic row read failure");
+    private final AssertionError primaryError = new AssertionError("synthetic row read error");
+    private final IOException primaryGuard = new IOException("synthetic guard failure");
     private int prepared;
 
     Fixture(@Nullable OffsetDateTime start, @Nullable OffsetDateTime end) {
@@ -209,7 +233,14 @@ final class BackupFailureUtcProjectionTest {
       var run = new BatchRun(RUN_ID, CUTOFF);
       var db = new BatchStepAttempt(7, run, BatchStep.BACKUP_DB, 4, STARTED, false);
       var config = new BatchStepAttempt(8, run, BatchStep.BACKUP_CONFIG, 4, STARTED, false);
-      new BackupFailureSnapshot(db, config, ENDED).verifyLatest(connection(), () -> 5_000_000_000L);
+      new BackupFailureSnapshot(db, config, ENDED).verifyLatest(connection(), this::remainingNanos);
+    }
+
+    private long remainingNanos() throws IOException {
+      if (fault == ReadFault.GUARD_FAILURE_AFTER_ROW && closed.equals(COMPLETE.subList(0, 3))) {
+        throw primaryGuard;
+      }
+      return 5_000_000_000L;
     }
 
     private Connection connection() {
@@ -301,7 +332,11 @@ final class BackupFailureUtcProjectionTest {
     private void checkStatementClose() throws SQLException {
       switch (fault) {
         case REPEATED_STATEMENT_FAILURE -> throw repeated;
-        case BOTH_CLOSES_AFTER_REJECTION, DISTINCT_CLOSES_AFTER_RUNTIME, STATEMENT_CLOSE_ONLY ->
+        case BOTH_CLOSES_AFTER_REJECTION,
+            DISTINCT_CLOSES_AFTER_RUNTIME,
+            REPEATED_ROW_ERROR,
+            GUARD_FAILURE_AFTER_ROW,
+            STATEMENT_CLOSE_ONLY ->
             throw statementClose;
         default -> {}
       }
@@ -311,6 +346,7 @@ final class BackupFailureUtcProjectionTest {
       switch (fault) {
         case REPEATED_ROW_FAILURE -> throw repeated;
         case DISTINCT_CLOSES_AFTER_RUNTIME -> throw primaryRuntime;
+        case REPEATED_ROW_ERROR -> throw primaryError;
         default -> {}
       }
     }
@@ -318,6 +354,7 @@ final class BackupFailureUtcProjectionTest {
     private void checkRowClose() throws SQLException {
       switch (fault) {
         case REPEATED_ROW_FAILURE -> throw repeated;
+        case REPEATED_ROW_ERROR -> throw primaryError;
         case BOTH_CLOSES_AFTER_REJECTION, DISTINCT_CLOSES_AFTER_RUNTIME, ROW_CLOSE_ONLY ->
             throw rowClose;
         default -> {}
