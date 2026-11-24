@@ -1,0 +1,132 @@
+{
+  "run": "PG44676",
+  "source": "1cd8f69445916bbe4310403b16c807adc2dfe2c2",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "WBS-P005-02/2"
+  ],
+  "terminalAtUTC": "2026-11-24T23:35:15.026950+00:00",
+  "actualExit": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+      "sha256": "dd8e3808d58f2e2c053deed65684e898b376b786e4d6fde699fe2f88e4a3c104"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+      "sha256": "05a585f144f1a2cc95242f65efbcd52dce5497f2da7525729847e973415035d6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+      "sha256": "9d3990bff0e3ba1d606daa7f51d430be2109cf4ef789a4cf5c53cb4573d1bc5b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/TransactionalRequestHandler.java",
+      "sha256": "d69b3e46b1d424dca27460291d87504e111b5d5b2dac64ff31f054303e91f1b6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/package-info.java",
+      "sha256": "545edb4601c05d33c738d8f573a3223d5a7b7813be1f2ab804646b3b256fd564"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "sha256": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sha256": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+      "sha256": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+      "sha256": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+      "sha256": "a91727bb730f8cc691a3d9e256efb2c942e33ed5254d3cf3d3c03e6b486ad453"
+    }
+  ],
+  "testedPhysical": 11,
+  "pmdProcessed": 11,
+  "pmdRawExit": 4,
+  "rawPmdFinding": {
+    "file": "LayoutHandlerRegistry.java",
+    "rule": "UseConcurrentHashMap",
+    "line": "34"
+  },
+  "priorApplicableRuleEvidence": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42726-ssc477-typed-layout-handler-registry-v1/manifest.json",
+    "sha256": "e4ac8ba7dee14881be8f38b7843a2bfb8a95f64af4f1c83549b56b9d0ac2293b"
+  },
+  "pmdScopedReason": "The temporary HashMap is confined to the constructor; no caller or registered handler can obtain it. Only Map.copyOf is stored in the final field. Changing to ConcurrentHashMap would not implement a product requirement.",
+  "ruleOrSourceSuppressionCreated": 0,
+  "unclassifiedLocalFindings": 0,
+  "currentRegistryPhysical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-nullaway-v2/target/classes/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.class",
+    "sha256": "39d42d66dc903479114122f8eed3c33d827e9b262f156a5807143510b61974a4"
+  },
+  "currentCumulativeApiScope": 104,
+  "apiDenominator": 286,
+  "newApiScope": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/TransactionalRequestHandler.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/package-info.java"
+  ],
+  "firstCompilationError": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-nullaway/terminal.json",
+    "sha256": "ad9e752d43e8bb3c9792e1b43f8c11ee06f84c0d683b25a1485efa95672526d4"
+  },
+  "excludedBeforeCorrectedCompile": [
+    "Inbox stored replay boundaries",
+    "JdbcResourceCleanup annotated close"
+  ],
+  "toolReceipts": {
+    "nullaway": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-nullaway-v2/begin.json",
+        "sha256": "eb6969fc83b44a3f6c5c5ed9c48cde25fd08316fa479ba54ca69c6f2c9219f9c"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-nullaway-v2/terminal.json",
+        "sha256": "ba0d31c05d895ea3362718876ee876b8d28e8e81e9b90de21e2dfd00a2f23d31"
+      }
+    },
+    "spotbugs": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-spotbugs/begin.json",
+        "sha256": "7693619d204436913c9f92b38191f8d5570daa479eb4a047c2779f49bd79007c"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-spotbugs/terminal.json",
+        "sha256": "a16de1d654e2168107af588a1d9cdd2866a80e736aa053e2a4bbd0396a0c2980"
+      }
+    },
+    "pmd": {
+      "begin.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-pmd/begin.json",
+        "sha256": "ec3c06f84eabe3e491f6a9d670cd9f41705f1076ff08869602487203af32fb84"
+      },
+      "terminal.json": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44676-current-api-request-boundaries-pmd/terminal.json",
+        "sha256": "247237efe2d280116fa4adac265fe08f66bbc27f195254c61c64bf3849210aa4"
+      }
+    }
+  },
+  "actualExternalOperations": 0,
+  "productTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
