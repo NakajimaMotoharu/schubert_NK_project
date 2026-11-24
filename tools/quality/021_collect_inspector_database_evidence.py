@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import validate_class_family_coverage
 import bootstrap_ownership
 
 GROUPS = (
@@ -82,19 +83,16 @@ def main():
         raise SystemExit("matching successful full reactor required")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--",
                     "src", "pom.xml", "program/characterization", "tools/quality"], cwd=repo, check=True)
-    target = repo / "src/schubert-nk-api/target"
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + bootstrap_ownership.owner(g[0], test=True)) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.application)
+    reports = {}
     coverage = {}
     for subject in subjects:
         module = bootstrap_ownership.owner(subject)
-        for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
-            name = cls.get("name")
-            if name == subject or name.startswith(subject + "$"):
-                coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                                  for c in cls.findall("counter")}
-    if not set(subjects).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-        raise SystemExit("missing or incomplete inspector database coverage")
+        if module not in reports:
+            report = repo / f"src/schubert-nk-{module}/target/site/jacoco/jacoco.xml"
+            reports[module] = ET.parse(report).getroot()
+        coverage.update(validate_class_family_coverage(reports[module], subject))
     evidence = evidence_output_root(repo) / "004_NK-DAT-001/evidence" / folder
     evidence.mkdir(parents=True, exist_ok=True)
     sanitized = ET.Element("testsuite", name="NK-DAT-001-" + folder, tests=str(len(methods)), failures="0", errors="0", skipped="0")

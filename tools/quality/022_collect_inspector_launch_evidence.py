@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_jacoco_contract import validate_class_family_coverage
 import bootstrap_ownership
 
 PREFIX = "dev.codex.schubert.nk.api.maintenance."
@@ -508,34 +509,23 @@ def main():
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()
                                 for g in groups], args.deployment)
-    coverage = {}
-    for cls in ET.parse(target / "site/jacoco/jacoco.xml").getroot().iter("class"):
-        name = cls.get("name")
-        if any(name == s or name.startswith(s + "$") for s in SUBJECTS):
-            coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                             for c in cls.findall("counter")}
-    if not set(SUBJECTS).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-        raise SystemExit("missing or incomplete launcher coverage")
+    subjects = [("api", subject) for subject in SUBJECTS]
     if args.deployment:
-        for original_module, subject in RUNTIME_SUBJECTS:
-            module = bootstrap_ownership.owner(subject)
-            for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
-                name = cls.get("name")
-                if name == subject or name.startswith(subject + "$"):
-                    coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                                     for c in cls.findall("counter")}
-        if not {subject for _, subject in RUNTIME_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-            raise SystemExit("missing or incomplete API/Web runtime coverage")
-        for module, subject in (("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT), ("batch", LOCK_SUBJECT),
-                                *(("storage", s) for s in PRIVATE_SUBJECTS),
-                                *(("batch", s) for s in (*STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS))):
-            for cls in ET.parse(repo / ("src/schubert-nk-" + module) / "target/site/jacoco/jacoco.xml").getroot().iter("class"):
-                name = cls.get("name")
-                if name == subject or name.startswith(subject + "$"):
-                    coverage[name] = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                                     for c in cls.findall("counter")}
-        if not {SCOPE_SUBJECT, FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
-            raise SystemExit("missing or incomplete parent boundary coverage")
+        subjects.extend((bootstrap_ownership.owner(subject), subject)
+                        for _, subject in RUNTIME_SUBJECTS)
+        subjects.extend((("storage", SCOPE_SUBJECT), ("storage", FLOCK_SUBJECT),
+                         ("batch", LOCK_SUBJECT)))
+        subjects.extend(("storage", subject) for subject in PRIVATE_SUBJECTS)
+        subjects.extend(("batch", subject) for subject in (
+            *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS,
+            *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS))
+    reports = {}
+    coverage = {}
+    for module, subject in subjects:
+        if module not in reports:
+            report = repo / f"src/schubert-nk-{module}/target/site/jacoco/jacoco.xml"
+            reports[module] = ET.parse(report).getroot()
+        coverage.update(validate_class_family_coverage(reports[module], subject))
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
     evidence = evidence_output_root(repo) / directory
     evidence.mkdir(parents=True, exist_ok=True)

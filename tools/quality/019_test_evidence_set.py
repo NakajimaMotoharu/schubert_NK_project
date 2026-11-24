@@ -680,6 +680,32 @@ class EvidenceSetTest(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         collector.validate_coverage(report, subject)
 
+    def test_selected_class_families_preserve_no_code_and_reject_duplicates(self):
+        from pgpt_jacoco_contract import validate_class_family_coverage
+
+        subject = "fixture/scope/Unit"
+        report = self._selected_class_report(subject)
+        package = report.find("package")
+        nested = subject + "$NonExecutable"
+        ET.SubElement(package, "class", name=nested)
+        ET.SubElement(package, "class", name=subject + "NotOwned")
+        self.assertEqual(
+            {subject, nested}, validate_class_family_coverage(report, subject).keys())
+        self.assertEqual({}, validate_class_family_coverage(report, subject)[nested])
+        for variant in ("missing-owner", "duplicate-nested", "inconsistent-line"):
+            with self.subTest(variant=variant):
+                wrong = copy.deepcopy(report)
+                classes = wrong.find("package")
+                if variant == "missing-owner":
+                    classes.remove(classes.find(f"class[@name='{subject}']"))
+                elif variant == "duplicate-nested":
+                    classes.append(copy.deepcopy(classes.find(f"class[@name='{nested}']")))
+                else:
+                    inner = classes.find(f"class[@name='{nested}']")
+                    ET.SubElement(inner, "counter", type="LINE", missed="0", covered="1")
+                with self.assertRaises(ValueError):
+                    validate_class_family_coverage(wrong, subject)
+
     def test_api_messaging_parent_inventory_and_coverage(self):
         parent = module("api_messaging_parent_collector", "034_collect_api_messaging_runtime.py")
         names = (

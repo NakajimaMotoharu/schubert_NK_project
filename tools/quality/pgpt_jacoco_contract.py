@@ -51,21 +51,41 @@ def validate_class_detail(cls, counters):
     expected["CLASS"] = int(bool(methods))
     if add_covered([cls], counters, omitted=("LINE",)) != expected:
         raise ValueError("class JaCoCo counters disagree with method detail")
+    if not methods and add_covered([cls], counters)["LINE"]:
+        raise ValueError("JaCoCo class without code reports covered lines")
     return methods
+
+
+def _validated_class_rows(cls):
+    counters = {cls: coverage_rows(cls)}
+    counters.update((method, coverage_rows(method)) for method in cls.findall("method"))
+    validate_class_detail(cls, counters)
+    return counters[cls]
 
 
 def validate_selected_class_coverage(report, subject, *, require_branch):
     classes = [element for element in report.iter("class") if element.get("name") == subject]
     if len(classes) != 1:
         raise ValueError("missing or duplicated JaCoCo class for selected scope")
-    cls = classes[0]
-    counters = {cls: coverage_rows(cls)}
-    counters.update((method, coverage_rows(method)) for method in cls.findall("method"))
-    validate_class_detail(cls, counters)
+    rows = _validated_class_rows(classes[0])
     required = {"INSTRUCTION", "LINE", "METHOD", "CLASS"}
     if require_branch:
         required.add("BRANCH")
-    rows = counters[cls]
     if not required <= rows.keys() or any(rows[metric]["covered"] == 0 for metric in required):
         raise ValueError("selected JaCoCo class coverage is incomplete")
     return rows
+
+
+def validate_class_family_coverage(report, subject):
+    """Check an inspected owner and its nested types, including natural no-Code rows."""
+    result = {}
+    for cls in report.iter("class"):
+        name = cls.get("name", "")
+        if name != subject and not name.startswith(subject + "$"):
+            continue
+        if name in result:
+            raise ValueError("duplicate JaCoCo class in selected family")
+        result[name] = _validated_class_rows(cls)
+    if subject not in result:
+        raise ValueError("selected JaCoCo family has no outer class")
+    return result
