@@ -111,6 +111,52 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     scenario.validate_module_coverage(report)
 
+    def _fixture_coverage_detail(self):
+        report = self._fixture_module_coverage()
+        package = report.findall("package")[1]
+        target = ET.SubElement(package, "class", {"name": "fixture/conditional/Root"})
+        method = ET.SubElement(target, "method", {"name": "evaluate", "desc": "()V"})
+        source = ET.SubElement(package, "sourcefile", {"name": "Root.java"})
+        ET.SubElement(source, "line", nr="10", mi="0", ci="2", mb="0", cb="2")
+        for node in (target, method, source):
+            ET.SubElement(node, "counter", type="BRANCH", missed="0", covered="2")
+        return report
+
+    def test_jacoco_accepts_clean_class_method_and_source_detail(self):
+        report = self._fixture_coverage_detail()
+        self.assertEqual({"missed": 0, "covered": 2},
+                         scenario.validate_module_coverage(report)["BRANCH"])
+
+    def test_jacoco_rejects_misses_below_clean_package_counters(self):
+        for path in (".//class", ".//method", ".//sourcefile"):
+            with self.subTest(path=path):
+                report = self._fixture_coverage_detail()
+                report.find(path).find("counter").set("missed", "1")
+                with self.assertRaisesRegex(ValueError, "missed detail counters"):
+                    scenario.validate_module_coverage(report)
+
+    def test_jacoco_rejects_missed_or_incomplete_line_detail(self):
+        for field in ("mi", "mb"):
+            for value in (None, "1"):
+                with self.subTest(field=field, value=value):
+                    report = self._fixture_coverage_detail()
+                    line = report.find(".//line")
+                    if value is None:
+                        del line.attrib[field]
+                    else:
+                        line.set(field, value)
+                    with self.assertRaisesRegex(ValueError, "incomplete or missed line detail"):
+                        scenario.validate_module_coverage(report)
+
+    def test_jacoco_rejects_duplicate_and_malformed_detail_counters(self):
+        for kind, covered in (("BRANCH", "1"), ("UNKNOWN", "1"), ("METHOD", "-1")):
+            with self.subTest(kind=kind, covered=covered):
+                report = self._fixture_coverage_detail()
+                ET.SubElement(report.find(".//method"), "counter",
+                              type=kind, missed="0", covered=covered)
+                with self.assertRaisesRegex(ValueError, "invalid or duplicated JaCoCo counter"):
+                    scenario.validate_module_coverage(report)
+
     @staticmethod
     def _fixture_spotbugs():
         return ET.fromstring(

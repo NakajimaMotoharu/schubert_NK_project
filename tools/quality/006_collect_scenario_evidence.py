@@ -52,7 +52,7 @@ def _coverage_rows(element):
 
 
 def validate_module_coverage(report):
-    """Require four nonempty module counters with matching package totals."""
+    """Require four nonempty module counters and reject contradictory detail."""
     root = _coverage_rows(report)
     packages = report.findall("package")
     names = [package.get("name") for package in packages]
@@ -73,6 +73,14 @@ def validate_module_coverage(report):
             totals[metric]["covered"] += values["covered"]
     if root != totals:
         raise ValueError("module JaCoCo counters disagree with package totals")
+    aggregate_nodes = {report, *packages}
+    for element in report.iter():
+        if element not in aggregate_nodes and any(
+            row["missed"] for row in _coverage_rows(element).values()
+        ):
+            raise ValueError("JaCoCo report contains missed detail counters")
+    if any((line.get("mi"), line.get("mb")) != ("0", "0") for line in report.iter("line")):
+        raise ValueError("JaCoCo report contains incomplete or missed line detail")
     return root
 
 
