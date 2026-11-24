@@ -29,15 +29,9 @@ final class NavigationLandmarkResourceTest {
   @Test
   void userManagementNavigationsHaveDistinctNames() {
     assertAll(
-        () ->
-            assertNavigation(
-                "admin/user-list", "利用者一覧のナビゲーション", List.of("@{/admin/users/new}")),
-        () ->
-            assertNavigation(
-                "admin/user-new", "利用者追加のナビゲーション", List.of("@{/admin/users}")),
-        () ->
-            assertNavigation(
-                "admin/user-detail", "利用者詳細のナビゲーション", List.of("@{/admin/users}")));
+        () -> assertNavigation("admin/user-list", "利用者一覧のナビゲーション", List.of("@{/admin/users/new}")),
+        () -> assertNavigation("admin/user-new", "利用者追加のナビゲーション", List.of("@{/admin/users}")),
+        () -> assertNavigation("admin/user-detail", "利用者詳細のナビゲーション", List.of("@{/admin/users}")));
   }
 
   @Test
