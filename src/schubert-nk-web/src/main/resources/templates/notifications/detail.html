@@ -14,7 +14,7 @@
     <dt th:if="${!page.values.cancelledAt.empty}">取消日時</dt><dd class="cancelled-at" th:if="${!page.values.cancelledAt.empty}" th:text="${page.values.cancelledAt}"></dd>
   </dl>
   <p class="deleted" th:if="${page.values.deleted}">質問・回答は削除済みです。</p>
-  <section th:unless="${page.values.deleted}"><h2>質問</h2><p class="question-body" th:text="${page.values.question}"></p></section>
+  <section th:if="${!page.values.deleted and page.values.state != 'CANCELLED'}"><h2>質問</h2><p class="question-body" th:text="${page.values.question}"></p></section>
   <section th:if="${page.values.answerAvailable}"><h2>回答</h2><p class="answer-body" th:text="${page.values.answer.empty ? '（空の回答）' : page.values.answer}"></p><a class="question-detail" th:href="${page.values.questionHref}">質問回答明細</a></section>
   <section class="error-detail" th:if="${page.values.state == 'ERROR'}"><p class="error-code" th:text="${page.values.errorCode}"></p><p class="user-facing-error" th:text="${page.values.userFacingError}"></p></section>
   <p class="operation-notice" role="alert" th:if="${notice != null and !notice.empty}" th:text="${notice}"></p>
