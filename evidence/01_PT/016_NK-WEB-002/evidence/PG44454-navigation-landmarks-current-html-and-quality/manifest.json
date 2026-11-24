@@ -1,0 +1,227 @@
+{
+  "run": "PG44454",
+  "source": "2107c0d711700ad82b4e593ba43c4a81b07cf213",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T19:27:38.914753+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P016-25.04/2",
+  "candidateWebResourceSource": "2b6c1c9c997058e0f1110c4659bf859cc491f6dd",
+  "packageEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44446-web-maven-resource-stage-after-nav-fix/manifest.json",
+    "sha256": "c804e345d2e916c66df7f5f0af5b9344de3bcb13baae9f4c30a14e025067dfa2"
+  },
+  "approvedDesign": [
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9"
+    }
+  ],
+  "regressionFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NavigationLandmarkResourceTest.java",
+    "sha256": "4d20d7c3bcf48ba606db8a6144c7112dbb3061af48d66b38c33de2b6c0423346"
+  },
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4991_六画面ナビゲーションのアクセシビリティ単体試験.md",
+    "sha256": "f6861da6af2b490cce668c144c75bfc402de3a96d095faa03b0696202e8248ec"
+  },
+  "bugs": [
+    "BUG-3784",
+    "BUG-3785",
+    "BUG-3786"
+  ],
+  "horizontal": [
+    "YKT-2954"
+  ],
+  "redInitialFixture": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44442-navigation-names-before/begin.json",
+      "sha256": "5af359ebdf91dae4a770ab6af7a9ff5198629d11f77a6392b6882c1ed99dabc8"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44442-navigation-names-before/terminal.json",
+      "sha256": "9d22c9a8d3b56399493c7f06346f3277d8837047a06795b5d8f51cbd9230dbd8"
+    },
+    "result": {
+      "compileExit": 0,
+      "testExit": 1,
+      "terminalAtUTC": "2026-11-24T19:24:52.440544+00:00",
+      "source": "016403f2bfb7dcc1ad601e1b1438a655eee2dfdf",
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44442-navigation-names-before/xml/TEST-junit-jupiter.xml",
+        "sha256": "bb1a35f450908757dda2fdf0dff969d879cb748787abbe9fdd344f94a236877c"
+      },
+      "names": [
+        {
+          "case": "userManagementNavigationsHaveDistinctNames()",
+          "message": "Multiple Failures (3 failures)\n\torg.opentest4j.AssertionFailedError: admin/user-list ==> expected: <1> but was: <3>\n\torg.opentest4j.AssertionFailedError: admin/user-new ==> expected: <利用者追加のナビゲーション> but was: <>\n\torg.opentest4j.AssertionFailedError: admin/user-detail ==> expected: <利用者詳細のナビゲーション> but was: <>"
+        },
+        {
+          "case": "mediaNavigationNamesTheScreenWithoutChangingDestinations()",
+          "message": "Multiple Failures (2 failures)\n\torg.opentest4j.AssertionFailedError: animation-watch ==> expected: <アニメ視聴画面のナビゲーション> but was: <>\n\torg.opentest4j.AssertionFailedError: music-list ==> expected: <曲一覧のナビゲーション> but was: <>"
+        },
+        {
+          "case": "questionReceiptNavigationHasANameAndKeepsTheThreeActionsInOrder()",
+          "message": "questions/accepted ==> expected: <質問受付完了のナビゲーション> but was: <>"
+        }
+      ]
+    }
+  },
+  "redWithCorrectedSelector": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44444-navigation-names-before/begin.json",
+      "sha256": "4d928a44556c9f1910867adc44b04d2206cd0379c418277d0f64d4b45b7ab888"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44444-navigation-names-before/terminal.json",
+      "sha256": "e88d7df24c9a6d941aa352ca28ea83f4c3e7866b45c3923d4ee060601cf45a13"
+    },
+    "result": {
+      "compileExit": 0,
+      "testExit": 1,
+      "terminalAtUTC": "2026-11-24T19:25:22.805268+00:00",
+      "source": "e422b3c1d84701d010d11179ad804fc021eea3d9",
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44444-navigation-names-before/xml/TEST-junit-jupiter.xml",
+        "sha256": "50d370dab3fc8c06ba55642f3101d2bb66f29c21eafcd7740b0346ff8851e0ea"
+      },
+      "names": [
+        {
+          "case": "userManagementNavigationsHaveDistinctNames()",
+          "message": "Multiple Failures (3 failures)\n\torg.opentest4j.AssertionFailedError: admin/user-list ==> expected: <利用者一覧のナビゲーション> but was: <>\n\torg.opentest4j.AssertionFailedError: admin/user-new ==> expected: <利用者追加のナビゲーション> but was: <>\n\torg.opentest4j.AssertionFailedError: admin/user-detail ==> expected: <利用者詳細のナビゲーション> but was: <>"
+        },
+        {
+          "case": "mediaNavigationNamesTheScreenWithoutChangingDestinations()",
+          "message": "Multiple Failures (2 failures)\n\torg.opentest4j.AssertionFailedError: animation-watch ==> expected: <アニメ視聴画面のナビゲーション> but was: <>\n\torg.opentest4j.AssertionFailedError: music-list ==> expected: <曲一覧のナビゲーション> but was: <>"
+        },
+        {
+          "case": "questionReceiptNavigationHasANameAndKeepsTheThreeActionsInOrder()",
+          "message": "questions/accepted ==> expected: <質問受付完了のナビゲーション> but was: <>"
+        }
+      ]
+    }
+  },
+  "finalOrdinary": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44450-navigation-names-normal-package/begin.json",
+      "sha256": "cf8e34b0683c6541dcfbd872375faa856b7ab60f682ee134ac9993f166036a8c"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44450-navigation-names-normal-package/terminal.json",
+      "sha256": "593eba3a4e14cbb0e17f78097cf1cdc5e2d3536ca92b71a1627c36f8035ee387"
+    },
+    "result": {
+      "compileExit": 0,
+      "testExit": 0,
+      "terminalAtUTC": "2026-11-24T19:27:02.151751+00:00",
+      "source": "2107c0d711700ad82b4e593ba43c4a81b07cf213",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44450-navigation-names-normal-package/xml/TEST-junit-jupiter.xml",
+        "sha256": "8b66169d93b6a6b62867268fc8bcc1d8bb945a5e544fb8bf63de9d1534e689b8"
+      },
+      "names": [
+        {
+          "case": "userManagementNavigationsHaveDistinctNames()",
+          "message": null
+        },
+        {
+          "case": "mediaNavigationNamesTheScreenWithoutChangingDestinations()",
+          "message": null
+        },
+        {
+          "case": "questionReceiptNavigationHasANameAndKeepsTheThreeActionsInOrder()",
+          "message": null
+        }
+      ]
+    }
+  },
+  "initialStatic": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44448-navigation-fixture-source-quality/begin.json",
+      "sha256": "fca41373e8bc473fe4dd284c17fd9db3dd5ad54762fc7fb34989bca60ae67278"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44448-navigation-fixture-source-quality/terminal.json",
+      "sha256": "9b95090c7389a59f7062033a0eddb1e54c7c41d4d6d246ccf6fabeede6f44938"
+    },
+    "result": {
+      "run": "PG44448",
+      "source": "2b6c1c9c997058e0f1110c4659bf859cc491f6dd",
+      "terminalAtUTC": "2026-11-24T19:26:31.971924+00:00",
+      "exits": {
+        "google-java-format": 1,
+        "spotless": 1,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "finalStatic": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44452-navigation-fixture-source-quality/begin.json",
+      "sha256": "2c05b910cf416afec9c1b4cc6fbb18c41736c3d32742d2551cccb337cab371d4"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44452-navigation-fixture-source-quality/terminal.json",
+      "sha256": "2bcb036ab0130d6a8800dd1f2852e516bd54f2f2736ce2e1885fe6d9987dbb4d"
+    },
+    "result": {
+      "run": "PG44452",
+      "source": "2107c0d711700ad82b4e593ba43c4a81b07cf213",
+      "terminalAtUTC": "2026-11-24T19:27:03.776826+00:00",
+      "exits": {
+        "google-java-format": 0,
+        "spotless": 0,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "navigations": 6,
+  "confirmedNoOtherTemplateChanges": true,
+  "runCountHistoricalFailuresSeparate": 6,
+  "finalJUnitCounts": {
+    "executed": 3,
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newFormal": 0,
+  "acceptance": null,
+  "realBrowser": false,
+  "javaProductAdded": 0,
+  "whole451": false
+}
