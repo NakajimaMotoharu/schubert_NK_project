@@ -4,10 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.VideoCategory;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +40,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
-/** PT-WATCH-DOM001..003; UI223/235 SS313. Actual resources and independent catalog maps only. */
+/** PT-WATCH-DOM001..004; UI223/235 SS313. Actual resources and local display inputs only. */
 final class AnimationWatchTemplateResourcePortTest {
   private static final String VIDEO = "video";
   private static final String HREF = "href";
@@ -101,6 +112,10 @@ final class AnimationWatchTemplateResourcePortTest {
 
   private static Document render(String id, Map<String, Object> p, String requestUri)
       throws IOException {
+    return renderPage(id, Map.of("values", p), requestUri);
+  }
+
+  private static Document renderPage(String id, Object page, String requestUri) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -117,11 +132,7 @@ final class AnimationWatchTemplateResourcePortTest {
     var engine = new SpringTemplateEngine();
     engine.setTemplateResolver(resolver);
     var vars =
-        Map.<String, Object>of(
-            "page",
-            Map.of("values", p),
-            "_csrf",
-            Map.of("parameterName", "_csrf", "token", SYNTHETIC_CSRF));
+        Map.of("page", page, "_csrf", Map.of("parameterName", "_csrf", "token", SYNTHETIC_CSRF));
     var d =
         Jsoup.parse(
             engine.process("animation-watch", new WebContext(exchange, Locale.JAPAN, vars)));
@@ -135,6 +146,40 @@ final class AnimationWatchTemplateResourcePortTest {
         safe,
         StandardOpenOption.CREATE_NEW);
     return d;
+  }
+
+  @Test
+  void projectionFeedsSharedPlayerAndUsesTheEncodedLogicalIdOnce() throws IOException {
+    var input =
+        new VideoDescriptorResponseData(
+            "映像+7",
+            RelativePath.of("fixture/hidden-storage.mp4"),
+            "hidden-storage.mp4",
+            19,
+            Sha256Hex.of("34".repeat(32)),
+            MediaMimeType.VIDEO_MP4,
+            ContentDisposition.INLINE,
+            "OVA 第七話",
+            VideoCategory.OVA,
+            DisplayPath.of("display/episode-seven.mp4"));
+    var actor =
+        new SessionPrincipal(
+            "watch-reader",
+            UserRole.USER,
+            AuthenticationContext.of("12".repeat(32)),
+            Instant.parse("2026-11-01T00:00:00Z"));
+    var view = AnimationWatchViewModel.from(actor, input);
+
+    var document = renderPage("WV004", view, "/animation/videos/%E6%98%A0%E5%83%8F%2B7");
+
+    assertEquals("OVA 第七話", document.title());
+    assertEquals("OVA / display/episode-seven.mp4", document.select(".subtitle").text());
+    assertEquals("watch-reader", document.select(".login-user").text());
+    assertEquals("OVA一覧", document.select("a[href='/animation/ova']").text());
+    assertEquals(
+        "/animation/media/%E6%98%A0%E5%83%8F%2B7",
+        document.select("video[controls][preload=metadata][playsinline]").attr("src"));
+    assertFalse(document.outerHtml().contains("hidden-storage.mp4"));
   }
 
   @Test
