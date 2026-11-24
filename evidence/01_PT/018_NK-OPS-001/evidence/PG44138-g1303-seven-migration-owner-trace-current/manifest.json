@@ -1,0 +1,441 @@
+{
+  "run": "PG44138",
+  "source": "d2a8e948a8eced9dacbe6f1c85dcfb5225b62883",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G13.03",
+  "terminalAtUTC": "2026-11-24T15:28:14.407300+00:00",
+  "previousTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+    "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+  },
+  "currentVerifiedRecordCount": 7,
+  "previousHistoricalHashDelta": 29,
+  "stillUnjoinedHistoricalHashes": 22,
+  "rows": [
+    {
+      "publicType": "AssetStagingTables",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+        "sha256": "6ccdd31966cf0674e762d52c9cd9731c167bcc4f75b5305f3fee95e16dcd815e"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "cc2b21061e2903f17813d7029cf7a3de4e54b4ee59affcc1f4c9d5570d05ccfc"
+      },
+      "physicalMemberCount": 4,
+      "sameOriginalMethods": [
+        "transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity()",
+        "eachDdlMustReturnExactlyZero()",
+        "prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement()",
+        "eachDdlOriginalFailureStopsTheRemainingPrefix()",
+        "largeUpdateAndCountUseLongWithoutIntegerTruncation()",
+        "prepareRuntimeAndErrorStillCloseTheStatement()",
+        "transferAutoCommitAndNullVendorStatementAreRejected()",
+        "allNineExtraScalarRowsAreRejected()",
+        "scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()",
+        "prepareOriginalFailureRetainsSuppressedCleanup()",
+        "prepareClosesOnlyItsStatementAndBindsOneTimeout()",
+        "everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal()",
+        "insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix()",
+        "prepareAutoCommitCannotPublishOrDropStagingEarly()",
+        "everyResultCloseAndCombinedFailureRetainsTwrSuppression()",
+        "allNineSqlNullCountsAreRejected()",
+        "transferMatchesAllTwelveIndependentSqlOperationsAndCounts()",
+        "transferPrimaryAndOuterCleanupHaveOneIndependentSuppressedInstance()",
+        "finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()",
+        "emptyCountsAndAudioZeroWithNoLinksRemainValid()",
+        "eachLargeInsertRequiresTheExactNonnegativeLongCount()",
+        "transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc()",
+        "allNineWrongCountsAreRejected()",
+        "transferInnerAndOuterCleanupKeepBothFailuresOnOriginalPrimary()",
+        "prepareTimeoutFailureStillClosesBeforeAnyDdl()",
+        "prepareMatchesAllThreeIndependentColumnListsAndExactSql()",
+        "prepareNullConnectionHasFixedInputDiagnostic()",
+        "prepareCloseOnlyFailureCannotBeSuccessful()",
+        "transferBothClosesReturningPrimaryKeepIdentityWithoutSelfSuppression()",
+        "allNineMissingScalarRowsAreRejected()",
+        "closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction()",
+        "allNineNullResultsAreRejectedWithoutInventedOwnership()",
+        "prepareNullVendorStatementIsAnExplicitSqlFailure()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/manifest.json",
+        "sha256": "27667d8e7770096366df127ed9d521a43a7bdb60e49c4572d2cbfa9cde92154a"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "8c04dea3b89d0d329fe71aecaf400190a474c98e2d827b2b977b2c86f36ba8ac"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationGamesVerifier",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+        "sha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java",
+        "sha256": "fb8d541d3aed8c87467310ab7d06d1045941d9008b4cb8063031ee74098f200d"
+      },
+      "physicalMemberCount": 1,
+      "sameOriginalMethods": [
+        "games019EqualValueThrowableInstancesRemainDistinctSuppressedObjects()",
+        "games005AllTenSqlNullPositionsReject()",
+        "games003AutoAndNullVendorHandlesHaveOwnedPostconditions()",
+        "games006IdsAndOrdersMatchCanonicalFixedValuesAndOrder()",
+        "games020FiniteConcurrentCallsUseIndependentOwnedHandles()",
+        "games014CallerWriteTransactionIsAllowedAndNeverMutated()",
+        "games018VerificationDoesNotModifyTheFixture()",
+        "games008CreatedAtIsTheExactV004Instant()",
+        "games007StoredCodeTitleMustMatchWithoutRepair()",
+        "games017IndependentLiteralTitlesAreNotRecomputedFromInput()",
+        "games001FixedV004TwoRowsSqlAndExactTypedProtocol()",
+        "games009EveryPhaseAndGetterOccurrenceKeepsOriginalFault()",
+        "games012SelfIdentityNeverSelfSuppresses()",
+        "games010CleanCloseFailuresAreNotSuccess()",
+        "games013NullResultAndTimeoutFailureCloseOnlyTheStatement()",
+        "games004MissingAndExtraRowsRejectWithoutReadingExtraFields()",
+        "games015FailureDoesNotPoisonLaterInvocation()",
+        "games016DiagnosticsAndDisplayNeverContainRowValues()",
+        "games002NullInputFailsBeforeAnyBorrowedRead()",
+        "games011AllPrimaryAndBothCleanupKindsKeepSuppressionOrder()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/manifest.json",
+        "sha256": "7ef36e03289b336dcac00e09a7cd7e23dbcc11c89a48a708ffc72ec58832d3c4"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "7e7eec832e33b0944f1ac1d30cee868f69e4526546b8dc0b62b63f70b82e8fa0"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationMasterColumnVerifier",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+        "sha256": "8dca6551545b05ce5090093c7e1e24f93657be4658a45d0b78f654a1b0a9ec57"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "sha256": "7172ad9f60a283c1b7b1631132648f095ec29edd83c98c3f53431b0bbececb90"
+      },
+      "physicalMemberCount": 2,
+      "sameOriginalMethods": [
+        "column023NotNullCatalogValidityFalseOrSqlNullNeverPassesAnyColumn()",
+        "column001SixQueriesSixtySixColumnsAndExactResources()",
+        "column005EachNullResultClosesOnlyPreviousResults()",
+        "column010AllStringMetadataSqlNullsDifferFromEmptyFlags()",
+        "column007ExtraMetadataRowsAreNotReadAsAnotherColumn()",
+        "column002NullConnectionFailsBeforeIo()",
+        "column018StatementCloseFailureCannotBecomeSuccess()",
+        "column008NullZeroNegativeDuplicateAndWrongOrdinalsFail()",
+        "column011SqlNullBooleanCannotMasqueradeAsFalse()",
+        "column004NullVendorStatementHasNoOwnedHandle()",
+        "column016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership()",
+        "column019AllFaultKindsPreserveResultThenStatementSuppression()",
+        "column021RedactionFreshSuccessAndBorrowedConnectionContract()",
+        "column017EveryResultCloseFailureStopsLaterQueries()",
+        "column025EveryOwnerMustMatchAbsoluteDeclaredRole()",
+        "column006AnyMissingPhysicalColumnIsRejected()",
+        "column020SamePrimaryAndEqualValuedDistinctCleanupIdentities()",
+        "column015BuiltinWidthsAndNamespaceTablekindPredicatesAreFixed()",
+        "column022FiniteSharedVerifierHasOnlyPerCallOwnedResources()",
+        "column014StoredVirtualMissingAndUnknownGenerationAreDistinct()",
+        "column024IdentitySequenceDefinitionFalseOrSqlNullNeverPassesAnyColumn()",
+        "column003AutoCommitIsNotChangedOrUsed()",
+        "column009EveryColumnAttributeMismatchIsDetected()",
+        "column026DefaultAndGeneratedValidityFalseOrSqlNullFailsEachColumn()",
+        "column013IdentityAlwaysDefaultMissingAndUnknownAreDistinct()",
+        "column012NotNullFlagsAreCheckedIndividuallyIncludingImplicitPk()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42836-master-column-current-v1/manifest.json",
+        "sha256": "e1d9eef69fbff62fc9401be3c84d4b3ec747db1b26b7d0021c84741497949fbf"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42836-master-column-current-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "3818906297d7af61649fc3bb9779cfd1fe9a9eeebf023f1cdbe3e2ede29155ba"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationMasterConstraintVerifier",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java",
+        "sha256": "cc632eea4d299c3b98bae4d413431c238bc8f7ca6946fafabdc4c767b5c594b8"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+        "sha256": "ed85b4c05f177efdd27c130c40c244dcf8dadc0483157108a4600a8f49e9e399"
+      },
+      "physicalMemberCount": 2,
+      "sameOriginalMethods": [
+        "constraint022FiniteSharedVerifierHasOnlyPerCallOwnedResources()",
+        "constraint019AllFaultKindsPreserveResultThenStatementSuppression()",
+        "constraint015FixedStatusNamespaceAndColumnOrderPredicatesAreLiteral()",
+        "constraint005EachNullResultClosesOnlyPreviousResults()",
+        "constraint014UpdateDeleteMatchActionsNeverCoerceOrDefault()",
+        "constraint010AllStringMetadataSqlNullsDifferFromEmptyFlags()",
+        "constraint001SixQueriesSeventyFiveConstraintsAndExactResources()",
+        "constraint008NullZeroNegativeDuplicateAndWrongOrdinalsFail()",
+        "constraint011SqlNullBooleanCannotMasqueradeAsFalse()",
+        "constraint016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership()",
+        "constraint007ExtraMetadataRowsAreNotReadAsAnotherConstraint()",
+        "constraint017EveryResultCloseFailureStopsLaterQueries()",
+        "constraint006AnyMissingDeclaredConstraintIsRejected()",
+        "constraint018StatementCloseFailureCannotBecomeSuccess()",
+        "constraint012EveryConstraintValidatedEnforcedLocalStatusIsRequired()",
+        "constraint009EveryConstraintAttributeMismatchIsDetected()",
+        "constraint004NullVendorStatementHasNoOwnedHandle()",
+        "constraint020SamePrimaryAndEqualValuedDistinctCleanupIdentities()",
+        "constraint013ReferencedSchemaTableKeysAndNonForeignMarkerAreDistinct()",
+        "constraint021RedactionFreshSuccessAndBorrowedConnectionContract()",
+        "constraint002NullConnectionFailsBeforeIo()",
+        "constraint003AutoCommitIsNotChangedOrUsed()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42840-master-constraint-current-v1/manifest.json",
+        "sha256": "ec138ac4d2ff0e83295331129ccd224583f004588481020f128f62700725aa64"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42840-master-constraint-current-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "512f2ef0a3b37a43264870b164b05fc154bac558469f4bd633d9fab59a77f648"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationMasterContentVerifier",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+        "sha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+        "sha256": "5a7b2542f81ca27bceab530e2aa6b86945eaa42927703eaa66aee36f16d9f3fe"
+      },
+      "physicalMemberCount": 2,
+      "sameOriginalMethods": [
+        "content011SqlNullIsComparedWithoutInventingZeroFalseOrEmpty()",
+        "content027CallerLiteralRowsAndDeclaredOrderStayUnchanged()",
+        "content026FixedRedactionAndFreshSuccessAfterRejection()",
+        "content004AutoCommitIsRejectedWithoutStatementAcquisition()",
+        "content001SixFixedQueriesAndEveryPayloadColumnMatch()",
+        "content010AllSixtyFiveColumnPositionsDetectIndividualValueChanges()",
+        "content003BothNullBoundariesHaveNoIo()",
+        "content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal()",
+        "content002EmptyAllTablesStillChecksEveryTerminalRow()",
+        "content025BorrowedConnectionHasOnlyAutoReadAndStatementAcquisition()",
+        "content021StatementCloseFailureIsNotSuccess()",
+        "content006NullResultAtEachTableClosesOnlyPriorResults()",
+        "content008MissingRowAtEveryTableRejectsWithNoLaterQuery()",
+        "content009ExtraRowsIncludingEmptyExpectationAreNeverRead()",
+        "content014DeclaredCurrentOrderIsNotReplacedByTargetPkOrder()",
+        "content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions()",
+        "content024EqualValuedDistinctCleanupIsKeptTwice()",
+        "content012TypedGettersAndImmediateWasNullMatchIndependentEventSequence()",
+        "content013NullEmptyLiteralBackslashNAndUtf8NotesStayDistinct()",
+        "content005NullStatementNeverCreatesOwnership()",
+        "content017TypedTimestamptzUsesInstantAndCanonicalUtc()",
+        "content015LinksSortByBothNumericIdsThenFixedAsciiType()",
+        "content016TargetN12AndTimestampMicrosecondYearExtremes()",
+        "content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount()",
+        "content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin()",
+        "content020EachResultCloseFailureIsNotSuccess()",
+        "content022AllThreeFaultKindsPreserveInnerThenOuterSuppressedOrder()",
+        "content028FiniteWorkersKeepIndependentBorrowedResources()",
+        "content018EachQueryFailsWithoutAcquiringItsResult()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/manifest.json",
+        "sha256": "27667d8e7770096366df127ed9d521a43a7bdb60e49c4572d2cbfa9cde92154a"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "8c04dea3b89d0d329fe71aecaf400190a474c98e2d827b2b977b2c86f36ba8ac"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationMasterFinalizer",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+        "sha256": "f35b20476ab4e13512ac2a86cb30ab42c1e08d522fb7fa3ab3255b8ede11c825"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java",
+        "sha256": "0dc49550d6c90b1b591b89ff6efe3a58707787a867388ba94dc4be342878b746"
+      },
+      "physicalMemberCount": 4,
+      "sameOriginalMethods": [
+        "final022EachPreparedCloseFailureIsPropagated()",
+        "final012LastMaxMismatchCannotIssueSequenceOrAnalyze()",
+        "final004AutoCommitFailsBeforeStatementCreation()",
+        "final024EachAnalyzeWrongCountWarningAndOriginalFailures()",
+        "final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder()",
+        "final007EveryPreflightResultShapeIsStrict()",
+        "final026MaximumN12IsRetainedWithoutAddingOneOrReorderingRows()",
+        "final015EachBooleanBindingFailure()",
+        "final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence()",
+        "final023OuterCloseFailureCannotBeSuccess()",
+        "final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner()",
+        "final005AutoCreateOriginalFailuresAndNullVendor()",
+        "final001ExactPreflightBoundSetvalAnalyzeOrderAndOwnership()",
+        "final011ReadPrimaryKeepsResultAndOuterSuppressedOrder()",
+        "final009EveryReadPhaseOriginalFailure()",
+        "final028FiniteReadersOwnIndependentProxiesAndTerminate()",
+        "final010PreflightResultCloseIsNotSuccess()",
+        "final002EmptyUsesOneFalseWithoutConsumingNextval()",
+        "final016EachPreparedTimeoutFailure()",
+        "final008EveryPreflightQueryFailureIsOriginal()",
+        "final027DiagnosticsFixedAndNoFailureNormalized()",
+        "final017EverySetvalResultShapeIsStrict()",
+        "final019EveryPreparedResultReadPhaseFailure()",
+        "final013EachPrepareNullOrOriginalFailureStopsFollowingCalls()",
+        "final006OuterTimeoutPreservesFailureAndCloses()",
+        "final020EveryPreparedResultCloseFailure()",
+        "final014EachLongBindingFailure()",
+        "final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity()",
+        "final018EveryPreparedQueryFailure()",
+        "final003NullArgumentsBeforeConnectionCalls()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/manifest.json",
+        "sha256": "27667d8e7770096366df127ed9d521a43a7bdb60e49c4572d2cbfa9cde92154a"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "8c04dea3b89d0d329fe71aecaf400190a474c98e2d827b2b977b2c86f36ba8ac"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    },
+    {
+      "publicType": "MigrationMasterReferenceVerifier",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+        "sha256": "a68c7bf896b659151e1eadfb80273bee54051b77b18ddcde9a0fa490a484332b"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.java",
+        "sha256": "59544827f26802a9b9532ef543976a5ece1a76c3e4d7947b90ca4f3fa89e3c02"
+      },
+      "physicalMemberCount": 2,
+      "sameOriginalMethods": [
+        "reference013StatementCloseFailureIsNotNormalCompletion()",
+        "reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery()",
+        "reference001ExactSixCountsNineForeignKeysAndOrderQuery()",
+        "reference002EmptyStillChecksAllSixTablesAndAllReferences()",
+        "reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount()",
+        "reference019EachCountUsesItsOwnDeclaredTableWithoutInventingRows()",
+        "reference004AutoCommitHasNoStatementOrQuery()",
+        "reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks()",
+        "reference005AutoAndCreateFailuresPreserveEveryOriginalType()",
+        "reference016OnlyReadOnlyBorrowedCallsAndExactResourcesExist()",
+        "reference009EveryQueryFailureStopsAtTheOriginalFailure()",
+        "reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra()",
+        "reference018IndependentFreshSuccessAfterFailedPriorQuery()",
+        "reference006NullVendorStatementCannotBecomeNpe()",
+        "reference017DiagnosticsAndToStringRemainFixedRedacted()",
+        "reference011EveryResultCloseFailureCannotBeSuccess()",
+        "reference012OriginalPrimaryKeepsInnerOuterCloseOrderAndSelfSuppression()",
+        "reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate()",
+        "reference010EveryScalarReadPhasePreservesOriginalFailure()",
+        "reference003BothNullArgumentsFailBeforeConnectionCalls()",
+        "reference022OuterCloseReturningPrimaryKeepsOnlyDistinctInnerFailure()",
+        "reference007TimeoutFailureClosesOwnedStatement()"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/manifest.json",
+        "sha256": "27667d8e7770096366df127ed9d521a43a7bdb60e49c4572d2cbfa9cde92154a"
+      },
+      "publicJUnit": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/junit/TEST-junit-jupiter.xml",
+        "sha256": "8c04dea3b89d0d329fe71aecaf400190a474c98e2d827b2b977b2c86f36ba8ac"
+      },
+      "requirementCandidates": [
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "SCP-005"
+      ],
+      "narrowOperation": "Reviewed synthetic local boundary; no actual DB/COPY operation or whole451"
+    }
+  ],
+  "totalReferencedPasses": 182,
+  "testRerun": 0,
+  "realMigrationOrDB": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,112 @@
+{
+  "run": "PG44140",
+  "source": "d2a8e948a8eced9dacbe6f1c85dcfb5225b62883",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": [
+    "WBS-G13.03",
+    "WBS-P018-02/2"
+  ],
+  "terminalAtUTC": "2026-11-24T15:30:22.372391+00:00",
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+    "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+  },
+  "records": [
+    {
+      "type": "ReleaseInventory",
+      "scope": "THREE_PHYSICAL_CANONICAL_CANDIDATE",
+      "formal": false,
+      "ordinaryObserved": 18,
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+        "sha256": "96e67eff343695afdbdff4fddb77c2d1cbef0f1e3f7f0f96bfe508ef397c7b0c"
+      },
+      "references": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37432-inventory-test-static-v1/manifest.json",
+          "sha256": "46229db3057a454cc198bb016028c50a3522178f7e6c7fbb17d1d86d69342db1"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37438-inventory-whole18-unit-v1/manifest.json",
+          "sha256": "2dd326a0734bfe6027440adf15e62cafee0ad4e4f423458311d03b33fb3e6ae0"
+        }
+      ],
+      "exactFixtures": [
+        {
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java",
+          "oldInputHash": "5e31e9acb25f892a208e05b4f4e4b8e70969dd116c00643e32bee67a95a1ad4c",
+          "currentSame": true
+        },
+        {
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryRawContractTest.java",
+          "oldInputHash": "7c6da325c0d9ef939fbf27ed3411ee61c198d8e98b72c22c1f90a776edbdc94f",
+          "currentSame": true
+        }
+      ]
+    },
+    {
+      "type": "ReleaseSignatureVerifier",
+      "scope": "THREE_PHYSICAL_OFFLINE_PUBLIC_VECTOR_PROOF",
+      "formal": false,
+      "ordinaryObserved": 10,
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+        "sha256": "e1b732ec8736ca5ef5661e42aa62f3d723c0b940666cd39dbd64f9b9bb20eae1"
+      },
+      "references": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/manifest.json",
+          "sha256": "dea9cc8e632ebb8bddc3624f2d4aff6e7dd41b4b474bc1ae9b9e35cfae75f833"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/xml/TEST-junit-jupiter.xml",
+          "sha256": "a580cebdac3372468339538ce0a346ba39d5c10c949b471325c116f8f9eda091"
+        }
+      ],
+      "exactFixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+        "sha256": "6b11e001d7b37f1757eaf0d8d3825f4f11ea184e5f9bfdc328b00b79f201cce1"
+      }
+    },
+    {
+      "type": "StartupReleaseManifest",
+      "scope": "CONTENTS_ONLY",
+      "formal": false,
+      "ordinaryObserved": 9,
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+        "sha256": "54bb4bf244047c02ab70cf9c55faf916897127817c1d4e15d65fb3ab284def62"
+      },
+      "references": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43342-bootstrap-contents-local-lineage-v1/manifest.json",
+          "sha256": "e91914ac472853c83d1d254a4dff1104bee757b9c264721914e48ce865153072"
+        }
+      ]
+    },
+    {
+      "type": "ReleasePayloadVerification",
+      "scope": "STATIC_DESIGN_TRACE_ONLY",
+      "formal": false,
+      "ordinaryObserved": 0,
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+        "sha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348"
+      },
+      "references": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/4243_P01802全五artifact契約・独立期待値対応.md",
+          "sha256": "47ae8eed228583465d4bc2505490a95af384f7f0e960d86171f080d7a0b88bb7"
+        }
+      ],
+      "remaining": "held FD metadata ownership and actual whole package proof"
+    }
+  ],
+  "joinedFullDirectTrace": 2,
+  "partialTrace": 2,
+  "remainingOldShaRowsAfterMigrationAndReleaseExact": 20,
+  "realOperations": 0,
+  "ordinaryTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

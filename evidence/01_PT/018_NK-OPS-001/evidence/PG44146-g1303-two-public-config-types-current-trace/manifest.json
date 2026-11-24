@@ -1,0 +1,140 @@
+{
+  "run": "PG44146",
+  "source": "5499b9380746e0ba63db1945297f0f53a28e41a9",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G13.03",
+  "terminalAtUTC": "2026-11-24T15:35:46.126991+00:00",
+  "currentSourceOwnerTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+    "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+  },
+  "priorSelectedPT": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/manifest.json",
+    "sha256": "1d1907f2eb3010e662e14f1346a06d4e61b0ed595d47c8ae018316f597cbbe6f"
+  },
+  "redactedCaseWitness": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/junit-cases.json",
+    "sha256": "7e43a9d95202e64e3db3c0d88494163a44e514cf2776d78945201bac57efe131"
+  },
+  "sourceScopes": [
+    {
+      "type": "ApiNonSecretConfig",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+        "sha256": "5bc27f0fddf5098f96a094b092598655baf517edc396cb70a0d11bcaeb8e3b22"
+      },
+      "physical": 1,
+      "originalOwner": "WBS-P018-01",
+      "originalCases": [
+        {
+          "testID": "PT-OPS-APICFG001",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg001IndependentDefaultsAndCanonicalHash",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG002",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG003",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG004",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG005",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg005NullUnknownAndConcurrentDeterminism",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG006",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg006ShippedTemplatesMatchApprovedDefaults",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-APICFG007",
+          "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "method": "opsApiCfg007IndependentManifestCountAndCanonicalHash",
+          "result": "PASS"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+        "sha256": "5ab2839cc4ccce751fa87616d0d857fcf1279ee37b0d5f59c342e3bd55ea4cf9"
+      }
+    },
+    {
+      "type": "WebNonSecretConfig",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+        "sha256": "612d92a60eb5c2ccb23992768f795d5ccc9f7b93eacd18eb2aa6ee370023aaf3"
+      },
+      "physical": 1,
+      "originalOwner": "WBS-P018-01",
+      "originalCases": [
+        {
+          "testID": "PT-OPS-WEBCFG001",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg001IndependentDefaultsAndCanonicalHash",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG002",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg002LayeredRangesAndScalarTypes",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG003",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG004",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG005",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg005NullUnknownAndConcurrentDeterminism",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG006",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg006ShippedTemplatesMatchApprovedDefaults",
+          "result": "PASS"
+        },
+        {
+          "testID": "PT-OPS-WEBCFG007",
+          "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "method": "opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries",
+          "result": "PASS"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+        "sha256": "d65a6c7239ce8f3205dfd32730e8722c65dac4518963b7c304911f954bdc4322"
+      }
+    }
+  ],
+  "firstMetadataLookup": "Historical originalXml is a list; adopted the already sanitized case receipt without rerunning.",
+  "actualRuntimeCredentialConnectionOrActualYamlRead": 0,
+  "newProductPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

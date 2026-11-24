@@ -1,0 +1,120 @@
+{
+  "run": "PG44142",
+  "source": "d2a8e948a8eced9dacbe6f1c85dcfb5225b62883",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G13.03",
+  "terminalAtUTC": "2026-11-24T15:31:43.706053+00:00",
+  "previousMatrix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+    "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+  },
+  "currentJdbcExact": {
+    "source": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "6d871af1d619b414d7d6c56d83ac97ff583ea9a6aa36c6f263362cc6389cae92"
+    },
+    "previousProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42918-bootstrap-admission-without-private-reflection-v1/manifest.json",
+      "sha256": "1afd4c994d153a4fe0f1371b99a4e59d315adf8108dcb932114d2cb000a7f921"
+    },
+    "physical": [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class"
+    ],
+    "priorCases": 6,
+    "currentExecuted": 0
+  },
+  "currentSchema": {
+    "source": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79"
+    },
+    "methodLineage": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43180-g1303-current-schema-method-oracle-v1/manifest.json",
+        "sha256": "3eb89d8efb7ff69ca32b722910993b1c87450eb8cfdd5a65d3eabf6c22d1308d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43218-g1303-schema-remaining-methods-v1/manifest.json",
+        "sha256": "509e7e14850fdc50876efa39bef45187d29299d57cebfb6095e805f96fc709dc"
+      }
+    ],
+    "rawOrigin": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43178-p0190102-schema-history-single-exec-v1/manifest.json",
+      "sha256": "9cdffd38cd7b865fffd4de244c8fea7bf2e2df07cd74d59abd2ce771453011b0"
+    },
+    "outOfIndividualConditionJoin": [
+      [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+        "checksum",
+        "()Ljava/lang/Integer;"
+      ],
+      [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+        "equals",
+        "(Ljava/lang/Object;)Z"
+      ],
+      [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+        "installedRank",
+        "()I"
+      ],
+      [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+        "type",
+        "()Ljava/lang/String;"
+      ],
+      [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+        "version",
+        "()Ljava/lang/String;"
+      ]
+    ],
+    "wholeSchemaOwner": false
+  },
+  "currentServiceScopes": [
+    {
+      "type": "ServiceDatabaseAdmission",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+        "sha256": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78"
+      },
+      "priorSdkOrTyped": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+          "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41436-p00405-database-port-exact-v1/manifest.json",
+          "sha256": "a46768c3b4813928f2368bb9ec2c8646c3400e3401026b26627cc678858b6abd"
+        }
+      ],
+      "sameSourceAsLegacy": true,
+      "currentLeafDeclaredPhysical": 1,
+      "actualCurrentOwnedJDBCVerified": false
+    },
+    {
+      "type": "ServiceDatabaseSource",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+        "sha256": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9"
+      },
+      "priorSdkOrTyped": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+          "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41436-p00405-database-port-exact-v1/manifest.json",
+          "sha256": "a46768c3b4813928f2368bb9ec2c8646c3400e3401026b26627cc678858b6abd"
+        }
+      ],
+      "sameSourceAsLegacy": false,
+      "currentLeafDeclaredPhysical": 3,
+      "actualCurrentOwnedJDBCVerified": false
+    }
+  ],
+  "actualDbRootOrOperations": 0,
+  "newProductPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
