@@ -1,0 +1,114 @@
+{
+  "eventId": "PGPT-20261008-9745",
+  "source": "526697a82feb7a593f15733e998f1015b168b171",
+  "productionCoreMain": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "canonicalDesignSource": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "managementWorkIds": [
+    "WBS-G08"
+  ],
+  "planRow": {
+    "ID": "WBS-G08",
+    "元行": "WBS-G08",
+    "費目": "F",
+    "主担当": "WBS-G08",
+    "状態": "計画",
+    "作業": "全scope同source/run・collector/manifest/hash一致",
+    "残pp": "2.0",
+    "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "018 collector/017019negative canary正常、固定必須scope全件同source/run/branch/exit・file hash/trace一致、別source補完0。",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G08",
+    "対象": "",
+    "範囲": "SS 354",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "25",
+    "楽観pp": "0.75",
+    "慎重pp": "4.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+    "lineNumber": 687,
+    "改訂残pp": "2.0",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44050",
+  "startEvent": "PGPT-20261008-9744",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "BUG-3764、3不正JSONが旧工具で拒否されないことを起票後に既存strict parserで是正。関連4工具46件合格、現公開9manifest再検査未解決0。製品PT加算0。",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44050-local-strict-public-pins-retest/manifest.json",
+    "sha256": "8c6460653dd15b582264b2fac460c7ac43f2abe87afaa68fcc228f3f193b66c7"
+  },
+  "nextEvidence": "P018-07 Caddyのローカル当候補の期限／起動依存を、現公開設定と既知署名可能fragmentで照合する。実TLS・起動は保留。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T14:19:17+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 4,
+      "remainingPercent": 96,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 4,
+    "remainingPercent": 96,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "5c63e5f676e842e4f236cba85d60421f72b4b27dc336757e3d5e6f7626e5f4cf",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-24T14:19:17+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 4,
+        "remainingPercent": 96,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-24T14:18:43.578348+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 4,
+    "remainingPercent": 96,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}

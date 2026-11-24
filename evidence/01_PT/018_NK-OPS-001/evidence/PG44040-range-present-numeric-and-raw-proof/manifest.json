@@ -1,0 +1,95 @@
+{
+  "run": "PG44040",
+  "actualExit": 0,
+  "source": "0f59dedb9bee92b95e022d487e970a6a0eb4c04f",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P009-04/2",
+  "terminalAtUTC": "2026-11-24T14:06:50.474217+00:00",
+  "canonicalOverflowContract": "5b023906454a7d3044847640ff6bb9e21c4cf6d2",
+  "exactCompiledCurrentPhysical": {
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class": "07a096b771e062b939083c71daf97ee3e07c146fb7c36dfbc77fa85854932e7d",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class": "9c4e54f7715a0b18ef5db819dc6aca51d7ec6b5293bc05c68b658645e7f87d08",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class": "b342e7e1ebca20fc5d87b29ac3a43274473efd6a8c076119e4bde044637cea39",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser.class": "94a6f9e676b8ec4d60adbcd95f3e823991a32b0550975d347b946a78c30f57d6"
+  },
+  "compileScope": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-implicit:none",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44040-range-source-class-identity/classes",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44040-range-source-class-identity/HttpByteRangeParser.java"
+  ],
+  "testsFromPreviousExactSource": [
+    {
+      "method": "nullAndConstructedSelectionsKeepInvariants()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest"
+    },
+    {
+      "method": "acceptsTheMaximumDecimalEndAndRejectsTheNextInsteadOfClampingIt()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeDecimalLimitTest"
+    },
+    {
+      "method": "oneHundredConcurrentParsesHaveNoSharedState()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest"
+    },
+    {
+      "method": "invalidGrammarBoundsAndArithmeticNeverSelectBytes()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest"
+    },
+    {
+      "method": "rejectsNonAsciiCaseEquivalentInTheUnit()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest"
+    },
+    {
+      "method": "literalRangesPreserveFirstSpecAndOneMebibyteCap()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest"
+    },
+    {
+      "method": "acceptsMixedAsciiCaseAndSelectsTheFirstInterval()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest"
+    },
+    {
+      "method": "distinguishesTheLastRepresentableCapFromTheFirstOverflow()",
+      "fixture": "dev.codex.schubert.nk.web.media.HttpByteRangeLongBoundaryTest"
+    }
+  ],
+  "originalScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42916-web-media-without-private-reflection-v1/manifest.json",
+    "sha256": "5746dcf5445afa94517242266e78455c9e388c94074559d98b08307efdf7b1a3"
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "d93de984c215316ab129946538642fd12146668334cfe8ffcaf8091192662530"
+  },
+  "originalRemainingCoverageDeficits": [
+    [
+      "dev/codex/schubert/nk/web/media/HttpByteRangeParser",
+      "<init>",
+      "()V",
+      "17",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/HttpByteRangeParser",
+      "<init>",
+      "()V",
+      "18",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ]
+  ],
+  "newJUnit": 0,
+  "privateReflectionInvoked": 0,
+  "networkAccessOrMediaRead": 0,
+  "allRuntimeRulesAndNativeStillNeeded": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

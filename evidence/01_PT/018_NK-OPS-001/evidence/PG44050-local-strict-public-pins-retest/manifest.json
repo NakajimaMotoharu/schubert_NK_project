@@ -1,0 +1,62 @@
+{
+  "run": "PG44050",
+  "actualExit": 0,
+  "source": "00d951fea70b0790382b4e90fff830475d7aecf5",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-24T14:18:43.578348+00:00",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44050-strict-public-json-before/manifest.json",
+    "sha256": "7c8cb83c7d2d953dc2f7d5e99725768769d9efc6d067e3960990256f32a9c2d1"
+  },
+  "tool": {
+    "path": "tools/quality/verify_published_manifest_pins.py",
+    "sha256": "c9214602b1e4f4c17ca62705e38d6bdf2d5ac1d682891bcb1129480825af54cc"
+  },
+  "fixture": {
+    "path": "tools/quality/tests/test_verify_published_manifest_pins.py",
+    "sha256": "f2ed39df64c453ebb7c29d32aaa0c47d502e007c8c7b6e70e59d8d010d405ccb"
+  },
+  "sharedInputCallbacks": {
+    "path": "tools/quality/static_input_scope.py",
+    "sha256": "c754adf9c2cca1af3be162e63cf42990c89bac25161da46d7abdcfff808e4ddd"
+  },
+  "retest": {
+    "path": "../pgpt-runs/PG379/PG44050-strict-manifest-json/after-terminal.json",
+    "sha256": "8a31f6feffdfe6977371f53e6d4440c72f36a97b868cc4ab129d4104c098106f"
+  },
+  "tests": {
+    "verificationPrograms": 4,
+    "totalPassed": 46,
+    "failed": 0,
+    "notRun": 0,
+    "selectedMalformedSubcasesRejected": 3
+  },
+  "publicScope": {
+    "actualExit": 0,
+    "command": [
+      "python3",
+      "-B",
+      "tools/quality/verify_published_manifest_pins.py",
+      "--start",
+      "be5e3682178575c9d4b50ac23f5e9b1b78b4a775",
+      "--end",
+      "00d951fea70b0790382b4e90fff830475d7aecf5"
+    ],
+    "proof": {
+      "path": "../pgpt-runs/PG379/PG44050-strict-manifest-json/public-recheck.json",
+      "sha256": "1c9b1addfcbe3278d4eeb80f3e3feb388fad4b5b5d2cf51676b39ad6afe6f0f7"
+    },
+    "reports": 9,
+    "current": 40,
+    "historical": 6,
+    "externalOrProtected": 42,
+    "unresolved": 0
+  },
+  "bug": "BUG-3764",
+  "horizontal": "YKT-2940",
+  "testId": "PT-OPS-G08-PINS009",
+  "newProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
