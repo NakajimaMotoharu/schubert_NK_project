@@ -55,7 +55,8 @@ class WipingByteArrayOutputStream extends ByteArrayOutputStream {
   }
 
   @Override
-  public synchronized String toString() {
+  public String toString() {
+    // The fixed diagnostic reads no buffer state and does not need the parent monitor (BUG-3801).
     return "WipingByteArrayOutputStream[<redacted>]";
   }
 }
