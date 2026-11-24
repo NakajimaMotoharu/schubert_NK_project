@@ -166,6 +166,48 @@ class PublishedManifestPinsTest(unittest.TestCase):
         self.assertEqual(1, result["historical"])
         self.assertEqual([], result["unresolved"])
 
+    def test_staged_manifest_and_input_use_one_index_snapshot(self):
+        self.write(FIXTURE, UPDATED)
+        self.manifest({"reference": pin(FIXTURE, UPDATED)})
+        self.git("add", FIXTURE, MANIFEST)
+        self.write(FIXTURE, b"unstaged input\n")
+        self.manifest({"reference": pin("src/unstaged.txt", INITIAL)})
+
+        result = audit(self.repo, self.original, self.original, staged=True)
+
+        self.assertEqual(self.original, result["rangeEnd"])
+        self.assertEqual(self.git("write-tree"), result["stagedTree"])
+        self.assertEqual(1, result["current"])
+        self.assertEqual([], result["unresolved"])
+        self.assertEqual(0, audit(self.repo, self.original, self.original)["manifests"])
+
+    def test_staged_manifest_rejects_a_worktree_only_input_before_commit(self):
+        local = "src/host-only-report.txt"
+        self.write(local, UPDATED)
+        self.manifest({"reference": pin(local, UPDATED)})
+        self.git("add", MANIFEST)
+
+        result = audit(self.repo, self.original, self.original, staged=True)
+
+        self.assertEqual(0, result["current"])
+        self.assertEqual(
+            [{"manifest": MANIFEST, **pin(local, UPDATED, source=None)}],
+            result["unresolved"],
+        )
+
+    def test_staged_tree_cannot_satisfy_an_explicit_commit_source(self):
+        self.write(FIXTURE, UPDATED)
+        self.manifest({"reference": pin(FIXTURE, UPDATED, source=self.original)})
+        self.git("add", FIXTURE, MANIFEST)
+
+        result = audit(self.repo, self.original, self.original, staged=True)
+
+        self.assertEqual(0, result["current"])
+        self.assertEqual(
+            [{"manifest": MANIFEST, **pin(FIXTURE, UPDATED, source=self.original)}],
+            result["unresolved"],
+        )
+
     def test_missing_path_is_reported_and_invalid_commit_is_rejected(self):
         self.manifest({"reference": pin("src/absent.txt", INITIAL)})
         end = self.commit()

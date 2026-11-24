@@ -1,4 +1,4 @@
-"""Check public PGPT manifest path and SHA-256 references against fixed Git objects."""
+"""Check public PGPT manifest pins against Git commits or a staged snapshot."""
 
 import argparse
 from collections import Counter
@@ -63,7 +63,7 @@ def pins(value):
             yield from pins(child)
 
 
-def audit(repo, start, end):
+def audit(repo, start, end, *, staged=False):
     if not exact_source(start) or not exact_source(end):
         raise ValueError("expected two full Git commit IDs")
 
@@ -83,8 +83,11 @@ def audit(repo, start, end):
         raise ValueError("range must identify Git commits")
     git(repo, "merge-base", "--is-ancestor", start, end)
     span = f"{start}..{end}"
+    staged_tree = git(repo, "write-tree").stdout.decode().strip() if staged else None
+    current = staged_tree or end
+    comparison = (start, staged_tree) if staged_tree else (span,)
     changed = git(
-        repo, "diff", "--name-only", "--diff-filter=AMR", "-z", span, "--", "evidence/01_PT"
+        repo, "diff", "--name-only", "--diff-filter=AMR", "-z", *comparison, "--", "evidence/01_PT"
     )
     paths = changed.stdout.decode("utf-8").split("\0")
     manifests = sorted(p for p in paths if PurePosixPath(p).name == "manifest.json")
@@ -92,10 +95,10 @@ def audit(repo, start, end):
     unresolved = []
 
     @cache
-    def blob_hash(commit, path):
-        if not is_commit(commit):
+    def blob_hash(revision, path):
+        if revision != staged_tree and not is_commit(revision):
             return None
-        result = git(repo, "cat-file", "blob", f"{commit}:{path}", required=False)
+        result = git(repo, "cat-file", "blob", f"{revision}:{path}", required=False)
         return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
     @cache
@@ -104,7 +107,7 @@ def audit(repo, start, end):
 
     for manifest in manifests:
         content = json.loads(
-            git(repo, "cat-file", "blob", f"{end}:{manifest}").stdout,
+            git(repo, "cat-file", "blob", f"{current}:{manifest}").stdout,
             object_pairs_hook=unique_object,
             parse_constant=invalid_constant,
         )
@@ -139,7 +142,7 @@ def audit(repo, start, end):
                     }
                 )
                 continue
-            candidates = (source,) if source else (end, parent_source, start)
+            candidates = (source,) if source else (current, parent_source, start)
             actual = next(
                 (c for c in dict.fromkeys(candidates) if c and blob_hash(c, path) == expected),
                 None,
@@ -154,26 +157,32 @@ def audit(repo, start, end):
                     {"manifest": manifest, "path": path, "sha256": expected, "source": source}
                 )
             else:
-                counts["current" if actual == end else "historical"] += 1
+                counts["current" if actual == current else "historical"] += 1
 
-    return {
+    result = {
         "rangeStart": start,
         "rangeEnd": end,
         "manifests": len(manifests),
         **counts,
         "unresolved": unresolved,
     }
+    if staged_tree:
+        result["stagedTree"] = staged_tree
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path.cwd())
     parser.add_argument("--start", required=True)
-    parser.add_argument("--end", required=True)
+    endpoint = parser.add_mutually_exclusive_group(required=True)
+    endpoint.add_argument("--end")
+    endpoint.add_argument("--staged", action="store_true")
     args = parser.parse_args()
     try:
         repo = Path(git(args.repo.resolve(), "rev-parse", "--show-toplevel").stdout.decode().strip())
-        result = audit(repo, args.start, args.end)
+        head = git(repo, "rev-parse", "HEAD").stdout.decode().strip() if args.staged else args.end
+        result = audit(repo, args.start, head, staged=args.staged)
     except (ValueError, OSError, subprocess.SubprocessError) as failure:
         # Failure diagnostics expose structure only. Git command stderr can describe private data.
         parser.exit(2, f"published pin verification failed ({type(failure).__name__})\n")
