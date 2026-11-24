@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest"
@@ -30,13 +31,10 @@ def validate_suite(suite):
         raise ValueError("unknown question test class")
     expected = METHODS if cls == CLASS else SUBMIT_METHODS
     prefix = "RID" if cls == CLASS else "SUB"
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [case.get("name") for case in cases]
-    if (suite.get("tests") != "8"
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
-            or len(names) != 8 or len(set(names)) != 8 or set(names) != set(expected)
-            or any(case.get("classname") != cls or
-                   any(child.tag not in ("system-out", "system-err") for child in case) for case in cases)):
+    if (len(names) != 8 or len(set(names)) != 8 or set(names) != set(expected)
+            or any(case.get("classname") != cls for case in cases)):
         raise ValueError("missing or nonpassing receipt identifier tests")
     return {f"PT-QST-{prefix}{i:03}": cls + "#" + name for i, name in enumerate(expected, 1)}
 

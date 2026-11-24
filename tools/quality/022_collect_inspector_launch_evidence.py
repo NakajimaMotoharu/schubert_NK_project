@@ -9,6 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validate_class_family_coverage
 import bootstrap_ownership
@@ -392,13 +393,10 @@ def validate_reports(suites, deployment=False):
     methods = {}
     for cls, start, expected in groups:
         suite = next(s for s in suites if s.get("name") == cls)
-        cases = suite.findall("testcase")
+        cases = validate_passing_surefire_suite(suite)
         names = [c.get("name") for c in cases]
-        if (suite.get("tests") != str(len(expected))
-                or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
-                or len(names) != len(set(names)) or set(names) != set(expected)
-                or any(c.get("classname") != cls or any(child.tag not in ("system-out", "system-err")
-                   for child in c) for c in cases)):
+        if (len(names) != len(set(names)) or set(names) != set(expected)
+                or any(c.get("classname") != cls for c in cases)):
             raise ValueError("launcher/deployment PT inventory or status is not certifiable")
         prefix = ({"dev.codex.schubert.nk.storage.ResourceScopeTest": "PT-OPS-RSCOPE",
                    "dev.codex.schubert.nk.storage.LinuxFileLockTest": "PT-OPS-FLOCK",

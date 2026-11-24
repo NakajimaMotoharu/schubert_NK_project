@@ -875,6 +875,52 @@ class EvidenceSetTest(unittest.TestCase):
                         with self.assertRaisesRegex(ValueError, "reactor JUnit"):
                             validate(bad, *arguments)
 
+    def test_junit_scope003_multisuite_and_selected_readers_require_an_explicit_terminal(self):
+        fixture = "fixture.Case"
+        names = tuple(f"test-{i}" for i in range(18))
+        group = ((fixture, 1, names[:1]),)
+        inputs = (
+            ("021_collect_inspector_database_evidence.py", "validate_reports", {"GROUPS": group}, 1, (False,)),
+            ("021_collect_inspector_database_evidence.py", "validate_reports", {"APPLICATION_GROUPS": group}, 1, (True,)),
+            ("022_collect_inspector_launch_evidence.py", "validate_reports", {"GROUPS": group}, 1, (False,)),
+            ("022_collect_inspector_launch_evidence.py", "validate_reports", {"DEPLOYMENT_GROUPS": group}, 1, (True,)),
+            ("027_collect_question_receipt_evidence.py", "validate_suite",
+             {"CLASS": fixture, "SUBMIT_CLASS": "fixture.Other", "METHODS": names[:8]}, 8, ()),
+            ("027_collect_question_receipt_evidence.py", "validate_suite",
+             {"CLASS": "fixture.Other", "SUBMIT_CLASS": fixture, "SUBMIT_METHODS": names[:8]}, 8, ()),
+            ("028_collect_stub_evidence.py", "validate_suite", {"CLASS": fixture, "METHODS": names[:1]}, 1, ()),
+            ("029_collect_scenario_screen_evidence.py", "validate_named_suite", {}, 1, (fixture, names[:1], 1)),
+            ("037_collect_expiry_audit_database.py", "validate_suite",
+             {"CLASS": fixture, "METHODS": {"FIXTURE": names[0]}}, 18, ()),
+        )
+        for filename, entry, constants, count, arguments in inputs:
+            reader = module("multisuite_terminal_fixture", filename)
+            validate = getattr(reader, entry)
+            valid = ET.Element(
+                "testsuite", name=fixture, tests=str(count), failures="0", errors="0", skipped="0",
+            )
+            for name in names[:count]:
+                ET.SubElement(valid, "testcase", name=name, classname=fixture)
+            with patch.multiple(reader, **constants) if constants else contextlib.nullcontext():
+                def caller(suite):
+                    return validate([suite] if entry == "validate_reports" else suite, *arguments)
+
+                self.assertTrue(caller(valid))
+                for invalid in ("failures", "errors", "skipped", "root", "extra", "nestedOutput"):
+                    with self.subTest(collector=filename, variant=str(arguments), invalid=invalid):
+                        broken = copy.deepcopy(valid)
+                        if invalid in ("failures", "errors", "skipped"):
+                            del broken.attrib[invalid]
+                        elif invalid == "root":
+                            broken.tag = "summary"
+                        elif invalid == "extra":
+                            ET.SubElement(broken, "unfinished")
+                        else:
+                            output = ET.SubElement(broken[0], "system-err")
+                            ET.SubElement(output, "notTextOnly")
+                        with self.assertRaisesRegex(ValueError, "reactor JUnit"):
+                            caller(broken)
+
     def test_api_web_log_consumer_inventory_and_coverage(self):
         log = module("api_web_log_consumer_collector", "033_collect_api_web_log_consumers.py")
         names = (

@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest"
@@ -21,13 +22,11 @@ TRACES = {"PT-ASY-STB005.txt": TRACE}
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != CLASS or suite.get("tests") != str(len(METHODS))
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (suite.get("name") != CLASS
             or len(names) != len(METHODS) or set(names) != set(METHODS)
-            or any(case.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case) for case in cases)):
+            or any(case.get("classname") != CLASS for case in cases)):
         raise ValueError("missing or nonpassing stub tests")
     return {f"PT-ASY-STB{i:03}": CLASS + "#" + name for i, name in enumerate(METHODS, 1)}
 

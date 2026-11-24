@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_reactor_junit import validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.database.DatabaseMigrationTest"
@@ -34,15 +35,12 @@ def digest(path):
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != CLASS or suite.get("tests") != "18"
-            or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+    if (suite.get("name") != CLASS
             or len(names) != 18 or len(set(names)) != 18
             or not set(METHODS.values()).issubset(names)
-            or any(case.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in case)
-                   for case in cases)):
+            or any(case.get("classname") != CLASS for case in cases)):
         raise ValueError("missing or nonpassing Expiry database tests")
     return {test_id: CLASS + "#" + name for test_id, name in METHODS.items()}
 
