@@ -44,6 +44,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 final class AnimationWatchTemplateResourcePortTest {
   private static final String VIDEO = "video";
   private static final String HREF = "href";
+  private static final String SRC = "src";
   private static final String USER = "USER";
   private static final String ADMIN = "ADMIN";
   private static final String SYNTHETIC_CSRF = "synthetic-noncredential-csrf";
@@ -178,7 +179,7 @@ final class AnimationWatchTemplateResourcePortTest {
     assertEquals("OVA一覧", document.select("a[href='/animation/ova']").text());
     assertEquals(
         "/animation/media/%E6%98%A0%E5%83%8F%2B7",
-        document.select("video[controls][preload=metadata][playsinline]").attr("src"));
+        document.select("video[controls][preload=metadata][playsinline]").attr(SRC));
     assertFalse(document.outerHtml().contains("hidden-storage.mp4"));
   }
 
@@ -193,7 +194,7 @@ final class AnimationWatchTemplateResourcePortTest {
       assertEquals(row.category() + " / " + row.path(), d.select(".subtitle").text());
       assertEquals(role, d.select(".login-role").text());
       assertEquals(1, d.select("video[controls][preload=metadata][playsinline]").size());
-      assertEquals(row.mediaHref(), d.select(VIDEO).attr("src"));
+      assertEquals(row.mediaHref(), d.select(VIDEO).attr(SRC));
       assertFalse(d.select(VIDEO).hasAttr("autoplay"));
       assertFalse(d.select(VIDEO).hasAttr("loop"));
       assertEquals(
@@ -224,7 +225,7 @@ final class AnimationWatchTemplateResourcePortTest {
     assertEquals(literal + " / " + literal, d.select(".subtitle").getFirst().wholeText());
     assertEquals(literal, d.select(".login-user").text());
     assertEquals(literal, d.select("a[href='/animation/main']").text());
-    assertEquals(row.mediaHref(), d.select(VIDEO).attr("src"));
+    assertEquals(row.mediaHref(), d.select(VIDEO).attr(SRC));
     assertTrue(d.select("script,iframe").isEmpty());
   }
 
@@ -246,7 +247,7 @@ final class AnimationWatchTemplateResourcePortTest {
                   var d = render("WV003-" + n, p, row.requestUri());
                   assertEquals(title, d.title());
                   assertEquals(title, d.select("h1").text());
-                  assertEquals(row.mediaHref(), d.select(VIDEO).attr("src"));
+                  assertEquals(row.mediaHref(), d.select(VIDEO).attr(SRC));
                   return null;
                 }));
       }
