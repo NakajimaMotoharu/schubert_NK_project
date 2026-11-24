@@ -1,0 +1,139 @@
+{
+  "run": "PG44268",
+  "source": "8b553f562e3d033cbe3d5e48890145175b3ba039",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": [
+    "WBS-P006-02/2",
+    "WBS-G13.04"
+  ],
+  "terminalAtUTC": "2026-11-24T17:28:19.759354+00:00",
+  "actualExit": 0,
+  "existingReturnedCase": 1,
+  "previouslySelectedTestId": "PT-OUTBOX-DATA001",
+  "historicalPropertyTestsNotMerged": 10,
+  "sourceExact": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sha256": "d0ba9bbf396af4cba3b912a87a37f9cc3162130cb5c8423c39ddc1f9c92e9f02"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sha256": "97e9737bf3afd955019405f713355de62da50dfba9f96a9e7d549ce9568cf5aa"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java",
+      "sha256": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+      "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+    }
+  ],
+  "fixtureExact": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+    "sha256": "1712c51387bdf0946af192b21a7b88164a8d48de6d31d01f30e66bee72c3442b"
+  },
+  "originalCountAsCurrentProductReruns": 0,
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42186-outbox-data-current-selected-v1/original.exec",
+    "sha256": "63328c455e384666091a4e8e746787c98bfc3660b789ca400abdb7bc45ffa07b"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42186-outbox-data-current-selected-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "f5c07c0c81baf852b60301b7e773434d391253162860673548387cc119ed3b90"
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 218
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 19
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 115
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 28
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "appendOnlyQualifier": true,
+  "oldPG38832BinaryNotEquivalent": true,
+  "originalManifest": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41404-outbox-copy-and-approved-fixture-v1/manifest.json",
+      "sha256": "6d12c9cfe85032811d42a8114ab892ae7b160afba6685a78fdbee277fdc52737"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42184-p00405-outbox-fixed-data-current-v1/manifest.json",
+      "sha256": "660e0f006045bb8b71fb544032236e87c9f5689dbdbcb7db8f4e6c9902150c5f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42186-p00405-outbox-body-owned-current-v1/manifest.json",
+      "sha256": "8498f717fa64a65b965c6f90e81327b9e213f27fcb3ffa983a0001a9aa31e58c"
+    }
+  ],
+  "retainedRule": "no re-use of database/JMS, lease acquisition or dispatch authority",
+  "localMeasurement": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44268-outbox-data001-current-raw-observation/measure.out",
+    "sha256": "67cc7d90a96c0a04d36e86b02b3bd1efe74484bcd01d883f60deaa40c773ef75"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44268-outbox-data001-current-raw-observation/begin.json",
+    "sha256": "ca99d27834cbf9c9e2aa55407c9d5c47125a82157e58cf28917be1fd252e6b3c"
+  },
+  "end": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44268-outbox-data001-current-raw-observation/terminal.json",
+    "sha256": "cff913294eebc887b9a964165e4cf17123041567b42eb34d25ed4afd03bc60db"
+  },
+  "operatorServiceActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
