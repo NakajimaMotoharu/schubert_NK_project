@@ -14,6 +14,7 @@ from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import coverage_class_names, validate_module_coverage
 from pgpt_reactor_junit import compiled_class_paths
+from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
 RESOURCE_METHODS = {
@@ -97,10 +98,7 @@ def main():
         static = "not configured for characterization runner"
         if module != "characterization":
             spot = ET.parse(target / "spotbugsXml.xml").getroot()
-            errors = spot.find("Errors")
-            if spot.findall("BugInstance") or errors is None or int(errors.get("errors", "0")):
-                raise SystemExit("static analysis not clean")
-            static = {"tool": "SpotBugs 4.10.4.0", "violations": 0, "errors": 0}
+            static = validate_module_spotbugs(spot, set(physical))
         modules[module] = {"tests": count, "coverage": counters, "spotbugs": static}
     validate_resource_method(auth_methods)
     manifest = {
