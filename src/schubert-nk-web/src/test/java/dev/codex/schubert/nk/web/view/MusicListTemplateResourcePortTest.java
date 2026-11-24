@@ -4,10 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +38,13 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
-/** PT-MUSIC-DOM001..008; actual resource only, independent literal map, no application Java. */
+/** PT-MUSIC-DOM001..009; UI223/235 SS313. Actual resources with isolated display inputs. */
 final class MusicListTemplateResourcePortTest {
   private static final String TITLE = "title";
   private static final String TRACKS = "tracks";
   private static final String PAIRS = "pairs";
   private static final String PLAYER = "audio";
+  private static final String SRC = "src";
   private static final String ROW = ".music-row";
   private static final String STRONG = ".music-info strong";
   private static final String SUBTITLE = ".subtitle";
@@ -43,6 +52,8 @@ final class MusicListTemplateResourcePortTest {
   private static final String META = ".scenario-meta";
   private static final String MUSIC = "Music";
   private static final String CATEGORY = "BGM";
+  private static final String SONGS = "曲";
+  private static final String SECTION = "album";
   private static final String READER = "fixture-reader";
   private static final String USER = "USER";
   private static final String ADMIN = "ADMIN";
@@ -84,6 +95,10 @@ final class MusicListTemplateResourcePortTest {
   }
 
   private static Document render(String id, Map<String, Object> values) throws IOException {
+    return renderPage(id, Map.of("values", values));
+  }
+
+  private static Document renderPage(String id, Object page) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -100,11 +115,7 @@ final class MusicListTemplateResourcePortTest {
     var engine = new SpringTemplateEngine();
     engine.setTemplateResolver(resolver);
     var context =
-        Map.<String, Object>of(
-            "page",
-            Map.of("values", values),
-            "_csrf",
-            Map.of("parameterName", "_csrf", "token", SYNTHETIC_CSRF));
+        Map.of("page", page, "_csrf", Map.of("parameterName", "_csrf", "token", SYNTHETIC_CSRF));
     var dom =
         Jsoup.parse(engine.process("music-list", new WebContext(exchange, Locale.JAPAN, context)));
     assertTrue(dom.select("[th\\:text],[th\\:if],[th\\:replace],[th\\:each]").isEmpty());
@@ -120,6 +131,44 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
+  void projectedSongsKeepStoredGroupingThroughSharedPlayers() throws IOException {
+    var actor =
+        new SessionPrincipal(
+            READER,
+            UserRole.USER,
+            AuthenticationContext.of("12".repeat(32)),
+            Instant.parse("2026-11-01T00:00:00Z"));
+    var group = Optional.of("stored-group-7");
+    var records =
+        List.of(
+            song("inst-7", "Different instrumental title", PairRole.INSTRUMENTAL, group, 10),
+            song("solo-7", "Theme", PairRole.NONE, Optional.empty(), 20),
+            song("voice+7", "12-7 Theme", PairRole.MAIN, group, 30));
+    var view =
+        MusicTrackViewModel.from(actor, SONGS, SECTION, new MusicTrackResponseData(3), records);
+    var document = renderPage("MDOM009", view);
+
+    assertEquals("3曲", document.select(SUBTITLE).text());
+    assertEquals(List.of("Theme", "Theme"), document.select(STRONG).eachText());
+    var rows = document.select(".song-row");
+    assertEquals(2, rows.size());
+    assertEquals(
+        List.of("/music/media/voice%2B7", "/music/media/inst-7"),
+        rows.getFirst().select(PLAYER).eachAttr(SRC));
+    assertEquals(
+        List.of("/music/download/voice%2B7", "/music/download/inst-7"),
+        rows.getFirst().select("a.download").eachAttr(HREF));
+    assertEquals(List.of("/music/media/solo-7"), rows.getLast().select(PLAYER).eachAttr(SRC));
+    assertEquals("インストなし", rows.getLast().select(".song-player-placeholder").text());
+  }
+
+  private static MusicTrackRecord song(
+      String id, String title, PairRole role, Optional<String> pairKey, int order) {
+    return new MusicTrackRecord(
+        id, title, SONGS, SECTION, DisplayPath.of("album/synthetic.mp3"), 19, pairKey, role, order);
+  }
+
+  @Test
   void ordinaryRowsKeepStoredOrderAndLiteralPlaybackMetadata() throws IOException {
     var d =
         render(
@@ -128,7 +177,7 @@ final class MusicListTemplateResourcePortTest {
     assertEquals(List.of("first", "second"), d.select(STRONG).eachText());
     assertEquals(List.of("album/first 1.0 MB", "album/second 2.0 MB"), d.select(META).eachText());
     assertEquals(
-        List.of("/music/media/first", "/music/media/second"), d.select(PLAYER).eachAttr("src"));
+        List.of("/music/media/first", "/music/media/second"), d.select(PLAYER).eachAttr(SRC));
     assertEquals(
         List.of("/music/download/first", "/music/download/second"),
         d.select("a.download").eachAttr(HREF));
