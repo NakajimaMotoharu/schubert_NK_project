@@ -1,0 +1,91 @@
+{
+  "eventId": "PGPT-20261008-10111",
+  "groupId": "nov24-night-pg44580-buffer-constant-diagnostic-no-monitor",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T21:45:40+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 20,
+      "remainingPercent": 80,
+      "resetsAt": 1796126528,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "7598cea550aca891c343fa00c3282fc86531f544",
+    "productionCoreMain": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "run": "PG44580",
+    "managementWorkIds": [
+      "WBS-P006-01/2"
+    ],
+    "planRow": {
+      "ID": "WBS-P006-01/2",
+      "元行": "WBS-P006-01/2",
+      "費目": "B",
+      "主担当": "WBS-P006-01",
+      "状態": "計画",
+      "作業": "Inbox原子的処理・同一結果replay／同source証拠による受入判定",
+      "残pp": "0.423",
+      "着手": "設計324・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "Inbox原子的処理・同一結果replay：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-103",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "FUN-103",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "11",
+      "楽観pp": "0.163",
+      "慎重pp": "0.845",
+      "要求設計の版差": "PT基準仕様 NK-MSG-002、SS 324",
+      "lineNumber": 333,
+      "改訂残pp": "0.423",
+      "wholePlan": {
+        "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+        "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+      }
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月24日_PGPT再開実行計画.txt",
+        "sha256": "702ef0dfeb1b5efbf1b57f8e3d734a87a3c4d26c087c5980fcc9674ce9e15fa5"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "previousCheckpoint": 4667,
+    "startScope": "WipingByteArrayOutputStream constant diagnostic still takes monitor after size was removed. Use controlled synthetic buffer and independent concurrent check before and after sole modifier change.",
+    "groupCapPp": 1.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.33,
+      "high": 1.5
+    },
+    "workCategory": "IMPLEMENTATION",
+    "completedOriginalRowPricePp": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "speedRequested": "standard",
+    "modelObserved": null,
+    "reasoningObserved": null,
+    "speedObserved": null,
+    "actualAllocatedPp": null,
+    "classification": "product narrow rule-based rework",
+    "relatedOnly": [
+      "WBS-F03/2-2-b",
+      "WBS-P018-10.03/2"
+    ],
+    "noDuplicatePrice": true,
+    "endCondition": "Single candidate before timeout then current one whole selected exec, ABI body and invariant preservation, exact class proof, style/compiler/PMD/SpotBugs. Formal held callers not tested.",
+    "nextAuthorized": [
+      "Finish scoped product evidence then rebind unaffected current four JAR and F03 sources by Git"
+    ]
+  }
+}
