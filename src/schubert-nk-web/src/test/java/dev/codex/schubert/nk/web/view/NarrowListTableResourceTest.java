@@ -27,9 +27,7 @@ final class NarrowListTableResourceTest {
   @Test
   void notificationListKeepsAllSixColumnHeaders() throws IOException {
     assertTable(
-        "notifications/list",
-        "通知一覧の表",
-        List.of("区分", "受付ID", "受付日時", "最終更新日時", "概要", "操作"));
+        "notifications/list", "通知一覧の表", List.of("区分", "受付ID", "受付日時", "最終更新日時", "概要", "操作"));
   }
 
   @Test
@@ -49,7 +47,8 @@ final class NarrowListTableResourceTest {
       assertNotNull(input);
       var css = new String(input.readAllBytes(), StandardCharsets.UTF_8);
       var rule =
-          Pattern.compile("@media\\s*\\(max-width:\\s*900px\\)\\s*\\{\\s*\\.table-scroll\\s*\\{([^}]*)}")
+          Pattern.compile(
+                  "@media\\s*\\(max-width:\\s*900px\\)\\s*\\{\\s*\\.table-scroll\\s*\\{([^}]*)}")
               .matcher(css);
       assertTrue(rule.find());
       assertTrue(Pattern.compile("overflow-x\\s*:\\s*auto\\s*;").matcher(rule.group(1)).find());
