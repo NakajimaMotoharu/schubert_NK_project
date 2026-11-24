@@ -1,15 +1,19 @@
 package dev.codex.schubert.nk.api.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.CapacityExceededException;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutionException;
@@ -19,7 +23,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
-/** Decimal byte/explicit counter oracle, no physical capacity test claimed. PT-SCN-008-C01..C03. */
+/** Decimal byte and counter oracle for logical capacity. PT-SCN-008-C01..C05. */
 class TransferCapacityTest {
   private static final long CRITICAL_BYTE_GATE = 4_500_000_000L;
   private static final long CRITICAL_FILE_GATE = 9_000;
@@ -260,6 +264,49 @@ class TransferCapacityTest {
       assertTrue(
           executor.awaitTermination(10, TimeUnit.SECONDS), "reservation executor terminated");
     }
+  }
+
+  @Test
+  void c04SnapshotsRetainValueIdentityAcrossReservations() {
+    var capacity = new TransferCapacity(8_192, 7);
+    var before = capacity.snapshot();
+    var expected = new TransferCapacity.Snapshot(8_192, 7, TransferCapacity.Level.NORMAL);
+    assertEquals(expected, before);
+    assertEquals(before, expected);
+    assertNotEquals(new TransferCapacity.Snapshot(8_193, 7, TransferCapacity.Level.NORMAL), before);
+    assertNotEquals(new TransferCapacity.Snapshot(8_192, 8, TransferCapacity.Level.NORMAL), before);
+    assertNotEquals(
+        new TransferCapacity.Snapshot(8_192, 7, TransferCapacity.Level.WARNING), before);
+    var observed = new HashMap<TransferCapacity.Snapshot, String>();
+    observed.put(before, "before");
+    assertEquals("before", observed.get(expected));
+    assertEquals("Snapshot[bytes=8192, files=7, level=NORMAL]", before.toString());
+
+    var reservation = capacity.reserve(4_800);
+    try {
+      assertEquals(
+          new TransferCapacity.Snapshot(12_992, 8, TransferCapacity.Level.NORMAL),
+          capacity.snapshot());
+      assertEquals(expected, before);
+    } finally {
+      reservation.close();
+    }
+    assertEquals(expected, capacity.snapshot());
+  }
+
+  @Test
+  void c05MetricLevelVocabularyIsClosedAndIndependentOfTheReturnedArray() {
+    var levels = TransferCapacity.Level.values();
+    var expected =
+        Set.of(
+            TransferCapacity.Level.NORMAL,
+            TransferCapacity.Level.WARNING,
+            TransferCapacity.Level.CRITICAL);
+    assertEquals(expected, Set.of(levels));
+    levels[0] = null;
+    assertEquals(expected, Set.of(TransferCapacity.Level.values()));
+    assertSame(TransferCapacity.Level.CRITICAL, TransferCapacity.Level.valueOf("CRITICAL"));
+    assertThrows(IllegalArgumentException.class, () -> TransferCapacity.Level.valueOf("UNKNOWN"));
   }
 
   private static void assertCapacity(TransferCapacity capacity) {
