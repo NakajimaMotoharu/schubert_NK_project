@@ -1,0 +1,103 @@
+{
+  "eventId": "PGPT-20261008-10058",
+  "source": "e0889509b06350b740f7a677f2c4d01ecb95576f",
+  "productionCoreMain": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P020-01.03/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P020-01.03/2",
+    "第58版ID": "WBS-P020-01.03/2",
+    "費用主担当項目": "P020-01",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-17までの計画週",
+    "作業・成果物": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+    "先行ID・着手条件": "WBS-P020-01.03/1、閉/WBS-P020-01.02",
+    "担当": "環境・比較担当",
+    "旧短期残pp": "0.488",
+    "改訂残pp": "0.488",
+    "終了条件": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+    "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+    "参照する元項目": "P020-01",
+    "lineNumber": 57
+  },
+  "run": "PG44524",
+  "startEvent": "PGPT-20261008-10057",
+  "workCategory": "SELECTED_TEST",
+  "outcome": "当比較工具の同一execで6件（現証拠へ追加の四条件＋同一測定に必要な既二境界）全成功。writeJson注入portの未加工18L/1M/6B全到達。GateCli全体は26/453L・2/72M・6/230B。実CHR、main、製品PTの実行0。",
+  "proof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44524-current-comparison-output-injected-io-six/manifest.json",
+    "sha256": "b311fc84c676ecc0fe70c487165e494e677811648d90a6131896b1e9b6cde6ed"
+  },
+  "nextEvidence": "F03で許可済みWeb局所を続ける。LogSearchのfilter・一覧範囲・リンクの適用に使える現入力と旧独立値の不足を確認。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T20:27:03+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 18,
+      "remainingPercent": 82,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 18,
+    "remainingPercent": 82,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "79735e59970cef4e4cf88ece36faa9775ff775dbbd46f990cbf88211f7d1f26a",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-24T20:27:03+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 18,
+        "remainingPercent": 82,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-24T20:26:53.917227+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 18,
+    "remainingPercent": 82,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}

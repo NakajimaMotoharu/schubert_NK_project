@@ -1,0 +1,109 @@
+{
+  "run": "PG44526",
+  "source": "a435d96f47faa47b95f44253d5f067dae4933212",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T20:33:36.524008+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G08",
+  "relatedF03": true,
+  "bug": "BUG-3794",
+  "horizontal": "YKT-2958",
+  "firstEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44526-spotbugs-report-shape/before.json",
+    "sha256": "7bbd353d6c96aea8b0157479c64898db1119040e7693d2de92a46377912e8897"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5828_SpotBugs証跡の診断と物理名簿単体仕様.md",
+    "sha256": "f82007697a43cc2e4f44454ecb9fedd3bcd62b279f9730c25883126d526a328e"
+  },
+  "frozenToolInputs": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "b274524f3e247c258c8a28c3d95496c863db7f6f87b32d2162e8ed01861e55f7"
+    },
+    {
+      "path": "tools/quality/f03_spotbugs_fresh.py",
+      "sha256": "6d569e88defdfa9e029527442109801e5539a19e70a42cd35a67402f3e112e63"
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "sha256": "279879987a293caa79dd905d8280c84d285771b071d61060c13b2a85a85b42e6"
+    },
+    {
+      "path": "tools/quality/pgpt_spotbugs_contract.py",
+      "sha256": "dce83c088aa7bedee92c6f9ebcb11d9a8a3d8b336fd564ffe1052bfeac75a95e"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "dcaef525aa82a88874eb190d2aa9ecf483b89f8e5ececc180fafd9ff575994a5"
+    }
+  ],
+  "fixedInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/run-begin.json",
+    "sha256": "10f6cabeac9c3e23bd719849ffa0c3b2c57f3e38d84574c9ea0131b0a22299ca"
+  },
+  "dedicatedCanaryIds": [
+    "PT-QA-SB-SHAPE001",
+    "PT-QA-SB-SHAPE002",
+    "PT-QA-SB-SHAPE003",
+    "PT-QA-SB-SHAPE004",
+    "PT-QA-SB-SHAPE005",
+    "PT-QA-SB-SHAPE006"
+  ],
+  "toolSuiteRuns": {
+    "collectorCanaries": {
+      "source": "a435d96f47faa47b95f44253d5f067dae4933212",
+      "terminalAtUTC": "2026-11-24T20:33:07.885410+00:00",
+      "actualExit": 0,
+      "count": 124,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/collectorCanaries.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/collectorCanaries.stderr",
+        "sha256": "685fa1d30c45202055034cca03a3d6c832293bbbff06bf8d8653ab741b183183"
+      }
+    },
+    "settingsCanaries": {
+      "source": "a435d96f47faa47b95f44253d5f067dae4933212",
+      "terminalAtUTC": "2026-11-24T20:33:07.950312+00:00",
+      "actualExit": 0,
+      "count": 6,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/settingsCanaries.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/settingsCanaries.stderr",
+        "sha256": "9ead30ffd84aec5282ea9c5a6b37c39042864743753e534fa8eb9a5add8b41db"
+      }
+    }
+  },
+  "independentExactInputs": {
+    "clean": true,
+    "rootError": false,
+    "orphanMissing": false,
+    "orphanClass": false,
+    "mirroredErrors": false,
+    "mirroredSummary": false
+  },
+  "independentTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44526-spotbugs-report-structure/terminal.json",
+    "sha256": "567898bb69466038d93caeabf5d76b32f246328ffd3dbda8186c7eae116d265b"
+  },
+  "mainPublicCollectorAndRelatedCoverage": {
+    "006_collect_scenario_evidence.py": 1,
+    "f03_spotbugs_fresh.py": 2,
+    "pgpt_closed_host_stages.py": 1
+  },
+  "originalLegacyReportStructure": 30,
+  "legacyOriginalAnalysisExit": null,
+  "legacyXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40948-f03-api-monitoring30-static-v1/spotbugs.xml",
+    "sha256": "a3dd7a4318f63a06fdbffbb848de061b35901f37d2428ec76c8d839f79588ba9"
+  },
+  "realStaticOrProductTestLaunch": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,167 @@
+{
+  "run": "PG44524",
+  "source": "e0889509b06350b740f7a677f2c4d01ecb95576f",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-P020-01.03/2",
+  "terminalAtUTC": "2026-11-24T20:26:53.917227+00:00",
+  "actualExit": 0,
+  "reference": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44518-current-comparison-output-destination-two/manifest.json",
+    "sha256": "61d97536ded71b83c2aa4eccd7133a53197ef3c2899d3f771a1cf545f48ceed0"
+  },
+  "originalOlderSix": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44112-current-gate-output-single-exec/manifest.json",
+    "sha256": "a8ad06401d61f6b6d1297dec319b23350a82179a4cb01d5be3df6ccf4a95eede"
+  },
+  "independentFixedFakeIoOracles": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/085_比較工具出力port同一execの単体仕様.md",
+      "sha256": "7f18f6a313a1f19f45cff9b311e51688b9681a875a13ede6dfe6423bd8d1ae4f"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/083_比較ゲート出力先の親なし境界単体仕様.md",
+      "sha256": "0d0a3599e7003b95c7a97398720bbc2b2611c476e30b3dd2b792b96025826c41"
+    }
+  ],
+  "currentTool": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44388-characterization-offline-normal-package/source/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "8111dbadf19dd0f2eecbfb3268de46cec385afe100c852c41502f02afa37e5ee"
+  },
+  "targetMethods": [
+    "dev.codex.schubert.characterization.GateOutputRootValueTest#destinationWithoutParentDoesNotInvokeOutputPort",
+    "dev.codex.schubert.characterization.GateOutputNullValueTest#missingDestinationDoesNotInvokeOutputPort",
+    "dev.codex.schubert.characterization.GateOutputFailureContractTest#failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim",
+    "dev.codex.schubert.characterization.GateOutputFailureContractTest#cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased",
+    "dev.codex.schubert.characterization.GateOutputFailureContractTest#nestedSameOutputIsRejectedWithoutReleasingOuterClaim",
+    "dev.codex.schubert.characterization.GateOutputFailureContractTest#nullPortIsRejectedBeforeAnyOutputClaim"
+  ],
+  "frozenInputs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputRootValueTest.java",
+      "sha256": "b0c8166fefa05e8fe2579fd82433bd7260a54c8172d14527293f535ba0a227f1"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputNullValueTest.java",
+      "sha256": "d4cf61143f004f2a699b2cd3bd2dc7befec5be96c941fd78b4c6e8706acb6342"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java",
+      "sha256": "d7e8b55e261aa185237fc68544030baec7b559a42560dea128c7b313d22180ef"
+    }
+  ],
+  "initialPostMetadata": "Root test ID belongs to specification 083, linked rather than duplicated in 085. First post stopped before publication. No JVM was restarted.",
+  "tested": 6,
+  "newCurrentInvocations": 4,
+  "requiredRepeatedCurrentBoundaryInvocations": 2,
+  "productTests": 0,
+  "actualChr": 0,
+  "fakeIoInvocationsOnly": true,
+  "temporaryJUnitFixtureRemovedAtTerm": true,
+  "mainInvocations": 0,
+  "exactTestSelectionExit": {
+    "compile": 0,
+    "test": 0,
+    "raw": 0
+  },
+  "inputArchiveAndPhysicalHashes": {
+    "dev/codex/schubert/characterization/GateCli.class": [
+      "dd4a6611f927de035100fdaf8e6678399627ff5d31ae1bbd74993bc568a4aa78",
+      "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3"
+    ],
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": [
+      "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812",
+      "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812"
+    ],
+    "dev/codex/schubert/characterization/GateCli$UsableSpace.class": [
+      "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+      "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c"
+    ],
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": [
+      "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74",
+      "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74"
+    ],
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": [
+      "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+      "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f"
+    ],
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": [
+      "a40344d1656e2f65073dcb4212c8f4503b13d8d200a4e144e8d4217993e3e899",
+      "b6ce1e4494583aa2dd04f5938dca4e8489d330208bd214cb36ee0bf45c2c65d1"
+    ]
+  },
+  "methodRawMissedCovered": {
+    "INSTRUCTION": [
+      0,
+      89
+    ],
+    "BRANCH": [
+      0,
+      6
+    ],
+    "LINE": [
+      0,
+      18
+    ],
+    "COMPLEXITY": [
+      0,
+      4
+    ],
+    "METHOD": [
+      0,
+      1
+    ],
+    "CLASS": [
+      0,
+      0
+    ]
+  },
+  "wholeGateCliClassRawMissedCovered": {
+    "INSTRUCTION": [
+      2250,
+      110
+    ],
+    "BRANCH": [
+      224,
+      6
+    ],
+    "LINE": [
+      427,
+      26
+    ],
+    "COMPLEXITY": [
+      187,
+      5
+    ],
+    "METHOD": [
+      70,
+      2
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44524-current-comparison-output-injected-io-six/raw.stdout",
+    "sha256": "0d4ee8528ec5a8a7d5da3f98211408e1c2daf480103bd594c018d2ab758d0d77"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44524-current-comparison-output-injected-io-six/reports/TEST-junit-jupiter.xml",
+    "sha256": "51d62d42bf6ec213e05db890eab29b52f2c7eb6eb3f13f0776c430f7bf3cf10c"
+  },
+  "actualTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44524-current-comparison-output-injected-io-six/terminal.json",
+    "sha256": "b7844345ed3e505e2a1d9d8304c512649349ea864c2868e2dd213fb03f3b36cb"
+  },
+  "commands": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44524-current-comparison-output-injected-io-six/begin.json",
+    "sha256": "599d39dfd852e04b268d6a38bd12ccf074c2f7403cf75a6e0fa5de6f9a71745d"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44524-current-comparison-output-injected-io-six/unit.exec",
+    "sha256": "f4a1206a6b2cf80a638cdf10a401dbb0bac512673754dbe6a90f262c5650e82b"
+  },
+  "execMerged": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
