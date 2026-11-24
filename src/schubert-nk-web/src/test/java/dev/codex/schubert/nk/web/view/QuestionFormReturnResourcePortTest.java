@@ -136,7 +136,7 @@ final class QuestionFormReturnResourcePortTest {
     assertEquals("", actualText(d, TEXTAREA));
     assertTrue(d.select(TEXTAREA).hasAttr("required"));
     assertEquals("6", d.select(TEXTAREA).attr("rows"));
-    assertEquals("質問", d.select("label[for=question]").text());
+    assertEquals("質問（必須）", d.select("label[for=question]").text());
     assertEquals("4096", d.select("[data-question-remaining]").text());
     assertEquals(1, d.select("script[src='/js/question-input-validation.js'][defer]").size());
     assertTrue(d.select(".retry-notice,.validation-summary,.field-error").isEmpty());
