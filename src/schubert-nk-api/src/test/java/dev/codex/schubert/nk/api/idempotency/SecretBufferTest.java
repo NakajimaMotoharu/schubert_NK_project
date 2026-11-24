@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
-/** PT-IDEM-WIPE-001..004; synthetic buffers only, no reflection or actual heap/credential dump. */
+/** PT-IDEM-WIPE-001..005; synthetic buffers only, no reflection or actual heap/credential dump. */
 final class SecretBufferTest {
   private static final int MAXIMUM_FIXTURE_CAPACITY = 1_050_000;
   private static final String REDACTED = "WipingByteArrayOutputStream[<redacted>]";
@@ -63,6 +69,35 @@ final class SecretBufferTest {
       stream.reset();
       assertEquals(0, stream.size());
       assertEquals(REDACTED, String.valueOf(stream));
+    }
+  }
+
+  /** PT-IDEM-WIPE-005, BUG-3801. */
+  @Test
+  void constantDiagnosticDoesNotUseTheBufferMonitor()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    try (var stream = new Inspectable()) {
+      byte[] fixture = {72};
+      stream.writeBytes(fixture);
+      var executor = Executors.newVirtualThreadPerTaskExecutor();
+      try {
+        var started = new CountDownLatch(1);
+        // Keep the parent stream monitor held until the diagnostic has completed.
+        synchronized (stream) {
+          var result =
+              executor.submit(
+                  () -> {
+                    started.countDown();
+                    return stream.toString();
+                  });
+          assertTrue(started.await(5, TimeUnit.SECONDS));
+          assertEquals(REDACTED, result.get(5, TimeUnit.SECONDS));
+          assertArrayEquals(fixture, stream.toByteArray());
+        }
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
+      }
     }
   }
 
