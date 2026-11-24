@@ -1,0 +1,169 @@
+{
+  "run": "PG44230",
+  "source": "73f105e5fd714037a94d26332f48c284eaa255d6",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-F02-b-b",
+  "rd": "SYS-010",
+  "terminalAtUTC": "2026-11-24T16:49:28.534628+00:00",
+  "actualExit": 0,
+  "approvedDesign": [
+    {
+      "path": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+      "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519",
+      "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  ],
+  "candidateConfig": {
+    "api": {
+      "template": {
+        "path": "src/deployment/config/api.yml.template",
+        "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+      },
+      "verifiedKeys": {
+        "nk.api.storage.asset-root": "/srv/schubert-nk/data/assets",
+        "nk.api.storage.transfer-root": "/srv/schubert-nk/data/transfer"
+      }
+    },
+    "web": {
+      "template": {
+        "path": "src/deployment/config/web.yml.template",
+        "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+      },
+      "verifiedKeys": {
+        "nk.web.storage.asset-root": "/srv/schubert-nk/data/assets",
+        "nk.web.storage.transfer-root": "/srv/schubert-nk/data/transfer"
+      }
+    },
+    "batch": {
+      "template": {
+        "path": "src/deployment/config/batch.yml.template",
+        "sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9"
+      },
+      "verifiedKeys": {
+        "nk.batch.backup-root": "/srv/schubert-nk/backup",
+        "nk.batch.backup-generations": "7"
+      }
+    }
+  },
+  "candidateUnits": {
+    "api": {
+      "template": {
+        "path": "src/deployment/systemd/schubert-nk-api.service.template",
+        "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630"
+      },
+      "localBusinessWritableRoots": [
+        "/srv/schubert-nk/data/transfer"
+      ],
+      "protectSystem": "strict"
+    },
+    "web": {
+      "template": {
+        "path": "src/deployment/systemd/schubert-nk-web.service.template",
+        "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+      },
+      "localBusinessWritableRoots": [],
+      "protectSystem": "strict"
+    },
+    "backup": {
+      "template": {
+        "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+        "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a"
+      },
+      "localBusinessWritableRoots": [
+        "/srv/schubert-nk/backup"
+      ],
+      "protectSystem": "strict"
+    }
+  },
+  "storageRegularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+  },
+  "currentStorageLexicalClassSha256": "090ba5659f0fe0a796a5d8325375f8a1d2ba70a10ef40e54672ab237158db758",
+  "earlierScopedEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43534-current-storage-lexical-six-exact-raw-v1/manifest.json",
+    "sha256": "f76e265f3af68af65351003cc654ee9f00289389af9d2dab3162548f321ada5e"
+  },
+  "earlierRequirements": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43946-four-owner-six-product-and-13-sys/manifest.json",
+    "sha256": "646d6bc5d55184b7063156be37f35ddaaba5e6748eb907b96eee6f84282b2a24"
+  },
+  "earlierSix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44184-f03-four-role-six-product-current-review-matrix/manifest.json",
+    "sha256": "b57e97e7221fce94ffc85dca95d43feba7b747bea14711a4a7d3f6ce7ecad3db"
+  },
+  "established": "configured asset and transfer paths, separated write declarations and local lexical input scope",
+  "remaining": [
+    "current Linux mount/FileStore identity and owner/mode for assets, transfer, backup and business DB",
+    "authorized positive/negative file operations on that candidate, deployment evidence, accountable disposition",
+    "API and Web regular packaging plus remaining F02 and 451 criteria"
+  ],
+  "hostFileStoreOrDbChecks": 0,
+  "retriedHeldActions": 0,
+  "newProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "independentConfigurationTest": {
+    "original": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16446-config-source-original-four-pt-v1/manifest.json",
+      "sha256": "27ae10eb011933a0555a15f9c0b75b0921a623312a4529d8a7386a6dd295b788"
+    },
+    "independentPost": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16448-config-source-original-four-post-v1/manifest.json",
+      "sha256": "ac7443811550e5f9c99d7d3eaef1b1319552d141861c78debf435b264bdb432d"
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16446-config-source-original-four-pt-v1/TEST-dev.codex.schubert.nk.batch.platform.ConfigurationTemplateContractTest.xml",
+      "sha256": "1a24d51be8c6031f5225c3388a8a0edde376e3200fb1d3a2e306c4a842c34785"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest.java",
+      "sha256": "59e19ad3d1ae556c476257a65795ef24b9e4f2ee38c400d4f79b196a0de42440"
+    },
+    "inputCount": 7,
+    "specification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1556_C06_Batch既定値・非秘密設定境界_単体テスト仕様書.md",
+      "sha256": "a7278cd0c066669d0c908f14dcd2a19f8e58679cb2157fea673685c6660c76f0"
+    },
+    "sameInputs": {
+      "api.env.template": {
+        "path": "src/deployment/config/api.env.template",
+        "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af"
+      },
+      "api.yml.template": {
+        "path": "src/deployment/config/api.yml.template",
+        "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+      },
+      "batch.yml.template": {
+        "path": "src/deployment/config/batch.yml.template",
+        "sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9"
+      },
+      "common.yml.template": {
+        "path": "src/deployment/config/common.yml.template",
+        "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+      },
+      "inbox-inspector.env.template": {
+        "path": "src/deployment/config/inbox-inspector.env.template",
+        "sha256": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73"
+      },
+      "web.env.template": {
+        "path": "src/deployment/config/web.env.template",
+        "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af"
+      },
+      "web.yml.template": {
+        "path": "src/deployment/config/web.yml.template",
+        "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+      }
+    },
+    "existingSuccesses": 4,
+    "predicateFocused": [
+      "PT-OPS-CONFIG-SUP002",
+      "PT-OPS-CONFIG-SUP004"
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "run": "PG44234",
+  "source": "413a347300b9ced248347290fb5587ec1aece51b",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P008-03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-24T16:55:56.453503+00:00",
+  "oldSuccessfulCases": 6,
+  "newProductTests": 0,
+  "currentFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+    "sha256": "bcbcb8cea87b6eb5852c370053bf3ce05cdfbfa13670ed61ea2f49dd9e3d893f"
+  },
+  "pins": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/manifest.json",
+      "sha256": "f35ed616e3c736d5cd8e6560ab5763d2c84d2022b68180eb65e25ddbf6b4c3a2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43070-capacity-fixture-checked-and-owned-cases-v1/manifest.json",
+      "sha256": "de3ee35efee7b06340322d031d006e6056466311199747b6e79ecee294b54b6d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/manifest.json",
+      "sha256": "620b325d39fff024fcf2298b86e954a560c90273b614062e85731273ef2c8577"
+    }
+  ],
+  "actualOldXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/sanitized-junit.xml",
+    "sha256": "3d51da5681897bbeb593e244708265f9eaf9344b3b552cdfba76b322cfa7285d"
+  },
+  "actualOldRaw": {
+    "path": "../pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/unfiltered.stdout",
+    "sha256": "4ac06ffe236daacd920de386a098ee96b26f3961566d0e7725c403370d02d260"
+  },
+  "knownDeficitSites": {
+    "dev/codex/schubert/nk/api/storage/TransferCapacity#snapshot": [
+      {
+        "at": 73,
+        "counts": [
+          "INSTRUCTION:4:3",
+          "BRANCH:0:0"
+        ]
+      },
+      {
+        "at": 74,
+        "counts": [
+          "INSTRUCTION:2:0",
+          "BRANCH:0:0"
+        ]
+      }
+    ],
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level#values": [
+      {
+        "at": 22,
+        "counts": [
+          "INSTRUCTION:4:0",
+          "BRANCH:0:0"
+        ]
+      }
+    ],
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level#valueOf": [
+      {
+        "at": 22,
+        "counts": [
+          "INSTRUCTION:5:0",
+          "BRANCH:0:0"
+        ]
+      }
+    ],
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation#close": [
+      {
+        "at": 113,
+        "counts": [
+          "INSTRUCTION:5:4",
+          "BRANCH:0:0"
+        ]
+      },
+      {
+        "at": 114,
+        "counts": [
+          "INSTRUCTION:2:1",
+          "BRANCH:0:0"
+        ]
+      }
+    ],
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot#toString": [
+      {
+        "at": 28,
+        "counts": [
+          "INSTRUCTION:3:0",
+          "BRANCH:0:0"
+        ]
+      }
+    ],
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot#hashCode": [
+      {
+        "at": 28,
+        "counts": [
+          "INSTRUCTION:3:0",
+          "BRANCH:0:0"
+        ]
+      }
+    ]
+  },
+  "fourMethodGaps": [
+    "Level.values",
+    "Level.valueOf",
+    "Snapshot.hashCode",
+    "Snapshot.toString"
+  ],
+  "uncoveredReleaseLine": "TransferCapacity.snapshot under exception",
+  "branchDeficitInPriorScopedRun": 0,
+  "meaningfulNextCase": "immutable snapshot hash/equality contract and closed metric status vocabulary",
+  "retainedHeld": [
+    "real FileStore owner and capacity",
+    "resource publication",
+    "API packaging"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

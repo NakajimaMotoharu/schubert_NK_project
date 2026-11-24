@@ -1,0 +1,170 @@
+{
+  "run": "PG44226",
+  "source": "73f105e5fd714037a94d26332f48c284eaa255d6",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": [
+    "候補再資格-23.01",
+    "候補再資格-64.01",
+    "WBS-P018-02/2",
+    "WBS-G13.03"
+  ],
+  "terminalAtUTC": "2026-11-24T16:45:05.989851+00:00",
+  "actualExit": 0,
+  "currentBootstrapArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "qualifiedTargetTypes": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$Crypto.class": "1e153be8adcce6dad403acc54caa538f1166c2f6aaba4770e4e96ab0855b7937",
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto.class": "b024207c68262d010e8a3edfa5c72bce17270a487fa648e60fd453688cddedd0",
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class": "e8919bdd618bc3956bef79c333bcd4a12f79779143885b579de6eb6688291fb7"
+  },
+  "exactRuntimeLocalDependency": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+  },
+  "sameFixture": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+    "sha256": "6b11e001d7b37f1757eaf0d8d3825f4f11ea184e5f9bfdc328b00b79f201cce1"
+  },
+  "sameProduction": {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+    "sha256": "e1b732ec8736ca5ef5661e42aa62f3d723c0b940666cd39dbd64f9b9bb20eae1"
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/manifest.json",
+      "sha256": "dea9cc8e632ebb8bddc3624f2d4aff6e7dd41b4b474bc1ae9b9e35cfae75f833"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40318-f02-public-rfc-independent-v1/manifest.json",
+      "sha256": "07115fb53923ed58c635ef0ac2ac345c6b7cc30cdff986838bf3b2e5ef3273f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44136-bootstrap-current-source-owner-delta/manifest.json",
+      "sha256": "98e12bc55dcf544be78c61e18f31bd17d2084dab99c55088ede8cf48e188e817"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44140-g1303-public-release-type-and-partial-trace/manifest.json",
+      "sha256": "ca633f90b8e26c6da6969e21fa4fb28fdc8f6d90412ecb21f05246f6bf4a47de"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44184-f03-four-role-six-product-current-review-matrix/manifest.json",
+      "sha256": "b57e97e7221fce94ffc85dca95d43feba7b747bea14711a4a7d3f6ce7ecad3db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/compiled-classes.json",
+      "sha256": "ead0ea555a56b4573b9bef4c2b0d8ad160dee146b91a1c84bd0d391b1ccac77e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "a580cebdac3372468339538ce0a346ba39d5c10c949b471325c116f8f9eda091"
+    }
+  ],
+  "cases": [
+    {
+      "testId": "PT-OPS-SIGN001",
+      "method": "sign001IndependentRfcVectors()"
+    },
+    {
+      "testId": "PT-OPS-SIGN002",
+      "method": "sign002MessageSignatureAndWrongKey()"
+    },
+    {
+      "testId": "PT-OPS-SIGN003",
+      "method": "sign003DerAndNullContracts()"
+    },
+    {
+      "testId": "PT-OPS-SIGN004",
+      "method": "sign004MaterialBoundaries()"
+    },
+    {
+      "testId": "PT-OPS-SIGN005",
+      "method": "sign005SnapshotAndErasedOwnedBuffers()"
+    },
+    {
+      "testId": "PT-OPS-SIGN006",
+      "method": "sign006KnownCryptoFailureIsRedacted()"
+    },
+    {
+      "testId": "PT-OPS-SIGN007",
+      "method": "sign007UnknownFailureIdentityAndErasure()"
+    },
+    {
+      "testId": "PT-OPS-SIGN008",
+      "method": "sign008ConcurrentNativeProviderAndMalformedPoint()"
+    },
+    {
+      "testId": "PT-OPS-SIGN009",
+      "method": "sign009KnownProviderFatalGraphsKeepIdentityAndEraseAllOwnedClones()"
+    },
+    {
+      "testId": "PT-OPS-SIGN010",
+      "method": "sign010FailureThenSuccessOwnsFreshClonesAndRetainsPinnedAndCallerValues()"
+    }
+  ],
+  "eligible": 10,
+  "fail": 0,
+  "error": 0,
+  "notRun": 0,
+  "skipped": 0,
+  "oldSingleRunRaw": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto": {
+      "INSTRUCTION": {
+        "hit": 24,
+        "miss": 0
+      },
+      "LINE": {
+        "hit": 6,
+        "miss": 0
+      },
+      "COMPLEXITY": {
+        "hit": 2,
+        "miss": 0
+      },
+      "METHOD": {
+        "hit": 2,
+        "miss": 0
+      },
+      "CLASS": {
+        "hit": 1,
+        "miss": 0
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier": {
+      "INSTRUCTION": {
+        "hit": 119,
+        "miss": 0
+      },
+      "BRANCH": {
+        "hit": 10,
+        "miss": 0
+      },
+      "LINE": {
+        "hit": 27,
+        "miss": 0
+      },
+      "COMPLEXITY": {
+        "hit": 11,
+        "miss": 0
+      },
+      "METHOD": {
+        "hit": 6,
+        "miss": 0
+      },
+      "CLASS": {
+        "hit": 1,
+        "miss": 0
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$Crypto": {}
+  },
+  "scope": "offline public RFC vectors, independent adverse inputs and synthetic provider outcomes only",
+  "remaining": [
+    "production release BOM and six artifacts from the authorized signer and immutable host path",
+    "QA-061 distribution/license approval, deployed candidate ownership, F02/F03 and whole 451"
+  ],
+  "privateKeyOrReleaseOperations": 0,
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

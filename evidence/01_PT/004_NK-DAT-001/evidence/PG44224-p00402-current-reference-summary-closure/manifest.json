@@ -1,0 +1,145 @@
+{
+  "run": "PG44224",
+  "source": "73f105e5fd714037a94d26332f48c284eaa255d6",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P004-02/2",
+  "terminalAtUTC": "2026-11-24T16:43:46.710599+00:00",
+  "actualExit": 0,
+  "proofs": {
+    "42120": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42120-p00402-inbox-reference-current-proof-v1/manifest.json",
+      "sha256": "9ba2535226c1739e5bab487c8bab09178f49a9511b6327edeeff315064a07019"
+    },
+    "42164": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42164-p00402-prior-summary-port-evidence-v1/manifest.json",
+      "sha256": "88b3c97bae549f6dec99ea7d1aa81926c557326093147e47ce65b3e78fdcca4b"
+    },
+    "43254": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43254-p00402-inspection-summary-corrected13-v1/manifest.json",
+      "sha256": "f9b548a6fce93dfa09cc859bf5b19b28622f4a232a6a54992b8d51fced6f009b"
+    },
+    "43464": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43464-p00402-current-inspection-summary-three-values-v1/manifest.json",
+      "sha256": "da5ff06b193fd9758281c0dfd6e2cca4a62533f03f12d6b7e31572bf5c71499d"
+    },
+    "43944": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+      "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+    },
+    "44014": {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG44014-current-p00402-declaration-bytes-and-acl-delta/manifest.json",
+      "sha256": "934764a17b05d832ec36382237b16abf38b2c45c3159da87595254e7cf6c656a"
+    }
+  },
+  "currentBatchRegularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "currentBatchMembers": [
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+      "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    }
+  ],
+  "inboxCurrentThreeInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java",
+      "sha256": "325b3228612a68be33a5b4d5e08105d0e142fb93b7845d8775f9e12311d4d1d5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java",
+      "sha256": "7f6747c6b267b81647554aa021ad95959a80dde08501e33b3488f14794c25568"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "sha256": "b07dbccdd5bed05ede5ef380efb670fab3834c26f95f1d5a265e7654c8f65c58"
+    }
+  ],
+  "inboxSourceAndFixtureMatch": true,
+  "inboxQualifiedLocalTests": 3,
+  "inboxArtifactScope": "two locally compiled value types only; regular API JAR remains gated",
+  "summaryMatchedRegularClassMembers": 6,
+  "summaryInertValuesReused": 3,
+  "summarySyntheticPortReused": 13,
+  "summaryPortSingleOriginalExecCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 226
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 59
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 16
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "runtimeThirdPartySourcesRetainedFromOriginal": true,
+  "allSixProductCoverage": false,
+  "syntheticSetUnion": false,
+  "independentRequirements": [
+    {
+      "part": "reference shape",
+      "local": "fixed 84-cell oracle and three previously executed results",
+      "remaining": "current authorized roles and actual protected rows retain originals"
+    },
+    {
+      "part": "summary",
+      "local": "the 13 surrogate cases and 3 value cases match separately",
+      "remaining": "current JDBC owner, live single summary call, absent/different run isolation and proven unchanged original DB"
+    },
+    {
+      "part": "role boundary",
+      "local": "current V010/V012/V015/V016/V019 declarative inputs and separate V031 proof",
+      "remaining": "current read-only ownership verification of applied schema roles/privileges and authorized product verification"
+    },
+    {
+      "part": "formal",
+      "local": "attributed package/value scope only",
+      "remaining": "F02/F03, complete 451, accountable signed disposition"
+    }
+  ],
+  "newOrdinaryTestExecutions": 0,
+  "newRuntimeInvocations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

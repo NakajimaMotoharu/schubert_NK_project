@@ -1,0 +1,243 @@
+{
+  "run": "PG44238",
+  "source": "254daa110f43d285209ad6e8dc44065599c07629",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P008-03/2",
+  "terminalAtUTC": "2026-11-24T16:59:59.064766+00:00",
+  "actualExit": 0,
+  "newTestIds": [
+    "PT-SCN-008-C04",
+    "PT-SCN-008-C05"
+  ],
+  "productTests": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unrun": 0
+  },
+  "oldSelected": 6,
+  "testSource": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+    "sha256": "94bd8602c684352d07b26233097271bc80509d3e7f4a74cd56b8bdcbfc81445b"
+  },
+  "specification": {
+    "path": "evidence/01_PT/008_NK-SCN-001/4559_Transfer容量の状態語彙・値snapshot単体仕様.md",
+    "sha256": "f6cf4684d851c4d6868e8c45d66ae8410562abf1a45456ac25e4b448569d5e3d"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/xml/TEST-junit-jupiter.xml",
+    "sha256": "64c56a3300893b24e0ca474502733d07ab1820aa6d4a9d58b6f63da00ecf300e"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/unit.exec",
+    "sha256": "66e3b06c6c014a8a1b9fd1912fbd592e719f7fe35327d0a6213c867d2a64d58d"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/raw.out",
+    "sha256": "01c1f9457a0906ae02fed5966f6a5ac8011a21c0cb93c23e7014a9a0e8937658"
+  },
+  "classes": {
+    "dev/codex/schubert/nk/api/error/CapacityExceededException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 6
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 145
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 28
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 50
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 104
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 22
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 31
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverage": {
+    "LINE": {
+      "missed": 1,
+      "covered": 58
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 20
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 24
+    }
+  },
+  "noCoverageUnion": true,
+  "unresolvedUnfilteredDeficit": {
+    "TransferCapacity.snapshot": "exceptional unlock line",
+    "TransferCapacity.Reservation.close": "partial exception-handler instructions"
+  },
+  "registeredIssue": "BUG-3771",
+  "fixCommit": "254daa110f43d285209ad6e8dc44065599c07629",
+  "preceding": {
+    "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG44236-transfer-capacity-values-before-style/manifest.json",
+    "sha256": "87474cf25fc07b7eb11e1f17186b8136b2759da6c1833ec4c5df12e12df31905"
+  },
+  "sourceStatic": {
+    "googleJavaFormat": 0,
+    "checkstyle": 0,
+    "checkstyleXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/checkstyle.xml",
+      "sha256": "2d064dfaf909fd485f185bcea0ccd5ce83b749a937bcbe1dee89f077018f7980"
+    },
+    "pmdRawExit": 4,
+    "pmdRawCount": 21,
+    "pmdComparedSameLegacyFileSnippets": 21,
+    "newNullAssignment": 0,
+    "pmdQualityOwnerPending": 21,
+    "pmdOriginal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/pmd.xml",
+      "sha256": "766ba3bbfa4cc57b187576ecd29248c960a2d664dc8f485c820c9fd209eab6a9"
+    },
+    "canonicalSpotless": {
+      "run": "PG44240",
+      "scope": 1,
+      "exit": 0,
+      "cacheSkipped": 0,
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44240-transfer-capacity-single-canonical-format/begin.json",
+        "sha256": "b81b85bd25d680d8c7b4a0f6433d7ac3692b0ea30556fd7102c72900126454cc"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44240-transfer-capacity-single-canonical-format/terminal.json",
+        "sha256": "1741199cd750474b1ea0434c71e2539e69558b9c4bc7e43b4fc73a40ef6cab94"
+      }
+    }
+  },
+  "command": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/begin.json",
+    "sha256": "19883acd76b3dca9c1448602f1306f66b311bf6f75c0e3e8639aca6402fad264"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44238-transfer-capacity-two-new-value-final/terminal.json",
+    "sha256": "2f61fa09317746de3a2fc163143a08db95b24c1dc778b3eed896806038cce8bd"
+  },
+  "realFileStoreOrRuntime": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
