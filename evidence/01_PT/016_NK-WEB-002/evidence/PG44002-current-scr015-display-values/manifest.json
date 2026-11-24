@@ -1,0 +1,93 @@
+{
+  "run": "PG44002",
+  "actualExit": 0,
+  "source": "cddccd80d7d66ac78ce71e9434407dafac8fe2f2",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P016-15/2",
+  "terminalAtUTC": "2026-11-24T13:24:17.505686+00:00",
+  "testId": "PT-WEB-SCR015-VM001",
+  "method": "displaysIndependentTimestampsAndLeavesMissingValuesBlank",
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListDisplayValueTest.java",
+    "sha256": "e37e1aa0d52d7a2f2f8fe7cc54bd6d0ba9d53ab62a08a5576226626191445e53"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4957_SCR015一覧日時表示値単体仕様.md",
+    "sha256": "a01739965cf3e477ecaa2b4e792b585d4381fe20bb46fda6f7aec468a7033dd7"
+  },
+  "mainSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+      "sha256": "3ab853dea7f6e95aa94c6553180ad7d355c1af6761636dc9828a9ada969f5eb6"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java",
+      "sha256": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+      "sha256": "d00242a9223aa067fc609945fc6e5bf382429c121b3c49600a3c3a056778c906"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    }
+  ],
+  "buildAndTests": {
+    "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/begin.json",
+    "sha256": "01e865a42c1428126aae4a39e3e63ca86dd7a8767b5653fc5c0ebe50de013acf"
+  },
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/terminal.json",
+    "sha256": "1b529bbd336e520b81e0b6ea3c800910394f107820f991852ef426ede88ba2b6"
+  },
+  "junit": {
+    "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/reports/TEST-junit-jupiter.xml",
+    "sha256": "1d429fe7e847b19304178e522a7aa7b49a29f8c202242de2e9c74e53064f2ec8"
+  },
+  "coverage": {
+    "LINE": [
+      49,
+      76
+    ],
+    "METHOD": [
+      14,
+      27
+    ],
+    "CLASS": [
+      2,
+      2
+    ],
+    "BRANCH": [
+      12,
+      28
+    ]
+  },
+  "raw": {
+    "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/raw.out",
+    "sha256": "60ef74fa17de432ce4640c6c20ae45dbee5e85a019fbc307d2a0aed56db6c9bc"
+  },
+  "currentStatic": {
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 0
+  },
+  "staticReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/fixture-style-terminal.json",
+      "sha256": "d1a4affd585181be6b7be5613dbc532a8315ab51e40f65ab0d4160c48d617772"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44002-current-scr015-display-values/pmd-terminal.json",
+      "sha256": "6127610c62cb25dd481b8a2cf52724c2e3727f4732bf6def72cf2f278eac665f"
+    }
+  ],
+  "expected": "Four distinct JST values incl. day crossing, absent optional values blank, ordered synthetic rows, role, state, link.",
+  "actualBackendOperations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

@@ -1,0 +1,109 @@
+{
+  "run": "PG44008",
+  "wbs": "WBS-P016-15/2",
+  "actualExit": 0,
+  "source": "8faaf1a4915284d85507efa5a21a4dc16a3f33f4",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T13:29:02.537778+00:00",
+  "start": {
+    "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/begin.json",
+    "sha256": "59b8d22abbfa919b4094fbc712b31aec5a620b416fb147cdfb650e340a223ba5"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/terminal.json",
+    "sha256": "6d1347df6e5ca7d931c93f07486005024e8451b0964fe412be6aeb2033e73445"
+  },
+  "junit": {
+    "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/reports/TEST-junit-jupiter.xml",
+    "sha256": "bf1df9bac6191fcea4fbe768ed06e85730dd8bfa50717ca4205268b45ae85e7f"
+  },
+  "raw": {
+    "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/raw.out",
+    "sha256": "12bd3229573bd49d3442ce706bbcb76ddb1dc81b08da27b9c60aadd5721121b7"
+  },
+  "execFile": {
+    "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/unit.exec",
+    "sha256": "391070a002f4b89604b809ab183c34ee404efc567fab7bc813b4efaded7245c3"
+  },
+  "coverage": {
+    "LINE": [
+      76,
+      76
+    ],
+    "METHOD": [
+      27,
+      27
+    ],
+    "CLASS": [
+      2,
+      2
+    ],
+    "BRANCH": [
+      28,
+      28
+    ]
+  },
+  "scope": "UserListViewModel and UserListViewModel.Row, single execution without aggregate",
+  "actualResults": {
+    "passCount": 5,
+    "failCount": 0,
+    "errors": 0,
+    "skip": 0,
+    "notRun": 0
+  },
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListDisplayValueTest.java",
+    "sha256": "b7b8c230445afb00fe81db8fa71c24e4e063b3974d5160e24612488c191871f4"
+  },
+  "testIds": [
+    "PT-WEB-SCR015-VM001",
+    "PT-WEB-SCR015-VM002",
+    "PT-WEB-SCR015-VM003",
+    "PT-WEB-SCR015-VM004",
+    "PT-WEB-SCR015-VM005"
+  ],
+  "methods": [
+    "displaysIndependentTimestampsAndLeavesMissingValuesBlank",
+    "retainsFiltersAndBothLinksOnTheMiddlePage",
+    "distinguishesEmptySuccessFromInvalidInput",
+    "rejectsDuplicateIdentityAndIncorrectByteOrTieOrder",
+    "rejectsAResponseForTheWrongPageAndANonAdministrator"
+  ],
+  "beforeFormat": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44006-scr015-before-format/manifest.json",
+    "sha256": "1346f9261f7a60ace1b647e9c5a52e6a9e393cb16417d1cd5a70225ce735457e"
+  },
+  "previousSeparateDateCase": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44002-current-scr015-display-values/manifest.json",
+    "sha256": "549b2bec18766c4bdfe8a441514fb15e561de09f670527e090ff92144b359554"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4957_SCR015一覧日時表示値単体仕様.md",
+    "sha256": "0eb13193c7f8740e0a9661d61dcd1fb33b69e9ec972f3a85bf66f185e812dc16"
+  },
+  "staticChecks": {
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 0
+  },
+  "staticReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/fixture-style-terminal.json",
+      "sha256": "606c661cfb4bada2c3a9446f4ceddd0981a18788ea950c952b0d3ea726e27283"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44008-current-scr015-display-branches-formatted/pmd-terminal.json",
+      "sha256": "9b24cbae0f43558b9bf20f05c47137d11b310e76b91ea2f9f93c941e53bfc688"
+    }
+  ],
+  "bug": "BUG-3761",
+  "fixCommit": "8faaf1a4915284d85507efa5a21a4dc16a3f33f4",
+  "notIncluded": [
+    "real HTTP",
+    "Role authorization by controller/API",
+    "live DB or ordinary environment",
+    "351/451 whole release"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
