@@ -19,12 +19,12 @@
   <section class="error-detail" th:if="${page.values.state == 'ERROR'}"><p class="error-code" th:text="${page.values.errorCode}"></p><p class="user-facing-error" th:text="${page.values.userFacingError}"></p></section>
   <p class="operation-notice" role="alert" th:if="${notice != null and !notice.empty}" th:text="${notice}"></p>
   <section class="cancel-confirm" th:if="${action != null}">
-    <div class="operation-errors" role="alert"><p th:each="issue : ${action.issues}" th:text="${issue.value}"></p></div>
+    <div th:replace="~{fragments/error-summary :: operationErrors(${action.issues})}"></div>
     <form class="cancel-form" method="post" data-operation-submit th:action="${'/notifications/' + page.values.id}">
       <input type="hidden" name="operation" value="CANCEL">
       <input type="hidden" name="id" th:value="${action.fields.id}">
-      <input type="hidden" name="operation_token" th:value="${action.fields.operation_token}">
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${action.fields.operation_token})}">
+      <input type="hidden" th:replace="~{fragments/forms :: csrfField(${_csrf.parameterName}, ${_csrf.token})}">
       <label><input type="checkbox" name="confirm" value="true" th:checked="${action.fields.confirm}" required>処理の取消を確認しました</label>
       <button type="submit">処理を取り消す</button>
     </form>

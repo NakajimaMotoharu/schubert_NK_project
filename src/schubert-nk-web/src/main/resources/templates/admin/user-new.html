@@ -6,11 +6,11 @@
   <header class="topbar"><h1>User追加</h1><div th:replace="~{fragments/layout :: userActions(${page.values.topBar})}"></div></header>
   <nav><a th:href="@{/admin/users}">User一覧</a></nav>
   <p role="alert" th:if="${!page.values.message.empty}" th:text="${page.values.message}"></p>
-  <ul class="validation-summary" th:if="${!page.values.issues.empty}"><li th:each="issue : ${page.values.issues}" th:text="${issue.value}"></li></ul>
+  <ul th:replace="~{fragments/error-summary :: validationList(${page.values.issues})}"></ul>
   <form method="post" data-operation-submit th:action="@{/admin/users/new}">
-    <input type="hidden" name="operation_token" th:value="${page.values.token}">
+    <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${page.values.token})}">
     <label>Username<input name="username" required maxlength="64" th:value="${page.values.fields.username}"></label>
-    <p class="field-error username-error" th:if="${page.values.issues.containsKey('username')}" th:text="${page.values.issues.username}"></p>
+    <p th:replace="~{fragments/forms :: fieldError(${page.values.issues}, 'username', 'field-error username-error')}"></p>
     <label>初期Password<input type="password" name="password" required autocomplete="new-password"></label>
     <label>Password確認<input type="password" name="password_confirmation" required autocomplete="new-password"></label>
     <label>Role<select name="role"><option value="USER" th:selected="${page.values.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${page.values.fields.role == 'ADMIN'}">ADMIN</option></select></label>

@@ -1,0 +1,9 @@
+<ul th:fragment="validationList(issues)" class="validation-summary" th:if="${!issues.empty}">
+  <li th:each="issue : ${issues}" th:text="${issue.value}"></li>
+</ul>
+<div th:fragment="operationErrors(issues)" class="operation-errors" role="alert">
+  <p th:each="issue : ${issues}" th:text="${issue.value}"></p>
+</div>
+<div th:fragment="questionValidation(issues)" class="validation-summary" role="alert" th:if="${!issues.empty}">
+  <ul><li th:each="issue : ${issues}"><a href="#question" th:text="${issue.value}"></a></li></ul>
+</div>

@@ -25,8 +25,8 @@
       <input type="hidden" name="operation" th:value="${form.operation}">
       <input type="hidden" name="id" th:value="${form.fields.id}">
       <input type="hidden" name="expected_version" th:value="${form.fields.expected_version}">
-      <input type="hidden" name="operation_token" th:value="${form.token}">
-      <ul class="validation-summary" th:if="${!form.issues.empty}"><li th:each="issue : ${form.issues}" th:text="${issue.value}"></li></ul>
+      <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${form.token})}">
+      <ul th:replace="~{fragments/error-summary :: validationList(${form.issues})}"></ul>
       <div th:if="${form.operation == 'STATUS'}"><input type="hidden" name="enabled" th:value="${form.fields.enabled}"><span th:text="${form.fields.enabled ? '有効化' : '無効化'}"></span></div>
       <label th:if="${form.operation == 'ROLE'}">Role<select name="role"><option value="USER" th:selected="${form.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${form.fields.role == 'ADMIN'}">ADMIN</option></select></label>
       <div th:if="${form.operation == 'PASSWORD'}"><label>新Password<input type="password" name="password" required autocomplete="new-password"></label><label>Password確認<input type="password" name="password_confirmation" required autocomplete="new-password"></label></div>

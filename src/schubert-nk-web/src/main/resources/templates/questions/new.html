@@ -5,14 +5,12 @@
 <body><main class="page question-new-page">
   <header class="topbar"><h1>質問要求</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
   <p class="retry-notice" th:if="${!page.notice.empty}" th:text="${page.notice}"></p>
-  <div class="validation-summary" role="alert" th:if="${!page.issues.empty}">
-    <ul><li th:each="issue : ${page.issues}"><a href="#question" th:text="${issue.value}"></a></li></ul>
-  </div>
+  <div th:replace="~{fragments/error-summary :: questionValidation(${page.issues})}"></div>
   <form class="question-input" method="post" th:action="@{/questions/new}">
-    <input type="hidden" name="operation_token" th:value="${page.values.operationToken}">
+    <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${page.values.operationToken})}">
     <label for="question">質問</label><textarea id="question" name="question" rows="6" required th:text="${page.values.question}"></textarea>
     <p>残り <span data-question-remaining>4096</span> byte</p>
-    <p class="field-error" th:if="${page.issues.containsKey('question')}" th:text="${page.issues.question}"></p>
+    <p th:replace="~{fragments/forms :: fieldError(${page.issues}, 'question', 'field-error')}"></p>
     <button type="submit">送信</button>
   </form><a th:href="@{/}">メニュー</a>
 </main><script src="/js/question-input-validation.js" defer></script></body></html>
