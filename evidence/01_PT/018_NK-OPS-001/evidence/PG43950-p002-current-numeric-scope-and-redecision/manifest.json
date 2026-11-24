@@ -1,0 +1,69 @@
+{
+  "run": "PG43950",
+  "source": "ca5c4559d15f7147b351d848d8cd8d20c98d8b26",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:22:15.698187+00:00",
+  "candidateIdenticalPaths": [
+    "pom.xml",
+    "src/schubert-nk-protocol"
+  ],
+  "originalRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43646-current-protocol-package-v1/manifest.json",
+    "sha256": "8152630ccb7755cd39f7aeadda6ebf7518cbea5a688a6f1af46fcf23a5508648"
+  },
+  "originalScopeSource": "2f2d7b7087347eb57c5602476f9031f065b634a5",
+  "testId": "PT-PRO-002-N03",
+  "testMethod": "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+  "approvedDesign": {
+    "commit": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+    "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+    "section": "6.2",
+    "requirement": "MSG-004"
+  },
+  "fixture": "20-byte literal w/ trailing 0x2b or 0xff after 9223372036854775808; independent expected nonnumeric protocol diagnostic",
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+    "sha256": "3c7ee8d0dfda56668c97d01553504d074414839ddcfc896c01f2843df50dc1dc"
+  },
+  "sameModuleTestSuites": 39,
+  "sameModuleProductTests": 171,
+  "artifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "physicalPins": {
+    "dev/codex/schubert/nk/protocol/codec/FieldEncodingException.class": "a2c4b4dea8b57f89373960f015b72ba5786dbb035b214282c39b3e858f7a7fec",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class": "a78f21c6145a38d6449f1857dd0f98e88e3473c6e3e73596cc5864b4f184b212",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class": "97a648fe4bfb519ef36d61e2f582dc621a859340a6f73e40a6ccc2f10e70db77"
+  },
+  "coverage": {
+    "line": [
+      120,
+      120
+    ],
+    "method": [
+      15,
+      15
+    ],
+    "clazz": [
+      1,
+      1
+    ],
+    "branch": [
+      86,
+      86
+    ],
+    "scope": "original identical FieldCodec physical only",
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/coverage.unfiltered.tsv",
+      "sha256": "64a4d0dea8ae775d4b39c2b4c7e77ae92541bcd8eed6a57d79ef83f60393f1ab"
+    }
+  },
+  "rows": {
+    "P002再判定-a": "Numeric leaf evidence confirmed; original whole owner acceptance retained open.",
+    "P002再判定-b": "Current production wide 451 and ownership/routes MSG-001/007, MSG-009 via QA-062, and actual CHR remain open."
+  },
+  "completedOriginalRowPricePp": 0,
+  "formalAcceptanceId": null,
+  "newDynamicExecutions": 0
+}

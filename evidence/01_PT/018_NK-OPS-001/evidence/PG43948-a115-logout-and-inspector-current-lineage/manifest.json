@@ -1,0 +1,145 @@
+{
+  "run": "PG43948",
+  "source": "ca5c4559d15f7147b351d848d8cd8d20c98d8b26",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:21:10.153224+00:00",
+  "rows": [
+    {
+      "row": "A1-15.01",
+      "activeInputs": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+          "expectedAtPriorJoin": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+          "currentBlob": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+          "expectedAtPriorJoin": "a31f66e18425e4af98189013965e446a9f37f543",
+          "currentBlob": "a31f66e18425e4af98189013965e446a9f37f543",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+          "expectedAtPriorJoin": "4d386edd142478e51eb8b4f48622a6f9149c4156",
+          "currentBlob": "4d386edd142478e51eb8b4f48622a6f9149c4156",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java",
+          "expectedAtPriorJoin": "bbd69e2dee5dd7d7a99ec86555e95539aeeaa4c1",
+          "currentBlob": "bbd69e2dee5dd7d7a99ec86555e95539aeeaa4c1",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+          "expectedAtPriorJoin": "5fefb0a3328c0a0588d753f2627206f1309a252b",
+          "currentBlob": "5fefb0a3328c0a0588d753f2627206f1309a252b",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing.java",
+          "expectedAtPriorJoin": "ec61f779da88d407518da4fb7ba2f3611318f790",
+          "currentBlob": "ec61f779da88d407518da4fb7ba2f3611318f790",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java",
+          "expectedAtPriorJoin": "b7d8f59acfa31600f56a986136eec2e4618a575e",
+          "currentBlob": "b7d8f59acfa31600f56a986136eec2e4618a575e",
+          "same": true
+        }
+      ],
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41482-a11501-logout-assembly-owner-v1/manifest.json",
+        "sha256": "b3a4e9542d44cc8004127f4cf2c8d12c934053b8cc72b9cf020ce0f90afe0a18"
+      },
+      "historicalSuccessfulMethods": [
+        "assemblyUsesRealRevocationInboxReplayWithoutTakingKeyOwnership",
+        "nullAndWireBoundariesAreRejected"
+      ],
+      "mappedIds": [
+        "PT-AUT-LOGOUT-ASSEMBLY-001",
+        "PT-AUT-LOGOUT-ASSEMBLY-002",
+        "PT-AUT-LOGOUT-ASSEMBLY-003"
+      ],
+      "candidateDynamicPasses": 0,
+      "heldTypes": [
+        "FingerprintKeyRing",
+        "ResponseSnapshotCodec"
+      ],
+      "testClassReads": 0,
+      "formalAcceptanceId": null,
+      "open": "QA-056 dependent compile/typed and same-source ordinary PT. Existing original passed historical only."
+    },
+    {
+      "row": "A1-15.02",
+      "activeInputs": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+          "expectedAtPriorJoin": "fb121f95d2c41b9f5bdc7e7c2168f4d527f36e1a",
+          "currentBlob": "fb121f95d2c41b9f5bdc7e7c2168f4d527f36e1a",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoffTest.java",
+          "expectedAtPriorJoin": "0021ab0f3279a56059b1b7c3b86e20d3bf5f668d",
+          "currentBlob": "0021ab0f3279a56059b1b7c3b86e20d3bf5f668d",
+          "same": true
+        },
+        {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+          "expectedAtPriorJoin": "3f0dd1b469d7c9a09405dd6211228b929fdfba36",
+          "currentBlob": "3f0dd1b469d7c9a09405dd6211228b929fdfba36",
+          "same": true
+        }
+      ],
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41484-a11502-inspector-handoff-trace-v1/manifest.json",
+        "sha256": "162adfd9243d1af61504a8cf2daeb00b9911053578f53c42ac8b9979865e9a4f"
+      },
+      "historicalSuccessfulCases": {
+        "PT-BAT-030": "actualTransactionHandoff",
+        "PT-BAT-031": "preconditionsAndReentrantLock",
+        "PT-BAT-032": "callbackFailuresAndNull",
+        "PT-BAT-033": "reacquisitionConflict",
+        "PT-BAT-034": "jdbcFailureMatrix",
+        "PT-BAT-035": "invalidResultMatrix",
+        "PT-BAT-036": "stateChangesAndInterrupts",
+        "PT-BAT-037": "concurrentGapCompetition",
+        "PT-BAT-282": "callbackIdentitySurvivesReacquisitionSqlFailure"
+      },
+      "currentCandidateDynamicPasses": 0,
+      "currentClassSha": "a891f817fc454137890a7d26e1329a1de4c3efe56fb28f76ea367e2fa385a518",
+      "typedPrior": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43568-batch-typed-reuse-current-72-v1/typed-context-by-physical.json",
+        "sha256": "66a365531d25dbb473f8a840de95e3283a84d07c2778be00fea475cd96b239fa"
+      },
+      "typedScopedRaw": 0,
+      "normalBatch": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+        "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+      },
+      "formalAcceptanceId": null,
+      "open": "Current source DB-owning fixture, runtime lock/owner, and current genuine results for nine. Existing nine historical only."
+    },
+    {
+      "row": "A1-15.03",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41732-a11503-temporary-fixture-applicability-v1/manifest.json",
+        "sha256": "077642e2988b206d08ffa455f770d6e0f8ad789a261826af093322f10ecc5a97"
+      },
+      "currentCandidateDynamicPasses": 0,
+      "open": "Existing twelve-case fixture uses real native and remains held. No independent alternative with accepted runtime ownership for this criterion."
+    }
+  ],
+  "owner": "DB・資源管理担当／API・QA-056担当",
+  "parent": "P004-03",
+  "parentRemaining": [
+    "actual DB and FileStore ownership, retention and retirement",
+    "F02 / F03 formal acceptance"
+  ],
+  "currentRunCount": 0,
+  "chargedOriginalRowPricePp": 0,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,143 @@
+{
+  "run": "PG43942/post-format + PG43944",
+  "status": "LOCAL_PT_AND_NORMAL_BATCH_VERIFIED_STATIC_APPLICABILITY_PENDING",
+  "source": "ca5c4559d15f7147b351d848d8cd8d20c98d8b26",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "testCommit": "eca3e12f83be9334c2534d4db49d5560eebe3274",
+  "canonicalDesign": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "branch": "dev-foundation",
+  "terminalAtUTC": "2026-11-24T12:17:59.085465+00:00",
+  "counts": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "line": [
+      91,
+      91
+    ],
+    "method": [
+      14,
+      14
+    ],
+    "clazz": [
+      1,
+      1
+    ],
+    "branch": [
+      68,
+      68
+    ],
+    "scope": "one class; single execution"
+  },
+  "build": {
+    "compile": 0,
+    "jar": 0
+  },
+  "regularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "physicalCount": 660,
+  "newChangedClass": [
+    "dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class"
+  ],
+  "matchedPhysicalSha256": "bbb31f9553a0cb3da6ecc222175324148d6776fe8f4dbd1b9af13789a77dcc87",
+  "fmtCheckstyle": "2 explicitly pinned files; raw formatting exit 0 and Checkstyle 0, both files",
+  "pmd": {
+    "rawTotal": 12,
+    "rawExit": [
+      4,
+      4
+    ],
+    "analysisErrors": 0,
+    "applicableCount": null,
+    "classification": [
+      {
+        "rule": "CloseResource",
+        "raw": 2,
+        "preliminary": "Each acquired instance has exactly one matching finally close; null/acquisition failure branches avoid claiming absent resources. Both close-only faults and close precedence independently tested."
+      },
+      {
+        "rule": "AvoidCatchingGenericException",
+        "raw": 8,
+        "preliminary": "The two scopes record and immediately rethrow RuntimeException and Error; close handling retains an existing primary with exact same-object handling. SSC-481 requires primary preservation. Review raw mechanism and all fatal paths before classifying."
+      },
+      {
+        "rule": "CompareObjectsWithEquals",
+        "raw": 1,
+        "preliminary": "Same Throwable reference is the guard required by Java self-suppression; equals would be a distinct contract."
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "raw": 1,
+        "preliminary": "Decoupled JDK interface proxy for synthetic JDBC, same fixture rule as PG43930."
+      }
+    ],
+    "disposition": "Quality owner applicability review pending; no suppression, mapped findings retained, no PMD/451 pass."
+  },
+  "spotbugs": {
+    "BugInstance": 0,
+    "Error": 0,
+    "MissingClass": 0
+  },
+  "publicAbiEqual": true,
+  "attempts": {
+    "typedFirst": "SpotBugs XML preserved; outer runner exited 1 because javap omitted -s. Fresh verification retained with separate root and exact -s; no product change."
+  },
+  "tests": [
+    "PT-BAT-BACKUP-UTC001..010",
+    "PG43914 SQL diagnostics four",
+    "PG43928 constructor/value four"
+  ],
+  "sourceProof": [
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/begin.json",
+      "sha256": "d9f6ced08fbe570bb134f071cc5b459c70f98b6ee8631d980f65a93c1e1ecb0e"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/terminal.json",
+      "sha256": "e9549d62d8292d65ca01e476358bf9ae73bf64fca113f6df5dd31d4914f4873b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/raw.out",
+      "sha256": "5f7fbe7d3b28506709100ebf71e87d06f285072f59837dd6a2784bd1dd1fa31d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/unit.out",
+      "sha256": "23205d8d19ae898428c803396e25d7b6216a3d171d047b79e3b35ed6483eed42"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/fixture-style-terminal.json",
+      "sha256": "b79856053b0b99d4933150aac702bd3ceedfc377f151a2bc7b4b6dc5e81c50e9"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/main-style/fixture-style-terminal.json",
+      "sha256": "8a32e5ad9431e1eaa315f91fa01ab5a31c6b752b57f7eb71b70da079610496a9"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43942-ssc481-backup-two-lease-post-format/pmd-terminal.json",
+      "sha256": "070627dd676a63f6780eaf3799f36e4e405c9ae6f2f739ce652ff8c9fc7bb667"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/begin.json",
+      "sha256": "4285f1f795ae497e394031473040387c9e2ac96c52134fd28ef97e1abfb52844"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/terminal.json",
+      "sha256": "ddf4eef71422b86115502ef21234f54a1b54b20d7ea882e85b396e445accb8d0"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/typed-verified/typed-terminal.json",
+      "sha256": "c6a71e62aaffda77bbdc1ba880e609bdd11fc9d98f059ca2ebf2e2b4f7f974b2"
+    }
+  ],
+  "previousProvisional": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43942-ssc481-backup-close-before-format/manifest.json",
+    "sha256": "72964d0f1fdeeed545e9aa996ae4eb1276b54833915df8bbbd5721581638077e"
+  },
+  "formalAcceptanceId": null,
+  "realDbExecuted": false
+}
