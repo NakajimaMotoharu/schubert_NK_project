@@ -129,10 +129,16 @@ final class SearchTemplateResourcePortTest {
   }
 
   private static Document render(String id, Map<String, Object> p) throws IOException {
+    return render(id, p, "");
+  }
+
+  private static Document render(String id, Map<String, Object> p, String contextPath)
+      throws IOException {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setMethod("GET");
-    request.setRequestURI("/search");
+    request.setContextPath(contextPath);
+    request.setRequestURI(contextPath + "/search");
     var exchange =
         JakartaServletWebApplication.buildApplication(servlet)
             .buildExchange(request, new MockHttpServletResponse());
@@ -180,6 +186,16 @@ final class SearchTemplateResourcePortTest {
     assertTrue(d.select("#search-errors").hasAttr("hidden"));
     assertTrue(d.select(".results,.count,.pagination").isEmpty());
     assertEquals("/js/search-speaker-submit.js", d.select("script[defer]").attr("src"));
+  }
+
+  /** PT-WEB-FRAG-003. */
+  @Test
+  void mediaHrefUsesServletContextPathExactlyOnce() throws IOException {
+    var p = page();
+    setResults(p, 1, 1, List.of(resultRow("fixed", true)));
+    var d = render("SDOM-CONTEXT", p, "/fixture");
+    assertEquals("/fixture/audio/71", d.select(AUDIO).attr("src"));
+    assertEquals("/fixture/audio/71/download", d.select("a.download").attr(HREF));
   }
 
   @Test
