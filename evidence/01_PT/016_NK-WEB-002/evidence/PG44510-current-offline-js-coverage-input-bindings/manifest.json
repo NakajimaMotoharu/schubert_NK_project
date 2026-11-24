@@ -1,0 +1,107 @@
+{
+  "run": "PG44510",
+  "source": "ce8d6c2c841c64eaadc5728e9c1d5092068c18b3",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-P016-25.03/2",
+  "terminalAtUTC": "2026-11-24T20:02:44.126698+00:00",
+  "actualExit": 0,
+  "stage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44498-web-maven-resource-stage-after-warning-buttons/manifest.json",
+    "sha256": "a52620db2acb5bcb44a1c42ca318bee770aec02bd2a4daba44c67056980575fa"
+  },
+  "provenance": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41676-p01625-node-coverage-source-join-v1/manifest.json",
+    "sha256": "c362bd5446cd3d70039db16d6bfc6444fd8829b74916e655ade2cff70b424755"
+  },
+  "originalIndependentScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14782-web-four-script-resources-independent-v1/manifest.json",
+    "sha256": "e9e6bb114098d6d02d38b502822916dd350b1db70c4de1f0e81d0e8775a5a70d"
+  },
+  "sourceScripts": {
+    "log-search-validation": {
+      "path": "static/js/log-search-validation.js",
+      "sha256": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+      "historicalQualifiedCases": 8,
+      "sameCandidateScript": true
+    },
+    "operation-post-submit": {
+      "path": "static/js/operation-post-submit.js",
+      "sha256": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429",
+      "historicalQualifiedCases": 6,
+      "sameCandidateScript": true
+    },
+    "question-input-validation": {
+      "path": "static/js/question-input-validation.js",
+      "sha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+      "historicalQualifiedCases": 8,
+      "sameCandidateScript": true
+    },
+    "search-speaker-submit": {
+      "path": "static/js/search-speaker-submit.js",
+      "sha256": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+      "historicalQualifiedCases": 8,
+      "sameCandidateScript": true
+    }
+  },
+  "knownTemplateEdges": {
+    "templates/admin/user-detail.html": {
+      "sha256": "3bc01a993a4796e6927bcdf1de5580ef32774f6572db1a6554f4cbd98aa02ed1",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true
+    },
+    "templates/admin/user-new.html": {
+      "sha256": "40b90170b0d2f9938464e779a0bdbeb0b2eea2f2d9614df7d41780c77af61065",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true
+    },
+    "templates/logs.html": {
+      "sha256": "d60b9234674187874cf4f4621d22a9717e33325836c57a3a781aa7609a5d737a",
+      "localScript": "/js/log-search-validation.js",
+      "method": "get",
+      "formHook": "",
+      "externalDeferred": true
+    },
+    "templates/notifications/detail.html": {
+      "sha256": "8b21f81dada7b2082ad4c1f793da8a6ec9cdbd24196b931712b73dfd49b79fa2",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true
+    },
+    "templates/questions/detail.html": {
+      "sha256": "42351337a102422a9b6c6ce56c8e798c21e7c87d41f62f8117dadaaf5ce77faa",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true
+    },
+    "templates/questions/new.html": {
+      "sha256": "f2bdc49dba685047afb6b0305a555f924ac841a40218e87ec47c8abab1d9bbf1",
+      "localScript": "/js/question-input-validation.js",
+      "method": "post",
+      "formHook": "question-input",
+      "externalDeferred": true
+    },
+    "templates/search.html": {
+      "sha256": "0c5af3c026d1449ef1a5831bf40d662ba9180b8efbfa731dd1cb88750c038007",
+      "localScript": "/js/search-speaker-submit.js",
+      "method": "get",
+      "formHook": "",
+      "externalDeferred": true
+    }
+  },
+  "checkedWebHtml": 29,
+  "distinctScripts": 4,
+  "actualNewNodeExecutions": 0,
+  "reusedExistingFixtureCases": 30,
+  "realBrowser": false,
+  "exactCssBrowserView": false,
+  "productJavaTests": 0,
+  "historyNoNewAcceptance": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
