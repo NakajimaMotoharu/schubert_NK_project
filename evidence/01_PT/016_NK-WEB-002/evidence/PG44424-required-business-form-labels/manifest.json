@@ -1,0 +1,373 @@
+{
+  "run": "PG44424",
+  "source": "55819a55298949fc6935c27e6d3536ab9a8c67bf",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T19:09:31.206684+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-P016-16/2",
+    "WBS-P016-17/2",
+    "WBS-P016-18/2",
+    "WBS-P016-21/2",
+    "WBS-P016-23/2",
+    "WBS-F03/2-2-b"
+  ],
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4988_新規業務フォームの必須表示単体仕様.md",
+    "sha256": "2f65e2adbfa188c1db4308e72cc04ec1bc8f4dab4c06e853504dd835d7152edd"
+  },
+  "result": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4989_新規業務フォームの必須表示実行結果.md",
+    "sha256": "bbbd00fd43865123679cccc975551d69974263fc6c26474ed4d235008442a421"
+  },
+  "bug": "BUG-3783",
+  "horizontal": "YKT-2953",
+  "exactIds": {
+    "questionInputIdentifiesTheRequiredTextarea()": "PT-WEB-FORM-LABEL001",
+    "userCreationIdentifiesEveryRequiredVisibleInput()": "PT-WEB-FORM-LABEL002",
+    "newUpdateFormsIdentifyRequiredChoicesAndConfirmations()": "PT-WEB-FORM-LABEL003"
+  },
+  "independentVisibleControls": 12,
+  "red": {
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/xml/TEST-junit-jupiter.xml",
+      "sha256": "95917410d927e018f22867546c8950cf7ab7196ccfb2ea989ca13e39b221b62a"
+    },
+    "tests": 3,
+    "failures": 3,
+    "cases": [
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "newUpdateFormsIdentifyRequiredChoicesAndConfirmations()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "questionInputIdentifiesTheRequiredTextarea()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "userCreationIdentifiesEveryRequiredVisibleInput()"
+      }
+    ]
+  },
+  "currentStaticDom": {
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/xml/TEST-junit-jupiter.xml",
+      "sha256": "7216b9ec1d723579bacdb46c452267388f37ad54502d17187941014b2eb1e931"
+    },
+    "tests": 3,
+    "failures": 0,
+    "cases": [
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "newUpdateFormsIdentifyRequiredChoicesAndConfirmations()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "questionInputIdentifiesTheRequiredTextarea()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.RequiredFormLabelResourceTest",
+        "name": "userCreationIdentifiesEveryRequiredVisibleInput()"
+      }
+    ]
+  },
+  "affectedPriorRegressions": {
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44420-required-labels-local-render-regression/report/TEST-junit-jupiter.xml",
+      "sha256": "47f86649e16f75d31c2c4f9838a6061e9af628bbb73a6b003eff8cd2d713aad8"
+    },
+    "tests": 38,
+    "failures": 0,
+    "cases": [
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationErrorFields()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "optionalNoticesNullEmptyAndText()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionErrorHidesAnswer()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "userAndAdminDisplayValuesStaySeparate()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationConfirmationBothValues()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "acceptedPageNavigationUsesApprovedTargets()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "concurrentInputAndAcceptedPagesKeepValuesSeparate()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationDeletedMasksBodiesAndAnswerLink()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "emptyFormsCreateNoMutationControlsAndRetainStaticNavigation()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionConfirmationUncheckedAndErrorsEscape()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "noticeValidationAndQuestionTextEscapeWithoutMarkup()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "backLinksAndDeferredOperationScript()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionAdminEmptyAnswer()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "everyRoleAndEnabledCombinationRetainsExactlyOneSelection()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "metadataEscapesMarkupAndEmptyDateValuesRemainEmpty()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "unmappedPasswordPropertiesAreNeverRedisplayed()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "emptyInputHasExplicitFormAndScriptContract()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionUserUnansweredReadOnly()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "ownedConcurrentFormsDoNotShareUsernamesOrSelections()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationCancelledFields()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationCompletedAnswersAndLink()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "initialFormHasApprovedEmptyValuesAndDefaults()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionConfirmationCheckedAndNotice()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "validationAndHiddenIdentityStayScopedToEachSuppliedForm()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+        "name": "passwordControlsNeverRetainUnmappedFieldValues()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "notificationReceivedAndProcessingTimestamps()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+        "name": "newPageMenuHrefUsesApprovedCanonicalPath()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+        "name": "alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes()"
+      },
+      {
+        "classType": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+        "name": "questionAnswerEscapesText()"
+      }
+    ]
+  },
+  "exactResources": [
+    {
+      "name": "templates/questions/new.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/resources/templates/questions/new.html",
+        "sha256": "51f5ec278523f4314e279712828b2376ee4c54c77caa3594cab3f5b34b80274d"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/resources/templates/questions/new.html",
+        "sha256": "f2bdc49dba685047afb6b0305a555f924ac841a40218e87ec47c8abab1d9bbf1"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+        "sha256": "f2bdc49dba685047afb6b0305a555f924ac841a40218e87ec47c8abab1d9bbf1"
+      }
+    },
+    {
+      "name": "templates/admin/user-new.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/resources/templates/admin/user-new.html",
+        "sha256": "736ec71ad8d3c0cc4f82985b437819e2888503fe5761e1ef2b3119a9670eb5fe"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/resources/templates/admin/user-new.html",
+        "sha256": "e983db0a093fe831482da60e55c21c313f4ddf2e515582ea395ed81c89d38906"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+        "sha256": "e983db0a093fe831482da60e55c21c313f4ddf2e515582ea395ed81c89d38906"
+      }
+    },
+    {
+      "name": "templates/admin/user-detail.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/resources/templates/admin/user-detail.html",
+        "sha256": "e1d76a91a6feb683781c0dfa533b8d158185c21638cd7f9cf2af1d61a0ff184b"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/resources/templates/admin/user-detail.html",
+        "sha256": "f6857c9c77b0ed0a4513a9528856182bf4fd068f22c12af0887993ef27fa4973"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+        "sha256": "f6857c9c77b0ed0a4513a9528856182bf4fd068f22c12af0887993ef27fa4973"
+      }
+    },
+    {
+      "name": "templates/notifications/detail.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/resources/templates/notifications/detail.html",
+        "sha256": "1a6592e049ca416af27265ebbf6ec8d668289787bbbff8dc92280c58ecff2b90"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/resources/templates/notifications/detail.html",
+        "sha256": "ce8163dd4a36e5ed98ebe3596c62fe22464087d8d6437848470643edc39d8469"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+        "sha256": "ce8163dd4a36e5ed98ebe3596c62fe22464087d8d6437848470643edc39d8469"
+      }
+    },
+    {
+      "name": "templates/questions/detail.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/resources/templates/questions/detail.html",
+        "sha256": "03c75ff00987215517218429b98484539a7cb85aa4d9cb83b937630f435728d7"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/resources/templates/questions/detail.html",
+        "sha256": "c3eb2a05f48ccfa91da9a7629697d48c5df586e6925d69b30bfeab1a0a2efbf9"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+        "sha256": "c3eb2a05f48ccfa91da9a7629697d48c5df586e6925d69b30bfeab1a0a2efbf9"
+      }
+    }
+  ],
+  "mavenOutput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44418-web-resources-required-labels/manifest.json",
+    "sha256": "09926695034617f757d6cfb493b29291c11e5a36d8901a003a6afd98e17ee60c"
+  },
+  "changedExistingTestExpectationScope": "QRETURN003, UI222 static required label, one literal only",
+  "commands": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/begin.json",
+      "sha256": "5c7ce859ea569e7074be395a2c54cb3d8baa00cef0523cf933447e5facd29cd1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/begin.json",
+      "sha256": "68a89952a9d8ca9401033a2936e89d6eff4a6afff77850b4ccfd84b7edb5dc4c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44420-required-labels-local-render-regression/begin.json",
+      "sha256": "0cf3cb2604fcc38be2e1c2ad789476ab55efb38fa8228f54ec45afe4e1dff57d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44422-required-labels-fixture-typed-one-v2/begin.json",
+      "sha256": "4a21afd03eee8857cc08a4d634dbb433b95b5de79f0b6a88c6a8e8f5bf333199"
+    }
+  ],
+  "terms": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44414-required-labels-before/terminal.json",
+      "sha256": "29c659f10dda7f408676540ef84565ce0135164af5ab3648943b55cb4c5ed466"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44416-required-labels-after/terminal.json",
+      "sha256": "7dcf3049e851fb1ba5f9e863f4553e423d905eeed9111829fe9a08f337204e04"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44420-required-labels-local-render-regression/terminal.json",
+      "sha256": "1372b4940dfd45a9b79a035fbc7e0ba04a1978ffea230468948c634b9244482b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44422-required-labels-fixture-typed-one-v2/terminal.json",
+      "sha256": "35ed88c687b770fe6d2eb858908250fa849f266ee0407c5be74c86bb3a66b019"
+    }
+  ],
+  "newStaticTypeSpotBugs": {
+    "actualExit": 0,
+    "source": "55819a55298949fc6935c27e6d3536ab9a8c67bf",
+    "run": "PG44422",
+    "terminalAtUTC": "2026-11-24T19:08:40.809569+00:00",
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44422-required-labels-fixture-typed-one-v2/spotbugs.xml",
+      "sha256": "60d768f55f3cb36fbfb1fd7c1f94009becefa0a1f44f64a592d5ef6b00df053f"
+    },
+    "warnings": [],
+    "missing": 0,
+    "errors": 0,
+    "count": 1
+  },
+  "realServerOrSecrets": 0,
+  "acceptedOriginal": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
