@@ -1,0 +1,538 @@
+{
+  "run": "PG44162",
+  "source": "aba46dae33489f4fc603186f962aa1bf8f4e4287",
+  "baselineJavaCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T15:53:22.702488+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P015-07/2",
+  "bug": "BUG-3766",
+  "expansion": "YKT-2942",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4968_検索ログ共通ページとエラー単体仕様.md",
+    "sha256": "c11d99af1b1ae70264db8b40080675c4b3c37ff1b7de3a589581956d9aab37bd"
+  },
+  "testedResources": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+      "sha256": "0c5af3c026d1449ef1a5831bf40d662ba9180b8efbfa731dd1cb88750c038007"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/scenario.html",
+      "sha256": "3f690ef72d36aca9e57522de3bfee549a329f7b87c96eb4cfa770a7c7eaaa4c2"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+      "sha256": "381da2cbdaaa95a83e62f61c3bbc4b762b19b302e1ac8af95a7cd96c3641c8f7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+      "sha256": "c3dfff06b9b9ed1a53cfc208b269b13b501ef03f6fa959ea348481eae6ff997d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/media.html",
+      "sha256": "1786ec016b9d981269e2112d5918f2743ee3573247a3d7453da5601bd38065ea"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+      "sha256": "58e2060861a328b3dbf05ce4c8aff7f3bdc062f97006481c175555fa2c81df3e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+      "sha256": "736ec71ad8d3c0cc4f82985b437819e2888503fe5761e1ef2b3119a9670eb5fe"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "sha256": "e1d76a91a6feb683781c0dfa533b8d158185c21638cd7f9cf2af1d61a0ff184b"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "sha256": "51f5ec278523f4314e279712828b2376ee4c54c77caa3594cab3f5b34b80274d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+      "sha256": "03c75ff00987215517218429b98484539a7cb85aa4d9cb83b937630f435728d7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+      "sha256": "df5a1f7e7830a435dcd40a70bdde89f7b09e2038da444606a739f0ce8b01f547"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+      "sha256": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/forms.html",
+      "sha256": "28e727880a7f6fc7d4c805f0b36119f72d73ad3a647623c53b4d2f5ad4a78232"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/error-summary.html",
+      "sha256": "8fa5afe1b38ed63d9fc78508778f9e6e6c5c1328967a5a3d866bf1aa324efb42"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+      "sha256": "d60b9234674187874cf4f4621d22a9717e33325836c57a3a781aa7609a5d737a"
+    }
+  ],
+  "fixture": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java",
+      "sha256": "83507176450460200da378b15c5fbc7ed906580da410ea68faebecaa8a97df0e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java",
+      "sha256": "c50a2c62bde7ed4458c7ac88125f8a792f56833de1a693cf41c02f86992926fc"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java",
+      "sha256": "75fbc9e3286d25bf13aa5b04a8127ea00a92f4830d359d2a687a119bc5e815c4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java",
+      "sha256": "988ac589b0acd9a66f9bef641d4c0530ebf0581d4b8017ca57485a995d86f993"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateTemplateResourcePortTest.java",
+      "sha256": "dbd37d699119f02d57c17d4da407fa7cec9a1164e4c48a6a9d8d27458f13dacd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailTemplateResourcePortTest.java",
+      "sha256": "8349e4310b2ecf720d35bcc81a1797d2d47ed505a0340fb5bfb6f9df6dbf0a33"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java",
+      "sha256": "9b6b6800dc02ac1483900891f0bee338a98d32eea3368878347e575e2af8565c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/DetailTemplateResourcePortTest.java",
+      "sha256": "ecda365e0af7e9c8b0f5a418800c4b714120005b2cf2eef0cf2724032b7e731f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSharedTemplateResourceTest.java",
+      "sha256": "47d9896f5488a6cadf35d631cbb0846a06007c6c9dd3e670997863df358e3dc7"
+    }
+  ],
+  "sdk": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+      "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar",
+      "sha256": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar",
+      "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar",
+      "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar",
+      "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+      "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar",
+      "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+      "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar",
+      "sha256": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar",
+      "sha256": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+      "sha256": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar",
+      "sha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar",
+      "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+      "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "jdk": "25.0.4",
+  "os": "7.0.0-44-generic",
+  "directMethods": [
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.AnimationWatchTemplateResourcePortTest",
+      "method": "approvedCatalogKindsHaveFixedPlaybackControlsAndBacklinks"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.AnimationWatchTemplateResourcePortTest",
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.AnimationWatchTemplateResourcePortTest",
+      "method": "displayTextIsEscapedWhilePlayerAndNavigationStayStructural"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "backLinksAndDeferredOperationScript"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationCancelledFields"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationCompletedAnswersAndLink"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationConfirmationBothValues"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationDeletedMasksBodiesAndAnswerLink"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationErrorFields"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "notificationReceivedAndProcessingTimestamps"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "optionalNoticesNullEmptyAndText"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionAdminEmptyAnswer"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionAnswerEscapesText"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionConfirmationCheckedAndNotice"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionConfirmationUncheckedAndErrorsEscape"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionErrorHidesAnswer"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.DetailTemplateResourcePortTest",
+      "method": "questionUserUnansweredReadOnly"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.LogSharedTemplateResourceTest",
+      "method": "frag001BothPagersKeepTheLogLabelsResultRangeAndLinks"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.LogSharedTemplateResourceTest",
+      "method": "frag002ValidationPreservesLogErrorIdsOrderingAndLiteralText"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "binaryMegabyteFormattingUsesZeroAndFractionalBoundaries"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "bothEmptyCollectionsProduceNoInventedPlayers"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "concurrentEnginesKeepEightPagesAndOutputsSeparate"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "everyOptionalPairSideHasExplicitPlayerOrPlaceholder"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "inactiveCollectionsAreNotEvaluated"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "ordinaryRowsKeepStoredOrderAndLiteralPlaybackMetadata"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "pageAndTopbarNavigationUseIndependentLiteralValues"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.MusicListTemplateResourcePortTest",
+      "method": "textEscapesWithoutInjectingMarkupOrAttributes"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "acceptedPageNavigationUsesApprovedTargets"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "concurrentInputAndAcceptedPagesKeepValuesSeparate"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "emptyInputHasExplicitFormAndScriptContract"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "newPageMenuHrefUsesApprovedCanonicalPath"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "noticeValidationAndQuestionTextEscapeWithoutMarkup"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.QuestionFormReturnResourcePortTest",
+      "method": "userAndAdminDisplayValuesStaySeparate"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "dialogueAndSpeakerFlagsRemainIndependentInAllFourCases"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "emptyEntryCollectionHasNoInventedBodyOrAudio"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "everyPreviousNextCombinationMatchesBothNavigationCopies"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "hundredEntriesKeepEveryAnchorPositionAndLongFirstBody"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "metadataAndNavigationUseExplicitApprovedDisplayValues"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "titlesSpeakerAndMultilineBodyEscapeMarkupWithoutTextLoss"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateResourcePortTest",
+      "method": "zeroOneAndTwoAudioLinksKeepStoredPlayerAndDownloadOrder"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "allKnownAndUnknownEnumFiltersRedisplayWithExplicitSelection"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "bothPaginationCopiesRespectSingleFirstMiddleAndLastBoundaries"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "errorsInputAndMultilineBodyEscapeWithoutExecutableMarkup"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "fullHundredRowPageKeepsEveryStoredPositionAndBoundaryBody"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "rowMetadataAndAudioPresenceDoNotCreateEmptyPlayers"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "successfulEmptyPageShowsZeroCountAndNoPagination"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.SearchTemplateResourcePortTest",
+      "method": "unsearchedPageRetainsSixGetControlsWithoutInventedResults"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "everyRoleAndEnabledCombinationRetainsExactlyOneSelection"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "initialFormHasApprovedEmptyValuesAndDefaults"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "ownedConcurrentFormsDoNotShareUsernamesOrSelections"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "unmappedPasswordPropertiesAreNeverRedisplayed"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserCreateTemplateResourcePortTest",
+      "method": "usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "emptyFormsCreateNoMutationControlsAndRetainStaticNavigation"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "metadataEscapesMarkupAndEmptyDateValuesRemainEmpty"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "passwordControlsNeverRetainUnmappedFieldValues"
+    },
+    {
+      "fixture": "dev.codex.schubert.nk.web.view.UserDetailTemplateResourcePortTest",
+      "method": "validationAndHiddenIdentityStayScopedToEachSuppliedForm"
+    }
+  ],
+  "casesByFixture": {
+    "UserDetailTemplateResourcePortTest": 8,
+    "MusicListTemplateResourcePortTest": 8,
+    "QuestionFormReturnResourcePortTest": 8,
+    "SearchTemplateResourcePortTest": 8,
+    "DetailTemplateResourcePortTest": 14,
+    "LogSharedTemplateResourceTest": 2,
+    "ScenarioDetailTemplateResourcePortTest": 8,
+    "AnimationWatchTemplateResourcePortTest": 3,
+    "UserCreateTemplateResourcePortTest": 8
+  },
+  "passed": 67,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newIds": 2,
+  "javaProductClassesOnClasspath": 0,
+  "newNormalWebJar": false,
+  "realBrowser": false,
+  "serviceOrDbOrJms": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "commandEvidence": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44162-web-templates-final-connected/begin.json",
+    "sha256": "f49702ff19255c5af204f8ffa05695d360b2f6333f8ffe537e2b0e1552a44d83"
+  },
+  "terminalEvidence": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44162-web-templates-final-connected/terminal.json",
+    "sha256": "726adecb618a16e45d3ebaa230b4694d0094f03274fce53a366b4210413dd7d5"
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44162-web-templates-final-connected/xml/TEST-junit-jupiter.xml",
+    "sha256": "60f1d1e2b303e64fa4b1858dd40b19f1b6d5a9019816ce7729d0401d177df5c2"
+  },
+  "historicalFixedTestRosters": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20684-search-route-corrected-eight-v1/manifest.json",
+      "sha256": "ada1ccbb2a3c97b3ca63dc659a7f0ba0294d0957764cbe588093b78f09d77ae9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20678-scenario-detail-resource-eight-v1/manifest.json",
+      "sha256": "da7c3ffce50a0c52b537304678064536b82ee9db4278e7bf233312ece9be3400"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20728-watch-resource-three-v1/manifest.json",
+      "sha256": "e5412681106fcb4f4cb1f75754474d2bdbead262db438b3d40a13c34b51c2340"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20492-music-list-template-eight-v1/manifest.json",
+      "sha256": "f92ca3cf81b46365e69eccdbfc1831cc553b097351fcb73adb02d27dc0c748a5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20642-user-create-resource-eight-v1/manifest.json",
+      "sha256": "4ee0e376dbfa82f5be06597e90184607ebb00380078c621d46531b2bef38322d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20662-user-detail-resource-eight-v1/manifest.json",
+      "sha256": "b103a6e39b7e4205befba3691fbb9e060ba929b8585a8ba912661634b6e6fb05"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20596-question-return-fixed-resource-eight-v1/manifest.json",
+      "sha256": "585a6bc67516caa539e19f5863040b34f6ab4658689b725c258e5852b866cac6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20360-detail-template-resource-fourteen-v1/manifest.json",
+      "sha256": "c968cd2b26a99f22fd974a7fd67df5e56ec9f9b6d78ef41df1fad7be05af41b0"
+    }
+  ],
+  "priorCurrentScope": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44156-web-shared-media-template-render/manifest.json",
+      "sha256": "3654fb66e90c19037dd867dc2feb730c2f8121efba4b960ce3d1dd58d9a23483"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44160-web-shared-form-errors-render/manifest.json",
+      "sha256": "d090887a4a458a1f2c46a29662233c69ced343c5f02f234f2151b7a4ed95d063"
+    }
+  ],
+  "additionalTestIds": [
+    "PT-WEB-FRAG-001",
+    "PT-WEB-FRAG-002"
+  ]
+}
