@@ -9,6 +9,7 @@ import g07_host_class_provenance_inputs as data
 from host_tool_invocation import capture, verify
 from f03_literal_batch_sources import out
 from classfile_code_metadata import decode
+from pgpt_spotbugs_contract import validate_module_spotbugs
 import pg9666_pagination_static as runner
 
 RUNTIME = ('PG13218-spotbugs-fresh-aux-plan-recovery-v1','a60a6ff0579588e9a10b5a2de6b2d2f4587f983408645a87e8cd4c7ad6917564')
@@ -46,12 +47,19 @@ def stage(cfg,source,normal_pin,preflight):
         root = ET.fromstring(report.read_bytes()) if report.is_file() else None
         if root is None:reports[role] = dict(reportPresent=False,actualExit=result['actualExit']);passed = False;continue
         bugs = len(list(root.iter('BugInstance')));missing = [x.text for x in root.iter('MissingClass')];errors = len(list(root.iter('Error')))
-        summary = root.find('FindBugsSummary');stats = [x.get('class') for x in root.iter('ClassStats')]
+        summary = root.find('FindBugsSummary');stats = [x.get('class', '') for x in root.iter('ClassStats')]
         names = {entry[:-6].replace('/','.') for entry in expected[role]};actual = set(stats)
-        exact = actual == names and len(stats) == len(actual) and summary is not None and int(summary.get('total_classes')) == len(names)
-        ok = result['actualExit'] == 0 and not result['timedOut'] and bugs == errors == 0 and not missing and exact
+        exact = actual == names and len(stats) == len(actual) and summary is not None and summary.get('total_classes') == str(len(names))
+        try:
+            validate_module_spotbugs(root, names)
+        except ValueError as error:
+            report_contract_error = str(error)
+        else:
+            report_contract_error = None
+        ok = result['actualExit'] == 0 and not result['timedOut'] and report_contract_error is None
         reports[role] = dict(reportPresent=True,sha256=data.sha(report.read_bytes()),actualExit=result['actualExit'],bugs=bugs,missingClasses=missing,analysisErrors=errors,
-            expectedClasses=len(names),observedClassStats=len(stats),exactPhysicalClassSet=exact,absentClassStats=sorted(names-actual),extraClassStats=sorted(actual-names),passed=ok)
+            expectedClasses=len(names),observedClassStats=len(stats),exactPhysicalClassSet=exact,absentClassStats=sorted(names-actual),extraClassStats=sorted(actual-names),
+            reportContractError=report_contract_error,passed=ok)
         passed &= ok
     assert all(data.sha(Path(path).read_bytes()) == sha for path,sha in hashes.items())
     assert all(data.sha((data.ROOT/path).read_bytes()) == sha for path,sha in n['begin']['inputHashes'].items())
@@ -89,14 +97,12 @@ def independent(cfg,source,normal_pin,static_pin,number):
         assert [x.text for x in project.findall('Jar')] == [str(jar)]
         aux = [x.text for x in project.findall('AuxClasspathEntry')]
         assert len(aux) == len(set(aux)) and set(aux) == set(begin['auxiliaryClasspathHashes'])
-        assert not [x for x in root.iter() if x.tag in ['BugInstance','MissingClass','Error']]
         expected = set()
         with zipfile.ZipFile(jar) as archive:
             for entry in archive.namelist():
                 if entry.endswith('.class'):decode(archive.read(entry),entry);expected.add(entry[:-6].replace('/','.'))
-        stats = [x.get('class') for x in root.iter('ClassStats')]
-        assert len(stats) == len(set(stats)) and set(stats) == expected and int(root.find('FindBugsSummary').get('total_classes')) == len(expected)
-        rows[role] = dict(physicalClasses=len(expected),reportedClasses=len(stats),reportSha256=data.sha(raw),exactClassSet=True);full += len(expected)
+        verified = validate_module_spotbugs(root, expected)
+        rows[role] = dict(physicalClasses=len(expected),reportedClasses=verified['analysedClasses'],reportSha256=data.sha(raw),exactClassSet=True);full += len(expected)
     assert full == 1843
     reference = dict(source=source,fullPhysicalMain=full,rows=rows,missingClasses=0,analysisErrors=0,bugs=0,productTestsExecuted=0,newAccepted=0,wholeF03Accepted=False,oldAnalysisSuccessTransferred=False)
     strict(reference,reference);labels = []

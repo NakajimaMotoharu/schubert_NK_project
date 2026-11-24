@@ -176,6 +176,47 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "analysed classes differ"):
                     scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
 
+    def test_spotbugs_rejects_diagnostic_elements_outside_errors(self):
+        for tag in ("Error", "MissingClass"):
+            for nested in (False, True):
+                with self.subTest(tag=tag, nested=nested):
+                    report = self._fixture_spotbugs()
+                    parent = ET.SubElement(report, "Unexpected") if nested else report
+                    ET.SubElement(parent, tag)
+                    with self.assertRaisesRegex(ValueError, "nonpassing or incomplete"):
+                        scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
+
+    def test_spotbugs_rejects_misplaced_or_duplicate_aggregate_sections(self):
+        for tag in ("Errors", "FindBugsSummary"):
+            for duplicate in (False, True):
+                with self.subTest(tag=tag, duplicate=duplicate):
+                    report = self._fixture_spotbugs()
+                    original = report.find(tag)
+                    if not duplicate:
+                        report.remove(original)
+                    ET.SubElement(report, "Unexpected").append(copy.deepcopy(original))
+                    with self.assertRaisesRegex(ValueError, "nonpassing or incomplete"):
+                        scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
+
+    def test_spotbugs_rejects_roster_rows_outside_the_module_summary(self):
+        for name in ("fixture.Extra", "fixture.Root"):
+            with self.subTest(name=name):
+                report = self._fixture_spotbugs()
+                ET.SubElement(report, "ClassStats", {"class": name})
+                with self.assertRaisesRegex(ValueError, "analysed classes differ"):
+                    scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
+
+    def test_spotbugs_requires_compiled_package_metadata_in_the_roster(self):
+        report = self._fixture_spotbugs()
+        names = {"fixture.Root", "fixture.Root$Inner", "fixture.package-info"}
+        with self.assertRaisesRegex(ValueError, "analysed classes differ"):
+            scenario.validate_module_spotbugs(report, names)
+        summary = report.find("FindBugsSummary")
+        summary.set("total_classes", "3")
+        ET.SubElement(summary.find("PackageStats"), "ClassStats", {"class": "fixture.package-info"})
+        self.assertEqual(3, scenario.validate_module_spotbugs(report, names)["analysedClasses"])
+
+
     def test_web_log_jdbc_resource_suite_canaries(self):
         expected = ("PT-IDEM-012-R02", "PT-IDEM-012-R03", "PT-IDEM-012-R04",
                     "PT-IDEM-012-R05")

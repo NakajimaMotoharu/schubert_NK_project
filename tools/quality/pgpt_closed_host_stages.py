@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 import pgpt_closed_host_profile as h
+from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
 def prepared(c, config):
@@ -55,9 +56,11 @@ def static(c, config, extra):
         analyzer_pom = ['-f', str(work / 'spotbugs-no-outer.pom.xml')]
     stages['spotbugs'] = h.steps.step('spotbugs', checked_command([str(h.MAVEN), '-o', '--no-transfer-progress', *analyzer_pom, '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', *FLAGS, 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']), work)
     shutil.copyfile(work / 'target/spotbugsXml.xml', out / 'spotbugs.xml')
-    sb = ET.parse(out / 'spotbugs.xml').getroot()
+    spotbugs_report = out / 'spotbugs.xml'
+    sb = ET.parse(spotbugs_report).getroot()
     raw, errors = findings(out / 'pmd.xml')
-    m = dict(actualExit=0, config=h.ref(config), prepare=h.ref(pp), inputHashes=m['inputHashes'], stages=stages, rawFindings=raw, processingErrors=errors, checkstyleFindings=len(ET.parse(out / 'checkstyle.xml').findall('.//error')), spotbugs=dict(bugs=len(sb.findall('.//BugInstance')), missing=len(sb.findall('.//MissingClass')), errors=len(sb.findall('.//Error')), classStats=sorted(x.get('class') for x in sb.findall('.//ClassStats'))), fullRootRulesetSha256=h.digest(h.R / 'tools/quality/static/pmd.xml'), productTestsExecuted=0, verifier=h.ref(Path(__file__).resolve()))
+    m = dict(actualExit=0, config=h.ref(config), prepare=h.ref(pp), inputHashes=m['inputHashes'], stages=stages, rawFindings=raw, processingErrors=errors, checkstyleFindings=len(ET.parse(out / 'checkstyle.xml').findall('.//error')), spotbugs=dict(bugs=len(sb.findall('.//BugInstance')), missing=len(sb.findall('.//MissingClass')), errors=len(sb.findall('.//Error')), classStats=sorted(x.get('class', '') for x in sb.findall('.//ClassStats'))), fullRootRulesetSha256=h.digest(h.R / 'tools/quality/static/pmd.xml'), productTestsExecuted=0, verifier=h.ref(Path(__file__).resolve()))
+    m['spotbugsReportSha256'] = h.digest(spotbugs_report)
     h.write_json(out / 'manifest.json', m)
     return m
 
@@ -113,7 +116,13 @@ def preflight(c, config, extra):
     compiler, tag = h.compiler_element()
     h.require(ET.tostring(compiler) == ET.tostring(ET.parse(work / 'pom.xml').getroot().find('.//' + tag('plugin'))) and h.digest(work / 'pom.xml') == m['subsetPomSha256'], 'exact Root compiler configuration')
     classified = classify_source_findings(c['mainSources'] + [x['path'] for x in c['testSources']], admission['sourceAnchors'], st['rawFindings'], lambda p: (h.R / p).read_text())
-    h.require({x.replace('.', '/') + '.class' for x in st['spotbugs']['classStats']} == set(m['physicalClassHashes']), 'SpotBugs full physical class universe')
+    expected_classes = {path.removesuffix('.class').replace('/', '.')
+                        for path in m['physicalClassHashes']}
+    h.require(st['spotbugs']['classStats'] == sorted(expected_classes),
+              'SpotBugs full physical class universe')
+    spotbugs_report = sp.parent / 'spotbugs.xml'
+    h.require(h.digest(spotbugs_report) == st['spotbugsReportSha256'], 'SpotBugs raw report hash')
+    validate_module_spotbugs(ET.parse(spotbugs_report).getroot(), expected_classes)
     for p, stages in [(pp, m['stages']), (sp, st['stages'])]:
         for label, v in stages.items():
             h.require(v['actualExit'] == (4 if label == 'pmd' and classified else 0) and not v['timedOut'], 'actual stage exit')

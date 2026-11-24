@@ -1,4 +1,4 @@
-"""BUG3188/YKT2656: bind a safe subset to the existing module quality settings.
+"""Bind module SpotBugs settings and reports to the declared analysis scope.
 
 Pure XML/command validation only; this module never launches a process or grants
 permission to read a classfile. Caller source/byte/authority guards still apply.
@@ -49,3 +49,37 @@ def checked_command(command):
            for v in command):
         raise ValueError("no exclusion, visitor selection or skipped analysis")
     return list(command)
+
+
+def validate_module_spotbugs(report, expected_classes):
+    """Verify diagnostics and the physical class roster in a single module report."""
+    errors = report.find("Errors")
+    summary = report.find("FindBugsSummary")
+    if (
+        report.tag != "BugCollection"
+        or not expected_classes
+        or errors is None
+        or summary is None
+        or len(report.findall(".//Errors")) != 1
+        or len(report.findall(".//FindBugsSummary")) != 1
+        or errors.get("errors") != "0"
+        or errors.get("missingClasses") != "0"
+        or len(errors) != 0
+        or any(report.findall(f".//{tag}") for tag in ("BugInstance", "Error", "MissingClass"))
+    ):
+        raise ValueError("nonpassing or incomplete module SpotBugs report")
+    classes = [entry.get("class") for entry in summary.findall("PackageStats/ClassStats")]
+    if (
+        summary.get("total_classes") != str(len(expected_classes))
+        or len(report.findall(".//ClassStats")) != len(classes)
+        or len(classes) != len(expected_classes)
+        or set(classes) != expected_classes
+    ):
+        raise ValueError("module SpotBugs analysed classes differ from compiled Main")
+    return {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "analysedClasses": len(classes),
+    }

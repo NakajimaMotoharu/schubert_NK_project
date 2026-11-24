@@ -17,6 +17,7 @@ from pgpt_reactor_junit import (
     MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record, verify_reactor_junit,
 )
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
 def scenario_storage_suite(name):
@@ -73,37 +74,6 @@ def validate_module_coverage(report):
     if root != totals:
         raise ValueError("module JaCoCo counters disagree with package totals")
     return root
-
-
-def validate_module_spotbugs(report, expected_classes):
-    errors = report.findall("Errors")
-    summaries = report.findall("FindBugsSummary")
-    if (
-        report.tag != "BugCollection"
-        or report.findall(".//BugInstance")
-        or not expected_classes
-        or len(errors) != 1
-        or errors[0].get("errors") != "0"
-        or errors[0].get("missingClasses") != "0"
-        or len(errors[0]) != 0
-        or len(summaries) != 1
-    ):
-        raise ValueError("nonpassing or incomplete module SpotBugs report")
-    summary = summaries[0]
-    classes = [entry.get("class") for entry in summary.findall("PackageStats/ClassStats")]
-    if (
-        summary.get("total_classes") != str(len(expected_classes))
-        or len(classes) != len(expected_classes)
-        or set(classes) != expected_classes
-    ):
-        raise ValueError("module SpotBugs analysed classes differ from compiled Main")
-    return {
-        "tool": "SpotBugs 4.10.4.0",
-        "violations": 0,
-        "errors": 0,
-        "missingClasses": 0,
-        "analysedClasses": len(classes),
-    }
 
 
 def main():
