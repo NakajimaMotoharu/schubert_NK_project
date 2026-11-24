@@ -1,0 +1,205 @@
+{
+  "run": "PG44508",
+  "source": "5ec32149fa965a773719283a8757db4cf6d165d4",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T20:00:02.423563+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P016-25.04/2",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4993_取消と削除の警戒色二次ボタン単体試験.md",
+    "sha256": "c26f71a9b734817edfca2698e41d3bb03ea2057bd9e680e65494b694b2addc9b"
+  },
+  "design": [
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9"
+    }
+  ],
+  "productResourceStage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44498-web-maven-resource-stage-after-warning-buttons/manifest.json",
+    "sha256": "a52620db2acb5bcb44a1c42ca318bee770aec02bd2a4daba44c67056980575fa"
+  },
+  "rawRed": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44496-warning-secondary-before/begin.json",
+      "sha256": "15516b2d31dc6f4a4c3de35951e73a83062a330502af4479ab78817618c97e45"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44496-warning-secondary-before/terminal.json",
+      "sha256": "cb340ec8ff8f0abbc3942d1d8489d1f60c8dafbcfe7e0305674d9d65ee3096c5"
+    },
+    "result": {
+      "compileExit": 0,
+      "testExit": 1,
+      "terminalAtUTC": "2026-11-24T19:57:56.101239+00:00",
+      "source": "63497bc072d63315f8a1db3ebe0fc9b2e026338b",
+      "tests": 5,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44496-warning-secondary-before/xml/TEST-junit-jupiter.xml",
+        "sha256": "9dd8c300936ba965c3f2652e217cf0a7fa10787d8d2039d71c37602a6589b8c2"
+      },
+      "names": [
+        {
+          "case": "newUpdateFormsIdentifyRequiredChoicesAndConfirmations()",
+          "message": null
+        },
+        {
+          "case": "questionInputIdentifiesTheRequiredTextarea()",
+          "message": null
+        },
+        {
+          "case": "userCreationIdentifiesEveryRequiredVisibleInput()",
+          "message": null
+        },
+        {
+          "case": "cancelledAndDeletedActionsUseAWarningButtonOnlyInTheExistingConfirmationForm()",
+          "message": ".cancel-form ==> expected: <1> but was: <0>"
+        },
+        {
+          "case": "warningButtonUsesTheApprovedRedForegroundAndLightBackground()",
+          "message": "expected: <true> but was: <false>"
+        }
+      ]
+    }
+  },
+  "rawInitialFormatting": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44500-warning-secondary-fixture-quality/begin.json",
+      "sha256": "058b25ab811742c53ad6939a3c278f75d18aee75d073f7c761bc1c2ed940b39f"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44500-warning-secondary-fixture-quality/terminal.json",
+      "sha256": "39d3cb6741a5980a7630047d6f9aa729efabe3d17abaa1a54f776ceadd1ce33b"
+    },
+    "result": {
+      "run": "PG44500",
+      "source": "7279c5ab8a29493185b053f4fd5b7fd296eed7fc",
+      "terminalAtUTC": "2026-11-24T19:58:31.773284+00:00",
+      "exits": {
+        "google-java-format": 1,
+        "spotless": 1,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "candidateNew2andOld3": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44502-warning-secondary-current-package/begin.json",
+      "sha256": "49f3cabd86fc3149b8ff87e9b5ea3debae2898e1087996270341e0f6352a324b"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44502-warning-secondary-current-package/terminal.json",
+      "sha256": "44fb7e737dd93f1c41685a43eb46d55af9b879ae6f3cf1d031abf508225f784b"
+    },
+    "result": {
+      "compileExit": 0,
+      "testExit": 0,
+      "terminalAtUTC": "2026-11-24T19:59:31.937215+00:00",
+      "source": "5ec32149fa965a773719283a8757db4cf6d165d4",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44502-warning-secondary-current-package/xml/TEST-junit-jupiter.xml",
+        "sha256": "0b9163c5005eea856f118e3a49c2d390497ab2de36cf9d3bba5b2eb75e6c0137"
+      },
+      "names": [
+        {
+          "case": "newUpdateFormsIdentifyRequiredChoicesAndConfirmations()",
+          "message": null
+        },
+        {
+          "case": "questionInputIdentifiesTheRequiredTextarea()",
+          "message": null
+        },
+        {
+          "case": "userCreationIdentifiesEveryRequiredVisibleInput()",
+          "message": null
+        },
+        {
+          "case": "cancelledAndDeletedActionsUseAWarningButtonOnlyInTheExistingConfirmationForm()",
+          "message": null
+        },
+        {
+          "case": "warningButtonUsesTheApprovedRedForegroundAndLightBackground()",
+          "message": null
+        }
+      ]
+    }
+  },
+  "readOnlyRendererTwo": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44506-warning-secondary-rendered-confirmations/begin.json",
+      "sha256": "0e763d8beae4f8500371d1efcd4816ff566866e1c6968907a104fd31c9dbdf29"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44506-warning-secondary-rendered-confirmations/terminal.json",
+      "sha256": "1bf6ce5dd806937c4115a7cac4235bd6ab90bce9051e432ad6d7df2f52a62bf4"
+    },
+    "result": {
+      "source": "5ec32149fa965a773719283a8757db4cf6d165d4",
+      "terminalAtUTC": "2026-11-24T19:59:31.493247+00:00",
+      "actualExit": 0,
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44506-warning-secondary-rendered-confirmations/report/TEST-junit-jupiter.xml",
+        "sha256": "7138c4130ee1b892268e1c603641793316527841866dd938ab72f70e9e3bed89"
+      }
+    }
+  },
+  "finalStatic": {
+    "begin": {
+      "path": "../pgpt-runs/PG379/PG44504-warning-secondary-fixture-quality/begin.json",
+      "sha256": "b6ab042d8ddf4dc8af73ffc429d5c6534f281a437f07d117a8a81734fec8bb09"
+    },
+    "terminal": {
+      "path": "../pgpt-runs/PG379/PG44504-warning-secondary-fixture-quality/terminal.json",
+      "sha256": "c86e434a7820fdfd941380dde34268c4b709388364c667781f914956e07754cd"
+    },
+    "result": {
+      "run": "PG44504",
+      "source": "5ec32149fa965a773719283a8757db4cf6d165d4",
+      "terminalAtUTC": "2026-11-24T19:59:33.861311+00:00",
+      "exits": {
+        "google-java-format": 0,
+        "spotless": 0,
+        "checkstyle": 0,
+        "pmd": 0
+      }
+    }
+  },
+  "resourceCount": 34,
+  "currentAssetSource": "7279c5ab8a29493185b053f4fd5b7fd296eed7fc",
+  "newPtDefined": 2,
+  "executionsApplied": 7,
+  "actualBackend": 0,
+  "noWholeRunMerge": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "related": [
+    "BUG-3792",
+    "BUG-3793",
+    "YKT-2957"
+  ]
+}
