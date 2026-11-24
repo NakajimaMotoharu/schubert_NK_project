@@ -130,7 +130,8 @@ final class CleanupRejectedValueTest {
     var reconstructed =
         terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS);
     var later =
-        terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END.plusSeconds(1), SUCCESS);
+        terminal(
+            attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END.plusSeconds(1), SUCCESS);
     var first = sevenSlots();
     var second = sevenSlots();
     var changed = sevenSlots();
