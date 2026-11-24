@@ -1,0 +1,199 @@
+{
+  "run": "PG43962",
+  "source": "b304608b0ced723ba2cf87472918b51eb7d51832",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "terminalAtUTC": "2026-11-24T12:41:52.520633+00:00",
+  "regularProductStaticNotExecuted": true,
+  "checkstyleMain": {
+    "source": "b304608b0ced723ba2cf87472918b51eb7d51832",
+    "terminalAtUTC": "2026-11-24T12:41:05.557857+00:00",
+    "exitCode": 0,
+    "baseEligible": 1026,
+    "nowEligible": 1029,
+    "allMains": 1033,
+    "heldFiles": 4,
+    "baselineUnchanged": 1006,
+    "reusedExactDeltaTests": 2,
+    "stalePreviouslyScopedNew": [],
+    "explicitCheckstyleCurrentRuns": 21,
+    "verifiedEligibleCount": 1029,
+    "findings": [],
+    "tool": {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43962-f03-current-approved-main-source-checkstyle/checkstyle.xml",
+      "sha256": "164c788fc1e2af9bea3cde73a0645ced056d494601711ed01a8da14b65d99d38"
+    },
+    "perModule": {
+      "api": {
+        "eligible": 283,
+        "held": 3
+      },
+      "batch": {
+        "eligible": 203,
+        "held": 0
+      },
+      "bootstrap": {
+        "eligible": 88,
+        "held": 0
+      },
+      "protocol": {
+        "eligible": 169,
+        "held": 0
+      },
+      "storage": {
+        "eligible": 25,
+        "held": 0
+      },
+      "web": {
+        "eligible": 261,
+        "held": 1
+      }
+    }
+  },
+  "checkstyleTest": {
+    "source": "b304608b0ced723ba2cf87472918b51eb7d51832",
+    "terminalAtUTC": "2026-11-24T12:39:34.366977+00:00",
+    "exitCode": 0,
+    "baseEligible": 1135,
+    "nowEligible": 1143,
+    "allTests": 1175,
+    "heldFiles": 32,
+    "baselineUnchanged": 1114,
+    "reusedExactDeltaTests": 13,
+    "stalePreviouslyScopedNew": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSqlDiagnosticTest.java"
+    ],
+    "explicitCheckstyleCurrentRuns": 16,
+    "verifiedEligibleCount": 1143,
+    "findings": [],
+    "tool": {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43962-f03-current-approved-test-source-checkstyle/checkstyle.xml",
+      "sha256": "e36c072ad1c23a1d22c74d604ecba857aa6442bd70365a214295caa9ace554f2"
+    },
+    "perModule": {
+      "api": {
+        "eligible": 336,
+        "held": 4
+      },
+      "batch": {
+        "eligible": 299,
+        "held": 26
+      },
+      "bootstrap": {
+        "eligible": 124,
+        "held": 0
+      },
+      "protocol": {
+        "eligible": 40,
+        "held": 0
+      },
+      "storage": {
+        "eligible": 36,
+        "held": 2
+      },
+      "web": {
+        "eligible": 308,
+        "held": 0
+      }
+    }
+  },
+  "actualStaticFileExecutions": 37,
+  "baselineProofs": [
+    {
+      "path": "../pgpt-runs/PG379/PG43962-f03-current-approved-main-source-checkstyle/begin.json",
+      "sha256": "fcd44465dcc890961adab05dd5d4d0649c8aeeb84513948127962f031b254db4"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43962-f03-current-approved-test-source-checkstyle/begin.json",
+      "sha256": "c631f35239a853b13fcec26fffb62b5498b8de6dc1810c049c1e09e3650b39b8"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43962-f03-current-approved-main-source-checkstyle/terminal.json",
+      "sha256": "fd36c74d5a204ac4432a3004a0839ebe301ccfdda6a50299bc716bc9299f71ac"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43962-f03-current-approved-test-source-checkstyle/terminal.json",
+      "sha256": "d15f737fdef7cc366aec516a4beb7b58ce6d67c1d16d9b98128e643969669099"
+    }
+  ],
+  "testFormatting": {
+    "prior": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43306-f03-six-module-retained-formatter-sources-v1/manifest.json",
+      "sha256": "d3441ee3126ed02c93a1c7467e3e627e18dec6a9950f6558a1347b7217881240"
+    },
+    "unchanged": 349,
+    "directExactFiles": {
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java": {
+        "path": "../pgpt-runs/PG379/PG43806-web-pool-after-retest-v1/fixture-style-terminal.json",
+        "sha256": "66ec1392d931ac3f0f83f01ffc651c0b4363fb2cfd18b189c1cde7e533d8fe18"
+      },
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java": {
+        "path": "../pgpt-runs/PG379/PG43808-web-media-after-v1/fixture-style-terminal.json",
+        "sha256": "beceb767e1eea40dffa1db29b48a2caaefc7c3bc3e8fe0d159602225840cc5a6"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollectorTest.java": {
+        "path": "../pgpt-runs/PG379/PG43810-api-mq-after-v1/fixture-style-terminal.json",
+        "sha256": "18223536b3fa01781b30f0e49d4ee04d54d7b272c0adabe95fadf6c19c655071"
+      },
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java": {
+        "path": "../pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/fixture-style-terminal.json",
+        "sha256": "a1e46122d793d2a25ccb8a5352c105366d963ec4a38c8a942b4faa87da4ac38c"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollectorTest.java": {
+        "path": "../pgpt-runs/PG379/PG43814-api-db-duration-after-v1/fixture-style-terminal.json",
+        "sha256": "d938a176f443bacf5f3db5ecf0d45924dcc138e3e3082622590662e71c34c344"
+      },
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java": {
+        "path": "../pgpt-runs/PG379/PG43870-current-cleanup-terminal-defensive-nine/fixture-style-terminal.json",
+        "sha256": "755398ad3bf07d3890fce311d8d1c07c1966781f9923ff000641a66e243a8c6c"
+      },
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPrincipalValueTest.java": {
+        "path": "../pgpt-runs/PG379/PG43890-web-principal-value-five/fixture-style-terminal.json",
+        "sha256": "44c14e10cf91bb545406a7cd9f4c3e0b9ef1d55ab26e938e9851e08ff8b0cc47"
+      },
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedDirectoryCallbackValueTest.java": {
+        "path": "../pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-style-terminal.json",
+        "sha256": "90d1275a6665f1fd6cb43b50788e2731c25dc5726149ac04ce5f502d5c3716ec"
+      },
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionRowValueTest.java": {
+        "path": "../pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture-style-terminal.json",
+        "sha256": "85fd290003bfcb7ad6af4f38f34294788ed76ace84f1c4d09b6938f359ecd304"
+      },
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshotValueTest.java": {
+        "path": "../pgpt-runs/PG379/PG43928-backup-failure-pair-current-once/fixture-style-terminal.json",
+        "sha256": "5ccb0f265e7f273051099c0e615fc84f5f5ff19eb40bb8bc36df21425ddb0795"
+      },
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java": {
+        "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/fixture-style-terminal.json",
+        "sha256": "7c1b68fbd3bd79ad26948170707e637e4a56822e5a4f658d107a88d020e08734"
+      },
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java": {
+        "path": "../pgpt-runs/PG379/PG43960-scr019-question-accepted-current-verified/fixture-style-terminal.json",
+        "sha256": "62da875bdb6edca48ae24f8f2164ce0ae911ceab6a2a68b528a0e5ddb47a53fb"
+      }
+    },
+    "qualifiedAtLeast": 361,
+    "denominator": 1143,
+    "unclassifiedAtMost": 782,
+    "formatterExecutedNow": 0
+  },
+  "heldRecords": {
+    "F03TestInventory": 32,
+    "QA056ProductMain": 4,
+    "root11Continuing": true,
+    "sourceBodiesRead": 0
+  },
+  "preflightAccounts": [
+    "Initial aggregate preflight rejected old Backup SQL fixture bytes. The new current check reused the admission but re-inspected the actual bytes.",
+    "Preflight normalization recognized earlier exitCodes versus results schemas. No tool was started in either rejected preflight."
+  ],
+  "quality": "Source-only Checkstyle for all admitted current files, no whole code NullAway/PMD/SpotBugs, full format or coverage claim",
+  "formalAcceptanceId": null
+}

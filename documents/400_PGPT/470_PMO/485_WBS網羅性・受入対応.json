@@ -1,4 +1,165 @@
 {
+  "scr019QuestionAcceptedTypedValueEvidencePG43960": {
+    "source": "b304608b0ced723ba2cf87472918b51eb7d51832",
+    "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+    "owner": "WBS-P016-19/2",
+    "traceLeaf": "WBS-G13.05",
+    "related": [
+      "WBS-F03/2-2-b"
+    ],
+    "rd": [
+      "QST-002"
+    ],
+    "ui": [
+      "UI224 §3"
+    ],
+    "ss": [
+      "SS313",
+      "SS331 §9.4",
+      "SS322 §6.2",
+      "SS323 QSDRSP01"
+    ],
+    "qa": [
+      "QA-048"
+    ],
+    "newCases": [
+      {
+        "testId": "PT-WEB-SCR019-VM001",
+        "method": "accepted001RendersOnlyTheApprovedFieldsAndJstTime",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      },
+      {
+        "testId": "PT-WEB-SCR019-VM002",
+        "method": "accepted002KeepsTheWhole200thCodePointAndDropsLaterCharacters",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      },
+      {
+        "testId": "PT-WEB-SCR019-VM003",
+        "method": "accepted003RejectsEachFixedReferenceMismatchIndependently",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      },
+      {
+        "testId": "PT-WEB-SCR019-VM004",
+        "method": "accepted004RejectsMissingInputAndEmptyQuestionSeparately",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      },
+      {
+        "testId": "PT-WEB-SCR019-VM005",
+        "method": "accepted005DoesNotProjectAnInconsistentAnswerState",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      },
+      {
+        "testId": "PT-WEB-SCR019-VM006",
+        "method": "accepted006RejectsFinerPrecisionThanTheResponseWireFormat",
+        "fixture": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        "independentOracle": {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43960-scr019-current-local-view-value/manifest.json",
+          "sha256": "d7564ebf4a0ed59551fa3fa9d1268013f8c740add230cad1c3a9a98df896c9e1"
+        },
+        "testedSource": "b304608b0ced723ba2cf87472918b51eb7d51832"
+      }
+    ],
+    "priorDom": {
+      "manifest": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42648-six-resource-fixture-43-current-v1/manifest.json",
+        "sha256": "4855375c4745623c581be4872e5fae38557753a669a8c6d3d60fb01eec801127"
+      },
+      "applicableInputPins": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+          "sha256": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java",
+          "sha256": "9b6b6800dc02ac1483900891f0bee338a98d32eea3368878347e575e2af8565c"
+        }
+      ],
+      "methods": [
+        "acceptedPageNavigationUsesApprovedTargets",
+        "acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody",
+        "concurrentInputAndAcceptedPagesKeepValuesSeparate",
+        "emptyInputHasExplicitFormAndScriptContract",
+        "fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate",
+        "newPageMenuHrefUsesApprovedCanonicalPath",
+        "noticeValidationAndQuestionTextEscapeWithoutMarkup",
+        "userAndAdminDisplayValuesStaySeparate"
+      ],
+      "syntheticOnly": true,
+      "replayed": 0
+    },
+    "formalAcceptanceId": null
+  },
   "ssc481BackupPrimaryKindsTracePG43954": {
     "source": "4a473381f1151ec8fb6401f4a7ff1ff9cc407e66",
     "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
