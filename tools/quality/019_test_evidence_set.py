@@ -921,6 +921,77 @@ class EvidenceSetTest(unittest.TestCase):
                         with self.assertRaisesRegex(ValueError, "reactor JUnit"):
                             caller(broken)
 
+    def test_junit_scope004_batch_and_inspection_readers_require_canonical_suites(self):
+        class_name = "fixture.BatchCheck"
+        for count, reader, start, strict in (
+            (2, inspection, None, True), (3, batch, 41, False),
+            (8, backup, 233, True), (10, references, 241, False),
+            (8, parent_summary, 251, False), (8, atomic, 259, False),
+        ):
+            names = tuple(f"test-{i}" for i in range(count))
+            valid = ET.Element(
+                "testsuite", name=class_name, tests=str(count), failures="0", errors="0", skipped="0",
+            )
+            for name in names:
+                ET.SubElement(valid, "testcase", name=name, classname=class_name)
+            with contextlib.ExitStack() as fixtures:
+                if reader is inspection:
+                    validate = lambda suite: [c.get("name") for c in reader.validate_suite(suite, class_name, names)]
+                    expected = list(names)
+                elif reader is batch:
+                    validate = lambda suite: reader.validate_group(suite, class_name, names, start)
+                    expected = {f"PT-BAT-{i:03}": class_name + "#" + n for i, n in enumerate(names, start)}
+                else:
+                    fixtures.enter_context(patch.multiple(reader, CLASS=class_name, METHODS=names))
+                    validate = reader.validate_suite
+                    expected = {f"PT-DB-INBOX-{i:03}": class_name + "#" + n for i, n in enumerate(names, start)}
+                self.assertEqual(expected, validate(valid))
+                for defect in ("failures", "errors", "skipped", "root", "extra", "invalidProperty"):
+                    with self.subTest(collector=reader.__name__, defect=defect):
+                        bad = copy.deepcopy(valid)
+                        if defect in ("failures", "errors", "skipped"):
+                            del bad.attrib[defect]
+                        elif defect == "root":
+                            bad.tag = "summary"
+                        elif defect == "extra":
+                            ET.SubElement(bad, "unfinished")
+                        else:
+                            ET.SubElement(ET.SubElement(bad, "properties"), "property", name="fixture")
+                        with self.assertRaisesRegex(ValueError, "reactor JUnit"):
+                            validate(bad)
+                ET.SubElement(valid[0], "system-out").text = "synthetic output"
+                if strict:
+                    with self.assertRaises(ValueError):
+                        validate(valid)
+                else:
+                    self.assertEqual(expected, validate(valid))
+
+        with tempfile.TemporaryDirectory() as directory, patch.object(batch, "BATCH_TEST_COUNT", 2):
+            target = Path(directory)
+            reports = target / "surefire-reports"
+            reports.mkdir()
+            first = ET.fromstring('<testsuite name="fixture.First" tests="1" failures="0" errors="0" skipped="0">'
+                                  '<testcase classname="fixture.First" name="first"/></testsuite>')
+            second = ET.fromstring('<testsuite name="fixture.Second" tests="1" failures="0" errors="0" skipped="0">'
+                                   '<testcase classname="fixture.Second" name="second"/></testsuite>')
+            path = reports / "TEST-fixture.Second.xml"
+            ET.ElementTree(first).write(reports / "TEST-fixture.First.xml")
+            ET.ElementTree(second).write(path)
+            self.assertEqual(["fixture.First", "fixture.Second"], [
+                suite.get("name") for suite in batch.read_batch_reports(target)
+            ])
+            bad = copy.deepcopy(second)
+            del bad.attrib["errors"]
+            ET.ElementTree(bad).write(path)
+            with self.assertRaisesRegex(ValueError, "nonpassing or inconsistent Batch JUnit"):
+                batch.read_batch_reports(target)
+            ET.ElementTree(first).write(path)
+            with self.assertRaisesRegex(ValueError, "duplicate Batch JUnit"):
+                batch.read_batch_reports(target)
+            path.unlink()
+            with self.assertRaisesRegex(ValueError, "total does not match"):
+                batch.read_batch_reports(target)
+
     def test_api_web_log_consumer_inventory_and_coverage(self):
         log = module("api_web_log_consumer_collector", "033_collect_api_web_log_consumers.py")
         names = (

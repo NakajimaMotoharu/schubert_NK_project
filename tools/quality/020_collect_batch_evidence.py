@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
 BATCH_TEST_COUNT = 550
@@ -373,13 +374,11 @@ def validate_lifecycle_traces(traces):
 
 
 def validate_group(suite, cls, expected, start):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [c.get("name") for c in cases]
     if (suite.get("name") != cls or suite.get("tests") != str(len(expected))
-            or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or len(names) != len(set(names)) or set(names) != set(expected)
-            or any(c.get("classname") != cls or
-                   any(child.tag not in ("system-out", "system-err") for child in c) for c in cases)):
+            or any(c.get("classname") != cls for c in cases)):
         raise ValueError("batch PT inventory or execution is not certifiable")
     return {f"PT-BAT-{i:03}": cls + "#" + name for i, name in enumerate(expected, start)}
 
@@ -419,14 +418,11 @@ def read_batch_reports(target):
     reports = [ET.parse(path).getroot() for path in sorted((target / "surefire-reports").glob("TEST-*.xml"))]
     module_cases = set()
     for suite in reports:
-        cases = suite.findall("testcase")
-        if (suite.tag != "testsuite" or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
-                or len(cases) != int(suite.get("tests", "-1"))
-                or any(child.tag not in ("system-out", "system-err") for case in cases for child in case)):
-            raise ValueError("nonpassing or inconsistent Batch JUnit report")
+        try:
+            cases = validate_passing_surefire_suite(suite)
+        except ValueError as error:
+            raise ValueError("nonpassing or inconsistent Batch JUnit report") from error
         case_ids = {(case.get("classname"), case.get("name")) for case in cases}
-        if any(not owner or not name for owner, name in case_ids):
-            raise ValueError("missing Batch JUnit case identity")
         if len(case_ids) != len(cases) or module_cases & case_ids:
             raise ValueError("duplicate Batch JUnit case")
         module_cases.update(case_ids)

@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 CLASS = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
 METHODS = ("sameDayBackupReruns", "ordinarySuccessStillUnique", "attemptAndDateBoundaries",
@@ -17,10 +18,9 @@ METHODS = ("sameDayBackupReruns", "ordinarySuccessStillUnique", "attemptAndDateB
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [c.get("name") for c in cases]
     if (suite.get("name") != CLASS or suite.get("tests") != "8"
-            or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or len(names) != 8 or set(names) != set(METHODS)
             or any(c.get("classname") != CLASS or len(c) for c in cases)):
         raise ValueError("missing or nonpassing backup rerun tests")

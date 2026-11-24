@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 CLASS = "dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest"
 METHODS = ("referenceCombinations", "identityConsistency", "temporalAndNullBoundaries", "lockOwnership",
@@ -21,13 +22,11 @@ TRACES = {"PT-DB-INBOX-241-combinations.txt": (
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [c.get("name") for c in cases]
     if (suite.get("name") != CLASS or suite.get("tests") != "10"
-            or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or len(names) != 10 or len(set(names)) != 10 or set(names) != set(METHODS)
-            or any(c.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in c) for c in cases)):
+            or any(c.get("classname") != CLASS for c in cases)):
         raise ValueError("missing or nonpassing run reference SQL tests")
     return {f"PT-DB-INBOX-{i:03}": CLASS + "#" + name for i, name in enumerate(METHODS, 241)}
 

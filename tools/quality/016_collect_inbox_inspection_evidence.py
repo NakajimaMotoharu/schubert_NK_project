@@ -16,6 +16,7 @@ import xml.etree.ElementTree as ET
 import bootstrap_ownership
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validated_class_rows
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -37,9 +38,8 @@ MUTATION_METHODS = ["validMutationReferences", "submitReferencesAndWork", "cance
 
 
 def validate_suite(suite, class_name, names):
-    cases = suite.findall("testcase")
-    if (len(cases) != len(names) or int(suite.get("tests", "0")) != len(names)
-            or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
+    cases = validate_passing_surefire_suite(suite)
+    if (len(cases) != len(names)
             or {c.get("name") for c in cases} != set(names)
             or any(c.get("classname") != class_name or len(c) != 0 for c in cases)):
         raise ValueError("missing, nonpassing or noncanonical tests")
@@ -229,7 +229,6 @@ def main():
                  "progressAndBoundaryContracts", "checkpointFaultsRollbackDeletion",
                  "uncertainCommitReloadsDurableCounts", "ownsLocksWithoutSavepoints",
                  "concurrentAttemptsNeverDoubleCount", "runIdentityKeysAndResultsStayPrivate"]
-    cases = suite.findall("testcase")
     if args.run_executor:
         names = ["emptyAndCompletedRunsSucceed", "protectedRowsEndWithWarning",
                  "moreThanOneChunkCompletes", "deadlineAndClockBoundaries",

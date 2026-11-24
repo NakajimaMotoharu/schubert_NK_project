@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 CLASS = "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest"
 METHODS = ("sevenKindAtomicCounts", "handleArgumentsAndIdentity", "backupLockAndRoleBoundary", "zeroChunkLockedRemainder", "retentionAndProtectedRows", "rollbackOverflowAndForeignKey", "typedProjectionAndNoBypass", "appendOnlyMigrationInventory",)
@@ -16,13 +17,11 @@ TRACES = {"PT-DB-INBOX-259-seven-kinds.txt": b"NOTIFICATIONS=1|1|0|1|1|false|OK\
 
 
 def validate_suite(suite):
-    cases = suite.findall("testcase")
+    cases = validate_passing_surefire_suite(suite)
     names = [c.get("name") for c in cases]
     if (suite.get("name") != CLASS or suite.get("tests") != "8"
-            or any(int(suite.get(k, "0")) for k in ("failures", "errors", "skipped"))
             or len(names) != 8 or len(set(names)) != 8 or set(names) != set(METHODS)
-            or any(c.get("classname") != CLASS or
-                   any(child.tag not in ("system-out", "system-err") for child in c) for c in cases)):
+            or any(c.get("classname") != CLASS for c in cases)):
         raise ValueError("missing or nonpassing atomic cleanup SQL tests")
     return {f"PT-DB-INBOX-{i:03}": CLASS + "#" + name for i, name in enumerate(METHODS, 259)}
 
