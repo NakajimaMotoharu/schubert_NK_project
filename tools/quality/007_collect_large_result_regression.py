@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 
 def main():
@@ -40,12 +41,9 @@ def main():
     for name in names:
         report = target / "surefire-reports" / ("TEST-" + name + ".xml")
         suite = ET.parse(report).getroot()
-        if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")):
-            raise SystemExit("nonpassing large-result test")
+        cases = validate_passing_surefire_suite(suite)
         clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
-        for case in suite.findall("testcase"):
-            if any(child.tag not in ("system-out", "system-err") for child in case):
-                raise SystemExit("nonpassing/flaky test")
+        for case in cases:
             attrs = {k: case.get(k) for k in ("name", "classname", "time")}
             ET.SubElement(clean, "testcase", attrs)
             methods.append(attrs["classname"] + "#" + attrs["name"])

@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 
 def shared_file_program(classname):
@@ -145,9 +146,7 @@ def main():
     reports.extend((repo / "src/schubert-nk-storage/target/surefire-reports").glob("TEST-dev.codex.schubert.nk.storage.*.xml"))
     for report in sorted(reports):
         suite = ET.parse(report).getroot()
-        cases = suite.findall("testcase")
-        if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")) or len(cases) != int(suite.get("tests")):
-            raise SystemExit("nonpassing/inconsistent media suite")
+        cases = validate_passing_surefire_suite(suite)
         if (suite.get("name", "").startswith(asset)
                 and shared_file_program(suite.get("name")) != "NK-MED-001"):
             continue
@@ -158,8 +157,6 @@ def main():
         clean = ET.Element("testsuite", {k: suite.get(k) for k in ("name", "time", "tests", "errors", "failures", "skipped")})
         clean.set("tests", str(len(cases)))
         for case in cases:
-            if any(child.tag not in ("system-out", "system-err") for child in case):
-                raise SystemExit("failed/skipped/flaky/rerun media case")
             attrs = {k: case.get(k) for k in ("name", "classname", "time")}
             methods.append(attrs["classname"] + "#" + attrs["name"])
             ET.SubElement(clean, "testcase", attrs)

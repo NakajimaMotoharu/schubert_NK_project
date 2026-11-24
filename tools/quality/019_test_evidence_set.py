@@ -992,6 +992,56 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "total does not match"):
                 batch.read_batch_reports(target)
 
+    def test_junit_scope005_base_consumers_use_the_shared_terminal_and_hold_the_derived_roster(self):
+        tools = Path(__file__).parent
+        sources = [
+            filename for filename, _ in gate.BASE if filename.startswith(("003", "007", "009", "010", "015"))
+        ]
+        self.assertEqual(["003", "007", "009", "010", "015"], [name[:3] for name in sources])
+        for filename in sources:
+            with self.subTest(collector=filename):
+                tree = ast.parse((tools / filename).read_text())
+                main = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "main")
+                calls = [node for node in ast.walk(main) if isinstance(node, ast.Call)]
+                self.assertEqual(1, sum(
+                    isinstance(call.func, ast.Name) and call.func.id == "validate_passing_surefire_suite"
+                    for call in calls
+                ))
+                self.assertFalse(any(
+                    isinstance(call.func, ast.Attribute) and call.func.attr == "findall"
+                    and call.args and isinstance(call.args[0], ast.Constant) and call.args[0].value == "testcase"
+                    for call in calls
+                ))
+
+        derived = module("inbox_regression_synthetic", "008_collect_inbox_regression.py")
+        for count, family in ((11, None), (3, "FIXTURE-R"), (4, "FIXTURE-B")):
+            suite = ET.Element(
+                "testsuite", name="fixture.Result", tests=str(count), failures="0", errors="0", skipped="0",
+            )
+            methods = [f"fixture.Result#method-{i}" for i in range(count)]
+            mapping = {f"{family}-{i}": method for i, method in enumerate(methods)} if family else None
+            for i in range(count):
+                ET.SubElement(suite, "testcase", name=f"method-{i}", classname="fixture.Result")
+            self.assertEqual(methods, derived.validated_methods(suite, count, mapping))
+            for defect in ("missingTerminal", "duplicateMethod", "wrongCount", "wrongMapping"):
+                if defect == "wrongMapping" and mapping is None:
+                    continue
+                with self.subTest(derivedCount=count, defect=defect):
+                    bad = copy.deepcopy(suite)
+                    expected = count
+                    bad_mapping = mapping
+                    if defect == "missingTerminal":
+                        del bad.attrib["skipped"]
+                    elif defect == "duplicateMethod":
+                        bad[1].set("name", "method-0")
+                    elif defect == "wrongCount":
+                        expected += 1
+                    else:
+                        bad_mapping = dict(mapping)
+                        bad_mapping[f"{family}-0"] = "fixture.Result#unlisted"
+                    with self.assertRaisesRegex(ValueError, "reactor JUnit|Inbox regression methods"):
+                        derived.validated_methods(bad, expected, bad_mapping)
+
     def test_api_web_log_consumer_inventory_and_coverage(self):
         log = module("api_web_log_consumer_collector", "033_collect_api_web_log_consumers.py")
         names = (

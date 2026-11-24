@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import coverage_class_names, validate_module_coverage
-from pgpt_reactor_junit import compiled_class_paths
+from pgpt_reactor_junit import compiled_class_paths, validate_passing_surefire_suite
 from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
@@ -72,14 +72,7 @@ def main():
         count = 0
         for report in reports:
             suite = ET.parse(report).getroot()
-            if any(int(suite.get(name, "0")) for name in ("errors", "failures", "skipped")):
-                raise SystemExit("nonpassing JUnit report")
-            cases = suite.findall("testcase")
-            if len(cases) != int(suite.get("tests")):
-                raise SystemExit("JUnit method count mismatch")
-            for case in cases:
-                if any(child.tag not in ("system-out", "system-err") for child in case):
-                    raise SystemExit("failure/rerun/flaky/skipped test is not certifiable")
+            cases = validate_passing_surefire_suite(suite)
             count += len(cases)
             if ".api.security." in suite.get("name", ""):
                 clean = ET.Element("testsuite", {name: suite.get(name) for name in

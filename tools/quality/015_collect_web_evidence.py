@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
 
 
 def validate_session_resource_inventory(mapping):
@@ -446,16 +447,10 @@ def main():
         expected.update({f"PT-WEB-{i:03d}": classname + "#" + name for i, name in cases})
         report = repo / "src/schubert-nk-web/target/surefire-reports" / ("TEST-" + classname + ".xml")
         suite = ET.parse(report).getroot()
-        actual = suite.findall("testcase")
-        if any(int(suite.get(key, "0")) for key in ("errors", "failures", "skipped")):
-            raise SystemExit("nonpassing Web PT")
-        if int(suite.get("tests", "0")) != len(actual):
-            raise SystemExit("inconsistent Web PT count")
+        actual = validate_passing_surefire_suite(suite)
         clean = ET.Element("testsuite", {key: suite.get(key) for key in
                                         ("name", "time", "tests", "errors", "failures", "skipped")})
         for case in actual:
-            if any(child.tag not in ("system-out", "system-err") for child in case):
-                raise SystemExit("failed/skipped/flaky/rerun Web case")
             attributes = {key: case.get(key) for key in ("name", "classname", "time")}
             methods.append(attributes["classname"] + "#" + attributes["name"])
             ET.SubElement(clean, "testcase", attributes)

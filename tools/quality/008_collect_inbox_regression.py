@@ -11,6 +11,17 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
+from pgpt_reactor_junit import validate_passing_surefire_suite
+
+
+def validated_methods(suite, expected_count, expected_ids=None):
+    methods = [case.get("classname") + "#" + case.get("name")
+               for case in validate_passing_surefire_suite(suite)]
+    if (len(methods) != expected_count or len(set(methods)) != expected_count
+            or (expected_ids is not None
+                and (len(expected_ids) != expected_count or set(methods) != set(expected_ids.values())))):
+        raise ValueError("missing or mismatched Inbox regression methods")
+    return methods
 
 
 def main():
@@ -32,35 +43,22 @@ def main():
     report = source / relative
     if hashlib.sha256(report.read_bytes()).hexdigest() != expected:
         raise SystemExit("certified report hash differs")
-    suite = ET.parse(report).getroot()
-    methods = [c.get("classname") + "#" + c.get("name") for c in suite.findall("testcase")]
-    if any(int(suite.get(k, "0")) for k in ("errors", "failures", "skipped")) or len(methods) != 11:
-        raise SystemExit("missing or nonpassing coordinator regression")
+    methods = validated_methods(ET.parse(report).getroot(), 11)
     replacement_relative = "output/TEST-dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest.xml"
     replacement_report = source / replacement_relative
     replacement_hash = next(f["sha256"] for f in validated["files"] if f["path"] == replacement_relative)
     if hashlib.sha256(replacement_report.read_bytes()).hexdigest() != replacement_hash:
         raise SystemExit("certified replacement report hash differs")
-    replacement_suite = ET.parse(replacement_report).getroot()
-    replacement_methods = [c.get("classname") + "#" + c.get("name") for c in replacement_suite.findall("testcase")]
     replacement_ids = {k: v for k, v in validated["testIdMethods"].items() if k.startswith("PT-IDEM-SR")}
-    if (any(int(replacement_suite.get(k, "0")) for k in ("errors", "failures", "skipped"))
-            or len(replacement_methods) != 3 or len(replacement_ids) != 3
-            or set(replacement_methods) != set(replacement_ids.values())):
-        raise SystemExit("missing or nonpassing replacement regression")
+    replacement_methods = validated_methods(ET.parse(replacement_report).getroot(), 3, replacement_ids)
     evidence = evidence_output_root(repo) / "006_NK-MSG-002/evidence"
     bound_relative = "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml"
     bound_report = source / bound_relative
     bound_hash = next(f["sha256"] for f in validated["files"] if f["path"] == bound_relative)
     if hashlib.sha256(bound_report.read_bytes()).hexdigest() != bound_hash:
         raise SystemExit("certified bound execution report hash differs")
-    bound_suite = ET.parse(bound_report).getroot()
-    bound_methods = [c.get("classname") + "#" + c.get("name") for c in bound_suite.findall("testcase")]
     bound_ids = {k: v for k, v in validated["testIdMethods"].items() if k.startswith("PT-IDEM-B")}
-    if (any(int(bound_suite.get(k, "0")) for k in ("errors", "failures", "skipped"))
-            or len(bound_methods) != 4 or len(bound_ids) != 4
-            or set(bound_methods) != set(bound_ids.values())):
-        raise SystemExit("missing or nonpassing bound execution regression")
+    bound_methods = validated_methods(ET.parse(bound_report).getroot(), 4, bound_ids)
     old = json.loads((evidence / "manifest.json").read_text())
     old_id = old["runId"]
     if not all(c.isalnum() or c == "-" for c in old_id):
