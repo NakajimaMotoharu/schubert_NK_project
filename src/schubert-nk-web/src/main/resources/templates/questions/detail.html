@@ -23,7 +23,7 @@
       <input type="hidden" name="operation_token" th:replace="~{fragments/forms :: operationToken(${action.fields.operation_token})}">
       <input type="hidden" th:replace="~{fragments/forms :: csrfField(${_csrf.parameterName}, ${_csrf.token})}">
       <label><input type="checkbox" name="confirm" value="true" th:checked="${action.fields.confirm}" required>質問・回答の削除を確認しました（必須）</label>
-      <button type="submit">質問・回答を削除</button>
+      <button type="submit" class="destructive-secondary">質問・回答を削除</button>
     </form>
   </section>
   <a class="back" href="/questions">質問回答一覧</a>
