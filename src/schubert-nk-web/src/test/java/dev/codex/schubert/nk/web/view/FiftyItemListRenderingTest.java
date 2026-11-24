@@ -43,13 +43,19 @@ final class FiftyItemListRenderingTest {
   private static final String OWNER = "fixture-reader";
   private static final String RECEIPT = "0".repeat(26);
   private static final String HREF = "href";
+  private static final String PAGE_PARAMETER = "page";
 
   @Test
   void userDirectoryRendersTheTypedAccountAndRetainsFiltersInBothPreviousLinks() {
     var filters =
         UserSearchForm.bind(
             Map.of(
-                "username", List.of("fixture"), "state", List.of("ACTIVE"), "page", List.of("2")));
+                "username",
+                List.of("fixture"),
+                "state",
+                List.of("ACTIVE"),
+                PAGE_PARAMETER,
+                List.of("2")));
     var record =
         new UserRecord(
             new UserId(12),
@@ -74,7 +80,12 @@ final class FiftyItemListRenderingTest {
     var filters =
         NotificationSearchForm.bind(
             Map.of(
-                "type", List.of("ACCEPTED"), "from", List.of("2026-11-01"), "page", List.of("2")));
+                "type",
+                List.of("ACCEPTED"),
+                "from",
+                List.of("2026-11-01"),
+                PAGE_PARAMETER,
+                List.of("2")));
     var record =
         new NotificationRecord(
             new NotificationId(12),
@@ -100,7 +111,12 @@ final class FiftyItemListRenderingTest {
     var filters =
         QuestionSearchForm.bind(
             Map.of(
-                "keyword", List.of("A & B"), "state", List.of("UNANSWERED"), "page", List.of("2")),
+                "keyword",
+                List.of("A & B"),
+                "state",
+                List.of("UNANSWERED"),
+                PAGE_PARAMETER,
+                List.of("2")),
             UserRole.USER);
     var record =
         new QuestionSummaryRecord(
