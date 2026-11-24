@@ -49,16 +49,57 @@ class EvidenceSetTest(unittest.TestCase):
             """
             <report name="fixture.Protocol">
               <package name="fixture/branchless">
+                <class name="fixture/branchless/Plain">
+                  <method name="run" desc="()V">
+                    <counter type="INSTRUCTION" missed="0" covered="4"/>
+                    <counter type="METHOD" missed="0" covered="1"/>
+                  </method>
+                  <counter type="INSTRUCTION" missed="0" covered="4"/>
+                  <counter type="METHOD" missed="0" covered="1"/>
+                  <counter type="CLASS" missed="0" covered="1"/>
+                </class>
+                <sourcefile name="Plain.java">
+                  <line nr="1" mi="0" ci="2" mb="0" cb="0"/>
+                  <line nr="2" mi="0" ci="1" mb="0" cb="0"/>
+                  <line nr="3" mi="0" ci="1" mb="0" cb="0"/>
+                  <counter type="LINE" missed="0" covered="3"/>
+                </sourcefile>
+                <counter type="INSTRUCTION" missed="0" covered="4"/>
                 <counter type="LINE" missed="0" covered="3"/>
                 <counter type="METHOD" missed="0" covered="1"/>
                 <counter type="CLASS" missed="0" covered="1"/>
               </package>
               <package name="fixture/conditional">
+                <class name="fixture/conditional/Root">
+                  <method name="evaluate" desc="()V">
+                    <counter type="BRANCH" missed="0" covered="2"/>
+                    <counter type="INSTRUCTION" missed="0" covered="2"/>
+                    <counter type="METHOD" missed="0" covered="1"/>
+                  </method>
+                  <method name="setup" desc="()V">
+                    <counter type="INSTRUCTION" missed="0" covered="3"/>
+                    <counter type="METHOD" missed="0" covered="1"/>
+                  </method>
+                  <counter type="BRANCH" missed="0" covered="2"/>
+                  <counter type="INSTRUCTION" missed="0" covered="5"/>
+                  <counter type="METHOD" missed="0" covered="2"/>
+                  <counter type="CLASS" missed="0" covered="1"/>
+                </class>
+                <sourcefile name="Root.java">
+                  <line nr="10" mi="0" ci="1" mb="0" cb="2"/>
+                  <line nr="11" mi="0" ci="1" mb="0" cb="0"/>
+                  <line nr="12" mi="0" ci="1" mb="0" cb="0"/>
+                  <line nr="13" mi="0" ci="1" mb="0" cb="0"/>
+                  <line nr="14" mi="0" ci="1" mb="0" cb="0"/>
+                  <counter type="LINE" missed="0" covered="5"/>
+                </sourcefile>
+                <counter type="INSTRUCTION" missed="0" covered="5"/>
                 <counter type="LINE" missed="0" covered="5"/>
                 <counter type="METHOD" missed="0" covered="2"/>
                 <counter type="CLASS" missed="0" covered="1"/>
                 <counter type="BRANCH" missed="0" covered="2"/>
               </package>
+              <counter type="INSTRUCTION" missed="0" covered="9"/>
               <counter type="LINE" missed="0" covered="8"/>
               <counter type="METHOD" missed="0" covered="3"/>
               <counter type="CLASS" missed="0" covered="2"/>
@@ -67,10 +108,15 @@ class EvidenceSetTest(unittest.TestCase):
             """
         )
 
+    @staticmethod
+    def _validate_fixture_coverage(report):
+        return scenario.validate_module_coverage(report, {"fixture/branchless/Plain",
+                                                          "fixture/conditional/Root"})
+
     def test_required_module_coverage_counters_are_integer_package_totals(self):
-        values = scenario.validate_module_coverage(self._fixture_module_coverage())
+        values = self._validate_fixture_coverage(self._fixture_module_coverage())
         self.assertEqual(
-            {"LINE": 8, "METHOD": 3, "CLASS": 2, "BRANCH": 2},
+            {"INSTRUCTION": 9, "LINE": 8, "METHOD": 3, "CLASS": 2, "BRANCH": 2},
             {key: row["covered"] for key, row in values.items()},
         )
         self.assertTrue(all(row["missed"] == 0 for row in values.values()))
@@ -88,7 +134,7 @@ class EvidenceSetTest(unittest.TestCase):
                     else:
                         row.set("covered", "0")
                     with self.assertRaises(ValueError):
-                        scenario.validate_module_coverage(report)
+                        self._validate_fixture_coverage(report)
 
     def test_inconsistent_packages_and_malformed_jacoco_counts_fail(self):
         for variant in ("covered", "missed", "duplicate", "missing", "malformed", "invalid-type"):
@@ -109,53 +155,97 @@ class EvidenceSetTest(unittest.TestCase):
                 else:
                     line.set("type", "LINES")
                 with self.assertRaises(ValueError):
-                    scenario.validate_module_coverage(report)
-
-    def _fixture_coverage_detail(self):
-        report = self._fixture_module_coverage()
-        package = report.findall("package")[1]
-        target = ET.SubElement(package, "class", {"name": "fixture/conditional/Root"})
-        method = ET.SubElement(target, "method", {"name": "evaluate", "desc": "()V"})
-        source = ET.SubElement(package, "sourcefile", {"name": "Root.java"})
-        ET.SubElement(source, "line", nr="10", mi="0", ci="2", mb="0", cb="2")
-        for node in (target, method, source):
-            ET.SubElement(node, "counter", type="BRANCH", missed="0", covered="2")
-        return report
+                    self._validate_fixture_coverage(report)
 
     def test_jacoco_accepts_clean_class_method_and_source_detail(self):
-        report = self._fixture_coverage_detail()
+        report = self._fixture_module_coverage()
         self.assertEqual({"missed": 0, "covered": 2},
-                         scenario.validate_module_coverage(report)["BRANCH"])
+                         self._validate_fixture_coverage(report)["BRANCH"])
 
     def test_jacoco_rejects_misses_below_clean_package_counters(self):
         for path in (".//class", ".//method", ".//sourcefile"):
             with self.subTest(path=path):
-                report = self._fixture_coverage_detail()
+                report = self._fixture_module_coverage()
                 report.find(path).find("counter").set("missed", "1")
                 with self.assertRaisesRegex(ValueError, "missed detail counters"):
-                    scenario.validate_module_coverage(report)
+                    self._validate_fixture_coverage(report)
 
     def test_jacoco_rejects_missed_or_incomplete_line_detail(self):
         for field in ("mi", "mb"):
             for value in (None, "1"):
                 with self.subTest(field=field, value=value):
-                    report = self._fixture_coverage_detail()
+                    report = self._fixture_module_coverage()
                     line = report.find(".//line")
                     if value is None:
                         del line.attrib[field]
                     else:
                         line.set(field, value)
                     with self.assertRaisesRegex(ValueError, "incomplete or missed line detail"):
-                        scenario.validate_module_coverage(report)
+                        self._validate_fixture_coverage(report)
 
     def test_jacoco_rejects_duplicate_and_malformed_detail_counters(self):
-        for kind, covered in (("BRANCH", "1"), ("UNKNOWN", "1"), ("METHOD", "-1")):
+        for kind, covered in (("INSTRUCTION", "1"), ("UNKNOWN", "1"), ("METHOD", "-1")):
             with self.subTest(kind=kind, covered=covered):
-                report = self._fixture_coverage_detail()
+                report = self._fixture_module_coverage()
                 ET.SubElement(report.find(".//method"), "counter",
                               type=kind, missed="0", covered=covered)
                 with self.assertRaisesRegex(ValueError, "invalid or duplicated JaCoCo counter"):
-                    scenario.validate_module_coverage(report)
+                    self._validate_fixture_coverage(report)
+
+    def test_jacoco_matches_class_names_and_their_packages(self):
+        for variant in ("missing", "wrong-name", "wrong-package", "duplicate", "outside-package"):
+            with self.subTest(variant=variant):
+                report = self._fixture_module_coverage()
+                package = report.find("package")
+                cls = package.find("class")
+                if variant == "missing":
+                    package.remove(cls)
+                elif variant == "wrong-name":
+                    cls.set("name", "fixture/branchless/Substitute")
+                elif variant == "wrong-package":
+                    cls.set("name", "fixture/conditional/Plain")
+                elif variant == "duplicate":
+                    package.append(copy.deepcopy(cls))
+                else:
+                    report.append(copy.deepcopy(cls))
+                with self.assertRaises(ValueError):
+                    self._validate_fixture_coverage(report)
+
+    def test_jacoco_reconciles_methods_and_rejects_inconsistent_detail(self):
+        for variant in ("missing", "wrong-count", "duplicate", "outside-class"):
+            with self.subTest(variant=variant):
+                report = self._fixture_module_coverage()
+                cls = report.find("package/class")
+                method = cls.find("method")
+                if variant == "missing":
+                    cls.remove(method)
+                elif variant == "wrong-count":
+                    method.find("counter[@type='INSTRUCTION']").set("covered", "5")
+                elif variant == "duplicate":
+                    cls.append(copy.deepcopy(method))
+                else:
+                    report.append(copy.deepcopy(method))
+                with self.assertRaises(ValueError):
+                    self._validate_fixture_coverage(report)
+
+    def test_jacoco_reconciles_source_lines_and_rejects_inconsistent_detail(self):
+        for variant in ("missing", "wrong-number", "duplicate", "outside-source", "malformed"):
+            with self.subTest(variant=variant):
+                report = self._fixture_module_coverage()
+                source = report.find("package/sourcefile")
+                line = source.find("line")
+                if variant == "missing":
+                    source.remove(line)
+                elif variant == "wrong-number":
+                    line.set("nr", "0")
+                elif variant == "duplicate":
+                    source.append(copy.deepcopy(line))
+                elif variant == "outside-source":
+                    report.append(copy.deepcopy(line))
+                else:
+                    line.set("ci", "invalid")
+                with self.assertRaises(ValueError):
+                    self._validate_fixture_coverage(report)
 
     @staticmethod
     def _fixture_spotbugs():
