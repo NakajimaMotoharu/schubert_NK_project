@@ -133,8 +133,19 @@ final class FiftyItemListPaginationTemplateTest {
     var values = new HashMap<String, String>();
     for (var field :
         List.of(
-            "username", "role", "state", "lockedUntil", "lastLogin", "createdAt", "updatedAt",
-            "type", "receiptId", "submittedAt", "lastUpdatedAt", "summary", "stateLabel",
+            "username",
+            "role",
+            "state",
+            "lockedUntil",
+            "lastLogin",
+            "createdAt",
+            "updatedAt",
+            "type",
+            "receiptId",
+            "submittedAt",
+            "lastUpdatedAt",
+            "summary",
+            "stateLabel",
             "answeredAt")) {
       values.put(field, "fixture");
     }
@@ -145,11 +156,17 @@ final class FiftyItemListPaginationTemplateTest {
 
   private static Map<String, Object> filters() {
     return Map.of(
-        "issues", Map.of(),
-        "values", Map.of("type", "", "from", "", "to", "", "keyword", "", "state", ""),
-        "admin", false,
-        "username", "",
-        "state", "",
-        "role", "");
+        "issues",
+        Map.of(),
+        "values",
+        Map.of("type", "", "from", "", "to", "", "keyword", "", "state", ""),
+        "admin",
+        false,
+        "username",
+        "",
+        "state",
+        "",
+        "role",
+        "");
   }
 }

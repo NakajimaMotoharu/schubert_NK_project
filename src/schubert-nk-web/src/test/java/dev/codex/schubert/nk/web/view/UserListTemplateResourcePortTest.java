@@ -156,7 +156,8 @@ final class UserListTemplateResourcePortTest {
     var document =
         render(
             Map.of(USERNAME, "", ROLE, "", STATE, "", ISSUES, Map.of()),
-            Optional.of(Map.of("totalCount", 0, "effectivePage", 1, "totalPages", 1, "empty", true)),
+            Optional.of(
+                Map.of("totalCount", 0, "effectivePage", 1, "totalPages", 1, "empty", true)),
             List.of(),
             Optional.empty(),
             Optional.empty());
