@@ -1,4 +1,90 @@
 {
+  "currentEveningEvidencePG44460": {
+    "wbs": "WBS-P020-01.03/2",
+    "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "proof": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44460-p020-current-packaged-baseline-metrics-qualification/manifest.json",
+      "sha256": "2c5b8b9e907b4c39f043fba0cd4e18b3ae852dee2096b699699b77dc349dd201"
+    },
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "newFormal": 0
+  },
+  "currentEveningEvidencePG44462": {
+    "wbs": "WBS-G13.01",
+    "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "proof": {
+      "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG44462-current-full-protocol-source-physical-rebinding/manifest.json",
+      "sha256": "5d0aafecaa59bb4b525963661fc95a473a054fd01e6a15d751c9e28f86dc9a9b"
+    },
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "newFormal": 0
+  },
+  "currentEveningEvidencePG44464": {
+    "wbs": "WBS-G13.02",
+    "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44464-current-storage-java-physical-trace/manifest.json",
+      "sha256": "4d0f2d2bca0bed9d40c76900c4c475fa75118ad07ece728c5deeb88fc4cb84d1"
+    },
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "newFormal": 0
+  },
+  "currentEveningEvidencePG44466": {
+    "wbs": "WBS-G13.06",
+    "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44466-current-batch-published-owner-and-retired-paths/manifest.json",
+      "sha256": "b9277245fdd2a70ea8c5d01b0e0a145f2eb0a2911d46209379990bc3433b650e"
+    },
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "newFormal": 0
+  },
+  "currentEveningEvidencePG44468": {
+    "wbs": "WBS-G13.04",
+    "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44468-current-api-registration-and-batch-path-retirement/manifest.json",
+      "sha256": "75d026b4974e144b9250bd19c0e938eb81ba73e2133184864a97aaf998ffc7bd"
+    },
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "newFormal": 0
+  },
+  "currentSixMainPathInventoryPG44468": {
+    "source": "ddfb09f93c0c2092cf033c74498067aec458b179",
+    "productMain": {
+      "protocol": 169,
+      "storage": 25,
+      "bootstrap": 88,
+      "batch": 203,
+      "api": 286,
+      "web": 262
+    },
+    "totalMain": 1033,
+    "missing": 0,
+    "activeJavaPathMembershipOnly": true,
+    "historicSha256AndArtifactCountsRemainHistorical": true,
+    "historicalArtifactRegistrySize": 1139,
+    "currentArtifactRegistrySize": 1140,
+    "removedToHistory": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdSession.java"
+    ],
+    "apiAppended": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java"
+    ],
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44468-current-api-registration-and-batch-path-retirement/manifest.json",
+      "sha256": "75d026b4974e144b9250bd19c0e938eb81ba73e2133184864a97aaf998ffc7bd"
+    },
+    "whole451": false
+  },
   "currentEveningEvidencePG44446": {
     "wbs": "WBS-F02-b-a",
     "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
@@ -541112,39 +541198,6 @@
       "previousCandidateSha256": "0143c396d5c69230c956ef55618ff08662dd5a46958059c0c400825c3efebd93"
     },
     {
-      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery.java",
-      "kind": "JAVA",
-      "module": "batch",
-      "class": "dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery",
-      "owner": "WBS-P018-03",
-      "costOwner": "WBS-P018-03",
-      "basis": "SSC239 fresh manager dependency within P01803.01/.02 budget",
-      "sha256": "83fbe26de80c142e104809c79c3d6ddddd274a0095401df42a9c59eb4835b8ba",
-      "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "candidateProvenance": "SSC239 WORKTREE_CANDIDATE; host/native/formal unqualified"
-    },
-    {
-      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdSession.java",
-      "kind": "JAVA",
-      "module": "batch",
-      "class": "dev/codex/schubert/nk/batch/platform/LinuxSystemdSession",
-      "owner": "WBS-P018-03",
-      "costOwner": "WBS-P018-03",
-      "basis": "SSC239 fresh manager dependency within P01803.01/.02 budget",
-      "sha256": "8ef62dad8a13297697d64260b73c88f558c38801410375827273ba18cd8755f5",
-      "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "candidateProvenance": "SSC239 WORKTREE_CANDIDATE; host/native/formal unqualified",
-      "sourceByteHistory": [
-        {
-          "source": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
-          "sha256": "c0e227573d4c58eb0fc81ad1edb2f84ebda302dafd2f2e8aaec64d05e2402297"
-        }
-      ],
-      "changeEvidence": "Source7fff/hygiene260; genuine3714/545/1643/native20points18streams; existing17/51 individually revalidated, all other scopes remain unaccepted"
-    },
-    {
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
       "kind": "JAVA",
       "module": "bootstrap",
@@ -705918,6 +705971,83 @@
       "acceptance": "UNASSESSED",
       "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
       "ssc451452Proof": "evidence/01_PT/018_NK-OPS-001/evidence/PG37674-ssc451452-protocol-module-criteria-return-v1/manifest.json"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "RequestContext",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "sha256": "9d3990bff0e3ba1d606daa7f51d430be2109cf4ef789a4cf5c53cb4573d1bc5b",
+      "acceptance": "UNASSESSED",
+      "basis": "SSC-477/SS311/312/323; scope owner from 481, local tests only",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
+      "localSpec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/046_SSC477同期Handler型と受信情報の単体仕様書.md",
+        "sha256": "caed63d29a4c2d203abb63087704b1c9edfeb77181f85d1a60cf5b7f5d47e9c1"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+        "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+      },
+      "testIds": [
+        "PT-JMS-HCTX001",
+        "PT-JMS-HCTX002",
+        "PT-JMS-HCTX003",
+        "PT-JMS-HCTX004"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "LayoutHandler",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "sha256": "dd8e3808d58f2e2c053deed65684e898b376b786e4d6fde699fe2f88e4a3c104",
+      "acceptance": "UNASSESSED",
+      "basis": "SSC-477/SS311/312/323; scope owner from 481, local tests only",
+      "counterApplicability": "NATURAL_NO_CODE",
+      "localSpec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/046_SSC477同期Handler型と受信情報の単体仕様書.md",
+        "sha256": "caed63d29a4c2d203abb63087704b1c9edfeb77181f85d1a60cf5b7f5d47e9c1"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+        "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+      },
+      "testIds": [
+        "PT-JMS-HCTX005"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+      "kind": "JAVA",
+      "module": "api",
+      "class": "LayoutHandlerRegistry",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "sha256": "05a585f144f1a2cc95242f65efbcd52dce5497f2da7525729847e973415035d6",
+      "acceptance": "UNASSESSED",
+      "basis": "SSC-477/SS311/312/323; scope owner from 481, local tests only",
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
+      "localSpec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/048_SSC477型付き同期登録の単体テスト仕様書.md",
+        "sha256": "3be487d5b724cd75832349813efe68fe8b43577623d0d2ce9eb1797b8cd409bc"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42726-ssc477-typed-layout-handler-registry-v1/manifest.json",
+        "sha256": "e4ac8ba7dee14881be8f38b7843a2bfb8a95f64af4f1c83549b56b9d0ac2293b"
+      },
+      "testIds": [
+        "PT-JMS-HREG001",
+        "PT-JMS-HREG002",
+        "PT-JMS-HREG003",
+        "PT-JMS-HREG004",
+        "PT-JMS-HREG005",
+        "PT-JMS-HREG006"
+      ]
     }
   ],
   "layouts": [
