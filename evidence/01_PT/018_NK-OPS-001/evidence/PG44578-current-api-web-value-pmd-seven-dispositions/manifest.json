@@ -1,0 +1,226 @@
+{
+  "run": "PG44578",
+  "source": "1947106a6299fe4cec510d8e75bbdfb79cfd561b",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-24T21:42:37.757959+00:00",
+  "auditedCounts": {
+    "api": {
+      "files": 27,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/api/pmd.out",
+        "sha256": "ed1fccb2ae4c44463c28ab1aa125592e2ac3027d30e93da8ff171faf4d28b06c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/api/pmd.err",
+        "sha256": "28205b933507aac26ff4349ad8a5cdfae58e04a6895d91c204b0ee8dda8463a1"
+      },
+      "raw": {
+        "exit": 4,
+        "report": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/api/pmd.xml",
+          "sha256": "3498087a2dfc9d818fcbdca779a383a0db043c2d74419bd0563013cd5cd916e1"
+        },
+        "raw": [
+          {
+            "file": "CanonicalField.java",
+            "rule": "NullAssignment",
+            "line": "22"
+          },
+          {
+            "file": "CanonicalField.java",
+            "rule": "ReturnEmptyCollectionRatherThanNull",
+            "line": "27"
+          },
+          {
+            "file": "OperationFingerprint.java",
+            "rule": "CloseResource",
+            "line": "49"
+          },
+          {
+            "file": "WipingByteArrayOutputStream.java",
+            "rule": "AvoidSynchronizedAtMethodLevel",
+            "line": "20"
+          },
+          {
+            "file": "WipingByteArrayOutputStream.java",
+            "rule": "AvoidSynchronizedAtMethodLevel",
+            "line": "27"
+          },
+          {
+            "file": "WipingByteArrayOutputStream.java",
+            "rule": "AvoidSynchronizedAtMethodLevel",
+            "line": "47"
+          },
+          {
+            "file": "WipingByteArrayOutputStream.java",
+            "rule": "AvoidSynchronizedAtMethodLevel",
+            "line": "58"
+          }
+        ],
+        "processingErrors": 0
+      }
+    },
+    "web": {
+      "files": 37,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/web/pmd.out",
+        "sha256": "5818df7d7fb4ef6cafdcb3768c663e936df68c003d9bcf8cc9f067d11b74cd38"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/web/pmd.err",
+        "sha256": "a80b959c3bc7a3aa0b80c0dc22b13be79659995da86030550dc84c3e6947da64"
+      },
+      "raw": {
+        "exit": 0,
+        "report": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/web/pmd.xml",
+          "sha256": "1cdd4a4c72e94e2b6f5813446149e268d1359adb327a1e3d06550595a8cff6bc"
+        },
+        "raw": [],
+        "processingErrors": 0
+      }
+    }
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/begin.json",
+    "sha256": "52928ab5fdc52f7524444e15791061d09156f34cf95a0e56a4471c3567b40e0b"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/terminal.json",
+    "sha256": "d91961f24bc1960a5e00a9ed2762871fcf0308b839f52aee9360f488373d4694"
+  },
+  "independentTwrBytecode": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-p",
+      "-c",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/api/qualified-classes/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.class"
+    ],
+    "inputClass": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44578-current-independent-value-sources-pmd/api/qualified-classes/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.class",
+      "sha256": "5c27a9e8350a7df2ce3b67d8ae33619468c0515e02aa87b7316313501d0fc5be"
+    },
+    "closeSites": 2,
+    "normalAndExceptional": true,
+    "suppression": true
+  },
+  "parentIntrinsicCheck": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "-p",
+    "java.io.ByteArrayOutputStream"
+  ],
+  "retainedClassification": [
+    {
+      "file": "CanonicalField.java",
+      "rule": "NullAssignment",
+      "line": "22",
+      "disposition": "APPROVED_NULL_IS_DISTINCT_WIRE_VALUE",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1108_同source静的診断・優先十分類_限定結果.md",
+        "sha256": "f36bc6b1ad8e4a5f41b108f241d069a72d0a0840f14477dc134bf55f6ccf56b3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+        "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+      }
+    },
+    {
+      "file": "CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "27",
+      "disposition": "APPROVED_NULL_IS_DISTINCT_WIRE_VALUE",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1108_同source静的診断・優先十分類_限定結果.md",
+        "sha256": "f36bc6b1ad8e4a5f41b108f241d069a72d0a0840f14477dc134bf55f6ccf56b3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+        "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+      }
+    },
+    {
+      "file": "OperationFingerprint.java",
+      "rule": "CloseResource",
+      "line": "49",
+      "disposition": "TWR_BOTH_EXIT_CALL_SITES_MEASURED",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1132_固定296snapshot所有・F03適用性_限定結果.md",
+        "sha256": "ee3292df45ff4a09d16555d924aea455dfce0b91dffb2e12bea77e162e20fedd"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+        "sha256": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b"
+      }
+    },
+    {
+      "file": "WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "20",
+      "disposition": "NONPUBLIC_INTRINSIC_PARENT_CONTRACT",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/2499_Main親同期・表示volatile五理由_現集合結合仕様.md",
+        "sha256": "300e89f39dcafbd63a4f9f3df66b84d4bde891136e09e7eb610ac27f142cfbc3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+      }
+    },
+    {
+      "file": "WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "27",
+      "disposition": "NONPUBLIC_INTRINSIC_PARENT_CONTRACT",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/2499_Main親同期・表示volatile五理由_現集合結合仕様.md",
+        "sha256": "300e89f39dcafbd63a4f9f3df66b84d4bde891136e09e7eb610ac27f142cfbc3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+      }
+    },
+    {
+      "file": "WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "47",
+      "disposition": "NONPUBLIC_INTRINSIC_PARENT_CONTRACT",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/2499_Main親同期・表示volatile五理由_現集合結合仕様.md",
+        "sha256": "300e89f39dcafbd63a4f9f3df66b84d4bde891136e09e7eb610ac27f142cfbc3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+      }
+    },
+    {
+      "file": "WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "58",
+      "disposition": "APPLICABLE_NOW_CONSTANT_LABEL_NO_STATE",
+      "priorDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/2499_Main親同期・表示volatile五理由_現集合結合仕様.md",
+        "sha256": "300e89f39dcafbd63a4f9f3df66b84d4bde891136e09e7eb610ac27f142cfbc3"
+      },
+      "currentSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+      }
+    }
+  ],
+  "rawApiExit4": true,
+  "rawApiSeven": 7,
+  "knownReasonsRetained": 6,
+  "applicableMethod": "WipingByteArrayOutputStream.toString",
+  "formerBodyUsedState": true,
+  "currentBodyUsesState": false,
+  "scopesOwnerFormalDecision": null,
+  "rawWebZero": 0,
+  "programEdits": 0,
+  "productTests": 0,
+  "excluded": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
