@@ -1,0 +1,137 @@
+{
+  "eventId": "PGPT-20261008-9811",
+  "source": "062a9f5e779e3184b3e87faaec29e5b1386b5415",
+  "productionCoreMain": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "canonicalDesignSource": "8cae180ad5fd9b238b99308f5e4aae76bbf5bd69",
+  "managementWorkIds": [
+    "WBS-P019-03.03/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P019-03.03/2",
+    "元行": "WBS-P019-03.03/2",
+    "費目": "B",
+    "主担当": "WBS-P019-03.03",
+    "状態": "計画",
+    "作業": "欠落/重複/破損/途中失敗の独立後条件／同source証拠による受入判定",
+    "残pp": "0.52",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認。P019-03のCOPY/SDKを扱う範囲は当該owner確認後",
+    "終了証拠": "欠落/重複/破損/途中失敗の独立後条件の対象別完了記録を確認。該当するSSC417の24試験は未実行。SDK/driver・独立fixture・同sourceの結果を回収。既存1050件を転記しない",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "P019-03親のSSC417・SDK/24未実行。子への一律配賦をせず対象TestIDの帰属を確認",
+    "範囲": "SCP-005、MIG-DAT-003、MIG-DAT-004、MIG-DAT-005、MIG-DAT-006、MIG-003、MIG-004、MIG-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "5",
+    "楽観pp": "0.195",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-MIG-001、SS 343",
+    "lineNumber": 771,
+    "改訂残pp": "0.52",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44130",
+  "startEvent": "PGPT-20261008-9810",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": {
+    "selected": 2,
+    "passed": 2,
+    "oldExactCases": 10,
+    "originalPhysicalCoverage": {
+      "LINE": {
+        "covered": 46,
+        "total": 46
+      },
+      "METHOD": {
+        "covered": 20,
+        "total": 20
+      },
+      "CLASS": {
+        "covered": 3,
+        "total": 3
+      },
+      "BRANCH": {
+        "covered": 14,
+        "total": 14
+      }
+    },
+    "whole451": false
+  },
+  "proof": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44130-current-scenario-entry-map-two-affected/manifest.json",
+    "sha256": "00b34abea3eae63f996b20a87158028d0020278ba879c567ac80ddb391cad454"
+  },
+  "nextEvidence": "現SCR020 NotificationListについて、旧結果で未対応の現物理・fixtureだけを特定。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-24T15:20:20+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 6,
+      "remainingPercent": 94,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 6,
+    "remainingPercent": 94,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "a90ec94effd131a71fb6d0c72fcd79f36e04eedba9ac9e114b0c7f8cfd02498e",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-24T15:20:20+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 6,
+        "remainingPercent": 94,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-24T15:19:58.168389+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 6,
+    "remainingPercent": 94,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}

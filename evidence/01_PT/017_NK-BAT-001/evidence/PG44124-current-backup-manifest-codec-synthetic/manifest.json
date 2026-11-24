@@ -1,0 +1,123 @@
+{
+  "run": "PG44124",
+  "source": "062a9f5e779e3184b3e87faaec29e5b1386b5415",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P017-05/2",
+  "terminalAtUTC": "2026-11-24T15:15:21.703609+00:00",
+  "originalGolden": {
+    "path": "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json",
+    "sha256": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e"
+  },
+  "scratchSyntheticGolden": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/target/backup-manifest-traces/PT-BAT-186-manifest.json",
+    "sha256": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e"
+  },
+  "fixture": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java",
+      "sha256": "c772bc0da0f2e22edae6c8727a299aece6e6c5bbef275548291a7b3c39d77e89"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "sha256": "b1739b91de40864e654e4469d816e2df5c28a20847d4e4043ca3e84175dda991"
+    }
+  ],
+  "format": "NKBACKUP1",
+  "cases": [
+    {
+      "testId": "PT-BAT-186",
+      "method": "independentCanonicalGolden"
+    },
+    {
+      "testId": "PT-BAT-187",
+      "method": "allFieldsAndMaximumLengths"
+    },
+    {
+      "testId": "PT-BAT-188",
+      "method": "structuralByteMutation"
+    },
+    {
+      "testId": "PT-BAT-189",
+      "method": "noncanonicalScalarsAndDates"
+    },
+    {
+      "testId": "PT-BAT-190",
+      "method": "missingUnknownDuplicateAndOrder"
+    },
+    {
+      "testId": "PT-BAT-191",
+      "method": "sizeAndNullBoundaries"
+    },
+    {
+      "testId": "PT-BAT-192",
+      "method": "inputOutputOwnership"
+    },
+    {
+      "testId": "PT-BAT-193",
+      "method": "concurrentCanonicalRoundTrips"
+    }
+  ],
+  "actualSuccess": 8,
+  "previousApplicable": 1,
+  "normalArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "rawCoverage": {
+    "LINE": {
+      "covered": 77,
+      "total": 79
+    },
+    "METHOD": {
+      "covered": 6,
+      "total": 7
+    },
+    "CLASS": {
+      "covered": 1,
+      "total": 1
+    },
+    "BRANCH": {
+      "covered": 12,
+      "total": 12
+    }
+  },
+  "manualExclusions": 0,
+  "frameworkScratchWriteOnly": true,
+  "realProductOperations": 0,
+  "command": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/begin.json",
+    "sha256": "687bc744175589f93aad4a0427bd7fb27aa62497b864b7045dec63539c70f427"
+  },
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/terminal.json",
+      "sha256": "a30f9bb4f7055fcca016267763e57d9a9cc229434458b430d17bf874c8e0a38d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/raw.out",
+      "sha256": "5ddd50180e80ed26f076c3c831f5d38c8977577f653e95f814e4c3db920d35de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/unit.exec",
+      "sha256": "4682e49db9242b2bebd53ec10d829c9eea58d1f86deba0ba71d7e09992a4eaff"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/init.log",
+      "sha256": "48a60a991a88e1055a946b973902209bc19e8c47b6512899f0f92dd1038487ab"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44124-current-backup-manifest-codec-pure/reports/TEST-junit-jupiter.xml",
+      "sha256": "baef32691006188b26a437d52eaead2ab5f1063ce7b83db9fc795501e4daac94"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/035_NK-BAT-001_backup_manifest_codec_単体テスト仕様書.md",
+    "sha256": "d83adaf35eeb2c470683a473dad75f4f9b9eeb0df24a213931b044e8288e8591"
+  },
+  "result": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4976_BackupManifestCodecの固定golden現結果.md",
+    "sha256": "59bfbbfd991c63a502166427e47db034a294a76e2fb0c4c803210254ea671b19"
+  },
+  "whole451": false,
+  "formalAcceptanceId": null
+}
