@@ -5,13 +5,15 @@ import hashlib
 import io
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import platform
 import re
 import subprocess
 import sys
+from tempfile import TemporaryDirectory
 import unittest
 from host_tool_invocation import capture, verify
+from verify_published_manifest_pins import SHA256, exact_source, git
 
 ROOT=Path(__file__).resolve().parents[2]
 DOCS=ROOT/'evidence/01_PT/018_NK-OPS-001'
@@ -56,6 +58,70 @@ def corpus():
     return result
 
 
+def public_manifest_path(path):
+    parts = PurePosixPath(path).parts
+    return (
+        parts[:2] == ("evidence", "01_PT")
+        and len(parts) in (6, 7)
+        and parts[3] == "evidence"
+        and (len(parts) == 6 or parts[4] == "provisional")
+        and re.fullmatch(r"(?i)PG[0-9]+(?:[-_].+)?", parts[-2]) is not None
+        and "private" not in parts[-2].casefold()
+        and parts[-1] == "manifest.json"
+    )
+
+
+def digest_candidates(repo, source, digests):
+    if not exact_source(source) or not 1 <= len(digests) <= 8:
+        raise ValueError("a full Git commit and one to eight SHA-256 digests are required")
+    if any(not isinstance(value, str) or not SHA256.fullmatch(value) for value in digests):
+        raise ValueError("expected lowercase SHA-256 digests")
+    commit = git(repo, "rev-parse", "--verify", "--end-of-options", f"{source}^{{commit}}")
+    if commit.stdout.decode().strip() != source:
+        raise ValueError("source must be a Git commit")
+
+    tree = git(repo, "ls-tree", "-r", "-z", source, "--", "evidence/01_PT").stdout
+    manifests = []
+    for row in tree.decode("utf-8").split("\0"):
+        metadata, _, path = row.partition("\t")
+        if metadata.startswith(("100644 blob ", "100755 blob ")) and public_manifest_path(path):
+            manifests.append(path)
+
+    query = ["grep", "-I", "-F", "-l", "-z", "--all-match", "--no-textconv"]
+    distinct = sorted(set(digests))
+    for value in distinct:
+        query.extend(("-e", value))
+    patterns = [
+        re.compile(rb"(?<![0-9A-Fa-f])" + value.encode("ascii") + rb"(?![0-9A-Fa-f])")
+        for value in distinct
+    ]
+
+    candidates = set()
+    for start in range(0, len(manifests), 500):
+        selected = manifests[start : start + 500]
+        result = git(repo, *query, source, "--", *selected, required=False)
+        if result.returncode == 1:
+            continue
+        result.check_returncode()
+        for row in result.stdout.decode("utf-8").split("\0"):
+            if not row:
+                continue
+            prefix, sep, path = row.partition(":")
+            if prefix != source or not sep or path not in selected:
+                raise ValueError("unexpected Git manifest match")
+            blob = git(repo, "cat-file", "blob", f"{source}:{path}").stdout
+            if all(pattern.search(blob) is not None for pattern in patterns):
+                candidates.add(path)
+
+    return {
+        "source": source,
+        "digests": distinct,
+        "trackedPublicManifests": len(manifests),
+        "paths": sorted(candidates),
+        "acceptanceInferred": False,
+    }
+
+
 class FollowupTest(unittest.TestCase):
     def test_FOLLOWUP001_number_order_not_modification_or_acceptance(self):
         rows=index_entries('C02',[('1520_old.md','# C02 old gap'),('1555_result.md','# C02 result'),
@@ -86,6 +152,57 @@ class FollowupTest(unittest.TestCase):
         rows=index_entries('C02',entries)
         self.assertEqual(['1734_public.md'],[r['name'] for r in rows])
         self.assertFalse(any('accepted' in key.lower() or 'allowed' in key.lower() for row in rows for key in row))
+
+
+class DigestCandidatesTest(unittest.TestCase):
+    def test_uses_exact_digests_together_in_tracked_git_manifests(self):
+        with TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            git(repo, "init", "-q")
+            prefix = "evidence/01_PT/001_PROGRAM/evidence/"
+            first = "a" * 64
+            second = "b" * 64
+            both = json.dumps({"product": first, "fixture": second}, indent=2)
+            good = prefix + "PG01-pure-result/manifest.json"
+            provisional = prefix + "provisional/PG02-pure-result/manifest.json"
+            entries = {
+                good: both,
+                provisional: both,
+                prefix + "PG03-other/manifest.json": json.dumps([first]),
+                prefix + "PG04-other/manifest.json": json.dumps([second]),
+                prefix + "PG05-near-match/manifest.json": json.dumps([first + "a", second]),
+                prefix + "PG06-private/manifest.json": both,
+                prefix + "raw/PG07-result/manifest.json": both,
+                prefix + "PG08-result/raw.json": both,
+            }
+            for path, content in entries.items():
+                file = repo / path
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text(content, encoding="utf-8")
+            symlink = repo / (prefix + "PG09-link/manifest.json")
+            symlink.parent.mkdir()
+            symlink.symlink_to(repo / good)
+            git(repo, "add", "--", "evidence/01_PT")
+            git(repo, "-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                "commit", "-qm", "fixture")
+            source = git(repo, "rev-parse", "HEAD").stdout.decode().strip()
+            (repo / good).write_text("dirty replacement", encoding="utf-8")
+            untracked = repo / (prefix + "PG10-untracked/manifest.json")
+            untracked.parent.mkdir()
+            untracked.write_text(both, encoding="utf-8")
+
+            results = digest_candidates(repo, source, [first, second])
+
+            self.assertEqual([good, provisional], results["paths"])
+            self.assertEqual(5, results["trackedPublicManifests"])
+            self.assertFalse(results["acceptanceInferred"])
+            self.assertEqual([], digest_candidates(repo, source, ["c" * 64])["paths"])
+
+    def test_validates_inputs_before_accessing_git(self):
+        for source, digests in (("HEAD", ["a" * 64]), ("a" * 40, []),
+                                ("a" * 40, ["a" * 63]), ("a" * 40, ["x" * 64] * 9)):
+            with self.subTest(source=source, digests=digests), self.assertRaises(ValueError):
+                digest_candidates(Path("nonexistent-repository"), source, digests)
 
 
 def qualify():
@@ -158,10 +275,19 @@ def qualify():
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--query')
+    selection=parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument('--query')
+    selection.add_argument('--digest', action='append', metavar='SHA256')
+    parser.add_argument('--source', metavar='GIT_COMMIT')
     args=parser.parse_args()
     if args.query is not None:
+        if args.source is not None:
+            parser.error('--source is only used with --digest')
         rows=index_entries(args.query,corpus())
         print(json.dumps(dict(query=args.query,totalMatches=len(rows),newest=rows[:15],acceptanceInferred=False),ensure_ascii=False))
     else:
-        parser.error('explicit bounded query required; qualification uses no-argument pg8150 entrypoint')
+        try:
+            result=digest_candidates(ROOT,args.source,args.digest)
+        except (ValueError, subprocess.CalledProcessError) as error:
+            parser.error(f'digest lookup failed ({type(error).__name__})')
+        print(json.dumps(result,ensure_ascii=False))
