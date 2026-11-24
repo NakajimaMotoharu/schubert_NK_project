@@ -29,9 +29,15 @@ final class NavigationLandmarkResourceTest {
   @Test
   void userManagementNavigationsHaveDistinctNames() {
     assertAll(
-        () -> assertNavigation("admin/user-list", "利用者一覧のナビゲーション", List.of("@{/admin/users/new}")),
-        () -> assertNavigation("admin/user-new", "利用者追加のナビゲーション", List.of("@{/admin/users}")),
-        () -> assertNavigation("admin/user-detail", "利用者詳細のナビゲーション", List.of("@{/admin/users}")));
+        () ->
+            assertNavigation(
+                "admin/user-list", "利用者一覧のナビゲーション", List.of("@{/admin/users/new}")),
+        () ->
+            assertNavigation(
+                "admin/user-new", "利用者追加のナビゲーション", List.of("@{/admin/users}")),
+        () ->
+            assertNavigation(
+                "admin/user-detail", "利用者詳細のナビゲーション", List.of("@{/admin/users}")));
   }
 
   @Test
@@ -47,12 +53,16 @@ final class NavigationLandmarkResourceTest {
     try (var input =
         NavigationLandmarkResourceTest.class.getResourceAsStream("/templates/" + name + ".html")) {
       assertNotNull(input, name);
-      var landmarks = Jsoup.parse(input, "UTF-8", "").select("nav:not([th\\:replace])");
+      var landmarks =
+          Jsoup.parse(input, "UTF-8", "").select("nav").stream()
+              .filter(nav -> !nav.hasAttr("th:replace"))
+              .toList();
       assertEquals(1, landmarks.size(), name);
-      assertEquals(label, landmarks.attr("aria-label"), name);
+      var landmark = landmarks.getFirst();
+      assertEquals(label, landmark.attr("aria-label"), name);
       assertEquals(
           destinations,
-          landmarks.select("a").stream()
+          landmark.select("a").stream()
               .map(link -> link.hasAttr("th:href") ? link.attr("th:href") : link.attr("href"))
               .toList(),
           name);
