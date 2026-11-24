@@ -1,0 +1,182 @@
+{
+  "run": "PG44402",
+  "source": "b0410ae5a48d887bafab694abef1a65619d025f1",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "terminalAtUTC": "2026-11-24T18:58:59.648761+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-P016-21/2",
+    "WBS-F03/2-2-b",
+    "WBS-F02-b-a"
+  ],
+  "bug": "BUG-3782",
+  "testId": "PT-WEB-NDETAIL-DOM004",
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4984_取消済み通知の読取表示単体仕様.md",
+    "sha256": "e7d8fe2f66ec64de2bdbbdca642771ab2d08c9d0fcce5ea20e1885c8e4256cf1"
+  },
+  "result": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4985_取消済み通知の読取表示実行結果.md",
+    "sha256": "15209ce434e0f0e0547f9557f8f5ba18cca97020d8bcf8034fa363b24d725ae3"
+  },
+  "sourceFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailRenderingTest.java",
+    "sha256": "a5f4964020dd589f66ea26f5f4923a4941f7dbda00c3066cf0795f72bc3784ba"
+  },
+  "sameCompiledFixture": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/fixtures/dev/codex/schubert/nk/web/view/NotificationDetailRenderingTest.class",
+    "sha256": "23474f7fba0bde829b43cb4dd525b8d01ce7494443f64366fafe284a90fc95a6"
+  },
+  "javaPhysicalFromExisting": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/classes/dev/codex/schubert/nk/web/session/SessionPrincipal.class",
+      "sha256": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/classes/dev/codex/schubert/nk/web/view/TopBarViewModel.class",
+      "sha256": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/classes/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.class",
+      "sha256": "e676000923b4431ab03a5af7c5a2c1cf6233b7a0eb8df92f96d5645726acb6cf"
+    }
+  ],
+  "red": {
+    "count": 1,
+    "failures": 1,
+    "exit": 1,
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/xml/TEST-junit-jupiter.xml",
+      "sha256": "13ad266a730c6aad6db1456ed36fe64e1ff2728c26d1f660e6b2b493c14b09c8"
+    },
+    "source": "93d71562d62c4a0d20ab81c9eac260f340d73f7f"
+  },
+  "green": {
+    "count": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit": 0,
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/xml/TEST-junit-jupiter.xml",
+      "sha256": "aad2612265df58d127f94d671580da35d828cdcdada59a398d0444bafd596116"
+    }
+  },
+  "artifactScope": [
+    {
+      "name": "templates/notifications/detail.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/resources/templates/notifications/detail.html",
+        "sha256": "df5a1f7e7830a435dcd40a70bdde89f7b09e2038da444606a739f0ce8b01f547"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/resources/templates/notifications/detail.html",
+        "sha256": "1a6592e049ca416af27265ebbf6ec8d668289787bbbff8dc92280c58ecff2b90"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+        "sha256": "1a6592e049ca416af27265ebbf6ec8d668289787bbbff8dc92280c58ecff2b90"
+      }
+    },
+    {
+      "name": "templates/fragments/layout.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/resources/templates/fragments/layout.html",
+        "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/resources/templates/fragments/layout.html",
+        "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+        "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+      }
+    },
+    {
+      "name": "templates/fragments/error-summary.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/resources/templates/fragments/error-summary.html",
+        "sha256": "8fa5afe1b38ed63d9fc78508778f9e6e6c5c1328967a5a3d866bf1aa324efb42"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/resources/templates/fragments/error-summary.html",
+        "sha256": "8fa5afe1b38ed63d9fc78508778f9e6e6c5c1328967a5a3d866bf1aa324efb42"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/fragments/error-summary.html",
+        "sha256": "8fa5afe1b38ed63d9fc78508778f9e6e6c5c1328967a5a3d866bf1aa324efb42"
+      }
+    },
+    {
+      "name": "templates/fragments/forms.html",
+      "previous": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/resources/templates/fragments/forms.html",
+        "sha256": "28e727880a7f6fc7d4c805f0b36119f72d73ad3a647623c53b4d2f5ad4a78232"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/resources/templates/fragments/forms.html",
+        "sha256": "28e727880a7f6fc7d4c805f0b36119f72d73ad3a647623c53b4d2f5ad4a78232"
+      },
+      "tracked": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/fragments/forms.html",
+        "sha256": "28e727880a7f6fc7d4c805f0b36119f72d73ad3a647623c53b4d2f5ad4a78232"
+      }
+    }
+  ],
+  "regularResourceProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44398-web-resources-after-notification-detail-fix/manifest.json",
+    "sha256": "2f0eb90e35a1fa615527550866ccf4cc926de9d25eb4ec2071c4334292a0b425"
+  },
+  "terminalReceipts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/terminal.json",
+      "sha256": "0d90317bc309c3f80c8af8e15dcc21b67abd18dbe24b2459307b5304eb1c6e27"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/terminal.json",
+      "sha256": "62cb1597df27506710ec2819fee6c052ecce276df7fcdc654586b61e74f87f5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44400-notification-cancelled-fixture-typed-one/terminal.json",
+      "sha256": "b367ed93ffa4fc9be5f2992dd5391b6cf79ce2be62190aa3863a4a232a7f69e4"
+    }
+  ],
+  "beginnings": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/begin.json",
+      "sha256": "262e1720abcaef7daf730e845c735f04fd3c5e4e4a3efa5ae5f421065ccdf9ad"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44396-notification-cancelled-dom-after/begin.json",
+      "sha256": "d379a7675e8b2d6335f91b7e7ba34bed2d986143a2525f54a93bd521e5e50f3f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44400-notification-cancelled-fixture-typed-one/begin.json",
+      "sha256": "655854d5f786fee1a9216111ac4a721fb6290b3eeec38026012f7cdf84286578"
+    }
+  ],
+  "fixtureStatic": {
+    "spotless": 0,
+    "checkstyle": 0,
+    "pmd": 0,
+    "spotbugs": {
+      "actualExit": 0,
+      "source": "b0410ae5a48d887bafab694abef1a65619d025f1",
+      "run": "PG44400",
+      "terminalAtUTC": "2026-11-24T18:58:18.618640+00:00",
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44400-notification-cancelled-fixture-typed-one/spotbugs.xml",
+        "sha256": "c24b8d541ebed9242e732a77aaddb9caf8b2c387ae0d93cc214ce3063d507a2a"
+      },
+      "warnings": [],
+      "missing": 0,
+      "errors": 0,
+      "count": 1
+    }
+  },
+  "wireDbOrResourceActionChanges": 0,
+  "realHttpOrAuthenticationOrMutationRan": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
