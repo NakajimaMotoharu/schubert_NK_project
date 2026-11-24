@@ -40,7 +40,7 @@ final class UserListTemplateResourcePortTest {
 
   private static Document render(
       Map<String, ?> filters,
-      Optional<Map<String, Integer>> counts,
+      Optional<Map<String, ?>> counts,
       List<Map<String, String>> rows,
       Optional<String> previous,
       Optional<String> next) {
@@ -98,7 +98,15 @@ final class UserListTemplateResourcePortTest {
     var document =
         render(
             Map.of(USERNAME, "", ROLE, ADMIN, STATE, ACTIVE, ISSUES, Map.of()),
-            Optional.of(Map.of("totalCount", 121, "effectivePage", 2, "totalPages", 3)),
+            Optional.of(
+                Map.of(
+                    "totalCount", 121,
+                    "effectivePage", 2,
+                    "totalPages", 3,
+                    "pageSize", 50,
+                    "empty", false,
+                    "firstResult", 51,
+                    "lastResult", 100)),
             Stream.concat(
                     IntStream.rangeClosed(51, 98)
                         .mapToObj(
@@ -128,8 +136,8 @@ final class UserListTemplateResourcePortTest {
     assertEquals(List.of(ADMIN, ACTIVE), search.select("option[selected]").eachAttr(VALUE));
     assertTrue(document.select(QUERY_ERRORS).hasAttr("hidden"));
     assertEquals("121 users / page 2 of 3", document.select(".count").text());
-    assertEquals(PREV, document.select(".previous").attr(HREF));
-    assertEquals(NEXT, document.select(".next").attr(HREF));
+    assertEquals(List.of(PREV, PREV), document.select(".previous").eachAttr(HREF));
+    assertEquals(List.of(NEXT, NEXT), document.select(".next").eachAttr(HREF));
     assertEquals(
         List.of("Username", "Role", "状態", "Lock終了日時", "最終Login日時", "作成日時", "更新日時", "詳細"),
         document.select("thead th").eachText());
@@ -148,7 +156,7 @@ final class UserListTemplateResourcePortTest {
     var document =
         render(
             Map.of(USERNAME, "", ROLE, "", STATE, "", ISSUES, Map.of()),
-            Optional.of(Map.of("totalCount", 0, "effectivePage", 1, "totalPages", 1)),
+            Optional.of(Map.of("totalCount", 0, "effectivePage", 1, "totalPages", 1, "empty", true)),
             List.of(),
             Optional.empty(),
             Optional.empty());

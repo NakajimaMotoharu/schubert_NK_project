@@ -18,10 +18,11 @@
     </select><button type="submit">検索</button>
   </form>
   <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' questions / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
-  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <nav th:replace="~{fragments/pagination :: tablePage(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
     <table th:if="${!page.rows.empty}"><thead><tr><th>受付日時</th><th class="owner-heading" th:if="${page.filters.admin}">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
     <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a> <a class="delete" th:href="${question.deleteHref}">削除</a></td></tr></tbody></table>
   </section>
+  <nav th:replace="~{fragments/pagination :: tablePage(${page}, true)}"></nav>
 </main></body></html>

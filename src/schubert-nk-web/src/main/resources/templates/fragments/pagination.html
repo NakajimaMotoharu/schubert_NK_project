@@ -16,4 +16,17 @@
     <a th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次の100件</a>
     <span th:if="${!page.nextHref.present}">次の100件</span>
   </nav>
+  <nav th:fragment="tablePage(page, bottom)" class="table-pagination"
+       th:classappend="${bottom} ? 'bottom-nav' : ''"
+       th:aria-label="${bottom} ? '一覧下のページ操作' : '一覧上のページ操作'"
+       th:if="${page.page.present and !page.page.orElseThrow().empty}"
+       th:with="summary=${page.page.orElseThrow()}">
+    <a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}"
+       th:text="|前の${summary.pageSize}件|"></a>
+    <span th:unless="${page.previousHref.present}" th:text="|前の${summary.pageSize}件|"></span>
+    <span class="pagination-range" th:text="|${summary.firstResult} - ${summary.lastResult} / ${summary.totalCount}|"></span>
+    <a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}"
+       th:text="|次の${summary.pageSize}件|"></a>
+    <span th:unless="${page.nextHref.present}" th:text="|次の${summary.pageSize}件|"></span>
+  </nav>
 </body></html>

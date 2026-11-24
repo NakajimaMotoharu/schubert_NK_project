@@ -17,7 +17,7 @@
     <button type="submit">検索</button>
   </form>
   <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' notifications / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
-  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <nav th:replace="~{fragments/pagination :: tablePage(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
     <table th:if="${!page.rows.empty}"><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
@@ -27,4 +27,5 @@
       <td class="notification-summary" th:text="${notification.summary}"></td><td><a class="detail" th:href="${notification.detailHref}">明細</a></td>
     </tr></tbody></table>
   </section>
+  <nav th:replace="~{fragments/pagination :: tablePage(${page}, true)}"></nav>
 </main></body></html>
