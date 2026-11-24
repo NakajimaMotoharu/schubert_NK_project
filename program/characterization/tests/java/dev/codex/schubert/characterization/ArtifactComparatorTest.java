@@ -422,6 +422,30 @@ class ArtifactComparatorTest {
     assertEquals(24, result.comparedCaseCount());
   }
 
+  /** PT-CHR-CATALOG-ORDER001 / BUG-3806: all original IDs must keep their approved order. */
+  @Test
+  void rejectsReorderedApprovedCatalogCasesWithAllArtifactsPresent() throws Exception {
+    Fixture fixture = fixture("same-ids-different-order");
+    assertTrue(compare(fixture).passed());
+    mutate(
+        fixture.project().resolve(FIXTURE_CATALOG_PATH),
+        catalog -> {
+          ArrayNode cases = catalog.withArray("cases");
+          assertEquals(24, cases.size());
+          JsonNode first = cases.remove(0);
+          assertEquals(FIXTURE_CHR_A01, first.path("id").asText());
+          assertEquals(FIXTURE_CHR_A02, cases.get(0).path("id").asText());
+          cases.insert(1, first);
+        });
+
+    ArtifactComparator.ComparisonResult result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(List.of("CATALOG_CASE_ORDER"), result.failures());
+    assertEquals(24, result.expectedCaseCount());
+    assertEquals(24, result.comparedCaseCount());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
   /** PT-CHR-DEF083: the number of distinct IDs cannot replace the approved roster. */
   @Test
   void rejectsAnUnapprovedCaseAtTheSameCatalogSize() throws Exception {

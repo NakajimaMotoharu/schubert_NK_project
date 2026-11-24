@@ -212,7 +212,7 @@ final class GateContractValidator {
     List<String> cases = strings(contract.path(FIELD_CASE_ORDER));
     require(cases.size() == 24, "CONTRACT_CASE_COUNT", failures);
     require(new HashSet<>(cases).size() == cases.size(), "CONTRACT_CASE_DUPLICATE", failures);
-    require(APPROVED_CASE_ORDER.equals(cases), "CONTRACT_CASE_ORDER", failures);
+    require(matchesApprovedCaseOrder(cases), "CONTRACT_CASE_ORDER", failures);
     List<String> differenceIds = strings(contract.path("differenceIds"));
     require(differenceIds.size() == 16, "CONTRACT_DIFFERENCE_COUNT", failures);
     require(
@@ -284,6 +284,10 @@ final class GateContractValidator {
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedOrder.equals(actualOrder), "CATALOG_ORDER", failures);
+  }
+
+  static boolean matchesApprovedCaseOrder(List<String> caseOrder) {
+    return APPROVED_CASE_ORDER.equals(caseOrder);
   }
 
   static boolean matchesApprovedCaseIds(Set<String> caseIds) {

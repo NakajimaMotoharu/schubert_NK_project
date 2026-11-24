@@ -180,10 +180,14 @@ public final class ArtifactComparator {
           failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
-    if (require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures)) {
+    if (require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures)
+        && require(
+            GateContractValidator.matchesApprovedCaseIds(expectedCases),
+            "CATALOG_CASE_IDS",
+            failures)) {
       require(
-          GateContractValidator.matchesApprovedCaseIds(expectedCases),
-          "CATALOG_CASE_IDS",
+          GateContractValidator.matchesApprovedCaseOrder(List.copyOf(expectedCases)),
+          "CATALOG_CASE_ORDER",
           failures);
     }
 
