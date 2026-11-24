@@ -1,0 +1,397 @@
+{
+  "currentAsOf": "aba4ac603bd6cbcd4ec24e3fc4566756cb5fe7e1",
+  "priorTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44542-restart-non-web-and-tool-java-test-trace/manifest.json",
+    "sha256": "788ee9d290f2d6b4d16e7300dea6272cdc26fc61231adcca940ce36a8d1bb4d6"
+  },
+  "product": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "gitBlob": "2c78d098e895233b0882bd3e3ea9c6c1ff6aa9c8",
+      "asOf": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+      "testIds": [
+        "PT-IDEM-WIPE-004",
+        "PT-IDEM-WIPE-005"
+      ],
+      "oracle": {
+        "path": "evidence/01_PT/006_NK-MSG-002/001_NK-MSG-002_単体テスト仕様書.md",
+        "sha256": "ffa05c8dbc91210f657cb767c4a8b7bc09ced9cdbab316e38c088268399e7c0b"
+      },
+      "related": "MQ-006/UI241/SS324 §3・§6",
+      "run": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44582-current-buffer-constant-diagnostic-owned-monitor/manifest.json",
+        "sha256": "ea518765b63d48d72091a033dd87f6ac9d037ab87f0465ffe88efbcfd80c5292"
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+      "gitBlob": "7b8a67095ad4bb0ef85225d231d24aceeb276cad",
+      "asOf": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+      "testIds": [
+        "PT-IDEM-WIPE-004",
+        "PT-IDEM-WIPE-005"
+      ],
+      "oracle": {
+        "path": "evidence/01_PT/006_NK-MSG-002/001_NK-MSG-002_単体テスト仕様書.md",
+        "sha256": "ffa05c8dbc91210f657cb767c4a8b7bc09ced9cdbab316e38c088268399e7c0b"
+      },
+      "related": "MQ-006/UI241/SS324 §3・§6",
+      "run": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44582-current-buffer-constant-diagnostic-owned-monitor/manifest.json",
+        "sha256": "ea518765b63d48d72091a033dd87f6ac9d037ab87f0465ffe88efbcfd80c5292"
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "gitBlob": "6b40580120f23c136079b84e5f60a17723358efb",
+      "asOf": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+      "testIds": [
+        "PT-IDEM-FPR-CATALOG001"
+      ],
+      "oracle": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5830_OperationFingerprint公開値単体仕様.md",
+        "sha256": "95e7e324102a622acd801e44179c71227f7fc7df4cc9f0384f7a7f09c1368b4a"
+      },
+      "currentRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44582-current-buffer-constant-diagnostic-owned-monitor/manifest.json",
+        "sha256": "ea518765b63d48d72091a033dd87f6ac9d037ab87f0465ffe88efbcfd80c5292"
+      },
+      "historicalFirstRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44548-current-fingerprint-enum-with-existing-eleven/manifest.json",
+        "sha256": "8eabf56619badfd6f8dadb1f625034b74d43fa0794b19279264ae5267a57e2ab"
+      }
+    }
+  ],
+  "qualityTools": [
+    {
+      "path": "tools/quality/003_collect_auth_evidence.py",
+      "gitBlob": "b057a32856eff26f626458dae17138ad1c847fb9",
+      "asOf": "8783b19527c815ef65b9122408b6e5a36d67c571",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5836_認証SpotBugs収集名簿単体仕様.md",
+        "sha256": "d22144305821b7e2fcf2723aa5d326540c7744ceedb656a0dc3e2ac59c750a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44596-auth-spotbugs-exact-compiled-roster/manifest.json",
+        "sha256": "9dde9ab2e81421ffacc8407d514b28d4e32b2ae73a1b122da67829b3529bfecb"
+      },
+      "productCounterContribution": 0,
+      "coverageComparatorRevision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+        "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+      }
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "gitBlob": "2440c57e9eb5d0aa1bb7274aa72a02b8f4f841ba",
+      "asOf": "21b0656406848689660cf04e4b9eb110ab99bf10",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5835_認証Inbox画面coverage集計単体仕様.md",
+        "sha256": "26726d944994a08d561f64f0b257035363db59af1abeb075fd53778bd2d02f9d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+        "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+      },
+      "productCounterContribution": 0,
+      "earlierWholeModuleCounterexamples": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44562-scenario-formal-coverage-compiled-roster-and-detail/manifest.json",
+        "sha256": "fe07ad5f12ded0c3425421a161643edb9f4afc3da1f01b97c7ead7e79d3eec96"
+      }
+    },
+    {
+      "path": "tools/quality/016_collect_inbox_inspection_evidence.py",
+      "gitBlob": "848b8844a957e11ad38d29c333bb05ed204f9cfa",
+      "asOf": "21b0656406848689660cf04e4b9eb110ab99bf10",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5835_認証Inbox画面coverage集計単体仕様.md",
+        "sha256": "26726d944994a08d561f64f0b257035363db59af1abeb075fd53778bd2d02f9d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+        "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "gitBlob": "22e2e9411d9763db0e48d49e48538bfc70acff05",
+      "asOf": "8783b19527c815ef65b9122408b6e5a36d67c571",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5836_認証SpotBugs収集名簿単体仕様.md",
+        "sha256": "d22144305821b7e2fcf2723aa5d326540c7744ceedb656a0dc3e2ac59c750a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44596-auth-spotbugs-exact-compiled-roster/manifest.json",
+        "sha256": "9dde9ab2e81421ffacc8407d514b28d4e32b2ae73a1b122da67829b3529bfecb"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/021_collect_inspector_database_evidence.py",
+      "gitBlob": "a2f43e7a9f041eae0e94b7e1aca4967eb5ed49b4",
+      "asOf": "f6eb5b50eb86e6724faac547cf1505758e3f9d85",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5834_監査系coverageクラスfamily単体仕様.md",
+        "sha256": "daa6b3820b1c3476ca58e403255a98b75ec5fd5e88227991afa8d4d4220802cb"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44592-inspector-selected-families-coverage-detail/manifest.json",
+        "sha256": "1b5bcb59a9adbbe298f764ebd927e4645c074f5e044a22d7824aea71c070cdee"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/022_collect_inspector_launch_evidence.py",
+      "gitBlob": "a13b97e00063af2fc86b5e91cef3f486af2740fb",
+      "asOf": "f6eb5b50eb86e6724faac547cf1505758e3f9d85",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5834_監査系coverageクラスfamily単体仕様.md",
+        "sha256": "daa6b3820b1c3476ca58e403255a98b75ec5fd5e88227991afa8d4d4220802cb"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44592-inspector-selected-families-coverage-detail/manifest.json",
+        "sha256": "1b5bcb59a9adbbe298f764ebd927e4645c074f5e044a22d7824aea71c070cdee"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/027_collect_question_receipt_evidence.py",
+      "gitBlob": "6a8f0d28627bbcca6cce78cc92a592f9c5c8f5c8",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/028_collect_stub_evidence.py",
+      "gitBlob": "c8d926ede1237635ad3eda4b1322f45b46de364c",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/029_collect_scenario_screen_evidence.py",
+      "gitBlob": "753cea14e833d6eb18a1f867e4a7334e41fde94f",
+      "asOf": "21b0656406848689660cf04e4b9eb110ab99bf10",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5835_認証Inbox画面coverage集計単体仕様.md",
+        "sha256": "26726d944994a08d561f64f0b257035363db59af1abeb075fd53778bd2d02f9d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+        "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/030_collect_sync_consumers.py",
+      "gitBlob": "761ae1ae52950e273dffb58baf2e3ccbeae8b9d7",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/031_collect_web_reply_consumers.py",
+      "gitBlob": "ab9b20f2289a3a0eb1e4c0056e44bc403477f2a0",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/032_collect_web_log_worker.py",
+      "gitBlob": "fbdea8641b4ce44a669e8215bf3e3d99cdb0c887",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/033_collect_api_web_log_consumers.py",
+      "gitBlob": "c617a576e44d7426f2dbe0bea2348fd18b003b6d",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/034_collect_api_messaging_runtime.py",
+      "gitBlob": "804c09a3cb023e997b2973603c218c4cc1097853",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/035_collect_log_path_router.py",
+      "gitBlob": "d2c7d5b6dd1f49d2f6dc048d03c3becd299ec643",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/036_collect_api_log_path_runtime.py",
+      "gitBlob": "6a2ea1e343d4541f80a7a9ce77416aeccccc96b1",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/038_collect_request_sender_resource.py",
+      "gitBlob": "1417a6c4d02deac503492882efaa56da2da63eef",
+      "asOf": "6be162a501bebf35856a5ea5740c5d6279bccd58",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5833_限定coverage十一入口単体仕様.md",
+        "sha256": "260eaafb549d576d560b5f250f5ee370e050385c433dcd187327172d1a8b7a6d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+        "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/039_collect_jms_resource_compounds.py",
+      "gitBlob": "3fbbaa6b31df81a050de7772ad07e48b07f2edf4",
+      "asOf": "7e8417564423ae67159642b68a19bb666c7c4a9f",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5832_限定coverage収集クラス明細単体仕様.md",
+        "sha256": "3c6a03a5b45b6d877423d90ee9586f82b5a6444e0030cafcd7bfa82500f459d6"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44564-selected-jms-and-log-coverage-method-detail/manifest.json",
+        "sha256": "542636c80c5fd2875088a36e9e4259476107097041dbd7d67b9fbbb542b3040c"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/040_collect_log_replay_vertical.py",
+      "gitBlob": "8a6469d9c0cebb0fc0e87dd8e709f070e6e44b5c",
+      "asOf": "7e8417564423ae67159642b68a19bb666c7c4a9f",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5832_限定coverage収集クラス明細単体仕様.md",
+        "sha256": "3c6a03a5b45b6d877423d90ee9586f82b5a6444e0030cafcd7bfa82500f459d6"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44564-selected-jms-and-log-coverage-method-detail/manifest.json",
+        "sha256": "542636c80c5fd2875088a36e9e4259476107097041dbd7d67b9fbbb542b3040c"
+      },
+      "productCounterContribution": 0
+    },
+    {
+      "path": "tools/quality/pgpt_jacoco_contract.py",
+      "gitBlob": "d168736dd880c4381eb63068656b8d37471122c4",
+      "asOf": "21b0656406848689660cf04e4b9eb110ab99bf10",
+      "role": "QUALITY_TOOL",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5835_認証Inbox画面coverage集計単体仕様.md",
+        "sha256": "26726d944994a08d561f64f0b257035363db59af1abeb075fd53778bd2d02f9d"
+      },
+      "archivedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+        "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+      },
+      "productCounterContribution": 0,
+      "callerArchiveRefs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44562-scenario-formal-coverage-compiled-roster-and-detail/manifest.json",
+          "sha256": "fe07ad5f12ded0c3425421a161643edb9f4afc3da1f01b97c7ead7e79d3eec96"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44564-selected-jms-and-log-coverage-method-detail/manifest.json",
+          "sha256": "542636c80c5fd2875088a36e9e4259476107097041dbd7d67b9fbbb542b3040c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44566-selected-coverage-eleven-entrypoints/manifest.json",
+          "sha256": "469af84be2670ccc0f9ea9937d220b95f6f142e5010b157c59f634a097b281dc"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44592-inspector-selected-families-coverage-detail/manifest.json",
+          "sha256": "1b5bcb59a9adbbe298f764ebd927e4645c074f5e044a22d7824aea71c070cdee"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44594-auth-inbox-screen-formal-detail-integrity/manifest.json",
+          "sha256": "16762f146cb47fe5eb8e7a23c8ea6714997780df1ac74bf23ba8fc973a3cf958"
+        }
+      ]
+    }
+  ]
+}
