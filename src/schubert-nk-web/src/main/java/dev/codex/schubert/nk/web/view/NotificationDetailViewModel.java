@@ -26,19 +26,19 @@ public final class NotificationDetailViewModel {
   private static final DateTimeFormatter RETAINED_TIME =
       DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss", Locale.ROOT)
           .withZone(ZoneOffset.ofHours(9));
+  private static final Map<NotificationState, String> STATE_LABELS =
+      Map.of(
+          NotificationState.RECEIVED, "受付中",
+          NotificationState.PROCESSING, "処理中",
+          NotificationState.COMPLETED, "処理完了",
+          NotificationState.ERROR, "エラー",
+          NotificationState.CANCELLED, "取消済み");
   private final TopBarViewModel topBar;
   private final Map<String, Object> values;
 
   private NotificationDetailViewModel(SessionPrincipal actor, NotificationDetailResponseData data) {
     topBar = TopBarViewModel.from(actor);
-    String label =
-        switch (data.internalState()) {
-          case RECEIVED -> "受付中";
-          case PROCESSING -> "処理中";
-          case COMPLETED -> "処理完了";
-          case ERROR -> "エラー";
-          case CANCELLED -> "取消済み";
-        };
+    String label = Objects.requireNonNull(STATE_LABELS.get(data.internalState()), "state label");
     boolean answer = data.internalState() == NotificationState.COMPLETED && !data.questionDeleted();
     values =
         Map.copyOf(

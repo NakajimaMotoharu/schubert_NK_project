@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.view;
 
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
 import dev.codex.schubert.nk.web.form.NotificationSearchForm;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
@@ -23,6 +24,18 @@ public final class NotificationListViewModel {
   private static final DateTimeFormatter TIME =
       DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss", Locale.ROOT)
           .withZone(ZoneOffset.ofHours(9));
+  private static final Map<NotificationState, NotificationType> DISPLAY_TYPES =
+      Map.of(
+          NotificationState.RECEIVED, NotificationType.ACCEPTED,
+          NotificationState.PROCESSING, NotificationType.ACCEPTED,
+          NotificationState.CANCELLED, NotificationType.ACCEPTED,
+          NotificationState.COMPLETED, NotificationType.COMPLETED,
+          NotificationState.ERROR, NotificationType.ERROR);
+  private static final Map<NotificationType, String> TYPE_LABELS =
+      Map.of(
+          NotificationType.ACCEPTED, "受付通知",
+          NotificationType.COMPLETED, "処理済通知",
+          NotificationType.ERROR, "エラー通知");
   private final TopBarViewModel topBar;
   private final NotificationSearchForm filters;
   private final Optional<PageViewModel> page;
@@ -58,12 +71,7 @@ public final class NotificationListViewModel {
       var current = copy.get(i);
       if (!ids.add(current.notificationId().value()))
         throw new IllegalArgumentException("duplicate notification identity");
-      NotificationType type =
-          switch (current.internalState()) {
-            case RECEIVED, PROCESSING, CANCELLED -> NotificationType.ACCEPTED;
-            case COMPLETED -> NotificationType.COMPLETED;
-            case ERROR -> NotificationType.ERROR;
-          };
+      NotificationType type = DISPLAY_TYPES.get(current.internalState());
       if (current.notificationType() != type
           || current.questionSummary().codePointCount(0, current.questionSummary().length()) > 100
           || (current.questionDeleted() && !current.questionSummary().equals("削除済み")))
@@ -88,12 +96,7 @@ public final class NotificationListViewModel {
   }
 
   private static Map<String, Object> row(NotificationRecord value) {
-    String type =
-        switch (value.notificationType()) {
-          case ACCEPTED -> "受付通知";
-          case COMPLETED -> "処理済通知";
-          case ERROR -> "エラー通知";
-        };
+    String type = Objects.requireNonNull(TYPE_LABELS.get(value.notificationType()), "type label");
     return Map.copyOf(
         Map.ofEntries(
             Map.entry("id", value.notificationId().value()),
