@@ -1,0 +1,97 @@
+{
+  "run": "PG44570",
+  "source": "1d7e642ba36529b9289b2f63c6f877fd2154b601",
+  "productionCore": "38d2139ab40c23c7c8c79f3561736b2121974039",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-24T21:35:47.394703+00:00",
+  "exactCompilers": {
+    "api": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44558-current-api-inbox-and-command-value-nullaway/manifest.json",
+        "sha256": "c6517e11927943999aed349c2b99efea5a17ca8a7d57eb3f6dce31637aa595e8"
+      }
+    ],
+    "web": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44554-current-media-scenario-web-view-nullaway/manifest.json",
+        "sha256": "56f4bc98a8f0851dc7cbcebd1f8b9b9f3d32750df9bc96b2f9d977a52b2abe57"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44556-current-menu-admin-question-web-view-nullaway/manifest.json",
+        "sha256": "51a0b71b825409d7579527ae3677546c5e1c36bcfd3523bffb66d5561d9c0899"
+      }
+    ]
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44570-current-web-and-api-value-classfiles-spotbugs/begin.json",
+    "sha256": "9e5cc8fed5b4a8e64eca21bb45bbe369c34939e9e9603988d1d14d02533551c1"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44570-current-web-and-api-value-classfiles-spotbugs/terminal.json",
+    "sha256": "a6e37cbb42c82d8c3e3fc1e8ef945a118762dbdf804e4cc2cf36465c3132699d"
+  },
+  "reports": {
+    "api": {
+      "exit": 0,
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44570-current-web-and-api-value-classfiles-spotbugs/api/spot.xml",
+        "sha256": "b06d19babb7b619cfee95042fc3485974fa8cbd10513de40195bfa15eca870bd"
+      },
+      "actualRows": 29,
+      "requestedRows": 29,
+      "extra": [],
+      "absent": [],
+      "warnings": [],
+      "missing": [],
+      "errors": 0
+    },
+    "web": {
+      "exit": 1,
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44570-current-web-and-api-value-classfiles-spotbugs/web/spot.xml",
+        "sha256": "db433c5e957f8dc69ed1d7229edaeb53d833ce389b258a9a18d2d42ecb434c15"
+      },
+      "actualRows": 50,
+      "requestedRows": 50,
+      "extra": [],
+      "absent": [],
+      "warnings": [
+        {
+          "type": "URF_UNREAD_FIELD",
+          "class": "dev.codex.schubert.nk.web.form.UserMutationInput",
+          "priority": "3"
+        },
+        {
+          "type": "URF_UNREAD_FIELD",
+          "class": "dev.codex.schubert.nk.web.form.UserMutationInput",
+          "priority": "3"
+        },
+        {
+          "type": "URF_UNREAD_FIELD",
+          "class": "dev.codex.schubert.nk.web.form.UserMutationInput",
+          "priority": "3"
+        }
+      ],
+      "missing": [],
+      "errors": 0
+    }
+  },
+  "apiClassScope": {
+    "tool": "SpotBugs 4.10.4.0",
+    "violations": 0,
+    "errors": 0,
+    "missingClasses": 0,
+    "analysedClasses": 29
+  },
+  "webFieldScopeFinding": [
+    "enabled",
+    "role",
+    "token"
+  ],
+  "bug": "BUG-3800",
+  "horizontal": "YKT-2962",
+  "noWeakenedStaticRules": true,
+  "productTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
