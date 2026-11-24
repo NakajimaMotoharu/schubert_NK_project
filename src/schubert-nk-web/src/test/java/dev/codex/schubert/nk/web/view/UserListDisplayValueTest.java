@@ -56,7 +56,8 @@ final class UserListDisplayValueTest {
 
     List<UserListViewModel.Row> rows =
         UserListViewModel.success(actor, form, page, List.of(locked, disabled)).getRows();
-    assertEquals(List.of(ALPHA, BETA), rows.stream().map(UserListViewModel.Row::getUsername).toList());
+    assertEquals(
+        List.of(ALPHA, BETA), rows.stream().map(UserListViewModel.Row::getUsername).toList());
     var first = rows.getFirst();
     assertEquals(17, first.getId());
     assertEquals("/admin/users/17", first.getDetailHref());
