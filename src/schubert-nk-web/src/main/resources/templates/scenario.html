@@ -31,8 +31,8 @@
         </div>
         <p th:text="${entry.body}"></p>
         <div class="audio" th:each="audio : ${entry.audio}">
-          <audio controls preload="none" th:src="@{${audio.href}}"></audio>
-          <a class="download" th:href="@{${audio.downloadHref}}">DL</a>
+          <audio th:replace="~{fragments/media :: audioPlayer(@{${audio.href}})}"></audio>
+          <a th:replace="~{fragments/media :: downloadLink(@{${audio.downloadHref}})}"></a>
           <span th:text="${audio.displayPath}"></span>
         </div>
       </article>

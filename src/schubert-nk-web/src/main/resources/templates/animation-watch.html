@@ -12,6 +12,6 @@
         <a th:href="${page.values.backHref}" th:text="${page.values.backLabel}"></a>
       </nav>
     </div></header>
-    <section class="video-shell"><video controls preload="metadata" playsinline th:src="${page.values.mediaHref}"></video></section>
+    <section class="video-shell"><video th:replace="~{fragments/media :: videoPlayer(${page.values.mediaHref})}"></video></section>
   </main></body>
 </html>

@@ -72,8 +72,8 @@
         <div class="result-actions">
           <a class="scenario-open" th:href="@{${row.scenarioHref}}">開く</a>
           <div class="audio" th:if="${row.audio.present}">
-            <audio controls preload="none" th:src="@{${row.audio.orElseThrow().href}}"></audio>
-            <a class="download" th:href="@{${row.audio.orElseThrow().downloadHref}}">DL</a>
+            <audio th:replace="~{fragments/media :: audioPlayer(@{${row.audio.orElseThrow().href}})}"></audio>
+            <a th:replace="~{fragments/media :: downloadLink(@{${row.audio.orElseThrow().downloadHref}})}"></a>
           </div>
         </div>
       </article>

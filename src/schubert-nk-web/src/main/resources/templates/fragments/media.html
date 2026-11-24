@@ -1,0 +1,3 @@
+<audio th:fragment="audioPlayer(source)" controls preload="none" th:src="${source}"></audio>
+<video th:fragment="videoPlayer(source)" controls preload="metadata" playsinline th:src="${source}"></video>
+<a th:fragment="downloadLink(target)" class="download" th:href="${target}">DL</a>
