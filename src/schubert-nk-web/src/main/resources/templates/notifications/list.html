@@ -20,12 +20,14 @@
   <nav th:replace="~{fragments/pagination :: tablePage(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
-    <table th:if="${!page.rows.empty}"><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
+    <div class="table-scroll" role="region" tabindex="0" aria-label="通知一覧の表" th:if="${!page.rows.empty}">
+      <table><thead><tr><th>区分</th><th>受付ID</th><th>受付日時</th><th>最終更新日時</th><th>概要</th><th>操作</th></tr></thead>
     <tbody><tr class="notification-row" th:each="notification : ${page.rows}">
       <td class="type" th:text="${notification.type}"></td><td class="receipt" th:text="${notification.receiptId}"></td>
       <td class="submitted-at" th:text="${notification.submittedAt}"></td><td class="updated-at" th:text="${notification.lastUpdatedAt}"></td>
       <td class="notification-summary" th:text="${notification.summary}"></td><td><a class="detail" th:href="${notification.detailHref}">明細</a></td>
     </tr></tbody></table>
+    </div>
   </section>
   <nav th:replace="~{fragments/pagination :: tablePage(${page}, true)}"></nav>
 </main></body></html>

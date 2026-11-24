@@ -21,12 +21,14 @@
   <nav th:replace="~{fragments/pagination :: tablePage(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
-    <table th:if="${!page.rows.empty}"><thead><tr><th>Username</th><th>Role</th><th>状態</th><th>Lock終了日時</th><th>最終Login日時</th><th>作成日時</th><th>更新日時</th><th>詳細</th></tr></thead>
+    <div class="table-scroll" role="region" tabindex="0" aria-label="利用者一覧の表" th:if="${!page.rows.empty}">
+      <table><thead><tr><th>Username</th><th>Role</th><th>状態</th><th>Lock終了日時</th><th>最終Login日時</th><th>作成日時</th><th>更新日時</th><th>詳細</th></tr></thead>
     <tbody><tr class="user-row" th:each="user : ${page.rows}">
       <td class="username" th:text="${user.username}"></td><td class="role" th:text="${user.role}"></td><td class="state" th:text="${user.state}"></td>
       <td class="locked-until" th:text="${user.lockedUntil}"></td><td class="last-login" th:text="${user.lastLogin}"></td><td class="created-at" th:text="${user.createdAt}"></td><td class="updated-at" th:text="${user.updatedAt}"></td>
       <td><a class="detail" th:href="${user.detailHref}">詳細</a></td>
     </tr></tbody></table>
+    </div>
   </section>
   <nav th:replace="~{fragments/pagination :: tablePage(${page}, true)}"></nav>
 </main></body></html>
