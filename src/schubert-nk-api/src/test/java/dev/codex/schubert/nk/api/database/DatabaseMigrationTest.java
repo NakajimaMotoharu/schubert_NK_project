@@ -2073,7 +2073,8 @@ final class DatabaseMigrationTest {
     Flyway old = Flyway.configure().configuration(current.getConfiguration()).target("030").load();
     assertEquals(30, old.migrate().migrationsExecuted);
     assertEquals(
-        0L, queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
+        0L,
+        queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
 
     String explicitRoutineAcls =
         """
@@ -2119,7 +2120,8 @@ final class DatabaseMigrationTest {
 
   private static void assertRoutineOwnerDefaults(String url) throws SQLException {
     assertEquals(
-        1L, queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
+        1L,
+        queryLong(ADMIN, url, "select count(*) from (" + OWNER_ROUTINE_DEFAULTS + ") defaults"));
 
     String executionEntries =
         "select count(*) from ("

@@ -47,9 +47,7 @@ class OperationFingerprintTest {
           GOLDEN_CANONICAL, HEX.formatHex(OperationFingerprint.INSTANCE.canonicalBytes(request)));
       assertEquals(
           GOLDEN_HMAC, HEX.formatHex(OperationFingerprint.INSTANCE.calculate(request, key)));
-      assertEquals(
-          "CanonicalRequest[<redacted>]",
-          request.toString());
+      assertEquals("CanonicalRequest[<redacted>]", request.toString());
     }
   }
 
@@ -116,8 +114,7 @@ class OperationFingerprintTest {
 
         assertArrayEquals(new byte[] {1, 2, 3}, field.value());
         assertEquals(1, request.fields().size());
-        assertEquals(
-            "CanonicalField[<redacted>]", field.toString());
+        assertEquals("CanonicalField[<redacted>]", field.toString());
         assertTrue(new CanonicalField("body", "X1", null).value() == null);
       }
     }
