@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -46,16 +47,10 @@ def validate_traces(traces):
 
 
 def validate_coverage(report):
-    result = {}
-    for cls in report.iter("class"):
-        if cls.get("name") in SUBJECTS:
-            result[cls.get("name")] = {counter.get("type"): {
-                "missed": int(counter.get("missed")), "covered": int(counter.get("covered"))
-            } for counter in cls.findall("counter")}
-    if set(result) != set(SUBJECTS) or any(
-            not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
-            or any(value["missed"] for value in counters.values()) for counters in result.values()):
-        raise ValueError("missing or incomplete receipt coverage")
+    result = {subject: validate_selected_class_coverage(report, subject, require_branch=False)
+              for subject in SUBJECTS}
+    if any("BRANCH" not in counters for counters in result.values()):
+        raise ValueError("receipt coverage branch counter is missing")
     return result
 
 

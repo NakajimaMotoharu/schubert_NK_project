@@ -385,16 +385,22 @@ class EvidenceSetTest(unittest.TestCase):
                 log_vertical.validate_resource_suite(wrong)
 
     @staticmethod
-    def _selected_class_report(subject):
+    def _add_selected_class(parent, subject, *, with_branches=True):
+        cls = ET.SubElement(parent, "class", name=subject)
+        totals = {"INSTRUCTION": 8, "METHOD": 1}
+        if with_branches:
+            totals["BRANCH"] = 2
+        for kind, covered in (totals | {"LINE": 1, "CLASS": 1}).items():
+            ET.SubElement(cls, "counter", type=kind, missed="0", covered=str(covered))
+        method = ET.SubElement(cls, "method", name="execute", desc="()V")
+        for kind, covered in totals.items():
+            ET.SubElement(method, "counter", type=kind, missed="0", covered=str(covered))
+        return cls
+
+    def _selected_class_report(self, subject):
         report = ET.Element("report")
         package = ET.SubElement(report, "package", name=subject.rpartition("/")[0])
-        cls = ET.SubElement(package, "class", name=subject)
-        method = ET.SubElement(cls, "method", name="execute", desc="()V")
-        for kind, covered in {"INSTRUCTION": 8, "METHOD": 1, "BRANCH": 2}.items():
-            for element in (cls, method):
-                ET.SubElement(element, "counter", type=kind, missed="0", covered=str(covered))
-        for kind in ("LINE", "CLASS"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        self._add_selected_class(package, subject)
         return report
 
     def test_jms_resource_compound_inventory_and_coverage(self):
@@ -455,9 +461,7 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], "failure")
         with self.assertRaises(ValueError): request_sender.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=request_sender.SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, request_sender.SUBJECT)
         self.assertEqual(5, len(request_sender.validate_coverage(report)))
         for counter in cls.findall("counter"):
             wrong = copy.deepcopy(report)
@@ -515,9 +519,7 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): runtime.validate_ready_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=runtime.READY_SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, runtime.READY_SUBJECT)
         self.assertEqual(5, len(runtime.validate_ready_coverage(report)))
         for counter in cls.findall("counter"):
             wrong = copy.deepcopy(report)
@@ -545,9 +547,7 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): runtime.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=runtime.SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, runtime.SUBJECT, with_branches=False)
         self.assertEqual(4, len(runtime.validate_coverage(report)))
         for counter in cls.findall("counter"):
             wrong = copy.deepcopy(report)
@@ -555,6 +555,7 @@ class EvidenceSetTest(unittest.TestCase):
             matching.set("missed", "1")
             with self.assertRaises(ValueError): runtime.validate_coverage(wrong)
         branch = ET.SubElement(cls, "counter", type="BRANCH", missed="0", covered="2")
+        ET.SubElement(cls.find("method"), "counter", type="BRANCH", missed="0", covered="2")
         self.assertEqual(5, len(runtime.validate_coverage(report)))
         branch.set("missed", "1")
         with self.assertRaises(ValueError): runtime.validate_coverage(report)
@@ -581,9 +582,7 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): router.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=router.SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, router.SUBJECT)
         self.assertEqual(5, len(router.validate_coverage(report)))
         for counter in cls.findall("counter"):
             wrong = copy.deepcopy(report)
@@ -704,9 +703,7 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): parent.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=parent.SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, parent.SUBJECT)
         self.assertEqual(5, len(parent.validate_coverage(report)))
         for counter in cls.findall("counter"):
             for field, value in (("missed", "1"), ("covered", "0")):
@@ -737,9 +734,7 @@ class EvidenceSetTest(unittest.TestCase):
             wrong = copy.deepcopy(suite); wrong[0].set("name", replacement)
             with self.assertRaises(ValueError): log.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=log.SUBJECT)
-        for kind in ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+        cls = self._add_selected_class(report, log.SUBJECT)
         self.assertEqual(5, len(log.validate_coverage(report)))
         for counter in cls.findall("counter"):
             for field, value in (("missed", "1"), ("covered", "0")):
@@ -775,9 +770,7 @@ class EvidenceSetTest(unittest.TestCase):
         with self.assertRaises(ValueError): worker.validate_suite(wrong)
         report = ET.Element("report")
         for subject in worker.SUBJECTS:
-            cls = ET.SubElement(report, "class", name=subject)
-            for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
-                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+            self._add_selected_class(report, subject)
         self.assertEqual(2, len(worker.validate_coverage(report)))
         for subject in worker.SUBJECTS:
             for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
@@ -814,10 +807,8 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong[-1].set("name", "temporaryReadFailureRollsBackAndLeavesRuntimeReady(Path)")
         with self.assertRaises(ValueError): reply.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=reply.SUBJECT)
-        for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
-        self.assertEqual(4, len(reply.validate_coverage(report)))
+        cls = self._add_selected_class(report, reply.SUBJECT)
+        self.assertEqual(5, len(reply.validate_coverage(report)))
         for counter in cls.findall("counter"):
             for field, value in (("missed", "1"), ("covered", "0")):
                 wrong = copy.deepcopy(report)
@@ -853,10 +844,8 @@ class EvidenceSetTest(unittest.TestCase):
         wrong = copy.deepcopy(suite); wrong[-1].set("name", "failedStartupPreservesClosingFailureAsSuppressed(Path)")
         with self.assertRaises(ValueError): sync.validate_suite(wrong)
         report = ET.Element("report")
-        cls = ET.SubElement(report, "class", name=sync.SUBJECT)
-        for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
-            ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
-        self.assertEqual(4, len(sync.validate_coverage(report)))
+        cls = self._add_selected_class(report, sync.SUBJECT)
+        self.assertEqual(5, len(sync.validate_coverage(report)))
         for counter in cls.findall("counter"):
             for field, value in (("missed", "1"), ("covered", "0")):
                 wrong = copy.deepcopy(report)
@@ -1546,16 +1535,14 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): stub.validate_traces(wrong)
         report = ET.Element("report")
         for name in ("AnswerResult", "StubAnswerProvider", "AnswerBusinessException"):
-            cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/api/application/question/" + name)
-            for kind in ("LINE", "METHOD", "CLASS"):
-                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+            self._add_selected_class(report, "dev/codex/schubert/nk/api/application/question/" + name, with_branches=False)
         result = stub.validate_coverage(report)
         self.assertEqual(3, len(result))
         self.assertTrue(all(counters["BRANCH"] == {"missed": 0, "covered": 0} for counters in result.values()))
         for cls_index in range(3):
             wrong = copy.deepcopy(report); ET.SubElement(wrong[cls_index], "counter", type="BRANCH", missed="1", covered="0")
             with self.assertRaises(ValueError): stub.validate_coverage(wrong)
-            for counter_index in range(3):
+            for counter_index in range(4):
                 wrong = copy.deepcopy(report); wrong[cls_index][counter_index].set("missed", "1")
                 with self.assertRaises(ValueError): stub.validate_coverage(wrong)
                 wrong = copy.deepcopy(report); wrong[cls_index].remove(wrong[cls_index][counter_index])
@@ -1593,12 +1580,10 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaises(ValueError): receipt.validate_traces(wrong)
         report = ET.Element("report")
         for name in ("QuestionReceiptId", "QuestionReceiptIdGenerator", "QuestionSubmitRequest"):
-            cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/api/application/question/" + name)
-            for kind in ("LINE", "METHOD", "CLASS", "BRANCH"):
-                ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
+            self._add_selected_class(report, "dev/codex/schubert/nk/api/application/question/" + name)
         self.assertEqual(3, len(receipt.validate_coverage(report)))
         for cls_index in (0, 1, 2):
-            for counter_index in range(4):
+            for counter_index in range(5):
                 wrong = copy.deepcopy(report); wrong[cls_index][counter_index].set("missed", "1")
                 with self.assertRaises(ValueError): receipt.validate_coverage(wrong)
             wrong = copy.deepcopy(report); wrong.remove(wrong[cls_index])

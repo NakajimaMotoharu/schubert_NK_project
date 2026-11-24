@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -37,21 +38,11 @@ def validate_traces(traces):
 
 
 def validate_coverage(report):
-    result = {}
-    for cls in report.iter("class"):
-        if cls.get("name") in SUBJECTS:
-            counters = {counter.get("type"): {
-                "missed": int(counter.get("missed")), "covered": int(counter.get("covered"))
-            } for counter in cls.findall("counter")}
-            # The three executable classes contain no conditional instructions.
-            counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
-            result[cls.get("name")] = counters
-    if set(result) != set(SUBJECTS) or any(
-            not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
-            or any(value["missed"] for value in counters.values())
-            or any(counters[kind]["covered"] <= 0 for kind in ("LINE", "METHOD", "CLASS"))
-            for counters in result.values()):
-        raise ValueError("missing or incomplete stub coverage")
+    result = {subject: validate_selected_class_coverage(report, subject, require_branch=False)
+              for subject in SUBJECTS}
+    # These three executable classes can have no conditional instructions.
+    for counters in result.values():
+        counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
     return result
 
 

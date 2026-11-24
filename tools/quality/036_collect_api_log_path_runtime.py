@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -77,34 +78,11 @@ def validate_ready_suite(root):
 
 
 def validate_coverage(report):
-    classes = [element for element in report.iter("class") if element.get("name") == SUBJECT]
-    if len(classes) != 1:
-        raise ValueError("API Log-path runtime production class missing")
-    counters = {counter.get("type"): {"missed": int(counter.get("missed")),
-                                       "covered": int(counter.get("covered"))}
-                for counter in classes[0].findall("counter")}
-    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS")
-    if (not set(required).issubset(counters)
-            or any(counters[kind]["missed"] != 0 or counters[kind]["covered"] <= 0
-                   for kind in required)
-            or ("BRANCH" in counters and counters["BRANCH"]["missed"] != 0)):
-        raise ValueError("API Log-path runtime production coverage below 100%")
-    return counters
+    return validate_selected_class_coverage(report, SUBJECT, require_branch=False)
 
 
 def validate_ready_coverage(report):
-    classes = [element for element in report.iter("class") if element.get("name") == READY_SUBJECT]
-    if len(classes) != 1:
-        raise ValueError("API dependency readiness production class missing")
-    counters = {counter.get("type"): {"missed": int(counter.get("missed")),
-                                       "covered": int(counter.get("covered"))}
-                for counter in classes[0].findall("counter")}
-    required = ("INSTRUCTION", "LINE", "METHOD", "CLASS", "BRANCH")
-    if (not set(required).issubset(counters)
-            or any(counters[kind]["missed"] != 0 or counters[kind]["covered"] <= 0
-                   for kind in required)):
-        raise ValueError("API dependency readiness production coverage below 100%")
-    return counters
+    return validate_selected_class_coverage(report, READY_SUBJECT, require_branch=True)
 
 
 def main():

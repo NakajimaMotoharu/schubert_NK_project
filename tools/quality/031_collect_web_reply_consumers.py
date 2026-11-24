@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_jacoco_contract import validate_selected_class_coverage
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -45,17 +46,7 @@ def validate_suite(suite):
 
 
 def validate_coverage(report):
-    classes = [element for element in report.iter("class") if element.get("name") == SUBJECT]
-    if len(classes) != 1:
-        raise ValueError("Web reply consumer production class missing")
-    counters = {counter.get("type"): {"missed": int(counter.get("missed")),
-                                       "covered": int(counter.get("covered"))}
-                for counter in classes[0].findall("counter")}
-    if (not {"LINE", "METHOD", "CLASS", "BRANCH"}.issubset(counters)
-            or any(counters[kind]["missed"] != 0 or counters[kind]["covered"] <= 0
-                   for kind in ("LINE", "METHOD", "CLASS", "BRANCH"))):
-        raise ValueError("Web reply consumer production coverage below 100%")
-    return counters
+    return validate_selected_class_coverage(report, SUBJECT, require_branch=True)
 
 
 def main():
