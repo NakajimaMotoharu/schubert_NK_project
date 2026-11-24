@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,12 +11,13 @@ import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.Rejected
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** PT-BAT-REJVAL001..004. Closed values only; the repository does not execute. */
+/** PT-BAT-REJVAL001..005. Closed values only; the repository does not execute. */
 final class CleanupRejectedValueTest {
   private static final Instant CUTOFF = Instant.parse("2026-11-01T00:00:00Z");
   private static final Instant START = Instant.parse("2026-11-01T00:00:01Z");
@@ -119,6 +122,35 @@ final class CleanupRejectedValueTest {
     assertThrows(NullPointerException.class, () -> new RejectedSnapshot(RUN, missing));
     assertThrows(
         NullPointerException.class, () -> new RejectedEntry(attempt, null, Optional.of(SUCCESS)));
+  }
+
+  @Test
+  void equivalentReportsHaveValueIdentityAndRedactedDiagnostics() {
+    var initial = terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS);
+    var reconstructed =
+        terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END, SUCCESS);
+    var later =
+        terminal(attempt(21, RUN, BatchStep.CLEAN_NOTIFICATION, false), END.plusSeconds(1), SUCCESS);
+    var first = sevenSlots();
+    var second = sevenSlots();
+    var changed = sevenSlots();
+    first.set(0, Optional.of(initial));
+    second.set(0, Optional.of(reconstructed));
+    changed.set(0, Optional.of(later));
+
+    var initialSnapshot = new RejectedSnapshot(RUN, first);
+    var reconstructedSnapshot = new RejectedSnapshot(RUN, second);
+    assertEquals(initial, reconstructed);
+    assertNotEquals(initial, later);
+    assertTrue(new HashSet<>(List.of(initial)).contains(reconstructed));
+    assertEquals(initialSnapshot, reconstructedSnapshot);
+    assertNotEquals(initialSnapshot, new RejectedSnapshot(RUN, changed));
+    assertTrue(new HashSet<>(List.of(initialSnapshot)).contains(reconstructedSnapshot));
+
+    var diagnostic = initial.toString();
+    assertTrue(diagnostic.contains("observation=<redacted>"));
+    assertFalse(diagnostic.contains(RUN.id().toString()));
+    assertFalse(diagnostic.contains("135"));
   }
 
   private static BatchStepAttempt attempt(long id, BatchRun run, BatchStep step, boolean skipped) {
