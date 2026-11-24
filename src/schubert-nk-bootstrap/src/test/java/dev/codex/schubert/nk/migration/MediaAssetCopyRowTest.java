@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** PT-MIG-MEDIAROW001..020; current V029 pairs, independent literals and pinned Music vectors. */
+/** PT-MIG-MEDIAROW001..021; current V029 pairs, independent literals and pinned Music vectors. */
 final class MediaAssetCopyRowTest {
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
@@ -389,6 +389,29 @@ final class MediaAssetCopyRowTest {
     var row = new MediaAssetCopyRow(video());
     assertEquals("MediaAssetCopyRow[REDACTED]", row.toString());
     assertArrayEquals(VIDEO_GOLDEN.getBytes(StandardCharsets.UTF_8), row.copyBytes(encoder()));
+  }
+
+  /** PT-MIG-MEDIAROW021. */
+  @Test
+  void namedAccessorsKeepDistinctDisplayAndStorageColumnsAndOptionalParent()
+      throws NoSuchAlgorithmException {
+    var fields = video();
+    String display = "shown/scene-a.mp4";
+    fields.set(7, display);
+    var row = new MediaAssetCopyRow(fields);
+    assertEquals("700", row.id());
+    assertEquals("video-a", row.logicalId());
+    assertEquals(VIDEO_TYPE, row.mediaType());
+    assertEquals(VIDEO_PATH, row.storageRelativePath());
+    assertEquals(display, row.displayPath());
+    assertEquals("3", row.byteSize());
+    assertEquals(SHA, row.sha256());
+    assertEquals(STAMP, row.createdAt());
+    assertTrue(row.parentLogicalId().isEmpty());
+
+    fields.set(12, "scene-parent");
+    assertEquals("scene-parent", new MediaAssetCopyRow(fields).parentLogicalId().orElseThrow());
+    assertTrue(row.parentLogicalId().isEmpty());
   }
 
   private static MediaAssetCopyRow withField(
