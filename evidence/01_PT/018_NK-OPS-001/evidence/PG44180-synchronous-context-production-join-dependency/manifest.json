@@ -1,0 +1,90 @@
+{
+  "run": "PG44180",
+  "source": "7a34deac927a67248cd649d5a736f4f3c1a48ee6",
+  "productionCore": "4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349",
+  "wbs": "WBS-P005-03/2",
+  "terminalAtUTC": "2026-11-24T16:06:03.433858+00:00",
+  "actualExit": 0,
+  "related": [
+    "SSC-477",
+    "BUG-3574",
+    "YKT-2810",
+    "QA-056"
+  ],
+  "existingRouteContract31": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42546-g1304-api-31-method-level-source-bindings-v1/manifest.json",
+    "sha256": "84288b932fd33d387042021265009a73f43c23e6059550f11d8a89f1758023b5"
+  },
+  "sameThreeFileProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44176-g1304-api-current-source-owner-lineage/manifest.json",
+    "sha256": "5f94fdf0f12995c8da871bebe3f68ebf4819c6986d7016e2ed0e044db22629a4"
+  },
+  "localScopes": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+        "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+      },
+      "exactInputJoin": "PG44176 confirms the current three source artifacts by SHA; normal API packaging is held",
+      "source": "02ef1afa67e4d6950063aa034421dec478064f8a",
+      "passed": 5
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42726-ssc477-typed-layout-handler-registry-v1/manifest.json",
+        "sha256": "e4ac8ba7dee14881be8f38b7843a2bfb8a95f64af4f1c83549b56b9d0ac2293b"
+      },
+      "exactInputJoin": "PG44176 confirms the current three source artifacts by SHA; normal API packaging is held",
+      "source": "e8368d22c4da2ec841f008df793594d3be9066af",
+      "passed": 6
+    }
+  ],
+  "productionEntryWitnesses": [
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.java",
+        "sha256": "c2915b65b2313f4586a6bcba6f8e7b67d11667f6de40bb6b9d54f369a98a5ece"
+      },
+      "line": 78,
+      "current": "wire request is passed without the qualified delivery count / pre-transaction receive time",
+      "required": "carry guarded provider count and receive time through unchanged dispatch"
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+        "sha256": "a662046d796e9c6905d4938a129f5ad9273a2ffaffc140678fac5e802fe4656d"
+      },
+      "line": 14,
+      "current": "single request parameter",
+      "required": "join admitted input without dropping provenance, maintain existing synchronous semantics"
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+        "sha256": "761c6990fe0045f4ed681062460ea511ff83f6a6adb3e8eeeaf2d0a95bb68997"
+      },
+      "line": 63,
+      "current": "31 configured layout IDs route to SyncRequestProcessor",
+      "required": "use registered typed handler inside authenticated transaction and Inbox boundary"
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+        "sha256": "65258747a2876004a921a86841b9bea32cd599a9301d7d6fb9e97c0fcec3db49"
+      },
+      "line": 41,
+      "current": "clock sampled at JDBC handler entry",
+      "required": "combine admitted delivery timing with trusted actor at the later per-layout boundary; keep same transaction ownership"
+    }
+  ],
+  "globalTypedRoutingCompletion": false,
+  "activeChanges": 0,
+  "hold": [
+    "actual route dependencies with QA056",
+    "existing unapproved real JMS and owner tests",
+    "F02/F03 and full 451"
+  ],
+  "branchNote": "An isolated adapter would have no production caller. Scope remains the existing approved transaction path.",
+  "newTests": 0,
+  "formalAcceptanceId": null
+}
