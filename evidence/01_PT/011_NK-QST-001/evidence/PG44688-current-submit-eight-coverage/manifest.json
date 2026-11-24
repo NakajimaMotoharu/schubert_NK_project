@@ -1,0 +1,120 @@
+{
+  "run": "PG44688",
+  "source": "917f0b4f729c173f0dbd94b060c354b4286e5cf6",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-P011-01/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-24T23:50:09.820874+00:00",
+  "actualExit": 0,
+  "tests": 8,
+  "newTestDefinitions": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exactCurrentPriorProductByte": true,
+  "currentChangedFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestPortTest.java",
+    "sha256": "c56553b6b0696685c99fedfa537b121132e1034827e0862cd04641725b5bf88d"
+  },
+  "caseMap": {
+    "PT-QST-PORT001": "literalOffsetsAndCanonicalFields",
+    "PT-QST-PORT002": "independentByteAndUnicodeBoundaries",
+    "PT-QST-PORT003": "reservedTokenAndUnsupportedLayoutReject",
+    "PT-QST-PORT004": "nullBoundariesRejectWithoutCloseLeak",
+    "PT-QST-PORT005": "sourceAndReturnedBuffersHaveSeparateOwners",
+    "PT-QST-PORT006": "closeIsTerminalAndReturnedCanonicalStaysOwned",
+    "PT-QST-PORT007": "traceMetadataExcludedAndActorBodyIncluded",
+    "PT-QST-PORT008": "parallelCopiesAndControlledCloseKeepIndependentOwnership"
+  },
+  "testSpec": {
+    "path": "evidence/01_PT/011_NK-QST-001/013_質問受付Request純粋契約単体仕様.md",
+    "sha256": "5719acc93d7c4f08f7eb8a62b0a6c2924f42450b5a8ea16866d0f7973aac29ef"
+  },
+  "exactProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "exactTestPhysical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-request-nullaway/target/classes/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.class",
+    "sha256": "7fe7a880ff724822b8485c5d1f115c8f760b80763513c80a7e321bb3d709c4eb"
+  },
+  "unfilteredMissedCovered": {
+    "INSTRUCTION": [
+      6,
+      207
+    ],
+    "BRANCH": [
+      0,
+      4
+    ],
+    "LINE": [
+      0,
+      52
+    ],
+    "COMPLEXITY": [
+      0,
+      11
+    ],
+    "METHOD": [
+      0,
+      9
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "rawOrigin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight-v2/raw.out",
+    "sha256": "3c11c807a1cafed9aad818d1070d79a4bd27d73bc73165ff8648c1cca2ac8775"
+  },
+  "rawMissedInstructionMethod": "close()V",
+  "compilerExceptionHandler": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight-v2/close-bytecode.txt",
+    "sha256": "072b72c871f04340cb6f9f55a60d3b764dff13e07350504245c750b8bb5b8be1"
+  },
+  "noExclusionToMark100": true,
+  "oneExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight-v2/unit.exec",
+    "sha256": "515299d6746463ab317d16450cd1e3c27f540c1b6965f034affbb6bd78e54b2d"
+  },
+  "execIdentity": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight-v2/exec-session.txt",
+    "sha256": "d2560a6f69687c916335bbb4f4087b61c5cfd8e1eac4f68b3a13d45e0e421288"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight-v2/terminal.json",
+    "sha256": "3c94cae02b4ed2a53dbb6fabbd8092112bfa8fcfaa40b170f9fe3dc3de8269ba"
+  },
+  "firstCompileOnlyFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-eight/terminal.json",
+    "sha256": "15c68646614ce69469afb7536cd9a0c71401ddd9d65fe3fdd148188b9c54c30f"
+  },
+  "quality": {
+    "nullaway": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-request-nullaway/terminal.json",
+      "sha256": "554114c2c6275fddea5caf6a21a30cf4fb98b37dd2b36f4b5b68ab60a72af7ce"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-request-spotbugs/terminal.json",
+      "sha256": "ed599da166db6c8b2d85e88de4fd435c738fb4f44c78156c607ee54b8b83d789"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44688-current-question-submit-request-pmd/terminal.json",
+      "sha256": "53fa71d4f25987a2b84587b76e69ba5631c0d7dc76b0b5655a3adf383bb70839"
+    }
+  },
+  "newTypedPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java"
+  ],
+  "apiBounded": 110,
+  "oldTest": {
+    "path": "evidence/01_PT/011_NK-QST-001/evidence/PG20344-question-submit-style-eight-v1/manifest.json",
+    "sha256": "1ec49a01d4f503040ed4712715f5c4a71d52c33c3a9da3ab1735da59125a769a"
+  },
+  "noDatabaseOrAuthOperation": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
