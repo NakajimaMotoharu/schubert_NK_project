@@ -12,7 +12,8 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_reactor_junit import (
-    MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record, verify_reactor_junit,
+    MODULE_DIRECTORIES, compiled_class_paths, reactor_run_record,
+    require_collection_inputs_unchanged, verify_reactor_junit,
 )
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import coverage_class_names as _coverage_class_names
@@ -43,9 +44,8 @@ def main():
     if reactor_run_record(records, run, ".exit").read_text().strip() != "0":
         raise SystemExit("failed execution cannot be certified")
     commit = reactor_run_record(records, run, ".commit").read_text().strip()
-    subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True,
-                   stdout=subprocess.DEVNULL)
+    paths = ("src", "pom.xml", "program/characterization", "tools/quality")
+    require_collection_inputs_unchanged(repo, commit, paths)
     report_receipt = verify_reactor_junit(repo, run, commit)
     terminal = json.loads(report_receipt)
     raw = reactor_run_record(records, run, ".log").read_bytes()
@@ -198,6 +198,7 @@ def main():
     }
     if verify_reactor_junit(repo, run, commit) != report_receipt:
         raise ValueError("reactor JUnit receipt changed during collection")
+    require_collection_inputs_unchanged(repo, commit, paths)
     receipt_path = Path("logs") / (run + "-junit-receipt.json")
     (evidence / receipt_path).write_bytes(report_receipt)
     manifest["reactorJunitReceipt"] = str(receipt_path)

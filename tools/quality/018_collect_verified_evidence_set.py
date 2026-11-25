@@ -9,7 +9,9 @@ import re
 import subprocess
 import sys
 
-from pgpt_reactor_junit import reactor_run_record, verify_reactor_junit
+from pgpt_reactor_junit import (
+    reactor_run_record, require_collection_inputs_unchanged, verify_reactor_junit,
+)
 from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
 
 BASE = (
@@ -262,10 +264,12 @@ def main():
     subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=repo, check=True)
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
     paths = ["src", "pom.xml", "program/characterization"]
-    if not args.validate_only:
+    if args.validate_only:
+        subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo,
+                       check=True)
+    else:
         paths.extend(("tools/quality", ".mvn", "mvnw", "mvnw.cmd"))
-    subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo, check=True)
-    if not args.validate_only:
+        require_collection_inputs_unchanged(repo, commit, paths)
         receipt = verify_reactor_junit(repo, args.run_id, commit)
         root = reserve_candidate(repo, args.run_id, args.candidate_root)
         collect(repo, args.run_id, candidate_root=root)
@@ -276,6 +280,7 @@ def main():
             or local_file(reactor.parent, published["reactorJunitReceipt"]).read_bytes() != receipt
         ):
             raise ValueError("collected reactor JUnit receipt differs from the terminal record")
+        require_collection_inputs_unchanged(repo, commit, paths)
     results = validate_all(root, args.run_id, commit, branch)
     print(json.dumps({"runId": args.run_id, "targetCommit": commit, "scopes": results,
                       "evidenceRoot": str(root),

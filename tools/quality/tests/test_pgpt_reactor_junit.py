@@ -10,7 +10,11 @@ from unittest.mock import patch
 import xml.etree.ElementTree as ET
 
 import pgpt_reactor_junit
-from pgpt_reactor_junit import capture_reactor_junit, verify_reactor_junit
+from pgpt_reactor_junit import (
+    capture_reactor_junit,
+    require_collection_inputs_unchanged,
+    verify_reactor_junit,
+)
 
 
 RUN = "PT-WEB-SYNTHETIC-01"
@@ -450,6 +454,30 @@ class ReactorJunitTest(unittest.TestCase):
         self.assertNotEqual(self.source, self.commit_fixture("later evidence-only checkpoint"))
 
         self.assertEqual(expected, self.verify())
+
+    def test_junit025_new_collection_checks_only_recorded_input_scope(self):
+        (self.repo / ".gitignore").write_text("target/\n")
+        tracked = self.repo / "src/original.txt"
+        tracked.write_text("original fixture\n")
+        self.git("add", ".gitignore", "src/original.txt")
+        recorded = self.commit_fixture("recorded input scope")
+        self.git("config", "status.showUntrackedFiles", "no")
+        (self.repo / "notes.txt").write_text("unrelated notes\n")
+        scope = ("src", "pom.xml", "program/characterization", "tools/quality")
+
+        require_collection_inputs_unchanged(self.repo, recorded, scope)
+
+        added = self.repo / "src/extra fixture.txt"
+        added.write_text("extra fixture\n")
+        with self.assertRaisesRegex(ValueError, "untracked inputs"):
+            require_collection_inputs_unchanged(self.repo, recorded, scope)
+        self.assertEqual("extra fixture\n", added.read_text())
+        added.unlink()
+
+        tracked.write_text("changed fixture\n")
+        with self.assertRaises(subprocess.CalledProcessError):
+            require_collection_inputs_unchanged(self.repo, recorded, scope)
+        self.assertEqual("changed fixture\n", tracked.read_text())
 
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()

@@ -50,6 +50,17 @@ def reactor_run_record(directory, run, suffix):
     return path
 
 
+def require_collection_inputs_unchanged(repo, commit, paths):
+    """Keep new collection on the reactor's tracked inputs and reject new inputs."""
+    subprocess.run(["git", "diff", "--quiet", commit, "--", *paths], cwd=repo, check=True)
+    untracked = subprocess.check_output(
+        ["git", "ls-files", "--others", "--exclude-standard", "-z", "--", *paths],
+        cwd=repo,
+    )
+    if untracked:
+        raise ValueError("untracked inputs in reactor evidence collection scope")
+
+
 def _verify_report_properties(suite):
     containers = suite.findall("properties")
     if len(containers) > 1:

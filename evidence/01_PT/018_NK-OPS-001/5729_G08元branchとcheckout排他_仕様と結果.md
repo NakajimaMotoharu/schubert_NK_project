@@ -5,3 +5,5 @@ NK-OPS-001、WBS-G08、SS352/354、451 §6、BUG-3635／3636、YKT-2856。PT-OPS
 PG42864、fb2404e9af、2026-11-23 JST。手順はPython 3.14、隔離Git checkout、Maven代理と固定XMLを使用。元runnerの別ID二実行、同commit別branchの成功誤認を再現。現runner9、終端16、収集器119を完走。旧正式53 scopeはGit archiveを復元先の一時領域で検証した。実製品や全回帰の起動は0。収集器のv3原rawとbranchはrunに付随し、両端で検証する。正式品質の新規認定は0。既存の週次や実環境の保留を変更しない。
 
 flockは同runner間でcheckout固有のGit directoryを境界とし、同じIDの永久予約はcheckout間で共有する。外部から直接実行したMavenは対象外。既認定の旧形式は保存検証のみ。構文・実行日時・Git source・各試験・元結果へのリンクは[PG42864 manifest](evidence/PG42864-formal-run-provenance-fixtures-v1/manifest.json)。
+
+PT-OPS-G09-JUNIT025（BUG-3874／YKT-3006）。合成Gitの確定sourceを選び、対象外noteとignore済み生成物がある正常例、対象範囲の未追跡入力、追跡ファイルの変更を個別確認する。Gitの通常表示から未追跡を除く設定でも当入力は拒否し、ファイルを保全する。006と018の新規収集前後で適用し、018保存物validate-onlyの扱いを維持する。製品・実収集未起動。
