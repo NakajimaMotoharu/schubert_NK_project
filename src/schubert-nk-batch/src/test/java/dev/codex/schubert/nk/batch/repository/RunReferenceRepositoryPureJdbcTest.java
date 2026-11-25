@@ -298,7 +298,8 @@ final class RunReferenceRepositoryPureJdbcTest {
   void independentConnectionsCanRunConcurrently()
       throws ExecutionException, InterruptedException, TimeoutException {
     try (var workers =
-        new BoundedBatchFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor(), 10, "JDBC fixture")) {
+        new BoundedBatchFixtureWorkers(
+            Executors.newVirtualThreadPerTaskExecutor(), 10, "JDBC fixture")) {
       List<Future<Boolean>> results = new ArrayList<>();
       for (int index = 0; index < 32; index++) {
         results.add(
@@ -343,7 +344,8 @@ final class RunReferenceRepositoryPureJdbcTest {
           assertThrows(
               AssertionError.class,
               () -> {
-                try (var workers = new BoundedBatchFixtureWorkers(executor, timeout, "JDBC fixture")) {
+                try (var workers =
+                    new BoundedBatchFixtureWorkers(executor, timeout, "JDBC fixture")) {
                   assertFalse(workers.executor().isShutdown());
                   throw primary;
                 }

@@ -311,7 +311,8 @@ final class InspectionSummaryPortTest {
   void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag()
       throws ExecutionException, InterruptedException, TimeoutException {
     boolean parentFlag = Thread.currentThread().isInterrupted();
-    try (var worker = new BoundedBatchFixtureWorkers(Executors.newSingleThreadExecutor(), 5, "JDBC fixture")) {
+    try (var worker =
+        new BoundedBatchFixtureWorkers(Executors.newSingleThreadExecutor(), 5, "JDBC fixture")) {
       for (boolean before : List.of(false, true)) {
         worker
             .executor()

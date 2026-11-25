@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -293,27 +293,30 @@ final class MaintenanceRecordsTest {
       for (int index = 1; index <= 64; index++) {
         final int value = index;
         futures.add(
-            workers.executor().submit(
-                () -> {
-                  String id = String.format(Locale.ROOT, "00000000-0000-0000-0000-%012x", value);
-                  Outcome outcome = value % 2 == 0 ? Outcome.SUCCESS : Outcome.WARNING;
-                  var active = new MaintenanceActivation(RUN, UUID.fromString(id));
-                  var complete = new MaintenanceCompletion(active, Instant.parse(END), outcome);
-                  String expected =
-                      "NKDONE1\n"
-                          + RUN_ID
-                          + "\n"
-                          + CUTOFF
-                          + "\n"
-                          + id
-                          + "\n"
-                          + END
-                          + "\n"
-                          + (value % 2 == 0 ? SUCCESS_LINE : WARNING_LINE);
-                  assertArrayEquals(ascii(expected), MaintenanceRecords.completion(complete));
-                  assertEquals(complete, MaintenanceRecords.readCompletion(ascii(expected)));
-                  return complete;
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      String id =
+                          String.format(Locale.ROOT, "00000000-0000-0000-0000-%012x", value);
+                      Outcome outcome = value % 2 == 0 ? Outcome.SUCCESS : Outcome.WARNING;
+                      var active = new MaintenanceActivation(RUN, UUID.fromString(id));
+                      var complete = new MaintenanceCompletion(active, Instant.parse(END), outcome);
+                      String expected =
+                          "NKDONE1\n"
+                              + RUN_ID
+                              + "\n"
+                              + CUTOFF
+                              + "\n"
+                              + id
+                              + "\n"
+                              + END
+                              + "\n"
+                              + (value % 2 == 0 ? SUCCESS_LINE : WARNING_LINE);
+                      assertArrayEquals(ascii(expected), MaintenanceRecords.completion(complete));
+                      assertEquals(complete, MaintenanceRecords.readCompletion(ascii(expected)));
+                      return complete;
+                    }));
       }
       var actual = new HashSet<UUID>();
       int warnings = 0;
