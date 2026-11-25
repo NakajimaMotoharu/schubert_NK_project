@@ -430,7 +430,8 @@ class ScenarioSearchViewModelTest {
     var doc =
         Jsoup.parse(
             engine.process(
-                "<p th:text='${page.filters.q}'></p><a th:href='${page.nextHref.orElseThrow()}'>次</a>",
+                "<p th:text='${page.filters.q}'></p><a"
+                    + " th:href='${page.nextHref.orElseThrow()}'>次</a>",
                 context));
     assertEquals(List.of("<script>&\""), doc.select("p").eachText());
     assertTrue(doc.select("script").isEmpty());
@@ -442,32 +443,30 @@ class ScenarioSearchViewModelTest {
   @Test
   void web229ConcurrentSnapshots()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
         tasks.add(
-            pool.submit(
-                () -> {
-                  var v =
-                      ScenarioSearchViewModel.success(
-                          actor("user-" + n, UserRole.USER),
-                          form("q-" + n, "1"),
-                          games(),
-                          speakers(),
-                          data(1, 1),
-                          List.of(row(n, "body-" + n)));
-                  assertEquals("user-" + n, v.getTopBar().getUsername());
-                  assertEquals("q-" + n, v.getFilters().getQ());
-                  assertEquals(
-                      "body-" + n, v.getResults().orElseThrow().getRows().getFirst().getBody());
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var v =
+                          ScenarioSearchViewModel.success(
+                              actor("user-" + n, UserRole.USER),
+                              form("q-" + n, "1"),
+                              games(),
+                              speakers(),
+                              data(1, 1),
+                              List.of(row(n, "body-" + n)));
+                      assertEquals("user-" + n, v.getTopBar().getUsername());
+                      assertEquals("q-" + n, v.getFilters().getQ());
+                      assertEquals(
+                          "body-" + n, v.getResults().orElseThrow().getRows().getFirst().getBody());
+                    }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
