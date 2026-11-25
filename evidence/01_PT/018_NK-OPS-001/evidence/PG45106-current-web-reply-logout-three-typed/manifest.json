@@ -1,0 +1,96 @@
+{
+  "run": "PG45106",
+  "source": "0f668e092b8b6cc04fd02a55d0a633651f73479f",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "actualExit": 4,
+  "terminalAtUTC": "2026-11-25T09:02:02.744287+00:00",
+  "candidateRoles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "sha256": "93599988b634badfe849f38f66abc4125ab5cc25e404c32fbda688f0060e101c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java",
+      "sha256": "81a3c31e993d9fba59ad5fdbfa7d26d26d8f21541e81fd885fb2dec5ba222c16"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java",
+      "sha256": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578"
+    }
+  ],
+  "priorTypeApproval": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45104-current-web-lifecycle-five-statics/manifest.json",
+    "sha256": "457e3d0925e1d4ecc95fe0b17671edd8188803a9788c125964b4dc3643bc18ee"
+  },
+  "counts": {
+    "api": 158,
+    "web": 187
+  },
+  "physical": 19,
+  "sources": 14,
+  "nullAway": 0,
+  "spotbugs": {
+    "exit": 0,
+    "findings": 0,
+    "missingOrErrors": 0
+  },
+  "pmd": {
+    "exit": 4,
+    "findings": [
+      {
+        "path": "ArtemisReplyConsumer.java",
+        "line": 53,
+        "rule": "AvoidCatchingGenericException",
+        "technicalRole": "wrapper retains checked rejection exception and runtime/fatal provider failure after owned rollback"
+      },
+      {
+        "path": "ArtemisReplyConsumer.java",
+        "line": 68,
+        "rule": "AvoidCatchingGenericException",
+        "technicalRole": "unconfirmed fatal isolation preserves independent originals"
+      },
+      {
+        "path": "ArtemisReplyConsumer.java",
+        "line": 69,
+        "rule": "CompareObjectsWithEquals",
+        "technicalRole": "same reference must not self-suppress; BUG-1485"
+      },
+      {
+        "path": "ArtemisReplyConsumer.java",
+        "line": 86,
+        "rule": "AvoidCatchingGenericException",
+        "technicalRole": "rollback exception ownership and cause preservation"
+      },
+      {
+        "path": "ArtemisReplyConsumer.java",
+        "line": 87,
+        "rule": "CompareObjectsWithEquals",
+        "technicalRole": "same reference must not self-suppress; BUG-1485"
+      }
+    ],
+    "rawRetained": true,
+    "ownerApplicability": "pending"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45106-current-web-reply-logout-types/begin.json",
+    "sha256": "ccb14dbbbd2264e65958371cae339f8f57a472306873934d5c60b148f5d62ced"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45106-current-web-reply-logout-types/terminal.json",
+    "sha256": "eef4f41292fcf89024138c2dd827be61bfdab71fe29c6ed383fc4d141bdd752e"
+  },
+  "analysisBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45106-current-web-reply-logout-statics/begin.json",
+    "sha256": "52e8187e71cae36eb65b7265388ae2d43ba981874756ee327641220371306070"
+  },
+  "analysisTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45106-current-web-reply-logout-statics/terminal.json",
+    "sha256": "c48ec948ce5f92c0248b82d449a0e8bfe5d2124f31d6f4b2d9c8557ea7db73a7"
+  },
+  "newProductTests": 0,
+  "heldStartupContextOpened": false,
+  "permissionBoundary": "no actual JMS/HTTP or multiple owners"
+}
