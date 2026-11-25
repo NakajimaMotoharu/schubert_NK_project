@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 class MessageCodecTest {
   private static final String PROTOCOL_MAGIC = "SCHBNK01";
   private static final String LAYOUT_VERSION = "001";
+  private static final String ZERO_LENGTH_FIELD = "000000";
   private static final String GAME_RESPONSE = "GAMRSP01";
   private static final String SYNC_REPLY_ADDRESS = "nk.sync.reply.web";
   private static final String SYNC_REQUEST_ADDRESS = "nk.sync.request";
@@ -45,24 +46,10 @@ class MessageCodecTest {
   void headerEncodingMatchesIndependentUi232GoldenVector() {
     CommonHeader header = requestHeader("LGNREQ01", 384);
     byte[] actual = HeaderCodec.standard().encode(header);
-    byte[] expected = new byte[256];
-    Arrays.fill(expected, (byte) ' ');
-    ascii(expected, 0, PROTOCOL_MAGIC);
-    ascii(expected, 8, LAYOUT_VERSION);
-    ascii(expected, 11, "LGNREQ01");
-    ascii(expected, 19, LAYOUT_VERSION);
-    ascii(expected, 22, "QS");
-    ascii(expected, 24, MESSAGE_ID.toString());
-    ascii(expected, 60, MESSAGE_ID.toString());
-    ascii(expected, 96, "20260902123456789");
-    ascii(expected, 177, "0256");
-    ascii(expected, 181, "000384");
-    ascii(expected, 187, "000000");
-    ascii(expected, 193, "000000");
-    ascii(expected, 199, "000000640");
+    byte[] expected = loginRequestGoldenHeader();
 
     assertArrayEquals(expected, actual);
-    assertEquals(header, HeaderCodec.standard().peek(actual));
+    assertEquals(header, HeaderCodec.standard().peek(expected));
     assertThrows(NullPointerException.class, () -> new HeaderCodec(null));
     assertThrows(NullPointerException.class, () -> HeaderCodec.standard().encode(null));
     assertThrows(PermanentProtocolException.class, () -> HeaderCodec.standard().peek(null));
@@ -109,7 +96,8 @@ class MessageCodecTest {
 
   @Test
   void headerDecoderRejectsEveryFixedFieldAndProfileCorruption() {
-    byte[] login = HeaderCodec.standard().encode(requestHeader("LGNREQ01", 384));
+    byte[] login = loginRequestGoldenHeader();
+    assertEquals(requestHeader("LGNREQ01", 384), HeaderCodec.standard().peek(login));
     corrupt(login, bytes -> bytes[0] = 'X');
     corrupt(login, bytes -> bytes[8] = '2');
     corrupt(login, bytes -> bytes[11] = 'x');
@@ -131,9 +119,10 @@ class MessageCodecTest {
     corrupt(login, bytes -> ascii(bytes, 208, "0000"));
     corrupt(login, bytes -> bytes[212] = 'X');
 
-    byte[] response =
-        HeaderCodec.standard()
-            .encode(responseHeader(GAME_RESPONSE, 9, 272, 0, ResultCode.NOT_FOUND));
+    byte[] response = notFoundGoldenHeader();
+    assertEquals(
+        responseHeader(GAME_RESPONSE, 9, 272, 0, ResultCode.NOT_FOUND),
+        HeaderCodec.standard().peek(response));
     corrupt(response, bytes -> ascii(bytes, 208, "9999"));
     corrupt(response, bytes -> Arrays.fill(bytes, 208, 212, (byte) ' '));
     corrupt(response, bytes -> ascii(bytes, 193, "000001"));
@@ -620,6 +609,42 @@ class MessageCodecTest {
         new ExpectedRoute(
             MessageKind.EVENT, InteractionKind.INTERNAL, "nk.web.log", Optional.empty(), false);
     assertFalse(event.expirationRequired());
+  }
+
+  private static byte[] loginRequestGoldenHeader() {
+    byte[] header = goldenHeaderBase("LGNREQ01", "QS", MESSAGE_ID);
+    ascii(header, 181, "000384");
+    ascii(header, 187, ZERO_LENGTH_FIELD);
+    ascii(header, 193, ZERO_LENGTH_FIELD);
+    ascii(header, 199, "000000640");
+    return header;
+  }
+
+  private static byte[] notFoundGoldenHeader() {
+    byte[] header = goldenHeaderBase(GAME_RESPONSE, "SS", CORRELATION_ID);
+    ascii(header, 113, "a".repeat(64));
+    ascii(header, 181, "000009");
+    ascii(header, 187, "000272");
+    ascii(header, 193, ZERO_LENGTH_FIELD);
+    ascii(header, 199, "000000265");
+    ascii(header, 208, "0104");
+    return header;
+  }
+
+  /** UI232 offsets, field values and space padding, independent of HeaderCodec. */
+  private static byte[] goldenHeaderBase(String layout, String profile, UUID correlation) {
+    byte[] header = new byte[256];
+    Arrays.fill(header, (byte) ' ');
+    ascii(header, 0, PROTOCOL_MAGIC);
+    ascii(header, 8, LAYOUT_VERSION);
+    ascii(header, 11, layout);
+    ascii(header, 19, LAYOUT_VERSION);
+    ascii(header, 22, profile);
+    ascii(header, 24, MESSAGE_ID.toString());
+    ascii(header, 60, correlation.toString());
+    ascii(header, 96, "20260902123456789");
+    ascii(header, 177, "0256");
+    return header;
   }
 
   private static void corrupt(byte[] source, Consumer<byte[]> mutator) {

@@ -39,3 +39,9 @@ PT-PRO-HDR3266-002：UI232総長式から独立算出`1,000,000-256=999,744`。d
 BUG1281再発予防：native summaryは原qualifiedFullTestsから生成して3701を厳密検証。Python payloadの派生はASTの数値/意味文字列だけを変換し、40/64桁SHA literalを変更しない。既長い歴史templateには数値置換を受けないhex形式placeholderを渡し、最後にだけ実source/archiveへ束縛する。純試験は実head/digestに旧件数文字列3699が含まれても不変であること、Protocol84/Batch1299、全namespace、original3694/native28 provenance、旧件数・外国stream拒否を確認する。最初の未実装工具試験では非hex sentinelが既SHA形式guardで拒否され、remote操作前にhex placeholderへ補足したTDD記録を保持する（実装済みProduction障害ではない）。
 
 K01.01群開始予算は実発行前eventへ別記し、Header監査/是正費と二重計上しない。全体後は105の全契約matrix/要求・artifact・TestID・独立期待値・終了依存を個別に監査し、WBS受入は全criteriaが揃う対象だけ変更する。
+
+## BUG-3853・YKT-1557
+
+`MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption` の破損前入力二つをUI232 §3と結果code表から作る。QS LGNREQ01 はheader256、data384、record長0・件数0、総長640、contextと結果は空。SS GAMRSP01 対象なしはheader256、data9、record長272・件数0、総長265、結果0104。Message ID、Correlation ID、送信日時、context、予約spaceは既定の独立fixture。破損前の2入力が予定のheaderとして解釈されることを先に照合する。
+
+既存の破損条件を維持し、変更ごとに元配列のcopyを一か所変更して `PermanentProtocolException` を期待する。数値offsetと出力バイトは製品encodeで作らない。別の既存正常試験ではQSの全256byteをencodeの実際値と比較し、同じ独立入力をpeekする。PG45368に、当Protocol JARと試験版、選択した実行結果とcounterを保存する。
