@@ -213,7 +213,8 @@ class DbPoolMetricRecorderTest {
               return actual == first || actual == second;
             });
       }
-      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
+      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertTrue(actual.get());
       assertEquals(1, first.active());
       assertEquals(8, first.maximum());
       shape(registry);

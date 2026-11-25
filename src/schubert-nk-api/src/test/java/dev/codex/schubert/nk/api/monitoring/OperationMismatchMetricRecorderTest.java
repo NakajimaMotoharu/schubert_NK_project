@@ -250,7 +250,8 @@ class OperationMismatchMetricRecorderTest {
   }
 
   @Test
-  void opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth() throws InterruptedException, ExecutionException {
+  void opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
@@ -263,7 +264,8 @@ class OperationMismatchMetricRecorderTest {
               return true;
             });
       }
-      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertTrue(result.get());
       for (String operation : OPERATIONS) assertEquals(8, count(registry, operation));
       assertEquals(64, registry.increments.get());
       shape(registry);

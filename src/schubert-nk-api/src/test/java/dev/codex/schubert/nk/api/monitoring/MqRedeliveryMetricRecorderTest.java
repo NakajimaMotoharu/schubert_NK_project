@@ -265,7 +265,8 @@ class MqRedeliveryMetricRecorderTest {
   }
 
   @Test
-  void mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts() throws InterruptedException, ExecutionException {
+  void mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);

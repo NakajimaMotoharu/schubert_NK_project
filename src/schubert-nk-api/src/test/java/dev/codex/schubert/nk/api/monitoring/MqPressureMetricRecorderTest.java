@@ -287,7 +287,8 @@ class MqPressureMetricRecorderTest {
   }
 
   @Test
-  void mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState() throws InterruptedException, ExecutionException {
+  void mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);

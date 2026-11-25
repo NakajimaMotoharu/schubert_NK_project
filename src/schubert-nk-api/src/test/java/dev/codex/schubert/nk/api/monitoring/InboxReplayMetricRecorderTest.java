@@ -337,7 +337,8 @@ class InboxReplayMetricRecorderTest {
   }
 
   @Test
-  void inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners() throws InterruptedException, ExecutionException {
+  void inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
