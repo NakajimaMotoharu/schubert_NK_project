@@ -1,0 +1,79 @@
+{
+  "run": "PG44854",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "P018-10",
+    "QA-054"
+  ],
+  "source": "bc958ae353c0372131903566e55f9b44ba40cc76",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:15:26.180493+00:00",
+  "typedPrevious": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44802-request-details-strict-json-proof/manifest.json",
+    "sha256": "16875f8b0afd7abb2524768a4c8fe6e0eaab5b544cc674b9868ba5b9d4172d0a"
+  },
+  "ordinaryPrevious": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42912-request-log-details-without-private-reflection-v1/manifest.json",
+    "sha256": "8cd222fe07d107632afe9e858353121197bd0e2042cb7a58e0129d84edc67fab"
+  },
+  "remainingRows": [
+    {
+      "method": "<init>",
+      "line": 20,
+      "instruction": "INSTRUCTION:2:0",
+      "branch": "BRANCH:0:0"
+    },
+    {
+      "method": "<init>",
+      "line": 21,
+      "instruction": "INSTRUCTION:5:0",
+      "branch": "BRANCH:0:0"
+    }
+  ],
+  "privateCtorContract": {
+    "expectedPrivateNonCallableFromJava": true,
+    "observed": true,
+    "noInvocation": true,
+    "notCoverage": true,
+    "testId": "PT-LOG-STATIC001"
+  },
+  "knownOrdinary8": {
+    "allowedScalarsAndRolesMatchLiteralJson": "PT-IDEM-012",
+    "unsafeMalformedDuplicateAndWrongTypesAreRejected": "PT-IDEM-012-invalid",
+    "rejectsMalformedUnicodeInKeysAndFamilyButPreservesAsciiEscapes": "PT-IDEM-012-UTF16",
+    "decodedPropertyIdentityControlsDuplicatesAndRoleOwnership": "PT-IDEM-012-JSON-001",
+    "numericZeroRequiresAnUnsignedDecimalIntegerSpelling": "PT-IDEM-012-JSON-002",
+    "raw002FourFixedHashCollisionsRemainUnknownKeys": "PT-LOG-RAW002",
+    "raw003ForbiddenPublicCanariesNeverEscapeThroughAnyRoleOrParserDiagnostic": "PT-LOG-RAW003",
+    "raw004BoundsTheOriginalJsonBeforeEscapeProjection": "PT-LOG-RAW004"
+  },
+  "allOrdinaryCallableMethodsCovered": true,
+  "ordinaryCounters": {
+    "line": [
+      49,
+      51
+    ],
+    "method": [
+      4,
+      5
+    ],
+    "class_": [
+      1,
+      1
+    ],
+    "branch": [
+      36,
+      36
+    ]
+  },
+  "allowedApplicableState": "retain gap; no private invocation, reflection, exclusion, or manufactured call. No current independent missing public behavior found. 451 applicability remains with broader scope.",
+  "priorPmdRawExit": 4,
+  "actualProductTests": 0,
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42912-request-log-details-without-private-reflection-v1/coverage-unfiltered.tsv",
+    "sha256": "43e14d02accfd4fa7920f87941ff8781e6c5db54a32ccbf855382e5b6d2756c9"
+  },
+  "newExclusion": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
