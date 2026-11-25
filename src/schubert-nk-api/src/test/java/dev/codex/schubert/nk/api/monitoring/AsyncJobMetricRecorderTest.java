@@ -256,7 +256,7 @@ class AsyncJobMetricRecorderTest {
   void asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth()
       throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
-        var workers = new FixtureWorkers(Executors.newFixedThreadPool(8))) {
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       var first = new Snapshot(values(1, 2, 3, 4, 5));
       var second = new Snapshot(values(10, 20, 30, 40, 50));
@@ -308,7 +308,7 @@ class AsyncJobMetricRecorderTest {
         assertThrows(
             AssertionError.class,
             () -> {
-              try (var workers = new FixtureWorkers(pool)) {
+              try (var workers = new MetricFixtureWorkers(pool)) {
                 assertSame(pool, workers.executor());
                 throw primary;
               }
@@ -318,22 +318,6 @@ class AsyncJobMetricRecorderTest {
     assertEquals(
         "async metric fixture workers did not stop", observed.getSuppressed()[0].getMessage());
     assertEquals(List.of("shutdownNow", "awaitTermination"), calls);
-  }
-
-  private record FixtureWorkers(ExecutorService executor) implements AutoCloseable {
-    @Override
-    public void close() {
-      executor.shutdownNow();
-      try {
-        if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
-          throw new AssertionError("async metric fixture workers did not stop");
-        }
-      } catch (InterruptedException interrupted) {
-        Thread.currentThread().interrupt();
-        throw new IllegalStateException(
-            "async metric fixture worker termination interrupted", interrupted);
-      }
-    }
   }
 
   @Test

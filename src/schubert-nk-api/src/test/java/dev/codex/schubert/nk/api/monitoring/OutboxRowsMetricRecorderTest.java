@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -185,32 +186,27 @@ class OutboxRowsMetricRecorderTest {
   }
 
   @Test
-  void outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable() throws Exception {
-    try (var registry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
-        var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
-        var one = new Counts(1, 2, 3);
-        var two = new Counts(4, 5, 6);
-        recorder.record(one);
-        var tasks = new ArrayList<Callable<Boolean>>();
-        for (int i = 0; i < 64; i++) {
-          var supplied = i % 2 == 0 ? one : two;
-          tasks.add(
-              () -> {
-                recorder.record(supplied);
-                var actual = recorder.snapshot().orElseThrow();
-                return actual == one || actual == two;
-              });
-        }
-        for (var actual : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
-        assertEquals(1, one.pending());
-        assertEquals(3, one.error());
-        shape(registry);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+  void outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable() throws InterruptedException, ExecutionException {
+    try (var registry = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
+      var one = new Counts(1, 2, 3);
+      var two = new Counts(4, 5, 6);
+      recorder.record(one);
+      var tasks = new ArrayList<Callable<Boolean>>();
+      for (int i = 0; i < 64; i++) {
+        var supplied = i % 2 == 0 ? one : two;
+        tasks.add(
+            () -> {
+              recorder.record(supplied);
+              var actual = recorder.snapshot().orElseThrow();
+              return actual == one || actual == two;
+            });
       }
+      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
+      assertEquals(1, one.pending());
+      assertEquals(3, one.error());
+      shape(registry);
     }
   }
 
