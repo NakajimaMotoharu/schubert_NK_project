@@ -25,3 +25,7 @@ readonly explicit tx/READ COMMITTEDを変更せず確認する一COUNT/MIN query
 技術進捗：Web前資格51/source0824から、新三Mainと対応26 Test IDを追加して当77で全再資格。実class13→18（+5）、L290→401（+111）/M60→81（+21）/B89→160（+71）、全miss0。APIの前の32追加ID/162は別sourceの部品成果であり、当Web77と合計した全体PASS/coverageを作らない。原190の新受入0/工数完成率null・正式1964/53は不変更。
 
 開始3/5/9pp上限10/fresh10→12残88/reset1793382075、同窓共有観測差2pp。専有N/T/PGPTだけの費用・工数はnull、PMO/他chat共有費を分離できたと推定しない。原/v4/v5/旧markerlast27区間/共有累積null/90再基底化0、usage1a3ed02e（07:08:28JST/explicit0/完全性未証明）保持。host容量37GiB/84%を確認・削除0。実DB/schema/connection owner/asOf/source/scheduler/外側期限/exporterは未受入、actual VM/Root/DB/Backup/key/native/network/配備/サービス0-HOLD、原保全物/stash7/Scenario3/Currentbaseline保持。QA051final/PTALT0/whole451-native-CHR/全src四100未受入、通常のcommit/報告/PMO返答待ちで停止しない。
+
+## 現製品候補のCollector再計測
+
+PG44988、現Core 8e2a6b055。WEBOBXCONN001～008を実行し8/8、失敗・error・skip各0。Collectorの単一execはL18/M3/C1/B2各未到達0。補助型の未到達は生表に保持。事前照合でPG43812の後続証跡を拾い切れず、実行後に現7 Javaの同一性を確認した。今回実行8は原8と重複し、適用成功の増分・原行価格・正式受入には加算しない。実DBは未実施。 [PG44988](evidence/PG44988-current-web-outbox-collector-eight/manifest.json)
