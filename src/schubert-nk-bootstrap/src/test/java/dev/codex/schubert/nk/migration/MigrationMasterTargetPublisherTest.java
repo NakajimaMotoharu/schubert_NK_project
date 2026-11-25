@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Proxy;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
@@ -403,7 +406,8 @@ final class MigrationMasterTargetPublisherTest {
   };
 
   @Test
-  void target001OneConnectionFixedNinetyFourSqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedNinetyFourSqlAndExactResources()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
@@ -420,7 +424,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target002EmptyHasNoInventedRowsAndOneFalseSetval() throws Exception {
+  void target002EmptyHasNoInventedRowsAndOneFalseSetval() throws SQLException {
     var f = new Fixture();
     f.empty = true;
     f.scalars = new long[SCALARS];
@@ -447,7 +451,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target004AllNullTransferCombinationsHaveNoConnectionCalls() throws Exception {
+  void target004AllNullTransferCombinationsHaveNoConnectionCalls()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     var conn = f.connection();
     var declared = normal();
@@ -466,7 +471,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target005AutoCommitDelegationNeverMutatesConnection() throws Exception {
+  void target005AutoCommitDelegationNeverMutatesConnection() throws SQLException {
     var prepare = new Fixture();
     prepare.autoCommit = true;
     assertThrows(
@@ -486,22 +491,26 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target006EveryPrepareSqlOriginalFailureStopsThePath() throws Exception {
+  void target006EveryPrepareSqlOriginalFailureStopsThePath()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(0, PREPARE_END);
   }
 
   @Test
-  void target007EveryTransferSqlOriginalFailureStopsThePath() throws Exception {
+  void target007EveryTransferSqlOriginalFailureStopsThePath()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(PREPARE_END, TRANSFER_END);
   }
 
   @Test
-  void target008EveryReferenceSqlFailurePreventsSetvalAndAnalyze() throws Exception {
+  void target008EveryReferenceSqlFailurePreventsSetvalAndAnalyze()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(TRANSFER_END, REFERENCE_END);
   }
 
   @Test
-  void target009EveryFinalizationSqlAndPreparedExecuteOriginalFailure() throws Exception {
+  void target009EveryFinalizationSqlAndPreparedExecuteOriginalFailure()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(CONTENT_END, SQL_COUNT);
     for (int slot = 0; slot < 5; slot++)
       for (Throwable failure : failures()) {
@@ -524,7 +533,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target010EveryTransferScalarMismatchCannotReachLaterStage() throws Exception {
+  void target010EveryTransferScalarMismatchCannotReachLaterStage() throws SQLException {
     for (int query = 0; query < TRANSFER_SCALARS; query++) {
       var f = new Fixture();
       f.badScalar = query;
@@ -539,7 +548,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target011EveryReferenceOrphanAndOrderViolationPreventsSequenceMutation() throws Exception {
+  void target011EveryReferenceOrphanAndOrderViolationPreventsSequenceMutation()
+      throws SQLException {
     for (int query = ORPHAN_FIRST; query < REFERENCE_SCALARS_END; query++) {
       var f = new Fixture();
       f.badScalar = query;
@@ -554,7 +564,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target012PartialSetvalAndAnalyzeWarningAreNotRetriedOrSuccess() throws Exception {
+  void target012PartialSetvalAndAnalyzeWarningAreNotRetriedOrSuccess() throws SQLException {
     for (int slot = 0; slot < 5; slot++) {
       var f = new Fixture();
       f.badScalar = SETVAL_SCALAR_FIRST + slot;
@@ -580,7 +590,7 @@ final class MigrationMasterTargetPublisherTest {
 
   @Test
   void target013EveryOwnedStatementCloseFailureKeepsExactPrefixAndOuterOwnership()
-      throws Exception {
+      throws SQLException {
     for (int close = 0; close < CLOSES; close++)
       for (Throwable failure : failures()) {
         var f = new Fixture();
@@ -600,7 +610,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target014OriginalReadFailureKeepsResultThenStatementSuppressedOrder() throws Exception {
+  void target014OriginalReadFailureKeepsResultThenStatementSuppressedOrder() throws SQLException {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.badRead = 0;
@@ -625,7 +635,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target015FixedRedactionAndSamePublisherFreshConnectionAfterFailure() throws Exception {
+  void target015FixedRedactionAndSamePublisherFreshConnectionAfterFailure()
+      throws SQLException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     assertEquals("MigrationMasterTargetPublisher[REDACTED]", publisher.toString());
     var failed = new Fixture();
@@ -639,7 +650,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target016SharedPublisherFiniteIndependentConnectionsAndTermination() throws Exception {
+  void target016SharedPublisherFiniteIndependentConnectionsAndTermination()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -663,12 +675,13 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target017AllSixContentQueryFaultsStopBeforeFinalization() throws Exception {
+  void target017AllSixContentQueryFaultsStopBeforeFinalization()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(REFERENCE_END, CONTENT_END);
   }
 
   @Test
-  void target018AllSixtyFiveValueChangesStopBeforeMaxSetvalAnalyze() throws Exception {
+  void target018AllSixtyFiveValueChangesStopBeforeMaxSetvalAnalyze() throws SQLException {
     for (int table = 0; table < CONTENT_TABLES; table++) {
       for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
         var f = new Fixture();
@@ -682,7 +695,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target019NullContentResultsDoNotCreateResultOwnership() throws Exception {
+  void target019NullContentResultsDoNotCreateResultOwnership() throws SQLException {
     for (int table = 0; table < CONTENT_TABLES; table++) {
       var f = new Fixture();
       f.nullContentResult = table;
@@ -693,7 +706,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target020MissingAndExtraRowsHaveNoExtraColumnReads() throws Exception {
+  void target020MissingAndExtraRowsHaveNoExtraColumnReads() throws SQLException {
     for (int table = 0; table < CONTENT_TABLES; table++) {
       for (boolean missing : List.of(true, false)) {
         var f = new Fixture();
@@ -710,7 +723,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target021RequiredSqlNullNeverBecomesZeroFalseOrEmpty() throws Exception {
+  void target021RequiredSqlNullNeverBecomesZeroFalseOrEmpty() throws SQLException {
     for (int table = 0; table < CONTENT_TABLES; table++) {
       for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
         if (contentLiteral(table).get(column) == null) continue;
@@ -726,7 +739,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target022EveryContentGetterKeepsPrimaryThenBothCleanupIdentities() throws Exception {
+  void target022EveryContentGetterKeepsPrimaryThenBothCleanupIdentities() throws SQLException {
     for (int table = 0; table < CONTENT_TABLES; table++) {
       for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
         for (Throwable primary : failures()) {
@@ -755,7 +768,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target023ScalarAndTypedResultsRemainSeparateOnOneBorrowedConnection() throws Exception {
+  void target023ScalarAndTypedResultsRemainSeparateOnOneBorrowedConnection()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     var declared = normal();
     workflow(new MigrationMasterTargetPublisher(), f, declared);
@@ -769,7 +783,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target024FiniteFailedContentCallsCannotReachFinalizerOrRetainResources() throws Exception {
+  void target024FiniteFailedContentCallsCannotReachFinalizerOrRetainResources()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -796,7 +811,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target025AllCatalogSqlFaultsPreventAnyStagingDdl() throws Exception {
+  void target025AllCatalogSqlFaultsPreventAnyStagingDdl()
+      throws SQLException, NoSuchAlgorithmException {
     sqlFailures(0, CATALOG_END);
     for (int table = 0; table < CATALOG_TABLES; table++) {
       var f = new Fixture();
@@ -812,7 +828,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target026All141CatalogRowAttributesMismatchBeforeDdl() throws Exception {
+  void target026All141CatalogRowAttributesMismatchBeforeDdl() throws SQLException {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
         for (int field = 0; field < catalogFieldCount(table); field++) {
@@ -830,7 +846,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target027NullCatalogResultHasOnlyPreviousResultOwnership() throws Exception {
+  void target027NullCatalogResultHasOnlyPreviousResultOwnership() throws SQLException {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       var f = new Fixture();
       f.nullCatalogResult = table;
@@ -841,7 +857,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target028MissingExtraCatalogColumnsHaveNoExtraFieldRead() throws Exception {
+  void target028MissingExtraCatalogColumnsHaveNoExtraFieldRead() throws SQLException {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (boolean missing : List.of(true, false)) {
         var f = new Fixture();
@@ -860,7 +876,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty() throws Exception {
+  void target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty() throws SQLException {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
         for (int field = 0; field < catalogFieldCount(table); field++) {
@@ -879,7 +895,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target030EveryCatalogGetterKeepsPrimaryThenBothCleanupIdentities() throws Exception {
+  void target030EveryCatalogGetterKeepsPrimaryThenBothCleanupIdentities() throws SQLException {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
         for (int field = 0; field < catalogFieldCount(table); field++) {
@@ -911,7 +927,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target031CatalogContentScalarResultsKeepSeparateOwnershipAndCounts() throws Exception {
+  void target031CatalogContentScalarResultsKeepSeparateOwnershipAndCounts()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(MIXED_CATALOG_GETTERS, f.catalogFieldReads);
@@ -925,7 +942,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target032FiniteCatalogFailureCannotReachDdlOrRetainResources() throws Exception {
+  void target032FiniteCatalogFailureCannotReachDdlOrRetainResources()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -953,7 +971,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target033AllInitialGameValueChangesPreventAnyStagingDdl() throws Exception {
+  void target033AllInitialGameValueChangesPreventAnyStagingDdl() throws SQLException {
     for (int row = 0; row < 2; row++)
       for (int field = 0; field < GAMES_FIELDS; field++)
         for (boolean nul : List.of(false, true)) {
@@ -977,7 +995,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target034AllTenGameGettersKeepPrimaryAndBothCleanupIdentities() throws Exception {
+  void target034AllTenGameGettersKeepPrimaryAndBothCleanupIdentities() throws SQLException {
     for (int row = 0; row < 2; row++)
       for (int field = 0; field < GAMES_FIELDS; field++)
         for (int kind = 0; kind < 3; kind++) {
@@ -1013,7 +1031,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target035EveryColumnOwnerMismatchStopsBeforeAnyStaging() throws Exception {
+  void target035EveryColumnOwnerMismatchStopsBeforeAnyStaging()
+      throws SQLException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     for (int table = 0; table < COLUMN_CATALOG_TABLES; table++) {
@@ -1032,7 +1051,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target036EveryDefaultMetadataRejectionStopsBeforeAnyStaging() throws Exception {
+  void target036EveryDefaultMetadataRejectionStopsBeforeAnyStaging()
+      throws SQLException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     for (int table = 0; table < COLUMN_CATALOG_TABLES; table++) {
@@ -1051,7 +1071,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target037DeferredConstraintRejectionStopsBeforeSequence() throws Exception {
+  void target037DeferredConstraintRejectionStopsBeforeSequence()
+      throws SQLException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     for (boolean warning : List.of(false, true)) {
@@ -1070,7 +1091,8 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target038DeferredPhaseFailureKeepsPrimaryAndCleanupIdentity() throws Exception {
+  void target038DeferredPhaseFailureKeepsPrimaryAndCleanupIdentity()
+      throws SQLException, NoSuchAlgorithmException {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     for (boolean warningPhase : List.of(false, true)) {
@@ -1254,7 +1276,8 @@ final class MigrationMasterTargetPublisherTest {
         .orElseThrow();
   }
 
-  private static void sqlFailures(int first, int end) throws Exception {
+  private static void sqlFailures(int first, int end)
+      throws SQLException, NoSuchAlgorithmException {
     var declared = normal();
     for (int index = first; index < end; index++)
       for (Throwable failure : failures()) {
@@ -1341,17 +1364,17 @@ final class MigrationMasterTargetPublisherTest {
     private int resultCloses;
     private int closeAttempts;
 
-    private void recordSql(String actual) throws Throwable {
+    private void recordSql(String actual) throws SQLException {
       int index = sql.size();
       sql.add(actual);
       assertEquals(SQL.get(index), actual);
-      if (index == badSql) throw failure;
+      if (index == badSql) MigrationFixtureFailures.raise(failure);
     }
 
-    private void closeOwned() throws Throwable {
+    private void closeOwned() throws SQLException {
       int index = closeAttempts;
       closeAttempts++;
-      if (index == badClose) throw closeFailure;
+      if (index == badClose) MigrationFixtureFailures.raise(closeFailure);
     }
 
     Connection connection() {
@@ -1686,11 +1709,11 @@ final class MigrationMasterTargetPublisherTest {
     return f;
   }
 
-  static MigrationMasterCopyDataset normal() throws Exception {
+  static MigrationMasterCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
-  private static MigrationCopyDataset content(String stamp) throws Exception {
+  private static MigrationCopyDataset content(String stamp) throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
@@ -1791,7 +1814,7 @@ final class MigrationMasterTargetPublisherTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(
