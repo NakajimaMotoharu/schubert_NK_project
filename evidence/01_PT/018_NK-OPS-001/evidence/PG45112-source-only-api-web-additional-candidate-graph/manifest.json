@@ -1,0 +1,88 @@
+{
+  "run": "PG45112",
+  "source": "8702fedd3f4dbf83bd0dacf52e43ee165b6cbcea",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T09:10:49.101863+00:00",
+  "sourceParser": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45112-source-only-api-web-additional-candidate-graph/ApprovedSourceReferences.java",
+    "sha256": "25769debe7238f4935e422bb24d834b383309f205862a79f215177d3b6a6dbbf"
+  },
+  "conservativeNameGraphOnly": true,
+  "sourceFilesParsed": 544,
+  "excludedDirectHeldApiWeb": 4,
+  "bootstrapHeldNameOnly": true,
+  "oldPinChangesAppliedFromCurrentPlan": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java"
+  ],
+  "nameOnlyClassifications": {
+    "api:ADDITIONAL_REVIEW_CANDIDATE": 23,
+    "api:KNOWNS_HOLD_NAME_IN_CONSERVATIVE_CLOSURE": 93,
+    "api:OTHER_PRODUCTS_NEED_EXPLICIT_AUX_CLOSURE": 3,
+    "web:KNOWNS_HOLD_NAME_IN_CONSERVATIVE_CLOSURE": 63,
+    "web:OTHER_PRODUCTS_NEED_EXPLICIT_AUX_CLOSURE": 5,
+    "web:ADDITIONAL_REVIEW_CANDIDATE": 7
+  },
+  "testedExistingKnownDependencyControls": {
+    "LogQueryRepository": {
+      "module": "api",
+      "kind": "KNOWNS_HOLD_NAME_IN_CONSERVATIVE_CLOSURE",
+      "blockingNames": [
+        "TemporaryInfrastructureException"
+      ],
+      "sameProductFiles": 8,
+      "importsFromBundle": [
+        "protocol"
+      ]
+    },
+    "WebDependencyReadiness": {
+      "module": "web",
+      "kind": "KNOWNS_HOLD_NAME_IN_CONSERVATIVE_CLOSURE",
+      "blockingNames": [
+        "WebStartupException"
+      ],
+      "sameProductFiles": 3,
+      "importsFromBundle": [
+        "protocol"
+      ]
+    },
+    "WebHttpServer": {
+      "module": "web",
+      "kind": "KNOWNS_HOLD_NAME_IN_CONSERVATIVE_CLOSURE",
+      "blockingNames": [
+        "WebStartupException"
+      ],
+      "sameProductFiles": 37,
+      "importsFromBundle": [
+        "protocol"
+      ]
+    }
+  },
+  "table": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45112-source-only-api-web-additional-candidate-graph/additional-candidates.tsv",
+    "sha256": "392f8cc97a8f20f1f51e91e6955de6ea89c584a576f745510f6d44c04276690d"
+  },
+  "currentBoundTyped": {
+    "api": 167,
+    "web": 187
+  },
+  "noCompilerAnalysisOrArtifactGeneration": true,
+  "productTrialCount": 0,
+  "thirdPartyAuxiliaryClosureSeparate": true,
+  "canonicalEvidenceNewPRsObserved": 0,
+  "authoritativeRecognitionUnchanged": true,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45112-current-api-web-reference-candidate-graph/begin.json",
+    "sha256": "63ab8a38089639345beaeca2c9de268f22c306872e5738ad101b117ab369a57d"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45112-current-api-web-reference-candidate-graph/terminal.json",
+    "sha256": "3ed11325d93ba0a39059fc5ca68012eec395f0797ee0ec500078380608f1cc11"
+  },
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "publicationFormatting": "Trailing empty last TSV field is explicitly marked NONE. Classification rows and counts are unchanged."
+}
