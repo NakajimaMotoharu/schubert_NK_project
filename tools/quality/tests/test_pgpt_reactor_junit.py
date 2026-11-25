@@ -495,6 +495,27 @@ class ReactorJunitTest(unittest.TestCase):
                     require_collection_inputs_unchanged(self.repo, reference, scope)
         self.assertEqual("qualified input\n", tracked.read_text())
 
+    def test_collection_requires_index_visibility_only_within_the_selected_inputs(self):
+        (self.repo / ".gitignore").write_text("target/\n")
+        tracked = self.repo / "src/original.txt"
+        outside = self.repo / "other.txt"
+        for path in (tracked, outside):
+            path.write_text("unchanged fixture\n")
+        self.git("add", ".gitignore", "src/original.txt", "other.txt")
+        recorded = self.commit_fixture("index visibility")
+        self.git("update-index", "--assume-unchanged", "other.txt")
+        require_collection_inputs_unchanged(self.repo, recorded, ("src",))
+
+        for flag in ("assume-unchanged", "skip-worktree"):
+            with self.subTest(flag=flag):
+                self.git("update-index", "--" + flag, "src/original.txt")
+                try:
+                    with self.assertRaisesRegex(ValueError, "index visibility"):
+                        require_collection_inputs_unchanged(self.repo, recorded, ("src",))
+                finally:
+                    self.git("update-index", "--no-" + flag, "src/original.txt")
+        require_collection_inputs_unchanged(self.repo, recorded, ("src",))
+
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()
         self.git("symbolic-ref", "HEAD", "refs/heads/dev-other")

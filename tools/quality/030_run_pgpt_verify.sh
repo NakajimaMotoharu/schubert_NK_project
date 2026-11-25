@@ -13,7 +13,10 @@ exec 9>"$git_dir/pgpt-verify.lock"
 flock -n 9
 require_clean_checkout() {
     state=$(git status --porcelain --untracked-files=normal) || return $?
-    test -z "$state"
+    test -z "$state" || return 1
+    visibility=$(git ls-files -v -- .mvn mvnw mvnw.cmd pom.xml src program/characterization tools/quality) || return $?
+    # Lowercase marks assume-unchanged and S marks skip-worktree.
+    printf '%s\n' "$visibility" | LC_ALL=C awk '/^[a-zS] / { hidden = 1 } END { exit hidden }'
 }
 require_recorded_checkout() {
     current_commit=$(git rev-parse HEAD) || return $?

@@ -95,6 +95,8 @@ class VerifyRunnerTest(unittest.TestCase):
             "    Path('capture-generated.txt').write_text('fixture input during capture')\n"
             "if (state / 'capture-change-branch').exists():\n"
             "    subprocess.run(['git', 'switch', '-qc', 'dev-during-capture'], check=True)\n"
+            "if (state / 'capture-restrict-index').exists():\n"
+            "    subprocess.run(['git', 'update-index', '--skip-worktree', 'mvnw'], check=True)\n"
         )
         self.git("init", "-q", "--initial-branch=dev-fixture")
         self.git("config", "user.name", "PGPT fixture")
@@ -130,6 +132,23 @@ class VerifyRunnerTest(unittest.TestCase):
         self.assertNotEqual(0, self.invoke().returncode)
         self.assertEqual([], list(self.records.iterdir()))
         self.assertFalse((self.state / "builds").exists())
+
+    def test_index_flags_on_selected_input_prevent_claim_and_build(self):
+        for flag, run in (("assume-unchanged", RUN_ID), ("skip-worktree", OTHER_RUN)):
+            with self.subTest(flag=flag):
+                self.git("update-index", "--" + flag, "mvnw")
+                try:
+                    self.assertEqual(1, self.invoke(run).returncode)
+                    self.assertFalse(self.marker("claim", run).exists())
+                    self.assertFalse((self.state / "builds").exists())
+                finally:
+                    self.git("update-index", "--no-" + flag, "mvnw")
+
+    def test_incomplete_index_visibility_after_capture_cannot_publish_success(self):
+        (self.state / "capture-restrict-index").touch()
+        self.assertEqual(1, self.invoke().returncode)
+        self.assertEqual("1", self.marker("exit").read_text().strip())
+        self.assertTrue((self.state / "collector").exists())
 
     def test_003_concurrent_duplicate_has_only_one_build_and_terminal(self):
         duplicate_path = self.root / "second checkout"
