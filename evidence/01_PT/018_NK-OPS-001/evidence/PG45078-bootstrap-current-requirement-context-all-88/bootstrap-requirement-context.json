@@ -1,0 +1,1499 @@
+{
+  "source": "a81de87f851416af8dc91bf25ec41765ae03a4fa",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalDesign": {
+    "111": {
+      "path": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e"
+    },
+    "141": {
+      "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0"
+    },
+    "151": {
+      "path": "documents/100_RD/150_非機能要件/151_性能・可用性要件.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "c33570a425c17f3ae3256925726254f7ff19179e5a5649b3043d778b4cfca26c"
+    },
+    "171": {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    "332": {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b"
+    },
+    "342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    },
+    "343": {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+    },
+    "352": {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f"
+    },
+    "354": {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    }
+  },
+  "rows": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "8d71e18708f728145f1abfeaab9d988afcd1cc0d",
+      "rd": [
+        "OPS-005",
+        "MON-001",
+        "SYS-004",
+        "SYS-005"
+      ],
+      "ss": [
+        "SS342"
+      ],
+      "context": "external nonsecret API service configuration",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": {
+      "owner": "WBS-P019-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "96f2808d631990ff4f07dbfac1b52b9700673882",
+      "rd": [
+        "DAT-002",
+        "DAT-003",
+        "OPS-009"
+      ],
+      "ss": [
+        "SS343"
+      ],
+      "context": "classifies unavailable or incompatible schema admission",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": {
+      "owner": "WBS-P004-05",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1f5551bedeabaebc8b99cb1bdb5d7f31e8d0f30a",
+      "rd": [
+        "DAT-001",
+        "OPS-009",
+        "MON-004"
+      ],
+      "ss": [
+        "SS332",
+        "SS352"
+      ],
+      "context": "SQL failure ownership and safe inspection",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": {
+      "owner": "WBS-P019-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "e6c7ffe8693cb17548c9ba4b5766c8db6086c30d",
+      "rd": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "actual JDBC version/ownership; Row has five explicit method bindings"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": {
+      "owner": "WBS-P018-05",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4e9cc21869210b76301a2c95ee00d877cb79094f",
+      "rd": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "same-source JDBC same-owner proofs and applicability boundary"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": {
+      "owner": "WBS-P018-05",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "0adb00672e5270d863aff178ce0c31477c550473",
+      "rd": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "same-source runtime datasource binding qualification"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4a3b49773e1d54e470141916f0f5231679273cb9",
+      "rd": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "approved owner runtime; no prior key inputs transferred"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialException.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "f0e62a5859e69c5bd3c0b779b6073a6b30d722e5",
+      "rd": [
+        "OPS-005",
+        "MON-004",
+        "DAT-003"
+      ],
+      "ss": [
+        "SS352"
+      ],
+      "context": "redacted Inspector credential rejection",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "803b74d69195f4eb92af756a4bf24df328bd8897",
+      "rd": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current approved credential path and ownership with protected operations"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialException.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4abf63ec4da96dd5bc88f4de8b49ef61be50a2b3",
+      "rd": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "ss": [
+        "SS352"
+      ],
+      "context": "redacted service credential rejection",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialReader.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "7fd158260e802ad71ffaeb6861b4dc8e089c7136",
+      "rd": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "ss": [
+        "SS352"
+      ],
+      "context": "external credential source boundary",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "728a8414d327a82ae4ca73bb5294ec1598d31570",
+      "rd": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current approved service credentials owner"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java": {
+      "owner": "WBS-P018-04",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1f96ee53cf4dc261ce6ee2874c30d23ec1000a4e",
+      "rd": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current ordinary resource lifecycle; local parts alone do not qualify whole type"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "669bb92d2977be908f16422c1287ee6e0cd4e6d5",
+      "rd": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current owned credential lifecycle; no key anywhere in public proof"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6a0a64575bbc3056a131f4eb6a6fc93ea1b6e523",
+      "rd": [
+        "OPS-005",
+        "MON-004",
+        "DAT-003"
+      ],
+      "ss": [
+        "SS352"
+      ],
+      "context": "separate Inspector credential access contract",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "ea96723cb8d91c59a88b46c46b674f3c69215019",
+      "rd": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current owned credential lifecycle; no key anywhere in public proof"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "07c53c615ac9f1ede4661426d742e01e273e1d54",
+      "rd": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "same-boot active child and exact parent evidence"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java": {
+      "owner": "WBS-P018-08",
+      "identityStatus": "SOURCE_HELD_METADATA_ONLY",
+      "sameSourceResult": null,
+      "rd": [
+        "SYS-011",
+        "SCM-005"
+      ],
+      "ss": [
+        "SS342",
+        "SS354"
+      ],
+      "context": "approved design checkpoint name only",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java": {
+      "owner": "WBS-P018-08",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4299e964e5f7fa578cf1bc3ff9d6d844cebf3bc6",
+      "rd": [
+        "SYS-011",
+        "SCM-005"
+      ],
+      "ss": [
+        "SS342",
+        "SS354"
+      ],
+      "context": "native quality acceptance profile context",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java": {
+      "owner": "WBS-P018-08",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "548985cdc949249bd90672832df9054ca5bf61c0",
+      "rd": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "native boot and raw stream owner"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java": {
+      "owner": "WBS-P018-08",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "15fbe7d4c6d1a6aa83f5c94be3404c9e20074b1a",
+      "rd": [
+        "SYS-011",
+        "SCM-005"
+      ],
+      "ss": [
+        "SS342",
+        "SS354"
+      ],
+      "context": "native quality terminal state context",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java": {
+      "owner": "WBS-P018-04",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "acac37316097ce832a8cdfc5b408624dfcd8b78b",
+      "rd": [
+        "OPS-001",
+        "OPS-009",
+        "AVL-007"
+      ],
+      "ss": [
+        "SS342"
+      ],
+      "context": "fixed service invocation configuration",
+      "basis": "canonical design context; no execution claimed"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java": {
+      "owner": "WBS-P018-04",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "7e8722a191aebb06fd8675407cdfb056936bb278",
+      "rd": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "authorized owner proof; no native runtime"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4583fcadd0935656a0bc66c8ba5fa50337293552",
+      "rd": [
+        "OPS-001",
+        "OPS-002",
+        "OPS-003",
+        "OPS-004",
+        "OPS-005",
+        "OPS-006",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1e898b066cc2f088731a672f87c157640e204dc2",
+      "rd": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current authorized maintenance owner and close"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java": {
+      "owner": "WBS-P018-08",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "68565193f03034493dc5c8bc2e88574462d3ad8d",
+      "rd": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current source file capability and native run owner"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java": {
+      "owner": "WBS-P018-02",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "b7bb1a7c47b0f394cdf6dad2dc58229b76eb3aeb",
+      "rd": [
+        "SCM-001",
+        "SCM-002",
+        "SCM-003",
+        "SCM-004",
+        "SCM-005"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": {
+      "owner": "WBS-P018-02",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6fe906fd4385ef61c969bc75e8abf25f6889e1d1",
+      "rd": [
+        "SCM-001",
+        "SCM-002",
+        "SCM-003",
+        "SCM-004",
+        "SCM-005"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": {
+      "owner": "WBS-P018-02",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "19e7833b01d03fb8303893110c64c3217c8506ee",
+      "rd": [
+        "OPS-009",
+        "SYS-011"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "fresh same-owner approved runtime read and terminal"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": {
+      "owner": "WBS-P018-02",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "9e2e7b87732b751af8c365ec9d85f87bcd0d322b",
+      "rd": [
+        "SCM-001",
+        "SCM-002",
+        "SCM-003",
+        "SCM-004",
+        "SCM-005"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "aa9b4ceb4a3fd76f9509fa9b3d8fa751dc593d6f",
+      "rd": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "current application start/stop associated ownership"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupProofFrame.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1d07cae0fa80879f38639476393895654b82e0de",
+      "rd": [
+        "OPS-001",
+        "OPS-002",
+        "OPS-003",
+        "OPS-004",
+        "OPS-005",
+        "OPS-006",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": {
+      "owner": "WBS-P018-02",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "84e43a017ed93841d58a7998d44e9892e134d39b",
+      "rd": [
+        "OPS-009",
+        "SYS-011"
+      ],
+      "basis": "PG45034 per-source context",
+      "requiredOwnerTerminal": "actual release/version/config-owned reads"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java": {
+      "owner": "WBS-P018-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "607357c4bd24a44e3466ecc6e44cdb62ec154009",
+      "rd": [
+        "OPS-001",
+        "OPS-002",
+        "OPS-003",
+        "OPS-004",
+        "OPS-005",
+        "OPS-006",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "41a07d307f128f0a6d0eee28b2a9fa17710c88c8",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "d6434a31bcb2ea8a365bdc558925432a84717738",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "44fd56a86551995306e6bc3066adb954dbc857d5",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "ab19eb709e4b3874b91b471a11b596322091415b",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "895c89ab6f5e3b37d53f091d12609a9e315e2ecd",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "9542ce3fce103d33b73bcf98d5bc7725ce18a708",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "860cd5d8bee98ce49cf5d20eed2f8463429480f4",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "293ff4468dd1b06e8073e5533fd6348e6647e918",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "95eda58acd170e85269b999290ddb164b6fcbfb5",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "53e056f4ac34fd726d5377aeead636e723bd880f",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "b97f5eb70612c36d3760062bead7483fd4ebf2ef",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "f5e05d39bc4cd582c2ba83820b5699c744510792",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "3fb7dde95407736a58a19d5dfdc4d76b1dde84d0",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "ea67983fc113d924ffbf6c3bf739f3d33f6d600e",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "bbd75c0dd57ba540d1fd8e4923db1ced7ad0c838",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "52cf50f865b7a575fcf0030f4e9043931d6a0ff8",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "27474d1fcfbfbaad65bf39258280728f7d527ce4",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "2d88c5b4245e6b8e137aa283d771a1cbfe12fe0f",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4875349e658002c4d978164f9b425770dca09e18",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1e5a5ec0fcea171b6de059c80a8004e83c7e5686",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "d23d54043a9ab265a7d88eeb84626959e966adcf",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6d224b234b9e42022f20bf0cb9daafb6000e5875",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4adaf454f524c9415120d5f1ddf6fc6547d7cc14",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "fba376b381c1efc900fda09910eeccc1240171be",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "776dbd85d2ad9750c378d19dd7f12ab78627fbc5",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "7680d6d8eb147fcad968298ae17028f0fa240cab",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "09a377204ff8d06c4e69d64d5698a3a823db3c31",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "991ddbd30300a0600d12e14adcb7338e8b5d11b3",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "29eb337cd721d850203e00be4867c5afb03efb0e",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6741d0f363257d75c68946c07e6de04b9c365c22",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4369f1b8207ede6fbecc1c4ba5411df4ff08ba34",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "e68623b31e1d467f7ed3704167e8af1dcbc770c5",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "50b4d81a6ac152764aa547b7b290978b3f2be049",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "eeb4ae022a347df8f2aa75a470b2a692a51c68ce",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "8ed6483742080fcd06566055b9b0035db284c06d",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "14ed8b808d8c397c9a0c598be99a0528ef6ca78f",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "c6d95fed9fdd1ceb86e1c2f64b23df4cb95c244f",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "f112881fbc7f757f488e225e01b52c91f1e7d37a",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "603c17f2f07a2cb999242c806bff69b16a9ce257",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "9a5e76fad0ae4ab9c61cc8cbc6071f2b5622aa4a",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "9a4d26f790380167164a90aa089a1023f3b54a76",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "f6336dd2eca7ec626be8a6fa0c8fb727529f7356",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6e5d040bfd403f13e656c04b9d72c8601e4eb006",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "4d41088cb995a265235deab9a720a085bc8273c3",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "24ab96cb9fbbc810e0d34659a8db3aa809f0e722",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "a88519a24cf1a7272626af9e89e60cf4e9176bc6",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "111eebe390780b3cfe7ccd21676d5fbd1c8ac1e3",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "7e26be9e3339cb4a175328cccdccbc2231a3214f",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1db50e9c41e1cf737a03eae1924c75c3dfe76eaf",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "1a6b78bca8efcf80b69e252ae8090664bccba582",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "08cc45d8a1eca7a0ab68336b019a4285ec4a5390",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "3d9eade3cef431c18876b7448c802bc09d9958b8",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java": {
+      "owner": "WBS-P019-03",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "6aeef3dc7ddb986a2aa258aeef377ff3c755ddfb",
+      "rd": [
+        "SCP-005",
+        "MIG-DAT-003",
+        "MIG-DAT-004",
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-004",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "basis": "original owner requirement context; per-method outcome separate"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": {
+      "owner": "WBS-P018-01",
+      "identityStatus": "SOURCE_TRACE_ONLY",
+      "sameSourceResult": null,
+      "gitBlob": "e5ce912b80415eef1f6ad0a54d0a04d14fc76a3d",
+      "rd": [
+        "OPS-005",
+        "SYS-005",
+        "PER-008"
+      ],
+      "ss": [
+        "SS342"
+      ],
+      "context": "external nonsecret Web service configuration",
+      "basis": "canonical design context; no execution claimed"
+    }
+  }
+}
