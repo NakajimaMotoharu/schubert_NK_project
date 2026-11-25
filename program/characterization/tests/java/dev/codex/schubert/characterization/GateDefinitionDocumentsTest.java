@@ -301,6 +301,40 @@ final class GateDefinitionDocumentsTest {
                 "SCHEMA_CASE_ITEM_TYPE"));
   }
 
+  /** PT-CHR-DEF-SCHEMA002 / BUG-3809. */
+  @Test
+  void fixedSchemaCannotAcceptAdditionalConstraints() throws Exception {
+    assertEquals(List.of(), validate(fixture()));
+    List<JsonNode> root = fixture();
+    object(root, SCHEMA).put("maxProperties", 1);
+    assertAll(
+        () -> assertEquals(List.of("SCHEMA_EXTRA_KEYWORD:root"), validate(root)),
+        () ->
+            rejectSchemaValue(
+                "/properties",
+                "unexpected",
+                JSON.createObjectNode(),
+                "SCHEMA_EXTRA_KEYWORD:properties"),
+        () ->
+            rejectSchemaValue(
+                "/properties/version",
+                "minimum",
+                JSON.getNodeFactory().numberNode(2),
+                "SCHEMA_EXTRA_KEYWORD:version"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases",
+                "enum",
+                JSON.createArrayNode().add(JSON.createArrayNode()),
+                "SCHEMA_EXTRA_KEYWORD:cases"),
+        () ->
+            rejectSchemaValue(
+                "/properties/cases/items",
+                "maxProperties",
+                JSON.getNodeFactory().numberNode(3),
+                "SCHEMA_EXTRA_KEYWORD:item"));
+  }
+
   private static void rejectSchemaValue(String pointer, String key, JsonNode value, String diagnostic)
       throws IOException {
     List<JsonNode> input = fixture();

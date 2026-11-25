@@ -231,6 +231,8 @@ final class GateContractValidator {
 
   private static void validateSchema(JsonNode schema, List<String> failures) {
     require(schema.isObject(), "SCHEMA_NOT_OBJECT", failures);
+    requireKnownSchemaKeys(
+        schema, Set.of("$schema", "title", "type", "required", "properties"), "root", failures);
     require(
         "https://json-schema.org/draft/2020-12/schema".equals(schema.path("$schema").asText()),
         "SCHEMA_DRAFT",
@@ -241,19 +243,33 @@ final class GateContractValidator {
         "SCHEMA_REQUIRED",
         failures);
     JsonNode properties = schema.path("properties");
+    requireKnownSchemaKeys(properties, Set.of(FIELD_VERSION, FIELD_CASES), "properties", failures);
+    JsonNode version = properties.path(FIELD_VERSION);
+    requireKnownSchemaKeys(version, Set.of("const"), "version", failures);
     require(
-        CorrelatedLogEvidenceValidator.versionOne(properties.path(FIELD_VERSION).path("const")),
+        CorrelatedLogEvidenceValidator.versionOne(version.path("const")),
         "SCHEMA_VERSION_CONST",
         failures);
     JsonNode cases = properties.path(FIELD_CASES);
+    requireKnownSchemaKeys(cases, Set.of("type", "minItems", "maxItems", "items"), "cases", failures);
     require("array".equals(cases.path("type").textValue()), "SCHEMA_CASES_TYPE", failures);
     require(integerEquals(cases.path("minItems"), 24), "SCHEMA_MIN_ITEMS", failures);
     require(integerEquals(cases.path("maxItems"), 24), "SCHEMA_MAX_ITEMS", failures);
     JsonNode item = cases.path("items");
+    requireKnownSchemaKeys(item, Set.of("type", "required"), "item", failures);
     require("object".equals(item.path("type").textValue()), "SCHEMA_CASE_ITEM_TYPE", failures);
     require(
         strings(item.path("required")).equals(List.of("id", "group", FIELD_CURRENT, "nk")),
         "SCHEMA_CASE_REQUIRED",
+        failures);
+  }
+
+  // SS355: this validator checks the fixed case schema, including the rules it can interpret.
+  private static void requireKnownSchemaKeys(
+      JsonNode node, Set<String> allowed, String location, List<String> failures) {
+    require(
+        node.properties().stream().allMatch(entry -> allowed.contains(entry.getKey())),
+        "SCHEMA_EXTRA_KEYWORD:" + location,
         failures);
   }
 
