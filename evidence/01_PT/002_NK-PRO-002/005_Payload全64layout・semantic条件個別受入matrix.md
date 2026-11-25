@@ -28,3 +28,9 @@ contract＝全64layout/14record/31error・上表の全八semantic method・個�
 codec/validatorはimmutable/local copyだけでDB/transaction/所有資源を持たず、業務再送の重複更新・JMS consumer所有は非該当。Java内部null参照はfactory/constructorで即時拒否、受信null wireは恒久protocol拒否、明示任意だけUnset/Optionalを許可。NPE catch正常化0。停止/解放が必要な実資源をここで仮合格にはしない。
 
 終了依存=P001-01/P001-02の同a9受入。全体/同native資格が真正終端するまでBUG1285/1288/YKT1051/1054/P001-03/P002-02は未完。全criteria・依存・hash・sourceを既strict auditの前/候補/後で照合してから認定する。正式1964/53・工数null・QA051final保留・全体残counter及びIT/ST未完は不変更。
+
+## P03/P05の元入力独立性（BUG-3854、YKT-1557）
+
+`PayloadCodecTest#decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers` の正常対照を、UI232 §5.1、UI234 §3.1／3.2、UI235 §4.2で結合する。対象はLGNREQ01の384バイトと予約offset365、LGNRSP01の432バイト中のX offset0とN offset167、ANMRSP01の16バイト中のB offset6。ここでoffsetは0起点。Xと予約のspace、NのASCII 0、Bのspaceを独立に設定する。
+
+元の有効入力を先にdecodeし、対象の値またはlayoutを検証する。その後、元の1バイトだけを置換して各 `PermanentProtocolException` を確認する。期待元は公開設計と規定文字、製品encodeは比較元へ使わない。QA-054のWLGEVTは汎用とnamedの別契約があるため、既試験の「汎用decoderが値を保持する」を維持する。個別終了・正規Protocolの照合・scope coverageはPG45370に対応する。

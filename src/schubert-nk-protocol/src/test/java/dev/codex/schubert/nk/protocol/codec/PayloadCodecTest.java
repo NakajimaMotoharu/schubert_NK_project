@@ -375,26 +375,22 @@ class PayloadCodecTest {
                 List.of(new byte[271]),
                 false));
 
-    byte[] login =
-        codec
-            .encode(
-                new PayloadValues(
-                    new LayoutId(LOGIN_REQUEST),
-                    new FieldValueSet(
-                        Map.of(
-                            USERNAME_FIELD,
-                            new FieldValue.Text("user"),
-                            "Password",
-                            new FieldValue.Text("p"),
-                            "Client address",
-                            new FieldValue.Text(LOOPBACK_ADDRESS))),
-                    List.of()),
-                false)
-            .copyData();
+    var loginId = new LayoutId(LOGIN_REQUEST);
+    // UI234 §3.1: fixed 384 bytes with X64, X256, X45, and reserved X19.
+    var username = "user";
+    byte[] login = new byte[384];
+    Arrays.fill(login, (byte) ' ');
+    byte[] usernameBytes = username.getBytes(StandardCharsets.US_ASCII);
+    System.arraycopy(usernameBytes, 0, login, 0, usernameBytes.length);
+    login[64] = 'p';
+    byte[] addressBytes = LOOPBACK_ADDRESS.getBytes(StandardCharsets.US_ASCII);
+    System.arraycopy(addressBytes, 0, login, 320, addressBytes.length);
+    assertEquals(
+        new FieldValue.Text(username),
+        codec.decode(loginId, login, List.of(), false).data().getOrUnset(USERNAME_FIELD));
     login[365] = 'X';
     assertThrows(
-        PermanentProtocolException.class,
-        () -> codec.decode(new LayoutId(LOGIN_REQUEST), login, List.of(), false));
+        PermanentProtocolException.class, () -> codec.decode(loginId, login, List.of(), false));
 
     LayoutFields event = LayoutFieldCatalog.standard().require("WLGEVT01");
     byte[] eventData =
@@ -408,9 +404,14 @@ class PayloadCodecTest {
         new FieldValue.Text("XEQUEST"),
         codec.decode(event.id(), eventData, List.of(), false).data().getOrUnset("Log type"));
 
-    assertBadErrorFiller(codec, "LGNRSP01", 0, (byte) 'A');
-    assertBadErrorFiller(codec, "LGNRSP01", 167, (byte) '1');
-    assertBadErrorFiller(codec, "ANMRSP01", 6, (byte) '0');
+    // UI232 §5.1, UI234 §3.2 and UI235 §4.2 define these error fillers.
+    byte[] loginFailure = new byte[432];
+    Arrays.fill(loginFailure, (byte) ' ');
+    Arrays.fill(loginFailure, 167, 176, (byte) '0');
+    byte[] animationFailure = "000000 000      ".getBytes(StandardCharsets.US_ASCII);
+    assertBadErrorFiller(codec, "LGNRSP01", loginFailure, 0, (byte) 'A');
+    assertBadErrorFiller(codec, "LGNRSP01", loginFailure, 167, (byte) '1');
+    assertBadErrorFiller(codec, "ANMRSP01", animationFailure, 6, (byte) '0');
   }
 
   @Test
@@ -508,10 +509,10 @@ class PayloadCodecTest {
   }
 
   private static void assertBadErrorFiller(
-      PayloadCodec codec, String layoutId, int offset, byte badValue) {
+      PayloadCodec codec, String layoutId, byte[] golden, int offset, byte badValue) {
     LayoutId id = new LayoutId(layoutId);
-    byte[] data =
-        codec.encode(new PayloadValues(id, FieldValueSet.empty(), List.of()), true).copyData();
+    assertEquals(id, codec.decode(id, golden, List.of(), true).layoutId());
+    byte[] data = golden.clone();
     data[offset] = badValue;
     assertThrows(PermanentProtocolException.class, () -> codec.decode(id, data, List.of(), true));
   }
