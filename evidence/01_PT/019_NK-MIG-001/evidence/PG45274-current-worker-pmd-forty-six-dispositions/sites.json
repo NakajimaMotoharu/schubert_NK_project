@@ -1,0 +1,718 @@
+[
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 310,
+    "column": 14,
+    "rule": "CloseResource",
+    "sourceLine": "for (var sink : output) assertEquals(0, sink.size());",
+    "oldLineIfIdenticalStatement": 308,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45242-current-assembly-twenty-four/pmd.xml",
+        "sha256": "ebd6f13e11c3a49385ea33fa131a683705617639f3946f582c762fda6e5855f3"
+      },
+      "priorSource": "2a52161650f0acbe8f8860587819c5c647dbc442",
+      "formerBasis": "純粋なin-memory ByteArrayOutputStream。外部FD・接続・ファイルを所有しない。出力0 byteを全6本で確認。"
+    },
+    "technicalBasis": "合成ByteArrayOutputStreamの全出力0を確認する。外部資源を保有しない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 316,
+    "column": 33,
+    "rule": "NullAssignment",
+    "sourceLine": "f.tables.get(2).get(0)[9] = null;",
+    "oldLineIfIdenticalStatement": 314,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45242-current-assembly-twenty-four/pmd.xml",
+        "sha256": "ebd6f13e11c3a49385ea33fa131a683705617639f3946f582c762fda6e5855f3"
+      },
+      "priorSource": "2a52161650f0acbe8f8860587819c5c647dbc442",
+      "formerBasis": "合成のCurrent投影の既存列にSQL NULLを明示してターゲットへ補完しないことを検査する。NULLを空文字に替えると入力意図を失う。"
+    },
+    "technicalBasis": "fixtureのSQL NULL・欠損値を独立入力として明示する。空文字や実データへ置換すると条件が変わる。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 668,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 794,
+    "column": 10,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "(ExecutorService)",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "合成ExecutorServiceを代理で作成し、実workerの起動なしに終了falseを作る。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 796,
+    "column": 17,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ExecutorService.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 796,
+    "column": 17,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "ExecutorService.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "合成ExecutorServiceを代理で作成し、実workerの起動なしに終了falseを作る。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "line": 797,
+    "column": 33,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new Class<?>[] {ExecutorService.class},",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "合成ExecutorServiceを代理で作成し、実workerの起動なしに終了falseを作る。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 299,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 373,
+    "column": 35,
+    "rule": "UseConcurrentHashMap",
+    "sourceLine": "final Map<Integer, Throwable> resultFailures = new HashMap<>();",
+    "oldLineIfIdenticalStatement": 374,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/pmd.xml",
+        "sha256": "60a0d18599ed58489f1bccd21eb8655213ea506aee5da69a20381721ee7df8a7"
+      },
+      "priorSource": "8161b6a724611b9264c66a2a647467f8227dcbf1",
+      "formerBasis": "per-instance fake tables/failures in one fixture owner; concurrent tests allocate a fresh fixture per task"
+    },
+    "technicalBasis": "各fixtureインスタンス専用の入力または失敗表であり、並列workerごとに別fixtureを生成する。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 374,
+    "column": 35,
+    "rule": "UseConcurrentHashMap",
+    "sourceLine": "final Map<Integer, Throwable> statementFailures = new HashMap<>();",
+    "oldLineIfIdenticalStatement": 375,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/pmd.xml",
+        "sha256": "60a0d18599ed58489f1bccd21eb8655213ea506aee5da69a20381721ee7df8a7"
+      },
+      "priorSource": "8161b6a724611b9264c66a2a647467f8227dcbf1",
+      "formerBasis": "per-instance fake tables/failures in one fixture owner; concurrent tests allocate a fresh fixture per task"
+    },
+    "technicalBasis": "各fixtureインスタンス専用の入力または失敗表であり、並列workerごとに別fixtureを生成する。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 397,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "Connection.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 398,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/pmd.xml",
+        "sha256": "60a0d18599ed58489f1bccd21eb8655213ea506aee5da69a20381721ee7df8a7"
+      },
+      "priorSource": "8161b6a724611b9264c66a2a647467f8227dcbf1",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 428,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "Statement.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 429,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/pmd.xml",
+        "sha256": "60a0d18599ed58489f1bccd21eb8655213ea506aee5da69a20381721ee7df8a7"
+      },
+      "priorSource": "8161b6a724611b9264c66a2a647467f8227dcbf1",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "line": 462,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ResultSet.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 463,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/pmd.xml",
+        "sha256": "60a0d18599ed58489f1bccd21eb8655213ea506aee5da69a20381721ee7df8a7"
+      },
+      "priorSource": "8161b6a724611b9264c66a2a647467f8227dcbf1",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 65,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var connection = target.connection();",
+    "oldLineIfIdenticalStatement": 65,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/pmd.xml",
+        "sha256": "57c465f445835b97adf49516f1ab4904189eb4ee2e58dd71d56a4c15fddc6b9e"
+      },
+      "priorSource": "6ec9cc668728781ddeeb87dd9edaf824e5a90a6c",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 133,
+    "column": 11,
+    "rule": "CloseResource",
+    "sourceLine": "var s = source.connection();",
+    "oldLineIfIdenticalStatement": 133,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/pmd.xml",
+        "sha256": "57c465f445835b97adf49516f1ab4904189eb4ee2e58dd71d56a4c15fddc6b9e"
+      },
+      "priorSource": "6ec9cc668728781ddeeb87dd9edaf824e5a90a6c",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 134,
+    "column": 11,
+    "rule": "CloseResource",
+    "sourceLine": "var t = target.connection();",
+    "oldLineIfIdenticalStatement": 134,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/pmd.xml",
+        "sha256": "57c465f445835b97adf49516f1ab4904189eb4ee2e58dd71d56a4c15fddc6b9e"
+      },
+      "priorSource": "6ec9cc668728781ddeeb87dd9edaf824e5a90a6c",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 162,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var c = source.connection();",
+    "oldLineIfIdenticalStatement": 162,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/pmd.xml",
+        "sha256": "57c465f445835b97adf49516f1ab4904189eb4ee2e58dd71d56a4c15fddc6b9e"
+      },
+      "priorSource": "6ec9cc668728781ddeeb87dd9edaf824e5a90a6c",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 451,
+    "column": 17,
+    "rule": "EqualsNull",
+    "sourceLine": "assertFalse(one.equals(null));",
+    "oldLineIfIdenticalStatement": 451,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/pmd.xml",
+        "sha256": "57c465f445835b97adf49516f1ab4904189eb4ee2e58dd71d56a4c15fddc6b9e"
+      },
+      "priorSource": "6ec9cc668728781ddeeb87dd9edaf824e5a90a6c",
+      "formerBasis": "explicit negative equality contract on returned in-memory value"
+    },
+    "technicalBasis": "equals(null)がfalseとなる境界を明示入力で検査する。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+    "line": 496,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "line": 7,
+    "column": 32,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "record MigrationFixtureWorkers(ExecutorService executor, long terminationSeconds)",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "テストが有限poolを所有し、cancelと期限付き待機を実施し、割込みを維持する。失敗時の一次診断保持は独立ASSEMBLY025。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "line": 11,
+    "column": 5,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "executor.shutdownNow();",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "テストが有限poolを所有し、cancelと期限付き待機を実施し、割込みを維持する。失敗時の一次診断保持は独立ASSEMBLY025。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "line": 13,
+    "column": 12,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "if (!executor.awaitTermination(terminationSeconds, TimeUnit.SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "テストが有限poolを所有し、cancelと期限付き待機を実施し、割込みを維持する。失敗時の一次診断保持は独立ASSEMBLY025。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "line": 17,
+    "column": 7,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "Thread.currentThread().interrupt();",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "テストが有限poolを所有し、cancelと期限付き待機を実施し、割込みを維持する。失敗時の一次診断保持は独立ASSEMBLY025。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+    "line": 55,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var target = f.connection();",
+    "oldLineIfIdenticalStatement": 55,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45214-current-coordinator-verifier-forty/pmd.xml",
+        "sha256": "c18774ac6a87c8d123d1002ff04bd1610a19287a4aa7d2a38126d923e1b02001"
+      },
+      "priorSource": "4d34081bb6b2f4156cea2a71139f72774f80cb40",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+    "line": 92,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var target = f.connection();",
+    "oldLineIfIdenticalStatement": 92,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45214-current-coordinator-verifier-forty/pmd.xml",
+        "sha256": "c18774ac6a87c8d123d1002ff04bd1610a19287a4aa7d2a38126d923e1b02001"
+      },
+      "priorSource": "4d34081bb6b2f4156cea2a71139f72774f80cb40",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+    "line": 117,
+    "column": 11,
+    "rule": "CloseResource",
+    "sourceLine": "var target = f.connection();",
+    "oldLineIfIdenticalStatement": 117,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45214-current-coordinator-verifier-forty/pmd.xml",
+        "sha256": "c18774ac6a87c8d123d1002ff04bd1610a19287a4aa7d2a38126d923e1b02001"
+      },
+      "priorSource": "4d34081bb6b2f4156cea2a71139f72774f80cb40",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+    "line": 357,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifierTest.java",
+    "line": 297,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 457,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var conn = f.connection();",
+    "oldLineIfIdenticalStatement": 457,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 658,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 790,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 948,
+    "column": 37,
+    "rule": "DoNotUseThreads",
+    "sourceLine": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+    "oldLineIfIdenticalStatement": null,
+    "oldReport": null,
+    "technicalBasis": "並列独立期待値の通常PTだけが有限poolを所有し、try-with-resourcesで解放。既存の待機・件数・比較値を維持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1108,
+    "column": 24,
+    "rule": "CompareObjectsWithEquals",
+    "sourceLine": "assertEquals(secondary == primary ? 0 : 1, primary.getSuppressed().length);",
+    "oldLineIfIdenticalStatement": 1111,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "literal reference identity decides self-suppression and exact distinct original exception, not value equality"
+    },
+    "technicalBasis": "一次と二次が同一オブジェクトのとき自己抑制を避ける法則。オブジェクト同一性と抑制順が独立oracle。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1109,
+    "column": 15,
+    "rule": "CompareObjectsWithEquals",
+    "sourceLine": "if (secondary != primary) assertSame(secondary, primary.getSuppressed()[0]);",
+    "oldLineIfIdenticalStatement": 1112,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "literal reference identity decides self-suppression and exact distinct original exception, not value equality"
+    },
+    "technicalBasis": "一次と二次が同一オブジェクトのとき自己抑制を避ける法則。オブジェクト同一性と抑制順が独立oracle。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1247,
+    "column": 9,
+    "rule": "CloseResource",
+    "sourceLine": "var connection = f.connection();",
+    "oldLineIfIdenticalStatement": 1250,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "test-local JDK Connection proxy intentionally borrowed; tests guard caller closure and assert separately acquired resources"
+    },
+    "technicalBasis": "このfixtureが返すJDK代理を渡し、独立期待値で借用と終了責務を検証する。実JDBC接続を開かない。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1307,
+    "column": 48,
+    "rule": "UseConcurrentHashMap",
+    "sourceLine": "final Map<Integer, List<@Nullable String>> transferContent = new HashMap<>();",
+    "oldLineIfIdenticalStatement": 1310,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "per-instance fake tables/failures in one fixture owner; concurrent tests allocate a fresh fixture per task"
+    },
+    "technicalBasis": "各fixtureインスタンス専用の入力または失敗表であり、並列workerごとに別fixtureを生成する。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1380,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "Connection.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1383,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1409,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "Statement.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1412,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1474,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "PreparedStatement.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1477,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1509,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ResultSet.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1512,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1541,
+    "column": 31,
+    "rule": "NullAssignment",
+    "sourceLine": "? null",
+    "oldLineIfIdenticalStatement": 1544,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "deliberately absent JDK proxy result to exercise JDBC required predecessor and owned subset"
+    },
+    "technicalBasis": "fixtureのSQL NULL・欠損値を独立入力として明示する。空文字や実データへ置換すると条件が変わる。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1563,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ResultSet.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1566,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1600,
+    "column": 31,
+    "rule": "NullAssignment",
+    "sourceLine": "? null",
+    "oldLineIfIdenticalStatement": 1603,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "deliberately absent JDK proxy result to exercise JDBC required predecessor and owned subset"
+    },
+    "technicalBasis": "fixtureのSQL NULL・欠損値を独立入力として明示する。空文字や実データへ置換すると条件が変わる。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1622,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ResultSet.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1625,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1653,
+    "column": 31,
+    "rule": "NullAssignment",
+    "sourceLine": "? null",
+    "oldLineIfIdenticalStatement": 1656,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "deliberately absent JDK proxy result to exercise JDBC required predecessor and owned subset"
+    },
+    "technicalBasis": "fixtureのSQL NULL・欠損値を独立入力として明示する。空文字や実データへ置換すると条件が変わる。",
+    "ownerDisposition": null
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+    "line": 1674,
+    "column": 15,
+    "rule": "UseProperClassLoader",
+    "sourceLine": "ResultSet.class.getClassLoader(),",
+    "oldLineIfIdenticalStatement": 1677,
+    "oldReport": {
+      "report": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/pmd.xml",
+        "sha256": "151831e5676c709edbc08e35dc0d580590892c4bc4cd2547a051221d72b7e946"
+      },
+      "priorSource": "b7fa2f82d98baac34ad99a64de9b5b487b7b1038",
+      "formerBasis": "proxy must be visible to its declared JDK JDBC interface using that interface loader"
+    },
+    "technicalBasis": "代理interfaceそのもののloaderを明示。試験用JDK interfaceと同じ型identityを保持。",
+    "ownerDisposition": null
+  }
+]
