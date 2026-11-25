@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
@@ -413,7 +415,8 @@ final class ReceiptReferencePortTest {
   }
 
   @Test
-  void concurrentIndependentReadsNeverShareConnectionsStatementsOrResults() throws Exception {
+  void concurrentIndependentReadsNeverShareConnectionsStatementsOrResults()
+      throws InterruptedException, ExecutionException, TimeoutException {
     Fixture fixture = new Fixture();
     var repository = new ReceiptReferenceRepository(fixture.source());
     var workers = Executors.newFixedThreadPool(2);
@@ -488,9 +491,16 @@ final class ReceiptReferencePortTest {
     String missing = "none";
     int changed = 1;
 
-    void fault(String point) throws Throwable {
-      Throwable failure = faults.get(point);
-      if (failure != null) throw failure;
+    void fault(String point) throws SQLException {
+      switch (faults.get(point)) {
+        case null -> {}
+        case SQLException sql -> throw sql;
+        case IllegalStateException state -> throw state;
+        case NullPointerException missing -> throw missing;
+        case NoSuppression disabled -> throw disabled;
+        case AssertionError fatal -> throw fatal;
+        default -> throw new AssertionError("Unexpected receipt fixture failure");
+      }
     }
 
     DataSource source() {
@@ -566,7 +576,7 @@ final class ReceiptReferencePortTest {
               });
     }
 
-    void event(String point) throws Throwable {
+    void event(String point) throws SQLException {
       if (!point.equals("prepare")) events.add(point);
       fixture.fault(point);
     }
