@@ -378,7 +378,7 @@ final class ExpiryAuditPortTest {
 
   @Test
   void retainedSuccessUsesDefaultOrExplicitSameDayOriginalOnlyAndClosesBeforeReturn()
-      throws Exception {
+      throws IOException {
     Fixture fixture = new Fixture();
     fixture.terminal();
     var guard = new GuardPort();
@@ -679,9 +679,13 @@ final class ExpiryAuditPortTest {
       snapshot.put(ENDED, END_AT.atOffset(ZoneOffset.UTC));
     }
 
-    void fault(String route, String point) throws Throwable {
+    void fault(String route, String point) throws SQLException {
       Throwable failure = faults.get(route + "." + point);
-      if (failure != null) throw failure;
+      if (failure == null) return;
+      if (failure instanceof SQLException sql) throw sql;
+      if (failure instanceof IllegalStateException runtime) throw runtime;
+      if (failure instanceof AssertionError fatal) throw fatal;
+      throw new AssertionError("unexpected fixture fault type", failure);
     }
 
     ExpiryAuditRepository repository() {

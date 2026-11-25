@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -42,7 +43,7 @@ final class ExpiryAuditJdbcFailureGraphTest {
       this.sqlPrefix = sqlPrefix;
     }
 
-    void invoke(ExpiryAuditRepository repository) throws Exception {
+    void invoke(ExpiryAuditRepository repository) throws IOException {
       switch (this) {
         case SUCCESSFUL -> repository.successful(RUN, STARTED, () -> 5_000_000_000L);
         case STAGE -> repository.stage(ATTEMPT, 3, 2, 200);
