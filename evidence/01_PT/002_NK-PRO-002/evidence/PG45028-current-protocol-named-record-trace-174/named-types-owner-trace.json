@@ -1,0 +1,2010 @@
+{
+  "source": "38203c355a8a5dd46b8cff4795b43aa7d4f79fd3",
+  "authority": {
+    "RD131": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS323": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  },
+  "program": "NK-PRO-001",
+  "owner": "WBS-P001-03",
+  "layoutFixture": {
+    "path": "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv",
+    "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+  },
+  "currentRelatedTests": {
+    "PT-PRO-001-T01": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+        "sha256": "55e136267272b66ccebb90ebf5cf5a299b725fcba251723cca1cc470a68d091c"
+      },
+      "clause": "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+        "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+      }
+    },
+    "PT-PRO-001-T02": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+        "sha256": "55e136267272b66ccebb90ebf5cf5a299b725fcba251723cca1cc470a68d091c"
+      },
+      "clause": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+        "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+      }
+    },
+    "PT-PRO-001-T03": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+        "sha256": "55e136267272b66ccebb90ebf5cf5a299b725fcba251723cca1cc470a68d091c"
+      },
+      "clause": "typedModelsAndHelpersRejectNullMissingAndWrongKinds",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+        "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+      }
+    },
+    "PT-PRO-002-M02": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "clause": "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+      }
+    },
+    "PT-PRO-001-RANGE18-001": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "clause": "zeroAndMaximumAreAcceptedAtEverySupportedWidth",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a"
+      }
+    },
+    "PT-PRO-001-RANGE18-002": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "clause": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a"
+      }
+    },
+    "PT-PRO-002-NPAGE001": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+        "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+      },
+      "clause": "fiftyRecordsFillTheFirstPageAndTheNextStartsAtFiftyOne",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+        "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+      }
+    },
+    "PT-PRO-002-NPAGE002": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+        "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+      },
+      "clause": "largestSixDigitPageUsesTheNotificationBound",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+        "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+      }
+    },
+    "PT-PRO-002-NPAGE003": {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+        "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+      },
+      "clause": "rejectsSearchPageSizeAndNotificationOffsetOrRecordMismatch",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+        "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+      }
+    }
+  },
+  "namedTypesAndHelpers": {
+    "FixedPayload": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-014",
+        "MQ-030"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/FixedPayload"
+      ],
+      "testIds": [
+        "PT-PRO-002-M02",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java",
+        "sha256": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f"
+      }
+    },
+    "PayloadData": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-016"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadData.java",
+        "sha256": "416ad3f4e119c5c7b637510f8f035793390ad7f8d0dd0b7ba7da7411b60bfb0d"
+      }
+    },
+    "PayloadRecord": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-014",
+        "MQ-038"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadRecord.java",
+        "sha256": "72789edba52cf9c59c6c9b2bbb2b382a409e390c7be24c6c4219087da9b40e81"
+      }
+    },
+    "PayloadValues": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-017",
+        "MQ-024"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadValues"
+      ],
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-001-T03"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadValues.java",
+        "sha256": "c761ed2b16ebf55916abd1b91958c094d6fd31b491c9aea6662edee27a799e5d"
+      }
+    },
+    "TypedFieldValues": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-017",
+        "MQ-024",
+        "MQ-027"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/TypedFieldValues"
+      ],
+      "testIds": [
+        "PT-PRO-001-T03",
+        "PT-PRO-001-RANGE18-001",
+        "PT-PRO-001-RANGE18-002"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "sha256": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11"
+      }
+    },
+    "TypedPayloadValues": {
+      "association": "COMMON_TYPE_HELPER",
+      "requirements": [
+        "MQ-016",
+        "MQ-017"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues"
+      ],
+      "testIds": [
+        "PT-PRO-001-T02",
+        "PT-PRO-001-T03"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.java",
+        "sha256": "5db4c6b32786b0803334a4c8f7949bf4be0b6936a71c94658f6cef78e970286b"
+      }
+    },
+    "PasswordResetRequestData": {
+      "association": [
+        {
+          "layout": "UPWREQ01",
+          "role": "data",
+          "ui233Line": 77,
+          "ss323Line": 92,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java",
+        "sha256": "07b1b58d8ccd0cff7c1fd5a836abfd0b5cdf36b7906b6b31e1f1c41de1a91abe"
+      }
+    },
+    "UserCreateRequestData": {
+      "association": [
+        {
+          "layout": "UCRREQ01",
+          "role": "data",
+          "ui233Line": 69,
+          "ss323Line": 84,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java",
+        "sha256": "975f2cf129e380283678c4d99122c8613e21622b31725ac88494f7da0de10883"
+      }
+    },
+    "UserDetailRequestData": {
+      "association": [
+        {
+          "layout": "UDTREQ01",
+          "role": "data",
+          "ui233Line": 71,
+          "ss323Line": 86,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.java",
+        "sha256": "b3a30f36f4121ac716b0a68d729574c32dc8a09d2d63422b51736c52f6da95b3"
+      }
+    },
+    "UserDetailResponseData": {
+      "association": [
+        {
+          "layout": "UDTRSP01",
+          "role": "data",
+          "ui233Line": 72,
+          "ss323Line": 87,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData.java",
+        "sha256": "38f7177993c2eba0e5fce69a85d55ec420a25b9d6cb1900bbaa4ea49121607cf"
+      }
+    },
+    "UserMutationResponseData": {
+      "association": [
+        {
+          "layout": "UCRRSP01",
+          "role": "data",
+          "ui233Line": 70,
+          "ss323Line": 85,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "USTRSP01",
+          "role": "data",
+          "ui233Line": 74,
+          "ss323Line": 89,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "URLRSP01",
+          "role": "data",
+          "ui233Line": 76,
+          "ss323Line": 91,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "UPWRSP01",
+          "role": "data",
+          "ui233Line": 78,
+          "ss323Line": 93,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "ULKRSP01",
+          "role": "data",
+          "ui233Line": 80,
+          "ss323Line": 95,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java",
+        "sha256": "5bf98b1c3f7c67fc33e331c122b64672eb216b2398208107ca225131e870629b"
+      }
+    },
+    "UserRecord": {
+      "association": [
+        {
+          "layout": "USRRSP01",
+          "role": "record",
+          "ui233Line": 68,
+          "ss323Line": 83,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRecord.java",
+        "sha256": "5c74402ddfb935a3a7f59af52fa6758859c43d67ceedb6f0e082ad7548ba392a"
+      }
+    },
+    "UserRoleRequestData": {
+      "association": [
+        {
+          "layout": "URLREQ01",
+          "role": "data",
+          "ui233Line": 75,
+          "ss323Line": 90,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.java",
+        "sha256": "099883bf78de39ddf48b0467c0f20b8b1e052cc89c2f1e4efd6be682bbe481ed"
+      }
+    },
+    "UserSearchRequestData": {
+      "association": [
+        {
+          "layout": "USRREQ01",
+          "role": "data",
+          "ui233Line": 67,
+          "ss323Line": 82,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.java",
+        "sha256": "58ff4b6dbd140e907ed8d9dd7d9f5225be0972ef6d9fb506a97ffb9c8e11ec7a"
+      }
+    },
+    "UserStatusRequestData": {
+      "association": [
+        {
+          "layout": "USTREQ01",
+          "role": "data",
+          "ui233Line": 73,
+          "ss323Line": 88,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.java",
+        "sha256": "33b3117a8f54b441c63f676f2c3bc789ad7e82be7d841dbf11cd0425b219f6e8"
+      }
+    },
+    "UserUnlockRequestData": {
+      "association": [
+        {
+          "layout": "ULKREQ01",
+          "role": "data",
+          "ui233Line": 79,
+          "ss323Line": 94,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.java",
+        "sha256": "1b1a8ca063746c14149c53c7121b1d2a8c31619fade43c41bb1780d671cdcec9"
+      }
+    },
+    "LoginRequestData": {
+      "association": [
+        {
+          "layout": "LGNREQ01",
+          "role": "data",
+          "ui233Line": 21,
+          "ss323Line": 38,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java",
+        "sha256": "26a303d816443d7375731a897b323087f7eb04e60940b821df5a4e10783c160f"
+      }
+    },
+    "LoginResponseData": {
+      "association": [
+        {
+          "layout": "LGNRSP01",
+          "role": "data",
+          "ui233Line": 22,
+          "ss323Line": 39,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.java",
+        "sha256": "73516a6bb1892756bd5bb857f7404b1631af5e8b865234176a99ea9c0def2860"
+      }
+    },
+    "LogoutRequestData": {
+      "association": [
+        {
+          "layout": "LOGREQ01",
+          "role": "data",
+          "ui233Line": 23,
+          "ss323Line": 40,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.java",
+        "sha256": "40d4674e04d918235ab5509f79d07a6706b56cce5aa98382103e6a0aacea2c38"
+      }
+    },
+    "LogoutResponseData": {
+      "association": [
+        {
+          "layout": "LOGRSP01",
+          "role": "data",
+          "ui233Line": 24,
+          "ss323Line": 41,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData.java",
+        "sha256": "dfeaeeba960ca5b198f8cba945ea979a218b2d991b56852ec516b05b8c3ee846"
+      }
+    },
+    "PagedResponseData": {
+      "association": [
+        {
+          "layout": "SRCRSP01",
+          "role": "data",
+          "ui233Line": 30,
+          "ss323Line": 47,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "LGSRSP01",
+          "role": "data",
+          "ui233Line": 61,
+          "ss323Line": 76,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "USRRSP01",
+          "role": "data",
+          "ui233Line": 68,
+          "ss323Line": 83,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "NTSRSP01",
+          "role": "data",
+          "ui233Line": 89,
+          "ss323Line": 104,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        },
+        {
+          "layout": "QSSRSP01",
+          "role": "data",
+          "ui233Line": 95,
+          "ss323Line": 110,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02",
+        "PT-PRO-002-NPAGE001",
+        "PT-PRO-002-NPAGE002",
+        "PT-PRO-002-NPAGE003"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.java",
+        "sha256": "54c61eaac197e54d18a76d5c7f129d3b88f494e2022cc764155200ac44e70591"
+      }
+    },
+    "LogRecord": {
+      "association": [
+        {
+          "layout": "LGSRSP01",
+          "role": "record",
+          "ui233Line": 61,
+          "ss323Line": 76,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/log/LogRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogRecord.java",
+        "sha256": "c92c10612d4380661f4a82ee2d9f72ffd60407bb48cd934055520e1e3092603a"
+      }
+    },
+    "LogSearchRequestData": {
+      "association": [
+        {
+          "layout": "LGSREQ01",
+          "role": "data",
+          "ui233Line": 60,
+          "ss323Line": 75,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java",
+        "sha256": "5f78131cdb62aa454eb68ac962d1e58cf542947c45f94753697a63ebc4d09ad6"
+      }
+    },
+    "WebLogEventData": {
+      "association": [
+        {
+          "layout": "WLGEVT01",
+          "role": "data",
+          "ui233Line": 106,
+          "ss323Line": 121,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/log/WebLogEventData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+        "sha256": "4d0dfd1f30653be3c16f16f4f273e2d2e089c546da7aa98b48c6e8f900de5adb"
+      }
+    },
+    "AnimationListRequestData": {
+      "association": [
+        {
+          "layout": "ANLREQ01",
+          "role": "data",
+          "ui233Line": 48,
+          "ss323Line": 63,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.java",
+        "sha256": "ae9b2fb77ab83a4962537ecda88516243d3ce3e4713080d9945949308bda52ca"
+      }
+    },
+    "AnimationListResponseData": {
+      "association": [
+        {
+          "layout": "ANLRSP01",
+          "role": "data",
+          "ui233Line": 49,
+          "ss323Line": 64,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java",
+        "sha256": "9ea09d9d4566e2c23b8ecfb0f68845f2e598217250c7305c1959f4cb29735192"
+      }
+    },
+    "AnimationMenuRequestData": {
+      "association": [
+        {
+          "layout": "ANMREQ01",
+          "role": "data",
+          "ui233Line": 46,
+          "ss323Line": 61,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.java",
+        "sha256": "4bfc67a93038d2c833a21c9783417c65ab00c9fd03cc24bb91ef9a65bb696227"
+      }
+    },
+    "AnimationMenuResponseData": {
+      "association": [
+        {
+          "layout": "ANMRSP01",
+          "role": "data",
+          "ui233Line": 47,
+          "ss323Line": 62,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.java",
+        "sha256": "3fdb04f41e7f22281747e06c959338db7d8df0548038f05286f55a362b032d2c"
+      }
+    },
+    "AnimationRecord": {
+      "association": [
+        {
+          "layout": "ANLRSP01",
+          "role": "record",
+          "ui233Line": 49,
+          "ss323Line": 64,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AnimationRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java",
+        "sha256": "76be7cbc0ad448d5db04b6f887107c07c730c8787de4a19ded78ac959b279796"
+      }
+    },
+    "AudioDescriptorRequestData": {
+      "association": [
+        {
+          "layout": "AUDREQ01",
+          "role": "data",
+          "ui233Line": 44,
+          "ss323Line": 59,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.java",
+        "sha256": "966cb8cd91e5cb839b17f516cc967a12449b9eee909e1d896e49b809a5a6fc1e"
+      }
+    },
+    "MediaDescriptorData": {
+      "association": [
+        {
+          "layout": "AUDRSP01",
+          "role": "data",
+          "ui233Line": 45,
+          "ss323Line": 60,
+          "rd": [
+            "MQ-016"
+          ]
+        },
+        {
+          "layout": "MEDRSP01",
+          "role": "data",
+          "ui233Line": 59,
+          "ss323Line": 74,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData.java",
+        "sha256": "b527e7e808aef26b0406627165b8301b629aea1895d29ca1391f588d7f1c638f"
+      }
+    },
+    "MusicCategoryRecord": {
+      "association": [
+        {
+          "layout": "MCTRSP01",
+          "role": "record",
+          "ui233Line": 53,
+          "ss323Line": 68,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.java",
+        "sha256": "5cd1305fb2372d39e20563e5ed6b18d0d2bb37e40eece3770dcbfedf2f91e008"
+      }
+    },
+    "MusicCategoryRequestData": {
+      "association": [
+        {
+          "layout": "MCTREQ01",
+          "role": "data",
+          "ui233Line": 52,
+          "ss323Line": 67,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.java",
+        "sha256": "262f161786c74c973fb08de827241b895fae54b914e1e35409749d339f47114b"
+      }
+    },
+    "MusicCategoryResponseData": {
+      "association": [
+        {
+          "layout": "MCTRSP01",
+          "role": "data",
+          "ui233Line": 53,
+          "ss323Line": 68,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.java",
+        "sha256": "adcb506327201d9cd54b1a8d716a1d99f4803f1fe11833dcc3a45f0985318d68"
+      }
+    },
+    "MusicDescriptorRequestData": {
+      "association": [
+        {
+          "layout": "MEDREQ01",
+          "role": "data",
+          "ui233Line": 58,
+          "ss323Line": 73,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.java",
+        "sha256": "6ca2ed033acb1e238b7000f3c7d488afa8ac2fe74c9c9c9841362ba4e20785f3"
+      }
+    },
+    "MusicSectionRecord": {
+      "association": [
+        {
+          "layout": "MCSRSP01",
+          "role": "record",
+          "ui233Line": 55,
+          "ss323Line": 70,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord.java",
+        "sha256": "455da9904dcbde3b1d7be1dce720897c003138c2d9f1a736871deab7ac1de9b4"
+      }
+    },
+    "MusicSectionRequestData": {
+      "association": [
+        {
+          "layout": "MCSREQ01",
+          "role": "data",
+          "ui233Line": 54,
+          "ss323Line": 69,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.java",
+        "sha256": "1179f10e4c80515451240869c52ec9c113b89d883949171daa03660f58eacb73"
+      }
+    },
+    "MusicSectionResponseData": {
+      "association": [
+        {
+          "layout": "MCSRSP01",
+          "role": "data",
+          "ui233Line": 55,
+          "ss323Line": 70,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData.java",
+        "sha256": "b2e55cc1a3b15dad3cc7933e6a0dafe39e8c2d4b9afcf186248e08994c0f91c1"
+      }
+    },
+    "MusicTrackRecord": {
+      "association": [
+        {
+          "layout": "MTRRSP01",
+          "role": "record",
+          "ui233Line": 57,
+          "ss323Line": 72,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.java",
+        "sha256": "c3e4d5a5e4de04642a361826684fa1f902681bbf455c754ad8fafb8c76ba262e"
+      }
+    },
+    "MusicTrackRequestData": {
+      "association": [
+        {
+          "layout": "MTRREQ01",
+          "role": "data",
+          "ui233Line": 56,
+          "ss323Line": 71,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.java",
+        "sha256": "28a578047a92633709aee42b08c52d113981ba4fd406dcc90984db96ebea4dbc"
+      }
+    },
+    "MusicTrackResponseData": {
+      "association": [
+        {
+          "layout": "MTRRSP01",
+          "role": "data",
+          "ui233Line": 57,
+          "ss323Line": 72,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.java",
+        "sha256": "69270c63ce61efded7400fdea0494290e60d6e3e20927612a5ad4a676e984f81"
+      }
+    },
+    "VideoDescriptorRequestData": {
+      "association": [
+        {
+          "layout": "VIDREQ01",
+          "role": "data",
+          "ui233Line": 50,
+          "ss323Line": 65,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.java",
+        "sha256": "3f398129709614dd5190184dd58f57175a193e3e51a958cc557ef8d050345f5f"
+      }
+    },
+    "VideoDescriptorResponseData": {
+      "association": [
+        {
+          "layout": "VIDRSP01",
+          "role": "data",
+          "ui233Line": 51,
+          "ss323Line": 66,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.java",
+        "sha256": "7ed7ea562f6ee8a7fab5e299e4226c2a521c6014ddce4c5ea51d32986c71ae64"
+      }
+    },
+    "NotificationCancelRequestData": {
+      "association": [
+        {
+          "layout": "NTCREQ01",
+          "role": "data",
+          "ui233Line": 92,
+          "ss323Line": 107,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.java",
+        "sha256": "f5e5add9b4222ba2ab624bfe8a2ee3cfdacb65bca31df61856587390e2ef06d0"
+      }
+    },
+    "NotificationCancelResponseData": {
+      "association": [
+        {
+          "layout": "NTCRSP01",
+          "role": "data",
+          "ui233Line": 93,
+          "ss323Line": 108,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData.java",
+        "sha256": "7632addc47ad41c0518e6b2dd1794e189d41f9549f00c02c2f106ce4fe5ff83e"
+      }
+    },
+    "NotificationDetailRequestData": {
+      "association": [
+        {
+          "layout": "NTDREQ01",
+          "role": "data",
+          "ui233Line": 90,
+          "ss323Line": 105,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.java",
+        "sha256": "ff53c6d7cb77d2f6a21a31173b8468f4fbcbdcfba8a643fd5984adf2f0f559a1"
+      }
+    },
+    "NotificationDetailResponseData": {
+      "association": [
+        {
+          "layout": "NTDRSP01",
+          "role": "data",
+          "ui233Line": 91,
+          "ss323Line": 106,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData.java",
+        "sha256": "e8a1c6393778b9a3fe1592dda7bdd8e46bf7a274b1cd3c6019f81fefe87d8053"
+      }
+    },
+    "NotificationRecord": {
+      "association": [
+        {
+          "layout": "NTSRSP01",
+          "role": "record",
+          "ui233Line": 89,
+          "ss323Line": 104,
+          "rd": [
+            "MQ-014",
+            "MQ-038",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02",
+        "PT-PRO-002-NPAGE001",
+        "PT-PRO-002-NPAGE002",
+        "PT-PRO-002-NPAGE003"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationRecord.java",
+        "sha256": "56c16891758b3cdfe1073bff5f9338b5db1085fd82e382e357bc91bf99386bb2"
+      }
+    },
+    "NotificationSearchRequestData": {
+      "association": [
+        {
+          "layout": "NTSREQ01",
+          "role": "data",
+          "ui233Line": 88,
+          "ss323Line": 103,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02",
+        "PT-PRO-002-NPAGE001",
+        "PT-PRO-002-NPAGE002",
+        "PT-PRO-002-NPAGE003"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java",
+        "sha256": "c33f1d8853f19f0b927b903f2856d6029bc807f666de8700f26c8e062ec600e2"
+      }
+    },
+    "QuestionDeleteRequestData": {
+      "association": [
+        {
+          "layout": "QDLREQ01",
+          "role": "data",
+          "ui233Line": 98,
+          "ss323Line": 113,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.java",
+        "sha256": "d13958aea41cfb4e846dbde2142a9fc90d8c253961d5ea7ff67808e9bec4407b"
+      }
+    },
+    "QuestionDeleteResponseData": {
+      "association": [
+        {
+          "layout": "QDLRSP01",
+          "role": "data",
+          "ui233Line": 99,
+          "ss323Line": 114,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData.java",
+        "sha256": "93f793ea16d1b3c864ff9e5fa0d77dee2205f6040c27f1af295153f4c9a45cd9"
+      }
+    },
+    "QuestionDetailRequestData": {
+      "association": [
+        {
+          "layout": "QSDREQ01",
+          "role": "data",
+          "ui233Line": 96,
+          "ss323Line": 111,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.java",
+        "sha256": "c8e961953b587bde006c568847331c325f9f79ae3ae41cb44b8dfb50a1cfdfdf"
+      }
+    },
+    "QuestionDetailResponseData": {
+      "association": [
+        {
+          "layout": "QSDRSP01",
+          "role": "data",
+          "ui233Line": 97,
+          "ss323Line": 112,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData.java",
+        "sha256": "c3caddc69e01cca280fb7e06822c9748ae38d142c81b47df8d447b0a049dcbdf"
+      }
+    },
+    "QuestionSearchRequestData": {
+      "association": [
+        {
+          "layout": "QSSREQ01",
+          "role": "data",
+          "ui233Line": 94,
+          "ss323Line": 109,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java",
+        "sha256": "e93c0affdb135f6af27adbc223d5de106748df8514188513a3ab4f66687c9128"
+      }
+    },
+    "QuestionSubmitRequestData": {
+      "association": [
+        {
+          "layout": "QSBREQ01",
+          "role": "data",
+          "ui233Line": 86,
+          "ss323Line": 101,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.java",
+        "sha256": "631b79eda983258ffe2ccb33a6a95ed74d498a7f058b95ea1730702211f39ec8"
+      }
+    },
+    "QuestionSubmitResponseData": {
+      "association": [
+        {
+          "layout": "QSBRSP01",
+          "role": "data",
+          "ui233Line": 87,
+          "ss323Line": 102,
+          "rd": [
+            "MQ-016",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData.java",
+        "sha256": "d41802650a3f5312c4f7f6336f103f068c0d634010217356632ae12b80356942"
+      }
+    },
+    "QuestionSummaryRecord": {
+      "association": [
+        {
+          "layout": "QSSRSP01",
+          "role": "record",
+          "ui233Line": 95,
+          "ss323Line": 110,
+          "rd": [
+            "MQ-014",
+            "MQ-038",
+            "MQ-042"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord.java",
+        "sha256": "5edf3044aca7b0932d099a2044053be6722c99e21ba82fd0adc28a930da82a37"
+      }
+    },
+    "QuestionWorkData": {
+      "association": [
+        {
+          "layout": "QWKREQ01",
+          "role": "data",
+          "ui233Line": 105,
+          "ss323Line": 120,
+          "rd": [
+            "MQ-016",
+            "MQ-043"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData.java",
+        "sha256": "13c895247b630d1fe12267361ba24fd94aede101167e78a6a7438dc55d0ac4e7"
+      }
+    },
+    "GameListRequestData": {
+      "association": [
+        {
+          "layout": "GAMREQ01",
+          "role": "data",
+          "ui233Line": 25,
+          "ss323Line": 42,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.java",
+        "sha256": "dd1215daa281f971ba16134229338ee8a8cca0720a8469637e8c3b3a56a4a05b"
+      }
+    },
+    "GameListResponseData": {
+      "association": [
+        {
+          "layout": "GAMRSP01",
+          "role": "data",
+          "ui233Line": 26,
+          "ss323Line": 43,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData.java",
+        "sha256": "155ecfd10ec246a8beed2bbcf6799cb70fbd180f6fad5ec23cef3168258939ab"
+      }
+    },
+    "GameRecord": {
+      "association": [
+        {
+          "layout": "GAMRSP01",
+          "role": "record",
+          "ui233Line": 26,
+          "ss323Line": 43,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/GameRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameRecord.java",
+        "sha256": "3d23656ab88501d8ae046e4fea304037b2a0ba61bea78e0a2c7ece7b81b37d7f"
+      }
+    },
+    "RouteListRequestData": {
+      "association": [
+        {
+          "layout": "RTEREQ01",
+          "role": "data",
+          "ui233Line": 31,
+          "ss323Line": 48,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.java",
+        "sha256": "961efbdfb469d7de55232aeb692551f1a07ab7c3791b96e4022231e9c970150f"
+      }
+    },
+    "RouteListResponseData": {
+      "association": [
+        {
+          "layout": "RTERSP01",
+          "role": "data",
+          "ui233Line": 32,
+          "ss323Line": 49,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData.java",
+        "sha256": "3b551a1b7febfd1de9a83b62703b12e9d897328a2a3bdcde615204b467d195fd"
+      }
+    },
+    "RouteRecord": {
+      "association": [
+        {
+          "layout": "RTERSP01",
+          "role": "record",
+          "ui233Line": 32,
+          "ss323Line": 49,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.java",
+        "sha256": "3b6b2262484845e71e3ccf6fee13d9b07a7c8d2a00c689fd83f736a6db9e4b3e"
+      }
+    },
+    "ScenarioDetailRequestData": {
+      "association": [
+        {
+          "layout": "SCNREQ01",
+          "role": "data",
+          "ui233Line": 35,
+          "ss323Line": 52,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.java",
+        "sha256": "4ad341d195f5e7ae6345afef839ed90d2dc18119c892e3037dc55dba91fafd21"
+      }
+    },
+    "ScenarioDetailResponseData": {
+      "association": [
+        {
+          "layout": "SCNRSP01",
+          "role": "data",
+          "ui233Line": 36,
+          "ss323Line": 53,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.java",
+        "sha256": "10e780b70f67c15c27e9f306b98ea2482927bbec124cb3de66239953ff5c994a"
+      }
+    },
+    "ScenarioEntryRecord": {
+      "association": [
+        {
+          "layout": "SCNRSP01",
+          "role": "record",
+          "ui233Line": 36,
+          "ss323Line": 53,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java",
+        "sha256": "757cad4dfa3e68ff373cf9e3109a28273f627c8aff27d265e87bc3348f5f4d7c"
+      }
+    },
+    "ScenarioFileListRequestData": {
+      "association": [
+        {
+          "layout": "SCFREQ01",
+          "role": "data",
+          "ui233Line": 33,
+          "ss323Line": 50,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.java",
+        "sha256": "eaa6f96baffa023a0ee8739f0bcef478e02488bc9dccf0d2ae9c76986b9357d5"
+      }
+    },
+    "ScenarioFileListResponseData": {
+      "association": [
+        {
+          "layout": "SCFRSP01",
+          "role": "data",
+          "ui233Line": 34,
+          "ss323Line": 51,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData.java",
+        "sha256": "2f61f8299fcd69fa9ced3a88d4479e7cc789a9ca6b37a8bde5aeecff37437881"
+      }
+    },
+    "ScenarioFileRecord": {
+      "association": [
+        {
+          "layout": "SCFRSP01",
+          "role": "record",
+          "ui233Line": 34,
+          "ss323Line": 51,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.java",
+        "sha256": "04d454ee61c3cb5c902bc6de83ae4a14d87aebce90b903eca1d02035d92448d0"
+      }
+    },
+    "ScenarioSearchRecord": {
+      "association": [
+        {
+          "layout": "SRCRSP01",
+          "role": "record",
+          "ui233Line": 30,
+          "ss323Line": 47,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord.java",
+        "sha256": "bd7098e3cdf5cc11a54ad737c6a5cfdd09d448eb7900594807ef6378c13f37f6"
+      }
+    },
+    "ScenarioSearchRequestData": {
+      "association": [
+        {
+          "layout": "SRCREQ01",
+          "role": "data",
+          "ui233Line": 29,
+          "ss323Line": 46,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.java",
+        "sha256": "3f54c2f51f1b8fdcb7a327f11fab1c1d5d714c36ff17e340b4caa3f38f7c31c8"
+      }
+    },
+    "SpeakerListRequestData": {
+      "association": [
+        {
+          "layout": "SPKREQ01",
+          "role": "data",
+          "ui233Line": 27,
+          "ss323Line": 44,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.java",
+        "sha256": "36a96085c16dae5702860cc2172962a62c79124a3fd94b5d94dc411b85646815"
+      }
+    },
+    "SpeakerListResponseData": {
+      "association": [
+        {
+          "layout": "SPKRSP01",
+          "role": "data",
+          "ui233Line": 28,
+          "ss323Line": 45,
+          "rd": [
+            "MQ-016"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData.java",
+        "sha256": "69c71b71ba91f229b013f699f7b1c59c7b679f4bce5b8dd0f4cad14c6a1e9004"
+      }
+    },
+    "SpeakerRecord": {
+      "association": [
+        {
+          "layout": "SPKRSP01",
+          "role": "record",
+          "ui233Line": 28,
+          "ss323Line": 45,
+          "rd": [
+            "MQ-014",
+            "MQ-038"
+          ]
+        }
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord"
+      ],
+      "testIds": [
+        "PT-PRO-001-T01",
+        "PT-PRO-001-T02"
+      ],
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord.java",
+        "sha256": "2b9a229f61b077ec6719f7fc03faad9bb8d6c8c53596c1d92c19e55f5dc7450c"
+      }
+    }
+  }
+}
