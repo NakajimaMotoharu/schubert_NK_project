@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission.Row;
+import dev.codex.schubert.nk.migration.MigrationFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -447,13 +448,13 @@ final class SchemaHistoryAdmissionTest {
   void opsSchema008IndependentConcurrentOwners()
       throws InterruptedException, ExecutionException, TimeoutException {
     var admission = new SchemaHistoryAdmission(RELEASE);
-    var executor = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor(), 10)) {
       var barrier = new java.util.concurrent.CyclicBarrier(8);
       var tasks = new ArrayList<java.util.concurrent.Future<int[]>>();
       for (int i = 0; i < 8; i++)
         tasks.add(
-            executor.submit(
+            workers.executor().submit(
                 () -> {
                   var probe = new Probe();
                   barrier.await(5, java.util.concurrent.TimeUnit.SECONDS);
@@ -462,9 +463,6 @@ final class SchemaHistoryAdmissionTest {
                 }));
       for (var task : tasks)
         assertArrayEquals(new int[] {1, 1, 0}, task.get(5, java.util.concurrent.TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-/** PT-BOOT-MIG-WORKER001..003; SS354; YKT-2997; synthetic executor termination outcomes. */
+/** PT-BOOT-MIG-WORKER001..004; SS354; YKT-2997; synthetic executor termination outcomes. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class MigrationFixtureWorkersTest {
   @Test
@@ -60,6 +60,30 @@ final class MigrationFixtureWorkersTest {
     } finally {
       Thread.interrupted();
     }
+  }
+
+  @Test
+  void worker004TerminationFailureIsSuppressedUnderThePrimaryFailure() {
+    var calls = new ArrayList<String>();
+    var executor = executor(calls, () -> false);
+    var primary = new AssertionError("synthetic worker body failure");
+
+    var observed =
+        assertThrows(
+            AssertionError.class,
+            () -> {
+              try (var workers = new MigrationFixtureWorkers(executor, 7)) {
+                assertSame(executor, workers.executor());
+                throw primary;
+              }
+            });
+
+    assertSame(primary, observed);
+    assertEquals(1, observed.getSuppressed().length);
+    assertTrue(observed.getSuppressed()[0] instanceof AssertionError);
+    assertEquals(
+        "migration fixture workers did not terminate", observed.getSuppressed()[0].getMessage());
+    assertEquals(List.of("cancel", "wait"), calls);
   }
 
   @FunctionalInterface

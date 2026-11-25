@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /** Cancels owned fixture workers with a finite wait and preserves the primary test failure. */
-record MigrationFixtureWorkers(ExecutorService executor, long terminationSeconds)
+public record MigrationFixtureWorkers(ExecutorService executor, long terminationSeconds)
     implements AutoCloseable {
   @Override
   public void close() {
