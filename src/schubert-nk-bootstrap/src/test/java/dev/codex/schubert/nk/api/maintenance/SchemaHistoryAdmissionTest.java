@@ -626,9 +626,14 @@ final class SchemaHistoryAdmissionTest {
           });
     }
 
-    private void throwIf(String method) throws Throwable {
-      Throwable fault = faults.get(method);
-      if (fault != null) throw fault;
+    private void throwIf(String method) throws SQLException {
+      switch (faults.get(method)) {
+        case null -> {}
+        case SQLException sql -> throw sql;
+        case IllegalStateException state -> throw state;
+        case AssertionError fatal -> throw fatal;
+        default -> throw new AssertionError("Unexpected schema history fixture failure");
+      }
     }
 
     private static <T> T proxy(Class<T> type, java.lang.reflect.InvocationHandler handler) {

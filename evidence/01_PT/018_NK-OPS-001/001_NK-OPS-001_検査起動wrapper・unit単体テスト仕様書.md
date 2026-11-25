@@ -221,3 +221,7 @@ WBS-F03/2-2-b、SS354、451、BUG-3695／YKT-2902。対象 `static_input_scope.c
 | PT-OPS-SRC-SCOPE011 | `StaticInputScopeTest.test_non_json_constants_are_rejected_even_with_exact_digest` | SHA-256が合う合成文書でも、内側のNaN、Infinity、-Infinityを `INVALID_JSON_CONSTANT` |
 
 PG43362ではBUG-3699の旧3失敗を保全した。変更後に正規のbinary入力とsource-only入力を含む工具22件が成功した。製品試験・coverageは未実行。[PG43362](evidence/PG43362-scope-metadata-json-v1/manifest.json)
+
+### BUG-3824 Schema History合成provider
+
+PT-OPS-SCHEMA001〜016、SYS-004／DAT-009、UI254、SS343・354、YKT-2981。既16件が固定のV031までの履歴、合成SQL・実行時・Errorの同一性、borrowed接続と親子解放、Row境界と同値を検証する。投入型の具体化以外はfixtureと期待値を維持する。PG45164の現source・原報告・終端を参照。実DB・Flyway・起動は保留。
