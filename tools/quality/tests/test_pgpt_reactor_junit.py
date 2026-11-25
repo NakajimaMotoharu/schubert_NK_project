@@ -557,5 +557,41 @@ class FormalCollectorInputsTest(unittest.TestCase):
                 self.assertEqual(ast.literal_eval(guard.args[2]), expected_paths)
 
 
+    def test_formal_json_collectors_accept_only_a_successful_integer_exit_code(self):
+        """PT-OPS-G09-JUNIT028: evaluate only the exit predicates, never a collector."""
+        directory = Path(__file__).resolve().parents[1]
+        for number in (5, 7, 8, 9, 10, 15, 16, *range(20, 41)):
+            path, = directory.glob(f"{number:03d}_collect*.py")
+            syntax = ast.parse(path.read_text(encoding="utf-8"))
+            candidates = []
+            for node in ast.walk(syntax):
+                if (isinstance(node, ast.Compare)
+                        and isinstance(node.left, ast.Subscript)
+                        and isinstance(node.left.slice, ast.Constant)
+                        and node.left.slice.value == "exitCode"
+                        and len(node.ops) == 1 and isinstance(node.ops[0], ast.NotEq)):
+                    candidates.append(node)
+                elif (isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not)
+                      and isinstance(node.operand, ast.Call)
+                      and isinstance(node.operand.func, ast.Name)
+                      and node.operand.func.id == "is_successful_reactor_exit"):
+                    candidates.append(node)
+            predicate, = candidates
+            expression = compile(ast.Expression(predicate), "<isolated exit predicate>", "eval")
+            for value, rejected in ((0, False), (False, True), (0.0, True), (1, True),
+                                    (-1, True), ("0", True), (None, True)):
+                with self.subTest(collector=number, input_type=type(value).__name__, value=value):
+                    metadata = {"exitCode": value}
+                    namespace = {
+                        "validated": metadata,
+                        "verified": metadata,
+                        "base": metadata,
+                        "is_successful_reactor_exit": getattr(
+                            pgpt_reactor_junit, "is_successful_reactor_exit", None
+                        ),
+                    }
+                    self.assertIs(eval(expression, namespace), rejected)
+
+
 if __name__ == "__main__":
     unittest.main()
