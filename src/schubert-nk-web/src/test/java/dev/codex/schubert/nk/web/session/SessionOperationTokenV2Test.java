@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -164,23 +165,17 @@ class SessionOperationTokenV2Test {
     assertThrows(
         IllegalArgumentException.class,
         () -> new SessionAttributes(Optional.empty(), Optional.empty(), Optional.empty(), tokens));
-    var pool = Executors.newFixedThreadPool(10);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(10))) {
       var futures = new ArrayList<Future<Void>>();
       for (int n = 0; n < 100; n++)
         futures.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   assertArrayEquals(bytes(golden), codec.encode(attributes));
                   assertEquals(10, codec.decode(bytes(golden)).operationTokens().size());
                   return null;
                 }));
       for (var future : futures) future.get(20, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
-        throw new AssertionError("session token v2 workers did not terminate");
-      }
     }
   }
 }
