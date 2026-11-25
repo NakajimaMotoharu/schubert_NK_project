@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,8 @@ final class WebStartupInputsTest {
       Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk", CREDENTIALS_DIRECTORY_ENV, ROOT);
 
   @Test
-  void opsWebInput001CombinesIndependentFixedInputs() throws Exception {
+  void opsWebInput001CombinesIndependentFixedInputs()
+      throws StorageIoException, NoSuchAlgorithmException {
     AtomicInteger reads = new AtomicInteger();
     NonSecretConfigSource source =
         service -> {
@@ -89,7 +91,7 @@ final class WebStartupInputsTest {
   }
 
   @Test
-  void opsWebInput004NullContracts() throws Exception {
+  void opsWebInput004NullContracts() throws NoSuchAlgorithmException {
     assertThrows(NullPointerException.class, () -> new WebStartupInputs(null, ENV));
     assertThrows(NullPointerException.class, () -> new WebStartupInputs(service -> null, null));
     var credentials = ServiceCredentialLocation.read(ENV);
@@ -117,7 +119,8 @@ final class WebStartupInputsTest {
   }
 
   @Test
-  void opsWebInput006ShowsRedactedValuesWithoutChangingComponentIdentity() throws Exception {
+  void opsWebInput006ShowsRedactedValuesWithoutChangingComponentIdentity()
+      throws NoSuchAlgorithmException {
     String fixtureDirectory = "/test-fixture/startup-config-value";
     var location =
         ServiceCredentialLocation.read(Map.of(CREDENTIALS_DIRECTORY_ENV, fixtureDirectory));
