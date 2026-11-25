@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Event;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Route;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Clock;
@@ -524,8 +525,7 @@ final class WebSecurityAuditPortTest {
   void concurrentRecordsKeepRequestIdsAndActorsSeparate() throws Exception {
     var sink = new Sink();
     var audit = audit(sink);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var pending = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 8; i++) {
         int number = i;
@@ -543,9 +543,6 @@ final class WebSecurityAuditPortTest {
                 }));
       }
       for (var future : pending) assertTrue(future.get(10, TimeUnit.SECONDS));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(8, sink.rows.size());
     var ids = new HashSet<String>();

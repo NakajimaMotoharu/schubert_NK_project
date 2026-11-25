@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Event;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Route;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Clock;
@@ -371,8 +372,7 @@ class WebSecurityAuditTest {
   void web100ConcurrentAuditEventsStayIndependent() throws Exception {
     var logger = new CapturingLogger();
     var audit = new WebSecurityAudit(logger, CLOCK, "a", "b");
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++) {
         int number = i;
@@ -394,9 +394,6 @@ class WebSecurityAuditTest {
       synchronized (audit) {
         for (var job : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) job.get(10, TimeUnit.SECONDS);
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(100, logger.entries.size());
     var seen = new HashSet<UUID>();

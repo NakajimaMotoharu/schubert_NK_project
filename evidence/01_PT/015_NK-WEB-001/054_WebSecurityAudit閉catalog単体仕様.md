@@ -39,3 +39,5 @@ BUG2333/YKT2078: initial072のhelper命名1をexpected不変で是正、最新07
 |PT-WEB-AUDITPORT008|WebSecurityAuditPortTest.versionOneAndSixtyFourAreRetainedAndInvalidFormatsReject|
 |PT-WEB-AUDITPORT009|WebSecurityAuditPortTest.clockAndLoggerFailuresPropagateWithoutProviderDiagnostics|
 |PT-WEB-AUDITPORT010|WebSecurityAuditPortTest.concurrentRecordsKeepRequestIdsAndActorsSeparate|
+
+BUG-3864／YKT-2997。PT-WEB-100とPT-WEB-AUDITPORT010の各in-memory Loggerを維持し、8 worker／100件または2 worker／8件と元のFuture 10秒。共用有限終了により先行診断と抑制例外を保持。正規Protocol・Gsonと現Web二Mainで選択し、実ログ送信や認証とは別。PG45410参照。
