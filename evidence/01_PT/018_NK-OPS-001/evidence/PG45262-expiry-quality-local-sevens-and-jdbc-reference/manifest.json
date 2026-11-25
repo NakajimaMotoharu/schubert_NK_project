@@ -1,0 +1,121 @@
+{
+  "run": "PG45262",
+  "source": "cfe6271fa8bcb59ff40cfb228c0fd58ca4c3290a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P017-11/2",
+    "WBS-P004-05/2"
+  ],
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:42:02.945340+00:00",
+  "originalRun": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45258-current-expiry-31-verified-test-input/manifest.json",
+    "sha256": "05ff960dc082091bfe371e0970d80643369de24e8c867ed88bbe2f8405e8f714"
+  },
+  "pmdOriginal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/pmd.xml",
+    "sha256": "eab96a0f1d02cd85132b79f8863c27f88d4e2b47c37a3fcf97e91be51269b261"
+  },
+  "unmodifiedRaw": [
+    {
+      "fixture": "ExpiryAuditJdbcFailureGraphTest.java",
+      "line": 144,
+      "rule": "UseProperClassLoader",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java",
+        "sha256": "45b573efb5ac50dc33b1deac0f0517be66465598f6dd2cb10cb770295cb3a229"
+      },
+      "originalLocation": "return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+      "reviewBasis": "単一Java SE 25の型引数に対するJDK proxy。与えられたinterfaceのloaderをそのまま使うので、同名別型をロードしたりWeb applicationのcontextを越えない。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 585,
+      "rule": "UseConcurrentHashMap",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "Map<Integer, Object> values = new HashMap<>();",
+      "reviewBasis": "期待値用の局所map。単一テスト呼出しの束縛比較に返し、並列／static共有を行わない。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 647,
+      "rule": "UseConcurrentHashMap",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "final Map<String, Object> snapshot = new HashMap<>();",
+      "reviewBasis": "JUnitが毎回所有する独立fixtureの観測値。SQL NULLの既試験入力も持ち、別workerへ渡さない。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 699,
+      "rule": "UseProperClassLoader",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "Connection.class.getClassLoader(),",
+      "reviewBasis": "java.sql.Connectionのみを代理する、JVM内self-owned fixture。固定interfaceをそのloaderに束縛。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 752,
+      "rule": "UseConcurrentHashMap",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "final Map<Integer, Object> bindings = new HashMap<>();",
+      "reviewBasis": "各Statement代理が別に所有するbind引数。Jdbc方式は同fixture同期実行のみで、外部から同じmapを変更しない。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 768,
+      "rule": "UseProperClassLoader",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "PreparedStatement.class.getClassLoader(),",
+      "reviewBasis": "java.sql.PreparedStatementのみ。実DBのJDBC driverやコンテナのcontext loaderを使わない。",
+      "reviewSigned": null
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 807,
+      "rule": "UseProperClassLoader",
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+      },
+      "originalLocation": "ResultSet.class.getClassLoader(),",
+      "reviewBasis": "java.sql.ResultSetのみ。検査対象の合成行へ返すので、実DBまたはWebアプリのclass lookupを扱わない。",
+      "reviewSigned": null
+    }
+  ],
+  "unmodifiedPmdExit": 4,
+  "localTechnicalCheckCount": 7,
+  "formalRuleDisposition": null,
+  "existingUtcScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44942-current-jdbc-utc-and-resource-links/manifest.json",
+    "sha256": "fc70df39a85b34ea7eabf56077bd448c5ef8006d5b6c17c0083723fa8048f9c2"
+  },
+  "currentOwnApiFixture": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/manifest.json",
+    "sha256": "5489b59c4bcdbd2f64dc1dab8fd3665693871a3219494e78a866dd0772f89f88"
+  },
+  "actualBackendOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
