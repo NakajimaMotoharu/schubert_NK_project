@@ -1,0 +1,50 @@
+{
+  "run": "PG45068",
+  "source": "c2b979e5bbb73dc0bbfc4a4ad2121809fcb2ae58",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T08:12:23.331153+00:00",
+  "actualExit": 1,
+  "compileSucceeded": true,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45068-batch-pure-two-fixture-spotbugs/begin.json",
+    "sha256": "4f244c0919479485189bce5d31f497dfddcd9a81079297262c35cbc60e74c7fe"
+  },
+  "analysisInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45068-batch-pure-two-fixture-spotbugs/spotbugs-begin.json",
+    "sha256": "92a12de0e5d2d633ee4f2838a29631d3e0388887b9beb2ab6cf035fbc187070f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45068-batch-pure-two-fixture-spotbugs/terminal.json",
+    "sha256": "c53ad07b1c529e693242698cbeb606d189bc54e780df867642c45d40f86f8ef6"
+  },
+  "spotbugsXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45068-batch-pure-two-fixture-spotbugs/spotbugs.xml",
+    "sha256": "3dc41a9234c434bf293eb0a6d127c9f1181d50ba131d48a5aee10a23abcd9c80"
+  },
+  "findings": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "priority": "3",
+      "className": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+      "method": "independentConcurrentObservations"
+    }
+  ],
+  "missing": 0,
+  "error": 0,
+  "targetFixturePhysical": 2,
+  "eqOriginalCompiledFixture": {
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.class": true,
+    "dev/codex/schubert/nk/batch/repository/StepObservationValueContractTest.class": true
+  },
+  "originalTenOrdinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43512-current-batch-inspection-and-step-value-reuse-v1/manifest.json",
+    "sha256": "b109759325d1eece23954abbfc1b6d053f491d4c91469dc3e5b0e3a185388209"
+  },
+  "newJUnitRuns": 0,
+  "defect": "BUG-3818",
+  "horizontal": "YKT-2976",
+  "readerPreparationCorrected": "old receipt uses explicit UNMEASURED_NOT_IN_ORIGINAL_CLASS_STATS",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
