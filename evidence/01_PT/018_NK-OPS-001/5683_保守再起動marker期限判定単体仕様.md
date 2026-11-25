@@ -22,3 +22,7 @@ PG42402の是正後source 8c99fbd2112183808d8d973bce7b3a9b3c1cef13、通常8件�
 ## 通常のJDK起動入口
 
 PT-OPS-MAINT-PREBOOT004-W09、PG42412。PG42408の正規Batch JARから局所三物理だけを照合し、JDK25の通常launcherで固定合成引数を渡した。出力はWAITING、CRITICAL、COMPLETE、INVALID_OBSERVATIONの4通り、余分な出力なし。元toolのclass-init判定失敗1件は別に保存。試験機でサービス等の操作は0。evidence/01_PT/018_NK-OPS-001/evidence/PG42412-g1306-watch-packaged-cli-proof-v1/manifest.json SHA256 9a712c899a20404d845c37ebbe1fee669c2221f8cf6c858823a65506390df990。
+
+## 期限内markerと観測時点の境界
+
+PT-OPS-MAINT-PREBOOT004-W10。SS341 §4.2、C02。開始20:00Z、同run・新bootのmarkerは20:30Z。観測が20:29:59.999999999Zでは未来markerのためWAITING、20:30Zで同時に観測した条件ではCOMPLETE。二つの時刻を独立リテラルに固定し、正規Batchの外部監視判定に合成値を供給する。既27試験・旧execの再実行や合算、実再起動は行わない。

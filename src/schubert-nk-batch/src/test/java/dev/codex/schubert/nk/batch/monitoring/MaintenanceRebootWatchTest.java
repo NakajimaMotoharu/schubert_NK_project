@@ -64,6 +64,16 @@ final class MaintenanceRebootWatchTest {
     assertEquals(CRITICAL, read("2026-11-21T21:01:00Z", new Marker(RUN, NEW_BOOT, later)));
   }
 
+  /** PT-OPS-MAINT-PREBOOT004-W10. */
+  @Test
+  void timelyMarkerOnlyQualifiesWhenItsTimestampHasBeenObserved() {
+    String moment = "2026-11-21T20:30:00Z";
+    var marker = new Marker(RUN, NEW_BOOT, Instant.parse(moment));
+
+    assertEquals(WAITING, read("2026-11-21T20:29:59.999999999Z", marker));
+    assertEquals(COMPLETE, read(moment, marker));
+  }
+
   @Test
   void backwardObservationIsInvalid() {
     assertEquals(INVALID_OBSERVATION, read("2026-11-21T19:59:59Z", null));
