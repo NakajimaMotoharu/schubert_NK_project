@@ -1,0 +1,119 @@
+{
+  "run": "PG44748",
+  "source": "3283e9f4118dea4f1445dd0f891b62030c25aa7e",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-P007-01/2",
+  "terminalAtUTC": "2026-11-25T00:58:31.044100+00:00",
+  "actualExit": 0,
+  "scopeOnly": "input fake clock and in-memory login counter values, no actual attempt",
+  "originalUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34420-login-value4-unit-v1/manifest.json",
+    "sha256": "088edb306b6973ed46d02f6778eab17c54298e1e3e23c017028b466cdd9dd3e2"
+  },
+  "originalIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34422-login-value4-independent-v1/manifest.json",
+    "sha256": "02d2110ed3e86823daeb3e64ba74e028f1fe3aeb14da2347f281b08919075b80"
+  },
+  "exactCurrentClasses": [
+    {
+      "member": "dev/codex/schubert/nk/api/security/LoginAttemptKind.class",
+      "receipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44670-current-api-value-outputs-nullaway/target/classes/dev/codex/schubert/nk/api/security/LoginAttemptKind.class",
+        "sha256": "aceb4284db52163e29ebbfd7e3c626613a8fd5417a292af57893bdb9ebed1054"
+      }
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/security/LoginAttemptState.class",
+      "receipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44670-current-api-value-outputs-nullaway/target/classes/dev/codex/schubert/nk/api/security/LoginAttemptState.class",
+        "sha256": "e70c59cf352a1d1335ed25e97a0aa9e856c75a5c5e2ab4255e849ada16014d69"
+      }
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/security/LockedLoginAttempt.class",
+      "receipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44670-current-api-value-outputs-nullaway/target/classes/dev/codex/schubert/nk/api/security/LockedLoginAttempt.class",
+        "sha256": "41bfea1d170deda924b75f6852129a6d80ef528984ba4c1741992e90c26cc670"
+      }
+    }
+  ],
+  "exactCurrentSourceAndFixture": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+      "sha256": "71655d2fa7fa5fe730d9d1ca20e7f713e669760f32af4437fed064873066e7a4"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+      "sha256": "493c8b03e7791a044be87f4fadeb1c7c7c95588aba1174cb38baa0b5a3b56f7b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+      "sha256": "393f52726e83c3ea52fe34c7385c0da413d49306a476894255602fe82880c352"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptStateTest.java",
+      "sha256": "8de7da1fea134d4f1973ac003287dccee971dad697859f6014f0a32743930391"
+    }
+  ],
+  "currentMappedTestCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+      "name": "fifteenMinuteWindowAndLockBoundariesAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+      "name": "retryAfterCeilsAndCapsUsingLiteralSeconds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+      "name": "exactUserAndIpThresholdsLockWithoutExtensionThenSuccessClears()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+      "name": "nullMalformedAndClockRegressionCannotInventAValidState()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+      "name": "currentObservedWindowEndpointVectorAppliesToUserAndIp()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "characterizationHistorical": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26714-login-window-source-current-bind-v1/manifest.json",
+    "sha256": "344ea58b11885fb786f083703e3ed321997ed9febfe66992f82ffb63a72d480f"
+  },
+  "independentCriteria": [
+    "USER fifth and IP tenth failure trigger",
+    "15 minutes window and lock boundary as distinct clocks",
+    "stable Retry-After ceiling/cap",
+    "ordinary reset and null clock regression"
+  ],
+  "evidenceSpec": {
+    "path": "evidence/01_PT/007_NK-AUT-001/001_NK-AUT-001_単体テスト仕様書.md",
+    "sha256": "f4f1101b02a88fef1a7fb247640a672f94886a69dff3d66891949159863b0603"
+  },
+  "newProductTests": 0,
+  "realAuthenticationOrJms": 0,
+  "approvedFixedUiTextNotRevalidated": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "blocked": [
+    "ordinary DB timestamp/transaction and persisted owner",
+    "HTTP/JMS lock flow UI header",
+    "formal 451"
+  ]
+}
