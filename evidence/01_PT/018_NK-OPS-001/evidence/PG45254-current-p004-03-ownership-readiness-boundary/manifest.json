@@ -1,0 +1,127 @@
+{
+  "run": "PG45254",
+  "wbs": "A1-15.01",
+  "relatedWbs": [
+    "A1-15.02",
+    "WBS-P004-03/2"
+  ],
+  "source": "9436f9c5e9a916c7ad181c564afb355602aa28d3",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:27:54.050577+00:00",
+  "rows": [
+    {
+      "row": "A1-15.01",
+      "category": "partial",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45190-current-a115-transitive-revocation-and-batch-lock-owner/manifest.json",
+          "sha256": "1f2650bae8ea38f136dbd8bdd269033016acf0376fd511a1415430d7b11d35bf"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/manifest.json",
+          "sha256": "61f0ce26a7175e470954ccbb3ae50272ed744126ec748fe9078b19b8e0af286f"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45186-current-jdbc-read-boundary-methods/manifest.json",
+          "sha256": "b3bf3b57668416c8efb9b5c22d9f66cec8b52e204de965530ab1b6e5e699b271"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/manifest.json",
+          "sha256": "5489b59c4bcdbd2f64dc1dab8fd3665693871a3219494e78a866dd0772f89f88"
+        }
+      ],
+      "point": "Logout組立と中の独立JDBC値を区別。修正された更新は限定選択5件のうち該当だけ。古いassembly試験から現経路を認定しない。",
+      "required": "QA-056対象の二型、正規API JAR、現所有・DB、Logout組立の当全結果",
+      "owner": "ビルド・DB・資源管理担当"
+    },
+    {
+      "row": "A1-15.02",
+      "category": "static only",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45190-current-a115-transitive-revocation-and-batch-lock-owner/manifest.json",
+          "sha256": "1f2650bae8ea38f136dbd8bdd269033016acf0376fd511a1415430d7b11d35bf"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "InspectorLockHandoffの正規物理を固定。元9はDB所有を含む歴史。",
+      "required": "現候補でのadvisory所有・元session・同一DBの真正9件",
+      "owner": "DB・資源管理担当"
+    },
+    {
+      "row": "A1-15.03",
+      "category": "held",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44458-a11503-current-git-identity-and-owner-gap/manifest.json",
+          "sha256": "57be79014e0c75ddd61c4a25ab4e1ba3d2523d666e8ae9414ad9f5fff6e33824"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "DurableRecordFilesの入力4の同一性。元12のrunner終了1、利用可能0。",
+      "required": "現候補の自所有native FileStore、試験の実行許可・独立終端",
+      "owner": "DB・資源管理担当"
+    },
+    {
+      "row": "A1-15.04",
+      "category": "held",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44304-inspector-static-grammar-current-package-and-run/manifest.json",
+          "sha256": "651bfb154218877e77703ce36740cf623833cade05a767b97a4bb6ccfe34daed"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "環境grammarの局所確認。元8と現10の所有依存を分離。",
+      "required": "現候補の環境ファイル所有、native形式と現試験の真正終端",
+      "owner": "DB・資源管理担当"
+    },
+    {
+      "row": "候補再資格-03.01",
+      "category": "proxy only",
+      "current": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/manifest.json",
+          "sha256": "4998892b9d1fa41164ded221013e6e2841c79900c7cf4e52cad88af2101fb153"
+        }
+      ],
+      "point": "参照repo10/10と現在9製品物理、元exception/close順を採用。",
+      "required": "実DBと現原本の読み取り・保持、全451",
+      "owner": "DB・資源管理担当"
+    },
+    {
+      "row": "候補再資格-31.01",
+      "category": "codec lineage only",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41622-p00403-maintenance-test-requalification-v1/manifest.json",
+          "sha256": "9ee00ee4f9d964e92afd7809a000274a748474d6a0d9ff4fad30d4f9aad17252"
+        }
+      ],
+      "point": "元8合成・6物理の対象と現在同一の試験入力。",
+      "required": "保持原本への実FileStore/DB境界、退役とF02/F03",
+      "owner": "DB・資源管理担当"
+    }
+  ],
+  "rawInputsWhole451": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45252-current-format-scope-sixteen-delta/manifest.json",
+    "sha256": "edf66ad134e4393cb577f7c1c7fda2adcabe4cf8831000301474fd8766f500e2"
+  },
+  "webReceiptSeparate": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45162-current-receipt-fixture-exceptions-qualified/manifest.json",
+    "sha256": "97c4a8391f363dfbd1503c99e5daa9ce82c4751f63946e99ca4338baa31d509e"
+  },
+  "coordinatedOwnerDecision": null,
+  "knownFormalPrerequisites": [
+    "MaintenanceRunFiles",
+    "原本保全と正規退役",
+    "正規六製品F02/F03",
+    "451"
+  ],
+  "fulfilledOriginalPricePp": 0,
+  "liveOperationIssued": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
