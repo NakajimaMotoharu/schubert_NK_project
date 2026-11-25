@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-11264",
+  "source": "4d9bbfbae5507f9fdc7df32dbc228863155a653b",
+  "sourceBeforeWork": "1b9ccc5709fa854fbf70a8121642d10064c06afc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "候補再資格-55.01"
+  ],
+  "planRow": {
+    "ID": "候補再資格-55.01",
+    "元行": "WBS-P016-07/2",
+    "費目": "B",
+    "主担当": "WBS-P016-07",
+    "状態": "差分証跡不足時のみ",
+    "作業": "変更した試験の既存証跡の適用範囲を照合",
+    "残pp": "0.3",
+    "着手": "新規の実行前に今回のsource・byte・期待値・同じ証跡の既有無を確認",
+    "終了証拠": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+    "補正根拠": "旧候補とのblob差分。Mainは1名義0.30、試験は0.15の暫定照合単価。A対象・閉鎖済だけのものは除外。既済みなら減額",
+    "契約HOLD": "",
+    "対象": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java、src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java",
+    "範囲": "WBS-P016-07",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0",
+    "慎重pp": "0.9",
+    "要求設計の版差": "PT基準仕様 NK-WEB-002、SS 313",
+    "lineNumber": 477,
+    "改訂残pp": "0.3",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG45728",
+  "startEvent": "PGPT-20261008-11263",
+  "workCategory": "IMPLEMENTATION",
+  "outcome": "局所製品1件、延べ3,084。現生計測はこの1件の範囲。実Wire・HTTP/FileStore、六製品451・正式受入なし。",
+  "proof": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45728-current-scenario-detail-bounded-projection/manifest.json",
+    "sha256": "ae2d80cc2ef933609a7a4143b67c5b02c7c7b0e81c9a47cd18adac5e40388ac2"
+  },
+  "nextEvidence": "短期C02の既保守値PG44964未測定とPG44972後続を照合し、未実証で業務期待のある純値を優先する。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T23:12:34+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 75,
+    "remainingPercent": 25,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "a7b386b38c99cea7cd97eb962d772113d5efa83416b25d5cd226d30db0508228",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T23:12:34+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 75,
+        "remainingPercent": 25,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T23:12:07.460919+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 75,
+    "remainingPercent": 25,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
