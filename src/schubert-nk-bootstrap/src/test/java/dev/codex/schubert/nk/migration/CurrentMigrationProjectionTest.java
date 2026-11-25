@@ -31,18 +31,11 @@ import org.junit.jupiter.api.Test;
 final class CurrentMigrationProjectionTest {
   private static final List<String> SQL =
       List.of(
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER"
-              + " BY id",
-          "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size"
-              + " FROM scenario.script_files ORDER BY id",
-          "SELECT"
-              + " id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block"
-              + " FROM scenario.script_entries ORDER BY id",
-          "SELECT"
-              + " id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256"
-              + " FROM scenario.audio_files ORDER BY id",
-          "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY"
-              + " entry_id,audio_file_id,link_type COLLATE \"C\"");
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER BY id",
+          "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM scenario.script_files ORDER BY id",
+          "SELECT id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block FROM scenario.script_entries ORDER BY id",
+          "SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id",
+          "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
   private static final String NAME = " Namé ";
   private static final String NORMALIZED = "stored_norm";
   private static final String ROLE = "movie_audio";
