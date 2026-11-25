@@ -7,3 +7,5 @@ PG42864、fb2404e9af、2026-11-23 JST。手順はPython 3.14、隔離Git checkou
 flockは同runner間でcheckout固有のGit directoryを境界とし、同じIDの永久予約はcheckout間で共有する。外部から直接実行したMavenは対象外。既認定の旧形式は保存検証のみ。構文・実行日時・Git source・各試験・元結果へのリンクは[PG42864 manifest](evidence/PG42864-formal-run-provenance-fixtures-v1/manifest.json)。
 
 PT-OPS-G09-JUNIT025（BUG-3874／YKT-3006）。合成Gitの確定sourceを選び、対象外noteとignore済み生成物がある正常例、対象範囲の未追跡入力、追跡ファイルの変更を個別確認する。Gitの通常表示から未追跡を除く設定でも当入力は拒否し、ファイルを保全する。006と018の新規収集前後で適用し、018保存物validate-onlyの扱いを維持する。製品・実収集未起動。
+
+BUG-3884／YKT-3006、PT-OPS-G09-JUNIT026。現collector 003・005・007～010・015・016・020～040の29入口で元commit・四pathを固定し、既共通guardを使用。元のみで拒否できなかった合成未追跡29、修正後拒否29、対象外と生成targetを許容29。元の残り処理の構造を独立に比較し、工具34成功。実業務と実collectorは実行待ちの状態を維持。 [PG45502](evidence/PG45502-formal-child-collectors-scope-check/manifest.json)
