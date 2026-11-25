@@ -273,7 +273,8 @@ final class QuestionReceiptIdTest {
         }
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
-        throw new IllegalStateException("question receipt worker termination interrupted", interrupted);
+        throw new IllegalStateException(
+            "question receipt worker termination interrupted", interrupted);
       }
     }
   }
