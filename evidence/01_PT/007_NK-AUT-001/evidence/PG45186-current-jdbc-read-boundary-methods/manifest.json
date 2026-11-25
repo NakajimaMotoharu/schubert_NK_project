@@ -1,0 +1,79 @@
+{
+  "run": "PG45186",
+  "source": "b801e25bba06c1db70353cbb94999dfb13d1e247",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "WBS-P007",
+    "WBS-G13.04"
+  ],
+  "actualExit": 0,
+  "actualTrials": 2,
+  "cumulativeLocalProductTrials": 1751,
+  "terminalAtUTC": "2026-11-25T11:01:22.282625+00:00",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45186-current-two-jdbc-read-negative-conditions/begin.json",
+    "sha256": "da1fbbdf4f68367a01b87a1bdabadf57abdd640459bf728cfb100850ff0a0e91"
+  },
+  "endpoint": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45186-current-two-jdbc-read-negative-conditions/terminal.json",
+    "sha256": "5ddcc422812e6bac86edf7f524d69bea1efc375a262c24f2eb9b051ead5a8d2d"
+  },
+  "expectedCaseNames": [
+    {
+      "testId": "PT-AUT-PRE003",
+      "selector": "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest#candidateLookupIsBoundedSingleRowAndNeverAnAuthorityGrant",
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+        "sha256": "798d7ad8dbf2b09a05c03930bd3a5bbc841f9c7b5d22f5029db09bdfc281e391"
+      },
+      "oldQualification": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20874-admin-prelude-jdbc-eight-v1/manifest.json",
+        "sha256": "ce7bf008353044a156a102689d02c164888de4825e629b4241039daab7ce1b6e"
+      }
+    },
+    {
+      "testId": "PT-AUT-JDBC003",
+      "selector": "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest#missingRevokedExpiredAndDisabledRowsNeverReachTouch",
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java",
+        "sha256": "d8559afdc03cf6816f9a64831dadc8be3c9198c65e0aad64acf732c609cf2812"
+      },
+      "oldQualification": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20840-authentication-verifier-jdbc-six-v1/manifest.json",
+        "sha256": "9ed3f1b415ee21c3439a2be2aa554692ea51f5509c507ebbd3c1d5c51f5adc03"
+      }
+    }
+  ],
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45186-current-two-jdbc-read-negative-conditions/junit/TEST-junit-jupiter.xml",
+    "sha256": "2e668455ffd32c9762c63e148cb10799ee7b3c42136b98918ae0d5f175146f9e"
+  },
+  "trial": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "justThisExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45186-current-two-jdbc-read-negative-conditions/selected.exec",
+    "sha256": "2d801d76ef78bb83b478dbe75b2dda912a45d0d20508f4453796c60864dd8b96"
+  },
+  "rawReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45186-current-two-jdbc-read-negative-conditions/measure.log",
+    "sha256": "3b80621bd9ff8e38cb294eb0c22d046cc57ae90a442d723e618ed557c7dc0fde"
+  },
+  "methodAndClass": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45186-current-jdbc-read-boundary-methods/raw.json",
+    "sha256": "51fd686190c8f7e59a3cfedbb80c2e0052e117cc393f8bef9288ca1d43d2d3c3"
+  },
+  "previousIsolationProof": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/manifest.json",
+    "sha256": "61f0ce26a7175e470954ccbb3ae50272ed744126ec748fe9078b19b8e0af286f"
+  },
+  "noCurrentScopeUnion": true,
+  "actualDbNotInvoked": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
