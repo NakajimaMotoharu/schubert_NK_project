@@ -1,0 +1,462 @@
+{
+  "source": "d3d0631134c0520bb9d5a62021be6f4743bb42a5",
+  "raw": "manifest.json",
+  "records": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+        "sha256": "110d38af5375d0bb7f5b9699e424a06642e05330e6f32046f98fdb265fd59cc3"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 69,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 141,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 175,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "INDEPENDENT_CALLER_MONITOR",
+      "details": "Test intentionally holds the caller-visible monitor while another worker performs the original API; removing the hold would drop the monitor-independence test.",
+      "line": 176,
+      "rule": "AvoidSynchronizedStatement",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "OWNERSHIP_REVIEW",
+      "details": "Shared reservation has one identity. The worker exercises close and the surrounding finally closes any acquired reservation on failure.",
+      "line": 186,
+      "rule": "CloseResource",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "INDEPENDENT_CALLER_MONITOR",
+      "details": "Test intentionally holds the caller-visible monitor while another worker performs the original API; removing the hold would drop the monitor-independence test.",
+      "line": 187,
+      "rule": "AvoidSynchronizedStatement",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "OWNERSHIP_REVIEW",
+      "details": "This reference is retrieved in the unconditional cleanup block and closed if present.",
+      "line": 201,
+      "rule": "CloseResource",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "OWNERSHIP_REVIEW",
+      "details": "Executor is a borrowed alias inside TransferFixtureWorkers try-with-resources; its owner shuts it down and awaits bounded termination.",
+      "line": 213,
+      "rule": "CloseResource",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 220,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+        "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+      },
+      "originalToolGroup": "45710",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 231,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetChecksumManifestTest.java",
+        "sha256": "616968e744128a2777580e69f84874acf9f19d28671530088cbb43e0ec49286e"
+      },
+      "originalToolGroup": "45724",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 159,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+        "sha256": "6288b3065cc2162838ed36cdfce3cea760e7223e391a3f7eba45ba87f63a219b"
+      },
+      "originalToolGroup": "45726",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 446,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java",
+        "sha256": "05975e701b01f7525cabe1231507da5cb8617215bd9ad8b30386e14803e9a997"
+      },
+      "originalToolGroup": "45728",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 395,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/AnimationWireClientTest.java",
+        "sha256": "b9da194cb6b104b246e4ca42c87e2d8c4cea841d312320ecb0842d6f16c168ba"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 324,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java",
+        "sha256": "38f5f0e19116db1dac933b3dee37460c6a508013823bddce3d737c9a147b98a3"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 401,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/MusicWireClientTest.java",
+        "sha256": "08d12c6eebbeec749ba9d09db8cb178e2b0e75b48980cbcc3d623ca1c8129197"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 332,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 413,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 419,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 421,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 454,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 464,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 465,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+        "sha256": "0161fc8c79c16b94a0e5b327a855f6c1ab62ba56960d7332aabd887717b1699f"
+      },
+      "originalToolGroup": "45734",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 501,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+        "sha256": "f222fca0e963704cf10fa02f65777e9ff4230404988e065acba1d9c47b5dde70"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 84,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+        "sha256": "f222fca0e963704cf10fa02f65777e9ff4230404988e065acba1d9c47b5dde70"
+      },
+      "originalToolGroup": "45742",
+      "classification": "INDEPENDENT_CALLER_MONITOR",
+      "details": "Test intentionally holds the caller-visible monitor while another worker performs the original API; removing the hold would drop the monitor-independence test.",
+      "line": 87,
+      "rule": "AvoidSynchronizedStatement",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+        "sha256": "1e275dbfdca7b15babe1997b6da7f5edf5199bb1bb3aba6a42dfe99674fe3f75"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 8,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+        "sha256": "1e275dbfdca7b15babe1997b6da7f5edf5199bb1bb3aba6a42dfe99674fe3f75"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 17,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+        "sha256": "1e275dbfdca7b15babe1997b6da7f5edf5199bb1bb3aba6a42dfe99674fe3f75"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 23,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+        "sha256": "1e275dbfdca7b15babe1997b6da7f5edf5199bb1bb3aba6a42dfe99674fe3f75"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 25,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+        "sha256": "1e275dbfdca7b15babe1997b6da7f5edf5199bb1bb3aba6a42dfe99674fe3f75"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 29,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 72,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 75,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 84,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 86,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "JDK_DEFINING_LOADER",
+      "details": "The only proxy interface belongs to java.base. Its actual defining loader is chosen, without an application or arbitrary thread-context loader.",
+      "line": 88,
+      "rule": "UseProperClassLoader",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 88,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+        "sha256": "59d25617831ec97aa2b12bea1dbf260273a4e68a4a7e5baa2b05577e6b48d1aa"
+      },
+      "originalToolGroup": "45742",
+      "classification": "FINITE_TEST_CONCURRENCY",
+      "details": "Local finite worker, timeout, or interrupt behavior exercises the independent concurrency contract or validates its cleanup.",
+      "line": 89,
+      "rule": "DoNotUseThreads",
+      "qualityOwnerDecision": null
+    }
+  ]
+}
