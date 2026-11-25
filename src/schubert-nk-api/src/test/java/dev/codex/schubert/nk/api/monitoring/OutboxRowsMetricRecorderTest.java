@@ -186,7 +186,8 @@ class OutboxRowsMetricRecorderTest {
   }
 
   @Test
-  void outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable() throws InterruptedException, ExecutionException {
+  void outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
@@ -203,7 +204,8 @@ class OutboxRowsMetricRecorderTest {
               return actual == one || actual == two;
             });
       }
-      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
+      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertTrue(actual.get());
       assertEquals(1, one.pending());
       assertEquals(3, one.error());
       shape(registry);
