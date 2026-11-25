@@ -1,0 +1,222 @@
+{
+  "run": "PG45120",
+  "source": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "productionCoreMain": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 1,
+  "reason": "Current four-target SpotBugs detects one separate held revocation method; both changed audit methods independently clear",
+  "terminalAtUTC": "2026-11-25T09:24:33.375844+00:00",
+  "preFix": "58fda918f7",
+  "fix": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "bug": "BUG-3820",
+  "horizontal": "YKT-2978",
+  "previousCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "rawBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45118-current-api-auth-probe-thirteen-typed/manifest.json",
+    "sha256": "f3be488d5e7ebb7d3e160b22f620763f5a64fb0ea9b9de7c271f0838c847a8cb"
+  },
+  "oldStaticThreeCurrentStaticOne": true,
+  "currentStaticScope": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-resource-statics/terminal.json",
+    "sha256": "7e7861c69dbbe7e0f41dae57fbbf095b14ce9811c741286fa2e4a002d3853037"
+  },
+  "remainingStatic": {
+    "method": "AuthSessionRevocationService.update",
+    "rule": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+    "realFixtureHeld": true
+  },
+  "rawPmdKept": 41,
+  "compiledSources": 50,
+  "nullAway": 0,
+  "ordinaryCounts": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "visibleCases": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/junit-summary.json",
+    "sha256": "9dddbe40052bbcf5c9902e39496d4acf3dced4a50fdc39d849c8f9f21e271d9f"
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-writers-18/reports/TEST-junit-jupiter.xml",
+    "sha256": "ce5d198e8c763ef40c48175010543df0122ebe534562cc2dee5fe054ff7ce91b"
+  },
+  "singleLiveExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-writers-18/one.exec",
+    "sha256": "d5251d5682d205b31c0cc20ebe25c5227415e62f2fd793a873c67a1e13ca195e"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-writers-18/raw.log",
+    "sha256": "27a6474271c4615f2d60529472e08c2f5ec62aecb44c5c75d222eb3f7e3920f3"
+  },
+  "writerCounters": {
+    "LINE": [
+      0,
+      61
+    ],
+    "METHOD": [
+      0,
+      4
+    ],
+    "CLASS": [
+      0,
+      2
+    ],
+    "BRANCH": [
+      0,
+      16
+    ]
+  },
+  "rawByClass": {
+    "dev/codex/schubert/nk/api/security/SessionAuditWriter": {
+      "crc": "5a58f364d154aeae",
+      "counter": {
+        "INSTRUCTION": [
+          0,
+          96
+        ],
+        "BRANCH": [
+          0,
+          4
+        ],
+        "LINE": [
+          0,
+          24
+        ],
+        "COMPLEXITY": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          2
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/api/security/LoginAuditWriter": {
+      "crc": "828bc5e8b63f9df9",
+      "counter": {
+        "INSTRUCTION": [
+          0,
+          151
+        ],
+        "BRANCH": [
+          0,
+          12
+        ],
+        "LINE": [
+          0,
+          37
+        ],
+        "COMPLEXITY": [
+          0,
+          8
+        ],
+        "METHOD": [
+          0,
+          2
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup": {
+      "crc": "7b305a9b2dcf44b7",
+      "counter": {
+        "INSTRUCTION": [
+          32,
+          22
+        ],
+        "BRANCH": [
+          4,
+          4
+        ],
+        "LINE": [
+          14,
+          9
+        ],
+        "COMPLEXITY": [
+          4,
+          4
+        ],
+        "METHOD": [
+          2,
+          2
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "newHelperCounters": {
+    "INSTRUCTION": [
+      0,
+      6
+    ],
+    "BRANCH": [
+      0,
+      2
+    ],
+    "LINE": [
+      0,
+      2
+    ],
+    "COMPLEXITY": [
+      0,
+      2
+    ],
+    "METHOD": [
+      0,
+      1
+    ],
+    "CLASS": [
+      0,
+      0
+    ]
+  },
+  "formatAndCheckstyle": 0,
+  "actualTrialsAdded": 18,
+  "cumulativeLocalProductTrials": 1354,
+  "newTestDefinitions": [
+    "PT-AUT-AUDIT-PREPARE001",
+    "PT-AUT-AUDIT-PREPARE002"
+  ],
+  "unmodifiedProductionInputsOtherFive": {
+    "src/schubert-nk-protocol/src/main": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+    "src/schubert-nk-protocol/pom.xml": "9e1b868711e88e06748011ca7d345fcfb3d212e4",
+    "src/schubert-nk-storage/src/main": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+    "src/schubert-nk-storage/pom.xml": "b0d15b225c56fdcae318600fb436984e7fb33876",
+    "src/schubert-nk-bootstrap/src/main": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+    "src/schubert-nk-bootstrap/pom.xml": "540cbf7c804ce2574ecb037a7f2e589855156218",
+    "src/schubert-nk-batch/src/main": "f713469ccd0424baf6339dd4748c043f23e4725e",
+    "src/schubert-nk-batch/pom.xml": "e181f798331dbddfe82111108f770e27538b0f04",
+    "src/schubert-nk-web/src/main": "e25acc5a895ad0a15ff2305ab9a912d401fbc0da",
+    "src/schubert-nk-web/pom.xml": "968f5090625708664487f79d4d9390fb8db58898"
+  },
+  "searchRemaining": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/common-acquisition-followup.json",
+    "sha256": "a1a464d1b7431ecaa2d3e5461bb431416ed5652bc205f06a1da7016807f117fd"
+  },
+  "realOperations": 0,
+  "manifestBegins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-writers-18/begin.json",
+      "sha256": "8645d26055110ccbc56002f520979669bd70ce0b788416cd2480da62528617a8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-resource-statics/begin.json",
+      "sha256": "f61f2ff11cf1227fe7380f74fd577d7f8ad997dacd2fa0f879117ad5ed116fce"
+    }
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
