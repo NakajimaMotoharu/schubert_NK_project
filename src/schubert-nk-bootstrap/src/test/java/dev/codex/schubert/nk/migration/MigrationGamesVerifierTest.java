@@ -553,11 +553,19 @@ final class MigrationGamesVerifierTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence) {
+          switch (failure) {
+            case null -> {}
+            case SQLException sql -> throw sql;
+            case IllegalStateException state -> throw state;
+            case AssertionError fatal -> throw fatal;
+            default -> throw new AssertionError("Unexpected games verifier fixture failure");
+          }
+        }
       }
     }
   }
