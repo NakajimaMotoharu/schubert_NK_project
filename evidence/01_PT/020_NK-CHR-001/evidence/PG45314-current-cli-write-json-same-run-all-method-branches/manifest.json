@@ -1,0 +1,169 @@
+{
+  "run": "PG45314",
+  "source": "d0a16c1efcb569917eea15275a015e0759534220",
+  "fixtureSource": "bb649f77c024b6ce785a32cbd498036f181e1eff",
+  "toolSource": "4f69b6a033f8ffeee6c61352962a51116f112291",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P020-01.01/2-a",
+  "terminalAtUTC": "2026-11-25T13:49:08.670103+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "actualToolTrials": 6,
+  "cumulativeScopeToolTrials": 386,
+  "previousPartial": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45312-current-chr-output-ownership-seven/terminal.json",
+      "sha256": "7bc08b1e0d09a0cc863e7284014aec1fcc78b079eb07a328a33aea85127657f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/terminal.json",
+      "sha256": "82877b5b3cd20807ff91da4d42a9c3bdd2681e44b2eecfccd02c2dd4787a19bd"
+    }
+  ],
+  "selectedLocalTarget": {
+    "GateCliTest": [
+      "atomicJsonWriterRejectsConcurrentUseOfTheSameOutput"
+    ],
+    "GateOutputFailureContractTest": [
+      "failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim",
+      "cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased",
+      "nestedSameOutputIsRejectedWithoutReleasingOuterClaim"
+    ],
+    "GateOutputRootValueTest": [
+      "destinationWithoutParentDoesNotInvokeOutputPort"
+    ],
+    "GateOutputNullValueTest": [
+      "missingDestinationDoesNotInvokeOutputPort"
+    ]
+  },
+  "sameExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/unit.exec",
+    "sha256": "4ae8fec28d6514d8c148f3da7d6b68d443ff9b6dcd9ff9379f1985621b588128"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/raw.log",
+    "sha256": "b82c14daade753b5e1b886d18a77a1647ff548031be2cc0ca74fd8701a3e7b5c"
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/junit/TEST-junit-jupiter.xml",
+    "sha256": "c251a8715a5082a0edab9db85dad2a2a70e600e6786a23adc95c2b521fbd2ca8"
+  },
+  "child": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/child.json",
+    "sha256": "9cbbbbe9463b09edd6d698ea71de0d8833eac6565cf07427d1bd0cc262112096"
+  },
+  "preflight": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/begin.json",
+    "sha256": "4e37b7aab574e51d3bd75ab57e2526675d5e20e126e6441ba897c9e59064085c"
+  },
+  "end": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45314-current-cli-write-json-six/terminal.json",
+    "sha256": "c683c7858fcfe4dd9f7221059debe8bc5f8de04fb7334c80ce76f21a61ea8c92"
+  },
+  "targetCounters": {
+    "INSTRUCTION": 128,
+    "BRANCH": 6,
+    "LINE": 29,
+    "COMPLEXITY": 10,
+    "METHOD": 7,
+    "CLASS": 0
+  },
+  "rawScopedMethods": [
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli",
+      "writeJson",
+      "(Ljava/nio/file/Path;Ljava/lang/Object;)V",
+      "8",
+      "INSTRUCTION:0:5",
+      "BRANCH:0:0",
+      "LINE:0:2",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli",
+      "writeJson",
+      "(Ljava/nio/file/Path;Ljava/lang/Object;Ldev/codex/schubert/characterization/GateCli$JsonOutput;)V",
+      "8",
+      "INSTRUCTION:0:89",
+      "BRANCH:0:6",
+      "LINE:0:18",
+      "COMPLEXITY:0:4",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "<init>",
+      "()V",
+      "2",
+      "INSTRUCTION:0:3",
+      "BRANCH:0:0",
+      "LINE:0:1",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "createParent",
+      "(Ljava/nio/file/Path;)V",
+      "1",
+      "INSTRUCTION:0:6",
+      "BRANCH:0:0",
+      "LINE:0:2",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "writeTemporary",
+      "(Ljava/nio/file/Path;Ljava/lang/Object;)V",
+      "1",
+      "INSTRUCTION:0:6",
+      "BRANCH:0:0",
+      "LINE:0:2",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "publish",
+      "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+      "1",
+      "INSTRUCTION:0:15",
+      "BRANCH:0:0",
+      "LINE:0:2",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ],
+    [
+      "METHOD",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "deleteTemporary",
+      "(Ljava/nio/file/Path;)V",
+      "1",
+      "INSTRUCTION:0:4",
+      "BRANCH:0:0",
+      "LINE:0:2",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:0"
+    ]
+  ],
+  "wholeCliProof": false,
+  "oldCoverageImportedOrMerged": 0,
+  "actualCurrentOrNk": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
