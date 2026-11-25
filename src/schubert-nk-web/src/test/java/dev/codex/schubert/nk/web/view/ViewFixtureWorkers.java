@@ -1,0 +1,34 @@
+package dev.codex.schubert.nk.web.view;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+/** Finite cleanup for render-only fixture workers. See BUG-3846 and YKT-2997. */
+final class ViewFixtureWorkers implements AutoCloseable {
+  private final ExecutorService executor;
+
+  ViewFixtureWorkers(ExecutorService executor) {
+    this.executor = Objects.requireNonNull(executor, "fixture executor");
+  }
+
+  <T> Future<T> submit(Callable<T> task) {
+    return executor.submit(task);
+  }
+
+  @Override
+  public void close() throws InterruptedException {
+    executor.shutdownNow();
+    try {
+      assertTrue(
+          executor.awaitTermination(10, TimeUnit.SECONDS), "view fixture workers did not stop");
+    } catch (InterruptedException interrupted) {
+      Thread.currentThread().interrupt();
+      throw interrupted;
+    }
+  }
+}

@@ -319,13 +319,12 @@ final class UserDetailTemplateResourcePortTest {
   @Test
   void ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       List<Future<?>> futures = new ArrayList<>();
       for (int i = 0; i < 8; i++) {
         final int n = i;
         futures.add(
-            executor.submit(
+            workers.submit(
                 () -> {
                   var name = "public-" + n;
                   var d =
@@ -340,9 +339,6 @@ final class UserDetailTemplateResourcePortTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

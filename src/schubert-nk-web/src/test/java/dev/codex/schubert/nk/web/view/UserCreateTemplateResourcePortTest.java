@@ -222,13 +222,12 @@ final class UserCreateTemplateResourcePortTest {
   @Test
   void ownedConcurrentFormsDoNotShareUsernamesOrSelections()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       List<Future<?>> futures = new ArrayList<>();
       for (int i = 0; i < 8; i++) {
         final int n = i;
         futures.add(
-            executor.submit(
+            workers.submit(
                 () -> {
                   var p = page();
                   var name = "public-" + n;
@@ -242,9 +241,6 @@ final class UserCreateTemplateResourcePortTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
