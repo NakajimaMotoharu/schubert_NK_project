@@ -30,3 +30,5 @@ SS351の送受信/ACK/retry/DLQ観測を上の内部七tupleへ固定する。AC
 期待値は上表・承認SS literal・呼出前fixture算出から作り、Production methodをexpected生成に使用しない。stage渡しの一event一incrementだけで実retry/duplicate抑止をしない。新8＋必要既API154を当162/20、7912ordinary/7916正常六compile別snapshot→7914独立40Java/実34＋metadata1/CRC/四100→7918全1783（当API35/歴史Batch65-Web14）→7920全129delta-114追加physical→7922生成既52＋新2=54/raw理由→7924公開scan、1719結果へsource/run/OS-JDK-tool/実日時/branch/command/exit/input/独立期待値/実際/coverage/関連BUG/hashを保存する。
 
 group1941/開始3-5-9pp上限10/fresh9残91/reset1793382075/PG7910receipt。実DB/MQ/clock/ACK/送信/再送/DLQ/Root/VM/service/配置0-HOLD、元-v4-v5/旧markerlast27区間/共有累積・専有N-T/工数null/90再基底化0、正式1964/53/原190新受入0/QA051final/PTALT0/whole451-native-CHR未受入。個別catalogの網羅を実MQ処理/全PGPTの完了にしない。
+
+BUG-3882／YKT-2997。MQEVENT007の整数期待・8worker／64件・元期限を維持。workerの有限終了の失敗を一次例外に付随させ、fixtureが所有する二registryは逆順で閉鎖。現版3件の終了は[PG45498](evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json)。実監視は別。

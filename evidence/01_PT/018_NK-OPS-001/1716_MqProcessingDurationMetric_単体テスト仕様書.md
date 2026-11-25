@@ -18,3 +18,5 @@ DEBUGはlayout毎の二Summary/seconds/publishPercentileHistogram＋p95 .95、�
 旧INBOXMETの独立SS323 literal vectorを試験素材として再利用し、Production LayoutRegistryの出力からexpectedを生成しない。使用するLayoutRegistry/Definition/InteractionKindは既176class純粋依存の同byteを先行検証済み、再導入/SQL/ネットワーク/実MQ/時計/VM/Root等0。新8＋必要既API146を当154/19、7892ordinary＋7896正常六compile（別snapshot）→7894独立38Java/実32＋metadata1/CRC/四100→7898全1781（API33/歴史Batch65-Web14）→7900全127delta-112追加physical→7902生成既50＋新Outcome2=52/raw全理由→7904公開scan・1717結果へsource/run/環境/時刻/command/exit/input/golden/実際/coverage/BUG/hashを結合する。
 
 group1939、開始3/5/9pp上限10/fresh9残91/reset1793382075/PG7890fresh receipt。元/v4/v5・旧markerlast27区間/共有累積/専有N-T/工数null/元90再基底化0、正式1964/53/原190新受入0/QA051final/PTALT0/whole451-native-CHR・全actualHOLDを維持。実broker/API budget/consumer hook/exporter/p95品質は未受入で、供給duration観測だけを実装・試験する。
+
+BUG-3882／YKT-2997。MQTIME007の整数期待・8worker／64件・元期限を維持。workerの有限終了の失敗を一次例外に付随させ、fixtureが所有する二registryは逆順で閉鎖。現版3件の終了は[PG45498](evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json)。実監視は別。

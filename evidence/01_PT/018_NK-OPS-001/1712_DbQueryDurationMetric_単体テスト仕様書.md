@@ -20,3 +20,5 @@ Micrometer1.17.1のDistributionSummaryをbaseUnit seconds/percentile histogram�
 新8＋必要既API130を当138/17予定、7830 ordinary→7832独立(34Java/実28＋metadata1)・7834正常六compileを別snapshot→7836全1777(当API29physical/歴史Batch65-Web14)→7838全123delta/108追加physical/歴史元Stepのcurrent移転0→7840生成新4＋既41=45/current ordinary/raw全理由→7842公開scan、1713結果へsource/run/実日時/OS-JDK-tool/branch/command/exit/XML/input/期待/実際/CRC/四coverage/BUG/hashを結合。SQL/接続・実時計/DB/Root/VM/配備等操作0、SDK4＋API専用2/既protocol依存は既版を再利用・変更0。
 
 開始3/5/9pp上限10/fresh receipt→event1934、原-v4-v5/旧markerlast27区間/累積・専有N-T/工数null/元90再基底化0。期待値は固定literalとfixture整数nsの独立算出、production methodでexpected生成0。正式1964/53/原190新受入0/QA051final/PTALT0/whole451-native-CHR/actualHOLD維持。
+
+BUG-3882／YKT-2997。DbQueryDurationMetricRecorderTest#dbTime007の整数期待・8worker／64件・元期限を維持。workerの有限終了の失敗を一次例外に付随させ、fixtureが所有する二registryは逆順で閉鎖。現版3件の終了は[PG45498](evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json)。実監視は別。
