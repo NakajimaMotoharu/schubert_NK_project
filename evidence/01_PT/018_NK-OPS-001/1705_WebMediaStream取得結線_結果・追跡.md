@@ -18,3 +18,7 @@
 PMD8=既5完全同属性・位置/source-debug不変＋新3（collect line28 col5 private lock、line35 col16 Runtime/col35 Error）。411の私有owner読取/公開lockと、missing後同一再throw・format/原因walk/retry/close/正常化なしを各位置/現在source/実試験へ個別結合、未分類/適用違反0・抑制0。新generated型なし、既5型14methodは同byte/JDK/公式filterと当GeneratedWebValueContractTest4へ再結合しcoverageへ算術加算0。
 
 新製造8、必要既35のsource再資格、metadata/source認証を分離。群開始3/5/9pp上限10/fresh3→4残96/reset1793382075、同窓共有観測差1ppは専有費でなくN-T/工数null。旧markerlast27区間/共有累積null・元90再基底化0、原-v4-v5/usagece258410（04:39:54JST/explicit0/完全性未証明）継承。actual操作0/全HOLD、原保全物/stash7/Scenario3/Currentbaseline保持。正式1964/53/原190新受入0/QA051final/PTALT0/whole451-native-CHR未受入、PGPT全完了とはしない。
+
+## 現候補での供給元NPEと別workerの再観測
+
+PT-OPS-MEDIACONN009は1/1成功。供給元が投げた同じNPEを返し、MUSICだけを欠測にした。既知のVIDEO 5と未観測AUDIOを保持し、別workerの要求でMUSICの0を観測した。呼出し・終端・入力SHAを保存。無加工の行17/18、メソッド3/3、クラス1/1、分岐2/4はこの1件だけの単一exec。旧8件のexecは別記録。書式・Checkstyle指摘0。 [PG44940](evidence/PG44940-web-media-provider-npe-and-recovery/manifest.json)
