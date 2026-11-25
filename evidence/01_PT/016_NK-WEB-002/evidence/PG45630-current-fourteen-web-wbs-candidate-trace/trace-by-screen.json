@@ -1,0 +1,759 @@
+{
+  "rows": [
+    {
+      "wbs": "WBS-P016-02",
+      "screen": "SCR002",
+      "program": "NK-WEB-002",
+      "condition": "メニューの表示名、権限別のリンクとレイアウト",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MenuDisplayValueTest.java",
+          "sha256": "d533c3e17ce5d15b557266fd52fa9ea0323dea43ae2b0788e24fbab1c5348190"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java",
+          "sha256": "b99a20ba699591cff8b682f76aaf975558e5143967b1000f58a0ba98601da0c5"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43988-current-scr002-menu-display/manifest.json",
+            "sha256": "f69b5c9dac9a8d5dd5018be6ec113842612c702f81f29b529daf9838f20e0327"
+          },
+          "reportedWbs": null,
+          "receiptSource": "c5c01377534b16d9ef23705e76bd3f0618ec2a8b",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45582-whole-wbs-test-paths-menu-and-three-dom-deltas/manifest.json",
+            "sha256": "90959310508909ecf803c2a36b47a3124dc3fb89081ab371d0cda478d175d445"
+          },
+          "reportedWbs": "WBS-G13.07/2",
+          "receiptSource": "c3b689f31c57f1dc5d95de380ab8b96286620ea2",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4955_SCR002メニュー表示値単体仕様.md",
+          "sha256": "65db87a4a4eb5f77057d77a53176e31f4b28ca95640ef27852cd58552eec4dba"
+        }
+      ],
+      "remainingRuntimeEvidence": "実サービスのowner sessionとMENU_VIEWEDのaudit到達",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-04",
+      "screen": "SCR004",
+      "program": "NK-WEB-002",
+      "condition": "Game一覧テンプレートと閉じた表示項目",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioGameListTemplateResourcePortTest.java",
+          "sha256": "84a63a4155655278e734fc716c2ece7b9605a599c4c87cf7afea2390dd3cf70f"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+          "sha256": "49f3879d7814f2a44212da900f51101fa2dc3d3965ef4cadca2675ed8e946439"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41694-p01604-scenario-game-resource-two-v1/manifest.json",
+            "sha256": "c4617f5776e0248fd57ef2e00ab8542f42b8c884ad09534003b807306ef9213f"
+          },
+          "reportedWbs": "WBS-P016-04/2",
+          "receiptSource": "f02c9c176c646f39d2e21aae89810be6ad3381ab",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41642-p01604-scenario-hierarchy-runtime-comparison-v1/manifest.json",
+            "sha256": "8443601ff3ba767707e204ccfffd6c7ef045d913d14086a399ba567f2a7ae0e5"
+          },
+          "reportedWbs": "WBS-P016-04/2",
+          "receiptSource": "186de2d95d17de70db705ebf6044db652bbdbf31",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4131_P01604SCR004Game一覧原二artifact契約対応.md",
+          "sha256": "9f85a29c709457f4bfb3a6f94b77af5561689df5ae9437749f4ed4aa7087f25f"
+        }
+      ],
+      "remainingRuntimeEvidence": "実Controller・HTTP・owner・正規API",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-05",
+      "screen": "SCR005",
+      "program": "NK-WEB-002",
+      "condition": "Route一覧の実資源、上位リンクと固定モデル",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioRouteListTemplateResourcePortTest.java",
+          "sha256": "97d6e6a51e592c4241453db3ce84cade29b1435c14161e8197958ced557f93db"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+          "sha256": "49f3879d7814f2a44212da900f51101fa2dc3d3965ef4cadca2675ed8e946439"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41692-p01605-scenario-route-resource-two-v1/manifest.json",
+            "sha256": "709899bf8f3cb38fb24d84ed5caaafe4df7bdb609d5ca20fdc7ec1806921fdca"
+          },
+          "reportedWbs": "WBS-P016-05/2",
+          "receiptSource": "1a739cbadd797398d5954cae2ced6d5d8a8f46b4",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41642-p01604-scenario-hierarchy-runtime-comparison-v1/manifest.json",
+            "sha256": "8443601ff3ba767707e204ccfffd6c7ef045d913d14086a399ba567f2a7ae0e5"
+          },
+          "reportedWbs": "WBS-P016-04/2",
+          "receiptSource": "186de2d95d17de70db705ebf6044db652bbdbf31",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4132_P01605SCR005Route一覧原二artifact契約対応.md",
+          "sha256": "81a203028676afcd814cb5cbf24b4fc6d34853e8340acd8e493616018b64de42"
+        }
+      ],
+      "remainingRuntimeEvidence": "実APIのGame存在と404・正規HTTP",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-06",
+      "screen": "SCR006",
+      "program": "NK-WEB-002",
+      "condition": "File一覧の実資源と親リンクの保存",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioFileListTemplateResourcePortTest.java",
+          "sha256": "afbf674fa6174520db2aa9a79e0f27fa5c36be0c5ae34150c5b841511d848706"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+          "sha256": "49f3879d7814f2a44212da900f51101fa2dc3d3965ef4cadca2675ed8e946439"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41688-p01606-scenario-file-resource-three-fixed-v1/manifest.json",
+            "sha256": "dcdf40ea849c6db7ee8b3c9300790f3a69b5cae544e4cc654a5bff47b3af8bf2"
+          },
+          "reportedWbs": "WBS-P016-06/2",
+          "receiptSource": "b20a15125e666eeefb43b81518d03ad30525f81d",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41642-p01604-scenario-hierarchy-runtime-comparison-v1/manifest.json",
+            "sha256": "8443601ff3ba767707e204ccfffd6c7ef045d913d14086a399ba567f2a7ae0e5"
+          },
+          "reportedWbs": "WBS-P016-04/2",
+          "receiptSource": "186de2d95d17de70db705ebf6044db652bbdbf31",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4133_P01606SCR006File一覧原二artifact契約対応.md",
+          "sha256": "67bb37c38c843c7e4c5b6b8fb275e5c84fd2ef1f08163190f227f6f9479041df"
+        }
+      ],
+      "remainingRuntimeEvidence": "実Game/Route所有・HTTP応答・404",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-08",
+      "screen": "SCR008",
+      "program": "NK-WEB-002",
+      "condition": "Animationメニューの表示とナビゲーション",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+          "sha256": "2b126dcf428070898018c3da7f121c8f2a4e7f32bf0c419036836f753cd7c396"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java",
+          "sha256": "71da27de0b62213aef118d8fdcff2c91b6ce624fb432f25ac05295b4739ce455"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41644-p01609-animation-current-eight-v1/manifest.json",
+            "sha256": "da79215d795385e935e60416d85635831756586ed886fc51ae44c3abb57a0646"
+          },
+          "reportedWbs": "WBS-P016-09/2",
+          "receiptSource": "186de2d95d17de70db705ebf6044db652bbdbf31",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [],
+      "remainingRuntimeEvidence": "実runtimeの認証済み一覧、ControllerとHTTP",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-09",
+      "screen": "SCR009",
+      "program": "NK-WEB-002",
+      "condition": "Animation一覧の各項目と件数境界",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+          "sha256": "2b126dcf428070898018c3da7f121c8f2a4e7f32bf0c419036836f753cd7c396"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java",
+          "sha256": "f179628406a4baf3de1d29ab5dd1df2c475818ca05371670f10ee723c67ec4ad"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java",
+          "sha256": "71da27de0b62213aef118d8fdcff2c91b6ce624fb432f25ac05295b4739ce455"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42574-scr009-animation-exact-used-bytes-and-selected-results-v1/manifest.json",
+            "sha256": "f6b3be8ca09dc8870ec7defe28405539af11be8141009265359846cf641fc102"
+          },
+          "reportedWbs": "WBS-P016-09/2",
+          "receiptSource": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4942_SCR009Animation件数過大側の単体仕様.md",
+          "sha256": "34fd03c78219832875b81f8607cd16b27cec0681811e2e70fee2d135d6a1fda4"
+        }
+      ],
+      "remainingRuntimeEvidence": "実API、HTTP、nativeとBrowser再生への遷移",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-11",
+      "screen": "SCR011",
+      "program": "NK-WEB-002",
+      "condition": "Musicカテゴリ・件数不足と固定テンプレート",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java",
+          "sha256": "0266a77b28645930f65edfc7e2c40b998a78f8a7cb0277715154a30d48b1204d"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+          "sha256": "24211090f5551351c66dfd78c95fea4acbf1645b10ae9a244344176c486607e9"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java",
+          "sha256": "b6bc6a80f5b2163af629f01c03716488854d317da35c24084e7edcba77166806"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44294-music-pair-template-and-static-evidence/manifest.json",
+            "sha256": "03b2a4b0539911013e5446110c75c031c1cfde9ee9da0e33569f923739f27ee0"
+          },
+          "reportedWbs": [
+            "WBS-P016-13/2",
+            "WBS-F03/2-2-b"
+          ],
+          "receiptSource": "af91c82fdbb95f363928d6535a9f6bbb37977b0b",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4940_SCR011カテゴリ件数不足側の単体仕様.md",
+          "sha256": "31d700fa9fd4a44269323173d6eef664ee3238d7aebf5c143537072bed5c35cc"
+        }
+      ],
+      "remainingRuntimeEvidence": "実APIのカテゴリ供給とHTTP表示・正規Browser",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-12",
+      "screen": "SCR012",
+      "program": "NK-WEB-002",
+      "condition": "Music区分の表示・件数境界と親リンク",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java",
+          "sha256": "0266a77b28645930f65edfc7e2c40b998a78f8a7cb0277715154a30d48b1204d"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+          "sha256": "24211090f5551351c66dfd78c95fea4acbf1645b10ae9a244344176c486607e9"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicListTemplateResourcePortTest.java",
+          "sha256": "b6bc6a80f5b2163af629f01c03716488854d317da35c24084e7edcba77166806"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44294-music-pair-template-and-static-evidence/manifest.json",
+            "sha256": "03b2a4b0539911013e5446110c75c031c1cfde9ee9da0e33569f923739f27ee0"
+          },
+          "reportedWbs": [
+            "WBS-P016-13/2",
+            "WBS-F03/2-2-b"
+          ],
+          "receiptSource": "af91c82fdbb95f363928d6535a9f6bbb37977b0b",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4938_SCR012区分件数不足側の単体仕様.md",
+          "sha256": "839d8af0db3c4e459845c76ef8a8418c89126af7c36998d5f867678da6bb12ba"
+        }
+      ],
+      "remainingRuntimeEvidence": "実APIの区分とHTTP順序、Browser",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-15",
+      "screen": "SCR015",
+      "program": "NK-WEB-002",
+      "condition": "利用者一覧・日時・件数、実テンプレートの固定値",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListDisplayValueTest.java",
+          "sha256": "b7b8c230445afb00fe81db8fa71c24e4e063b3974d5160e24612488c191871f4"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListLastPageCountTest.java",
+          "sha256": "f52aff18fe3cbf6c92002cc4618be68e5c76227b71d0658189f75be74eba311e"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListTemplateResourcePortTest.java",
+          "sha256": "5f523a9b3d2d1c6b4316c34cdae6eb31d6e241a056288c3c4e32ed18d5da9136"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45584-current-three-list-rendering-on-exact-resource-stage/manifest.json",
+            "sha256": "91c1e999dcd6309d0220b6e22a68625f59dbe9a7f84030a8449ad6f85e54066c"
+          },
+          "reportedWbs": "WBS-P016-15/2",
+          "receiptSource": "219492395e635df3cb8acf17f25e653cc015f0fc",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45586-four-list-and-page-model-single-exec-witnesses/manifest.json",
+            "sha256": "df2bea3bc29f58046897db03ec8e348c413f0bf24cdaf960c4fb0515ff090d81"
+          },
+          "reportedWbs": "WBS-F03/2-2-b",
+          "receiptSource": "a87e464240002c057f9a5c1ac896d0d66e78fba7",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41708-p01615-user-list-template-three-fixed-v1/manifest.json",
+            "sha256": "5bd3684f01ac67201cb708500e4d6b1ab03ac884a0a124a779056ed16c2c3ef7"
+          },
+          "reportedWbs": "WBS-P016-15/2",
+          "receiptSource": "793b23c6ea45f11e89feba0060cc1e24325f69af",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4957_SCR015一覧日時表示値単体仕様.md",
+          "sha256": "0eb13193c7f8740e0a9661d61dcd1fb33b69e9ec972f3a85bf66f185e812dc16"
+        }
+      ],
+      "remainingRuntimeEvidence": "実管理権限、API、DB、Browser",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-19",
+      "screen": "SCR019",
+      "program": "NK-WEB-002",
+      "condition": "受付完了の表示と参照値。永続照合の候補は別記",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModelTest.java",
+          "sha256": "81952397ff93d650ae8e07a958c24187a39fa4bbc3150b00addeabc48909f841"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+          "sha256": "65fa2bf19f1c879a8a69656062176656640803d87d902828e914186da7a799f5"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          },
+          "reportedWbs": "WBS-P016-19/2",
+          "receiptSource": "186de2d95d17de70db705ebf6044db652bbdbf31",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44918-receipt-offset-owned-eleven/manifest.json",
+            "sha256": "a6d9d2747d69061e118ffe3dcfc51024a4491885005e0acd5d27d0d0d7067d20"
+          },
+          "reportedWbs": "WBS-P004-05/2",
+          "receiptSource": "dbe46094a67c2ef62c1bda96624dbe7ade18b622",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45266-current-receipt-original-worker-failure/manifest.json",
+            "sha256": "cd22df7e9417fabfbc68be41781f28efa44198164f6b3ccbd1ad5dd827de9547"
+          },
+          "reportedWbs": "WBS-F03/2-2-b",
+          "receiptSource": "2e4d7e7d29fd2271382fe008c3714265b1597e49",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4953_SCR019受付表示単体仕様.md",
+          "sha256": "aa5306837d323c3774406d0b685f7f55ab85ad8f63f4fc38ab0850559c063645"
+        }
+      ],
+      "remainingRuntimeEvidence": "実業務DBの再照会とowner・正規HTTP",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-20",
+      "screen": "SCR020",
+      "program": "NK-WEB-002",
+      "condition": "通知一覧のラベル・日時・件数とview投影",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListProjectionPortTest.java",
+          "sha256": "dd588ba04f7f91ec278662273eb3e5f08acaafc63147d0c2db859b2d8d6cac43"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45584-current-three-list-rendering-on-exact-resource-stage/manifest.json",
+            "sha256": "91c1e999dcd6309d0220b6e22a68625f59dbe9a7f84030a8449ad6f85e54066c"
+          },
+          "reportedWbs": "WBS-P016-15/2",
+          "receiptSource": "219492395e635df3cb8acf17f25e653cc015f0fc",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45586-four-list-and-page-model-single-exec-witnesses/manifest.json",
+            "sha256": "df2bea3bc29f58046897db03ec8e348c413f0bf24cdaf960c4fb0515ff090d81"
+          },
+          "reportedWbs": "WBS-F03/2-2-b",
+          "receiptSource": "a87e464240002c057f9a5c1ac896d0d66e78fba7",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4963_SCR020通知一覧表示現候補実行結果.md",
+          "sha256": "3beae6b31302784ca9ee876f437f50a07cc5e13904121c3d931dcbe7eaa615a8"
+        }
+      ],
+      "remainingRuntimeEvidence": "実認証・ownerと通知順、HTTP、Browser",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-22",
+      "screen": "SCR022",
+      "program": "NK-WEB-002",
+      "condition": "質問一覧・所有者／管理者の表示列と件数",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListProjectionPortTest.java",
+          "sha256": "c0242ae7c2cb9592a5f56da86712721b513ff086d669c7023f85ca212e31e592"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45584-current-three-list-rendering-on-exact-resource-stage/manifest.json",
+            "sha256": "91c1e999dcd6309d0220b6e22a68625f59dbe9a7f84030a8449ad6f85e54066c"
+          },
+          "reportedWbs": "WBS-P016-15/2",
+          "receiptSource": "219492395e635df3cb8acf17f25e653cc015f0fc",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45586-four-list-and-page-model-single-exec-witnesses/manifest.json",
+            "sha256": "df2bea3bc29f58046897db03ec8e348c413f0bf24cdaf960c4fb0515ff090d81"
+          },
+          "reportedWbs": "WBS-F03/2-2-b",
+          "receiptSource": "a87e464240002c057f9a5c1ac896d0d66e78fba7",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4962_SCR022質問一覧表示現候補実行結果.md",
+          "sha256": "41c188b645826ea611aee9853092d23d51ecadd4c322fb8e96ec12a60557edbd"
+        }
+      ],
+      "remainingRuntimeEvidence": "実APIを経由する所有者と管理者用の表示・順序",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-23",
+      "screen": "SCR023",
+      "program": "NK-WEB-002",
+      "condition": "質問・回答の明細表示と安全な固定テンプレート",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java",
+          "sha256": "83d1ec0918c7ce4bb550105ca37b7b3f7c66e806e5b6cd3d54cfe174fc8edfda"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44368-question-detail-projection-template-and-static/manifest.json",
+            "sha256": "3c3ed2ef18f5fa003d18c946cf1cfa8848d73a28d0b3f00112fa77ff2a346889"
+          },
+          "reportedWbs": [
+            "WBS-P016-23/2",
+            "WBS-F03/2-2-b"
+          ],
+          "receiptSource": "ed3ae8db741a46a206a8bafb681e1ddc78ed9765",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44098-current-scr023-question-detail-values/manifest.json",
+            "sha256": "c7142cd3f49a17e7ebd49a9b51ff4211bfdd298fdb96559a57eb66e2a5859d78"
+          },
+          "reportedWbs": [
+            "WBS-P016-23/2",
+            "WBS-F03/2-2-b"
+          ],
+          "receiptSource": "adae3458ce2c82263512d6e07b14cb7e4824d672",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4961_SCR023質問明細表示現候補実行結果.md",
+          "sha256": "ca0a58564906f9437c74fedd7d744093e143f5bed4882bfc1848bcaeba108842"
+        }
+      ],
+      "remainingRuntimeEvidence": "実API権限、削除更新、専用CSRFとBrowser",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    },
+    {
+      "wbs": "WBS-P016-24",
+      "screen": "SCR090",
+      "program": "NK-WEB-002",
+      "condition": "固定エラー表示、二つのエラー振り分けと終了例外",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "selectedCandidateFiles": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+          "sha256": "5281fb091ca71ccd137785253a8a668db4fe7703eecaadb8d01be432ecd01b4f"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+          "sha256": "4b90e12785a185e0ceebbe96f89499dad0a49dab4ae3fdee71a5d8ad94035dc8"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+          "sha256": "893750e2d3dd2f23b0ad5188143cb659e66ea70613c6e5986ebd4e56219ba5bb"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+          "sha256": "89d5ef8b761517592001886cc182efffc3e8d623a20e54f1c516aaed81acd2db"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ErrorTemplateResourcePortTest.java",
+          "sha256": "87568799b1f44ae931a3aa272885f92ca92984dd058a96140bbf9ffafe689070"
+        }
+      ],
+      "existingEvidenceOrReference": [
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45616-current-scr090-error-controller-golden-eight/manifest.json",
+            "sha256": "34289321a918f033c4e199d2e6ae4b9a3d366fa118775f8425b7b3cfcc587823"
+          },
+          "reportedWbs": "WBS-P016-24/2",
+          "receiptSource": "e08d2874c29795cf835f8e0ce14ca4acfd408e4d",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45618-current-scr090-memory-router-filter-twenty-six/manifest.json",
+            "sha256": "e54fe2e182b5775dd233023364882a32e559f84b41f3dbadf49e0d824d3f9474"
+          },
+          "reportedWbs": "WBS-P016-24/2",
+          "receiptSource": "0937536a5431e67acee4f91188bb36f8a41258de",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45606-scr090-current-nine-pure-and-dom-witnesses/manifest.json",
+            "sha256": "daa914f0d9b3b8970e97c43c24f1ec99e5c6da867505b35f3ab22f508a738add"
+          },
+          "reportedWbs": "WBS-P016-24/2",
+          "receiptSource": "1626ffc16075c38d9eec900b4b83054c02ee3340",
+          "sameProductionFullApproval": false
+        },
+        {
+          "reference": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45612-five-web-fixtures-canonical-spotless/manifest.json",
+            "sha256": "23d368283def57a30c83ccbdece560467eef2321faa8e419875bd38c5c653d92"
+          },
+          "reportedWbs": "WBS-F03/2-2-b",
+          "receiptSource": "32055c4fe1e6fd2e9b6e7de660ac46fd691fcd08",
+          "sameProductionFullApproval": false
+        }
+      ],
+      "specificationOrResultRefs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/5004_SCR090四並行fixture一次失敗保持単体仕様.md",
+          "sha256": "3490ddc774b167f14b698987a12f61e3a2412c6cb69337a23c7770f2232136f2"
+        },
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/4990_SCR090製品表示モデル接続実行結果.md",
+          "sha256": "8bcbc41141c874b1fb16a681ff4417ed7928cf685e788d11d2d6e2754a97def1"
+        }
+      ],
+      "remainingRuntimeEvidence": "実Browser／正規HTTP、元業務の認証・通知",
+      "formalAcceptanceId": null,
+      "changedSourceOrTests": false
+    }
+  ]
+}
