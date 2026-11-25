@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-/** PT-JDBC-CLEANUP001..005; DAT-009/AUT-004; SS332/352/SSC424; no real JDBC resource or driver. */
+/** PT-JDBC-CLEANUP001..007/009; DAT-009/AUT-004; SS332/352/SSC424; synthetic JDBC handles. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class JdbcResourceCleanupTest {
   @Test
@@ -101,6 +101,22 @@ final class JdbcResourceCleanupTest {
     verifyOwner(
         ResultSet.class,
         (primary, resource) -> JdbcResourceCleanup.closeRows(primary, (ResultSet) resource));
+  }
+
+  @Test
+  void cleanup009OptionalStatementClosesOnlyAcquiredHandleAndRetainsPrimary() throws SQLException {
+    JdbcResourceCleanup.closeStatementIfPresent(null, null);
+    var primary = new SQLException("PUBLIC original");
+    var existing = new SQLException("PUBLIC previous close");
+    primary.addSuppressed(existing);
+
+    JdbcResourceCleanup.closeStatementIfPresent(primary, null);
+
+    assertArrayEquals(new Throwable[] {existing}, primary.getSuppressed());
+    verifyOwner(
+        Statement.class,
+        (failure, resource) ->
+            JdbcResourceCleanup.closeStatementIfPresent(failure, (Statement) resource));
   }
 
   private interface OwnerClose {
