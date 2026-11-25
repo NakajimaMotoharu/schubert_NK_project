@@ -1,0 +1,209 @@
+{
+  "run": "PG44826",
+  "source": "5b92a966bd2790558b7a504ceddee27f1d9a367c",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "WBS-P004-05/2",
+    "SS333",
+    "SS311",
+    "SS332",
+    "SS352"
+  ],
+  "terminalAtUTC": "2026-11-25T02:41:37.557457+00:00",
+  "ruleset": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "rawOccurrences": 7,
+  "localizedTechnicalDisposition": {
+    "range": {
+      "rawExit": 4,
+      "raw": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-pmd/pmd.xml",
+        "sha256": "8651c611572bf89a36403e895be95211644d76dd452b89c27e6d75b3076f099e"
+      },
+      "begin": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-pmd/begin.json",
+        "sha256": "17cc14050cd7dc7c0b51c4be8ee644eaf7a807337df8cc647fb090c7461127f5"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-pmd/terminal.json",
+        "sha256": "9148bc346d78edfe64e72020f377f490e25df78b664b45b6be04139245d75b55"
+      },
+      "source": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+        "sha256": "0a3e8d580e8155d808dca5e9d87ac70d51cd36a3b931c33233fe62a6ef2eca28"
+      },
+      "findings": [
+        {
+          "beginline": "96",
+          "endline": "96",
+          "begincolumn": "25",
+          "endcolumn": "50",
+          "priority": "3",
+          "rule": "UseConcurrentHashMap",
+          "ruleset": "Multithreading",
+          "tokenAtFinding": "headers = new HashMap<>();",
+          "reason": "One Map per deliver call. Its writes happen before begin receives a separate immutable snapshot. There is no shared writable Map, independent of Semaphore acquisition by other calls.",
+          "evidence": "SS333 Range/header contract, current runner reused fixed 200/206/416 and HEAD oracle. No claims about the live FileStore.",
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        }
+      ]
+    },
+    "cleanup": {
+      "rawExit": 4,
+      "raw": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-api-jdbc-resources-source-pmd/pmd.xml",
+        "sha256": "1d70b89d37af59548309cee6485b64803861dfe3130ea705b840fb256cf91a88"
+      },
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-api-jdbc-resources-source-pmd/begin.json",
+        "sha256": "f98d393d3b46601a5468687b0714d0eba44605229ab518bb4a6ba42cd39c7c3b"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-api-jdbc-resources-source-pmd/terminal.json",
+        "sha256": "bd6125e55a92d952bc90b9033b0d86a4228ef1aaf1d5b36b56390565fe02103b"
+      },
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+        "sha256": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a"
+      },
+      "findings": [
+        {
+          "beginline": "30",
+          "endline": "30",
+          "begincolumn": "29",
+          "endcolumn": "45",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "RuntimeException",
+          "owner": "SqlClose action",
+          "reason": "RuntimeException from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP003",
+            "PT-JDBC-CLEANUP004",
+            "PT-JDBC-CLEANUP005"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        },
+        {
+          "beginline": "30",
+          "endline": "30",
+          "begincolumn": "48",
+          "endcolumn": "53",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "Error",
+          "owner": "SqlClose action",
+          "reason": "Error from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP003",
+            "PT-JDBC-CLEANUP004",
+            "PT-JDBC-CLEANUP005"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        },
+        {
+          "beginline": "42",
+          "endline": "42",
+          "begincolumn": "29",
+          "endcolumn": "45",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "RuntimeException",
+          "owner": "Statement owner",
+          "reason": "RuntimeException from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP006"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        },
+        {
+          "beginline": "42",
+          "endline": "42",
+          "begincolumn": "48",
+          "endcolumn": "53",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "Error",
+          "owner": "Statement owner",
+          "reason": "Error from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP006"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        },
+        {
+          "beginline": "54",
+          "endline": "54",
+          "begincolumn": "29",
+          "endcolumn": "45",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "RuntimeException",
+          "owner": "ResultSet owner",
+          "reason": "RuntimeException from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP007"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        },
+        {
+          "beginline": "54",
+          "endline": "54",
+          "begincolumn": "48",
+          "endcolumn": "53",
+          "priority": "3",
+          "rule": "AvoidCatchingGenericException",
+          "ruleset": "Error Prone",
+          "tokenAtFinding": "Error",
+          "owner": "ResultSet owner",
+          "reason": "Error from the exact one close operation retains identity if no primary failed; otherwise the same throwable is suppressed on the primary. Removing this catch would change the Java TWR failure graph, including same-instance close.",
+          "evidence": [
+            "PT-JDBC-CLEANUP007"
+          ],
+          "localAssessment": "not an applicable production rule violation within this scoped contract",
+          "qualityOwnerAcceptance": null
+        }
+      ]
+    }
+  },
+  "oldCaseReferences": {
+    "PG44780": {
+      "path": "evidence/01_PT/009_NK-MED-001/evidence/PG44780-current-media-range-type-and-reuse/manifest.json",
+      "sha256": "95f87005c7d733ba5ca0734113487d1de62614e4b42c072ee80d0a0c6364aeeb"
+    },
+    "PG44792": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44792-current-jdbc-helper-and-web-fixed-errors/manifest.json",
+      "sha256": "c6ad303d12b8f46916f71967507a633d6f32a66af45384819a0f468c932d3f4e"
+    },
+    "PG44758": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44758-p00405-current-jdbc-caller-cleanup-proof/manifest.json",
+      "sha256": "759fd8008680a920d307cb6bda0a3c6a699892ce82ffcaf2f688ead45d7c1e87"
+    }
+  },
+  "metadataAttempts": {
+    "initial": "failed on PMD source-column trailing blank",
+    "final": "zero metadata assertion failures"
+  },
+  "accountableApprovalPending": true,
+  "whole451": false,
+  "waiverInRuleConfig": false,
+  "suppressionAdded": false,
+  "newStaticRerun": false,
+  "productTestsExecuted": 0,
+  "formalAcceptanceId": null,
+  "newFormal": 0
+}
