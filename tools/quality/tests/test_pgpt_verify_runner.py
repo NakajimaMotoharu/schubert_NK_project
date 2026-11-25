@@ -87,10 +87,14 @@ class VerifyRunnerTest(unittest.TestCase):
         )
         wrapper.chmod(0o700)
         (self.tool_dir / "pgpt_reactor_junit.py").write_text(
-            "import os, sys\n"
+            "import os, subprocess, sys\n"
             "from pathlib import Path\n"
             "state = Path(os.environ['PGPT_FIXTURE_STATE'])\n"
             "(state / 'collector').write_text(str(Path.cwd()) + '\\n' + sys.argv[2])\n"
+            "if (state / 'capture-add-input').exists():\n"
+            "    Path('capture-generated.txt').write_text('fixture input during capture')\n"
+            "if (state / 'capture-change-branch').exists():\n"
+            "    subprocess.run(['git', 'switch', '-qc', 'dev-during-capture'], check=True)\n"
         )
         self.git("init", "-q", "--initial-branch=dev-fixture")
         self.git("config", "user.name", "PGPT fixture")
@@ -252,6 +256,27 @@ class VerifyRunnerTest(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertEqual("unset\n", (self.state / "java-options").read_text())
         self.assertEqual("0", self.marker("exit").read_text().strip())
+
+
+    def test_014_input_added_during_capture_cannot_publish_a_verified_terminal(self):
+        (self.state / "capture-add-input").touch()
+        completed = self.invoke()
+        self.assertEqual(1, completed.returncode, completed.stderr)
+        self.assertEqual("1", self.marker("exit").read_text().strip())
+        self.assertEqual("fixture input during capture",
+                         (self.repo / "capture-generated.txt").read_text())
+        self.assertTrue((self.state / "collector").is_file())
+        self.assertTrue(self.marker("claim").is_dir())
+
+    def test_015_branch_changed_during_capture_cannot_publish_a_verified_terminal(self):
+        (self.state / "capture-change-branch").touch()
+        completed = self.invoke()
+        self.assertEqual(1, completed.returncode, completed.stderr)
+        self.assertEqual("1", self.marker("exit").read_text().strip())
+        self.assertEqual(self.commit, self.git("rev-parse", "HEAD").stdout.strip())
+        self.assertEqual("dev-during-capture", self.git("branch", "--show-current").stdout.strip())
+        self.assertEqual("dev-fixture", self.marker("branch").read_text().strip())
+        self.assertTrue((self.state / "collector").is_file())
 
 
 if __name__ == "__main__":
