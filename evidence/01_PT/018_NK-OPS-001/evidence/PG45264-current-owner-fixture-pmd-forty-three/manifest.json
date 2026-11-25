@@ -1,0 +1,453 @@
+{
+  "run": "PG45264",
+  "source": "f6d5ec5da4393ecf283b9bccd770de18a15e1e6b",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-03/2",
+    "WBS-P004-02/2"
+  ],
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:43:39.203086+00:00",
+  "inputRuns": [
+    {
+      "run": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45162-current-receipt-fixture-exceptions-qualified/manifest.json",
+        "sha256": "97c4a8391f363dfbd1503c99e5daa9ce82c4751f63946e99ca4338baa31d509e"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+        "sha256": "57b7f219a3a038c3bc489f005d0d22410daf345b1123a334e7a73e1a2032f13d"
+      },
+      "pmdOriginal": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45162-current-receipt-fixture-exceptions-qualified/pmd-raw.json",
+        "sha256": "170112571d3c35a65f49967bb52b7dd1ce8c6132f74627aca9bfa564468cf704"
+      },
+      "findings": [
+        {
+          "rule": "AvoidDuplicateLiterals",
+          "line": 74,
+          "raw": "The String literal \"query\" appears 4 times in this file; the first occurrence is on line 74",
+          "lineText": "\"query\",",
+          "localReason": "同じ局所イベント識別子が期待表三箇所と代理の一箇所に直書き。試験内定数で値を明示する対象。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "CloseResource",
+          "line": 422,
+          "raw": "Ensure that resources like this ExecutorService object are closed after use",
+          "lineText": "var workers = Executors.newFixedThreadPool(2);",
+          "localReason": "finallyのshutdownNowと有限awaitTerminationでこの試験のworkerの終了を要求する。無制限closeへの代替では元の上限を保持できない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 422,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "var workers = Executors.newFixedThreadPool(2);",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 424,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "var first = workers.submit(() -> repository.find(ID).orElseThrow());",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 425,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "var second = workers.submit(() -> repository.find(ID).orElseThrow());",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotThrowExceptionInFinally",
+          "line": 432,
+          "raw": "A throw statement in a finally block makes the control flow hard to understand.",
+          "lineText": "} finally {",
+          "localReason": "非終端でfinallyからAssertionErrorをthrowする。先に失敗していた場合は元の失敗を隠す。終了保全と一次失敗保持を同時に成立させる対象。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 433,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "workers.shutdownNow();",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 434,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "if (!workers.awaitTermination(10, TimeUnit.SECONDS)) {",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 588,
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "final Map<Integer, Object> bindings = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 659,
+          "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+          "lineText": "return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+          "localReason": "Java SEの個別interfaceを解決するローカル代理。既定JDBC型はこのfixture loaderで一意に解決され、Webのapplication loaderやdriverを使わない。",
+          "formalDisposition": null
+        }
+      ],
+      "raw": 10
+    },
+    {
+      "run": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/manifest.json",
+        "sha256": "4998892b9d1fa41164ded221013e6e2841c79900c7cf4e52cad88af2101fb153"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+        "sha256": "029c02e02480fcb1a8de2137abfb12e36697bbe66f6e8b2a020f6e2bc82cee15"
+      },
+      "pmdOriginal": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/pmd-findings.json",
+        "sha256": "265ddd555d6022f1120e0a9b46bd0dc2c5afad7ddc5b2580a3a7f8b1418673c6"
+      },
+      "findings": [
+        {
+          "rule": "DoNotUseThreads",
+          "line": 144,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "Thread.currentThread().interrupt();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 146,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertTrue(Thread.currentThread().isInterrupted());",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 149,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "Thread.interrupted();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 155,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertTrue(Thread.currentThread().isInterrupted());",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 158,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "Thread.interrupted();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "NullAssignment",
+          "line": 178,
+          "raw": "Assigning an Object to null is a code smell.  Consider refactoring.",
+          "lineText": "fixture.values[column] = null;",
+          "localReason": "JDBC必須観測値の欠落を独立に注入するための合成null。空値へ変更すると別の条件を検証してしまう。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "CloseResource",
+          "line": 298,
+          "raw": "Ensure that resources like this ExecutorService object are closed after use",
+          "lineText": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+          "localReason": "finallyのshutdownNowと有限awaitTerminationでこの試験のworkerの終了を要求する。無制限closeへの代替では元の上限を保持できない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 298,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 303,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "executor.submit(",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 313,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "executor.shutdownNow();",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 314,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 361,
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "final Map<String, Integer> counts = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 362,
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "final Map<Position, Throwable> failures = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 363,
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "final Map<Integer, Object> parameters = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "DoNotUseThreads",
+          "line": 460,
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "if (interruptOnRowClose) Thread.currentThread().interrupt();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 485,
+          "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+          "lineText": "type.getClassLoader(),",
+          "localReason": "Java SEの個別interfaceを解決するローカル代理。既定JDBC型はこのfixture loaderで一意に解決され、Webのapplication loaderやdriverを使わない。",
+          "formalDisposition": null
+        }
+      ],
+      "raw": 16
+    },
+    {
+      "run": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45168-current-inspection-summary-fixture-thirteen/manifest.json",
+        "sha256": "793353afec64ff1cb566af5b3bb6c8e4b4c0cb1465e09503f2e3e9eafb98022c"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+        "sha256": "cd240ca46f19c66af57d939b7b7e399b1ea44e308b9737ff8b17205b700ac9e5"
+      },
+      "pmdOriginal": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45168-current-inspection-summary-fixture-thirteen/pmd-raw.json",
+        "sha256": "6c35acf4b4977524affcf430968d2b866a81726e40ca451bc64edc1c4c94fa9b"
+      },
+      "findings": [
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 312,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "boolean parentFlag = Thread.currentThread().isInterrupted();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 313,
+          "rule": "CloseResource",
+          "raw": "Ensure that resources like this ExecutorService object are closed after use",
+          "lineText": "var worker = Executors.newSingleThreadExecutor();",
+          "localReason": "finallyのshutdownNowと有限awaitTerminationでこの試験のworkerの終了を要求する。無制限closeへの代替では元の上限を保持できない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 313,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "var worker = Executors.newSingleThreadExecutor();",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 316,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "worker",
+          "localReason": "接続代理の所有やOracle確認に限定したJUnit worker。実HTTP、DB又はコンテナでの実行ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 322,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "if (before) Thread.currentThread().interrupt();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 324,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertTrue(Thread.currentThread().isInterrupted());",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 329,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "Thread.interrupted();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 331,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertFalse(Thread.currentThread().isInterrupted());",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 336,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "worker.shutdownNow();",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 337,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));",
+          "localReason": "試験所有workerの打切り・有限終了。共有サービスworkerではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 339,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "assertEquals(parentFlag, Thread.currentThread().isInterrupted());",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 405,
+          "rule": "UseConcurrentHashMap",
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "private final Map<String, Throwable> faults = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 407,
+          "rule": "UseConcurrentHashMap",
+          "raw": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "lineText": "private final Map<Integer, Object> bindings = new HashMap<>();",
+          "localReason": "試験の単一データ作成又は個別Connection、Statement／fixtureの観測値。各workerは自身のownerを持ち、このMapを共有しない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 425,
+          "rule": "UseProperClassLoader",
+          "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+          "lineText": "Fixture.class.getClassLoader(),",
+          "localReason": "Java SEの個別interfaceを解決するローカル代理。既定JDBC型はこのfixture loaderで一意に解決され、Webのapplication loaderやdriverを使わない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 458,
+          "rule": "UseProperClassLoader",
+          "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+          "lineText": "Fixture.class.getClassLoader(),",
+          "localReason": "Java SEの個別interfaceを解決するローカル代理。既定JDBC型はこのfixture loaderで一意に解決され、Webのapplication loaderやdriverを使わない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 490,
+          "rule": "UseProperClassLoader",
+          "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+          "lineText": "Fixture.class.getClassLoader(),",
+          "localReason": "Java SEの個別interfaceを解決するローカル代理。既定JDBC型はこのfixture loaderで一意に解決され、Webのapplication loaderやdriverを使わない。",
+          "formalDisposition": null
+        },
+        {
+          "file": "InspectionSummaryPortTest.java",
+          "line": 508,
+          "rule": "DoNotUseThreads",
+          "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+          "lineText": "if (interruptOnRowClose) Thread.currentThread().interrupt();",
+          "localReason": "このJUnit所有のtask又は親の割込み状態を明示して確認し、試験の終了前に復元する。Webコンテナ内の業務thread作成ではない。",
+          "formalDisposition": null
+        }
+      ],
+      "raw": 17
+    }
+  ],
+  "distinctStaticFindings": 43,
+  "localPendingFix": [
+    {
+      "fixture": "ReceiptReferencePortTest",
+      "rule": "AvoidDuplicateLiterals",
+      "line": 74
+    },
+    {
+      "fixture": "ReceiptReferencePortTest",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 432
+    }
+  ],
+  "localBasisProposedNotSigned": 41,
+  "currentRelatedHistoricalOrdinary": [
+    11,
+    10,
+    13
+  ],
+  "priorWrongLabelCorrection": "PG45262の記録にある「751」は「451」。数値・原判定・実行結果は同じ。",
+  "correctsEvents": [
+    "PGPT-20261008-10794"
+  ],
+  "globalAcceptanceAdded": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
