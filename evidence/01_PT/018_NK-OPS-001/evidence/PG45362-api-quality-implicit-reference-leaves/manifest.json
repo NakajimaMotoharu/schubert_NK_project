@@ -1,0 +1,315 @@
+{
+  "run": "PG45362",
+  "source": "a815732770e55d98d1aa5ddcc732f6bc091347f1",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T15:13:18.566086+00:00",
+  "actualExit": 0,
+  "existingRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45306-explicit-hold-dependency-with-typed-source-roster/manifest.json",
+    "sha256": "e907b8843c33d39e1c96cbd29453645222ee72d6f2ea1671dc2178a9bff24cb2"
+  },
+  "inputByPath": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45306-explicit-hold-dependency-with-typed-source-roster/scope-by-path.json",
+    "sha256": "de82eabf2071c782cd839ae0d474a59a80e8c8a4e844a3414b851767a8647643"
+  },
+  "classifiedImplicitReasons": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java": {
+      "symbol": "UserCommandService",
+      "anchorLines": [
+        22
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+        "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474"
+      },
+      "gitBlob": "50aa2f9d4e648dd0d3422a3d4bf6bb3a5843494d",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java": {
+      "symbol": "UserCommandService",
+      "anchorLines": [
+        233
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "gitBlob": "fb69962fdb800092c2e95391dcd1c95609e1bc8f",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java": {
+      "symbol": "UserQueryRequest",
+      "anchorLines": [
+        32
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+        "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f"
+      },
+      "gitBlob": "585ed6a7f3f8fcacba9109353d8b01039ddd28a9",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java": {
+      "symbol": "UserMutationRequest",
+      "anchorLines": [
+        34
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+        "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1"
+      },
+      "gitBlob": "b21ed6afd7e98232ab6744f716e8c6f29589fa55",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java": {
+      "symbol": "LogRequest",
+      "anchorLines": [
+        36
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "sha256": "cf74fa263488cf9ae7c3199724630c735dd4b35c26b7fb20152883979773d1f5"
+      },
+      "gitBlob": "1d3776f183e268f84b92197adbe265280b1d3d16",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java": {
+      "symbol": "QuestionMutationRequest",
+      "anchorLines": [
+        32
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java",
+        "sha256": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c"
+      },
+      "gitBlob": "d2a8b734f83ac3257e668e8ba7e68360c92768dd",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java": {
+      "symbol": "QuestionCommandService",
+      "anchorLines": [
+        137
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+        "sha256": "efcd9884e66c0f5f12dfc3ae1161b1d9b8c7da4259f8f48dc558b5f9dcbcec6a"
+      },
+      "gitBlob": "e30b715ed5a8c1e3e0dc4ca14f84335f8696a6ef",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java": {
+      "symbol": "QuestionQueryRequest",
+      "anchorLines": [
+        34
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java",
+        "sha256": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620"
+      },
+      "gitBlob": "635d3f70800cd4fdbdcb78f861635b3e9f0ed8c5",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java": {
+      "symbol": "ScenarioRequest",
+      "anchorLines": [
+        27
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java",
+        "sha256": "d01fdad23e83591779d549b39f9dd7fea697965d1e1cb11a8dc239c3c72fdaca"
+      },
+      "gitBlob": "fc7ae74870e039f8629f41031f91da1e29bed05f",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec.java": {
+      "symbol": "ResponseSnapshotCodec",
+      "anchorLines": [
+        22,
+        24
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec.java",
+        "sha256": "60a25ff3e340450537302fc93da9a645549b151969a778397c63e14e5cba6ef4"
+      },
+      "gitBlob": "3abef9ebcfe02dfbb5a273bbd4dc0b466a322ae4",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java": {
+      "symbol": "InspectorSettings",
+      "anchorLines": [
+        19
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java",
+        "sha256": "42d362ba0e5a671717f28285cfde053b15967f7402601283eab843537cae9184"
+      },
+      "gitBlob": "e2a40c69ae8598ed0a5feb65f325df4f08216f4b",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLaunchConfiguration.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java": {
+      "symbol": "InspectorDatabaseConnections",
+      "anchorLines": [
+        21
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+        "sha256": "5fe7308a07bd1647aea4981749e348c44913e1f5df73159865f502be98bc24ae"
+      },
+      "gitBlob": "8eb5b13bc69ef4338372279fc7a5803c0a5bf687",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorSettings.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java": {
+      "symbol": "OutboxDispatcher",
+      "anchorLines": [
+        14,
+        22,
+        31,
+        38
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+        "sha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a"
+      },
+      "gitBlob": "04c95baa2defefa61a5093ba4ff5f735bfbe4cf6",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java": {
+      "symbol": "ApiReadOnlyObservationAttempt",
+      "anchorLines": [
+        24,
+        38,
+        58
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+        "sha256": "25eed3a03c68fd2f0bb7c68bf576239e238a2e2ecd4b4003ddc3d076348c2f41"
+      },
+      "gitBlob": "733c604c60383eb84f4ed635e0fe2eed725117ad",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java": {
+      "symbol": "ApiReadOnlyObservationAttempt",
+      "anchorLines": [
+        63
+      ],
+      "sourcePin": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "sha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d"
+      },
+      "gitBlob": "59530a22322e47ee075d604cf951d880307346a4",
+      "reference": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "holdChain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java"
+      ],
+      "confirmedNeedsSamePackageType": true
+    }
+  },
+  "apiTotalMain": 286,
+  "apiTypedReceipt": 193,
+  "apiUntypedNamedHoldDependencies": 93,
+  "fromOriginalUnknown": 15,
+  "stillUnresolvedApiBySourceTrace": 0,
+  "wholeApiAdmittedOrQualified": false,
+  "heldExactSourceOrByteOpened": false,
+  "actualCompileOrPT": 0,
+  "webRemainderNotReclassifiedHere": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "followUp": [
+    "担当が承認済みの用途と四型・nativeの保留範囲を正式に確定",
+    "対象の型と呼出元でAPI JVM/品質を当sourceで取得し、六製品451に接続"
+  ]
+}
