@@ -1,0 +1,81 @@
+{
+  "run": "PG45184",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "WBS-P007"
+  ],
+  "source": "0f7d120ce07ad81b324033506bc6c4b72fb370f7",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "actualExit": 0,
+  "actualTrials": 3,
+  "cumulativeLocalProductTrials": 1749,
+  "terminalAtUTC": "2026-11-25T11:00:00.641707+00:00",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45184-current-owned-jdbc-three-methods-v5/begin.json",
+    "sha256": "9231ae23a309684095d157f5a6cf3cc3fb8502e9374f75a74d4732c3a0b85d2f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45184-current-owned-jdbc-three-methods-v5/terminal.json",
+    "sha256": "2898b30b6392c21069ab3da4d2ef3f9c5bb66a49ba8fe979e783b2c409793235"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45184-current-owned-jdbc-three-methods-v5/junit/TEST-junit-jupiter.xml",
+    "sha256": "567aa54f143c214cabe89223ed7623314044a812376685c00d195b534296f9b6"
+  },
+  "trial": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "fixtureSelections": [
+    {
+      "testId": "PT-AUT-REV006",
+      "selector": "dev.codex.schubert.nk.api.security.SessionRevocationJdbcPortTest#affectedSqlAndEveryCloseFailureRemainUnsuccessfulAndRedacted",
+      "resourceOwner": "AuthSessionRevocationService"
+    },
+    {
+      "testId": "PT-AUT-PRE007",
+      "selector": "dev.codex.schubert.nk.api.security.AdminPreludeJdbcPortTest#ordinaryJdbcAndCloseFailuresPreserveBorrowedOwnershipAndRedaction",
+      "resourceOwner": "AdminCommandAuthenticator"
+    },
+    {
+      "testId": "PT-AUT-JDBC005",
+      "selector": "dev.codex.schubert.nk.api.security.AuthenticationVerifierJdbcPortTest#ordinaryJdbcCloseFaultsPreserveCleanupAndUnknownIdentity",
+      "resourceOwner": "AuthenticationContextVerifier"
+    }
+  ],
+  "rawSingleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45184-current-owned-jdbc-three-methods-v5/selected.exec",
+    "sha256": "e7d81c59f2213be219703419654a4fed0b8aa3131ac647846a22617dc95b4058"
+  },
+  "rawReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45184-current-owned-jdbc-three-methods-v5/measure.log",
+    "sha256": "3fae91e1377a61cd1de2e86e14eadd62b982f19109c480dd0bfb6b6d49c3dd57"
+  },
+  "rawMethods": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/methods.json",
+    "sha256": "0501d9caf05e293896c970ea23c8c693efa6badac0d5c1b24dd112ac08bd8610"
+  },
+  "productClosureCount": 21,
+  "productTypedDeclarationsRetained": true,
+  "earlierStatic": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45152-current-revocation-update-owner-static/manifest.json",
+      "sha256": "bedf6f488b185ac9512b16eb68c97e7debfe1a597ec4cd8a98c2bd215452b70e"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/manifest.json",
+      "sha256": "82a6fbc43e6eb94605bcc9af02d849693cd159c40234d7648b56fdc7acbada8f"
+    }
+  ],
+  "priorToolCorrections": {
+    "reason": "first classpath slice lacked annotation JAR arguments, then jdeps required the Java 25 multi-release option, then scoped audit JSON required the exact previously pinned Gson JAR; final preflight corrected analyzer arg indexing. No test compilation or execution",
+    "testsStarted": 0
+  },
+  "actualDBOrAdvisoryOrHttp": false,
+  "actualHeldCohortInvoked": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
