@@ -1,0 +1,96 @@
+{
+  "run": "PG44912",
+  "wbs": "WBS-G02",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "source": "9218355454ca009f869680604e5e1d74accb01c7",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:45:50.905935+00:00",
+  "actualExit": 0,
+  "rule": "Checkstyle IllegalCatch supplemental audit, NullPointerException and java.lang.NullPointerException in single/multi-catch clauses.",
+  "semantics": "Report typed catch locations independently of body; any reported handler needs individual assessment for normalization. Generic Exception/RuntimeException/Throwable handlers and null-negative product cases are separate.",
+  "tool": {
+    "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+    "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+  },
+  "useOfPriorCheckstylePermission": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43962-f03-current-approved-main-source-checkstyle/scope.json",
+    "sha256": "b99f2f4e27fbcb74c74aa56cc60342f2e0928de387a5f750d2ae0652715d4d97"
+  },
+  "rootQualityEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44872-six-product-checkstyle-exact-source-delta/manifest.json",
+    "sha256": "826295884f255a15a3e7fc614317165c5e925548a1b4a66f4d004ba377b27aa5"
+  },
+  "sourceScope": {
+    "plan": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/plan.json",
+      "sha256": "ff2cf68ae24c490f67f75505e19de98c680e1f3d716abc747c8b9d4dff61ffe8"
+    },
+    "inventory": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/inventory.json",
+      "sha256": "1e0d31e469d345b897b3f9bca221e8d0d96e465960ceeae6e32c58b649816c4e"
+    },
+    "fixedScope": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/scope.json",
+      "sha256": "38fd9d33f0905133705f2a9a42540302a60b5dc640190e97b5bb244b5e2d1ff9"
+    },
+    "preflight": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/preflight.json",
+      "sha256": "a15a9bc3ccf7dd60c09c957e0bc5dbb198ae72a92fa02b75f60c8a20662811b8"
+    },
+    "authorizedMain": 1028,
+    "heldMain": 5,
+    "allInputSourcesReverified": true,
+    "preflightPreparationRetry": "PG43962はQA056四型の差分範囲。PG44872のMain全体とBootstrap追加保留1を照合してから実行。初回は検査未起動。"
+  },
+  "negativeControl": {
+    "report": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/control-result.xml",
+      "sha256": "5bbb7d81099dcce5aa768c107a0d733e4a1c0eb2da5a357a5efa456ae991027e"
+    },
+    "fixture": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/DiagnosticControl.java",
+      "sha256": "ee3690818d80a1ada8576aaeabff3f726e3da477773804668bb5804df88f196b"
+    },
+    "caughtLines": [
+      3,
+      6,
+      9
+    ],
+    "ordinaryExceptionLine": 12,
+    "expectedExit": 3,
+    "javacOrRuntimeInvoked": false
+  },
+  "ruleFile": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/npe-check.xml",
+    "sha256": "aa09b58395a461b9d676a7540efa3fb54436af96695dd63ab772cdabf5b86864"
+  },
+  "jvm": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+  },
+  "result": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/production-result.xml",
+    "sha256": "41e2a5e467bbf4bdee88d7d2e161c48ff4b368609d72ec989c5c8dff0280bfcc"
+  },
+  "terminalReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44912-checkstyle-explicit-npe-catch/production-result.status",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "explicitFindings": [],
+  "physicalProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0,
+  "publicReproductionInputs": {
+    "ruleFile": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44912-current-explicit-null-pointer-catch-check/npe-check.xml",
+      "sha256": "aa09b58395a461b9d676a7540efa3fb54436af96695dd63ab772cdabf5b86864"
+    },
+    "controlSource": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44912-current-explicit-null-pointer-catch-check/DiagnosticControl.java",
+      "sha256": "ee3690818d80a1ada8576aaeabff3f726e3da477773804668bb5804df88f196b"
+    }
+  }
+}
