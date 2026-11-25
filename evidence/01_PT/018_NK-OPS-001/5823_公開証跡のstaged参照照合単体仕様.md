@@ -17,3 +17,5 @@ PT-OPS-PINPATH001、BUG-3814／YKT-2972。合成Gitに置く固定1ファイル�
 ## 表現不能な文字を含む明示path
 
 PT-OPS-PINPATH002、BUG-3815／YKT-2973。Gitに置く正常合成ファイルの固定SHAを使用し、偽のpath値だけにNULを含める。公開相対形・外部相対形を独立に試す。両Git入口で未解決1、診断のpathはnull、正常公開1、正常外部1。NUL付pathの原文を表示せず、参照先のGit読取りも起こさない。
+
+PT-OPS-PINPATH003（BUG-3872／YKT-3004）。隔離Gitに公開root内の不正親成分を含む相対pathと、同root配下の絶対pathを各一件登録する。確定commitとstagedの両入力で各2件を未解決、正常な追跡pinを一件、外部保全とCurrent基準を計二件とする。合成fixtureのみ。証跡工具は任意ファイルではなくGit objectを引き続き照合する。

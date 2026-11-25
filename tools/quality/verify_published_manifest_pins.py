@@ -40,12 +40,11 @@ def local_path(repo, value):
             path = path.relative_to(repo)
         except ValueError:
             return None
-    if (
-        not path.parts
-        or path.parts[0] not in PUBLIC_ROOTS
-        or ".." in path.parts
-        or path.parts[:4] == CURRENT_BASELINE
-    ):
+    if not path.parts or path.parts[0] not in PUBLIC_ROOTS:
+        return None
+    if ".." in path.parts:
+        raise ValueError("public pin path contains a parent component")
+    if path.parts[:4] == CURRENT_BASELINE:
         return None
     return path.as_posix()
 
@@ -143,7 +142,19 @@ def audit(repo, start, end, *, staged=False):
                     }
                 )
                 continue
-            path = local_path(repo, raw_path)
+            try:
+                path = local_path(repo, raw_path)
+            except ValueError:
+                unresolved.append(
+                    {
+                        "manifest": manifest,
+                        "path": raw_path,
+                        "sha256": expected,
+                        "source": source,
+                        "reason": "INVALID_PUBLIC_PATH_COMPONENT",
+                    }
+                )
+                continue
             if path is None:
                 counts["externalOrProtected"] += 1
                 continue

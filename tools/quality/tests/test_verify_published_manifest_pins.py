@@ -221,6 +221,31 @@ class PublishedManifestPinsTest(unittest.TestCase):
         self.assertEqual(1, result["current"])
         self.assertEqual([], result["unresolved"])
 
+    def test_public_paths_with_parent_components_are_unresolved(self):
+        relative = "src/sample-folder/../example.txt"
+        absolute = self.repo / "evidence/sample-folder/../example.txt"
+        errors = [
+            {"manifest": MANIFEST, **pin(path, INITIAL, source=None),
+             "reason": "INVALID_PUBLIC_PATH_COMPONENT"}
+            for path in sorted(map(str, (relative, absolute)))
+        ]
+        self.manifest([
+            pin(relative, INITIAL),
+            pin(absolute, INITIAL),
+            pin(FIXTURE, INITIAL),
+            pin("../public-fixture.txt", INITIAL),
+            pin("program/characterization/baseline/current/fixture.txt", INITIAL),
+        ])
+        self.git("add", MANIFEST)
+        staged = audit(self.repo, self.original, self.original, staged=True)
+        committed = audit(self.repo, self.original, self.commit())
+
+        for result in (staged, committed):
+            with self.subTest(staged="stagedTree" in result):
+                self.assertEqual(errors, result["unresolved"])
+                self.assertEqual(1, result["current"])
+                self.assertEqual(2, result["externalOrProtected"])
+
     def test_manifest_type_change_is_reported_in_both_git_snapshots(self):
         self.manifest({"reference": pin(FIXTURE, INITIAL)})
         start = self.commit()
