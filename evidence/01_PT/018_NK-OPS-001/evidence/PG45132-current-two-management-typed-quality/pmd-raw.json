@@ -1,0 +1,362 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 37,
+    "column": 17,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 70,
+    "column": 14,
+    "raw": "Avoid catching RuntimeException in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 70,
+    "column": 33,
+    "raw": "Avoid catching Error in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 73,
+    "column": 16,
+    "raw": "Avoid catching RuntimeException in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 73,
+    "column": 35,
+    "raw": "Avoid catching Error in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 74,
+    "column": 36,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 74,
+    "column": 36,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 74,
+    "column": 66,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 74,
+    "column": 66,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": 75,
+    "column": 13,
+    "raw": "Use equals() to compare object references.",
+    "technicalContext": "主例外と抑制例外の同一インスタンスによる自己抑制回避。所有・同一性の契約に対応。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 150,
+    "column": 13,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 157,
+    "column": 32,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 260,
+    "column": 27,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 266,
+    "column": 9,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 276,
+    "column": 9,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 278,
+    "column": 16,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 282,
+    "column": 11,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 292,
+    "column": 24,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 38,
+    "column": 17,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidUsingVolatile",
+    "line": 50,
+    "column": 28,
+    "raw": "Use of modifier volatile is not recommended.",
+    "technicalContext": "公開状態の可視性を維持。サーバ所有・停止遷移と合わせて要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 73,
+    "column": 14,
+    "raw": "Avoid catching RuntimeException in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 73,
+    "column": 33,
+    "raw": "Avoid catching Error in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 76,
+    "column": 16,
+    "raw": "Avoid catching RuntimeException in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": 76,
+    "column": 35,
+    "raw": "Avoid catching Error in try-catch block",
+    "technicalContext": "部分起動失敗時の資源解放と元の失敗種別の維持。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 77,
+    "column": 36,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 77,
+    "column": 36,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 77,
+    "column": 66,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": 77,
+    "column": 66,
+    "raw": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "technicalContext": "例外とErrorを原種別のまま戻す終了境界。実起動境界で要確認。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": 78,
+    "column": 13,
+    "raw": "Use equals() to compare object references.",
+    "technicalContext": "主例外と抑制例外の同一インスタンスによる自己抑制回避。所有・同一性の契約に対応。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 152,
+    "column": 13,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 159,
+    "column": 32,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 261,
+    "column": 32,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 267,
+    "column": 9,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 271,
+    "column": 29,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 275,
+    "column": 33,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 281,
+    "column": 30,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 284,
+    "column": 9,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 286,
+    "column": 16,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 290,
+    "column": 11,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  },
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+    "rule": "DoNotUseThreads",
+    "line": 300,
+    "column": 29,
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "管理ポートの専用スレッドと終了所有。J2EE Webアプリ内部規範との適用性を未決のまま保持。",
+    "formalStatus": "未判定"
+  }
+]
