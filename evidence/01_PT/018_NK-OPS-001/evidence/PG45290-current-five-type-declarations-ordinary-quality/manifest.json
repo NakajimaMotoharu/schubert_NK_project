@@ -1,0 +1,70 @@
+{
+  "run": "PG45290",
+  "source": "b3541f909cf36760e3988d82ae863ac38cffd592",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T13:16:58.418443+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "scopeStart": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45290-current-five-api-web-type-declarations/begin.json",
+    "sha256": "6b333e05313ee26d312c13d95e2a3bf019122b1ea30b1aea2aad5890f3e54d27"
+  },
+  "typeTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45290-current-five-api-web-type-declarations/terminal.json",
+    "sha256": "e851c80b4fddc378ee16168a13b5af03a970ebda9f0f3b43f2a1b00c8e1a735f"
+  },
+  "analyzerTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45290-current-five-api-web-typed-statics/terminal.json",
+    "sha256": "a84b8f71af93ff971deed714c09b707571409b3eb68783a3fc1b2dc72637a844"
+  },
+  "analyzerTargetCount": 5,
+  "completeTypeInputs": 11,
+  "physical": 11,
+  "visibleNullAwayDiagnostics": 0,
+  "validProductTestCount": 0,
+  "rawSpotbugs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45290-current-five-api-web-typed-statics/spotbugs.xml",
+    "sha256": "08509b8ca56a3a4753d5cefc80f9101948b7ce380dd3cfac49e8ca32f8f6b6e3"
+  },
+  "rawSpotbugsCount": 0,
+  "rawPmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45290-current-five-api-web-typed-statics/pmd.xml",
+    "sha256": "d8d9bbe926fcfafc865dc4661d5b6209e5c8f34e0dcce969ff04437daceb437b"
+  },
+  "pmdTechnicalDisposition": [
+    {
+      "file": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "line": 20,
+      "column": 28,
+      "method": "write",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "localEngineeringBasis": "書込とresetから親ByteArrayOutputStreamと同一モニタで取得・確保・配列上書き・countを保護する。独立ロックは親の同期する継承メソッドを保護できない。",
+      "qualityOwnerDecision": null
+    },
+    {
+      "file": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "line": 27,
+      "column": 28,
+      "method": "write",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "localEngineeringBasis": "書込とresetから親ByteArrayOutputStreamと同一モニタで取得・確保・配列上書き・countを保護する。独立ロックは親の同期する継承メソッドを保護できない。",
+      "qualityOwnerDecision": null
+    },
+    {
+      "file": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "line": 47,
+      "column": 28,
+      "method": "reset",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "localEngineeringBasis": "書込とresetから親ByteArrayOutputStreamと同一モニタで取得・確保・配列上書き・countを保護する。独立ロックは親の同期する継承メソッドを保護できない。",
+      "qualityOwnerDecision": null
+    }
+  ],
+  "signedDispositionCount": 0,
+  "fullRosterAggregationPending": true,
+  "productSourceOrToolConfigChanged": false,
+  "actualJmsOrDatabaseOrAuth": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
