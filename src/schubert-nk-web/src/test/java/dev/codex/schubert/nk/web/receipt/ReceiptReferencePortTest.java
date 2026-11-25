@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.receipt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,6 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -31,7 +33,7 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-WEB-RCPTPORT001..011. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
+/** PT-WEB-RCPTPORT001..012. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
 final class ReceiptReferencePortTest {
   private static final String ID = "00000000000000000000000001";
   private static final String OTHER_ID = "00000000000000000000000002";
@@ -47,6 +49,7 @@ final class ReceiptReferencePortTest {
   private static final String POINT_AUTO = "auto";
   private static final String POINT_READONLY = "readonly";
   private static final String POINT_ISOLATION = "isolation";
+  private static final String POINT_QUERY = "query";
   private static final String POINT_FIRST_NEXT = "next1";
   private static final String POINT_ROW_CLOSE = "rowClose";
   private static final String POINT_STATEMENT_CLOSE = "statementClose";
@@ -71,7 +74,7 @@ final class ReceiptReferencePortTest {
             POINT_ISOLATION,
             POINT_SELECT,
             "bind1",
-            "query",
+            POINT_QUERY,
             POINT_FIRST_NEXT,
             "id",
             "question",
@@ -191,7 +194,7 @@ final class ReceiptReferencePortTest {
             POINT_ISOLATION,
             "prepare",
             "bind",
-            "query",
+            POINT_QUERY,
             POINT_FIRST_NEXT,
             "id",
             "question",
@@ -380,7 +383,7 @@ final class ReceiptReferencePortTest {
             POINT_ISOLATION,
             POINT_SELECT,
             "bind1",
-            "query",
+            POINT_QUERY,
             POINT_FIRST_NEXT,
             POINT_ROW_CLOSE,
             POINT_STATEMENT_CLOSE,
@@ -419,20 +422,14 @@ final class ReceiptReferencePortTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     Fixture fixture = new Fixture();
     var repository = new ReceiptReferenceRepository(fixture.source());
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var first = workers.submit(() -> repository.find(ID).orElseThrow());
-      var second = workers.submit(() -> repository.find(ID).orElseThrow());
+    try (var scope = new WorkerScope(Executors.newFixedThreadPool(2))) {
+      var first = scope.workers().submit(() -> repository.find(ID).orElseThrow());
+      var second = scope.workers().submit(() -> repository.find(ID).orElseThrow());
       for (var future : List.of(first, second)) {
         var value = future.get(5, TimeUnit.SECONDS);
         assertEquals(ID, value.receiptId());
         assertEquals(7, value.questionId());
         assertEquals(AT, value.submittedAt());
-      }
-    } finally {
-      workers.shutdownNow();
-      if (!workers.awaitTermination(10, TimeUnit.SECONDS)) {
-        throw new AssertionError("receipt reference workers did not terminate");
       }
     }
     assertEquals(2, fixture.connections.size());
@@ -445,6 +442,60 @@ final class ReceiptReferencePortTest {
       assertEquals(0, connection.rollbacks);
       assertEquals(1, connection.closeAttempts);
       assertEquals(POINT_CONNECTION_CLOSE, connection.events.getLast());
+    }
+  }
+
+  @Test
+  void cleanupFailureIsSuppressedOnTheOriginalWorkerCheck() {
+    var events = new ArrayList<String>();
+    var workers =
+        proxy(
+            ExecutorService.class,
+            (object, method, args) ->
+                switch (method.getName()) {
+                  case "shutdownNow" -> {
+                    events.add("cancel");
+                    yield List.of();
+                  }
+                  case "awaitTermination" -> {
+                    assertEquals(10L, args[0]);
+                    assertSame(TimeUnit.SECONDS, args[1]);
+                    events.add("wait");
+                    yield false;
+                  }
+                  case "isShutdown" -> false;
+                  default ->
+                      throw new AssertionError("unexpected executor method: " + method.getName());
+                });
+    var primary = new AssertionError("original worker check failed");
+    var observed =
+        assertThrows(
+            AssertionError.class,
+            () -> {
+              try (var scope = new WorkerScope(workers)) {
+                assertFalse(scope.workers().isShutdown());
+                throw primary;
+              }
+            });
+    assertSame(primary, observed);
+    assertEquals(List.of("cancel", "wait"), events);
+    assertEquals(1, primary.getSuppressed().length);
+    var secondary = assertInstanceOf(AssertionError.class, primary.getSuppressed()[0]);
+    assertEquals("receipt reference workers did not terminate", secondary.getMessage());
+  }
+
+  private record WorkerScope(ExecutorService workers) implements AutoCloseable {
+    @Override
+    public void close() {
+      workers.shutdownNow();
+      try {
+        if (!workers.awaitTermination(10, TimeUnit.SECONDS)) {
+          throw new AssertionError("receipt reference workers did not terminate");
+        }
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new AssertionError("receipt reference worker shutdown interrupted", interrupted);
+      }
     }
   }
 
@@ -606,7 +657,7 @@ final class ReceiptReferencePortTest {
                     return connection.fixture.changed;
                   }
                   case "executeQuery" -> {
-                    connection.event("query");
+                    connection.event(POINT_QUERY);
                     if (connection.fixture.missing.equals("row")) return null;
                     return row();
                   }
