@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "tests": 12,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "dev.codex.schubert.nk.api.messaging.outbound.ReplySenderStageContractTest": [
+      "stage001FixedPersistentReplyUsesBorrowedContextWithoutCommitOrClose",
+      "stage002NullAndEveryNontransactedModeRejectBeforeMessageCreation",
+      "stage003EveryRuntimeOrFatalStageKeepsIdentityAndNeverRetries",
+      "stage004CheckedMessageConstructionFailureNeverAcquiresProducer"
+    ],
+    "dev.codex.schubert.nk.api.messaging.outbound.DlqSenderContractTest": [
+      "dlq005LayoutDiagnosticsAndDeliveryCountsAreBoundedWithoutPretendingWireValidation",
+      "dlq006NullWrongModeAndAdministrativeOriginsFailBeforeMessageMutation",
+      "dlq007EveryProviderFaultKeepsIdentityAndCannotBecomeUnavailableOrRetry",
+      "dlq008TrustedWriterFailureOrUnboundedTransportCannotSendOrCommit",
+      "dlq001TrustedSnapshotPreservesLiteralBodyAndMetadataWithoutOwningTransaction",
+      "dlq004BothUuidDiagnosticsRequireCanonicalLowercaseWithoutEchoingMalformedValues",
+      "dlq003TransportDiagnosticHasIndependentAsciiAndLengthBoundaries",
+      "dlq002UntrustedApplicationOriginsPreserveTextHandleAndOnlyAllowlistedProperties"
+    ]
+  }
+}
