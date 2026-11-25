@@ -251,7 +251,8 @@ final class GateContractValidator {
         "SCHEMA_VERSION_CONST",
         failures);
     JsonNode cases = properties.path(FIELD_CASES);
-    requireKnownSchemaKeys(cases, Set.of("type", "minItems", "maxItems", "items"), "cases", failures);
+    requireKnownSchemaKeys(
+        cases, Set.of("type", "minItems", "maxItems", "items"), "cases", failures);
     require("array".equals(cases.path("type").textValue()), "SCHEMA_CASES_TYPE", failures);
     require(integerEquals(cases.path("minItems"), 24), "SCHEMA_MIN_ITEMS", failures);
     require(integerEquals(cases.path("maxItems"), 24), "SCHEMA_MAX_ITEMS", failures);

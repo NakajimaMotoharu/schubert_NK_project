@@ -335,8 +335,8 @@ final class GateDefinitionDocumentsTest {
                 "SCHEMA_EXTRA_KEYWORD:item"));
   }
 
-  private static void rejectSchemaValue(String pointer, String key, JsonNode value, String diagnostic)
-      throws IOException {
+  private static void rejectSchemaValue(
+      String pointer, String key, JsonNode value, String diagnostic) throws IOException {
     List<JsonNode> input = fixture();
     ObjectNode container = object(input, SCHEMA).withObject(pointer);
     if (value.isMissingNode()) {
@@ -537,8 +537,7 @@ final class GateDefinitionDocumentsTest {
     checks.add(() -> assertEquals(List.of("REQ_FIELDS:CHR-A01"), validate(requiredObject)));
     checks.add(
         () ->
-            assertEquals(
-                List.of("REQ_SUPPLEMENTAL_CHECKS:CHR-A02"), validate(supplementalObject)));
+            assertEquals(List.of("REQ_SUPPLEMENTAL_CHECKS:CHR-A02"), validate(supplementalObject)));
     for (JsonNode invalid :
         List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
       var invalidRequired = fixture();
