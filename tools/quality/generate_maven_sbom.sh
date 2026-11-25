@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..013, PT-OPS-SBOM-029..030.
+# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..013, PT-OPS-SBOM-029..031.
 # Use a verified Maven repository for the selected source. Run from its worktree root.
 if [[ $# -ne 3 || -z ${3:-} ]]; then
   printf 'Usage: %s MODULE MAVEN_REPOSITORY OUTPUT_TIMESTAMP\n' "$0" >&2
@@ -40,8 +40,9 @@ output_directory=$(mktemp -d -- "$target/software-bom.XXXXXXXX")
   -DincludeTestScope=false -DincludeSystemScope=false -DincludeBomSerialNumber=false \
   -DdetectUnusedForOptionalScope=false -Dcyclonedx.skipAttach=true >&2
 
-if [[ ! -s "$output_directory/software-bom.json" ]]; then
-  printf 'The selected Maven goal produced no software BOM.\n' >&2
+artifact="$output_directory/software-bom.json"
+if [[ -L "$artifact" || ! -f "$artifact" || ! -s "$artifact" ]]; then
+  printf 'The selected Maven goal produced no software BOM as a nonempty regular file.\n' >&2
   exit 1
 fi
-printf '%s\n' "$output_directory/software-bom.json"
+printf '%s\n' "$artifact"

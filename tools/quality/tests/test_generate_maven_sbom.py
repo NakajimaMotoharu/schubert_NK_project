@@ -36,11 +36,19 @@ arguments = sys.argv[1:]
 Path('arguments.json').write_text(json.dumps(arguments), encoding='utf-8')
 if os.environ.get('NK_SIMULATED_MAVEN_CHATTER') == '1':
     print('[INFO] Maven fixture diagnostic')
-if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') == 'exit':
+outcome = os.environ.get('NK_SIMULATED_MAVEN_OUTCOME')
+if outcome == 'exit':
     sys.exit(41)
-if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
+if outcome != 'no-output':
     destination = next(a.split('=', 1)[1] for a in arguments if a.startswith('-DoutputDirectory='))
-    (Path(destination) / 'software-bom.json').write_text('{"fixture": "software bom"}\\n', encoding='utf-8')
+    artifact = Path(destination) / 'software-bom.json'
+    if outcome == 'directory':
+        artifact.mkdir()
+        (artifact / 'note.txt').write_text('fixture note', encoding='utf-8')
+    elif outcome == 'link':
+        artifact.symlink_to(Path('earlier-fixture.json').resolve())
+    else:
+        artifact.write_text('{"fixture": "software bom"}\\n', encoding='utf-8')
 """,
             encoding="utf-8",
         )
@@ -165,6 +173,16 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
                     self.assertEqual(FIXTURE, Path(artifact).read_bytes())
                 else:
                     self.assertEqual("", result.stdout)
+
+    def test_sbom031_requires_the_regular_artifact_from_its_output_folder(self):
+        earlier = self.root / "earlier-fixture.json"
+        earlier.write_bytes(FIXTURE)
+        for output in ("directory", "link"):
+            with self.subTest(output=output):
+                result = self.invoke("protocol", self.repository, STAMP, output=output)
+                self.assertEqual(1, result.returncode)
+                self.assertEqual("", result.stdout)
+                self.assertEqual(FIXTURE, earlier.read_bytes())
 
 
 if __name__ == "__main__":
