@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Instant;
@@ -313,24 +314,22 @@ public final class AuthSessionRevocationService {
   private static void update(
       Connection connection, UUID id, Instant at, SessionRevocationReason reason)
       throws SQLException {
-    {
-      var statement =
-          requireValue(
-              connection.prepareStatement(
-                  "update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked"));
-      @Nullable Throwable jdbcFailure9 = null;
-      try {
-        statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
-        statement.setString(2, reason.name());
-        statement.setObject(3, id);
-        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
-          throw new SQLException("session changed during revocation", "40001");
-      } catch (SQLException | RuntimeException | Error failure) {
-        jdbcFailure9 = failure;
-        throw failure;
-      } finally {
-        JdbcResourceCleanup.closeStatement(jdbcFailure9, statement);
-      }
+    @Nullable PreparedStatement acquired =
+        connection.prepareStatement(
+            "update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked");
+    @Nullable Throwable primary = null;
+    try {
+      var statement = requireValue(acquired);
+      statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
+      statement.setString(2, reason.name());
+      statement.setObject(3, id);
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
+        throw new SQLException("session changed during revocation", "40001");
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);
     }
   }
 }
