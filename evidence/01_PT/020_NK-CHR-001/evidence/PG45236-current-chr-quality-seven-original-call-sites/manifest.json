@@ -1,0 +1,113 @@
+{
+  "run": "PG45236",
+  "source": "059ab47b0e623edbbceb1fe02f456413b9daea34",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P020-01.03/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:08:36.122764+00:00",
+  "rawPmdCount": 7,
+  "rawPmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45228-current-chr-quality-static-pair/pmd.xml",
+    "sha256": "a8e4549f02d4b67405b6909fedfdf029fae800e6c0fc197085e73d68bd4ba530"
+  },
+  "originalTerminal": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45228-current-definition-quality-ninety/manifest.json",
+    "sha256": "c0dca7c4b5b68886132d725dffcc036be10b013df6c38b6a8f60e4ad3a1ad224"
+  },
+  "localFindings": [
+    {
+      "source": {
+        "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+        "sha256": "53af8fa80b5873e8c0389f1009a3a94b09b9c2c2cd7a59f4f8500b4777a7cd51"
+      },
+      "line": 153,
+      "rule": "UseConcurrentHashMap",
+      "rawLine": "Map<String, Object> metrics = new LinkedHashMap<>();",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "gateMetrics呼出し毎の局所LinkedHashMap。putの結果も参照も共有せず、最後に不可変copyを返す。同時実行で変更対象が他呼出しに流出しない。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 676,
+      "rule": "CloseResource",
+      "rawLine": "var workers = Executors.newFixedThreadPool(2);",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "この試験だけがpoolを所有。submit、assert、getの例外でもfinallyのshutdownNowで中断要求し、awaitTermination(10, SECONDS)で終端を要求する。static checkerは終了契約をJava closeとして認識しない。無期限closeへ置換しない。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 676,
+      "rule": "DoNotUseThreads",
+      "rawLine": "var workers = Executors.newFixedThreadPool(2);",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "本番J2EEサービスでなくJUnit用の固定2 worker。並行な二つの独立検証に必要で、静的解析から削除しない。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 678,
+      "rule": "DoNotUseThreads",
+      "rawLine": "var first = workers.submit(() -> validate(valid));",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "正常な合成定義のみを第一workerへ渡す。第二の入力状態を共有しない。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 679,
+      "rule": "DoNotUseThreads",
+      "rawLine": "var second = workers.submit(() -> validate(invalid));",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "契約版を改変した別インスタンスのみを第二workerへ渡す。正常側と期待値を分ける。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 683,
+      "rule": "DoNotUseThreads",
+      "rawLine": "workers.shutdownNow();",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "試験所有poolに対するfinallyでの取消と資源終了。"
+    },
+    {
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "line": 684,
+      "rule": "DoNotUseThreads",
+      "rawLine": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "localScopeDisposition": "not applicable for the documented callsite; subject to owner review",
+      "basis": "固定上限10秒の試験所有pool終端検証。終了が成立しなければ試験失敗。"
+    }
+  ],
+  "toolXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45228-chr-current-quality-ninety/reports/TEST-junit-jupiter.xml",
+    "sha256": "1963aa914fe2829e4fc954b4abb6048a06174fc757e0bb67e2c367180b5c08b8"
+  },
+  "boundedConcurrentCase": "concurrentValidAndInvalidDefinitionsRemainIndependent()",
+  "filterOrSuppressionChanged": false,
+  "allToolOwnerReviewPending": true,
+  "unmeasured": [
+    "whole 451",
+    "actual Current/NK"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
