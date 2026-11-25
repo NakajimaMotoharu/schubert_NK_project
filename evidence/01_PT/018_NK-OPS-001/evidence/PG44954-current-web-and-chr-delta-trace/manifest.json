@@ -1,0 +1,72 @@
+{
+  "run": "PG44954",
+  "source": "bf542d37a03c32a9f3f840ce4b02fb46a1db0c34",
+  "currentProductCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T05:39:46.071294+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G13.07/2",
+  "deltaCompareBase": "1286eef593914a73fbb2101c70fabb5257767a3a",
+  "approvedDesign": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "changedTrackedJavaFiles": [
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java"
+  ],
+  "javaProductMainsChanged": [],
+  "rows": [
+    {
+      "id": "PT-OPS-MEDIACONN009",
+      "mainPath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+        "sha256": "e142725d31047cf0b604730f33bb6c9c4711e91c910aad231e4f1cb36a3864fd"
+      },
+      "scopeKind": "product fixture",
+      "program": "NK-OPS-001",
+      "owner": "WBS-G02",
+      "requirements": [
+        "RD171 MON",
+        "UI252",
+        "SS333",
+        "SS351"
+      ],
+      "localTest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44940-web-media-provider-npe-and-recovery/manifest.json",
+        "sha256": "1c1878743ac0ed64452b6202750bbea9a4a7aa33d7de9f3a2662b0bb2d162a55"
+      },
+      "staticDesignAndTrace": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44944-current-web-media-fixture-canonical-spotless-and-trace/manifest.json",
+        "sha256": "5d273e1e6bb0c8409b96e8b1eb385c10f5efd78fc5fc3e7b247b9a16e2976166"
+      },
+      "independentOracle": "per-type fixed supplier values, identical NPE and another worker observes recovery zero"
+    },
+    {
+      "id": "PT-CHR-DEF-MEDIA001",
+      "mainPath": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "fixture": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "48e1ff6f239a26e51e445f57538c9e17f8c0b6526d26c94d1ed80406ed398875"
+      },
+      "scopeKind": "characterization tool / offline synthetic",
+      "program": "NK-CHR-001",
+      "owner": "WBS-P020-01.03/2",
+      "requirements": [
+        "RD TST-001",
+        "UI264 CHR-M04",
+        "SS355 G01"
+      ],
+      "bug": "BUG-3813",
+      "horizontal": "YKT-2971",
+      "localTest": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44950-video-observation-definition-gate/manifest.json",
+        "sha256": "b0df896954bb23c80d3411374fc29902343821cd334b32ffe1a9dca5afdeca21"
+      },
+      "independentOracle": "four deletion/replace contrasts against the UI-fixed 200 and first Range declarations, unchanged compliant input"
+    }
+  ],
+  "uniqueTestIds": 2,
+  "newProductPtRerun": 0,
+  "newQualifiedFormal": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
