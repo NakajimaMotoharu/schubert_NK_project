@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.storage.TransferFixtureWorkers;
 import dev.codex.schubert.nk.protocol.file.ContentDisposition;
 import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
 import dev.codex.schubert.nk.protocol.file.MediaType;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -147,14 +149,14 @@ class AssetChecksumManifestTest {
   }
 
   @Test
-  void med044ConcurrentMatchesOwnImmutableInput() throws Exception {
+  void med044ConcurrentMatchesOwnImmutableInput()
+      throws IOException, InterruptedException, ExecutionException {
     byte[] bytes = line(MUSIC_A_PATH).getBytes(StandardCharsets.UTF_8);
     try (var source = new Source(bytes, 13)) {
       var manifest = AssetChecksumManifest.read(source, 1);
       Arrays.fill(bytes, (byte) '!');
       assertEquals("AssetChecksumManifest[entries=1]", manifest.toString());
-      var pool = Executors.newFixedThreadPool(10);
-      try {
+      try (var workers = new TransferFixtureWorkers(Executors.newFixedThreadPool(10))) {
         List<Callable<Boolean>> tasks = new ArrayList<>();
         for (int i = 0; i < 100; i++)
           tasks.add(
@@ -163,10 +165,9 @@ class AssetChecksumManifestTest {
                 reject(() -> manifest.requireMatches(music(MUSIC_A_PATH, "0".repeat(64), 3)));
                 return manifest.entryCount() == 1;
               });
-        for (var future : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(future.get());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "checksum executor terminated");
+        for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+          assertTrue(future.get());
+        }
       }
       assertTrue(source.isOpen());
     }

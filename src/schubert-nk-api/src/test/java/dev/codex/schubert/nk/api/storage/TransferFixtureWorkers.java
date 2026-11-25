@@ -3,8 +3,8 @@ package dev.codex.schubert.nk.api.storage;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/** Bounded shutdown for the executor owned by a transfer fixture. BUG-3918, YKT-2997. */
-record TransferFixtureWorkers(ExecutorService executor) implements AutoCloseable {
+/** Bounded shutdown for a worker pool owned by a transfer or media file test. YKT-2997. */
+public record TransferFixtureWorkers(ExecutorService executor) implements AutoCloseable {
   @Override
   public void close() {
     executor.shutdownNow();
