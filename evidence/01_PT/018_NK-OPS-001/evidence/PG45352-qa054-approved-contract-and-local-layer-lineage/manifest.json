@@ -1,0 +1,194 @@
+{
+  "run": "PG45352",
+  "source": "274b64dbdc9181e08f56278fbfd9b855e86f4921",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G05",
+  "relatedWbs": [
+    "WBS-P016-02",
+    "WBS-G13.01",
+    "WBS-F03"
+  ],
+  "terminalAtUTC": "2026-11-25T14:54:40.080264+00:00",
+  "actualExit": 0,
+  "qa": "QA-054",
+  "uic": "UIC-011",
+  "ssc": "SSC-336",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "canonicalDesign": {
+    "235": {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    "252": {
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986"
+    },
+    "264": {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    },
+    "355": {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    "351": {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    "312": {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    "323": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+    },
+    "324": {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f"
+    }
+  },
+  "protocol": {
+    "originalRun": {
+      "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45004-current-protocol-canonical-ci-174/manifest.json",
+      "sha256": "a634e531b1af4d3eaf249e6ff357f32c1550c52f0c0af3bd4f3fd86d86c46f64"
+    },
+    "artifact": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "7975f333937787b5f7d8eec65835c273198a2c15a48fc00ea805f38f19d9c22e"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest.xml",
+      "sha256": "4b077129c5adbf8b5e8c071ee7e4ccf718a6198a34897f69fa156f635acd918a"
+    },
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "sha256": "1620f9e223c8157e653d16789104871c9aaf4dfcfa0e1fa20819b486b202ddbd"
+    },
+    "cases": {
+      "PT-PRO-QA054-001": "legacyRequestMatchesIndependentOriginalBytes",
+      "PT-PRO-QA054-002": "menuActionMatchesIndependentOffsetsAndRoundTrips",
+      "PT-PRO-QA054-003": "explicitRequestActionKeepsItsOwnClosedPair",
+      "PT-PRO-QA054-004": "everyOtherCategoryIsRejectedByNamedBoundary",
+      "PT-PRO-QA054-005": "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+      "PT-PRO-QA054-006": "omittedActionIsAllowedForRequestOnly",
+      "PT-PRO-QA054-007": "missingBlankUnknownAndWrongCaseCategoryFail",
+      "PT-PRO-QA054-008": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+      "PT-PRO-QA054-009": "everyCanonicalConstructorReferenceRejectsNull",
+      "PT-PRO-QA054-010": "existingHttpMetadataAndReservedRulesRemainEnforced",
+      "PT-PRO-QA054-011": "independentConcurrentCallersDoNotMixCategories",
+      "PT-PRO-QA054-012": "recordFieldsAreCompleteImmutableAndRedacted",
+      "PT-PRO-QA054-013": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire"
+    },
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "existingOnly": true
+  },
+  "web": {
+    "originalRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27612-trace-menu24-independent-v1/manifest.json",
+      "sha256": "8b70732c00567b8b4dbdfdbfe307098db330f8cc74218f4012f19f78f92dbe87"
+    },
+    "olderCrosscheck": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44270-qa054-menu-request-local-owner-current/manifest.json",
+      "sha256": "a5134b52bc7cc96c0886aded4625260093a94908edc5f2da2587f226b895dad6"
+    },
+    "junit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27612-trace-menu24-independent-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "c916564bbac89698a0e75c0676c454d061866666fee33a37a7c0477de6b1151d"
+    },
+    "sameInputs": [
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+        "sha256": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+        "sha256": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+        "sha256": "09758f7eb669d78245636629df215e1d3ce0345be0532385f4b27b2244df4f48"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+        "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+        "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+        "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java",
+        "sha256": "892c36828ff005248b7d62b593124f9d853c583caf80a3e3e3bef142841057a3"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java",
+        "sha256": "7fa6583a49c37dedd196d696a2c0d7c45f2e7b7097044d63aa2aef5ef2915ad3"
+      },
+      {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+        "sha256": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java",
+        "sha256": "e4fbe4fd8a06c6cd7ce520856dafc4e02c8ee306f4c874d77b35d499fbee3406"
+      }
+    ],
+    "threeUsedProtocolPhysicalSha256": {
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogType.class": "16abeb98a98e841bd4717e668ae242a03c41cfca3036536103e79171d0aac150"
+    },
+    "testIds": [
+      {
+        "testId": "PT-WEB-MENU003",
+        "method": "menu003SuccessfulUserAndAdminModelsMarkOnlyTheirOwnTrace()"
+      },
+      {
+        "testId": "PT-WEB-MENU001",
+        "method": "menu001EveryGateAndBoundaryUsesIndependentTruthTable()"
+      },
+      {
+        "testId": "PT-WEB-MENU002",
+        "method": "menu002ClosedKindsHaveLiteralMetadataAndNullContracts()"
+      },
+      {
+        "testId": "PT-WEB-MENU004",
+        "method": "menu004FailedOrMissingScopeDoesNotForgeAMenuSuccess()"
+      },
+      {
+        "testId": "PT-WEB-MENU005",
+        "method": "menu005NestedMarkersDoNotInheritAndEachNoMqEventSelfCorrelates()"
+      }
+    ],
+    "oldOutputNoNewNormalWebJar": true,
+    "descriptor": "Retained local projection, no delivery or persisted replay claim"
+  },
+  "api": {
+    "inspection": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42822-qa054-log-search-audit-port-held-v1/manifest.json",
+      "sha256": "2692472c1bcabdf1fba5db39a87a5f5f02a1f05b371c36dfb9f4da111b7bb722"
+    },
+    "olderEight": "evidence/01_PT/010_NK-ADM-001/evidence/PG19488-qa054-log-search-audit-eight-v1/manifest.json",
+    "olderEightManifest": {
+      "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG19488-qa054-log-search-audit-eight-v1/manifest.json",
+      "sha256": "5ac5349ff6decce61cd767827058861c740c46e162b758b34f0f2a0818ad7339"
+    },
+    "newApiPortPass": 0,
+    "hold": "LogSearchAuditPortTest uses LogRequest which depends on current LogQueryRepository; the production repository depends on a QA-056 held type."
+  },
+  "remaining": [
+    "Web producer two separate IDs, actual API persistence/duplicate replay",
+    "first APP log search success once/response snapshot and replay zero further ACTION under actual transaction",
+    "actual CHR-L01, signed six-product 451 and exit dependencies"
+  ],
+  "newProductTrials": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
