@@ -1,0 +1,124 @@
+{
+  "run": "PG45246",
+  "wbs": "WBS-P019-03.02/2",
+  "source": "aa946c588dbc65dfa4fe685a6d21ed16d51a8fd2",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-25T12:20:30.468744+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "previousIndependent12": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44896-migration-copy-manifest-original12-raw/manifest.json",
+    "sha256": "71a66d9aaa7ccb609e18776707f5ddffb644adf2ab53d8a7ca26219f2de3402f"
+  },
+  "current24WithTwoApplicable": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45242-current-migration-assembly-precise-twenty-four/manifest.json",
+    "sha256": "179943a3386782162621be51ea278fd5c38f60c7bad5e06f18eeefb7a6e02b42"
+  },
+  "requirements": [
+    "SS343 SSC410",
+    "MIG-DAT-003..006"
+  ],
+  "independentSpec": {
+    "path": "evidence/01_PT/019_NK-MIG-001/140_四対応表と六COPY指紋結合・全990独立仕様.md",
+    "sha256": "e72a164f86b720b63bc00937a57a1216610c65eae79b33e309b0be7c2977c7ac"
+  },
+  "testScopesSeparated": [
+    {
+      "testId": "PT-MIG-COPYMAN001",
+      "caseMethod": "copyman001IndependentNormalSixTuples",
+      "condition": "固定六正常tuple・版とSHA",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN002",
+      "caseMethod": "copyman002EmptySixStreamsHaveFixedEmptySha",
+      "condition": "空六tupleの0とSHA",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN003",
+      "caseMethod": "copyman003NullBoundaries",
+      "condition": "必須入力null拒否",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN004",
+      "caseMethod": "copyman004FileCountMismatch",
+      "condition": "ファイル件数独立",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN005",
+      "caseMethod": "copyman005EntryCountMismatch",
+      "condition": "エントリ件数独立",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN006",
+      "caseMethod": "copyman006SpeakerCountMismatch",
+      "condition": "話者件数独立",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN007",
+      "caseMethod": "copyman007AudioCountMismatch",
+      "condition": "音声件数独立",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN008",
+      "caseMethod": "copyman008BytesAreDefensive",
+      "condition": "返却byteの防御copy",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN009",
+      "caseMethod": "copyman009SixCountsAreImmutable",
+      "condition": "六件数の変更不能",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN010",
+      "caseMethod": "copyman010SameCopyTuplesDifferentDeclaredMappingChangesBinding",
+      "condition": "件数等価でも異なる対応表拘束",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN011",
+      "caseMethod": "copyman011FiniteConcurrentImmutableSource",
+      "condition": "有限同時読取とimmutable結果",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-COPYMAN012",
+      "caseMethod": "copyman012FixedRedactionAndRepeatedSnapshot",
+      "condition": "固定マスクとsnapshot再読",
+      "originalRun": "PG42440"
+    },
+    {
+      "testId": "PT-MIG-CURRENTASSEMBLY023",
+      "caseMethod": "assembly023EmptyCopyManifestUsesSameDeclaredAssembly",
+      "condition": "空／対応表と六指紋の固定hash",
+      "originalRun": "PG45242"
+    },
+    {
+      "testId": "PT-MIG-CURRENTASSEMBLY024",
+      "caseMethod": "assembly024NormalCopyManifestCountsAndSameMappingBinding",
+      "condition": "通常／六件数、対応表拘束",
+      "originalRun": "PG45242"
+    }
+  ],
+  "closure39Retained": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44894-six-borrowed-output-dataset-current20/manifest.json",
+    "sha256": "154edfd56dc19d679ba3eae71153b7c3500be77b4f30f2f417ff866d4ab3f3b9"
+  },
+  "joinAndQualification": "当候補の不変Main・fixtureで元12を適用。現組立の2条件を別選択の元XMLへ結ぶ。coverage/正式を合算しない。",
+  "actualDriverOrStore": false,
+  "remaining": [
+    "SSC417の適用範囲・実COPY／DB",
+    "個別安全と所有",
+    "同候補全451"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
