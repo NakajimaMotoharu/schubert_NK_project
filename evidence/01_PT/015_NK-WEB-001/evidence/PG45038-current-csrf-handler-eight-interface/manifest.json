@@ -1,0 +1,113 @@
+{
+  "run": "PG45038",
+  "source": "1d6aa4ca182161bf5ae448c97ef19c0fec7fb137",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P015-01"
+  ],
+  "terminalAtUTC": "2026-11-25T07:44:10.987036+00:00",
+  "actualExit": 0,
+  "priorFixture": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG22546-seven-future-independent-v1/manifest.json",
+    "sha256": "c83dc755afa467842001f033eb35c5e54fae55bdd42cacf85bbbadae5b093d72"
+  },
+  "presentTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45022-current-web-login-csrf-and-transport-nullaway/manifest.json",
+    "sha256": "dcb8bb8313207dad1dd457a7415fd7d11ec5cb46f1ed403044e714d5b4f75b96"
+  },
+  "presentScopedStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45036-current-csrf-denied-canonical-static/manifest.json",
+    "sha256": "f7259f10b9a9dc51ba15826f4387b7e8241831464351eab682094dbbcacfab08"
+  },
+  "formatter": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43318-f03-current-admitted-business-fixture-format-v1/manifest.json",
+    "sha256": "420fa73af937633e7c6a33e2b1f1869dba724a44693c888424b3a14120878a37"
+  },
+  "checkstyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44064-f03-current-web-missing-test-format/manifest.json",
+    "sha256": "527b8f74156001d713d57791250e8595c82f3625e177ad6727e55635be2348c9"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/begin.json",
+    "sha256": "adb517453eba57cb7007be14bfeabfee7be849ae7baf8c38433a8ee6bf5b8c99"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/terminal.json",
+    "sha256": "5a95cd2a80943363d220821079d714c34019ff5ae529f9c868c474d20904158a"
+  },
+  "previousCompileOnlyFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight/terminal.json",
+    "sha256": "c8f87a7cbbe09e65db5a55413c991295ad2a2492cf8bd2ad331fcb92b4bf1574"
+  },
+  "compileRetryCause": "Gson pinned InlineMe annotation dependency was missing; fixed dependency only, no product/runtime in first attempt",
+  "authoringSpec": {
+    "path": "evidence/01_PT/015_NK-WEB-001/068_CSRF拒否403ローカル監査_自己所有thread単体仕様.md",
+    "sha256": "26039c55f33869be46521a3b84830aa3eac8ba0b1fe3daad224bc6fa6791f80d"
+  },
+  "unitResults": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "e19bb338c1721854d503876769b0fc765851b32786b3aa5052409c7d87c8e66e"
+  },
+  "testIds": {
+    "PT-WEB-CSRF403001": "nullBoundariesRejectBeforeRequestResponseOrAuditCallbacks",
+    "PT-WEB-CSRF403002": "unauthenticatedDenialReturns403AndOneClosedAuditWithoutInspectingException",
+    "PT-WEB-CSRF403003": "authenticatedDenialWithoutSuppliedCsrfKeepsNoDisplaySnapshot",
+    "PT-WEB-CSRF403004": "authenticatedSuppliedCsrfCapturesDisplayStringsWithoutLoggingSecretCanary",
+    "PT-WEB-CSRF403005": "missingOrWrongTrustedRequestContextStopsBeforeAnyTerminalCallback",
+    "PT-WEB-CSRF403006": "untrustedAuthenticationAndMalformedDisplayInputFailBeforeAudit",
+    "PT-WEB-CSRF403007": "terminalCallbackFailuresPreserveIdentityAndDoNotRetryOrContinue",
+    "PT-WEB-CSRF403008": "twoWorkerThreadLocalActorsAndRequestAuditsRemainIndependent"
+  },
+  "testCount": 8,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/one.exec",
+    "sha256": "20eccf66f62a1cd9d5b6dd0bd92de67818e9a70961a2d84be7ec47f8b7c194f8"
+  },
+  "report": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/jacoco.xml",
+    "sha256": "17c089dd8d0ac7aa4ec244a44f59944c798f4b994ee8a7f90a1758694a53f9fe"
+  },
+  "unfilteredReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45038-current-csrf-handler-port-eight-v2/raw.log",
+    "sha256": "930f94066548ec4bf013e8fe864f92c1e063ac1c9a2d1066415fafc4b17f342f"
+  },
+  "currentUnfiltered": {
+    "INSTRUCTION": [
+      0,
+      51
+    ],
+    "BRANCH": [
+      0,
+      0
+    ],
+    "LINE": [
+      0,
+      15
+    ],
+    "COMPLEXITY": [
+      0,
+      2
+    ],
+    "METHOD": [
+      0,
+      2
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "branchRatio": null,
+  "physicalClassId": "29fcd387718d7a87",
+  "executionSession": "PG45038-CSRFDENIED8-CURRENT-INTERFACE",
+  "liveHttpOrServer": 0,
+  "heldOperations": 0,
+  "cumulativeLocalProductTrials": 1284,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
