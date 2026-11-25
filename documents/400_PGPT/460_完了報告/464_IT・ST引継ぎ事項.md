@@ -1,5 +1,20 @@
 # IT・ST引継ぎ事項
 
+## 現候補の開始条件とLinuxで取得する証拠
+
+対象製品Coreは cf08e414be9f877b851a387704350d5e7c980209。工程主管が正式PG/PTと対象環境の資格を確認し、SS362の開始条件を判定する。F02・F03、六製品同一source/runの451、署名付きBOM、QA-056・QA-062・SSC-461の決着、現環境の所有と担当受領が残る。配布条件と承認担当はQA-061で未決。
+
+| 担当・対象 | PG/PTの保全証拠 | 次に必要な証拠 |
+| --- | --- | --- |
+| 運用、朝の計画保守 | 05:00 JSTのtimer構文と先行する停止・更新・外部監視の合成証跡。 | 日次受けserviceの製造・固定の実行主体・同run前後証票を先に確定。許可された対象で60分以内の実効停止・更新安全判定と再起動markerを確認し、Linux外部の観測を保存する。 |
+| DB・移行 | 31版の当処理資源。V031 checksum 1880247817。V030はSQLコメントの系譜を固定。Backup確定16件は代理JDBC。 | 既設V030の実適用checksumを移行前に確認し、既ownerで新規とV030からの更新、両後条件、原本保持と切戻しを検証する。V030を仮定で修正しない。 |
+| Messaging | 旧PT-JMS-002の実ACL証跡。六キュー宣言を比較し、ACLの六matchに版差を確認。 | 同候補で個別の実ACL・耐久・ownerの終端を固定。旧Expiry限定要約は別の受入証拠として保持。 |
+| Web・性能、互換性 | 現比較工具の通常試験と現Batchの監視局所5件。 | 正規の実Browser/CHR-A01・L01等と独立停止後条件を採取。対象Linuxで同時10名、p95 2.5秒、STANDARD、16GB/256GBの前提とRPO/RTO 24時間をSS362に沿って実測。QA-050は承認済み初期backoffと以後15分でIT/ST時の性能を記録。 |
+
+PG/PTの現在の正式有効は16/190、正式認定1,964 PT／53領域。実測と受領時刻がそろった時点で個別に判定する。IT/STの開始・完了は未判定。
+
+[PG45676](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45676-current-f02-f03-owner-decision-evidence-delta/manifest.json) [PG43744](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43744-daily-timer-receiver-fixed-identity-gap/manifest.json) [PG45610](../../../evidence/01_PT/019_NK-MIG-001/evidence/PG45610-current-31-ddl-history-and-processed-resource-lineage/manifest.json) [PG45674](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG45674-current-backup-pair-commit-sixteen-unfiltered/manifest.json) [PG45692](../../../evidence/01_PT/005_NK-MSG-001/evidence/PG45692-artemis-legacy-runtime-receipt-and-config-lineage/manifest.json) [PG45686](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45686-current-five-alert-owned-worker-regressions/manifest.json)
+
 切替・切戻しリハーサルの工程別記入欄と判定証跡を整理した。実対象、署名、実リハーサルの確定が残る。 [切替・切戻し判定記録票](465_切替・切戻し判定記録票.md)
 
 ## 2026-11-26 02:33 JST　比較工具の正規成果物と実CHRの前提
