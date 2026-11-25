@@ -1,0 +1,515 @@
+{
+  "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "design": [
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  ],
+  "priorResourceRequirements": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45052-current-web-resource-34-requirements/resource-owner-criteria.json",
+    "sha256": "e2e6d0d29a77873dd4e99c6640272bb9d7f101857b480bd61904b7d60aa80f9b"
+  },
+  "rows": {
+    "SCR004": {
+      "owner": "WBS-P016-04",
+      "requirements": [
+        "FUN-004"
+      ],
+      "applicableDisplayOnly": "ゲームカードの順序／空表示。業務側display_orderの選択は別。",
+      "resourcePins": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
+          "sha256": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioGameListTemplateResourcePortTest.java",
+        "sha256": "84a63a4155655278e734fc716c2ece7b9605a599c4c87cf7afea2390dd3cf70f",
+        "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+      },
+      "approvedOriginal": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41694-p01604-scenario-game-resource-two-v1/manifest.json",
+        "sha256": "c4617f5776e0248fd57ef2e00ab8542f42b8c884ad09534003b807306ef9213f"
+      },
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41694-p01604-scenario-game-resource-two-v1/begin.json",
+        "sha256": "1844ccee957d228eeab7d09b11ccaaa287068c30e7cca206a739e9b2d261c2eb"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41694-p01604-scenario-game-resource-two-v1/unit.terminal.json",
+        "sha256": "3ff80eb17cfd3cb85e98b332fb70bf7cbab733342988662b0a159141d9a22c60"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41694-p01604-scenario-game-resource-two-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "5b96db39f7e34e8fce4c340693a1d245c3d6605f0bc195d8c340812cb0c0a1f6"
+      },
+      "referenceReuse": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43522-current-scr004-game-template-reuse-v1/manifest.json",
+        "sha256": "5de5557500e50f42af41793b30afd6a3703fdc4e1b0d4f574a62d828f5a1b927"
+      },
+      "cases": {
+        "PT-WEB-SCR004-RSRC-001": "displaysGameCardsAndSearchInApprovedOrder",
+        "PT-WEB-SCR004-RSRC-002": "rendersTheEmptyMessageWithoutInventingCards"
+      },
+      "loadedSDK": [
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+          "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar",
+          "sha256": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar",
+          "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar",
+          "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar",
+          "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+          "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar",
+          "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+          "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar",
+          "sha256": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar",
+          "sha256": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+          "sha256": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar",
+          "sha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar",
+          "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+          "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+          "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+        }
+      ],
+      "approvedCurrentCheck": "Bound collection link exactly once, observed on Maven output member digest; no pagination fragment"
+    },
+    "SCR005": {
+      "owner": "WBS-P016-05",
+      "requirements": [
+        "FUN-004"
+      ],
+      "applicableDisplayOnly": "Routeラベルと件数、0/50件、ページ操作なし。業務側prefix選択・並べ替えは別。",
+      "resourcePins": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html",
+          "sha256": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioRouteListTemplateResourcePortTest.java",
+        "sha256": "97d6e6a51e592c4241453db3ce84cade29b1435c14161e8197958ced557f93db",
+        "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+      },
+      "approvedOriginal": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41692-p01605-scenario-route-resource-two-v1/manifest.json",
+        "sha256": "709899bf8f3cb38fb24d84ed5caaafe4df7bdb609d5ca20fdc7ec1806921fdca"
+      },
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41692-p01605-scenario-route-resource-two-v1/begin.json",
+        "sha256": "5c609005b2011b5a11d5539afb48ec53f18af564a78aa7345c7b87c64f30b6e8"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41692-p01605-scenario-route-resource-two-v1/unit.terminal.json",
+        "sha256": "53fdbc9918ced74a93af10dcffdd495983a328c3591c3d907bac4e23dc381ec4"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41692-p01605-scenario-route-resource-two-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "e806263d583c51d4c1497a11f8eecadf171ecea3c19108a8877a85135f136877"
+      },
+      "referenceReuse": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43518-current-scr005-route-template-reuse-v1/manifest.json",
+        "sha256": "6985b8f98f4eafdb818c378fa7413ad8fe3425085f36114a0751467ede6b93f1"
+      },
+      "cases": {
+        "PT-WEB-SCR005-RSRC-001": "rendersApprovedHeadingRoutesAndFileCounts",
+        "PT-WEB-SCR005-RSRC-002": "rendersEmptyAndFiftyRoutesWithoutExtraNavigation"
+      },
+      "loadedSDK": [
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+          "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar",
+          "sha256": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar",
+          "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar",
+          "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar",
+          "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+          "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar",
+          "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+          "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar",
+          "sha256": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar",
+          "sha256": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+          "sha256": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar",
+          "sha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar",
+          "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+          "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+          "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+        }
+      ],
+      "approvedCurrentCheck": "Bound collection link exactly once, observed on Maven output member digest; no pagination fragment"
+    },
+    "SCR006": {
+      "owner": "WBS-P016-06",
+      "requirements": [
+        "FUN-004"
+      ],
+      "applicableDisplayOnly": "受領順・数値リンク・0/500件、ページ操作なし。業務側display_orderとtitle優先解決は別。",
+      "resourcePins": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-files.html",
+          "sha256": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioFileListTemplateResourcePortTest.java",
+        "sha256": "afbf674fa6174520db2aa9a79e0f27fa5c36be0c5ae34150c5b841511d848706",
+        "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+      },
+      "approvedOriginal": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41688-p01606-scenario-file-resource-three-fixed-v1/manifest.json",
+        "sha256": "dcdf40ea849c6db7ee8b3c9300790f3a69b5cae544e4cc654a5bff47b3af8bf2"
+      },
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41688-p01606-scenario-file-resource-three-fixed-v1/begin.json",
+        "sha256": "7371fbefca97173215394bae5492a2ec4285e1ee8cf47feb59cce195dc1d0f3d"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41688-p01606-scenario-file-resource-three-fixed-v1/unit.terminal.json",
+        "sha256": "df71dd516de88d4d827531e1fa39fbff4decc436eb0fc5fc467ffeb3e4c92a41"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41688-p01606-scenario-file-resource-three-fixed-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "10f3f712f387008fa7a4b1c923f2785bd8522409aede7b5f313d56f83e19b1f6"
+      },
+      "referenceReuse": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG43520-current-scr006-file-template-reuse-v1/manifest.json",
+        "sha256": "4bae20b601a824fbad0cef1439ba3d598abaf8c90bf341631b5f3998739e7b99"
+      },
+      "cases": {
+        "PT-WEB-SCR006-RSRC-003": "rendersBothEmptyAndFiveHundredRowsWithoutPagination",
+        "PT-WEB-SCR006-RSRC-002": "retainsOrderAndOnlyUsesTheGivenNumericLinks",
+        "PT-WEB-SCR006-RSRC-001": "displaysRouteHeadingAndApprovedNavigation"
+      },
+      "loadedSDK": [
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+          "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar",
+          "sha256": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar",
+          "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar",
+          "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar",
+          "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+          "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar",
+          "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+          "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar",
+          "sha256": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar",
+          "sha256": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+          "sha256": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar",
+          "sha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar",
+          "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+          "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+          "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+        }
+      ],
+      "approvedCurrentCheck": "Bound collection link exactly once, observed on Maven output member digest; no pagination fragment"
+    },
+    "SCR015": {
+      "owner": "WBS-P016-15",
+      "requirements": [
+        "FUN-009",
+        "AUT-002"
+      ],
+      "applicableDisplayOnly": "各検索入力・固定列・維持された前後リンク、空または不正入力で行を捏造しない。実ADMIN認可と業務側username昇順は別。",
+      "resourcePins": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+          "sha256": "5ec5b640f971a0eee0a5476c106668b289bc0fa474ed0f04beaa7d210ea59d66",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+          "sha256": "5fe1dafc73db004b35fa744da576f403d18f1ccbce4037915c65bc0ea9506163",
+          "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListTemplateResourcePortTest.java",
+        "sha256": "5f523a9b3d2d1c6b4316c34cdae6eb31d6e241a056288c3c4e32ed18d5da9136",
+        "source": "2369e5af36dda4d4480fdf98d8fe24b90a73b710"
+      },
+      "approvedOriginal": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44494-current-narrow-list-tables-and-ordinary-regression/manifest.json",
+        "sha256": "7fa8a610a8931e3adf15628f966800f56ab15056fdd3dcc46426fb00ec5269e3"
+      },
+      "input": {
+        "path": "../pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/begin.json",
+        "sha256": "63da7fc1cbd4ce92aa6319315c55017d5cdcc0eb9aef1231e8bec183f3cdd79a"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/terminal.json",
+        "sha256": "c0d42849021fc686d8ef25f15083bcbda7522eddf362907ce59f6e82defe5323"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44488-current-narrow-list-rendering-six/xml/TEST-junit-jupiter.xml",
+        "sha256": "446f275010281874a8c48b7e0a9a4815ebbde725cbd06f272f35156e2d03522f"
+      },
+      "loadedSDK": [
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+          "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+          "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar",
+          "sha256": "75dd1c045492bff8e1963aabb28bfe903c2064e11e27fe2f0f0aff1ad3d84476"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar",
+          "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar",
+          "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar",
+          "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+          "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar",
+          "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+          "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar",
+          "sha256": "fd5d306052d7aa6769a8ec77778d328e6f7c83af5ac074df38035bbb1e9cd72b"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar",
+          "sha256": "4011795f8494dd69e764b7709443dd13d3068ba8ac37624f61d7084f4429cbe2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+          "sha256": "597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar",
+          "sha256": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar",
+          "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+          "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+          "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        }
+      ],
+      "cases": {
+        "PT-WEB-SCR015-RSRC-001": "rendersFixedColumnsSearchInputsAndBothPageLinks",
+        "PT-WEB-SCR015-RSRC-002": "rendersZeroCountWithoutRowsOrNavigation",
+        "PT-WEB-SCR015-RSRC-003": "rendersInvalidInputAndErrorWithoutInventingSearchResults"
+      },
+      "sharedRunSixOnlyThreeApplied": true,
+      "approvedCurrentCheck": "GET filter and tablePage at both approved locations on current exact bytes"
+    }
+  },
+  "remaining": [
+    "actual browser and login actor",
+    "controller API/DB input and sort",
+    "QA-056",
+    "six same-source/run 451"
+  ],
+  "exactMavenMemberDigests": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44498-web-maven-resource-stage-after-warning-buttons/output-member-sha256.json",
+    "sha256": "3d54c5ec32235a8e4af1e54bc290da36c6607408ea1fdaa7dd8e06e116c1e4c0"
+  }
+}
