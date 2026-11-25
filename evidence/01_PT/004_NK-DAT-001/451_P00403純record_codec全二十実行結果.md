@@ -13,3 +13,5 @@ Core 91c55386a79a59b9766fb1cc9447d7451c71c083 / Unit c65fb1fc5decc9f3d6ef773a813
 全53Codeを含む六physicalの無除外100%。旧standard29M100と別に測定し、private ctor/生成enum/String hash guardの除外0。原477Main compile0/Batch646 SB0/二source PMD-CS0/全signature同一/他1100physical一致。BUG3169とYKT2638は当六scopeを限定close。
 
 四synthetic wire/二negative input vector・全hashは[evidence manifest](evidence/PG37284-record-codec20/manifest.json)へ。new4/original16は同一runで、別pure8は再演せず現七byte一致だけを当sliceで参照。native二owner/実SQL/F02F03/全451終了依存は未受入。原C.423価格消化0、追加.6完了（見積価格であり専有実費ではない）、formal1964/53・元17/190・工数null不変。IT/ST完了は宣言しない。
+
+保守完了記録のPT-BAT-045は、現共用終了補助を含むPG45398の選択4件中の1件。元PG37284のMaintenanceRecords全8件からは、body・補助・正規Batch六物理が同じ残7件を別途参照する。P004-03の実原本所有、正規退役、FileStore・DB、先行F02/F03の判定が残る。 [現在の並行実行](../017_NK-BAT-001/evidence/PG45398-current-maintenance-and-batch-fixture-workers/manifest.json)
