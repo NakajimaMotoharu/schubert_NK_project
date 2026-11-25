@@ -1,0 +1,161 @@
+{
+  "run": "PG45522",
+  "source": "5236a19a2e38ee4e9fd98b5f33ccb3141430a3da",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.05",
+  "terminalAtUTC": "2026-11-25T18:41:06.492479+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3890",
+  "horizontal": "YKT-3013",
+  "collisionCount": 8,
+  "newCanonicalCount": 8,
+  "distinctCaseIdentitiesInComparison": 18,
+  "cases": [
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT001",
+      "activeFormTestId": "PT-WEB-CSRFPORT001",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "lazyHandlingSetsOnlyTheTwoRequestAliases",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT001",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "generatesFromSuppliedAttributeWithoutRandomnessOrExistingSessionRotation"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT002",
+      "activeFormTestId": "PT-WEB-CSRFPORT002",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "nullApiBoundariesRejectBeforeDelegation",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT002",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "existingSessionRequiresObservedNewIdentityAndUsesOnlyRotatedAttribute"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT003",
+      "activeFormTestId": "PT-WEB-CSRFPORT003",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "validSchemaReturnsSubmittedValueWithoutReadingToken",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT003",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "loadNeverCreatesSessionAndRejectsMalformedOrNonStringAttributes"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT004",
+      "activeFormTestId": "PT-WEB-CSRFPORT004",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "missingMultipleNullAndMalformedValuesReturnNull",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT004",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "nullSaveInvalidatesOnlySuppliedExistingSessionAndNeverCreatesOne"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT005",
+      "activeFormTestId": "PT-WEB-CSRFPORT005",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "queryCsrfAndInvalidEscapesRejectBeforeBodyRead",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT005",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "saveRequiresExactHeaderParameterAndPersistedValueWithoutWritingState"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT006",
+      "activeFormTestId": "PT-WEB-CSRFPORT006",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "absentEmptyAndDifferentCaseQueryNamesKeepBodyValue",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT006",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "nullBoundariesAndMissingGeneratedAttributeHaveExplicitFailureSignals"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT007",
+      "activeFormTestId": "PT-WEB-CSRFPORT007",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "deferredNullAndFailureAreNotMadeIntoValidValues",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT007",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "callbackFailuresPreserveIdentityWithoutRetryOrCleanupAuthority"
+    },
+    {
+      "historicalLabel": "PT-WEB-CSRFPORT008",
+      "activeFormTestId": "PT-WEB-CSRFPORT008",
+      "formSuite": "dev.codex.schubert.nk.web.security.FormCsrfRequestPortTest",
+      "formMethod": "bodyArgumentFaultIsNullButOutsideQueryAndFatalPropagate",
+      "currentAdapterTestId": "PT-WEB-CSRFSESSIONPORT008",
+      "adapterSuite": "dev.codex.schubert.nk.web.security.EncryptedSessionCsrfPortTest",
+      "adapterMethod": "concurrentSuppliedFramesKeepMaterializedValuesAndCallbacksSeparate"
+    }
+  ],
+  "historicalForm": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20408-form-csrf-request-nine-v1/manifest.json",
+    "sha256": "f14f5f83428bfbd75ef3c2611d45c292c0d934ec61e436e9a62c707bf0342eec"
+  },
+  "historicalAdapter": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21164-csrf-session-eight-v1/manifest.json",
+    "sha256": "7501be679d4af7f6a3cff669206b112452bdfaf80a3a707cd8da3e506edebe41"
+  },
+  "independentAdapter": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21174-csrf-session-independent-post-v1/manifest.json",
+    "sha256": "6173b835162e65bdc5e0853fe3c69c6e5e7ef372fa45eb5f9ff6eadb7f2bfb46"
+  },
+  "existingLaterForm": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45048-current-form-request-ten/manifest.json",
+    "sha256": "cb4fc9cb34d66d34a2ea21c77588f0fdb221749edfa43bf83e995bd2a49a8049"
+  },
+  "existingFormRawXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20408-form-csrf-request-nine-unit-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "6ad3fd2e92992b62b3ca8f5a02e824eaf8155bc6d003e41eb91fd074908661b5"
+  },
+  "existingAdapterRawXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21164-csrf-session-eight-unit-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "dbfdee86ec339bd5503693bf66b02904f7456a329c22d2f3130c07caeb4b3fa9"
+  },
+  "existingLaterFormRawXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "be5b00953788604efe1f459eaf22c495f6beb2bfd703468d1b6bff4621f3755c"
+  },
+  "previousDocuments": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/052_FormCsrfHandlerメモリ境界単体仕様.md",
+      "sha256": "12ae2bcaaca30bcbb9bf8b44b1831e917b72376aa22e9fdbc2cf8a817b3015b3",
+      "source": "5236a19a2e38ee4e9fd98b5f33ccb3141430a3da"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/053_FormCsrfHandlerメモリ境界単体結果.md",
+      "sha256": "47c6dc6b2193bf2c18458d115ad99ddc4f39a64d29a4e6ef578290569a790745",
+      "source": "5236a19a2e38ee4e9fd98b5f33ccb3141430a3da"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/062_暗号session_CSRF_adapter自己所有Servlet単体仕様.md",
+      "sha256": "c276e9e27162da6d1a3b60cb6aa74b6b70b1b1ce5d936d7a40a5dee2e95d3618",
+      "source": "5236a19a2e38ee4e9fd98b5f33ccb3141430a3da"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/063_暗号session_CSRF_adapter自己所有Servlet単体結果.md",
+      "sha256": "ee441ec1b401974b6695a27e250eccf68e256d1d90ef245b097d3ec19b016b10",
+      "source": "5236a19a2e38ee4e9fd98b5f33ccb3141430a3da"
+    }
+  ],
+  "currentDocuments": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/052_FormCsrfHandlerメモリ境界単体仕様.md",
+      "sha256": "08095de3cf05c93f4672d278f541161664690a46eac9ebdb5ef86c1d79a59c25"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/053_FormCsrfHandlerメモリ境界単体結果.md",
+      "sha256": "47c6dc6b2193bf2c18458d115ad99ddc4f39a64d29a4e6ef578290569a790745"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/062_暗号session_CSRF_adapter自己所有Servlet単体仕様.md",
+      "sha256": "384862d6d43ef92daf7967a016e5c0de281a308eb6873af88cf80e6e7eaf18ce"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/063_暗号session_CSRF_adapter自己所有Servlet単体結果.md",
+      "sha256": "eac18573d8d829bf2b4c8deea132aa9bbc4c44fac3f5f8f61092ef2b344428a0"
+    }
+  ],
+  "sourceFileOrRawEvidenceRead": 0,
+  "newJUnitExecutions": 0,
+  "activeRealSessionOrAuth": 0,
+  "historyAliasAndOriginalCoverageRetained": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
