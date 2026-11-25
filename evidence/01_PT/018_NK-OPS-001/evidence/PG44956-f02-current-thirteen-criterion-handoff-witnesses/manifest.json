@@ -1,0 +1,391 @@
+{
+  "run": "PG44956",
+  "source": "fe8553f64363221786b1263b7077296690755ee9",
+  "currentProductCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T05:43:01.731517+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-F02-b-b",
+  "designRef": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "originalCriteria": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43946-four-owner-six-product-and-13-sys/manifest.json",
+    "sha256": "646d6bc5d55184b7063156be37f35ddaaba5e6748eb907b96eee6f84282b2a24"
+  },
+  "latestRequirementVersion": "22189f6fe2987a502103f483e08f3c97b4c1fbb9",
+  "currentOrdinaryAndResources": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+    "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+  },
+  "exactLoginTemplate": {
+    "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+    "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+  },
+  "exactCaddy": {
+    "path": "src/deployment/caddy/Caddyfile.template",
+    "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+  },
+  "currentRecordRows": [
+    {
+      "id": "SYS-001",
+      "rdLiteral": "次期システムの名称をschubert NKとする。",
+      "existingScope": "ログイン題名の現資源と承認DIF-001。実描画の名義は未確認。",
+      "remainingOriginal": "実Browserの全名義／DOM／CHR-A01終端",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+          "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/004_NK-WEB-001/evidence/PG44900-ordinary-web-resources-ui222-structural-audit/manifest.json",
+          "sha256": "c29f5dbcd2e6c3be6bcad612ddb5a476139464f0f21acffff40a99e32bfd8cae"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+          "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+        }
+      ],
+      "relatedProducts": [
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-002",
+      "rdLiteral": "Java 25 LTSを使用する。Ubuntu標準パッケージ`openjdk-25-jdk`で動作可能な構成とする。",
+      "existingScope": "正規四JAR、実release25 485 Main。作業機の隔離JDK25.0.4。",
+      "remainingOriginal": "API/Web実compile・稼働、Ubuntu標準JDK実環境",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38258-wbs66-current-checkstyle-and-batch-spotbugs-v1/manifest.json",
+          "sha256": "cb70fcb5f88912ba218060f8b210ede1182a7c6b213d843dcf23ffc4b629d695"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44952-f02-sys002-host-java25-packaging-boundary/manifest.json",
+          "sha256": "35fce5d57675f398599171d69a257eee152930768b51095f3e0145e53f856db1"
+        }
+      ],
+      "relatedProducts": [
+        "protocol",
+        "storage",
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-003",
+      "rdLiteral": "OSはUbuntu Server 26.04 LTSとする。",
+      "existingScope": "現在の作業ホストUbuntu 26.04と、別の既存対象環境引渡し。対象Serverの現物は未照合。",
+      "remainingOriginal": "現Ubuntu Server release、owner、稼働後条件",
+      "actualHistoricalPrimary": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44952-f02-sys002-host-java25-packaging-boundary/manifest.json",
+          "sha256": "35fce5d57675f398599171d69a257eee152930768b51095f3e0145e53f856db1"
+        }
+      ],
+      "relatedProducts": [
+        "bootstrap",
+        "batch"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-004",
+      "rdLiteral": "DBMSはPostgreSQL 18系を使用し、構築時点の最新minor releaseを採用する。",
+      "existingScope": "元PG18.6環境整備の記録のみ。現在版・接続・schema実証は保留。",
+      "remainingOriginal": "現owner／DB版・対象schema／実際のSQL契約",
+      "actualHistoricalPrimary": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "currentScopedWitnesses": [],
+      "relatedProducts": [
+        "storage",
+        "api",
+        "batch"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-005",
+      "rdLiteral": "Web層とサーバ側アプリケーション層の通信は、すべてApache ActiveMQ Artemisを介する。",
+      "existingScope": "明示依存3,369参照で既定外0。保留5源の99参照、全型付きと実Artemisは未完。",
+      "remainingOriginal": "型全量ArchUnitと実Web→API Artemis、接続真正終端",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+          "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38240-current-six-source-reference-edges-v1/manifest.json",
+          "sha256": "62dfcbbfdf393b0a7895c2f09fcf546be99d5f4ef4702fbf0e536c8f4947800a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44926-current-six-module-explicit-additional-seven/manifest.json",
+          "sha256": "c9c8b8d090ed93cf2b8e8342dd3924a5cb01775b42dab2f2c3534015ca1722e2"
+        }
+      ],
+      "relatedProducts": [
+        "protocol",
+        "api",
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-006",
+      "rdLiteral": "ブラウザ向け画面デザインは極力維持する。MQ導入等に伴う必要不可欠な変更は許容する。",
+      "existingScope": "現Web資源34と24ページの静的構造の局所検査。実ブラウザと全互換は別。",
+      "remainingOriginal": "各実画面／DOM／承認DIF／現Browserと結果",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+          "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/004_NK-WEB-001/evidence/PG44900-ordinary-web-resources-ui222-structural-audit/manifest.json",
+          "sha256": "c29f5dbcd2e6c3be6bcad612ddb5a476139464f0f21acffff40a99e32bfd8cae"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+          "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+        }
+      ],
+      "relatedProducts": [
+        "web",
+        "protocol"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-007",
+      "rdLiteral": "Web層より後段の内部処理方式は、利用者から見た挙動を極端に変えない範囲で変更できる。安定性を優先する。",
+      "existingScope": "差分判定工具の同候補ローカル89件。実Current/NK比較や処理結果の確認では未成立。",
+      "remainingOriginal": "利用者操作ごとのE2E同等と復旧後条件",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/manifest.json",
+          "sha256": "add67bdc6bfdf6c8920df16312543b5b51bd5a98417b68a5b67cf2326e378cb0"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44950-video-observation-definition-gate/manifest.json",
+          "sha256": "b0df896954bb23c80d3411374fc29902343821cd334b32ffe1a9dca5afdeca21"
+        }
+      ],
+      "relatedProducts": [
+        "web",
+        "api",
+        "batch",
+        "protocol"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-008",
+      "rdLiteral": "本番環境はオンプレミス、単一拠点、インターネット接続ありとする。",
+      "existingScope": "既存の対象ホスト引渡し資料のみ。配備の正規所有・同稼働は別。",
+      "remainingOriginal": "本番の設計どおりのホスト・拠点と稼働",
+      "actualHistoricalPrimary": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "currentScopedWitnesses": [],
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-009",
+      "rdLiteral": "コンテナおよびKubernetesは初期前提としない。必要性が確認された場合に再評価する。",
+      "existingScope": "六module構成・正規JAR四、資源二。対象Linuxの直接OS作業条件・稼働は別。",
+      "remainingOriginal": "現行実機の構成とon-prem運用の照合",
+      "actualHistoricalPrimary": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+          "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+          "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+          "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+        }
+      ],
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-010",
+      "rdLiteral": "大容量マスタ素材を含む業務データはローカルストレージに保持し、外部ストレージサービスを利用しない。",
+      "existingScope": "現local設定3とUnit3の公開バイトを過去の独立資料と照合。実配置・FileStore未実施。",
+      "remainingOriginal": "業務データの実配置・所有と引渡し証拠",
+      "actualHistoricalPrimary": [],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44230-f02-sys010-local-storage-design-and-candidate/manifest.json",
+          "sha256": "8689c9515eb110a34db40a6f37d35b9775f7ec651f97f144f7975f8f445555b3"
+        }
+      ],
+      "relatedProducts": [
+        "storage",
+        "bootstrap",
+        "api",
+        "batch"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-012",
+      "rdLiteral": "初期公開方式はdomainを使用せず、到達確認済みのglobal IP addressと現行外部port `55160/tcp`を使用する。本番サーバ側のport開放は完了済みとする。",
+      "existingScope": "公開Caddyテンプレートの宣言は既元証拠の同一バイト。現稼働は別。",
+      "remainingOriginal": "有効Unitと同ownerの実入口・port・通信",
+      "actualHistoricalPrimary": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42600-p01807-caddy-public-template-and-parser-hold-v1/manifest.json",
+          "sha256": "826bc0bc93ff7b841765d8c5b8f6e123884cf4fea76742925b0ae6711469d8f6"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44052-caddy-current-public-and-parent-bounds/manifest.json",
+          "sha256": "7d3b1b52eff8ccddecb19c5b21fcc07f84a3bdeeb70e20050fb769c33b9d8ffa"
+        }
+      ],
+      "relatedProducts": [
+        "bootstrap",
+        "batch",
+        "api",
+        "web"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-013",
+      "rdLiteral": "初期TLS方式は現行相当のCaddy内部証明書を許容し、client側の証明書警告を許容する。通信暗号化は維持する。",
+      "existingScope": "TLSの宣言を含む公開テンプレートの同一バイト。実証明書とTLS通信の検証は未実施。",
+      "remainingOriginal": "稼働Caddy、実TLS／HTTP／公開証明書の照合",
+      "actualHistoricalPrimary": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42600-p01807-caddy-public-template-and-parser-hold-v1/manifest.json",
+          "sha256": "826bc0bc93ff7b841765d8c5b8f6e123884cf4fea76742925b0ae6711469d8f6"
+        }
+      ],
+      "relatedProducts": [
+        "web",
+        "bootstrap"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    },
+    {
+      "id": "SYS-014",
+      "rdLiteral": "Domainまたは公的に信頼されるIP address証明書を将来採用する場合に、業務アプリを改修せず入口設定と証明書を交換できる構成とする。",
+      "existingScope": "入口宣言の既ソースが同一。実際の証明書交換、再配備、正規同候補運用の確認は保留。",
+      "remainingOriginal": "入口・証明書を交換可能とする正規配備契約の確認",
+      "actualHistoricalPrimary": [
+        {
+          "path": "src/deployment/caddy/Caddyfile.template",
+          "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+        },
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/049_C02既存証跡・実効所有条件保留.md",
+          "sha256": "64488b011a7a5ba01823393cba63e0496bf1d1bee2dbb226c7f389f9fe51d858"
+        }
+      ],
+      "currentScopedWitnesses": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42600-p01807-caddy-public-template-and-parser-hold-v1/manifest.json",
+          "sha256": "826bc0bc93ff7b841765d8c5b8f6e123884cf4fea76742925b0ae6711469d8f6"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44052-caddy-current-public-and-parent-bounds/manifest.json",
+          "sha256": "7d3b1b52eff8ccddecb19c5b21fcc07f84a3bdeeb70e20050fb769c33b9d8ffa"
+        }
+      ],
+      "relatedProducts": [
+        "web",
+        "bootstrap"
+      ],
+      "formalAcceptanceId": null,
+      "wholeAccepted": false
+    }
+  ],
+  "fullyAcceptedSysCount": 0,
+  "rolesWithNewSignedReceipt": 0,
+  "formalAcceptanceId": null,
+  "internalVerificationArtifacts": 6,
+  "actualDeploymentTest": 0,
+  "newProductExecution": 0,
+  "whole451": false
+}
