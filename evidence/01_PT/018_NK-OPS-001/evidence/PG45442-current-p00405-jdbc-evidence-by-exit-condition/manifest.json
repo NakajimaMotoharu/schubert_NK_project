@@ -1,0 +1,157 @@
+{
+  "run": "PG45442",
+  "source": "40758b90aaee4222faf4e332ccd108b6dbb99244",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-25T17:03:10.639507+00:00",
+  "approvedDesign": [
+    {
+      "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    }
+  ],
+  "originalWbs": {
+    "新版ID": "WBS-P004-05/2",
+    "第58版ID": "WBS-P004-05/2",
+    "費用主担当項目": "P004-05",
+    "計画窓": "繰越",
+    "予定期間・週末": "2026-12-20までの計画週",
+    "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+    "担当": "API・DB担当",
+    "旧短期残pp": "0.423",
+    "改訂残pp": "0.423",
+    "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 21
+  },
+  "criteria": [
+    {
+      "criterion": "UTCと資源の分離：Backupのsnapshot/例外",
+      "result": "JDBC代理の20成功。当18および拡張2の証拠として既集計・本群加算0。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        },
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45188-current-backup-pmd-twelve-site-handoff/manifest.json",
+          "sha256": "c4c1495de62b714b405aa8d027429e2b83fb0c28edf3fa37affa9aa94126fb0f"
+        }
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+        "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+      },
+      "matchedArchive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+      },
+      "stillNeededForAcceptance": "実PostgreSQLのtimezone・取得精度・backup保持"
+    },
+    {
+      "criterion": "取得済／取得前失敗のclose、一次と抑制順序",
+      "result": "JdbcResourceCleanupの合成9件。現L23/M4/C1/B8。実Connection操作は依存先が別所有。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45282-current-jdbc-acquired-or-missing-nine/manifest.json",
+          "sha256": "df89e418a7a51b0d864cdf87432fd6ecc6c5924cd2da46f0e7844d1486fc1c0c"
+        }
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/reports/TEST-junit-jupiter.xml",
+        "sha256": "82059d5799b996ab0e1c15982dbcef675b2e85c2df372c509208732e0c29e013"
+      },
+      "stillNeededForAcceptance": "通常ApiJdbcPoolと実call siteのcommit/rollback・障害時資源"
+    },
+    {
+      "criterion": "SQLの結果、束縛、借用状態の保存",
+      "result": "Outboxの旧単一run12と当入力・10物理が一致。関連RequiredColumnの分岐は当該coverageに合算なし。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45160-outbox-current-exact-twelve-single-original/manifest.json",
+          "sha256": "b1b799c280313458c65b336ff17515760516ae40e6dc25be37469e6515aae6a5"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43552-current-jdbc-outbox-12-single-exec-v1/manifest.json",
+          "sha256": "ece1baa5241fa96148834289425c6bb180fe7767ef9dc5cff9ef4b5b15938b62"
+        }
+      ],
+      "originalXml": {
+        "path": "../pgpt-runs/PG379/PG43552-current-jdbc-outbox-12-single-exec-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "5bca11a0aa0ee0febba0937fe47263a86b51461ef9ae6d66f70e7998be293a64"
+      },
+      "stillNeededForAcceptance": "実Outbox transactionと整合後条件、claim/rollback"
+    },
+    {
+      "criterion": "UTCとborrowed Connectionの所有を分離",
+      "result": "Web受付scopeの元11件を現候補の合成境界として確認。受領16番Program、API同期取引には転用不可。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45162-current-receipt-fixture-exceptions-qualified/manifest.json",
+          "sha256": "97c4a8391f363dfbd1503c99e5daa9ce82c4751f63946e99ca4338baa31d509e"
+        }
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45162-current-receipt-proxy-exceptions/result/TEST-junit-jupiter.xml",
+        "sha256": "f8ff496ae636edf3f66220e9c384ef73527185585aac7af2738e1a83daf52795"
+      },
+      "stillNeededForAcceptance": "実ブラウザ／実SQL時の結果と接続所有"
+    },
+    {
+      "criterion": "借用read-only観測の完了後publish、close順",
+      "result": "当純JDK代理3、元5SDK。当counterのraw未到達を保持。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45420-current-three-monitoring-ownership-races/manifest.json",
+          "sha256": "bbf6e1ae7ef2f40ff0281d9e39871b6ced5e99cbebe771dc0210d4544b9a05c8"
+        }
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45420-web-outbox-observation-bounded/xml/TEST-junit-jupiter.xml",
+        "sha256": "944d9ad49078610228903e0a883d4d62b829741f7427e20608d4d127a332379d"
+      },
+      "stillNeededForAcceptance": "実DB状態・監視sink"
+    },
+    {
+      "criterion": "API管理者・session readの親子資源受渡し",
+      "result": "二Mainの現NullAway/SpotBugsと戻り前の順序を照合。実auth runtime判定は0。",
+      "workflow": [
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/manifest.json",
+          "sha256": "82a6fbc43e6eb94605bcc9af02d849693cd159c40234d7648b56fdc7acbada8f"
+        }
+      ],
+      "stillNeededForAcceptance": "同候補認証とSQL実境界"
+    }
+  ],
+  "distinctOrdinaryRuns": 5,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "actualRealDatabaseExecutions": 0,
+  "actualNewProductTests": 0,
+  "coverageRunsCombined": false,
+  "decision": "追加証拠は候補判定用。残るAPI先行、実取引、451を満たすまで保留。"
+}
