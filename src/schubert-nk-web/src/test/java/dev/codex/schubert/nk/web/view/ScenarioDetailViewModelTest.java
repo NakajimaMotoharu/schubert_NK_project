@@ -392,13 +392,12 @@ class ScenarioDetailViewModelTest {
   @Test
   void web204ConcurrentProjection()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Future<ScenarioDetailViewModel>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
         tasks.add(
-            pool.submit(
+            workers.submit(
                 () ->
                     ScenarioDetailViewModel.from(
                         new SessionPrincipal(
@@ -415,9 +414,6 @@ class ScenarioDetailViewModelTest {
         assertEquals("本文" + i, result.getEntries().getFirst().getBody());
         assertEquals(i + 1, result.getEntries().getFirst().getId());
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
