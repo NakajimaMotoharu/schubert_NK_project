@@ -16,3 +16,9 @@ NK-WEB-001 / WebHttpLogKind/WebRequestTrace/MenuController。RD FUN002/FUN008/MO
 実際のProducer/APIingestはheld graphへ依存するため製造・PG強化レビューと静的検査を実施し、当15へ含めない。REQUEST local/outbox/DB＋MENU別eventID、HTTP結果不変、未知/null/collisionのmetadata故障、API16bind/UK/ACKをsourceレビューで追跡する。実HTTP/暗号/SQLtransaction/再配送の未実測をPASSへ変換しない。
 
 実行command・OS/JDK/tool・source・終了code・静的・line/method/class/branch全100・normal全physicalCRC・TestID/XML・BUG・manifest path/hashは045結果へ保存。期待値はUI/SS固定tableでありproductionから生成しない。現時点NOT_RUN、第一V/CHR/native/451/正式受入は未完。
+
+## BUG-3851・YKT-2997の並行fixture再試験
+
+PT-WEB-MENU001～005は既存の独立期待値を使用する。PT-WEB-MENU005は同一threadのmarker伝播、別threadでmarkerが伝播しないこと、業務messageと自分のcorrelationの選択を判定する。REQ008の変更二methodは、未終了scopeを別threadが閉じようとした際の失敗と最初のIDの保存、100件の並行requestでの相互汚染0を、元固定ID／件数で確認する。入力はMockHttpServletRequestとJDK workerで、実送信・実DB・実HTTP・配備用環境への接続を伴わない。
+
+既存ViewFixtureWorkersTestの独立3例で一次例外の同一性と二次例外のsuppressed順、cancel後10秒終了待機、InterruptedException同一性と旗の再付与を判定する。一次処理のget期限はMenu 10秒、REQ008 5秒のまま、worker終了期限10秒を維持する。現正規Protocolを依存に指定し、既許可Web局所型をJava 25でコンパイルして選択試験を一回実行する。PG45354で対象commit、入力、コマンド、終了、カウンタと静的結果を保存する。部分結果は全Web/451やQA-054の実業務結果へ加算しない。

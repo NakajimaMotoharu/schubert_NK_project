@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.web.controller.MenuController;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
 import dev.codex.schubert.nk.web.view.MenuViewModel;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.time.Instant;
 import java.util.List;
@@ -124,6 +125,7 @@ final class MenuAuditContractTest {
   }
 
   @Test
+  @SuppressWarnings("try")
   void menu005NestedMarkersDoNotInheritAndEachNoMqEventSelfCorrelates() throws Exception {
     var first = WebRequestTraceTest.trace(new MockHttpServletRequest(), 430);
     var second = WebRequestTraceTest.trace(new MockHttpServletRequest(), 431);
@@ -142,12 +144,8 @@ final class MenuAuditContractTest {
       }
       assertTrue(second.menuViewCandidate());
       assertFalse(first.menuViewCandidate());
-      var workers = Executors.newFixedThreadPool(1);
-      try {
+      try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(1))) {
         workers.submit(WebRequestTrace::markMenuViewed).get(10, TimeUnit.SECONDS);
-      } finally {
-        workers.shutdownNow();
-        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertFalse(first.menuViewCandidate());
       WebRequestTrace.markMenuViewed();

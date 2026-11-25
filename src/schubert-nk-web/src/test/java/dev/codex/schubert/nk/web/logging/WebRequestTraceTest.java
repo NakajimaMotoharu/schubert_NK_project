@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.web.security.CaddyClientAddressResolver;
 import dev.codex.schubert.nk.web.security.CaddyTransportContextFilter;
 import dev.codex.schubert.nk.web.security.WebRequestContext;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.servlet.DispatcherType;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -260,6 +261,7 @@ final class WebRequestTraceTest {
   }
 
   @Test
+  @SuppressWarnings("try")
   void req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit() throws Exception {
     var first = trace(new MockHttpServletRequest(), 6);
     var second = trace(new MockHttpServletRequest(), 7);
@@ -277,8 +279,7 @@ final class WebRequestTraceTest {
         inner.close();
       }
       ids.get();
-      var pool = Executors.newVirtualThreadPerTaskExecutor();
-      try {
+      try (var pool = new ViewFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor())) {
         assertEquals(new UUID(2, 14), pool.submit(ids::get).get(5, TimeUnit.SECONDS));
         assertThrows(
             ExecutionException.class,
@@ -289,9 +290,6 @@ final class WebRequestTraceTest {
                           return 0;
                         })
                     .get(5, TimeUnit.SECONDS));
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     } finally {
       outer.close();
@@ -305,9 +303,9 @@ final class WebRequestTraceTest {
   }
 
   @Test
+  @SuppressWarnings("try")
   void req008HundredConcurrentRequestsDoNotCrossContaminate() throws Exception {
-    var pool = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var pool = new ViewFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor())) {
       var jobs = new ArrayList<Future<Integer>>();
       for (int i = 1; i <= 100; i++) {
         final int owner = i;
@@ -330,9 +328,6 @@ final class WebRequestTraceTest {
       }
       for (int i = 0; i < jobs.size(); i++)
         assertEquals(i + 1, jobs.get(i).get(5, TimeUnit.SECONDS));
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

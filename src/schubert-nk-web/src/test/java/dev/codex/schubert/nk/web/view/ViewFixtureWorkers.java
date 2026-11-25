@@ -8,15 +8,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-/** Finite cleanup for render-only fixture workers. See BUG-3846 and YKT-2997. */
-final class ViewFixtureWorkers implements AutoCloseable {
+/** Finite cleanup for local Web test workers. See BUG-3846 and YKT-2997. */
+public final class ViewFixtureWorkers implements AutoCloseable {
   private final ExecutorService executor;
 
-  ViewFixtureWorkers(ExecutorService executor) {
+  public ViewFixtureWorkers(ExecutorService executor) {
     this.executor = Objects.requireNonNull(executor, "fixture executor");
   }
 
-  <T> Future<T> submit(Callable<T> task) {
+  public <T> Future<T> submit(Callable<T> task) {
     return executor.submit(task);
   }
 
