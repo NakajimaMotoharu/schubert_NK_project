@@ -105,3 +105,9 @@
 ## BUG-3811の現候補再試験
 
 製品 `8e2a6b055c45f9f868433c73174b87bc72972d77`、JDK代理同一fixture9/9、失敗・エラー・スキップ各0。直接のcloseとrollbackを保持し、cleanup時の失敗伝播を共通化した。原execで行104/104、メソッド10/10、実行コードクラス1/1、分岐32/32。Workはabstract、命令は352/373。先行是正ではSpotBugs資源所有3件が発生したため適用成績に算入しない。最終静的はNullAway・書式・Checkstyle 0、SpotBugs Low 1とPMD20は生出力・担当判断残。実DB、正式451は未了。 [PG44836/38](evidence/PG44836-receipt-cleanup-branch-specific-proof/manifest.json)
+
+## PG44914 受付参照のNPE伝播
+
+現候補の製品クラスはPG44838と同一。再現入力はJDBC interface内の合成ResultSetだけ。PT-WEB-RCPTPORT010は供給元と同一の例外、commit 0、行／文／rollback／接続の順を1回ずつ確認した。同一実行の元9件と新1件の計10件が成功し、失敗・エラー・skip・未実行は各0。現対象クラスの未加工coverageは行104、method10、class1、branch32で各未達0。別のexecは合算していない。現在のCheckstyleとGJFはこのfixture1件について終了0。型付き静的検査の新fixtureへの適用と実DB・全451は別。
+
+[PG44914](evidence/PG44914-receipt-npe-owned-ten/manifest.json)
