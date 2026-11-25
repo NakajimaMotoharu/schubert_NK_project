@@ -9,3 +9,5 @@ ASYNCGAUGE001～008全成功：SS331/既V003と一致する五state/gauge一名�
 PG7307-api-metric-contract-review-v1原SHA `624e613f9c8ee551d76e5a17a62e44a8ef5d2f89b38a9712673598c55bea9d46` は既真Batch harnessの同byteと実API harness入力hashを元runへ結合し、source role/artifact/未使用fixture resources以外の全XML意味不変を確認。coverage低下/skip/Werror削除/SB削除/親差替え/exclusion追加の六改変を拒否、API POM一同版core nodeだけ・版/scope/exclusion/重複/他依存/欠落の六改変も拒否。元V003全文はe7同byteで五state CHECK一致、実DB/DDL実行0。十二件は静的negative checkであり8PTへ加算0、旧sourceの試験成功転用0。
 
 新障害/追加発見/上位変更0。実DB/JMS/HTTP/worker/Root/VM/cohort/keys/配備/collector/exporter操作0、実source/finite collector/全scope同source451/native/CHRは未受入HOLD。正式1964/53・歴史17/別source新7・原190新受入0/工数null/QA051final/PTALT0不変更。OS/JDK/tool/branch/source・command/日時/終了/XML/coverage/static/path/hashは元7300/7302・静的7307へ一意対応する。
+
+PG45482。ASYNCGAUGE007と補助009の2件成功、F/E/skip各0。対象L/M/C/B（未到達／到達）は 9/38, 3/9, 0/3, 10/9。同じCoreの対象3物理とSDK4を元証拠へ照合し厳密compile・固定書式成功。別日の8件全体、六製品451への加算なし。 [PG45482](evidence/PG45482-current-async-gauge-worker-ownership/manifest.json)

@@ -18,3 +18,7 @@ NK-OPS-001/P018-09/共有C07追加費0、RD171 MON005～013/UI252/SS324§10・33
 新8通常PTを独立API monitoring harnessで当source固定後にMaven verifyし、XML全case/終了/FES0、単一session/実CRC・実3class四counter100、annotation-only package-info一classは非実行metadataとして明示、lint/Werror/NullAway/SB/PMD/CSを確認する。五gaugeの3class分母に空scope/意味なしassert/除外で100%を作らない。PG7300/7302以降manifestへOS/JDK/tool/branch/source・command/日時/終了/XML/coverage/static/path/hashを保存予定。既Web/Batch同版SDK1.17.1四Jarをoffline再利用/取得なし、API POM一node以外の意味不変を検証する。
 
 全六通常compile/Jar・旧1669byte/歴史Batch43/source743・歴史Web10/source19cの同byteだけと、当API4physical/3実行を別domainで照合する。当API8に旧Batch169/Web23/設定9を合算せず、全体451/正式の代替にしない。全65source差分と全1726physicalは予定値であり実測前は未確認。DB source/identity/finite collector/Root/exporter/native/CHRは未受入HOLD、formal1964/53・歴史17/別source新7・原190新受入0・工数null/QA051final/PTALT0を維持。障害は修正前915/916へ起票する。
+
+## BUG-3879／YKT-2997 の並行fixture再試験
+
+ASYNCGAUGE007の8 worker、64件、10秒、五つの独立期待とin-memory registryの所有順を維持。追加PT-OPS-ASYNCGAUGE009はJDK代理一つで一次例外と終了期限切れを重ね、一次同一・抑制一件・停止と待機が順に各一回。 [PG45482](evidence/PG45482-current-async-gauge-worker-ownership/manifest.json)
