@@ -1,0 +1,112 @@
+{
+  "run": "PG45156",
+  "source": "cf08e414be9f877b851a387704350d5e7c980209",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T10:11:41.903967+00:00",
+  "bug": "BUG-3822",
+  "horizontal": "YKT-2978",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45154-current-two-jdbc-owner-finding-baseline/manifest.json",
+    "sha256": "63e5172c22d07cd2f25586f6ec48aa9e56b8c0ba6b9e87cf0f59697527071361"
+  },
+  "currentFocused14": {
+    "sources": 14,
+    "compiledPhysical": 19,
+    "nullAway": 0,
+    "spotbugsFrom": 2,
+    "spotbugsTo": 0,
+    "errors": 0,
+    "missing": 0
+  },
+  "changedMainSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    }
+  ],
+  "twoChangedOwnerPhysical": [
+    "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.class",
+    "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.class"
+  ],
+  "differentNestedPhysical": [
+    {
+      "member": "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.class",
+      "stdoutDigestForIdenticalJavap": "0fec5f711eca914e6d0cf6154c556c040b9258621f68dfd3234b1dfa6b301ab1"
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier$VerifiedSession.class",
+      "stdoutDigestForIdenticalJavap": "a7234aedcd25e79ce6767115cbac29bc728a89240ed862ae05acf21f6a876102"
+    }
+  ],
+  "javap": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+  },
+  "unchangedFiveOtherProducts": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "web",
+    "batch"
+  ],
+  "originalMethodBodyReconstructedTwice": true,
+  "sqlAndBindingsAndReadBehaviorUnchanged": true,
+  "closeRowsBeforeStatementAndBorrowedConnectionUnchanged": true,
+  "pmd": {
+    "actualExit": 4,
+    "before": 33,
+    "after": 35,
+    "applicationPending": true,
+    "findings": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/pmd-raw.json",
+      "sha256": "9b27601da8e7e04bc0913da1037991215f8d858663c6c4231182d5bcab98952c"
+    }
+  },
+  "canonicalSpotless": {
+    "files": 2,
+    "changed": 0,
+    "actualExit": 0
+  },
+  "terminations": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-owner-two-fixed-types/terminal.json",
+      "sha256": "d2a50bbe25109ec1394f248c970dc881322eb4820908c63263c0d5864da30534"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-owner-two-fixed-static/terminal.json",
+      "sha256": "20d868246d78f06152c5b46a6c76558cd85e12281731aaeb334b7188f2d984bd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-two-canonical-spotless/terminal.json",
+      "sha256": "206c9c3481a3a86243ed1b2fecab6046d8b707b7518b667cff1b8f9423b91c79"
+    }
+  ],
+  "starts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-owner-two-fixed-types/begin.json",
+      "sha256": "35abe591d30380bc6a882160c44039740d0b29c85fe7e1d04e051b6b97c40ebb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-owner-two-fixed-static/begin.json",
+      "sha256": "8ac28c11ee9430b891b571349200b23d51e520b8cc599f2e763eb8aee58ce516"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45156-current-jdbc-two-canonical-spotless/begin.json",
+      "sha256": "c8ec9ec7881570d948c29659729a2db22102ff4bb529206afea814fdb3f768e0"
+    }
+  ],
+  "scopeOrthogonalToRealAuthDb": true,
+  "actualRuntimeTests": 0,
+  "allReferencedHelpersRemainExisting": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
