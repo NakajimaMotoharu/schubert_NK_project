@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -111,8 +111,7 @@ final class ReplyCorrelationRegistryTest {
     CountDownLatch start = new CountDownLatch(1);
     AtomicInteger winners = new AtomicInteger();
     List<Future<?>> tasks = new ArrayList<>();
-    ExecutorService executor = Executors.newFixedThreadPool(16);
-    try {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(16), 5)) {
       for (int index = 0; index < 100; index++) {
         int marker = index;
         tasks.add(
@@ -129,9 +128,6 @@ final class ReplyCorrelationRegistryTest {
       for (Future<?> task : tasks) {
         task.get(5, TimeUnit.SECONDS);
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(1, winners.get());
     assertEquals(99L, registry.lateResponseCount());

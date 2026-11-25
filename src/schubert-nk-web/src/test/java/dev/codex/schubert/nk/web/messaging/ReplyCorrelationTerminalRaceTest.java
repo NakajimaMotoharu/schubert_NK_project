@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -35,9 +35,9 @@ final class ReplyCorrelationTerminalRaceTest {
   @Test
   void terminalRaceHasOneWinnerAndReturnsThePermit()
       throws InterruptedException, ExecutionException, TimeoutException {
-    ExecutorService workers =
-        Executors.newFixedThreadPool(3, Thread.ofPlatform().daemon().factory());
-    try {
+    try (var workers =
+        new ViewFixtureWorkers(
+            Executors.newFixedThreadPool(3, Thread.ofPlatform().daemon().factory()), 5)) {
       for (int iteration = 0; iteration < 64; iteration++) {
         ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry(1);
         PendingReply pending = registry.register(FIRST, DEADLINE, NOW).orElseThrow();
@@ -88,8 +88,6 @@ final class ReplyCorrelationTerminalRaceTest {
         assertTrue(registry.cancel(SECOND));
         assertEquals(0, registry.pendingCount());
       }
-    } finally {
-      stopWorkers(workers);
     }
   }
 
@@ -100,9 +98,9 @@ final class ReplyCorrelationTerminalRaceTest {
     CountDownLatch start = new CountDownLatch(1);
     List<Future<Optional<PendingReply>>> calls = new ArrayList<>();
     List<PendingReply> accepted = new ArrayList<>();
-    ExecutorService workers =
-        Executors.newFixedThreadPool(20, Thread.ofPlatform().daemon().factory());
-    try {
+    try (var workers =
+        new ViewFixtureWorkers(
+            Executors.newFixedThreadPool(20, Thread.ofPlatform().daemon().factory()), 5)) {
       try {
         for (int index = 1; index <= 20; index++) {
           UUID id = new UUID(0, index);
@@ -131,8 +129,6 @@ final class ReplyCorrelationTerminalRaceTest {
       for (PendingReply pending : accepted) {
         assertTrue(registry.cancel(pending.correlationId()));
       }
-    } finally {
-      stopWorkers(workers);
     }
     assertEquals(0, registry.pendingCount());
     assertTrue(registry.register(FIRST, DEADLINE, NOW).isPresent());
@@ -141,12 +137,6 @@ final class ReplyCorrelationTerminalRaceTest {
     assertTrue(registry.cancel(FIRST));
     assertTrue(registry.cancel(SECOND));
     assertEquals(0, registry.pendingCount());
-  }
-
-  private static void stopWorkers(ExecutorService workers) throws InterruptedException {
-    workers.shutdownNow();
-    assertTrue(
-        workers.awaitTermination(5, TimeUnit.SECONDS), "reply test workers did not terminate");
   }
 
   @Test
