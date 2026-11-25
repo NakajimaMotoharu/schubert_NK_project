@@ -19,3 +19,7 @@ shared012/profile069・六SDKsha固定、prepare/static→Git固定→単一全9
 |PT-WEB-CSRFPORT007|deferredNullAndFailureAreNotMadeIntoValidValues|
 |PT-WEB-CSRFPORT008|bodyArgumentFaultIsNullButOutsideQueryAndFatalPropagate|
 |PT-WEB-CSRFPORT009|sharedHandlerKeepsParallelRequestAttributesSeparate|
+
+### 現例外保持の補足
+
+PT-WEB-CSRFPORT010は、既BUG-2707の修正後に追加する。入力は同じ合成要求のbody引数取得で発生する二つの `IllegalArgumentException`。一方の原因と、他方の抑制例外へ別々の `AssertionError` を設定する。期待値は各fixtureが作った `AssertionError` と同じインスタンスの送出。既008の通常引数例外がnullを返す期待値は維持する。実セッション・DB・HTTPを使わず、現classで001～010を一つのexecに記録する。

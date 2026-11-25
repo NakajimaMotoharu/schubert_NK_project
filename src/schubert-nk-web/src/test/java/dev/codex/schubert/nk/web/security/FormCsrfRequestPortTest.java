@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.DefaultCsrfToken;
 
-/** AUT004/UI226/SS313314352/PT-WEB-CSRFPORT001..009; memory values only, no matching/auth. */
+/** AUT004/UI226/SS313314352/PT-WEB-CSRFPORT001..010; memory values only, no matching/auth. */
 final class FormCsrfRequestPortTest {
   private static final String METHOD_PARAMETERS = "getParameterValues";
   private static final String CSRF = "_csrf";
@@ -244,6 +244,30 @@ final class FormCsrfRequestPortTest {
         assertThrows(
             NoSuchElementException.class,
             () -> HANDLER.resolveCsrfTokenValue(other.asRequest(), TOKEN)));
+  }
+
+  @Test
+  void wrappedFatalBodyFaultsEscapeWithTheirOriginalIdentity() {
+    var cause = new AssertionError("synthetic fatal cause");
+    var caused = new Fixture();
+    caused.faultAt = METHOD_PARAMETERS;
+    caused.fault = new IllegalArgumentException("synthetic argument fault", cause);
+    assertSame(
+        cause,
+        assertThrows(
+            AssertionError.class, () -> HANDLER.resolveCsrfTokenValue(caused.asRequest(), TOKEN)));
+
+    var suppressed = new AssertionError("synthetic suppressed fatal");
+    var argument = new IllegalArgumentException("synthetic argument fault");
+    argument.addSuppressed(suppressed);
+    var withSuppressed = new Fixture();
+    withSuppressed.faultAt = METHOD_PARAMETERS;
+    withSuppressed.fault = argument;
+    assertSame(
+        suppressed,
+        assertThrows(
+            AssertionError.class,
+            () -> HANDLER.resolveCsrfTokenValue(withSuppressed.asRequest(), TOKEN)));
   }
 
   @Test
