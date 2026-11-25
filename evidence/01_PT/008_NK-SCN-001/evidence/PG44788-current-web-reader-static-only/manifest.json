@@ -1,0 +1,74 @@
+{
+  "run": "PG44788",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P008-06/2"
+  ],
+  "source": "985971acbf3ba4bd41acbf737b993b4855e9d22d",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:41:01.841833+00:00",
+  "actualExit": 0,
+  "proofByTool": {
+    "nullaway": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-nullaway/begin.json",
+        "sha256": "225597620cbc523ee0958cd9f3a05417124e344c501202ace2e0863017074155"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-nullaway/terminal.json",
+        "sha256": "717d3a5229d306ede60050498973e15abef2b2ecce88c75f119a7da17969ba04"
+      }
+    },
+    "spotbugs": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-spotbugs/begin.json",
+        "sha256": "6dbd785624056ff28387ff372a8bfeefc38da8523f0ae3a95c185f9e511d4d15"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-spotbugs/terminal.json",
+        "sha256": "1a0a886f37c6b6f346705fb47a8eb10258f39e5a30691d34ff07a3ed123a11bf"
+      }
+    },
+    "pmd": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-pmd/begin.json",
+        "sha256": "5b830a1012a969521aa446f280cbfef3cbb580ed2be9810b54b91044cd59bc14"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-pmd/terminal.json",
+        "sha256": "b4456937e9560181ffdd307e58ad572b28c200bcab987d8423c9e77c09130239"
+      }
+    }
+  },
+  "currentMain": {
+    "path": "../pgpt-runs/PG379/PG44788-current-web-scenario-record-reader-nullaway/target/classes/dev/codex/schubert/nk/web/storage/ScenarioRecordReader.class",
+    "sha256": "2a987fa3faa561b6e675fd53c675b2e6a88fcb929c07c869d1461f93553e9437"
+  },
+  "declaredInputCount": 3,
+  "typedMainPhysical": 1,
+  "priorClassEqualityWithCompileOnly": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38210-scenario-reader-before-prepare-v1/manifest.json",
+    "sha256": "7f9b8fb7682a51944fbb112c27f04957fa9331c1abb2abcf1ff937e59da0172f"
+  },
+  "priorClassDifferentWithFourHistoricalJUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26906-scenario-current148-v1/manifest.json",
+    "sha256": "c9dae12eca72e16b280d66e72ad4ad300ffe6b14951fbdadee8a44a7a4375708"
+  },
+  "dynamicHold": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38208-scenario-record-reader-namespace-v1/manifest.json",
+    "sha256": "99b661a0d2c5ad9ce0d021f58141f5551912ac0159845852bbad96977d4a2b21"
+  },
+  "relatedDefect": "BUG-3212",
+  "relatedHorizontal": "YKT-2664",
+  "testsNotRun": [
+    "PT-SCN-008-RD03",
+    "PT-SCN-008-RD04",
+    "private namespace contract"
+  ],
+  "productExecutions": 0,
+  "coverage": null,
+  "webTypedMain124of262": 124,
+  "reason": "The existing ScenarioFileFixture includes POSIX mode change; the recorded dynamic scope was held before running. The ordinary artifacts of different physical Main cannot qualify this candidate.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
