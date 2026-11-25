@@ -1,0 +1,597 @@
+{
+  "run": "PG45118",
+  "source": "de81bf483c5edaad3bda1c0e53b02a6d8ad9b6ee",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 4,
+  "terminalAtUTC": "2026-11-25T09:18:51.839666+00:00",
+  "typedAdditional": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "sha256": "8aca829fb6f08507ef5a27280546e830131bcf08c90ff91c7040329c1b837b97"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/package-info.java",
+      "sha256": "16ab7158a137c125eb2ac88928839dfec34c3ad2a7038895d781ec614c770f10"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/package-info.java",
+      "sha256": "e87586e1779c1035d605abfb01df45fe85ed7ed558b161bd456147defc294600"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/package-info.java",
+      "sha256": "9fda3fc02fe4b73a9322f239fe20b53e44939fc0a30f25d156f406e0f116ca04"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java",
+      "sha256": "4e8a3b76dfcb01673d169b3bb2938049976fab84dab648f408bbe283ee7b79ad"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "e333b1f5d203642942c0a94578003fe23a6f9f67c981a68b3ce35d309bd2e0bb"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+      "sha256": "ca0a8a417ddfac9bce26135a86a22c408bc1b43e353282dc9381eb7e8128b4ae"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "sha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sha256": "15d5a5a1ffe4de19519c49a83540bf2bdf942ef7fd523eb8fe1472c147f4950e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+      "sha256": "9a5a2059297418f3dc1d6091ff27beb85ee5e1f3a68a46dd9a6fec2b63a42f8d"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+      "sha256": "d4cc9148da42e97b6712a12217edc2aecc2fadaccc84c8edf54bad100364d514"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldProbeFileIo.java",
+      "sha256": "85e2996a53395a7ee59f27e7b7bd0e6aab624d6ad245307660cc7fcf4c090ac6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStartupProbe.java",
+      "sha256": "d4ca4a803d313c5f2269b5e245785e7f345bb1f076a3511ce4c895e5bdcab18e"
+    }
+  ],
+  "before": {
+    "api": 177,
+    "web": 194
+  },
+  "after": {
+    "api": 190,
+    "web": 194
+  },
+  "packageDescriptors": 4,
+  "ordinaryTargetSource": 9,
+  "sourceInputs": 50,
+  "physical": 59,
+  "explicitTargetPhysical": 15,
+  "nullAway": 0,
+  "metadataPrepRetriesBeforeMaven": 2,
+  "spotbugs": {
+    "exit": 1,
+    "findings": [
+      {
+        "rule": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "name": "dev.codex.schubert.nk.api.security.AuthSessionRevocationService",
+        "method": "update",
+        "lines": [
+          319
+        ]
+      },
+      {
+        "rule": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "name": "dev.codex.schubert.nk.api.security.LoginAuditWriter",
+        "method": "write",
+        "lines": [
+          52
+        ]
+      },
+      {
+        "rule": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "name": "dev.codex.schubert.nk.api.security.SessionAuditWriter",
+        "method": "write",
+        "lines": [
+          43
+        ]
+      }
+    ],
+    "missingOrErrors": 0
+  },
+  "pmd": {
+    "exit": 4,
+    "findings": [
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 99
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 99
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 118
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 118
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 141
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 141
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 154
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 154
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 182
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 182
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 194
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 194
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "CompareObjectsWithEquals",
+        "line": 196
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 204
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 204
+      },
+      {
+        "source": "BootstrapAdminService.java",
+        "rule": "CompareObjectsWithEquals",
+        "line": 206
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 75
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 84
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 88
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 88
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 95
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 95
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 107
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 117
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 162
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 162
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 217
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 225
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 229
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 229
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 236
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 236
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 245
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 253
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 257
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 257
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 264
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 264
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "CloseResource",
+        "line": 317
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 328
+      },
+      {
+        "source": "AuthSessionRevocationService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 328
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 85
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 89
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 95
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 95
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 101
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 101
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 119
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 135
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 135
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 145
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 150
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 161
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 161
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "CloseResource",
+        "line": 168
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 176
+      },
+      {
+        "source": "AuthSessionService.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 176
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 64
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 69
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 98
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 98
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 105
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 105
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 113
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 120
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 120
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 128
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 133
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 148
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 148
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 155
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 190
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 201
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 201
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "CloseResource",
+        "line": 211
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 222
+      },
+      {
+        "source": "LoginAttemptRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 222
+      },
+      {
+        "source": "LoginAuditWriter.java",
+        "rule": "CloseResource",
+        "line": 50
+      },
+      {
+        "source": "LoginAuditWriter.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 72
+      },
+      {
+        "source": "LoginAuditWriter.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 72
+      },
+      {
+        "source": "SessionAuditWriter.java",
+        "rule": "CloseResource",
+        "line": 41
+      },
+      {
+        "source": "SessionAuditWriter.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 59
+      },
+      {
+        "source": "SessionAuditWriter.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 59
+      },
+      {
+        "source": "TransferStartupProbe.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 85
+      },
+      {
+        "source": "TransferStartupProbe.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 119
+      },
+      {
+        "source": "TransferStartupProbe.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 139
+      },
+      {
+        "source": "TransferStartupProbe.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 145
+      }
+    ],
+    "ownerDecisionPending": true
+  },
+  "priorReferenceGraph": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45112-source-only-api-web-additional-candidate-graph/manifest.json",
+    "sha256": "2afc261f6583bf22c8d764811ca6034d81b3202c9649697b76467d334e707b52"
+  },
+  "buildBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45118-current-api-auth-lookup-and-probe-types/begin.json",
+    "sha256": "443933e0b0a022587adde81d5c39fc4ad2730999b33c44e8d0578f2ee863c701"
+  },
+  "buildTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45118-current-api-auth-lookup-and-probe-types/terminal.json",
+    "sha256": "3a2f4639346b90ce0c8ceb2885b036bc8cad7b67bd1928a794cf0839c3590e91"
+  },
+  "staticBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45118-current-api-auth-lookup-and-probe-statics/begin.json",
+    "sha256": "71a3c2f1eff71a183d5191fe07fbd7580d62b3a0c85e43c905bd47681eda581b"
+  },
+  "staticTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45118-current-api-auth-lookup-and-probe-statics/terminal.json",
+    "sha256": "26df4cbf60b268c07b788328e50aecc019d8003140dbe1d6863cd6dfe2791663"
+  },
+  "newProductTrials": 0,
+  "noActualAuthenticationFileOrJDBC": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
