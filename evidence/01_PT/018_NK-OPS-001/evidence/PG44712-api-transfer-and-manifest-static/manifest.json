@@ -1,0 +1,120 @@
+{
+  "run": "PG44712",
+  "source": "c87924c198343a0caff428dbb6ec2760f35ccf1e",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T00:17:19.271284+00:00",
+  "actualExit": 0,
+  "admittedSourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java",
+      "sha256": "93d56d7ef295998c5f637c90f0aafaa2f15fbdc4d366ab6e238c833c96788db7"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java",
+      "sha256": "97da7ca6adc387e39046443ca298a4dd39dbbf574fa2b9e16951c8b9d227793c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java",
+      "sha256": "503f89c284da8e356acc0ff45cf865b40cd094a783b04abce2389a89bb59a8b9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaIntegrityException.java",
+      "sha256": "c95df6a16e02c263a6409b04695df44ab06b4500f92c825bdbf31e94a89168ac"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java",
+      "sha256": "a9f7e2731c228ec539b2bb4b3e0e9a1161662e162cf33dad6e39789d0909ccdd"
+    }
+  ],
+  "oldUnique": 110,
+  "newlyQualified": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaIntegrityException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java"
+  ],
+  "currentUnique": 114,
+  "denominator": 286,
+  "alreadyScoped": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java"
+  ],
+  "actualNullAwayFiles": 6,
+  "actualSpotBugsPhysical": 9,
+  "actualPmdFiles": 6,
+  "pmdExit": 4,
+  "rawPmdFindings": [
+    {
+      "file": "AssetChecksumManifest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "39"
+    }
+  ],
+  "pendingRuleDisposition": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java"
+  ],
+  "analysis": "The report refers to a method-local map used within read and copied by the constructor; full F03 classification remains open. Raw issue has been retained without rule changes.",
+  "beginnings": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-nullaway/begin.json",
+      "sha256": "05a5282000807c878cf6dc4351cef8638516479b43be09fa56ae9e00c43ac7f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-spotbugs/begin.json",
+      "sha256": "123ce3e1920c0527ce0ad2a9f130c8426567bb5fdb87922b280f203c96b1a616"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-pmd/begin.json",
+      "sha256": "c5f0998f6d641fd055994d9c1aa81b28cbd156a19333cd8e3ea2c4379e21f20e"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-nullaway/terminal.json",
+      "sha256": "378e514902d409ae5232cd9bf6cf30a42abd896cf8a8b27e7fb06e6e29b7fbac"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-spotbugs/terminal.json",
+      "sha256": "ca2691a0030d9b0d4262fc62c6f60e81ff5c1fed037610f7c49b106f7880561d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44712-current-api-storage-value-pmd/terminal.json",
+      "sha256": "d74e778554fa28d0df22c2e43941db678baa9d2c7e7a7cdb8bcf6f4b557d55b6"
+    }
+  ],
+  "priorInputUnion": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44660-current-f03-unique-typed-inputs/paths.json",
+      "sha256": "d1dbfdaa8fcbb275bdaf4703167065844539833095fddd78e276e790df08c5d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44670-current-api-login-value-bounds-static/manifest.json",
+      "sha256": "c7db8251d11871c273b43853b0cf8fe7a5c967682df551c699a0f3ae7508f886"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44676-current-api-declared-boundary-static/manifest.json",
+      "sha256": "378d9843587d61cdf280d8ecf26f3ceb6831f0affbe25e461b8b186a35743ec1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44682-current-api-web-standard-metrics-static/manifest.json",
+      "sha256": "d012a6d2186f9466b8e1a94f4e8c0de7b6869174957b0e8f6984c5bd527dc008"
+    },
+    {
+      "path": "evidence/01_PT/011_NK-QST-001/evidence/PG44686-current-receipt-nine-single-coverage/manifest.json",
+      "sha256": "29e0f23726fe7b41b54f7190984496dbc9b609312b65b203f8af89eefdab5d2a"
+    },
+    {
+      "path": "evidence/01_PT/011_NK-QST-001/evidence/PG44688-current-submit-eight-coverage/manifest.json",
+      "sha256": "6923eff1fdf34af83318d0c87456361ac5fbfb1bc1377ab43834a92bc260925b"
+    }
+  ],
+  "noRealProviderOperation": true,
+  "testsExecuted": 0,
+  "normalFullApiJarProduced": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
