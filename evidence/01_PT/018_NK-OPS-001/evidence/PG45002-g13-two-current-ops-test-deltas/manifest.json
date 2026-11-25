@@ -1,0 +1,105 @@
+{
+  "run": "PG45002",
+  "wbs": "WBS-G13.07/2",
+  "source": "d69dd28462fac03639bba386933d8401799f0652",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T06:51:13.368277+00:00",
+  "actualExit": 0,
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44954-current-web-and-chr-delta-trace/manifest.json",
+    "sha256": "91e5beec03e3dc9fbc9583ba54ba71fbe5fe53229d8604a2465f62e740b1f008"
+  },
+  "deltaStart": "bf542d37a03c32a9f3f840ce4b02fb46a1db0c34",
+  "semanticJavaMainChanges": 0,
+  "registeredJavaTestChanges": [
+    {
+      "caseId": "PT-OPS-MAINT-PREBOOT004-W10",
+      "method": "timelyMarkerOnlyQualifiesWhenItsTimestampHasBeenObserved",
+      "program": "NK-OPS-001",
+      "rdRequirementIds": [
+        "AVL-001",
+        "OPS-003"
+      ],
+      "caseChange": "new_definition",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatchTest.java",
+        "sha256": "6287517d2dcc9cc210b1b663ae5f730f347052a63b53cb4bbc926d5921a501c3"
+      },
+      "approvedDesign": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+          "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+          "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "unitSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5683_保守再起動marker期限判定単体仕様.md",
+        "sha256": "f094f29ee46b43f5e345a77131665fa3a75c0db945c81800dfd83a42b14a96be"
+      },
+      "verifiedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44972-c02-marker-future-then-observed/manifest.json",
+        "sha256": "04be682f8f1e6698539efebb45767f6c8067bbe8ad7931cf0f9151ea58880a48"
+      }
+    },
+    {
+      "caseId": "APISTOP019",
+      "method": "apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock",
+      "program": "NK-OPS-001",
+      "rdRequirementIds": [
+        "OPS-003"
+      ],
+      "caseChange": "existing_oracle_strengthened",
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+        "sha256": "cb709e13b6e4b07b7b46e74fe241545348f91b20cabd1dcd9571e91eb60baf1b"
+      },
+      "approvedDesign": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+          "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "unitSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/3633_API停止通知一体化_独立PT仕様.md",
+        "sha256": "adc5667d2f556a5be3bf9b2e43877c26ff3e45989667a075ff3da5e13ff499bc"
+      },
+      "verifiedRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44992-api-stop-budget-observed-owner/manifest.json",
+        "sha256": "92839a66f06cb96c4865aa1972782e5d08176ee628104c15d3789a88f2acc40c"
+      }
+    }
+  ],
+  "newTestIds": 1,
+  "changedOraclePriorIds": 1,
+  "runtimeOrProductTestExecuted": 0,
+  "wholeTrace": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "note": "The W10 canonical ID is the primary test spec and original invocation ID. Checkpoint 5054 used an abbreviated name; the true identifier is explicitly bound here."
+}
