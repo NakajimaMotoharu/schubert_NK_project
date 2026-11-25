@@ -1,0 +1,110 @@
+{
+  "run": "PG45152",
+  "source": "119f6b67cfe4eac9e22386d0a3a6bc956afa30cb",
+  "productionCoreMain": "119f6b67cfe4eac9e22386d0a3a6bc956afa30cb",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "WBS-P007"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T10:06:52.352868+00:00",
+  "bug": "BUG-3820",
+  "horizontal": "YKT-2978",
+  "previousCandidateCore": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "sourceInput": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+    "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+  },
+  "sameFiveMainTrees": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "web",
+    "batch"
+  ],
+  "compiledSources": 50,
+  "compiledPhysical": 59,
+  "differentPhysical": [
+    "dev/codex/schubert/nk/api/security/AuthSessionRevocationService.class"
+  ],
+  "priorAndAfterPhysicalSha": [
+    "995408df1996e2bdcfa52f292e0b7bcddd52b4003239a75ff6f894d4be97ce33",
+    "11b502ee77aba63d944ed16df0959267954372256815d0463a5ac5ee94e972e2"
+  ],
+  "nullAway": 0,
+  "spotBugsUpdatedOne": {
+    "before": 1,
+    "after": 0,
+    "missing": 0,
+    "errors": 0
+  },
+  "pmd": {
+    "actualExit": 4,
+    "rawBefore": 27,
+    "rawAfter": 28,
+    "rawCloseResourceChange": 1,
+    "approvalPending": true,
+    "newAcquisitionLocatedImmediatelyBeforeOwnedTry": true,
+    "rows": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45152-current-revocation-update-owner-static/pmd-findings.json",
+      "sha256": "9c1a2f7a75442d8574b27f50eb33e1ead4f6794ff9ca5d39d5f9aeb03ed8428c"
+    }
+  },
+  "canonicalSpotless": {
+    "files": 1,
+    "changes": 0,
+    "actualExit": 0
+  },
+  "unchangedFixedSqlAndStateLiteral": true,
+  "unchangedThreeBindingOrder": true,
+  "unchangedAffectedRowsGate": true,
+  "unchangedCallerOwnedTransaction": true,
+  "null22004AndOwnedReleaseStillRequireRuntimeVerification": true,
+  "knownSeparateLocalAudit18WithoutRevocationRuntime": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/manifest.json",
+    "sha256": "598d2deb7e0c372fbcd43e6a9456cf95f7777edac9506a5bdef2ed7aa095bc98"
+  },
+  "priorJdbc8WithoutRevocationRuntime": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45136-current-jdbc-cleanup-original-eight/manifest.json",
+    "sha256": "cddc9dc2d7184292ca708f0878a500304724b91b89d9da325acacea07b1a2a66"
+  },
+  "allKnownMainPhysicalUsedByAuditFixtureSame": true,
+  "terminal": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-owner-type/terminal.json",
+      "sha256": "d6e9019fd70769572dff1f471576688bdb6a6917e998b57d644b6f9cdfdbab6d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-owner-static/terminal.json",
+      "sha256": "6fafc50e1c81b75cff980a35e88daa93d687a1300fc43474616cbf2984ef7e90"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-canonical-spotless/terminal.json",
+      "sha256": "671ffe8820c49433be7fd641b443fd5cf81ddfc8afa5ef7124be86d43e03882b"
+    }
+  ],
+  "begins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-owner-type/begin.json",
+      "sha256": "67cb54c844a0331150375ee9ae467c83a0c422101ce2ec65aaffa047bc9bd1b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-owner-static/begin.json",
+      "sha256": "7bad2c2aa826dc40e62d7d14432febc2395bd16574af924e1b4fc30c46997c51"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45152-current-revocation-canonical-spotless/begin.json",
+      "sha256": "87cb9c2f84304217096be29157c4e51d17c82ce971dec67822134764a9db8fce"
+    }
+  ],
+  "remainingSafetyAndAuthorityHolds": [
+    "real DB and original AuthSessionRevocationServiceTest",
+    "five held Main/32 held tests and Root11",
+    "entire six-product 451"
+  ],
+  "actualProductTests": 0,
+  "localProductTrialsTotal": 1650,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
