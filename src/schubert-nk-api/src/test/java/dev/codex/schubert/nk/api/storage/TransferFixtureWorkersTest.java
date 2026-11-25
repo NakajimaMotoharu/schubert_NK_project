@@ -19,7 +19,7 @@ final class TransferFixtureWorkersTest {
   @Test // PT-SCN-FIXTURE-WORKER001
   void timeoutKeepsTheFirstFailureAndFailsWhenAlone() {
     var calls = new ArrayList<String>();
-    var stalled = executor(calls, () -> false);
+    var stalled = executor(calls, 10, () -> false);
     var primary = new AssertionError("fixture expectation failed");
     var observed =
         assertThrows(
@@ -55,6 +55,7 @@ final class TransferFixtureWorkersTest {
     var worker =
         executor(
             calls,
+            5,
             () -> {
               throw interrupted;
             });
@@ -63,7 +64,7 @@ final class TransferFixtureWorkersTest {
           assertThrows(
               IllegalStateException.class,
               () -> {
-                try (var workers = new TransferFixtureWorkers(worker)) {
+                try (var workers = new TransferFixtureWorkers(worker, 5)) {
                   assertSame(worker, workers.executor());
                 }
               });
@@ -80,7 +81,8 @@ final class TransferFixtureWorkersTest {
     assertEquals("transfer fixture workers did not terminate", failure.getMessage());
   }
 
-  private static ExecutorService executor(List<String> calls, Termination termination) {
+  private static ExecutorService executor(
+      List<String> calls, long expectedSeconds, Termination termination) {
     return (ExecutorService)
         Proxy.newProxyInstance(
             ExecutorService.class.getClassLoader(),
@@ -90,7 +92,7 @@ final class TransferFixtureWorkersTest {
               return switch (method.getName()) {
                 case "shutdownNow" -> List.of();
                 case "awaitTermination" -> {
-                  assertEquals(10L, args[0]);
+                  assertEquals(expectedSeconds, args[0]);
                   assertEquals(TimeUnit.SECONDS, args[1]);
                   yield termination.await();
                 }

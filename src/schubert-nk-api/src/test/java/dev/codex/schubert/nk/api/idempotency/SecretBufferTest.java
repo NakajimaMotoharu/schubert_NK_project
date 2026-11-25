@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.api.storage.TransferFixtureWorkers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -79,24 +80,23 @@ final class SecretBufferTest {
     try (var stream = new Inspectable()) {
       byte[] fixture = {72};
       stream.writeBytes(fixture);
-      var executor = Executors.newVirtualThreadPerTaskExecutor();
-      try {
+      try (var workers =
+          new TransferFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor(), 5)) {
         var started = new CountDownLatch(1);
         // Keep the parent stream monitor held until the diagnostic has completed.
         synchronized (stream) {
           var result =
-              executor.submit(
-                  () -> {
-                    started.countDown();
-                    return stream.toString();
-                  });
+              workers
+                  .executor()
+                  .submit(
+                      () -> {
+                        started.countDown();
+                        return stream.toString();
+                      });
           assertTrue(started.await(5, TimeUnit.SECONDS));
           assertEquals(REDACTED, result.get(5, TimeUnit.SECONDS));
           assertArrayEquals(fixture, stream.toByteArray());
         }
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
     }
   }
