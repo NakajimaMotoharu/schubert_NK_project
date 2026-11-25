@@ -262,12 +262,14 @@ final class PostgresCopyTextWriterTest {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < 64; index++)
         futures.add(
-            workerScope.executor().submit(
-                () -> {
-                  var sink = new TrackingSink();
-                  writer.writeRows(List.of(first(), second()), sink);
-                  return sink.bytes();
-                }));
+            workerScope
+                .executor()
+                .submit(
+                    () -> {
+                      var sink = new TrackingSink();
+                      writer.writeRows(List.of(first(), second()), sink);
+                      return sink.bytes();
+                    }));
       for (var future : futures)
         assertArrayEquals(
             (ORACLE_FIRST_ROW + ORACLE_SECOND_ROW).getBytes(StandardCharsets.UTF_8),

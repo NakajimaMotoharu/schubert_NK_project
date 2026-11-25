@@ -167,12 +167,15 @@ final class PostgresCopyTextEncoderTest {
     try (var workerScope = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       for (int index = 0; index < 64; index++) {
         futures.add(
-            workerScope.executor().submit(
-                () -> {
-                  byte[] actual = encoder.encodeRow(Arrays.asList("A\tB", null));
-                  assertArrayEquals(new byte[] {0x41, 0x5c, 0x74, 0x42, 9, 0x5c, 0x4e, 10}, actual);
-                  Arrays.fill(actual, (byte) 0);
-                }));
+            workerScope
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] actual = encoder.encodeRow(Arrays.asList("A\tB", null));
+                      assertArrayEquals(
+                          new byte[] {0x41, 0x5c, 0x74, 0x42, 9, 0x5c, 0x4e, 10}, actual);
+                      Arrays.fill(actual, (byte) 0);
+                    }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
     }
