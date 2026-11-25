@@ -391,13 +391,12 @@ class AnimationTemplateTest {
   void animation053ConcurrentRendering()
       throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var c = context()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var tasks = new ArrayList<Future<?>>();
         for (int i = 0; i < 64; i++) {
           final int n = i;
           tasks.add(
-              executor.submit(
+              workers.submit(
                   () -> {
                     String username = FIXTURE_READER + n;
                     String token = "public-csrf-" + n;
@@ -434,9 +433,6 @@ class AnimationTemplateTest {
                 + "maximumRecords=50\n"
                 + "actualNkGate=false\n",
             StandardCharsets.US_ASCII);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

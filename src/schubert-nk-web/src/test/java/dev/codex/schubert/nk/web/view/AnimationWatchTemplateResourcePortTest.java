@@ -232,13 +232,12 @@ final class AnimationWatchTemplateResourcePortTest {
   @Test
   void boundedConcurrentViewsKeepEachTitleAndStreamSeparate()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       List<Future<?>> futures = new ArrayList<>();
       for (int i = 0; i < 8; i++) {
         final int n = i;
         futures.add(
-            executor.submit(
+            workers.submit(
                 () -> {
                   var row = CATALOG.get(n % CATALOG.size());
                   var p = new HashMap<>(values(row, USER));
@@ -252,9 +251,6 @@ final class AnimationWatchTemplateResourcePortTest {
                 }));
       }
       for (var f : futures) f.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

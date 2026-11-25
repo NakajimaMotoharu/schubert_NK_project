@@ -345,21 +345,26 @@ class ScenarioDetailTemplateTest {
         "display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;");
     declarations.put(
         ".scenario-nav a, .scenario-nav span",
-        "min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px;");
+        "min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff;"
+            + " border: 1px solid #dde1e6; border-radius: 8px;");
     declarations.put(".scenario-nav a", "color: #1f6feb; text-decoration: none; font-weight: 700;");
     declarations.put(".scenario-nav a:hover", "text-decoration: underline;");
     declarations.put(
         ".scenario-nav a:last-child, .scenario-nav span:last-child", "justify-content: flex-end;");
     declarations.put(
         ".script-body",
-        "display: grid; gap: 6px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 12px;");
+        "display: grid; gap: 6px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px;"
+            + " padding: 12px;");
     declarations.put(
         SCRIPT_ENTRY_SELECTOR,
-        "display: grid; grid-template-columns: 92px minmax(0, 1fr) 220px; gap: 12px; padding: 7px 0; border-bottom: 1px solid #edf0f4;");
+        "display: grid; grid-template-columns: 92px minmax(0, 1fr) 220px; gap: 12px; padding: 7px"
+            + " 0; border-bottom: 1px solid #edf0f4;");
     declarations.put(".script-entry:last-child", "border-bottom: 0;");
     declarations.put(
         ".script-entry .audio",
-        "grid-column: 3; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; justify-items: end; margin-top: 0; align-items: center; color: #5f6368; font-size: 12px;");
+        "grid-column: 3; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px;"
+            + " justify-items: end; margin-top: 0; align-items: center; color: #5f6368; font-size:"
+            + " 12px;");
     declarations.put(
         ".script-entry .audio span",
         "grid-column: 1 / -1; justify-self: end; overflow-wrap: anywhere; text-align: right;");
@@ -371,18 +376,28 @@ class ScenarioDetailTemplateTest {
     declarations.put(".bottom-nav", "margin-top: 12px; margin-bottom: 0;");
     declarations.put(
         ".script-entry:target",
-        "margin: 0 -8px; padding: 9px 8px; background: #fff8d8; border: 1px solid #f0d36a; border-radius: 8px;");
+        "margin: 0 -8px; padding: 9px 8px; background: #fff8d8; border: 1px solid #f0d36a;"
+            + " border-radius: 8px;");
     declarations.put(
         ".script-entry p", "white-space: pre-wrap; line-height: 1.7; margin: 10px 0 0;");
     declarations.put(
         ".script-entry .download",
-        "display: inline-grid; place-items: center; min-width: 34px; height: 30px; padding: 0 8px; border: 1px solid #c9ced6; border-radius: 6px; color: #1f6feb; text-decoration: none; font-weight: 700; background: #fff;");
+        "display: inline-grid; place-items: center; min-width: 34px; height: 30px; padding: 0 8px;"
+            + " border: 1px solid #c9ced6; border-radius: 6px; color: #1f6feb; text-decoration:"
+            + " none; font-weight: 700; background: #fff;");
     declarations.put(".script-entry audio", "width: 320px; max-width: 100%; height: 34px;");
     var expected = new StringBuilder();
     declarations.forEach(
         (selector, body) -> expected.append(selector).append(" { ").append(body).append(" }\n"));
     expected.append(
-        "@media (max-width: 900px) {\n  .scenario-nav { grid-template-columns: 1fr; }\n  .scenario-nav a:last-child, .scenario-nav span:last-child { justify-content: flex-start; }\n  .script-entry { grid-template-columns: 1fr; gap: 4px; }\n  .script-entry .audio { grid-column: 1; justify-items: stretch; }\n  .script-entry .audio span { justify-self: start; text-align: left; }\n}\n");
+        "@media (max-width: 900px) {\n"
+            + "  .scenario-nav { grid-template-columns: 1fr; }\n"
+            + "  .scenario-nav a:last-child, .scenario-nav span:last-child { justify-content:"
+            + " flex-start; }\n"
+            + "  .script-entry { grid-template-columns: 1fr; gap: 4px; }\n"
+            + "  .script-entry .audio { grid-column: 1; justify-items: stretch; }\n"
+            + "  .script-entry .audio span { justify-self: start; text-align: left; }\n"
+            + "}\n");
     assertEquals(expected.toString(), added.substring(added.indexOf("\n") + 1));
   }
 
@@ -390,13 +405,12 @@ class ScenarioDetailTemplateTest {
   void detail024ConcurrentRendering()
       throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var context = context()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var tasks = new ArrayList<Future<Document>>();
         for (int i = 0; i < 64; i++) {
           final int n = i;
           tasks.add(
-              executor.submit(
+              workers.submit(
                   () ->
                       Jsoup.parse(
                           render(
@@ -420,11 +434,13 @@ class ScenarioDetailTemplateTest {
         Files.createDirectories(root);
         Files.writeString(
             root.resolve("PT-SCR-024.txt"),
-            "template=scenario\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumEntries=10000\nmaximumVoices=999\nactualNkGate=false\n",
+            "template=scenario\n"
+                + "fixture=public-synthetic\n"
+                + "concurrentRenders=64\n"
+                + "maximumEntries=10000\n"
+                + "maximumVoices=999\n"
+                + "actualNkGate=false\n",
             StandardCharsets.US_ASCII);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
