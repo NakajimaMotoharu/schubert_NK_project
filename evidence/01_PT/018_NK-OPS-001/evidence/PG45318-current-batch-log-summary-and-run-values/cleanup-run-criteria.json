@@ -1,0 +1,241 @@
+{
+  "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883",
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  ],
+  "independentCaseMap": [
+    {
+      "method": "summaryUsesFixedDeltasAndCumulativeWarning",
+      "testId": "PT-BAT-CLEANVALUE003",
+      "expected": "7/4/3 attempt, 10/5/5 cumulative, 10 on skipped; empty/Long.MAX_VALUE produce exit 0; no run identity in diagnostic"
+    },
+    {
+      "method": "summaryRejectsEachInvalidComponent",
+      "testId": "PT-BAT-CLEANVALUE004",
+      "expected": "Nulls, mismatched run, incomplete progress, each independently regressed target/deleted/skipped"
+    },
+    {
+      "method": "progressRetainsValuesAndRejectsNulls",
+      "testId": "PT-BAT-CLEANVALUE005",
+      "expected": "Fixed counts and run with explicit complete flag; reject null at boundary"
+    },
+    {
+      "method": "chunkRequiresZeroCountsForEveryRejectedReason",
+      "testId": "PT-BAT-CLEANVALUE006",
+      "expected": "Fixed three reasons; only OK accepts non-zero in rejected chunk fixture"
+    },
+    {
+      "method": "cutoffBoundsNullsAndFixedRunDiagnostic",
+      "testId": "PT-BAT-RUNVALUE001",
+      "expected": "AD 0001 through 9999 at microsecond precision, below/above/precision/null rejected; fixed redacted string"
+    },
+    {
+      "method": "activationNullsValueAccessorsAndFixedDiagnostic",
+      "testId": "PT-BAT-RUNVALUE002",
+      "expected": "UTC 15:00 maps to next Tokyo date; identity not logged; nulls rejected"
+    },
+    {
+      "method": "countsAcceptExactBoundsAndRejectEachInconsistentComponent",
+      "testId": "PT-BAT-CLEANVALUE001",
+      "expected": "Use fixed nine invalid and six valid count arrays, including overflow and Long.MAX_VALUE"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+    "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+  },
+  "productSources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java",
+      "sha256": "14c7ddab5f5156bb31f86da057d7460f98c8863ea680bcabdf47505568f3bab1",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+      "sha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java",
+      "sha256": "89a3708504bedbc86eb7bdc7a99e84a61047ccb8fe2a9fad961c0944a687abe8",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java",
+      "sha256": "5a753a16012cee16134b37686d7ee7c26cde29e2a52449fe81bd2bd73a914597",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java",
+      "sha256": "57cd675756ee9d372388f562ee2242f75df95ce95173f56fe9b861b4723a2833",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+      "sha256": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+      "sha256": "3b44cff07b6f6b57ebad36a1adb2f6e48934d7eaae0c35ea3283af06a7ccb03f",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+      "sha256": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+      "source": "e434cc6bbbcea52793b0129d00b88bf3492fc883"
+    }
+  ],
+  "physicalPerClass": {
+    "dev/codex/schubert/nk/batch/repository/CleanupReason": {
+      "LINE": {
+        "missed": 0,
+        "hit": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "hit": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "BRANCH": {
+        "missed": 0,
+        "hit": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "hit": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+      "BRANCH": {
+        "missed": 0,
+        "hit": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "hit": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk": {
+      "BRANCH": {
+        "missed": 0,
+        "hit": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "hit": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": {
+      "LINE": {
+        "missed": 0,
+        "hit": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "hit": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress": {
+      "LINE": {
+        "missed": 0,
+        "hit": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "hit": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary": {
+      "BRANCH": {
+        "missed": 0,
+        "hit": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "hit": 20
+      },
+      "METHOD": {
+        "missed": 0,
+        "hit": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "hit": 1
+      }
+    }
+  },
+  "compileOnlySupport": {
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class": "f7e6207a992c3f5236caeec30a26601e08743614230e2a1bcdcb7959a83e8556",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+  },
+  "localOutputNeverOperationOwner": true
+}
