@@ -1,7 +1,9 @@
 """Compare a quality tool's inputs to pinned scope and inventory metadata."""
 
 import argparse
+import csv
 import hashlib
+import io
 import json
 import re
 from pathlib import Path
@@ -126,6 +128,42 @@ def compare_source_scope(plan, scope, inventory):
     return {"tool": tool, "files": len(proposed)}
 
 
+def read_source_roster(path, expected_sha256):
+    contents = path.read_bytes()
+    if hashlib.sha256(contents).hexdigest() != expected_sha256:
+        raise ScopeError("ROSTER_DIGEST_MISMATCH")
+    reader = csv.DictReader(io.StringIO(contents.decode("utf-8")), delimiter="\t", strict=True)
+    fields = reader.fieldnames or []
+    if len(fields) != len(set(fields)) or not {"path", "sha256"} <= set(fields):
+        raise ScopeError("INVALID_SOURCE_ROSTER")
+    sources = {}
+    for row in reader:
+        name, digest = row["path"], row["sha256"]
+        if (None in row or not name or name != name.strip() or name in sources
+                or not digest or not re.fullmatch(r"[0-9a-f]{64}", digest)):
+            raise ScopeError("INVALID_SOURCE_ROSTER")
+        sources[name] = digest
+    if not sources:
+        raise ScopeError("INVALID_SOURCE_ROSTER")
+    return sources
+
+
+def source_reuse_delta(plan, inventory, roster):
+    """Classify already validated targets against a roster for the same tool configuration."""
+    hashes = inventory.get("sha256ByPath")
+    if not isinstance(hashes, dict):
+        raise ScopeError("MISSING_SOURCE_DIGEST_INVENTORY")
+    unchanged, unmeasured = [], []
+    for path in sorted(plan["filesByPath"]):
+        digest = hashes.get(path)
+        if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise ScopeError("INVALID_SOURCE_DIGEST")
+        (unchanged if roster.get(path) == digest else unmeasured).append(path)
+    if not unmeasured:
+        raise ScopeError("NO_UNMEASURED_SOURCE")
+    return {"unchangedInRoster": unchanged, "unmeasuredInRoster": unmeasured}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plan", type=Path, required=True)
@@ -134,18 +172,26 @@ def main(argv=None):
     parser.add_argument("--inventory", type=Path, required=True)
     parser.add_argument("--inventory-sha256", required=True)
     parser.add_argument("--source-only", action="store_true")
+    parser.add_argument("--prior-source-roster", type=Path,
+                        help="check target sources against an existing same-configuration roster")
+    parser.add_argument("--prior-source-roster-sha256")
     args = parser.parse_args(argv)
     try:
+        if (bool(args.prior_source_roster) != bool(args.prior_source_roster_sha256)
+                or (args.prior_source_roster and not args.source_only)):
+            raise ScopeError("SOURCE_ROSTER_ARGUMENTS")
         compare = compare_source_scope if args.source_only else compare_scope
-        outcome = compare(
-            read_metadata(args.plan),
-            read_metadata(args.scope, args.scope_sha256),
-            read_metadata(args.inventory, args.inventory_sha256),
-        )
+        plan = read_metadata(args.plan)
+        scope = read_metadata(args.scope, args.scope_sha256)
+        inventory = read_metadata(args.inventory, args.inventory_sha256)
+        outcome = compare(plan, scope, inventory)
+        if args.prior_source_roster:
+            roster = read_source_roster(args.prior_source_roster, args.prior_source_roster_sha256)
+            outcome.update(source_reuse_delta(plan, inventory, roster))
     except ScopeError as exc:
         print(json.dumps({"scopeMatch": False, "reason": str(exc)}))
         return 1
-    except (OSError, UnicodeError, json.JSONDecodeError):
+    except (OSError, UnicodeError, json.JSONDecodeError, csv.Error):
         print(json.dumps({"scopeMatch": False, "reason": "UNREADABLE_METADATA"}))
         return 1
     print(json.dumps({"scopeMatch": True, **outcome}))

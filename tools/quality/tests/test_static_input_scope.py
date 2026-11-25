@@ -141,6 +141,66 @@ class SourceInputScopeTest(unittest.TestCase):
             self.assertEqual({"scopeMatch": True, "tool": "formatter", "files": 1},
                              json.loads(output.getvalue()))
 
+    def test_cli_prior_roster_detects_reuse_without_changing_scope_rules(self):
+        second = "fixture/src/New.java"
+        old_hash = "1" * 64
+        new_hash = "2" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            roster = root / "roster.tsv"
+
+            def run(*, candidates, digests, roster_rows, good_pin=True, paired=True):
+                self.scope["admitted"] = [self.path, second]
+                self.plan["filesByPath"] = {p: self.blob for p in candidates}
+                self.inventory["filesByPath"] = {p: self.blob for p in candidates}
+                self.inventory["sha256ByPath"] = digests
+                args = ["--source-only", "--prior-source-roster", str(roster)]
+                body = "path\tsha256\tproof\n" + "".join(
+                    f"{name}\t{digest}\tprevious\n" for name, digest in roster_rows
+                )
+                roster.write_text(body, encoding="utf-8")
+                if paired:
+                    roster_digest = hashlib.sha256(roster.read_bytes()).hexdigest()
+                    args += ["--prior-source-roster-sha256", roster_digest if good_pin else "0" * 64]
+                for flag, record in (("plan", self.plan), ("scope", self.scope),
+                                     ("inventory", self.inventory)):
+                    path = root / flag
+                    data = json.dumps(record).encode("utf-8")
+                    path.write_bytes(data)
+                    args.extend(("--" + flag, str(path)))
+                    if flag != "plan":
+                        args.extend(("--" + flag + "-sha256", hashlib.sha256(data).hexdigest()))
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    status = main(args)
+                return status, json.loads(output.getvalue())
+
+            current = {self.path: old_hash, second: new_hash}
+            past = [(self.path, old_hash), (second, old_hash)]
+            self.assertEqual(
+                (0, {"scopeMatch": True, "tool": "formatter", "files": 2,
+                     "unchangedInRoster": [self.path], "unmeasuredInRoster": [second]}),
+                run(candidates=current, digests=current, roster_rows=past),
+            )
+            self.assertEqual(
+                (0, {"scopeMatch": True, "tool": "formatter", "files": 1,
+                     "unchangedInRoster": [], "unmeasuredInRoster": [second]}),
+                run(candidates=[second], digests=current, roster_rows=past[:1]),
+            )
+            for reason, candidates, digests, rows, extra in (
+                ("NO_UNMEASURED_SOURCE", [self.path], current, past, {}),
+                ("INVALID_SOURCE_DIGEST", [second], {second: "invalid"}, past, {}),
+                ("INVALID_SOURCE_ROSTER", [self.path], current, past + past[:1], {}),
+                ("ROSTER_DIGEST_MISMATCH", [second], current, past, {"good_pin": False}),
+                ("SOURCE_ROSTER_ARGUMENTS", [second], current, past, {"paired": False}),
+                ("HELD_SOURCE_PATH", [self.held], {self.held: new_hash}, past, {}),
+            ):
+                with self.subTest(reason=reason):
+                    self.assertEqual(
+                        (1, {"scopeMatch": False, "reason": reason}),
+                        run(candidates=candidates, digests=digests, roster_rows=rows, **extra),
+                    )
+
     def test_other_tool_receipt_is_rejected(self):
         self.scope["tool"] = "checkstyle"
         self.reject("TOOL_MISMATCH")
