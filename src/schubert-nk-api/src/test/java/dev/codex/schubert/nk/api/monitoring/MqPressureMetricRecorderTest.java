@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -286,7 +287,7 @@ class MqPressureMetricRecorderTest {
   }
 
   @Test
-  void mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState() throws Exception {
+  void mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState() throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);
@@ -304,13 +305,9 @@ class MqPressureMetricRecorderTest {
               return "published";
             });
       }
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+        for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           assertEquals("published", result.get());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertTrue(supplied.contains(recorder.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow()));
       assertSame(separate, second.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());

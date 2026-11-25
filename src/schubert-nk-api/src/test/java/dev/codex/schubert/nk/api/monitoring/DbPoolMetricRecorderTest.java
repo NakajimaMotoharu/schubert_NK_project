@@ -197,31 +197,26 @@ class DbPoolMetricRecorderTest {
   @Test
   void poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots()
       throws InterruptedException, ExecutionException {
-    try (var registry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
-        var first = new Counts(1, 2, 3, 8);
-        var second = new Counts(4, 5, 6, 9);
-        recorder.record(first);
-        var tasks = new ArrayList<Callable<Boolean>>();
-        for (int i = 0; i < 64; i++) {
-          var supplied = i % 2 == 0 ? first : second;
-          tasks.add(
-              () -> {
-                recorder.record(supplied);
-                var actual = recorder.snapshot().orElseThrow();
-                return actual == first || actual == second;
-              });
-        }
-        for (var actual : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
-        assertEquals(1, first.active());
-        assertEquals(8, first.maximum());
-        shape(registry);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+    try (var registry = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
+      var first = new Counts(1, 2, 3, 8);
+      var second = new Counts(4, 5, 6, 9);
+      recorder.record(first);
+      var tasks = new ArrayList<Callable<Boolean>>();
+      for (int i = 0; i < 64; i++) {
+        var supplied = i % 2 == 0 ? first : second;
+        tasks.add(
+            () -> {
+              recorder.record(supplied);
+              var actual = recorder.snapshot().orElseThrow();
+              return actual == first || actual == second;
+            });
       }
+      for (var actual : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());
+      assertEquals(1, first.active());
+      assertEquals(8, first.maximum());
+      shape(registry);
     }
   }
 

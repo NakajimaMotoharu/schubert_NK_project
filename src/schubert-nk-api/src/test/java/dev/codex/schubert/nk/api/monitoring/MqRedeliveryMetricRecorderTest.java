@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -264,7 +265,7 @@ class MqRedeliveryMetricRecorderTest {
   }
 
   @Test
-  void mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts() throws Exception {
+  void mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts() throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
@@ -277,13 +278,9 @@ class MqRedeliveryMetricRecorderTest {
               recorder.recordDelivery(BrokerTopology.ASYNC_WORK, 3);
               return "counted";
             });
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+        for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           assertEquals("counted", result.get());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertEquals(64, count(registry, ASYNC_WORK_ADDRESS, "3"));
       assertEquals(0, count(other, ASYNC_WORK_ADDRESS, "3"));

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -336,7 +337,7 @@ class InboxReplayMetricRecorderTest {
   }
 
   @Test
-  void inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners() throws Exception {
+  void inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners() throws InterruptedException, ExecutionException {
     try (var registry = new Registry();
         var other = new Registry()) {
       var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
@@ -349,13 +350,9 @@ class InboxReplayMetricRecorderTest {
               recorder.record(new LayoutId(SUBMIT_REQUEST_LAYOUT), ResultCode.IDEMPOTENT_SUCCESS);
               return "recorded";
             });
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+        for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           assertEquals("recorded", result.get());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertEquals(64, count(registry, SUBMIT_REQUEST_LAYOUT, IDEMPOTENT_CODE));
       assertEquals(0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));

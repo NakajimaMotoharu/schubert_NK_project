@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -249,28 +250,23 @@ class OperationMismatchMetricRecorderTest {
   }
 
   @Test
-  void opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth() throws Exception {
-    try (var registry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
-        var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
-        var tasks = new ArrayList<Callable<Boolean>>();
-        for (int i = 0; i < 64; i++) {
-          var operation = Operation.values()[i % 8];
-          tasks.add(
-              () -> {
-                recorder.record(operation);
-                return true;
-              });
-        }
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
-        for (String operation : OPERATIONS) assertEquals(8, count(registry, operation));
-        assertEquals(64, registry.increments.get());
-        shape(registry);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+  void opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth() throws InterruptedException, ExecutionException {
+    try (var registry = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
+      var tasks = new ArrayList<Callable<Boolean>>();
+      for (int i = 0; i < 64; i++) {
+        var operation = Operation.values()[i % 8];
+        tasks.add(
+            () -> {
+              recorder.record(operation);
+              return true;
+            });
       }
+      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+      for (String operation : OPERATIONS) assertEquals(8, count(registry, operation));
+      assertEquals(64, registry.increments.get());
+      shape(registry);
     }
   }
 
