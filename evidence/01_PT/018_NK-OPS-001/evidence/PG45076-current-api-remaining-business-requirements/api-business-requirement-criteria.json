@@ -1,0 +1,918 @@
+{
+  "source": "f07aac4ca18205e76c9dee0d271dcf680ab88bd3",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalMain": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "sources": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": {
+      "publicSourceGitBlob": "8707e70e592f319f8216e0086e378326e690b47d",
+      "originalOwner": "WBS-P010-05",
+      "design": [
+        "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "MON-004"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserApplicationAssembly.java": {
+      "publicSourceGitBlob": "2c42abc913981e81103aee646dfbfa7a86d4e426",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java": {
+      "publicSourceGitBlob": "50aa2f9d4e648dd0d3422a3d4bf6bb3a5843494d",
+      "originalOwner": "WBS-P010-03",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "FUN-103",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": {
+      "publicSourceGitBlob": "7108df31f1b31d42598d938c4f78520716b62e07",
+      "originalOwner": "WBS-P010-03",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "FUN-103",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": "PG44998",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java": {
+      "publicSourceGitBlob": "494b7815479c72ad417330a3ad8a0d9c950b9e26",
+      "originalOwner": "WBS-P010-03",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "FUN-103",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java": {
+      "publicSourceGitBlob": "e55b4ddfe9fefb631c921acbb0ce367abdc2659c",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java": {
+      "publicSourceGitBlob": "585ed6a7f3f8fcacba9109353d8b01039ddd28a9",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java": {
+      "publicSourceGitBlob": "26efb5ded8e855920e93379ec050ddd2fc5177b5",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java": {
+      "publicSourceGitBlob": "ab2db1d86e09f1968f7f63e149b385de2b528c0d",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java": {
+      "publicSourceGitBlob": "b21ed6afd7e98232ab6744f716e8c6f29589fa55",
+      "originalOwner": "WBS-P010-03",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "FUN-103",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationAssembly.java": {
+      "publicSourceGitBlob": "2f40b4c52e8652d34885f4e365c9763fd4ecd250",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java": {
+      "publicSourceGitBlob": "ff37ac514bfabd615bf959a0492ef92aefed9210",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java": {
+      "publicSourceGitBlob": "1d3776f183e268f84b92197adbe265280b1d3d16",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java": {
+      "publicSourceGitBlob": "e468bf6d0384136ca5a7d7d54e654e71e8a8b2f9",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationAssembly.java": {
+      "publicSourceGitBlob": "67e9c1a11825115b8e2e0e8bf4b116dbe9d0e159",
+      "originalOwner": "WBS-P009-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MQ-020",
+        "AUT-001"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java": {
+      "publicSourceGitBlob": "c06445211103724fdb390d24c339f0ff3f1a5cee",
+      "originalOwner": "WBS-P009-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MQ-020"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java": {
+      "publicSourceGitBlob": "a6ddd5372ff1382ebdb8e3689b49a9f354d44a49",
+      "originalOwner": "WBS-P009-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MQ-020",
+        "AUT-001"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java": {
+      "publicSourceGitBlob": "e27b7168c4e3e2542dc8797e15dd245e8bd82085",
+      "originalOwner": "WBS-P009-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MQ-020"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": {
+      "publicSourceGitBlob": "647c92be11aacfbaa6ec6d9f47208e96219bdc3d",
+      "originalOwner": "WBS-P011-03",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-010",
+        "FUN-103",
+        "QST-001"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationAssembly.java": {
+      "publicSourceGitBlob": "cad60b7b47bdac8dbd48bc21efb94bb7032d7a37",
+      "originalOwner": "WBS-P008-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "AUT-001",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java": {
+      "publicSourceGitBlob": "c4f60b366899e02a4dce355643d6a2318a3ab122",
+      "originalOwner": "WBS-P008-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "AUT-001",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java": {
+      "publicSourceGitBlob": "fc7ae74870e039f8629f41031f91da1e29bed05f",
+      "originalOwner": "WBS-P008-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "AUT-001",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java": {
+      "publicSourceGitBlob": "a20274c743367b409d05a162b61f97ffb17b8d7c",
+      "originalOwner": "WBS-P008-05",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-004",
+        "MSG-F06",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java": {
+      "publicSourceGitBlob": "48064a1cdff1770ffaa2814e3260c5cd958c142b",
+      "originalOwner": "WBS-P008-02",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "AUT-001",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java": {
+      "publicSourceGitBlob": "d1df45998eeea76203487510fc1d3e82d9900285",
+      "originalOwner": "WBS-P010-05",
+      "design": [
+        "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "MON-004"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java": {
+      "publicSourceGitBlob": "d458e5af8cf4515e4fa82f7f0ab1ae033fa5c0f4",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java": {
+      "publicSourceGitBlob": "43c87c5d376e15adb7c93929c36336bfe2dc7f60",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetManifestLoader.java": {
+      "publicSourceGitBlob": "9d7fd16d06be8ea167000b428a85d924d4cd5895",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspector.java": {
+      "publicSourceGitBlob": "5355da08c6e35b9a8cb91478323acb648885659b",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaFileInspector.java": {
+      "publicSourceGitBlob": "bc1211d5b605e21ac08ad9a259884e98307d08ab",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaIntegrityException.java": {
+      "publicSourceGitBlob": "6a4bc51e3e4ca7f1f679f4aa788c9b0a9a86f044",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFileInspector.java": {
+      "publicSourceGitBlob": "726f7461cabd9b9745adf616227b543bbdcdeac9",
+      "originalOwner": "WBS-P008-05",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-004",
+        "MSG-F06",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFilePublisher.java": {
+      "publicSourceGitBlob": "b8913d7a7e0ba687b18cb639dc7927937d5e0932",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java": {
+      "publicSourceGitBlob": "a21952b64ed31b70a5e2f56674fdb8db803b95c1",
+      "originalOwner": "WBS-P005-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md"
+      ],
+      "requirements": [
+        "MQ-001",
+        "MQ-007",
+        "MQ-012"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java": {
+      "publicSourceGitBlob": "5d25b9d761b91cc999cc11265ca867a7b5fe370d",
+      "originalOwner": "WBS-P005-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md"
+      ],
+      "requirements": [
+        "MQ-001",
+        "MQ-007",
+        "MQ-012"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/TransactedJmsContextProvider.java": {
+      "publicSourceGitBlob": "e6562f6b65a9a5dae28bf6a3f4ab4c5dc9e77f8a",
+      "originalOwner": "WBS-P005-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md"
+      ],
+      "requirements": [
+        "MQ-001",
+        "MQ-007",
+        "MQ-012"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryException.java": {
+      "publicSourceGitBlob": "59316d93a29db2a1ea5d84ab75236417d61506d9",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java": {
+      "publicSourceGitBlob": "1be3a95e6c64d390d91e1ed1a560b4f4545411a3",
+      "originalOwner": "WBS-P010-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-008",
+        "AUT-002",
+        "MON-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaQueryException.java": {
+      "publicSourceGitBlob": "8713abc03dc0922de890a3a48b71139e6b46dae8",
+      "originalOwner": "WBS-P009-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "FIL-003",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java": {
+      "publicSourceGitBlob": "57533c8635b83376a4ce7733236880ed4c36e5b2",
+      "originalOwner": "WBS-P009-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MQ-020"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java": {
+      "publicSourceGitBlob": "443fb17d748da348a005ba7e7112060426d91ad6",
+      "originalOwner": "WBS-P008-05",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-004",
+        "MSG-F06",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryException.java": {
+      "publicSourceGitBlob": "3f5843a4f193dde13f1b1532b57fd34cea3df68b",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java": {
+      "publicSourceGitBlob": "dd7f02b597351d89532c2a209bff657cfc5e692e",
+      "originalOwner": "WBS-P010-01",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirements": [
+        "FUN-009",
+        "AUT-002",
+        "AUT-003"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java": {
+      "publicSourceGitBlob": "7076c224636702cbc63dadc95966c16b6147001a",
+      "originalOwner": "WBS-P007-05",
+      "design": [
+        "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapper.java": {
+      "publicSourceGitBlob": "830a3feb32086d0a4833912d6f87ae1b5d65af16",
+      "originalOwner": "WBS-P007-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004",
+        "MQ-021"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java": {
+      "publicSourceGitBlob": "81aa0db3fac7eaf949e4389cb1707be7a6e00873",
+      "originalOwner": "WBS-P007-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004",
+        "MQ-021"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java": {
+      "publicSourceGitBlob": "2858b9a00ced4e1d6552abd8450d16c30c67d77f",
+      "originalOwner": "WBS-P007-04",
+      "design": [
+        "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004",
+        "MQ-021"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java": {
+      "publicSourceGitBlob": "4d386edd142478e51eb8b4f48622a6f9149c4156",
+      "originalOwner": "WBS-P007-05",
+      "design": [
+        "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java": {
+      "publicSourceGitBlob": "bbd69e2dee5dd7d7a99ec86555e95539aeeaa4c1",
+      "originalOwner": "WBS-P007-05",
+      "design": [
+        "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md"
+      ],
+      "requirements": [
+        "FUN-001",
+        "AUT-004"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldProbeFileIo.java": {
+      "publicSourceGitBlob": "d78785585a824a5f2c7427bbae7ef4a2b5aa124e",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldTransferFileIo.java": {
+      "publicSourceGitBlob": "5c6336d1c93a5d70e7469a01d4e363c826118a6c",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ProbeFileIo.java": {
+      "publicSourceGitBlob": "93192ec65ae02dfd4b3063ece3259dcbf3e4aa50",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java": {
+      "publicSourceGitBlob": "bf9fa6f55ea4caa8e6c149084ce126c60861dd9a",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector.java": {
+      "publicSourceGitBlob": "962bd6f95e76841dee2511fbebe7290b85d300bc",
+      "originalOwner": "WBS-P008-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "MSG-F03",
+        "FIL-006",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java": {
+      "publicSourceGitBlob": "33e2990f3c477f22c13c36651346d0e5fefef532",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java": {
+      "publicSourceGitBlob": "83855f29ed9d4755738d6a98ef6e829a9e1a52af",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferFileIo.java": {
+      "publicSourceGitBlob": "53917b0ff2004bd6caa4a2bea3351f9b4771c4b2",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": "PG44878",
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferRootInspection.java": {
+      "publicSourceGitBlob": "3df5951350a7d1dfd8656de7661c53a07776c360",
+      "originalOwner": "WBS-P008-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "MSG-F03",
+        "FIL-006",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStartupProbe.java": {
+      "publicSourceGitBlob": "c96bb5573047ccf835d6b614068b8b648b140a1e",
+      "originalOwner": "WBS-P008-04",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "MSG-F03",
+        "FIL-006",
+        "FIL-007"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferStoragePreparation.java": {
+      "publicSourceGitBlob": "982d105899d0fc589171f84f344717eac34f514d",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferUsageScanner.java": {
+      "publicSourceGitBlob": "496544f0e2c27098dcd0130547532089b0c10ac2",
+      "originalOwner": "WBS-P008-03",
+      "design": [
+        "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md"
+      ],
+      "requirements": [
+        "FUN-003",
+        "FUN-004",
+        "MQ-039",
+        "MSG-F05",
+        "MSG-F08",
+        "FIL-009"
+      ],
+      "limitedTypedEvidence": null,
+      "realRuntimeRequired": true
+    }
+  }
+}
