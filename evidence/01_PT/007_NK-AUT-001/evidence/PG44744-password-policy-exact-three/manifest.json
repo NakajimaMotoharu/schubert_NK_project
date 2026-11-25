@@ -1,0 +1,67 @@
+{
+  "run": "PG44744",
+  "source": "6c0b07f3b51a536bb220643154ab7a95033b6694",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-P007-01/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T00:55:33.841303+00:00",
+  "actualExit": 0,
+  "oldUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26710-password-whole6-v1/manifest.json",
+    "sha256": "79528d9a445e08ec7593de22148ca1b6ac37a214b75aa8a072aa3a91f054aadd"
+  },
+  "oldIndependence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26712-password-pure-independent-v1/manifest.json",
+    "sha256": "ab1d92fdf7bf05fedbbff930e9ce1b3d4aa06fe9d10e71b057d85580c8921258"
+  },
+  "oldExecuted6Referenced3": {
+    "PT-AUT-001-01": "loginAndCreationBoundariesDifferAndInputsAreConsumed()",
+    "PT-AUT-001-02": "nfcSupplementaryAndUsernameComparisonUseExplicitValues()",
+    "PT-AUT-001-03": "malformedControlAndNullContractsRejectWithoutRetainingInput()"
+  },
+  "unchangedInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java",
+      "sha256": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java",
+      "sha256": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55"
+    }
+  ],
+  "currentPhysical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44736-current-api-port-values-nullaway-v2/target/classes/dev/codex/schubert/nk/api/security/PasswordPolicy.class",
+    "sha256": "eb344e646e8e81226188776cafb9975f63dbdcb306bdaa8087b453606e725679"
+  },
+  "appliedLocalSDKs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "noReuseOfOtherPasswordHasherCases": true,
+  "rootAuthoritativeSpec": {
+    "path": "evidence/01_PT/007_NK-AUT-001/001_NK-AUT-001_単体テスト仕様書.md",
+    "sha256": "f4f1101b02a88fef1a7fb247640a672f94886a69dff3d66891949159863b0603"
+  },
+  "newProductTests": 0,
+  "verifiedCriteria": [
+    "login vs registration fixed lengths",
+    "Unicode NFC and code-point limits",
+    "destruction of caller-owned char arrays on invalid/null input"
+  ],
+  "realCredentialsOrActualAuthorization": 0,
+  "remaining": [
+    "5/10 attempt state and actual 15-min lock in caller operation",
+    "real HTTP/retry-after and DB",
+    "451 same runtime and formal decision"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
