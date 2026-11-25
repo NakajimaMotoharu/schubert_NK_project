@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.web.error.ProblemViewFactory;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
 import dev.codex.schubert.nk.web.view.ErrorViewModel;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -217,17 +218,16 @@ final class ErrorControllerPortTest {
 
   @Test
   void sharedControllerHasIndependentConcurrentRequestAndModelState() throws Exception {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var first =
-          executor.submit(
+          workers.submit(
               () -> {
                 Fixture f = new Fixture(new UUID(0, 1));
                 f.attributes.put(RequestDispatcher.ERROR_STATUS_CODE, 403);
                 return invoke(f);
               });
       var second =
-          executor.submit(
+          workers.submit(
               () -> {
                 Fixture f = new Fixture(new UUID(0, 2));
                 f.method = POST;
@@ -240,9 +240,6 @@ final class ErrorControllerPortTest {
       assertEquals(FIXED_UI.get(403), a.getMessage());
       assertEquals(new UUID(0, 2).toString(), b.getRequestId());
       assertEquals(405, b.getStatus());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

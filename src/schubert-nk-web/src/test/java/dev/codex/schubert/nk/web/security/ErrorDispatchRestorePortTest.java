@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -264,13 +264,12 @@ final class ErrorDispatchRestorePortTest {
 
   @Test
   void eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate() throws Exception {
-    var pool = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var jobs = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 8; i++) {
         int index = i;
         jobs.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   var f = new Fixture();
                   if (index % 2 == 0) f.captured(UserRole.ADMIN);
@@ -281,9 +280,6 @@ final class ErrorDispatchRestorePortTest {
                 }));
       }
       for (int i = 0; i < 8; i++) assertEquals(i % 2 == 0, jobs.get(i).get(10, TimeUnit.SECONDS));
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

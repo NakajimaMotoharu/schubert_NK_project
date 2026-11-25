@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -208,8 +208,7 @@ final class ErrorDispatchRouterPortTest {
 
   @Test
   void concurrentRoutesKeepEightSuppliedContextsAndCallbacksThreadLocal() throws Exception {
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var jobs = new ArrayList<java.util.concurrent.Future<?>>();
       for (int index = 0; index < 8; index++) {
         boolean error = index % 2 == 0;
@@ -231,9 +230,6 @@ final class ErrorDispatchRouterPortTest {
                 }));
       }
       for (var job : jobs) job.get(10, java.util.concurrent.TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
