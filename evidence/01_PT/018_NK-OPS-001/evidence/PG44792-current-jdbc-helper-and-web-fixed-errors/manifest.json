@@ -1,0 +1,106 @@
+{
+  "run": "PG44792",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "WBS-P011-04/2"
+  ],
+  "source": "d4dfb041e981182cb86b1e8f33c693d0b32c1cda",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:49:39.904491+00:00",
+  "actualExit": 4,
+  "standards": [
+    "451",
+    "SS331/332/352",
+    "PT-JDBC-CLEANUP001..008",
+    "PT-WEB-024..031"
+  ],
+  "byModule": {
+    "api": {
+      "compiler": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/terminal.json",
+        "sha256": "2f0c9b17e63f58a084a9f49e90b571afc77a6060fdb04309d0d826a06b78d995"
+      },
+      "spot": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-api-jdbc-resources-source-spotbugs/terminal.json",
+        "sha256": "dc815bd4573218f4eb24a1df5a7cefcb184c466f21602384978dd850fc091507"
+      },
+      "pmd": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-api-jdbc-resources-source-pmd/terminal.json",
+        "sha256": "bd6125e55a92d952bc90b9033b0d86a4228ef1aaf1d5b36b56390565fe02103b"
+      },
+      "rawPmd": [
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "30"
+        },
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "30"
+        },
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "42"
+        },
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "42"
+        },
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "54"
+        },
+        {
+          "file": "JdbcResourceCleanup.java",
+          "rule": "AvoidCatchingGenericException",
+          "line": "54"
+        }
+      ],
+      "spotClasses": [
+        "dev.codex.schubert.nk.api.database.JdbcResourceCleanup",
+        "dev.codex.schubert.nk.api.database.JdbcResourceCleanup$SqlClose"
+      ]
+    },
+    "web": {
+      "compiler": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44778-current-web-receipt-reference-jdbc-declarations-nullaway/terminal.json",
+        "sha256": "1a33aeed99fa479ed62998fdde0b6cb4b48308d2252f5ed7185083c5de354027"
+      },
+      "spot": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-web-session-persist-errors-source-spotbugs/terminal.json",
+        "sha256": "41597221fd7267aab74ee93c862854426f1e31e628de57410d1dc5553340a6a7"
+      },
+      "pmd": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44792-current-web-session-persist-errors-source-pmd/terminal.json",
+        "sha256": "53a01b7af690ceab7ca8e2ad2b3d32e50cc1a6b01264fedeb2068b71596cb012"
+      },
+      "rawPmd": [],
+      "spotClasses": [
+        "dev.codex.schubert.nk.web.session.InvalidSessionRowException",
+        "dev.codex.schubert.nk.web.session.SessionStoreException"
+      ]
+    }
+  },
+  "apiLocalDecision": "Six typed catches are raw PMD findings. SQL/RuntimeException/Error must preserve close-once, primary identity, suppressed order, and JDK self-suppression parity; per-finding applicability has no accountable disposition.",
+  "priorHelper": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44758-p00405-current-jdbc-caller-cleanup-proof/manifest.json",
+    "sha256": "759fd8008680a920d307cb6bda0a3c6a699892ce82ffcaf2f688ead45d7c1e87"
+  },
+  "repeatedTests": 0,
+  "newAllToolCleanApi": 0,
+  "newAllToolCleanWeb": 2,
+  "webLocalScope": 129,
+  "heldRuntime": [
+    "Current caller I/O and transaction postconditions",
+    "Whole 451 and accountable acceptance"
+  ],
+  "productExecutions": 0,
+  "actualDB": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
