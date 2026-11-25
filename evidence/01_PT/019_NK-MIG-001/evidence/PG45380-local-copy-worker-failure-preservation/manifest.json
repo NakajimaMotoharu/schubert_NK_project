@@ -1,0 +1,169 @@
+{
+  "run": "PG45380",
+  "source": "a872f3e803cbcc3eb7d80341c31f4864f7320cec",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.03/2-照合",
+  "relatedWbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P019-03.02/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T15:43:32.576957+00:00",
+  "bug": "BUG-3855",
+  "horizontal": "YKT-2997",
+  "spec": {
+    "path": "evidence/01_PT/019_NK-MIG-001/017_COPYtext製造・独立十二byte仕様.md",
+    "sha256": "a94dee66c0be876314fe9d37c8a8fd32219b71453bf161eda7ec170cd636bbfc"
+  },
+  "reference24": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44892-copy-text-two-classes-current24/manifest.json",
+    "sha256": "7af393730acd380aa1a697c1cd4d6f2b276302197ccef2fc0aac7ca445644632"
+  },
+  "sharedNegativeReference3": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45298-fixture-worker-termination-and-interrupt/manifest.json",
+    "sha256": "c5940a476c84b172af3aed0be41fb621d6e9fac7c7f1dc342a5ae432880f5704"
+  },
+  "sameSharedHelperSource": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "sha256": "26ba9d01545025a99e53176f4874f07679a31e814e39a819fffd16e53b610c6c"
+  },
+  "regularBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "twoExactClasses": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/physical/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class",
+      "sha256": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+    },
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/physical/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class",
+      "sha256": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2"
+    }
+  },
+  "testCases": {
+    "PostgresCopyTextEncoderTest": [
+      "copy012ConcurrentCallsHaveSeparateOutputOwnership",
+      "copy001LiteralRowsAndBothEntryPoints",
+      "copy003MandatoryDelimiterAndLineEscapes",
+      "copy004OtherControlEscapesAndOrdinaryQuotes",
+      "copy010InputAndReturnOwnershipAreIndependent",
+      "copy011SafeDiagnosticAndUninterpretedNumericText",
+      "copy002NullEmptyAndLiteralNullMarkerAreDistinct",
+      "copy008EmptyInputAndWidthContracts",
+      "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition",
+      "copy005FixedUnicodeHexAndNoImplicitNormalization",
+      "copy006LiteralTerminatorAndSqlLikeDataStayFields",
+      "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed"
+    ],
+    "PostgresCopyTextWriterTest": [
+      "constructorRejectsNullEncoderWithFixedDiagnostic",
+      "obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext",
+      "nullOrEmptyRowsFailWithoutWritingThatRow",
+      "nullSourceAndSinkAreRejectedBeforeRequestingAnIterator",
+      "independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows",
+      "invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow",
+      "callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed",
+      "originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent",
+      "emptyIterableMakesNoSinkCallsAndDoesNotOwnIt",
+      "finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden",
+      "mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix",
+      "originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush"
+    ]
+  },
+  "tests": 24,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "assertionsAndFixtureValuesPreserved": true,
+  "firstFormatterOnlyNoJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four/terminal.json",
+    "sha256": "31707f33f56a487ce4cbcbc830c0f4c9da20570d3d762bfb03aea48654206994"
+  },
+  "selectedStrictCompileAndFormat": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/terminal.json",
+    "sha256": "d46851e5ba5027a10a3c34fb903003c7ee49ed9ebf769402735a5efd0cba7b04"
+  },
+  "fullInputRecord": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/begin.json",
+    "sha256": "2f08ed35a7d0f4329e6c85278be22ae0de994829f5ad702466e2af0537e1091b"
+  },
+  "sameOrdinaryXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "dd37eacda40b3f30964a5bbf99833f3eed6b0f6c3ed8a9fff60442d68af012fd"
+  },
+  "rawSameExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/jacoco.exec",
+    "sha256": "93ef44b080ec0972d683d6f6f9d9b3b4f18aa637ee87ae4d87c5562d0cd1a83e"
+  },
+  "coverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45380-copy-text-fixture-workers-twenty-four-v2/coverage.xml",
+    "sha256": "7a6c85219a077dad6891d522c92d1a707463d20acb41aa0463a65b56b199aeaa"
+  },
+  "byClass": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": {
+      "INSTRUCTION": {
+        "covered": 69,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 16,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 17,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 12,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": {
+      "INSTRUCTION": {
+        "covered": 200,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 33,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 44,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 26,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "actualDbTransportOrSdk": false,
+  "sdkHeld24TestTrials": 0,
+  "actualProductTrials": 24,
+  "cumulativeLocalProductTrialsGross": 2658,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "workerFixture": {
+    "threads": 8,
+    "tasks": 64,
+    "getTimeoutSeconds": 5,
+    "terminationTimeoutSeconds": 10
+  }
+}
