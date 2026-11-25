@@ -1,0 +1,150 @@
+{
+  "coverage": [
+    {
+      "member": "dev/codex/schubert/characterization/GateContractValidator",
+      "crc": "23042f94c5feec8b",
+      "raw": {
+        "INSTRUCTION": [
+          0,
+          3119
+        ],
+        "BRANCH": [
+          0,
+          303
+        ],
+        "LINE": [
+          0,
+          564
+        ],
+        "COMPLEXITY": [
+          0,
+          221
+        ],
+        "METHOD": [
+          0,
+          66
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "member": "dev/codex/schubert/characterization/GateContractValidator$ValidationResult",
+      "crc": "302f46113fc85c24",
+      "raw": {
+        "INSTRUCTION": [
+          0,
+          29
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          2
+        ],
+        "COMPLEXITY": [
+          0,
+          7
+        ],
+        "METHOD": [
+          0,
+          7
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "remainingPmd": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "file": "GateContractValidator.java",
+      "line": 153,
+      "reason": "local map, only the constructing call writes it before immutable publication",
+      "sourceLine": "Map<String, Object> metrics = new LinkedHashMap<>();",
+      "source": {
+        "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+        "sha256": "53af8fa80b5873e8c0389f1009a3a94b09b9c2c2cd7a59f4f8500b4777a7cd51"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "CloseResource",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 676,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "var workers = Executors.newFixedThreadPool(2);",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 676,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "var workers = Executors.newFixedThreadPool(2);",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 678,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "var first = workers.submit(() -> validate(valid));",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 679,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "var second = workers.submit(() -> validate(invalid));",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 683,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "workers.shutdownNow();",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "GateDefinitionDocumentsTest.java",
+      "line": 684,
+      "reason": "finite synthetic concurrent definition oracle with finally shutdown and checked termination",
+      "sourceLine": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "source": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "2b9ad45ac4f1b0cd1d186d18e0d865041c0b9be65576a7f00e5c16504997628a"
+      },
+      "ownerVerdict": null
+    }
+  ]
+}
