@@ -1,0 +1,541 @@
+{
+  "run": "PG45374",
+  "source": "f9ff18668ea3116f769017d8ed9694b3216f24b3",
+  "core": "cf08e414be9f877b851a387704350d5e7c980209",
+  "suites": {
+    "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "fieldCodecHasOnlyTheEightDesignedStaticOperations",
+        "largeResultCodecHasOnlyWriteAndDecodeOperations",
+        "mediaValidatorExposesNoGrammarCacheOrInstanceOperation",
+        "semanticValidatorRetainsBothDesignedEntryPointsOnly"
+      ],
+      "originalXmlSha256": "699ee0baadb8a9c3fe1d92e9878d3098420c6baada9a2c18ce9347358402561d"
+    },
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+        "loginLockAndFailurePreserveOnlyApprovedErrorFields",
+        "malformedLoginErrorBoundariesAndTypesAreRejected"
+      ],
+      "originalXmlSha256": "dd5ff48eb52ffda5aa8e9c8b176fe852239b5d47fd1d0be49955a1d2149a9ef2"
+    },
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "nfcGolden001HangulJamoFitsComposedByteWidth",
+        "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+        "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition"
+      ],
+      "originalXmlSha256": "bd603de0f8ab8ca888d688647fef02e1616efc789ba636d943fb7a68e3f55b67"
+    },
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "booleanAndReservedFieldsRejectUnknownBytes",
+        "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput",
+        "numericCodecChecksDigitsRangeAndOverflow",
+        "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+        "numericErrorFillerDoesNotBecomeBusinessZero",
+        "numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+        "textDecodeIsStrictCanonicalAndOptionalAware",
+        "textEncodeNormalizesUtf8AndPadsWithAsciiSpace"
+      ],
+      "originalXmlSha256": "5bb9f9d47e135ecc8a78c45ac3dc678660c895d764290b500c0c806d148e1d5c"
+    },
+    "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition",
+        "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields"
+      ],
+      "originalXmlSha256": "518189cbc1dfd7f72eea19052e869226ea1bce03f739a858a4f70074642a47ab"
+    },
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ],
+      "originalXmlSha256": "f94f49a8036c24c7d548c041a4b4c2d7d9789ed07a99f47e9cf457a766704aa5"
+    },
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allSixtyFourLayoutsRoundTripMinimumSuccessValues",
+        "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+        "encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+        "everyResponseLayoutUsesExactErrorFillersAndNoRecords",
+        "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets",
+        "numericDigitLimitIsCheckedWithoutOverflow",
+        "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+        "valuesAreImmutableNullSafeAndRedacted"
+      ],
+      "originalXmlSha256": "19f2bbeed1c7a4af44f64055ff7dc2287a01e98053371e51403ce1e428e0c70c"
+    },
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+        "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+        "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+      ],
+      "originalXmlSha256": "2d94f7db8bff020e939ce968ab05fd80df011765f507a7495b34f24257085b0f"
+    },
+    "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary",
+        "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver",
+        "qss001DecodesExactKeywordUsernameAndBlankFields",
+        "qss002RejectsMalformedAndNonNfcAtBothTextOffsets"
+      ],
+      "originalXmlSha256": "fa47fcab980dd4d4230a1cd93740336dd672be19c3821efb60ced8cf8def9268"
+    },
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes",
+        "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+        "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts"
+      ],
+      "originalXmlSha256": "167fbbd6d1c227ba87685b5e94d38b6ebc5a9168dbce0deb2342f0b0846eda57"
+    },
+    "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary",
+        "bothFieldsRejectNoncanonicalButWellFormedUtf8",
+        "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled",
+        "resetAccepts64FourByteCodePointsWithoutConsumingVersion"
+      ],
+      "originalXmlSha256": "7bd8219de62ce149c345749bbb9bbb03f2eb9db92a4f84a20c177f1296acc965"
+    },
+    "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit",
+        "usr002RejectsTheAllSpaceMandatoryField",
+        "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd",
+        "usr004RejectsValidUtf8ThatIsNotNfc"
+      ],
+      "originalXmlSha256": "8328b7ca23f795d288ad958849d472e957c77e2913f44d2c1b1f79b25e46c7d7"
+    },
+    "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "expectedRouteRetainsValuesAndRejectsMissingOrInconsistentRoutes",
+        "largeContentUsesIndependent4800ByteEquationAndValueKeys",
+        "transportSnapshotRetainsEveryComponentAndRejectsInvalidBoundaries"
+      ],
+      "originalXmlSha256": "19e9a55eca76221fa54abbb10b9f32b55b387ff3f363738a914bba647430bce6"
+    },
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+        "contentMetadataRejectsInvalidValues",
+        "decodeRejectsTruncationExtraHashAndIoFailure",
+        "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+        "verificationRejectsAllThirtyTwoDigestBytePositions",
+        "writeRejectsNullCountLengthAndIoFailure",
+        "writesAndReadsHeaderlessExactRecordsWithIndependentHash"
+      ],
+      "originalXmlSha256": "0109c805beb00fef28ff01fed631582feec3017f7c7f0e344d61d2778650ed0e"
+    },
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rejectsMalformedDisplayFileNameWithoutReplacement",
+        "rejectsMalformedLogicalIdentifierWithoutReplacement",
+        "rejectsMalformedStoragePathWithoutReplacement",
+        "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries"
+      ],
+      "originalXmlSha256": "99012d17a4df0d48ea01a7fc0384889584671a7859e2be89bd8a3f7c12c9c70f"
+    },
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "acceptsExactlySevenSsc004ExtensionMimePairs",
+        "bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+        "constructorRejectsNullComponents",
+        "dispositionMapsOnlyIAndA",
+        "rejectsEveryMimeCrossProductAndVideoAttachment",
+        "rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+        "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries"
+      ],
+      "originalXmlSha256": "ae7d6acae20cda44cf88a670a2f7b270dd987b80d4b47bbdda877c5b2529e279"
+    },
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "authenticationContextValidatesAndRedacts",
+        "enumsMapOnlyApprovedWireValues",
+        "headerConstructorRejectsEveryStructuralViolation",
+        "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+        "headerReferencesRejectNullAtTheNamedInvariantBoundary",
+        "headerValidateAgainstRejectsEachMetadataMismatch",
+        "validHeadersCoverRequestResponseErrorAndEventProfiles"
+      ],
+      "originalXmlSha256": "dee5f35d5ba7d8b6a2d3e30a3f133ff1287c15dabdc63c7fb73d609600bfba65"
+    },
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "catalogMatchesIndependentUi234To236Fixture",
+        "layoutFieldsRejectWrongAreaGapLengthAndNull",
+        "parserRejectsMalformedUnknownAndDuplicateRows"
+      ],
+      "originalXmlSha256": "148c0372f70833fab7ae55630d0d0b2ca3a624073a739ac72750f54c12268fd5"
+    },
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "layoutDefinitionChecksEveryLengthAndKindInvariant",
+        "layoutIdAndFieldDefinitionAreStrictAndOneBased",
+        "registryMatchesIndependentUi233Catalog",
+        "registryRejectsEmptyNullDuplicateAndKindMismatches"
+      ],
+      "originalXmlSha256": "29556b7e97ab9f37854fec6d2b7c236bc2dd67ebc96f4b76ebd23a40a1e64a34"
+    },
+    "dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "fiftyRecordsFillTheFirstPageAndTheNextStartsAtFiftyOne",
+        "largestSixDigitPageUsesTheNotificationBound",
+        "rejectsSearchPageSizeAndNotificationOffsetOrRecordMismatch"
+      ],
+      "originalXmlSha256": "4123a32725bb83a1830532f41b8f51d57357eca1dff6caab78711b3d329e7bdc"
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "page001SecondPageHasIndependentExpectedBounds",
+        "page002MaximumEffectivePageKeepsExactNineDigitArithmetic",
+        "page003RejectsIndependentRangeAndOneFieldArithmeticChanges"
+      ],
+      "originalXmlSha256": "e6297547daaacf00a86acfaa35cd08ff4417c60c2fc125b814bdbe5524b5c215"
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "deletedNotificationNeverContainsAnswer",
+        "listRecordConditionsAndOrderingAreEnforced",
+        "loginUserPasswordDateAndSessionRulesAreEnforced",
+        "mediaAnimationAndMusicConditionsAreEnforced",
+        "notificationCancellationAndQuestionStateConditionsAreEnforced",
+        "pageConstantsCountsAndArithmeticAreEnforced",
+        "receiptWebAndDefensiveContractsAreEnforced",
+        "scenarioInlineAndLargeFileConditionsAreEnforced"
+      ],
+      "originalXmlSha256": "5285341efa67da644c817d1cbc30206562fb4e16b2fdb0daa8c57c3ae1c8d095"
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest": {
+      "count": 1,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "concurrentReadersRetainAllIndependentSixtyFourTypeBindings"
+      ],
+      "originalXmlSha256": "27185fa34e95bb60a2079a8ddf78c1ff09862969df123588a96503de477652d6"
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest": {
+      "count": 6,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allNamedTypesHaveIndependentDirectionalFieldMeaning",
+        "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+        "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes",
+        "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+        "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames",
+        "typedModelsAndHelpersRejectNullMissingAndWrongKinds"
+      ],
+      "originalXmlSha256": "e60f78e3e894a368eeab77fab38fd63fcdad1c486d6d3f8970554398a5a211f2"
+    },
+    "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "fieldAndTypedPayloadWrappersKeepValueKeysAndDefensiveLists",
+        "fieldMetadataRetainsIndependentOneBasedOffsetsAndActualValueKeys",
+        "headerAndWireWrappersRetainTheirDeclaredComponentIdentity",
+        "layoutCatalogCopiesItsInputAndUsesStructuralValueKeys"
+      ],
+      "originalXmlSha256": "5e057d6af44f542688b49e09a4087b8b6169dae4bb5be8c2938014f27c00cb74"
+    },
+    "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "metaValue001AllClosedEnumFactoriesAndCallerOwnedArrays",
+        "metaValue002FieldValuesRetainIndependentHashAndRedactionContracts",
+        "metaValue003HttpAndElapsedNumbersEnforceAsciiAndIndependentBoundaries",
+        "metaValue004LayoutOrderingUsesTheActualComparableBridgeAndPreservesCauses"
+      ],
+      "originalXmlSha256": "1f47d7e689b4f313533acd07a1360d4a811d218cacd16f89c2110e8ac7fb057e"
+    },
+    "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "sem001PasswordCharacterByteAndUsernameLimits",
+        "sem002InclusiveDateLimitsAndOneSidedFilters",
+        "sem003QuestionAndWebLogTextContracts"
+      ],
+      "originalXmlSha256": "f46b9ba09ef1bf070eb289c23725b55bcda09b788c77a1c3e442ce1946fbe93a"
+    },
+    "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "semanticEncodingHelpersRejectNullReferences",
+        "semanticHelpersDecodeAndEncodeEverySupportedShape",
+        "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects",
+        "semanticValueObjectsNormalizeValidateCompareAndRedact"
+      ],
+      "originalXmlSha256": "4c55a72aec45b4734e1bfe3782ae9164773cdce25de4ce7f0e132d73067dfe1c"
+    },
+    "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth",
+        "nullNameIsRejectedBeforeWidthAndValueValidation",
+        "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation",
+        "zeroAndMaximumAreAcceptedAtEverySupportedWidth"
+      ],
+      "originalXmlSha256": "e2e5d4be9c598870f52f0e84638ed557a261693257af940db7976f77a07e653f"
+    },
+    "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest": {
+      "count": 13,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire",
+        "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+        "everyCanonicalConstructorReferenceRejectsNull",
+        "everyOtherCategoryIsRejectedByNamedBoundary",
+        "existingHttpMetadataAndReservedRulesRemainEnforced",
+        "explicitRequestActionKeepsItsOwnClosedPair",
+        "independentConcurrentCallersDoNotMixCategories",
+        "legacyRequestMatchesIndependentOriginalBytes",
+        "menuActionMatchesIndependentOffsetsAndRoundTrips",
+        "missingBlankUnknownAndWrongCaseCategoryFail",
+        "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+        "omittedActionIsAllowedForRequestOnly",
+        "recordFieldsAreCompleteImmutableAndRedacted"
+      ],
+      "originalXmlSha256": "dabaf966aec99a5aed4315c67878119222d7a9546519f760aad12e41326ad57e"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "enum001SerializedAnswerStateMatchesIndependentProtocolVector",
+        "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor"
+      ],
+      "originalXmlSha256": "f53f47366f6b4ac1e0075c18ef0f8959aeea038a242d5dac6b6b988ff04adb19"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "n12Value001IndependentPositiveRangeAndFixedDiagnosticForEveryDeclaredKind",
+        "n12Value002SameKindRecordContractIndependentHashAndLiteralText",
+        "n12Value003AllKindPairsAndRealHashCollectionKeepEqualNumbersDistinct"
+      ],
+      "originalXmlSha256": "d260f627bd430d0b0dbe20908db7c1b4bd92432a6c5da1231c337482f90479e8"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "pathValue001RelativeNormalBoundariesAndTypedHashContract",
+        "pathValue002RelativeRejectsEachRootSegmentAndByteBoundary",
+        "pathValue003DisplayOnlyPathsPreservePermittedTextAndRejectTraversal"
+      ],
+      "originalXmlSha256": "16402364db486e0bedfd036b6b31df1e4d5bde885640886bb37e5df6a27d43ab"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars",
+        "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars"
+      ],
+      "originalXmlSha256": "e10faa3c3900ff7ba176eaaaa5a2bf7241f67135f99b8e6ed1937f4a3dfa5022"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest": {
+      "count": 5,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion",
+        "allN12IdentifierTypesEnforceTheSharedPositiveRange",
+        "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+        "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds",
+        "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues"
+      ],
+      "originalXmlSha256": "f95a05046a0b30c50b4a0f10813b36144e95a2e068a61875369e25d509073c94"
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "wireValue001ClosedNamesOrderOrdinalWireAndActualGeneratedFactoryMatchIndependentTables",
+        "wireValue002GeneratedNameLookupRejectsUnknownEmptyCaseSpaceNullAndWireAliases",
+        "wireValue003ReturnedValueArraysAreIndependentCallerOwnedCopies",
+        "wireValue004RealHashCollectionKeepsAllFiftyEightTypedSingletonKeys"
+      ],
+      "originalXmlSha256": "ceb3057ba4a7bff709de9476c54859fb185a5835ad8c4e72cf99c71014172db9"
+    },
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+        "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+        "bug037RequiredAndOptionalDataSendersRejectBadTime",
+        "formatsAndParsesStrictJstMilliseconds"
+      ],
+      "originalXmlSha256": "26818c109755453603d5f83f21328e52a36fecae7070bd5e415746646a29972a"
+    },
+    "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "nullUnknownAndNearMatchAddressesAreDenied",
+        "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle"
+      ],
+      "originalXmlSha256": "dd38c9af5c8d199f6e901ee8e9ca8013d535421d731d4c3b19e9ea0a77f2f144"
+    },
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "iso009PrimaryAndProtocolAreRequired",
+        "iso010SameNodeIsRetainedWithoutSelfSuppression",
+        "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity",
+        "iso012DisabledPrimarySuppressionCannotHideProtocol"
+      ],
+      "originalXmlSha256": "95aa67b65fb71a039354fbae4cd1b69505f93c34dfdf0f2dd3c1947972bcee54"
+    },
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "disabledPrimarySuppressionDoesNotHideRollbackFailure",
+        "distinctEqualValuedNodesAreBothRetained",
+        "primaryAndRollbackMustBothBePresent",
+        "sameNodeIsRetainedOnceWithoutSelfSuppression"
+      ],
+      "originalXmlSha256": "56bb5553de5211f4888700a630bc73b9dc1f8b7a97d41f04b59dc2086cb42547"
+    }
+  }
+}
