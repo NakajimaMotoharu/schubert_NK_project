@@ -1,0 +1,234 @@
+{
+  "run": "PG45678",
+  "source": "b1a91a4b6d85d74c2d20b197c66cdc952311176a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P017-05/2",
+  "terminalAtUTC": "2026-11-25T22:09:27.689508+00:00",
+  "actualExit": 0,
+  "preflightClasspathRepair": "initial stage stopped before compile; resource directory separated from the three JAR inputs",
+  "bug": "BUG-3912",
+  "horizontal": "YKT-2997",
+  "specifications": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/035_NK-BAT-001_backup_manifest_codec_単体テスト仕様書.md",
+      "sha256": "d83adaf35eeb2c470683a473dad75f4f9b9eeb0df24a213931b044e8288e8591"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/033_NK-BAT-001_backup_manifest値_単体テスト仕様書.md",
+      "sha256": "99803516650353d3eaa5fa63c3a30db98fbad2ab0891aa8a8bbd2e56bc45b7e7"
+    }
+  ],
+  "beforeFixLedgerCommit": "3a62a8aecf20cf4e43a2918e60a4cd2b8ebcb37a",
+  "retainedProvenHelper": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45398-current-maintenance-and-batch-fixture-workers/manifest.json",
+    "sha256": "c63d8502ffcee7ae44fad178ada9cd02f6afaebc7898af1e53bf5fd4b4ee32af"
+  },
+  "helperExactSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/fixture/BoundedBatchFixtureWorkers.java",
+    "sha256": "27af9f82e79577ad6f7e8ba5ff8f855e32b3521bef1df00df58db3c9c81b84df"
+  },
+  "independentExpectedSample": {
+    "path": "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json",
+    "sha256": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e"
+  },
+  "previousNormalResults": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44122-current-backup-manifest-raw-values/manifest.json",
+      "sha256": "26fba79ab7e7f944bb8e89a40261485489fbaaf90ab57a6514fb677fe46f37a7"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44124-current-backup-manifest-codec-synthetic/manifest.json",
+      "sha256": "0cb94345d6573993ce860eba272ac73373d78cd82daaeb6a98b089c3e3490b06"
+    }
+  ],
+  "selected": {
+    "PT-BAT-185": "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest#concurrentValueUse",
+    "PT-BAT-193": "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest#concurrentCanonicalRoundTrips"
+  },
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "owningWorkerEightInputSixtyFourByEach": true,
+  "futureSeconds": 5,
+  "shutdownSeconds": 10,
+  "readRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/raw.log",
+    "sha256": "79edb487c8b7c0aabdfbd5a3aefd239febeadb15fd6900c30aa932c3ceed2064"
+  },
+  "currentSingleRawByClass": {
+    "dev/codex/schubert/nk/batch/backup/BackupVersions": {
+      "crc": "d72d425c0126a55b",
+      "four": {
+        "BRANCH": [
+          3,
+          5
+        ],
+        "LINE": [
+          3,
+          8
+        ],
+        "METHOD": [
+          2,
+          10
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/backup/BackupManifest": {
+      "crc": "807ef6402ca1a160",
+      "four": {
+        "BRANCH": [
+          13,
+          13
+        ],
+        "LINE": [
+          6,
+          36
+        ],
+        "METHOD": [
+          2,
+          17
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/backup/BackupFileDigest": {
+      "crc": "87bdd8b9dc4e26a9",
+      "four": {
+        "BRANCH": [
+          2,
+          2
+        ],
+        "LINE": [
+          2,
+          5
+        ],
+        "METHOD": [
+          2,
+          4
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep": {
+      "crc": "3a814d328e8e73bf",
+      "four": {
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          1,
+          14
+        ],
+        "METHOD": [
+          3,
+          3
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "crc": "7ebe79e62602f09c",
+      "four": {
+        "BRANCH": [
+          3,
+          3
+        ],
+        "LINE": [
+          2,
+          8
+        ],
+        "METHOD": [
+          2,
+          4
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+      "crc": "96690498395317f3",
+      "four": {
+        "BRANCH": [
+          7,
+          7
+        ],
+        "LINE": [
+          4,
+          12
+        ],
+        "METHOD": [
+          3,
+          9
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/BackupManifestCodec": {
+      "crc": "5bf2ec4079a2b4af",
+      "four": {
+        "BRANCH": [
+          5,
+          7
+        ],
+        "LINE": [
+          5,
+          74
+        ],
+        "METHOD": [
+          2,
+          5
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "report": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "34f61db9c947daa0b834c53f2118311eb432020fd4b16974421c739b845cab83"
+  },
+  "start": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/begin.json",
+    "sha256": "496dbf6838e40984cf117db92523c6836df5eb1a241001b6de8dffad86e03984"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/terminal.json",
+    "sha256": "63418e6920afbd66d859f85c227347bb6c7855e0889270d70420aa6134fac9d2"
+  },
+  "execOne": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/unit.exec",
+    "sha256": "62a8cb857ad2b2542df2f83f55e91aa5fb12353da8ceeded057db9866c3698c6"
+  },
+  "checkstyle": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/check.xml",
+    "sha256": "6866692315186a423833371c0b962860b0ab943deec9a472e38b30023128985b"
+  },
+  "oldOtherFourteenNotReplayed": true,
+  "wholeCoverageYet": false,
+  "actualStorageOrDbOperation": false,
+  "cumulativeProductTrialsGross": 2888,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

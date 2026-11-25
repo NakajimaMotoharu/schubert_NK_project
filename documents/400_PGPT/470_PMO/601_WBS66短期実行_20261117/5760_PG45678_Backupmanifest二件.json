@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-11214",
+  "source": "b1a91a4b6d85d74c2d20b197c66cdc952311176a",
+  "sourceBeforeWork": "790313f2a5fb8563ea6c3d842cc85225103a92cc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P017-05/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P017-05/2",
+    "元行": "WBS-P017-05/2",
+    "費目": "B",
+    "主担当": "WBS-P017-05",
+    "状態": "計画",
+    "作業": "manifest/hash・commit・7世代prune／同source証拠による受入判定",
+    "残pp": "0.488",
+    "着手": "設計341・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "manifest/hash・commit・7世代prune：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 341",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "6",
+    "楽観pp": "0.195",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-BAT-001、SS 341",
+    "lineNumber": 530,
+    "改訂残pp": "0.488",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG45678",
+  "startEvent": "PGPT-20261008-11213",
+  "workCategory": "IMPLEMENTATION",
+  "outcome": "局所終了0、厳格compile／書式／Checkstyle0。一回目は資源ディレクトリの型判定でcompile前停止。旧14成功を再演せず、完全な451と実FileStore・DBは未成立。製品局所延べ2888。",
+  "proof": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45678-current-backup-manifest-two-fixture-diagnostics/manifest.json",
+    "sha256": "cbf3e168f8aa61d0f52d651a53ac3d901af88ba580fb5891b76551f0c06b114e"
+  },
+  "nextEvidence": "P017-05の独立条件と残る保留の範囲を確認し、全体WBSの次の許可済み試験へ進む。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T22:09:51+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 73,
+    "remainingPercent": 27,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "9c3b25d0630ef6b38314e1c6fc32743668ff160c28d054dccfd004638fea3206",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T22:09:51+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 73,
+        "remainingPercent": 27,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T22:09:27.689508+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 73,
+    "remainingPercent": 27,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
