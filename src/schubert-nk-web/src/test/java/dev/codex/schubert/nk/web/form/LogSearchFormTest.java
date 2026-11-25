@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.web.form.LogSearchForm.Code;
 import dev.codex.schubert.nk.web.form.LogSearchForm.Field;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -284,8 +284,7 @@ class LogSearchFormTest {
   @Test
   void web285ConcurrentBinding() throws InterruptedException, ExecutionException, TimeoutException {
     var shared = Map.of(LEVEL_FIELD, List.of("WARN"));
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var pool = new ViewFixtureWorkers(8)) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
@@ -307,9 +306,7 @@ class LogSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+
     }
     assertEquals(Map.of(LEVEL_FIELD, List.of("WARN")), shared);
   }

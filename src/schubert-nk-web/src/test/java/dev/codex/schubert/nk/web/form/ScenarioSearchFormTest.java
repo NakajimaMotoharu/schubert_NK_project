@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;
 import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Code;
 import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Field;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -267,8 +267,7 @@ class ScenarioSearchFormTest {
   @Test
   void web221ConcurrentValidation()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var pool = new ViewFixtureWorkers(8)) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
@@ -284,9 +283,7 @@ class ScenarioSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+
     }
   }
 }

@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -279,8 +279,7 @@ class UserCreateFormTest {
   @Test
   void create007OneHundredConcurrentIndependentRequests()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var executor = new ViewFixtureWorkers(8)) {
       var results = new ArrayList<Future<Void>>();
       for (int i = 1; i <= 100; i++) {
         int n = i;
@@ -306,9 +305,7 @@ class UserCreateFormTest {
                 }));
       }
       for (var result : results) assertNull(result.get(10, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+
     }
   }
 

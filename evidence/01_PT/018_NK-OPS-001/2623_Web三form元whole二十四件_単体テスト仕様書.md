@@ -17,3 +17,7 @@ Test三pathのcanonical/costはUNKNOWN/null維持、主関連をTest ownerへ推
 command=python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg14270_web_three_forms_whole_twenty_four_pt.py。元3Testのhash b681fa5d/161a06a8/20f36e96と同source normal六Jar/既Reporterを固定し新-onlyslot、JDK25.0.4 javac→JUnit/JaCoCo一session・8/8/8=24件/3suite/FES・未実行0。14272独立postは原XML/全Source/SDK/hash/実終了・8 false-result反例・単一sessionCRCと全三Source七physical（Scenario/Log各base+Code+Field、Question base）を測定。各Source四counterとmiss/自然0を保持、無意味な追加呼出/手動除外/旧exec合成なし・標準生成filter不変更。
 
 2624結果に日時/OS/JDK/tool/branch/source/実command/exit/元独立期待・実際/counter/BUG/公開path/hashを保存、元15件は再演せず別exec保持。旧0061-400転用/正式1964-53/個別17-190/工数null/QA051final/全F03-451・既動的HOLD/原本保全・二held工具metadata前除外は不変更。未完試験/条件を合格へ加算しない。
+
+## 並行fixtureの一次失敗と終了異常（BUG-3858）
+
+PT-WEB-221、PT-WEB-285、QuestionSubmitFormの008、UserCreateFormの007、UserSearchFormの008を合成入力で実行する。従来の投入数・worker数、Future期限と固定の入力・期待値を維持する。終了の後条件は独立補助の一次失敗、抑制例外、割込みの試験と現物を照合する。その他の試験結果・異なるscopeのcoverageは合算しない。

@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -238,8 +238,7 @@ class QuestionSubmitFormTest {
   @Test
   void qstForm008ConcurrentIndependentBodiesAndTokens()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var executor = new ViewFixtureWorkers(8)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int i = 1; i <= 100; i++) {
         int index = i;
@@ -264,9 +263,7 @@ class QuestionSubmitFormTest {
         assertArrayEquals(
             golden("question-" + i, token), results.get(i - 1).get(30, TimeUnit.SECONDS));
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+
     }
   }
 }

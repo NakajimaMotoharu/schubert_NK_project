@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -219,8 +219,7 @@ final class UserSearchFormContractTest {
   @Test
   void search008IndependentParallelBindingsNeverShareMutableFields()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var executor = new ViewFixtureWorkers(4)) {
       var results = new ArrayList<Future<?>>();
       for (int index = 1; index <= 16; index++) {
         final int number = index;
@@ -243,9 +242,7 @@ final class UserSearchFormContractTest {
                 }));
       }
       for (var result : results) result.get(5, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+
     }
   }
 }
