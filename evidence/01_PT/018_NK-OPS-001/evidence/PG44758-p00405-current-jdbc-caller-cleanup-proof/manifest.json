@@ -1,0 +1,92 @@
+{
+  "run": "PG44758",
+  "source": "28264d87120a84f808ed3d994ddeaf3e91ec52d7",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-P004-05/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T01:08:49.459598+00:00",
+  "actualExit": 0,
+  "priorHelperTestProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43326-p00405-jdbc-eight-current-source-lineage-v1/manifest.json",
+      "sha256": "7861de77cac30af8d098856fb66bd98df0f9a7ebcfb9f8de00b3b48fec2b462e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/manifest.json",
+      "sha256": "a5de7bb6d72db02d4bdc4b9db2e604b4b9809bd2be2e20a635eaab172e542ab1"
+    }
+  ],
+  "eligibleOldHelperCases": 8,
+  "sourceMatches": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+      "sha256": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "sha256": "4b217bc193580f03e3a9b2106aca425996a59a71bac1457b3e9ae7eb4cef06c9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java",
+      "sha256": "65eb6947a987e0d912344cda4c5d993e66e271ec4d21fc49e1a52a47028fa548"
+    }
+  ],
+  "actualCurrentJVMHelper": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/target/classes/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class",
+    "sha256": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+  },
+  "nullContract": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "sha256": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2"
+  },
+  "rawUnchanged": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44756-api-authorization-bounded-analysis-raw-findings/manifest.json",
+    "sha256": "df7381825a2fd8f725436eab096d70fc04d8ebd21fb38b59816e52cc4f4fafaf"
+  },
+  "targetCallerSource": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "07ccf831ef7e491d5d58cc4de65904228da27e225175d44c35e4f9727549374b",
+      "method": "owner",
+      "localClassifiedCandidate": "Caller source retains nested finally and the established typed owner. Concern stays pending end-to-end caller paths and disposition.",
+      "independentScope": "PG43052 helper-only both ownership types"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "37b2aca8c1bc67d91baea35d3b5e214b82bb083e24d0ac36a67deedbd25c6e62",
+      "method": "readSession",
+      "localClassifiedCandidate": "Caller source retains nested finally and the established typed owner. Concern stays pending end-to-end caller paths and disposition.",
+      "independentScope": "PG43052 helper-only both ownership types"
+    }
+  ],
+  "historical46SitesDifferentUnits": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37066-f03-jdbc-close46-applicability-v1/manifest.json",
+    "sha256": "9273b8dc11029fb35556bb2b4a1cb4f2050d6f21d1c5e678a3092bee55057496"
+  },
+  "newProductTests": 0,
+  "actualDatabaseOrDriver": 0,
+  "reviewJudgement": "These eight fixtures verify close once, primary identity/suppressed order, and direct helper ownership. They do not directly execute the two caller methods. Retain SpotBugs two and PMD thirty-three.",
+  "remaining": [
+    "API/DB owners application to current raw cases",
+    "driver UTC/transaction boundary and combined ownership",
+    "F02/F03/451"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "identicalCurrentPhysical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/target/classes/dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class",
+      "sha256": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/target/classes/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class",
+      "sha256": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+    }
+  ]
+}
