@@ -1,0 +1,224 @@
+{
+  "run": "PG45662",
+  "source": "ec7950f72f3fafb986399b4ca0ae0c7e8c7b2f72",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P004-02/2",
+  "terminalAtUTC": "2026-11-25T21:48:05.250313+00:00",
+  "actualExit": 0,
+  "relatedWbs": [
+    "WBS-P004-02",
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "originCriteria": [
+    "WBS-P004-02:contract",
+    "WBS-P004-02:scope",
+    "WBS-P004-02:quality"
+  ],
+  "targetPortContractPartial": true,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "2db0a6d9ec5ead14218cf06abfc746f82b604b0bcc9ced5b68ab4a68ee52d379"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/707_Inbox検査summary_単体テスト仕様書.md",
+    "sha256": "3f6869b09a54620738af30ede69c273b95a641e565edb62fb5f09b0a82978d86"
+  },
+  "currentFixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+    "sha256": "564698b5a2ce9e44d817f951f5ac769e04aec7cf684c04f4f5def052547ffd8a"
+  },
+  "graphFixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+    "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+  },
+  "workerHelper": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/fixture/BoundedBatchFixtureWorkers.java",
+    "sha256": "27af9f82e79577ad6f7e8ba5ff8f855e32b3521bef1df00df58db3c9c81b84df"
+  },
+  "tests": [
+    {
+      "testId": "INSPPORT001",
+      "method": "literalSqlTimeoutAndUuidUtcBindingsReturnAllFourColumnsWithoutOwnershipMutation",
+      "expected": "literal4列/timeout5/UUIDUTCµs2bindと16操作順、3/2/1・completefalse",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT002",
+      "method": "trueAbsenceIsDifferentFromZeroKnownCountsAndBothCompleteValuesArePreserved",
+      "expected": "absenceOptionalと既知0を区別、completefalse/true・MAX/Max-1/1",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT003",
+      "method": "requiredNullCountBalanceAndDuplicateRowsCannotFabricateAValidSummary",
+      "expected": "必須4null/negative3/不整合balance/2rowは固定例外",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT004",
+      "method": "nullAndExplicitAutocommitWritableReadCommittedPrerequisitesRejectBeforeOwnedSql",
+      "expected": "nullconstructor/run/autoCommitfalse/readonlytrue/非RCはSQL取得0",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT005",
+      "method": "nullStatementOrResultSetIsCataloguedAndEveryAcquiredResourceStillCloses",
+      "expected": "nullstmt/rowは固定例外・取得したstmtだけclose",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT006",
+      "method": "everyProviderFaultPointIsReachedAndOnlySqlLosesPrivateDiagnostics",
+      "expected": "全16point×SQL-RTE-Error、実hit/原unknown同一性・SQLdiagnostic固定",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT007",
+      "method": "primaryAndBothCloseScopesHaveIndependentPriorityAndExactSafeSecondaryCounts",
+      "expected": "body×rowclose/stmtclose18組、safe secondaryの正確な個数/型/固定message",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45168",
+      "eligibleToUseAsOneNewRun": false
+    },
+    {
+      "testId": "INSPPORT008",
+      "method": "beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag",
+      "expected": "ownedworker内だけ前後割込み、post失敗でも両close、finallyflag消去/親flag不変",
+      "originalPass": "PG45168",
+      "currentApplicableRun": "PG45398",
+      "eligibleToUseAsOneNewRun": false
+    }
+  ],
+  "originalThirteen": {
+    "tests": 13,
+    "failed": 0,
+    "errors": 0,
+    "skips": 0,
+    "notRun": 0,
+    "testsAndIds": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45168-current-inspection-summary-fixture-thirteen/cases.json",
+      "sha256": "d47ab9b7f08a3dbba37ddb6d615f0b82bc810e8bfcfd4360a43ce18e03d2f47f"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45168-current-inspection-jdbc-thirteen/xml/TEST-junit-jupiter.xml",
+      "sha256": "30bfde61f337576939c8327b2d005030c5f434a9a857d7a9b2135c7ba43ad12a"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45168-current-inspection-jdbc-thirteen/unit.exec",
+      "sha256": "8442b9946b3521ce76381ed90a6d00e0ee1ad04b0a8eb0c18495094c0587e1be"
+    }
+  },
+  "changedWorkerIndependentResult": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45398-batch-maintenance-records-bounded-format-fixed/xml/TEST-junit-jupiter.xml",
+    "sha256": "a8b62ed397882617fd3aa303787ca54b1a7447c66a308784df108c3e49a94ba7"
+  },
+  "knownProductClassSha256": {
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+  },
+  "proofs": {
+    "PG44840": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+      "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+    },
+    "PG45168": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45168-current-inspection-summary-fixture-thirteen/manifest.json",
+      "sha256": "793353afec64ff1cb566af5b3bb6c8e4b4c0cb1465e09503f2e3e9eafb98022c"
+    },
+    "PG45398": {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45398-current-maintenance-and-batch-fixture-workers/manifest.json",
+      "sha256": "c63d8502ffcee7ae44fad178ada9cd02f6afaebc7898af1e53bf5fd4b4ee32af"
+    },
+    "PG35614": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35614-observation-value4-unfiltered-v1/manifest.json",
+      "sha256": "d39e5683088f43eb27f1e5b279eef8186748feb50399ec04955354ccf93861e6"
+    }
+  },
+  "oldRepositoryRaw": {
+    "INSTRUCTION": [
+      0,
+      226
+    ],
+    "BRANCH": [
+      0,
+      20
+    ],
+    "LINE": [
+      0,
+      59
+    ],
+    "COMPLEXITY": [
+      0,
+      16
+    ],
+    "METHOD": [
+      0,
+      6
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "changedInterruptRawForClass": {
+    "BRANCH": {
+      "covered": 10,
+      "missed": 10
+    },
+    "LINE": {
+      "covered": 43,
+      "missed": 14
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "valueFixtureClassSha256": {
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+  },
+  "valueFixtureCountersSeparate": true,
+  "noExecMerged": true,
+  "unresolved": [
+    "API InboxCleanup / A1-01.02 の当source実DBと原本・権限",
+    "現Inspectorと親所有の実経路",
+    "F02/F03正式終了",
+    "全対象全451"
+  ],
+  "newProductTests": 0,
+  "cumulativeProductTrialsGross": 2861,
+  "formalAcceptanceId": null
+}
