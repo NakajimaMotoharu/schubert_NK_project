@@ -16,3 +16,5 @@ SCM-005／RD171、SS352 §13、WBS-P018-02/2。Java 25とMaven 3.9.12、Maven Ce
 - evidence/01_PT/018_NK-OPS-001/evidence/PG42604-p01802-protocol-standard-software-inventory-v1/manifest.json
 - https://cyclonedx.org/docs/1.6/json/
 - https://github.com/CycloneDX/cyclonedx-maven-plugin/releases/tag/cyclonedx-maven-plugin-2.9.3
+
+PT-OPS-SBOM-032（BUG-3885／YKT-3001・3002）。合成Maven wrapperが受けた二変数を観測。MAVEN_ARGS／_JAVA_OPTIONSは未設定、無関係の合成tag、直接目標と出力契約は維持。旧1失敗、現20成功。実Maven・配布・署名は別。 [PG45506](evidence/PG45506-sbom-canonical-parent-process-environment/manifest.json)

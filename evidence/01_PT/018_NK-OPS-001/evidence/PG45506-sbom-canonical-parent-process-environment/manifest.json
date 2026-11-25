@@ -1,0 +1,79 @@
+{
+  "run": "PG45506",
+  "source": "e193e29f048f8a9a095fb8ffa99a98cb487795b5",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P018-02/2",
+  "terminalAtUTC": "2026-11-25T18:23:18.932604+00:00",
+  "actualExit": 0,
+  "newTest": "PT-OPS-SBOM-032",
+  "ordinaryToolTests": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "originalRed": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/before.json",
+    "sha256": "82cdf61d707ae0e78343f5cdb932a1f1ae47b9cc028a7b7904395a04a639c1fc"
+  },
+  "originalRedLog": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/before.log",
+    "sha256": "8792f2d392575a46cf53411da35d968c81984d5b3cc80b6dc599f9ab4b9e4006"
+  },
+  "oldBOM": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45438-current-sbom-regular-artifact-contract/manifest.json",
+    "sha256": "b038870489dd81aa1c3b375bdfb23e7d60aa3e99f8f85c9a0badefb7bd68fbc1"
+  },
+  "ordinary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/ordinary.log",
+    "sha256": "48f38d90c01c89f8154088ceb697a98ba62073ff991ceeda3de6f3666d3c18bb"
+  },
+  "static": {
+    "bash": {
+      "exit": 0,
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/bash.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "shellcheck": {
+      "exit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck",
+        "tools/quality/generate_maven_sbom.sh"
+      ],
+      "tool": {
+        "path": "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck",
+        "sha256": "311de5f94ecea1d98052ccdc94166591dce89e031e7357debd2f3213b547f7df"
+      },
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/shellcheck-verified-tool.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "initialShellcheckSetup": {
+    "exit": 127,
+    "reason": "初回は展開階層を省いたpathを指定。実ShellCheckは未起動。既検証SHAの組合せでこの検査だけを取得。",
+    "proof": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45506-sbom-fixed-parent-process-inputs/execution.json",
+      "sha256": "e173427545ab3cd141477cf45cc1bbb198b343d3ee86d1b9940cb849c1e1fd3d"
+    }
+  },
+  "exactLauncher": {
+    "path": "tools/quality/generate_maven_sbom.sh",
+    "sha256": "c3b86047884f53c980cbe5610a7173721101fb5c9ba0a7e80df8240e55ab2129"
+  },
+  "exactTest": {
+    "path": "tools/quality/tests/test_generate_maven_sbom.py",
+    "sha256": "9f3d84c31201ccdc988e82352ce4735e4f8ff091fe8b3afcb57bd936f027ea60"
+  },
+  "envContract": [
+    "do not pass MAVEN_ARGS",
+    "do not pass _JAVA_OPTIONS",
+    "preserve unrelated request tag and direct goal"
+  ],
+  "actualMavenOperations": 0,
+  "actualSignatureOrDistribution": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "command": "PYTHONPATH=tools/quality/tests:tools/quality python3 -B -m unittest -q test_generate_maven_sbom test_verify_maven_sbom"
+}
