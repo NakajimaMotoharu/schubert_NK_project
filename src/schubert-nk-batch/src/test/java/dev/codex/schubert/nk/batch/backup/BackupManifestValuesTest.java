@@ -32,6 +32,8 @@ import org.junit.jupiter.api.Test;
 
 /** BAK/BKO/UI251/SS341 6.4/343 5.3; SSC058/PG165; BAT178..185 in method order. */
 final class BackupManifestValuesTest {
+  private static final int SCHEMA_TOKEN_POSITION = 2;
+
   @Test
   void completeIdentityAndDirectoryName() {
     var value = manifest();
@@ -89,7 +91,7 @@ final class BackupManifestValuesTest {
   void versionTokenBoundaries() {
     for (int i = 0; i < 8; i++) {
       final int index = i;
-      if (i == 2) {
+      if (i == SCHEMA_TOKEN_POSITION) {
         for (String s : List.of("001", "999")) assertEquals(s, versions(i, s).schema());
         for (String s : List.of("", "000", "1", "01", "1000", "+01", "a01", "００１"))
           invalid(() -> versions(index, s));
