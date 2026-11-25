@@ -1,0 +1,643 @@
+{
+  "run": "PG45430",
+  "source": "0d8f02a7bb4e3f3a777d7bc82ce7865dd3239ebf",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G03.04",
+  "terminalAtUTC": "2026-11-25T16:49:51.130568+00:00",
+  "productTrials": 0,
+  "locallyTracedExistingProductMethods": 10,
+  "independentOriginalRuns": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45410-current-two-web-audit-worker-diagnostics/manifest.json",
+        "sha256": "9993cdaaf84a67c8b00bc2c1b6f9cca32c90390ecc24d61c06537bb6501b4742"
+      },
+      "source": "4f04cdfb50d9f83c8235416090e8bfe1523da70b",
+      "originalJUnit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45410-local-two-web-captured-audit/xml/TEST-junit-jupiter.xml",
+        "sha256": "69753657c02b88538b09e7b2ad99395bcc31001fa29bfd2b87718dacb4bba35c"
+      },
+      "actual": 2,
+      "product": 2,
+      "testHelper": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45412-current-web-outbox-borrowed-worker/manifest.json",
+        "sha256": "0c483dd271467bf90a5396e33a6236d1975fb0978064927348f4d30e3661f7ed"
+      },
+      "source": "8c45f9abec7104706a5899b1ce6c246b1f420982",
+      "originalJUnit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45412-local-web-outbox-borrowed-worker/xml/TEST-junit-jupiter.xml",
+        "sha256": "d93ae0ed59603fe90314de3fa18ea8f44d0d07022a3164d7773caf16b0554345"
+      },
+      "actual": 1,
+      "product": 1,
+      "testHelper": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/009_NK-MED-001/evidence/PG45416-current-media-logger-and-worker-boundaries/manifest.json",
+        "sha256": "0982628da0c62ae8a5431251a66a32bd3c74c42321e80ba48ffc20ff21f04fab"
+      },
+      "source": "c6df6c95006c570741ddfa9b54f09f212bef6853",
+      "originalJUnit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45416-local-media-audit-five-seconds/xml/TEST-junit-jupiter.xml",
+        "sha256": "0713810c9f7326d92b4ef50859e3f45d3c556ce41f477b6ba0fad0ca14a93693"
+      },
+      "actual": 5,
+      "product": 1,
+      "testHelper": 4
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45418-current-reply-registry-three-worker-trials/manifest.json",
+        "sha256": "e55fc5b0d79b92bd6bbe6f531f1c90cff67a7c0289515c18274dfee6a78e1dda"
+      },
+      "source": "f3aa5df1d87c304938fce28bff61982f1d82a437",
+      "originalJUnit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45418-local-reply-correlation-races/xml/TEST-junit-jupiter.xml",
+        "sha256": "579dae58bdc0b6050f7a6318422d6c5ebd202be49d95e8698f28b8cfdfa8f4b8"
+      },
+      "actual": 3,
+      "product": 3,
+      "testHelper": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45420-current-three-monitoring-ownership-races/manifest.json",
+        "sha256": "bbf6e1ae7ef2f40ff0281d9e39871b6ced5e99cbebe771dc0210d4544b9a05c8"
+      },
+      "source": "a8a4471b72bb9139957e41c279a9faa6b9f1da9b",
+      "originalJUnit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45420-web-outbox-observation-bounded/xml/TEST-junit-jupiter.xml",
+        "sha256": "944d9ad49078610228903e0a883d4d62b829741f7427e20608d4d127a332379d"
+      },
+      "actual": 3,
+      "product": 3,
+      "testHelper": 0
+    }
+  ],
+  "traceRows": [
+    {
+      "testId": "PT-WEB-100",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+        "sha256": "f41c76903f327a463377a204036cb038a5feca1f1168052c9f03d29285b82219"
+      },
+      "fixtureGitBlob": "2ae59bb6fb6565b602e6fd82e6d8ef9f29a487ca",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/015_NK-WEB-001/001_NK-WEB-001_単体テスト仕様書.md",
+          "sha256": "93d053042fbd6e6427de6934dcb7b943e5beb767112f3c2b4da71ffaad2a2f57"
+        },
+        {
+          "path": "evidence/01_PT/015_NK-WEB-001/054_WebSecurityAudit閉catalog単体仕様.md",
+          "sha256": "9b04439475b4333381b4cb9af01978d9feabd845b6e7705e80eb21fc85130959"
+        }
+      ],
+      "requirements": [
+        "AUT001..004",
+        "MON004"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+          "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+          "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+          "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "100並行の個別actor・request・IPと独立JSON",
+      "originRun": "PG45410",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "PT-WEB-AUDITPORT010",
+      "method": "concurrentRecordsKeepRequestIdsAndActorsSeparate",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.java",
+        "sha256": "9fe33599067434488f4d4f46e25e65dbe585cfb81a36757598a7ecb5330a19f0"
+      },
+      "fixtureGitBlob": "a7d5f45b4395c6c7311958fd0293df863e080417",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/015_NK-WEB-001/054_WebSecurityAudit閉catalog単体仕様.md",
+          "sha256": "9b04439475b4333381b4cb9af01978d9feabd845b6e7705e80eb21fc85130959"
+        }
+      ],
+      "requirements": [
+        "AUT001..004",
+        "MON004"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+          "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+          "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+          "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "固定8記録でrequest IDとactorを隔離",
+      "originRun": "PG45410",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "WLG-PORT-020",
+      "method": "port020SharedRepositoryHasIndependentConcurrentJdbcState",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+        "sha256": "8a6f8e75a04746f69fbecc5456ca1692bd598f2cf51c1b8162e4ed8717871cdc"
+      },
+      "fixtureGitBlob": "a903384da859fdbe19a442191c2619a5d108c01d",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/015_NK-WEB-001/046_WebLogOutbox全JDBCport_単体テスト仕様.md",
+          "sha256": "2b169ed63322a175f596cb466e19e4ba6af7aea32ca4197574d9f4e61f8902e8"
+        }
+      ],
+      "requirements": [
+        "QA-054"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+          "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+          "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+          "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+          "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "別workerのJDK代理JDBCで保存IDが独立",
+      "originRun": "PG45412",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "MED-AUDIT-008",
+      "method": "media008OwnConcurrentCallsHaveNoMutableEventRetention",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+        "sha256": "c04b5ffd2ad0b5382ed55cf1664d4dce7a96c8ffd5fbe70f0f6788eac8f1df2e"
+      },
+      "fixtureGitBlob": "61e23dcf3292b43566e70b5d6884b291b5448e79",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/009_NK-MED-001/012_WebMediaAudit全localJSON_単体テスト仕様.md",
+          "sha256": "6d5f3c93c6e6032044e1ed51f3b111d2433e2099b3be099c23a092bb15ea8cfc"
+        }
+      ],
+      "requirements": [
+        "FUN-005",
+        "FUN-006",
+        "FUN-007",
+        "MON"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+          "sha256": "f1f8d15f3abf0a44b583ecda98f975da393bd4d56f8fa5c241725a23f8af5b38",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+          "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "合成二イベントのactorとbyteを保持",
+      "originRun": "PG45416",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "PT-JMS-TERM-001",
+      "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+        "sha256": "afda3e185ec0d5f0a2e24d9e881e276c895772839c939d79889e3e59f4a8cce3"
+      },
+      "fixtureGitBlob": "2dc7f1e82fb3618c5e0e6f591871b63c2db83424",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2391_P005応答終端競合_単体テスト仕様書.md",
+          "sha256": "0f04e3835d7d014727c22bd47c3c7db966302404dca4b4ed1661aedfd3edd3f6"
+        }
+      ],
+      "requirements": [
+        "MQ-004",
+        "MQ-005"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/200_UI/210_アーキテクチャ/212_コンポーネント・接続設計.md",
+          "sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+          "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+          "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+          "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "64反復で完了・取消・満期の終端一勝",
+      "originRun": "PG45418",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "PT-JMS-TERM-002",
+      "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+        "sha256": "afda3e185ec0d5f0a2e24d9e881e276c895772839c939d79889e3e59f4a8cce3"
+      },
+      "fixtureGitBlob": "2dc7f1e82fb3618c5e0e6f591871b63c2db83424",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2391_P005応答終端競合_単体テスト仕様書.md",
+          "sha256": "0f04e3835d7d014727c22bd47c3c7db966302404dca4b4ed1661aedfd3edd3f6"
+        }
+      ],
+      "requirements": [
+        "MQ-004",
+        "MQ-005"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/200_UI/210_アーキテクチャ/212_コンポーネント・接続設計.md",
+          "sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+          "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+          "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+          "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "20件同時登録のうち2件と枠の回収",
+      "originRun": "PG45418",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "PT-JMS-008-REGISTRY-05",
+      "method": "oneOfOneHundredSimultaneousResponsesWins",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+        "sha256": "d114ef8fbe8b72af309e3deb4a4a21410cea4925ba21c216c0d1e07801f3fff3"
+      },
+      "fixtureGitBlob": "482686877f021baa9b85311eef65f59ab7480989",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2391_P005応答終端競合_単体テスト仕様書.md",
+          "sha256": "0f04e3835d7d014727c22bd47c3c7db966302404dca4b4ed1661aedfd3edd3f6"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2635_WebMemoryCoordinator元whole十七件_単体テスト仕様書.md",
+          "sha256": "d3ea80eff0ddf9cbb122be6418fcd3e2818720a5791b47b19875dbfb74910f2d"
+        }
+      ],
+      "requirements": [
+        "MQ-004",
+        "MQ-005"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/200_UI/210_アーキテクチャ/212_コンポーネント・接続設計.md",
+          "sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+          "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+          "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+          "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "合成100応答の一勝、late99",
+      "originRun": "PG45418",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "WEBOBXCONN006",
+      "method": "webObxConn006OwnedContenderReallyBlocksUntilReadonlyAcquisitionAndPublicationFinish",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+        "sha256": "3ffc0c72bea0512fd1125065d67ca31623a7f9346653d9d75168def927d7d2d4"
+      },
+      "fixtureGitBlob": "87a2a5b764adc455dfee243c2217378122055d96",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/1721_WebOutbox観測経路_単体テスト仕様書.md",
+          "sha256": "13c19c811ce3ceb17157a82bed2085b4f64d25053e59801bae241f154800a980"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/4682_WebOutbox借用読取有限並行_単体テスト仕様.md",
+          "sha256": "5effa318f2c142d1e52617ba3374faa9c5467a450791f5b74b71d0316ca1079f"
+        }
+      ],
+      "requirements": [
+        "MON003",
+        "MON005",
+        "MON010..013"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+          "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+          "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "先行ownerのclose前に後続のSQL開始・観測公開がない",
+      "originRun": "PG45420",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "WEBOBXCONN007",
+      "method": "webObxConn007ParallelIndependentConnectionResultsMatchPrecomputedOwnerVectors",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+        "sha256": "3ffc0c72bea0512fd1125065d67ca31623a7f9346653d9d75168def927d7d2d4"
+      },
+      "fixtureGitBlob": "87a2a5b764adc455dfee243c2217378122055d96",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/1721_WebOutbox観測経路_単体テスト仕様書.md",
+          "sha256": "13c19c811ce3ceb17157a82bed2085b4f64d25053e59801bae241f154800a980"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/4682_WebOutbox借用読取有限並行_単体テスト仕様.md",
+          "sha256": "5effa318f2c142d1e52617ba3374faa9c5467a450791f5b74b71d0316ca1079f"
+        }
+      ],
+      "requirements": [
+        "MON003",
+        "MON005",
+        "MON010..013"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+          "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+          "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "64回別ownerの既知値と未知の固定順",
+      "originRun": "PG45420",
+      "checkstyleFindings": 0
+    },
+    {
+      "testId": "WEBOBXDB010",
+      "method": "webObxDb010ParallelIndependentConnectionsAndInstantsNeverShareMutableRepositoryState",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+        "sha256": "cc57bc31a47658551cf7f109e648e8d6b3bfcb395eb99b8dbacfc9ba40e849bf"
+      },
+      "fixtureGitBlob": "1a50f5d17459fd9497f61ea63a7e9f7358281d31",
+      "programSpecifications": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/1721_WebOutbox観測経路_単体テスト仕様書.md",
+          "sha256": "13c19c811ce3ceb17157a82bed2085b4f64d25053e59801bae241f154800a980"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/4682_WebOutbox借用読取有限並行_単体テスト仕様.md",
+          "sha256": "5effa318f2c142d1e52617ba3374faa9c5467a450791f5b74b71d0316ca1079f"
+        }
+      ],
+      "requirements": [
+        "MON003",
+        "MON005",
+        "MON010..013"
+      ],
+      "approvedDocuments": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+          "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+          "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "independentOracle": "別Connection・別asOfとquery/close各一回",
+      "originRun": "PG45420",
+      "checkstyleFindings": 0
+    }
+  ],
+  "sourceStyleProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45428-current-recent-nine-checkstyle-two-spotless/manifest.json",
+    "sha256": "3027120853631a3fc4791167b71260728f1d161aaf4ae551ed7fa0fc7d8408d9"
+  },
+  "previousDistinctScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45392-current-nine-web-fixture-trace/manifest.json",
+    "sha256": "c64904f3f5f06e73ea0f17dd7e4eeac45281fdfd2666ab5a195669e3e62d2b4f"
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0,
+  "outstanding": [
+    "G03.04全画面及びJS・operation token・Logoutの実経路",
+    "F03同固定source/runの六製品451及び担当判定",
+    "Web正規JARと実HTTP・JMS・DBの終了依存"
+  ],
+  "stagedPinCorrection": {
+    "previousEventId": "PGPT-20261008-10964",
+    "previousEvidenceSha256": "21793d326b5330ea68c72c2c9bb9a83644afc5f56c998450748e8b99d14bec8f",
+    "change": "approved design pins now explicitly identify the origin/main commit; no execution, verdict, input or estimate changed"
+  }
+}
