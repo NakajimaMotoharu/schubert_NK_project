@@ -262,18 +262,21 @@ final class QuestionSubmitRequestPortTest {
                 assertThrows(IllegalStateException.class, request::copyQuestion);
                 return copy;
               });
-      var closer =
-          workers.submit(
-              () -> {
-                if (!copied.await(10, TimeUnit.SECONDS))
-                  throw new AssertionError("owned copy worker deadline");
-                request.close();
-                retired.countDown();
-                return true;
-              });
+      var closer = workers.submit(() -> closeAfterCopy(request, copied, retired));
       assertEquals(true, closer.get(10, TimeUnit.SECONDS));
       assertArrayEquals(BODY.toCharArray(), reader.get(10, TimeUnit.SECONDS));
       assertThrows(IllegalStateException.class, request::header);
     }
+  }
+
+  private static boolean closeAfterCopy(
+      QuestionSubmitRequest request, CountDownLatch copied, CountDownLatch retired)
+      throws InterruptedException {
+    if (!copied.await(10, TimeUnit.SECONDS)) {
+      throw new AssertionError("owned copy worker deadline");
+    }
+    request.close();
+    retired.countDown();
+    return true;
   }
 }
