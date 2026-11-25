@@ -20,3 +20,5 @@ NPE契約=normal六Main/@NullMarked/NullAway0、constructor invariant・全nulln
 実command=input/001_owned_media_audit_unit.py prepare/static/run/post media_audit、新unused slot。normal19630六Main827/NullAway・19632六SBは全Main/POM/JAR同hash後に再利用、不要なrebuild/既成功Test再演なし。全8@Test/0FESaborted、normal全物理2/CRC/単一exec/session/line-method-class-branch100、enumbranch0は標準N/A/手除外0・合成0・held四probe0。raw静的/個別適用性/抑制0を残す。013結果/publicmanifestへOS/JDK/tool/branch/source/run/時刻/command/exit/XML/期待-実際/coverage/hash/BUGを記録する。
 
 未受入=実Media配信/ファイル権限/MIME実体/hash/context/authenticator/ActualBrowser/Root/VM/native/CHR/global451/IT-ST、親WBSとfirstV終了依存は別。正式1964/53や工数率へ新加算しない。
+
+MED-AUDIT-008（BUG-3866／YKT-2997）は既2worker・各Future 5秒・終了5秒と、二合成eventの独立期待を保持する。補助の明示5秒はPT-WEB-VIEW-WORKER004で非正値・順序と共に観測し、既定10秒と中断の001～003も現補助で確認する。実Web/Fileやログ配送とは別。PG45416参照。

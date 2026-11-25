@@ -13,9 +13,18 @@ import java.util.concurrent.TimeUnit;
 /** Finite cleanup for local Web test workers. See BUG-3846 and YKT-2997. */
 public final class ViewFixtureWorkers implements AutoCloseable {
   private final ExecutorService executor;
+  private final long terminationSeconds;
 
   public ViewFixtureWorkers(ExecutorService executor) {
+    this(executor, 10);
+  }
+
+  public ViewFixtureWorkers(ExecutorService executor, long terminationSeconds) {
     this.executor = Objects.requireNonNull(executor, "fixture executor");
+    if (terminationSeconds <= 0) {
+      throw new IllegalArgumentException("fixture worker termination must be bounded and positive");
+    }
+    this.terminationSeconds = terminationSeconds;
   }
 
   public <T> Future<T> submit(Callable<T> task) {
@@ -37,7 +46,8 @@ public final class ViewFixtureWorkers implements AutoCloseable {
     executor.shutdownNow();
     try {
       assertTrue(
-          executor.awaitTermination(10, TimeUnit.SECONDS), "view fixture workers did not stop");
+          executor.awaitTermination(terminationSeconds, TimeUnit.SECONDS),
+          "view fixture workers did not stop");
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException("Web fixture worker termination interrupted", interrupted);

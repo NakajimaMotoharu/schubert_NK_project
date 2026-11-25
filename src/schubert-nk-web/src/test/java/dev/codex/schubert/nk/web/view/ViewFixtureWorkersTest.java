@@ -87,6 +87,18 @@ final class ViewFixtureWorkersTest {
     }
   }
 
+  @Test // PT-WEB-VIEW-WORKER004
+  void explicitFiveSecondBoundIsUsedAndNonpositiveBoundsAreRejected()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    var executor = new ObservedExecutor(true, null);
+    try (var workers = new ViewFixtureWorkers(executor, 5)) {
+      assertEquals(5, workers.submit(() -> 5).get(1, TimeUnit.SECONDS));
+    }
+    assertThrows(IllegalArgumentException.class, () -> new ViewFixtureWorkers(executor, 0));
+    assertThrows(IllegalArgumentException.class, () -> new ViewFixtureWorkers(executor, -1));
+    assertEquals(List.of("execute", "cancel", "5 SECONDS"), executor.calls);
+  }
+
   private static final class ObservedExecutor extends AbstractExecutorService {
     private final List<String> calls = new ArrayList<>();
     private final boolean finished;

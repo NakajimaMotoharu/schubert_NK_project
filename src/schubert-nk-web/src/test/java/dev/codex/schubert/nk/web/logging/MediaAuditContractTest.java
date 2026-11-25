@@ -17,6 +17,7 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.logging.WebMediaAudit.Failure;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Clock;
@@ -345,8 +346,8 @@ final class MediaAuditContractTest {
   void media008OwnConcurrentCallsHaveNoMutableEventRetention() throws Exception {
     var logger = new CapturingLogger();
     var audit = new WebMediaAudit(logger, CLOCK, APP, CONFIG);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    // BUG-3177 bounds worker termination independently of the Future waits.
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2), 5)) {
       var first =
           workers.submit(
               () ->
@@ -369,10 +370,6 @@ final class MediaAuditContractTest {
                       Failure.IO));
       first.get(5, TimeUnit.SECONDS);
       second.get(5, TimeUnit.SECONDS);
-    } finally {
-      // BUG3177: Future deadlines must also bound the owned executor cleanup.
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(2, logger.callCount.get());
     assertEquals(2, logger.entries.size());
