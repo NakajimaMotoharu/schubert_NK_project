@@ -21,3 +21,5 @@ PG22080のpreflightではApiStopBudgetの符号折返しは既差分演算/既01
 ## 停止公開中の後続待機を独立に観測
 
 BUG-3816／YKT-2974。PT-OPS-API-STOP019の後続workerが予算ownerを実際に待ったことを自己所有JDK threadのowner IDで確認する。固定時間に未完だけを期待した旧判定は未着手も受理する。先行時計が保持中に停止通知true、時計読取1、解放後の既60秒と総2回、以後停止通知trueを維持する。外部接続・停止操作なし。
+
+正規Test IDは既表と同じ APISTOP019。先行表の50ms Future判定は修正前の記録であり、現試験は開始合図と先行owner IDを待機の根拠とする。

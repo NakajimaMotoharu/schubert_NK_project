@@ -1,0 +1,129 @@
+{
+  "source": "77f5ed24b7491b72324e497c4db5f5d4896983de",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "run": "PG44992",
+  "wbs": "WBS-P018-05/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T06:38:34.201199+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3816",
+  "horizontal": "YKT-2974",
+  "testId": "APISTOP019",
+  "counterexampleUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/counterexample-terminal.json",
+    "sha256": "80df44c0d6782cb8e7731fb410c851a4eb3ae0b10ef55bd6bf7b3b20c9e53d21"
+  },
+  "mainExact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg22090-api-stop-state-twenty-unit-v1/component/dev/codex/schubert/nk/api/bootstrap/ApiStopBudget.class",
+    "sha256": "ac8cd8450bf1b6ccfc4a7f92d9ea3dc3cb433313e5869f30eeb121fb0d2bb480"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+    "sha256": "cb709e13b6e4b07b7b46e74fe241545348f91b20cabd1dcd9571e91eb60baf1b"
+  },
+  "old": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22090-api-stop-state-twenty-unit-v1/manifest.json",
+    "sha256": "95faef01085b82bf04edbb5ed8e34df304c98684e61c672b00b9245d6cc215ee"
+  },
+  "jobBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/begin.json",
+    "sha256": "3bb43e2122d1d397f2e6370af1d4c385cd7f635d3b1787a0a6a54b7a46638a1a"
+  },
+  "jobTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/terminal.json",
+    "sha256": "1b0dc1d26d849199bf71a476e619cefa2eed525a65e080e8e9d655724268f332"
+  },
+  "qualityTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/quality-terminal.json",
+    "sha256": "7cb8fd5e8ae1238ac7509e6a9ba12e224d12baa6f45ea756b80ab32eb185ab72"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/reports/TEST-junit-jupiter.xml",
+    "sha256": "3073c6908ec94ba63b72e2cefef2d45ec8b5292739a361061959d3af93c08f9e"
+  },
+  "currentCases": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actualProductTrials": 20,
+  "newTestIds": 0,
+  "newVerifiedTestOracle": 1,
+  "standardReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44992-api-stop-known-reader/coverage.standard.xml",
+    "sha256": "1024e740e85573b6787fd7f742ec2c50b33c89a984c607e04e50e056828647ed"
+  },
+  "standardCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 117
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 26
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 12
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "unfilteredReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44992-api-stop-budget-observed-owner/coverage.unfiltered.tsv",
+    "sha256": "63681547375804205f40658ca0fb59cd65ee02b7c86b1d7eb14f9416784e02d1"
+  },
+  "unfilteredCounterDisposition": [
+    "two uncovered compiler duplicates of the finally guard at time:63 are retained",
+    "verified branches12 are not reported as unfiltered100"
+  ],
+  "sourceChecks": {
+    "spotless": [
+      "[INFO] Spotless.Java is keeping 1 files clean - 0 needs changes to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean"
+    ],
+    "checkstyle": 0,
+    "fixturePmdExit": 4,
+    "fixturePmdRawByRule": {
+      "AvoidUsingVolatile": 2,
+      "DoNotUseThreads": 11,
+      "NullAssignment": 5
+    },
+    "pmdTechnicalClassification": {
+      "AvoidUsingVolatile": "two shared test-fixture controls, neither drives production runtime",
+      "DoNotUseThreads": "eleven owned tester thread observations or bounded finite workers",
+      "NullAssignment": "five synthetic fault removal transitions; independent negative tests"
+    },
+    "technicalScopeOnly": true
+  },
+  "horizontalEquivalentAlreadyProved": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBindingTest.java",
+      "sha256": "4c365915592d16a935cf141ca371c6a947264f6ddf819b00286847f46a643d7c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBindingTest.java",
+      "sha256": "e2f67b747cdc7bb287c88ee862a7821138792749e9badaf6a2083ab8d08d9f9f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sha256": "1f93771700b7243bb3f2d0eef683ccae3b8f5c4b19e031265f49af2399c15cb4"
+    }
+  ],
+  "actualServiceOrExternal": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "cumulativeLocalProductTrials": 1102
+}
