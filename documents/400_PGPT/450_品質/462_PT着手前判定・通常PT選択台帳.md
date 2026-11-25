@@ -1,5 +1,13 @@
 # PT着手前判定・通常PT選択台帳
 
+## 保存点5354の現候補と正式判定
+
+Core `cf08e414be9f877b851a387704350d5e7c980209`。元190項目の正式受入 **16/190（8.4%）**、再開後の正式追加0、重点0/5、指定0/12、成立した元行価格0pp。歴史認定は1,964 PT／53領域、工数率は未較正。再開後の局所製品試行は延べ **2,212件**。1,924から追加288試行のうち、選択範囲自体が成功したのは226試行。Expiryの旧入力31と、現入力の誤った例外型で2件失敗した選択31は不採用。試験未起動のコンパイルだけは試行数に含めない。 [Expiryの三結果](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG45258-current-expiry-31-verified-test-input/manifest.json) [移行の現135件](../../../evidence/01_PT/019_NK-MIG-001/evidence/PG45270-six-migration-bounded-worker-fixtures/manifest.json)
+
+F02の正規包装4/6、1,116物理、API/Webの処理済み資源32/34、SYS13の個別受入0。正規Batch JAR中の BackupFailureSnapshot のSHAを当測定と再照合した。整形後18件と追加2件が成功し、対象L91/M14/C1/B68は全到達。PMD生12の担当適用は未判定。 [正規Batchと試験](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json) [PMD12件の個別根拠](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG45188-current-backup-pmd-twelve-site-handoff/manifest.json)
+
+F03は型付きAPI193/286・Web197/262、正規Spotless Main1028/1033・Test1167/1199。直近のテスト差分13ファイルは全部を元コマンドの終了0とSHAで再照合し、追加2を分母・検査済み件数へそれぞれ反映。六製品451、PMD適用、保留32とRoot11、署名は残る。P004-03のA1-15.01〜.05を局所証拠と実所有条件に分け、Batchの当11と13、Webの当12を関連範囲へ接続した。 [P004-03の対象別の不足](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45254-current-p004-03-ownership-readiness-boundary/manifest.json) [Batchの資源所有](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG45268-batch-bounded-jdbc-worker-two-cohorts/manifest.json)
+
 ## PTPRE-040 — PT_DEFAULT：S3b前半の有限自己所有保持fixture25/13
 
 1304/1306、SS316/PG-D466、元6162全851/1667・六strict compile/静的0（実PT0）。source保存後src/build/Current不変更を確認し、6164新only25/13を一回。自己所有proxy/未接続locator・既synthetic credential/isolated loopback component・有限自己所有JVMだけ、実VM/current/Root/既DBBackup/鍵/failed-cohort/intent/permit操作0。子watchdog20秒・直接Process handleのbounded回収・外側marker未帰還と固定診断を独立literalで確認、子143をnative資格にしない。19子観測はJUnit件数に加算0、有限policyは例外throwを維持し固定native非復帰と別判定。全六gatesと原結果/部分counterを保存、全分岐は後続関連群とまとめた新sourceで確認し未測定を100補完0。拒否PTの再試行/境界探索/代替扱い0、Main/Test固定は元真正終端まで。
