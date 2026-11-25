@@ -1,0 +1,224 @@
+{
+  "run": "PG45434",
+  "source": "ec8b1b02749cb8a14f56101f5a53e977beca426a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G05",
+  "terminalAtUTC": "2026-11-25T16:53:30.852495+00:00",
+  "originMain": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "feedbackRows": [
+    {
+      "qa": "QA-054",
+      "answerState": "承認済",
+      "designCommit": "a6f7a91aa28e1bcb5afc48708cfc7715f77b72a6",
+      "publicLedgers": [
+        {
+          "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+          "sha256": "953a1aac48fd97ba5ecc65b2a3735864004abcff112faaaf03f6770173850bcc",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+          "sha256": "e85b74564f804d775841dd144906c566852be0594032cf0ddf2add21f9759979",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+          "sha256": "e4e6db2bbc8c21154423fbf931f7eb5c6c4cb0a666e3854fbfa5f253f6032266",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "approvedSpecs": [
+        {
+          "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+          "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+          "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+          "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "sourceQualification": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45352-qa054-approved-contract-and-local-layer-lineage/manifest.json",
+          "sha256": "f0a4e8ec9efd22323a947b92adb156d51f4e00379620d9ef9cbda7f90093c8e7"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45430-current-web-test-specification-trace/manifest.json",
+          "sha256": "8f7b06f15ed8e38fba42d4c90a2dc6a95be805a313b440009ab6b5304ce94b2d"
+        }
+      ],
+      "protocolAlreadyProven": 13,
+      "missing": [
+        "API初回LOG_SEARCHEDの当候補JDBC transaction・再送同一性",
+        "実MENU_VIEWED outbox→JMS→永続化・実L01",
+        "同候補451"
+      ]
+    },
+    {
+      "qa": "QA-055",
+      "answerState": "固定文維持の承認済",
+      "designCommit": "74b1afa74587157162eaaf7ade8d475de9e39006",
+      "publicLedgers": [
+        {
+          "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+          "sha256": "953a1aac48fd97ba5ecc65b2a3735864004abcff112faaaf03f6770173850bcc",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+          "sha256": "e85b74564f804d775841dd144906c566852be0594032cf0ddf2add21f9759979",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+          "sha256": "e4e6db2bbc8c21154423fbf931f7eb5c6c4cb0a666e3854fbfa5f253f6032266",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "approvedSpecs": [
+        {
+          "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+          "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+          "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "sourceQualification": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45350-qa055-local-output-dependency-audit/manifest.json",
+          "sha256": "c207ed40266a2e0da3f5d589cd9013104078eb126c6be6bfb96993dabed7f045"
+        }
+      ],
+      "approvedIndependentMockHeaders": [
+        "0",
+        "1",
+        "899",
+        "900"
+      ],
+      "missing": [
+        "実Browserの固定文／同じHTTPでRetry-After",
+        "実認証と該当CHR・BUG2340/YKT2085の終了条件"
+      ]
+    },
+    {
+      "qa": "QA-061",
+      "answerState": "配布条件・担当ともに未決との回答済",
+      "developmentLedger": {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "bea8dc023a367e42ec61abb261ade24e53bd5ce5b2b5c09202341bfcec680900"
+      },
+      "approvedSpecs": [
+        {
+          "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+          "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+          "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "inspectionOnly": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43228-p01802-retained-license-declarations-v1/manifest.json",
+          "sha256": "fb22ded00242dfd65b208255ad6f4cf344226644ca78a0738dfe9095b6dedebe"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45404-current-sbom-artifact-streams-separated/manifest.json",
+          "sha256": "13d3e7871333d64c1aa174d6c08b8acb857ea3dca2a4133213af2b9db157a417"
+        }
+      ],
+      "externalDeclared": 69,
+      "missing": [
+        "配布条件と担当、承認基準・法務/配布判定",
+        "P018-02の正式同候補"
+      ]
+    },
+    {
+      "qa": "QA-056",
+      "answerState": "当該classfileの生成・読取の確認待ち",
+      "publicLedger": {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "953a1aac48fd97ba5ecc65b2a3735864004abcff112faaaf03f6770173850bcc",
+        "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+      },
+      "developmentLedger": {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "bea8dc023a367e42ec61abb261ade24e53bd5ce5b2b5c09202341bfcec680900"
+      },
+      "missing": [
+        "当該範囲の許可・F02/F03の実成果と担当判断"
+      ]
+    },
+    {
+      "qa": "QA-062",
+      "answerState": "LF基準の確認待ち",
+      "developmentLedger": {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "bea8dc023a367e42ec61abb261ade24e53bd5ce5b2b5c09202341bfcec680900"
+      },
+      "missing": [
+        "通常JARの正式判定・改行ルールの判断"
+      ]
+    }
+  ],
+  "verifiedPublishedDesignCount": 2,
+  "answeredWithOutstandingBusinessDecision": 1,
+  "heldQuestionCountInThisScope": 2,
+  "newTrials": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "newFormal": 0
+}
