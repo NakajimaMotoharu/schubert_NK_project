@@ -1,0 +1,362 @@
+[
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 432,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this ExecutorService object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 432,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 437,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 448,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 449,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 669,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 693,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterColumnVerifierTest.java",
+    "line": 733,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 450,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this ExecutorService object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 450,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 455,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 466,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 467,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 599,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 623,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterConstraintVerifierTest.java",
+    "line": 663,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 448,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this ExecutorService object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 448,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 453,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 464,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 465,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 850,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 874,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterContentVerifierTest.java",
+    "line": 914,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 125,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this Connection object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 384,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this ExecutorService object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 384,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 389,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 400,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 401,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 441,
+    "rule": "CompareObjectsWithEquals",
+    "raw": "Use equals() to compare object references.",
+    "technicalContext": "元例外と後始末例外の同一インスタンスを比較する負条件。equalsと同一性は別契約。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 442,
+    "rule": "CompareObjectsWithEquals",
+    "raw": "Use equals() to compare object references.",
+    "technicalContext": "元例外と後始末例外の同一インスタンスを比較する負条件。equalsと同一性は別契約。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 566,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 595,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 650,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterFinalizerTest.java",
+    "line": 689,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 111,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this Connection object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 354,
+    "rule": "CloseResource",
+    "raw": "Ensure that resources like this ExecutorService object are closed after use",
+    "technicalContext": "対象fixtureのbridgeまたはworker所有と後条件を維持。TWR await置換は適用性の別判定。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 354,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 359,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 368,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 369,
+    "rule": "DoNotUseThreads",
+    "raw": "To be compliant to J2EE, a webapp should not use any thread.",
+    "technicalContext": "合成競合を有限待機で観測する自己所有スレッド。実サービスやアプリ容器とは別の適用判断。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 517,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 539,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  },
+  {
+    "file": "MigrationMasterReferenceVerifierTest.java",
+    "line": 571,
+    "rule": "UseProperClassLoader",
+    "raw": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+    "technicalContext": "java.sql 型に対するJDK動的代理。固定したinterfaceのclass loaderを使用。",
+    "approvedApplicability": null
+  }
+]
