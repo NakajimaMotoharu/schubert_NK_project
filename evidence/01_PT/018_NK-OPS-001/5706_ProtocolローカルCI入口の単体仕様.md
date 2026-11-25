@@ -10,3 +10,5 @@ NK-OPS-001、WBS-P018-02/2、SCM-005（RD171）、UI201/243/261、SS352 §13・3
 | PT-OPS-CI-PRO004 | Protocolのpom.xml欠落 | 終了2、Mavenの呼出0 |
 
 現入口は4件の局所契約、Bash構文・ShellCheckを通過。実Wrapperのversion probeでMaven 3.9.12／JDK 25.0.4を確認。既存PG42624のProtocol 171件と同単一exec、PG42664のPOM候補のProtocol依存・包装照合、PG42666の依存収束を参照する。今回、実Wrapperから入口の全 `verify` を再演していない。受入には現候補でCIサービスの有効化後に取得する個別の実行証跡が必要。
+
+PT-OPS-CI-PRO007（BUG-3870／YKT-3002）。合成キャッシュと代替MavenにJVM文字コード既定値を与える。固定のProtocol検証入口が当変数を継承せず、元Maven引数と終了を維持する。製品・実Mavenは起動しない。

@@ -19,7 +19,8 @@ if [[ ! -d "$1" ]]; then
 fi
 
 repository=$(CDPATH='' cd -- "$1" && pwd -P)
-unset MAVEN_ARGS
+# Preserve the fixed UTF-8 test JVM even when the caller has HotSpot defaults.
+unset MAVEN_ARGS _JAVA_OPTIONS
 exec ./mvnw --offline --batch-mode --strict-checksums --no-transfer-progress \
   "-Dmaven.repo.local=$repository" -DskipTests=false -Dmaven.test.skip=false \
   -Dmaven.test.failure.ignore=false -DfailIfNoTests=true -pl "$module" verify

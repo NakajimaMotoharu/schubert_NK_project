@@ -68,6 +68,7 @@ class VerifyRunnerTest(unittest.TestCase):
             "set -eu\n"
             'pwd -P >> "$PGPT_FIXTURE_STATE/builds"\n'
             'printf "%s\\n" "${MAVEN_ARGS-unset}" > "$PGPT_FIXTURE_STATE/maven-args"\n'
+            'printf "%s\\n" "${_JAVA_OPTIONS-unset}" > "$PGPT_FIXTURE_STATE/java-options"\n'
             'if [ -e "$PGPT_FIXTURE_STATE/change-head" ]; then\n'
             '  git commit -q --allow-empty -m "Different source during build"\n'
             "fi\n"
@@ -243,6 +244,13 @@ class VerifyRunnerTest(unittest.TestCase):
         result = self.invoke()
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertEqual("unset\n", (self.state / "maven-args").read_text())
+        self.assertEqual("0", self.marker("exit").read_text().strip())
+
+    def test_013_full_verification_does_not_inherit_hotspot_defaults(self):
+        self.env["_JAVA_OPTIONS"] = "-Dfile.encoding=US-ASCII"
+        result = self.invoke()
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("unset\n", (self.state / "java-options").read_text())
         self.assertEqual("0", self.marker("exit").read_text().strip())
 
 

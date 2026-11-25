@@ -1,9 +1,10 @@
-"""Local Maven command contract for PT-OPS-CI-PRO001..004 and PT-OPS-CI-PRO006."""
+"""Local Maven command contract for PT-OPS-CI-PRO001..004 and PT-OPS-CI-PRO006..007."""
 import os
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "verify_protocol_ci.sh"
@@ -25,6 +26,7 @@ class VerifyProtocolCiTest(unittest.TestCase):
             '#!/usr/bin/env bash\n'
             'printf "%s\\0" "$@" > observed.args\n'
             'printf "%s" "${MAVEN_ARGS-}" > inherited.args\n'
+            'printf "%s" "${_JAVA_OPTIONS-unset}" > inherited.java-options\n'
             'exit "${FIXTURE_MAVEN_EXIT:-0}"\n',
             encoding="utf-8",
         )
@@ -86,3 +88,9 @@ class VerifyProtocolCiTest(unittest.TestCase):
         args = (self.root / "observed.args").read_bytes().split(b"\0")
         repositories = [arg for arg in args if arg.startswith(b"-Dmaven.repo.local=")]
         self.assertEqual([f"-Dmaven.repo.local={self.repository}".encode()], repositories)
+
+    def test_ci_pro007_protocol_verification_does_not_inherit_hotspot_defaults(self):
+        with patch.dict(os.environ, {"_JAVA_OPTIONS": "-Dfile.encoding=US-ASCII"}):
+            result = self.invoke(self.repository)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(b"unset", (self.root / "inherited.java-options").read_bytes())
