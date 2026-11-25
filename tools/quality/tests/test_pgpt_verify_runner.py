@@ -67,6 +67,7 @@ class VerifyRunnerTest(unittest.TestCase):
             "#!/bin/sh\n"
             "set -eu\n"
             'pwd -P >> "$PGPT_FIXTURE_STATE/builds"\n'
+            'printf "%s\\n" "${MAVEN_ARGS-unset}" > "$PGPT_FIXTURE_STATE/maven-args"\n'
             'if [ -e "$PGPT_FIXTURE_STATE/change-head" ]; then\n'
             '  git commit -q --allow-empty -m "Different source during build"\n'
             "fi\n"
@@ -236,6 +237,13 @@ class VerifyRunnerTest(unittest.TestCase):
         self.assertEqual(source, self.marker("commit").read_text().strip())
         self.assertTrue((self.state / "collector").is_file())
         self.assertEqual("local generated output\n", (self.repo / "target/result.txt").read_text())
+
+    def test_012_full_verification_does_not_inherit_caller_maven_args(self):
+        self.env["MAVEN_ARGS"] = "-DfixtureMarker=caller-default"
+        result = self.invoke()
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("unset\n", (self.state / "maven-args").read_text())
+        self.assertEqual("0", self.marker("exit").read_text().strip())
 
 
 if __name__ == "__main__":
