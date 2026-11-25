@@ -1,0 +1,68 @@
+{
+  "run": "PG45508",
+  "source": "c7819c521f18a910a95053314fd2f2cb79096daa",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T18:24:23.505505+00:00",
+  "actualExit": 0,
+  "checkstyle": 0,
+  "checkstyleSelected": 3,
+  "checkstyleTool": {
+    "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+    "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+  },
+  "checkstyleConfig": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+    "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "plan": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/plan.json",
+    "sha256": "4bcc021bd564b82951019b2f6f28b4a27ffa2ade1b14f17d801753b394210743"
+  },
+  "exactInputGitBlobs": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java": "9a59446abd6a6bbbb87d051584ee04a413641adf",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java": "90ec717300f9e6238a5bbf05d06682e35dc30184",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java": "31bc7b2b3d18610451b830046e93a66076f52c49"
+  },
+  "guard": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/guard.json",
+    "sha256": "0e8a55b1292e356bfb11741f0e484d5ebd831a6d66ed0537f121ed7739cee9c9"
+  },
+  "report": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/checkstyle.xml",
+    "sha256": "f9e74724f855802dd322bd3cfe04806c4b8594184c46a58659b062e145c73ea8"
+  },
+  "log": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/checkstyle.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+    "-c",
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+    "-f",
+    "xml",
+    "-o",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/checkstyle.xml",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/DbQueryDurationMetricRecorderTest.java",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/MqProcessingDurationMetricRecorderTest.java",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45508-current-three-fixture-checkstyle/MqMessageMetricRecorderTest.java"
+  ],
+  "priorScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39402-bug3278-four-api-recorders-prestyle-v1/manifest.json",
+    "sha256": "a048b03480064a5afcf0c6b3204ca46658f8bef790e9c511efe9a890f0c78ea4"
+  },
+  "sameCandidateLocalPT": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json",
+    "sha256": "ad1c6d9a8a12bfdafa4eeba5a033e41edb7b03a00aa2d8b776379d9748f5fe39"
+  },
+  "newProductTrials": 0,
+  "notMeasuredHere": [
+    "canonical Maven Spotless scope for the three latest fixtures",
+    "whole typed quality of six modules"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
