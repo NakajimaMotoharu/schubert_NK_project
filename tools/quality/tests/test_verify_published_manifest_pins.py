@@ -221,6 +221,26 @@ class PublishedManifestPinsTest(unittest.TestCase):
         self.assertEqual(1, result["current"])
         self.assertEqual([], result["unresolved"])
 
+    def test_scalar_manifest_does_not_disappear_from_staged_or_committed_audit(self):
+        valid_object = MANIFEST.replace("001_fixture", "002_fixture")
+        valid_array = MANIFEST.replace("001_fixture", "003_fixture")
+        self.manifest({"reference": pin(FIXTURE, INITIAL)}, valid_object)
+        self.manifest([pin(FIXTURE, INITIAL)], valid_array)
+        for value in (None, False, 1, "completed"):
+            self.manifest(value)
+            self.git("add", ".")
+            staged = audit(self.repo, self.original, self.original, staged=True)
+            committed = audit(self.repo, self.original, self.commit())
+
+            for result in (staged, committed):
+                with self.subTest(value=value, staged="stagedTree" in result):
+                    self.assertEqual(3, result["manifests"])
+                    self.assertEqual(2, result["current"])
+                    self.assertEqual(
+                        [{"manifest": MANIFEST, "reason": "INVALID_MANIFEST_SHAPE"}],
+                        result["unresolved"],
+                    )
+
     def test_public_paths_with_parent_components_are_unresolved(self):
         relative = "src/sample-folder/../example.txt"
         absolute = self.repo / "evidence/sample-folder/../example.txt"

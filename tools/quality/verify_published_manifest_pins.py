@@ -126,6 +126,9 @@ def audit(repo, start, end, *, staged=False):
             object_pairs_hook=unique_object,
             parse_constant=invalid_constant,
         )
+        if not isinstance(content, (dict, list)):
+            unresolved.append({"manifest": manifest, "reason": "INVALID_MANIFEST_SHAPE"})
+            continue
         parent_source = exact_source(content.get("source")) if isinstance(content, dict) else None
         references = set(pins(content))
         for raw_path, expected, source, has_explicit_source in sorted(
