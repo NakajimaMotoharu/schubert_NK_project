@@ -2,6 +2,8 @@
 
 PG-D-154/SSC-049先行aa2baa3a。OPS-009/UI251/SS311/343 §6.11。batch.file.InspectorEnvironmentPublisher、共有EnvironmentInodePolicyと既存Reader。親OS lock/固定namespace/子終端/永続run原本はcaller契約であり合成成功扱いしない。
 
+本表のPT-OPS-PUB-001〜003はInspectorEnvironmentPublisherTestのJava単体を一意に指す。678の旧公開工具の同名ラベルは、678の現行ORDPUB IDに対応する。
+
 | Test ID | method | 入力・操作・独立期待値 |
 |---|---|---|
 | PT-OPS-PUB-001 | createAndRetire | 固定UUID/時刻→独立literal2行、0600/nlink1、part消失、target公開、retire後不存在、再retire成功 |
