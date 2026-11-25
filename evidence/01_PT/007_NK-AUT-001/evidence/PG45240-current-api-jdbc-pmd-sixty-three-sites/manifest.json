@@ -1,0 +1,81 @@
+{
+  "run": "PG45240",
+  "source": "3156fb59c5457abc661961a4546421f62f8f8ccc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2",
+    "A1-15.01"
+  ],
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:12:20.063882+00:00",
+  "rawInputs": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45152-current-revocation-update-owner-static/pmd-findings.json",
+      "sha256": "9c1a2f7a75442d8574b27f50eb33e1ead4f6794ff9ca5d39d5f9aeb03ed8428c"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/pmd-raw.json",
+      "sha256": "9b27601da8e7e04bc0913da1037991215f8d858663c6c4231182d5bcab98952c"
+    }
+  ],
+  "originalReports": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45152-current-revocation-update-owner-static/manifest.json",
+      "sha256": "bedf6f488b185ac9512b16eb68c97e7debfe1a597ec4cd8a98c2bd215452b70e"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/manifest.json",
+      "sha256": "82a6fbc43e6eb94605bcc9af02d849693cd159c40234d7648b56fdc7acbada8f"
+    }
+  ],
+  "findings": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/findings.json",
+    "sha256": "1955456ac29315689e665529176cf2c79bcba578d6cf5e794951cf68fe102615"
+  },
+  "rawCategoryCount": {
+    "closeResource": 23,
+    "runtimeException": 20,
+    "error": 20
+  },
+  "originalCurrentLocalTests": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/manifest.json",
+      "sha256": "61f0ce26a7175e470954ccbb3ae50272ed744126ec748fe9078b19b8e0af286f"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45186-current-jdbc-read-boundary-methods/manifest.json",
+      "sha256": "b3bf3b57668416c8efb9b5c22d9f66cec8b52e204de965530ab1b6e5e699b271"
+    }
+  ],
+  "sourceOnlyReviewed": [
+    "lockUsers",
+    "logoutCurrent",
+    "revokeAll",
+    "verify",
+    "verifyIdentity"
+  ],
+  "design": [
+    {
+      "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "blob": "62ed7ffe32fa168d5f9a6a846f0bb39399beebe9"
+    },
+    {
+      "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "blob": "f98e727f1a4731dacae7c916532a6ecbc009f047"
+    }
+  ],
+  "liaison": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+    "sha256": "fef9a289334d37edd7630e3bcbbdf1ef8b9ab0a5357f0ff1001606b37b929d80"
+  },
+  "rawPreserved": true,
+  "ruleSuppressionChanged": false,
+  "actualBackendExecuted": false,
+  "ownerDecision": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,1136 @@
+[
+  {
+    "report": "PG45152",
+    "originalOrdinal": 1,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 76,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 100,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 2,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 85,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 93,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 3,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 89,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 93,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 4,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 89,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 93,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 5,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 96,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 100,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 6,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 96,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 100,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 7,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 108,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 167,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 8,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 118,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 160,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 9,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 156,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 160,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 10,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 156,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 160,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 11,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 163,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 167,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 12,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "logoutCurrent",
+    "line": 163,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 167,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 13,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 218,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 241,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 14,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 226,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 234,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 15,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 230,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 234,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 16,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 230,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 234,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 17,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 237,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 241,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 18,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 237,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 241,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 19,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 246,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 269,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure7, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 20,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 254,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 262,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure8, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 21,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 258,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 262,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure8, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 22,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 258,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 262,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure8, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 23,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 265,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 269,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure7, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 24,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "revokeAll",
+    "line": 265,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 269,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure7, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 25,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "update",
+    "line": 317,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 332,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatement ownerを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 26,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "update",
+    "line": 322,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 332,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じsame owned statement aliasを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 27,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "update",
+    "line": 328,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 332,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45152",
+    "originalOrdinal": 28,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "method": "update",
+    "line": 328,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 332,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 1,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 82,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 103,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 2,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 87,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 96,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 3,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 92,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 96,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 4,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 92,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 96,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 5,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 99,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 103,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 6,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "verifyIdentity",
+    "line": 99,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 103,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 7,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 127,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 152,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure3, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatement ownerを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 8,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 130,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 152,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure3, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じsame owned statement aliasを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 9,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 133,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 145,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 10,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 141,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 145,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 11,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 141,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 145,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure4, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 12,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 148,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 152,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure3, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 13,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "owner",
+    "line": 148,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 152,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure3, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 14,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 160,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 197,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 15,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 174,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 190,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, rows);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 16,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 186,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 190,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, rows);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 17,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 186,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 190,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure6, rows);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 18,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 193,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 197,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 19,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "method": "lockUsers",
+    "line": 193,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 197,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 20,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 55,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 77,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 21,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 60,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 70,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 22,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 66,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 70,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 23,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 66,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 70,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure2, row);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 24,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 73,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 77,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 25,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 73,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 77,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 26,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 82,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 95,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatementを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 27,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 91,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 95,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 28,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "verify",
+    "line": 91,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 95,
+    "closeStatement": "JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);",
+    "currentBehaviorScope": "static source only",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 29,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 143,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 181,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure4, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じstatement ownerを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 30,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 146,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "caught": null,
+    "closeLine": 181,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure4, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じsame owned statement aliasを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 31,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 149,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "caught": null,
+    "closeLine": 174,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure5, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "finallyは同じrowsを所有。nullable取得は非nullだけを閉じ、型付きaliasは新資源を増やさない。借用Connectionの終了責務は呼出元に残る。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 32,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 170,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 174,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure5, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 33,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 170,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 174,
+    "closeStatement": "JdbcResourceCleanup.closeRows(jdbcFailure5, row);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 34,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 177,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "caught": "RuntimeException",
+    "closeLine": 181,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure4, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  },
+  {
+    "report": "PG45156",
+    "originalOrdinal": 35,
+    "file": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "method": "readSession",
+    "line": 177,
+    "rule": "AvoidCatchingGenericException",
+    "message": "Avoid catching Error in try-catch block",
+    "caught": "Error",
+    "closeLine": 181,
+    "closeStatement": "JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure4, acquired);",
+    "currentBehaviorScope": "original selected private method and fixture",
+    "technicalDisposition": "owned close / original exception preservation; reviewer pending",
+    "basis": "捕捉直後に同じprimaryを再送出する。finallyでclose failureをprimaryに従属させ、primary無しならclose failureを返す。元例外を正常や別例外に読み替えない。"
+  }
+]
