@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -148,19 +151,15 @@ final class QuestionReceiptIdTest {
     Map<String, Integer> expected = new HashMap<>();
     for (String value : literalCycles) expected.put(value, 4);
     Map<String, Integer> actual = new HashMap<>();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ReceiptWorkers(Executors.newFixedThreadPool(8))) {
       List<Callable<QuestionReceiptId>> tasks = new ArrayList<>();
       for (int i = 0; i < 64; i++) tasks.add(generator::generate);
       // Holding the caller-visible monitor must not block the private generator lock.
       synchronized (generator) {
-        var results = tasks.stream().map(executor::submit).toList();
+        var results = tasks.stream().map(workers::submit).toList();
         for (var result : results)
           actual.merge(result.get(5, TimeUnit.SECONDS).value(), 1, Integer::sum);
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(expected, actual);
     assertEquals(1664, calls.get());
@@ -209,15 +208,72 @@ final class QuestionReceiptIdTest {
                 return 0;
               });
       assertSame(failure, assertThrows(failure.getClass(), generator::generate));
-      var worker = Executors.newSingleThreadExecutor();
-      try {
+      try (var worker = new ReceiptWorkers(Executors.newSingleThreadExecutor())) {
         assertEquals(
             "00000000000000000000000000",
             worker.submit(generator::generate).get(5, TimeUnit.SECONDS).value());
         assertEquals(27, calls.get());
-      } finally {
-        worker.shutdownNow();
-        assertTrue(worker.awaitTermination(10, TimeUnit.SECONDS));
+      }
+    }
+  }
+
+  @Test
+  @DisplayName("PT-QST-RID010 worker cleanup retains the first failed assertion or submission")
+  void simultaneousFailurePreservesPrimaryDiagnostic() {
+    var primary = new IllegalStateException("public fixture submission failure");
+    var shutdowns = new AtomicInteger();
+    var waits = new AtomicInteger();
+    var pool =
+        (ExecutorService)
+            Proxy.newProxyInstance(
+                QuestionReceiptIdTest.class.getClassLoader(),
+                new Class<?>[] {ExecutorService.class},
+                (ignored, method, arguments) ->
+                    switch (method.getName()) {
+                      case "submit" -> throw primary;
+                      case "shutdownNow" -> {
+                        shutdowns.incrementAndGet();
+                        yield List.of();
+                      }
+                      case "awaitTermination" -> {
+                        waits.incrementAndGet();
+                        assertEquals(10L, arguments[0]);
+                        assertEquals(TimeUnit.SECONDS, arguments[1]);
+                        yield false;
+                      }
+                      default -> throw new AssertionError(method.getName());
+                    });
+
+    var actual =
+        assertThrows(
+            IllegalStateException.class,
+            () -> {
+              try (var worker = new ReceiptWorkers(pool)) {
+                worker.submit(() -> FORWARD);
+              }
+            });
+    assertSame(primary, actual);
+    assertEquals(1, actual.getSuppressed().length);
+    assertEquals("question receipt workers did not stop", actual.getSuppressed()[0].getMessage());
+    assertEquals(1, shutdowns.get());
+    assertEquals(1, waits.get());
+  }
+
+  private record ReceiptWorkers(ExecutorService executor) implements AutoCloseable {
+    <T> Future<T> submit(Callable<T> task) {
+      return executor.submit(task);
+    }
+
+    @Override
+    public void close() {
+      executor.shutdownNow();
+      try {
+        if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+          throw new AssertionError("question receipt workers did not stop");
+        }
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new IllegalStateException("question receipt worker termination interrupted", interrupted);
       }
     }
   }
