@@ -1,0 +1,511 @@
+{
+  "source": "1c927105b6d12de93c3b996846d601692731a804",
+  "productByClass": {
+    "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "semanticValidatorRetainsBothDesignedEntryPointsOnly",
+        "fieldCodecHasOnlyTheEightDesignedStaticOperations",
+        "mediaValidatorExposesNoGrammarCacheOrInstanceOperation",
+        "largeResultCodecHasOnlyWriteAndDecodeOperations"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "malformedLoginErrorBoundariesAndTypesAreRejected",
+        "allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+        "loginLockAndFailurePreserveOnlyApprovedErrorFields"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+        "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+        "nfcGolden001HangulJamoFitsComposedByteWidth"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "numericErrorFillerDoesNotBecomeBusinessZero",
+        "booleanAndReservedFieldsRejectUnknownBytes",
+        "numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+        "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+        "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput",
+        "textDecodeIsStrictCanonicalAndOptionalAware",
+        "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+        "numericCodecChecksDigitsRangeAndOverflow"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition",
+        "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+        "valuesAreImmutableNullSafeAndRedacted",
+        "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+        "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+        "everyResponseLayoutUsesExactErrorFillersAndNoRecords",
+        "allSixtyFourLayoutsRoundTripMinimumSuccessValues",
+        "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets",
+        "numericDigitLimitIsCheckedWithoutOverflow"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+        "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+        "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "qss001DecodesExactKeywordUsernameAndBlankFields",
+        "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary",
+        "qss002RejectsMalformedAndNonNfcAtBothTextOffsets",
+        "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+        "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts",
+        "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "resetAccepts64FourByteCodePointsWithoutConsumingVersion",
+        "bothFieldsRejectNoncanonicalButWellFormedUtf8",
+        "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary",
+        "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "usr002RejectsTheAllSpaceMandatoryField",
+        "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit",
+        "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd",
+        "usr004RejectsValidUtf8ThatIsNotNfc"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "transportSnapshotRetainsEveryComponentAndRejectsInvalidBoundaries",
+        "largeContentUsesIndependent4800ByteEquationAndValueKeys",
+        "expectedRouteRetainsValuesAndRejectsMissingOrInconsistentRoutes"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+        "decodeRejectsTruncationExtraHashAndIoFailure",
+        "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+        "writeRejectsNullCountLengthAndIoFailure",
+        "verificationRejectsAllThirtyTwoDigestBytePositions",
+        "writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+        "contentMetadataRejectsInvalidValues"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rejectsMalformedDisplayFileNameWithoutReplacement",
+        "rejectsMalformedLogicalIdentifierWithoutReplacement",
+        "rejectsMalformedStoragePathWithoutReplacement",
+        "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+        "constructorRejectsNullComponents",
+        "acceptsExactlySevenSsc004ExtensionMimePairs",
+        "bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+        "dispositionMapsOnlyIAndA",
+        "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries",
+        "rejectsEveryMimeCrossProductAndVideoAttachment"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest": {
+      "count": 7,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "headerReferencesRejectNullAtTheNamedInvariantBoundary",
+        "authenticationContextValidatesAndRedacts",
+        "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+        "headerValidateAgainstRejectsEachMetadataMismatch",
+        "validHeadersCoverRequestResponseErrorAndEventProfiles",
+        "enumsMapOnlyApprovedWireValues",
+        "headerConstructorRejectsEveryStructuralViolation"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "catalogMatchesIndependentUi234To236Fixture",
+        "layoutFieldsRejectWrongAreaGapLengthAndNull",
+        "parserRejectsMalformedUnknownAndDuplicateRows"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "registryMatchesIndependentUi233Catalog",
+        "registryRejectsEmptyNullDuplicateAndKindMismatches",
+        "layoutIdAndFieldDefinitionAreStrictAndOneBased",
+        "layoutDefinitionChecksEveryLengthAndKindInvariant"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "largestSixDigitPageUsesTheNotificationBound",
+        "rejectsSearchPageSizeAndNotificationOffsetOrRecordMismatch",
+        "fiftyRecordsFillTheFirstPageAndTheNextStartsAtFiftyOne"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "page001SecondPageHasIndependentExpectedBounds",
+        "page003RejectsIndependentRangeAndOneFieldArithmeticChanges",
+        "page002MaximumEffectivePageKeepsExactNineDigitArithmetic"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest": {
+      "count": 8,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "pageConstantsCountsAndArithmeticAreEnforced",
+        "receiptWebAndDefensiveContractsAreEnforced",
+        "listRecordConditionsAndOrderingAreEnforced",
+        "mediaAnimationAndMusicConditionsAreEnforced",
+        "deletedNotificationNeverContainsAnswer",
+        "notificationCancellationAndQuestionStateConditionsAreEnforced",
+        "scenarioInlineAndLargeFileConditionsAreEnforced",
+        "loginUserPasswordDateAndSessionRulesAreEnforced"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest": {
+      "count": 1,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "concurrentReadersRetainAllIndependentSixtyFourTypeBindings"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest": {
+      "count": 6,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+        "typedModelsAndHelpersRejectNullMissingAndWrongKinds",
+        "allNamedTypesHaveIndependentDirectionalFieldMeaning",
+        "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes",
+        "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+        "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "layoutCatalogCopiesItsInputAndUsesStructuralValueKeys",
+        "headerAndWireWrappersRetainTheirDeclaredComponentIdentity",
+        "fieldMetadataRetainsIndependentOneBasedOffsetsAndActualValueKeys",
+        "fieldAndTypedPayloadWrappersKeepValueKeysAndDefensiveLists"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "metaValue001AllClosedEnumFactoriesAndCallerOwnedArrays",
+        "metaValue002FieldValuesRetainIndependentHashAndRedactionContracts",
+        "metaValue003HttpAndElapsedNumbersEnforceAsciiAndIndependentBoundaries",
+        "metaValue004LayoutOrderingUsesTheActualComparableBridgeAndPreservesCauses"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "sem003QuestionAndWebLogTextContracts",
+        "sem001PasswordCharacterByteAndUsernameLimits",
+        "sem002InclusiveDateLimitsAndOneSidedFilters"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "semanticHelpersDecodeAndEncodeEverySupportedShape",
+        "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects",
+        "semanticEncodingHelpersRejectNullReferences",
+        "semanticValueObjectsNormalizeValidateCompareAndRedact"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "nullNameIsRejectedBeforeWidthAndValueValidation",
+        "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation",
+        "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth",
+        "zeroAndMaximumAreAcceptedAtEverySupportedWidth"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest": {
+      "count": 13,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "everyCanonicalConstructorReferenceRejectsNull",
+        "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+        "omittedActionIsAllowedForRequestOnly",
+        "missingBlankUnknownAndWrongCaseCategoryFail",
+        "explicitRequestActionKeepsItsOwnClosedPair",
+        "existingHttpMetadataAndReservedRulesRemainEnforced",
+        "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire",
+        "legacyRequestMatchesIndependentOriginalBytes",
+        "menuActionMatchesIndependentOffsetsAndRoundTrips",
+        "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+        "everyOtherCategoryIsRejectedByNamedBoundary",
+        "recordFieldsAreCompleteImmutableAndRedacted",
+        "independentConcurrentCallersDoNotMixCategories"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "enum001SerializedAnswerStateMatchesIndependentProtocolVector",
+        "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "n12Value001IndependentPositiveRangeAndFixedDiagnosticForEveryDeclaredKind",
+        "n12Value002SameKindRecordContractIndependentHashAndLiteralText",
+        "n12Value003AllKindPairsAndRealHashCollectionKeepEqualNumbersDistinct"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest": {
+      "count": 3,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "pathValue002RelativeRejectsEachRootSegmentAndByteBoundary",
+        "pathValue003DisplayOnlyPathsPreservePermittedTextAndRejectTraversal",
+        "pathValue001RelativeNormalBoundariesAndTypedHashContract"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars",
+        "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest": {
+      "count": 5,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion",
+        "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+        "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+        "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds",
+        "allN12IdentifierTypesEnforceTheSharedPositiveRange"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "wireValue004RealHashCollectionKeepsAllFiftyEightTypedSingletonKeys",
+        "wireValue003ReturnedValueArraysAreIndependentCallerOwnedCopies",
+        "wireValue001ClosedNamesOrderOrdinalWireAndActualGeneratedFactoryMatchIndependentTables",
+        "wireValue002GeneratedNameLookupRejectsUnknownEmptyCaseSpaceNullAndWireAliases"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+        "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+        "bug037RequiredAndOptionalDataSendersRejectBadTime",
+        "formatsAndParsesStrictJstMilliseconds"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+        "nullUnknownAndNearMatchAddressesAreDenied"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "iso010SameNodeIsRetainedWithoutSelfSuppression",
+        "iso009PrimaryAndProtocolAreRequired",
+        "iso012DisabledPrimarySuppressionCannotHideProtocol",
+        "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity"
+      ]
+    },
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest": {
+      "count": 4,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "distinctEqualValuedNodesAreBothRetained",
+        "primaryAndRollbackMustBothBePresent",
+        "disabledPrimarySuppressionDoesNotHideRollbackFailure",
+        "sameNodeIsRetainedOnceWithoutSelfSuppression"
+      ]
+    }
+  },
+  "fixtureCases": {
+    "dev.codex.schubert.nk.protocol.fixture.ProtocolFixtureWorkersTest": {
+      "count": 2,
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "cases": [
+        "interruptedCleanupRetainsTheCauseAndRestoresTheThreadFlag",
+        "timeoutIsSuppressedAfterAnAssertionAndSurfacedOnItsOwn"
+      ]
+    }
+  }
+}
