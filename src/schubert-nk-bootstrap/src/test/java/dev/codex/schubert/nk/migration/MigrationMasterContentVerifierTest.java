@@ -838,10 +838,10 @@ final class MigrationMasterContentVerifierTest {
       return nextQuery - 1;
     }
 
-    void hit(String call) throws Throwable {
+    void hit(String call) throws SQLException {
       int index = calls.size();
       calls.add(call);
-      if (index == failAt) throw failure;
+      if (index == failAt) MigrationFixtureFailures.raise(failure);
     }
 
     Connection connection() {

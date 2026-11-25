@@ -553,10 +553,10 @@ final class MigrationMasterFinalizerTest {
     private int outerCloses;
     private int failureHits;
 
-    private void hit(String call, int slot) throws Throwable {
+    private void hit(String call, int slot) throws SQLException {
       if (failCall.equals(call) && failSlot == slot) {
         failureHits++;
-        throw failure;
+        MigrationFixtureFailures.raise(failure);
       }
     }
 
