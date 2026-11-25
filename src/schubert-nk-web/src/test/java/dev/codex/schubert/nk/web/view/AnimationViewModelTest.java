@@ -360,6 +360,7 @@ class AnimationViewModelTest {
                   assertEquals(
                       "/animation/videos/sub-a",
                       m.getRows().getFirst().getSubtrack().orElseThrow().getHref());
+                  return null;
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);

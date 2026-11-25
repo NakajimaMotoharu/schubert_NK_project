@@ -303,6 +303,7 @@ class ScenarioHierarchyViewModelTest {
                       String.format(Locale.ROOT, "%02d", n),
                       ScenarioFileListViewModel.from(p, g, n, FIXTURE_UNCLASSIFIED_ROUTE, files())
                           .getPrefix());
+                  return null;
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
