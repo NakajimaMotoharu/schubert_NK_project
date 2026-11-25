@@ -480,6 +480,21 @@ class ReactorJunitTest(unittest.TestCase):
             require_collection_inputs_unchanged(self.repo, recorded, scope)
         self.assertEqual("changed fixture\n", tracked.read_text())
 
+    def test_junit027_input_baseline_must_be_the_original_full_commit_object(self):
+        (self.repo / ".gitignore").write_text("target/\n")
+        tracked = self.repo / "src/original.txt"
+        tracked.write_text("qualified input\n")
+        self.git("add", ".gitignore", "src/original.txt")
+        recorded = self.commit_fixture("qualified source")
+        tree = self.git("rev-parse", "HEAD^{tree}").stdout.decode().strip()
+        scope = ("src", "pom.xml", "program/characterization", "tools/quality")
+        require_collection_inputs_unchanged(self.repo, recorded, scope)
+        for reference in ("HEAD", recorded[:12], tree):
+            with self.subTest(kind="tree" if reference == tree else "symbolic or shortened"):
+                with self.assertRaisesRegex(ValueError, "full Git commit"):
+                    require_collection_inputs_unchanged(self.repo, reference, scope)
+        self.assertEqual("qualified input\n", tracked.read_text())
+
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()
         self.git("symbolic-ref", "HEAD", "refs/heads/dev-other")
