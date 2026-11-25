@@ -1,0 +1,182 @@
+{
+  "run": "PG45670",
+  "source": "cf14bca83c4af57137eee5c619adb783e53d525e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T22:00:28.276465+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3911",
+  "horizontal": "YKT-2997",
+  "prefixedLedgerCommit": "95542f9d3d2e14c819b127f4e66a043d77ce2bfc",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/begin.json",
+    "sha256": "79bd03890f49c5471e72d9baa27760ac3959b8e9997045bae9358b6a6d5d524f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/terminal.json",
+    "sha256": "7aad98c15faf760de48129787d2a298c3100a6b52de285c4b157d1691ed232c7"
+  },
+  "existingJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aba8510ab9e549ec5dc38a8f72eefce9209396e48b9b0d9ca8f6360382d1f924"
+  },
+  "productTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+  "sourceAndTestChanges": {
+    "testFiles": 5,
+    "productionFiles": 0
+  },
+  "specification": {
+    "path": "evidence/01_PT/002_NK-PRO-002/103_Protocol有限workerの診断保持単体仕様.md",
+    "sha256": "a45bf70f8e50a7f3882ca6b3e82eed6a1827ed4fbb8764e010616659f333a0d9"
+  },
+  "independentInputs": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv",
+      "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/resources/protocol/named-types-ss323.tsv",
+      "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+    }
+  ],
+  "unchangedPrimaryExpected": true,
+  "normalTests": 3,
+  "regressionTests": 2,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/xml/TEST-junit-jupiter.xml",
+    "sha256": "41fff995677673240c7587cde637486c4f69a90f45f822c7e488948c9d5ffdb5"
+  },
+  "testIds": {
+    "PT-PRO-002-P09": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse",
+    "PT-PRO-CATALOG-STATE001": "layout.PayloadTypeCatalogStateContractTest#concurrentReadersRetainAllIndependentSixtyFourTypeBindings",
+    "PT-PRO-QA054-011": "layout.WebLogActionContractTest#independentConcurrentCallersDoNotMixCategories",
+    "PT-PRO-WORKER001": "fixture.ProtocolFixtureWorkersTest#timeoutIsSuppressedAfterAnAssertionAndSurfacedOnItsOwn",
+    "PT-PRO-WORKER002": "fixture.ProtocolFixtureWorkersTest#interruptedCleanupRetainsTheCauseAndRestoresTheThreadFlag"
+  },
+  "gates": {
+    "compile": 0,
+    "unit": 0,
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 4
+  },
+  "checkstyleXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/checkstyle.xml",
+    "sha256": "d38dde1d3fa8fb0ac5e7345bab5e7aefd497ff1e9f75c627729c366eb2da1205"
+  },
+  "rawPmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45670-protocol-three-worker-fixtures/pmd.xml",
+    "sha256": "c7f8ac33d6611df4a09c1664eef2e27bb1f707b1594ffb7c5e95d419f2a8c7c5"
+  },
+  "rawPmdRetained": [
+    {
+      "file": "PayloadGoldenVectorTest.java",
+      "line": 165,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "PayloadTypeCatalogStateContractTest.java",
+      "line": 59,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 11,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 11,
+      "rule": "AvoidFieldNameMatchingMethodName"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 13,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 17,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 23,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 26,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 28,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 18,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 32,
+      "rule": "AvoidDuplicateLiterals"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 34,
+      "rule": "CloseResource"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 34,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 41,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 57,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 60,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 64,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "line": 182,
+      "rule": "NullAssignment"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "line": 212,
+      "rule": "DoNotUseThreads"
+    }
+  ],
+  "allPmdAppliedDispositionAccepted": false,
+  "oldOrdinaryQualification": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "oldResultNotMerged": true,
+  "formalAcceptanceId": null,
+  "noDbOrBrokerOrManagedServiceUse": true,
+  "cumulativeProductTrialsGross": 2867,
+  "testFixtureEngineeringTrials": 2,
+  "whole451": false
+}
