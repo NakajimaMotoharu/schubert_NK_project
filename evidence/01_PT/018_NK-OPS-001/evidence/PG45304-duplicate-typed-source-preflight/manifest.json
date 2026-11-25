@@ -1,0 +1,141 @@
+{
+  "run": "PG45304",
+  "source": "a6eb273a62f953c408bd7d128cc456762903469a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G02",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T13:35:17.794783+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "qualityToolRegressionTrials": 23,
+  "qualityToolNewTests": 1,
+  "syntheticConditions": 8,
+  "syntheticControlActuals": {
+    "all-previous-eight": {
+      "cmd": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/snapshot/tools/quality/static_input_scope.py",
+        "--source-only",
+        "--plan",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/plan.json",
+        "--scope",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/scope.json",
+        "--scope-sha256",
+        "6a0ffa48cb34cb9eefe69aca52f6a1557b98616ed566596559326861956bafbc",
+        "--inventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/inventory.json",
+        "--inventory-sha256",
+        "1977adce53135a192437e72d83b776c91c7edc1526ca695303ebf7ac32cf1fc5",
+        "--prior-source-roster",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG45294-current-nullaway-explicit-deduplicated-roster/current-source-roster.tsv",
+        "--prior-source-roster-sha256",
+        "c2a570286cb55ef7e85a5f684bd42899ed2921713a8c0610828a2a7ff9e8d3b7"
+      ],
+      "actualExit": 1,
+      "publicResult": {
+        "scopeMatch": false,
+        "reason": "NO_UNMEASURED_SOURCE"
+      },
+      "pinnedInput": {
+        "plan": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/plan.json",
+          "sha256": "0caa88869bd9427727654def67a8457ac2f10abe2ba8f79ba15657dd84692b06"
+        },
+        "scope": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/scope.json",
+          "sha256": "6a0ffa48cb34cb9eefe69aca52f6a1557b98616ed566596559326861956bafbc"
+        },
+        "inventory": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/all-previous-eight/inventory.json",
+          "sha256": "1977adce53135a192437e72d83b776c91c7edc1526ca695303ebf7ac32cf1fc5"
+        }
+      }
+    },
+    "selected-delta": {
+      "cmd": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/snapshot/tools/quality/static_input_scope.py",
+        "--source-only",
+        "--plan",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/plan.json",
+        "--scope",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/scope.json",
+        "--scope-sha256",
+        "2039cd272eae95573962f12e7aedc64d4bc78cc010fdef2cfbca5ada5e1b1f8f",
+        "--inventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/inventory.json",
+        "--inventory-sha256",
+        "142491b0b2086c62b3e86122df1dfde2d3da7f81ad0f45779a1f79033a52c736",
+        "--prior-source-roster",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG45294-current-nullaway-explicit-deduplicated-roster/current-source-roster.tsv",
+        "--prior-source-roster-sha256",
+        "c2a570286cb55ef7e85a5f684bd42899ed2921713a8c0610828a2a7ff9e8d3b7"
+      ],
+      "actualExit": 0,
+      "publicResult": {
+        "scopeMatch": true,
+        "tool": "nullaway-configured-maven",
+        "files": 9,
+        "unchangedInRoster": [
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/AnimationWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MusicWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireException.java",
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java"
+        ],
+        "unmeasuredInRoster": [
+          "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java"
+        ]
+      },
+      "pinnedInput": {
+        "plan": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/plan.json",
+          "sha256": "703703ff344074d0b7a5b6562d27ac5e80b5a43cdcaabf4ba7d9a5fb3ea8f9ef"
+        },
+        "scope": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/scope.json",
+          "sha256": "2039cd272eae95573962f12e7aedc64d4bc78cc010fdef2cfbca5ada5e1b1f8f"
+        },
+        "inventory": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/selected-delta/inventory.json",
+          "sha256": "142491b0b2086c62b3e86122df1dfde2d3da7f81ad0f45779a1f79033a52c736"
+        }
+      }
+    }
+  },
+  "toolAssessment": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45304-typed-source-roster-preflight/terminal.json",
+    "sha256": "dc5b44042e90e3bbf2853a4926b1cdd20892538ac4d948f970926e9e8906fc9e"
+  },
+  "changed": [
+    {
+      "path": "tools/quality/static_input_scope.py",
+      "sha256": "d40f63e133209788f1bc64cfa9a3ba6f01602252ec4efbbe02e368db13341ab4"
+    },
+    {
+      "path": "tools/quality/tests/test_static_input_scope.py",
+      "sha256": "114284a70a4b20fa1ff67613d32cafb51b3c0b55babcc4d12918f0e5f5f4092b"
+    }
+  ],
+  "defect": "BUG-3844",
+  "horizontal": "YKT-2998",
+  "priorAggregate": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45294-current-nullaway-explicit-deduplicated-roster/manifest.json",
+    "sha256": "b14a6f2c82856d1bba0cbe0f11dd31d2995685d168a9251f8087b132183c3a65"
+  },
+  "pinnedLedgerBeforeFix": "4d37278e12",
+  "scopeEligibilityUnaffected": true,
+  "sourceRosterCheckIsNotReuseApproval": true,
+  "maintainsNeededSameSourceFullRun": true,
+  "accountsOfToolActionsAndProductPtIndependent": true,
+  "productCompilerOrAnalyzerLaunches": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
