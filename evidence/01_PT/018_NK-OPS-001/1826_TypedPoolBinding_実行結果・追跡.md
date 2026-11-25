@@ -39,3 +39,10 @@ PMDは**raw6を保持・個別context評価済6・未分類0/適用違反0**。o
 開始3/6/10pp cap10・fresh45残55→終了fresh45残55/reset1793382075、共有丸め0≠専有0、N/T/工数/専有費null。usage1e461de65af2326ca576dc64e42ac4d18c8ed3e4fffbeae9cecd98cc7c240036（10-25 01:20:12→02:02:03JST、explicit新record0/完全性未証明）。元/v4/v5・開始見積・追加依存/手戻り1719・再認証・工具費を混同しない。技術新584→606Test/新Main31→33は異source値、actual60を原4222等へ合算しない。formal1964/53・原190新受入0/歴史17・QA051final/PTALT0/actualHOLD・原本等不変更。
 
 own79942失敗1/41508-71067-91558-63638-61729各0の真正終端回収済、二重job/actual VM-DB-native操作0。旧8834/35/36/38は未発行UNRUN。8850公開scan/保存push後、callerの所有捕捉→context init→management→確認済stop後context closeのPG接続を進める。actual Hikari bean供給/VM/native/CHR・全451は未受入のまま、ソケット/権限/permit等を試行せず通常継続する。
+
+
+## BUG-3810／YKT-2968 現候補の再試験
+
+製品Core `34427a4ef823dc4ff92955eb39428d7fe40c9b8a`、修正fixture `77223086584fe1dda46ac3543acf5614ef88c539`。旧Webは15件中1失敗、APIの同型試験1件も旧状態期待で失敗した。修正後、両ロール各15/15成功、失敗・エラー・スキップ各0。先行所有・getter未進行・解放後四getter×2と系列4を確認。API補助Protocol未収録の最初の試行は15件中2エラーで、合格数に含めない。正規Protocolから現候補12物理を照合して完全な試行を回収した。
+
+各roleのBinding L16/M5/C1、分岐対象0。Collector L19/M3/C1/B4。書式・Checkstyle各0、API18/Web21源のNullAway各0。補助SDKの同名物理のためPMD/SpotBugs未実施。全451及びP018-09の正式受入は継続。 [PG44816/18](evidence/PG44816-borrowed-pool-serialization-fixture-closure/manifest.json) SHA-256 `f2eb56135d940fca6c260f2732bacabd82f33b982e77ae4f1ac75c7fddb66364`
