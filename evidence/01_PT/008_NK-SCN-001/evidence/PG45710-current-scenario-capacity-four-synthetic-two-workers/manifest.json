@@ -1,0 +1,95 @@
+{
+  "run": "PG45710",
+  "source": "210e00da56cb3cfe4243eb91cf3fa1f5b4839371",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "候補再資格-44.01",
+  "relatedWbs": [
+    "WBS-P008-06/2",
+    "候補再資格-43.01",
+    "WBS-P008-03/2"
+  ],
+  "terminalAtUTC": "2026-11-25T22:51:14.867433+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3918",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "4c5061b575a8def7d5a1d1390e565a4d5529ec3d",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45710-current-scenario-and-capacity-four-plus-two/begin.json",
+    "sha256": "90bd0f9deed7a1e301005ddfbf6a82ed976b284dc9c4ccfd8f8f5aebd2f96ce0"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45710-current-scenario-and-capacity-four-plus-two/terminal.json",
+    "sha256": "21c0a0175751b4025e75d35c17a0d656d426c686fc34a00d5f184af8d91db949"
+  },
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "110d38af5375d0bb7f5b9699e424a06642e05330e6f32046f98fdb265fd59cc3"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+      "sha256": "6e64877e08a9acbe6da1f96ae3e16bef7ccbe4c6cea5cc69f7d9d6ba88bb80bf"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkers.java",
+      "sha256": "a02b4f1e5681d9cc6dbbacfdf3a2bf79de996609b7099a98f61c65778ba1b1f2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferFixtureWorkersTest.java",
+      "sha256": "a304b7f848307c4ee7952837b50a70c7e7437341d6f2e1ab97fd24157d08ad74"
+    }
+  ],
+  "canonicalScopedJar": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    }
+  ],
+  "xml": {
+    "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG45710-current-scenario-capacity-four-synthetic-two-workers/junit-sanitized.xml",
+    "sha256": "35964509c360edfe290f513c7abab0f8c5889ca9ed95b7dd18a7eb5832415859"
+  },
+  "rawCoverage": {
+    "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG45710-current-scenario-capacity-four-synthetic-two-workers/coverage-unfiltered.tsv",
+    "sha256": "45f1eb055e7d5bbcb0eb3189b32a52968e5564dcf4fbdc4c003937094a7d49af"
+  },
+  "originalReceipts": [
+    {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG44776-current-record-stream-prior-five-exact/manifest.json",
+      "sha256": "37febfa66253c57f29fbd4984fca966e730a6913099430708604441f299d992c"
+    },
+    {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG44716-transfer-capacity-exact-current-residual/manifest.json",
+      "sha256": "62833e076469e267815401596f80b4183e37c17e6b537275c9f1c41c91cbdfce"
+    }
+  ],
+  "strictCompilerFmtCheckstyleZero": true,
+  "normalProductTests": 4,
+  "testEngineering": 2,
+  "unchangedHistoricalResultsNotRerun": true,
+  "formalResultsNotCombined": true,
+  "tests": 6,
+  "failed": 0,
+  "errors": 0,
+  "skips": 0,
+  "selection": [
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest#w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose",
+    "dev.codex.schubert.nk.api.storage.TransferCapacityTest#c03CompetingCloseAndRetainDischargeTheSameReservationOnce",
+    "dev.codex.schubert.nk.api.storage.TransferFixtureWorkersTest#timeoutKeepsTheFirstFailureAndFailsWhenAlone",
+    "dev.codex.schubert.nk.api.storage.TransferFixtureWorkersTest#interruptionKeepsTheOriginalExceptionAndRestoresTheFlag"
+  ],
+  "scratchUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45710-current-scenario-and-capacity-four-plus-two/unit.exec",
+    "sha256": "a7c05a2f5be16a285ffa9258ac212164ef2780e6d168657df27ef8e92db03974"
+  },
+  "actualWriterOrNativeOrExternalAuthorizedEnvironment": false,
+  "cumulativeProductTrialsGross": 2905,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
