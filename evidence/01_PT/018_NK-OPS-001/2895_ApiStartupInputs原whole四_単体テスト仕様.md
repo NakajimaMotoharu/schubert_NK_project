@@ -5,3 +5,7 @@ NK-OPS-001/ApiStartupInputs.<init>/load/Values、RD SYS002/004・MQ001、UI24325
 原001はfake sourceでcommon DEBUG/API pool8、API指定一回と固定Path。002は位置欠落で固定redacted拒否/source0。003はchecked失敗identityとconfig別path拒否/source0。004はsource/env/Values各nullをNPE契約で拒否しcatch正常化0。期待は既072の独立literal/呼数とSSでありproduction methodからexpectedを作らない。fixtureはin-memory YAML/Map、外部file/resourceなし。位置の他境界/並行は既CREDLOC原資格へ参照、起動compositionの再送は非該当。原Testの全四のみ一回実行、過去成功確認再演なし。
 
 予定command: python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg15340_api_startup_inputs_four_pt.py。固定normal6Jar/SDK25.0.4・新slot・原wholeTestをfresh compile、一つの本人JVM/reporting XML/一session exec、終了/FES/case数/環境/argvを保存。postは資格済みshared pure v2の閉profile（API namespace一致、無fixture、baselineMain P01805/TestUNKNOWN）に全Source二physical Main/Valuesを指定。Mainのpackage validateEnvironment wrapperは原4で未実行のため、実counter未達を除外・人工呼出で埋めない。全4成功だけでMain完了/四100/正式/native/起動を認定しない。独立postは元072のliteral/Map/source0・順序/null/実XMLと全二class/実CRC/公式filter/未達lineを照合。結果2896とmanifest、BUG/実commitは後記。
+
+## 当候補の早期検証 PT-OPS-API-INPUT-005
+
+SS342・343 §4/6、RD SYS-002/004、UI243・253。ApiStartupInputs.validateEnvironment() へ固定の設定場所と異なる設定場所を入力する。正規入力は正常終了し、異常入力は固定の IllegalArgumentException 文言を返す。両者とも、呼ばれれば AssertionError で失敗する合成設定sourceを使用し、未読であることを独立に確認する。認証情報内容、実環境、実サービスは使用しない。実行対象と証拠はPG45134を参照。

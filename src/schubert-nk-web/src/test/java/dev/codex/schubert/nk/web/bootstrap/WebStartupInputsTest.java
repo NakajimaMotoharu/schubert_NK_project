@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** PT-OPS-WEB-INPUT-001..004; source-to-startup-input composition only. */
+/** PT-OPS-WEB-INPUT-001..005; source-to-startup-input composition only. */
 final class WebStartupInputsTest {
   private static final String ROOT = "/run/credentials/schubert-nk-web.service";
   private static final Map<String, String> ENV =
@@ -92,5 +92,23 @@ final class WebStartupInputsTest {
     var config = WebNonSecretConfig.parse("", "");
     assertThrows(NullPointerException.class, () -> new WebStartupInputs.Values(null, credentials));
     assertThrows(NullPointerException.class, () -> new WebStartupInputs.Values(config, null));
+  }
+
+  @Test
+  void opsWebInput005ChecksEnvironmentBeforeOpeningConfigSource() {
+    NonSecretConfigSource unopened =
+        service -> {
+          throw new AssertionError("environment validation must not read the source");
+        };
+    new WebStartupInputs(unopened, ENV).validateEnvironment();
+
+    Map<String, String> wrongDirectory =
+        Map.of("SCHUBERT_NK_CONFIG_DIR", "/other", "CREDENTIALS_DIRECTORY", ROOT);
+    assertEquals(
+        "Web non-secret environment unavailable",
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new WebStartupInputs(unopened, wrongDirectory).validateEnvironment())
+            .getMessage());
   }
 }

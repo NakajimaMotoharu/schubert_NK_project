@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** PT-OPS-API-INPUT-001..004; source-to-startup-input composition only. */
+/** PT-OPS-API-INPUT-001..005; source-to-startup-input composition only. */
 final class ApiStartupInputsTest {
   private static final String ROOT = "/run/credentials/schubert-nk-api.service";
   private static final Map<String, String> ENV =
@@ -92,5 +92,23 @@ final class ApiStartupInputsTest {
     var config = ApiNonSecretConfig.parse("", "");
     assertThrows(NullPointerException.class, () -> new ApiStartupInputs.Values(null, credentials));
     assertThrows(NullPointerException.class, () -> new ApiStartupInputs.Values(config, null));
+  }
+
+  @Test
+  void opsApiInput005ChecksEnvironmentBeforeOpeningConfigSource() {
+    NonSecretConfigSource unopened =
+        service -> {
+          throw new AssertionError("environment validation must not read the source");
+        };
+    new ApiStartupInputs(unopened, ENV).validateEnvironment();
+
+    Map<String, String> wrongDirectory =
+        Map.of("SCHUBERT_NK_CONFIG_DIR", "/other", "CREDENTIALS_DIRECTORY", ROOT);
+    assertEquals(
+        "API non-secret environment unavailable",
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ApiStartupInputs(unopened, wrongDirectory).validateEnvironment())
+            .getMessage());
   }
 }

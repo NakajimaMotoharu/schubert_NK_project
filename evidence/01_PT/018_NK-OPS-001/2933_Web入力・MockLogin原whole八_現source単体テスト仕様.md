@@ -22,3 +22,7 @@ effectは非秘密canonical設定のSHA256実行true（鍵無し）とnormal Web
 command：python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg15486_web_inputs_mocklogin_eight_pt.py。rawと専用15488post draftを事前lint0で用意、元真正terminal/実RAWhash取得後にpostを初回実行。全current/snapshot/Input/Jar/Test/launcher/reporter・login.html ba814effをpinし、一新session/180秒上限、全8XML/FES/OS-JDKprefix/全三CodeCRCを検証。coverageは全二Sourceへ集計し、line/method未達/branch自然0はそのまま保存・人工100/手動除外/旧exec union0。元fixed passive readerで四held class true probe無しを確認、reader selftest/旧PT確認再演なし。別15490独立postで元8ID/全code/SS-UI/期待値/packaged resource/typedcounter/効果/owner/実stagehash・意味反例を照合する。結果2934/実manifestに実日時/JDK25.0.4/OS/branch/source/command/終了/全hash/coverageを保存、正式1964-53/歴史17-190/工数null/QA051final/全HOLD不変。
 
 初回15486/4b7d6ea4はFiles部分文字列がServiceConfigFiles型へ一致してpreflight1、SLOT/compile/JVM/OUT前停止。BUG2131/YKT1878を修正前起票して旧工具を保持し、new15487v2は識別子境界regex・ServiceConfigFiles二許可/Files三禁止のmetadata反例を先行確認、同じ元見積/原8Testで初回Product実行へ進む。実commandはpython3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg15487_web_inputs_mocklogin_eight_pt_v2.py、専用15488draftのoriginal import/RUNもbody実行前にnewv2へ合わせる。新PT成功を旧未実行8の再試験成功へ二重加算しない。
+
+## 当候補の早期検証 PT-OPS-WEB-INPUT-005
+
+SS342・343 §4/6、RD SYS-002/004、UI243・253。WebStartupInputs.validateEnvironment() へ固定の設定場所と異なる設定場所を入力する。正規入力は正常終了し、異常入力は固定の IllegalArgumentException 文言を返す。両者とも、呼ばれれば AssertionError で失敗する合成設定sourceを使用し、未読であることを独立に確認する。認証情報内容、実環境、実サービスは使用しない。実行対象と証拠はPG45134を参照。
