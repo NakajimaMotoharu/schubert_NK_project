@@ -1,0 +1,460 @@
+{
+  "run": "PG44836",
+  "finalExecutionRun": "PG44838",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T02:57:46.377584+00:00",
+  "previousProductionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "sourceChange": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sha256": "00654a461c21b363ec8478c8bd89e98a9b28e2fecea6e10c52d574c72f65e38f"
+  },
+  "previousFailureAndBaseline": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44834-current-receipt-port-nine-and-unfiltered-deficits/manifest.json",
+    "sha256": "697f1c2854612d09cf665bb5d8fb5f2bb8351d1a543846b64c2529575e9ec99e"
+  },
+  "bug": "BUG-3811",
+  "ykt": "YKT-2969",
+  "firstRejected": {
+    "source": "cad6ac4665c207c0f1570148608e70ee8bb3ffdc",
+    "unit": [
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/begin.json",
+        "sha256": "ade9f752e636d383f7eb4047a9220fce060fe0b82e519e4ad6bd3df152644c93"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/terminal.json",
+        "sha256": "f24956c21f2d19bfde7743fa03bab7acc53ad9a601f8eed02bf8dc04cbeb8be6"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/result/TEST-junit-jupiter.xml",
+        "sha256": "cf7131a812209ee3be4dfedee5c0f5b877e5d84ed9d4c0d95a2b49400da2c9b1"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/pt.exec",
+        "sha256": "0ff555502a2c7bfbf438d848437b129fd1b80238933dea4935abf3143bfd2e9a"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/raw.out",
+        "sha256": "b442208160db0fc9aec2b6a9287de5158f3db08b2f4552ee83acf2542a53521b"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-memory-nine/companion.out",
+        "sha256": "71e0963aa9a961eee4cab0b80f949a83b4278749ad92001d8ea949b268af11c5"
+      }
+    ],
+    "rawLines": [],
+    "crc64": "1161218fe4190671",
+    "counters": {
+      "INSTRUCTION": {
+        "covered": 360,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 86,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "staticEvidence": {
+      "nullaway": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-nullaway/terminal.json",
+        "sha256": "9d1aaa62e1a623d83151307e57291e02730b5ab9d44800db2d2d32aa15485a5c"
+      },
+      "spotbugs": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-spotbugs/terminal.json",
+        "sha256": "93fd44b43905c66f1217d5a1e5389b0f6a455337b0bdd0f2d98ec576b0af7382"
+      },
+      "pmd": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-pmd/terminal.json",
+        "sha256": "81988270fce2e58a3f9d3a46022cfe9336fb706fd08386965eddf9ddf132305d"
+      }
+    },
+    "pmdRaw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-pmd/pmd.xml",
+      "sha256": "db0f1c86f479f5c56577f5a73ce144b7917b9f8f83e36489d9dc163c4225276e"
+    },
+    "pmdOccurrences": [
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "49"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "49"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "CloseResource",
+        "line": "70"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "CloseResource",
+        "line": "78"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "94"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "94"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "100"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "100"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "CloseResource",
+        "line": "110"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "120"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "120"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "124"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "124"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "146"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "146"
+      }
+    ],
+    "pmdExit": 4,
+    "spotBugsRaw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-receipt-cleanup-spotbugs/spotbugs.xml",
+      "sha256": "2090106fa3a79d3692e7293db8083a31f799927755d003547d3807dff8dc433e"
+    },
+    "spotBugsExit": 1,
+    "spotBugsFacts": [
+      {
+        "type": "OBL_UNSATISFIED_OBLIGATION",
+        "priority": "2",
+        "sourceLine": "38"
+      },
+      {
+        "type": "OBL_UNSATISFIED_OBLIGATION",
+        "priority": "2",
+        "sourceLine": "78"
+      },
+      {
+        "type": "OBL_UNSATISFIED_OBLIGATION",
+        "priority": "2",
+        "sourceLine": "72"
+      }
+    ],
+    "style": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44836-current-receipt-cleanup-style/terminal.json",
+      "sha256": "9ee26621ecf3bc9ac12621d42bca4a33dd5c7618c5757e693e46de985749170d"
+    }
+  },
+  "finalCandidate": {
+    "source": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+    "unit": [
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/begin.json",
+        "sha256": "97c85b1c35487eeb30c226dbf81d93379b841ac127a8cff89c01172999d4c467"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/terminal.json",
+        "sha256": "10e3f18a44e1dc03bf9fca3cbd0e6676f1e9c29f8b218e1c98b2a9b92a1dc4e8"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/result/TEST-junit-jupiter.xml",
+        "sha256": "040e68428660db7d2781d927e43e5295fa8b0f6576e8be4ecc797243c94d3241"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/pt.exec",
+        "sha256": "beeed0ba66450795b3171c4e499bd5300de380e446674516687c81edbd22be1c"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/raw.out",
+        "sha256": "f4246e95715566b33f952b6855186437c514b9e6b5f3f6f2b8d4488e002826f3"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-memory-nine/companion.out",
+        "sha256": "9b3fa9d295a80eea1162c97574e5ae8d3692a9e336c68f1e00f55743f92d7499"
+      }
+    ],
+    "rawLines": [
+      [
+        "read",
+        "(Ljava/sql/Connection;Ljava/lang/String;)Ljava/util/Optional;",
+        "104",
+        "INSTRUCTION:1:2",
+        "BRANCH:0:0"
+      ],
+      [
+        "read",
+        "(Ljava/sql/Connection;Ljava/lang/String;)Ljava/util/Optional;",
+        "105",
+        "INSTRUCTION:6:3",
+        "BRANCH:0:0"
+      ],
+      [
+        "read",
+        "(Ljava/sql/Connection;Ljava/lang/String;)Ljava/util/Optional;",
+        "114",
+        "INSTRUCTION:1:2",
+        "BRANCH:0:0"
+      ],
+      [
+        "read",
+        "(Ljava/sql/Connection;Ljava/lang/String;)Ljava/util/Optional;",
+        "115",
+        "INSTRUCTION:6:3",
+        "BRANCH:0:0"
+      ],
+      [
+        "transaction",
+        "(Ldev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work;)Ljava/lang/Object;",
+        "147",
+        "INSTRUCTION:3:3",
+        "BRANCH:0:0"
+      ],
+      [
+        "lambda$register$0",
+        "(Ldev/codex/schubert/nk/web/receipt/ReceiptReference;Ljava/sql/Connection;)Ljava/lang/Boolean;",
+        "56",
+        "INSTRUCTION:3:3",
+        "BRANCH:0:0"
+      ],
+      [
+        "lambda$register$0",
+        "(Ldev/codex/schubert/nk/web/receipt/ReceiptReference;Ljava/sql/Connection;)Ljava/lang/Boolean;",
+        "58",
+        "INSTRUCTION:1:2",
+        "BRANCH:0:0"
+      ]
+    ],
+    "crc64": "dd5ee8c14f68c462",
+    "counters": {
+      "INSTRUCTION": {
+        "covered": 352,
+        "missed": 21
+      },
+      "BRANCH": {
+        "covered": 32,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 104,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 26,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "staticEvidence": {
+      "nullaway": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-nullaway/terminal.json",
+        "sha256": "1610a914426f5bef7cb5119055cf993048a2a68208aa87c67577b6e66723a0ff"
+      },
+      "spotbugs": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-spotbugs/terminal.json",
+        "sha256": "bec5d041f3ed3f6808099f8cd5d86192d4e8da05c55421903bd621ce6f521a06"
+      },
+      "pmd": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-pmd/terminal.json",
+        "sha256": "0a88ecb20b879bf325aa9bc6ef0dc1e3029e8098801e0d78d157b456ba9e34c3"
+      }
+    },
+    "pmdRaw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-pmd/pmd.xml",
+      "sha256": "409da9c37daeee70af5b535ad9ffd22753a87953307c1c007b6686058a85a97e"
+    },
+    "pmdOccurrences": [
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "49"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "49"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "55"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "55"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "98"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "98"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "104"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "104"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "108"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "108"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "114"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "114"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "132"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "132"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "135"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "135"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "140"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "140"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "146"
+      },
+      {
+        "file": "ReceiptReferenceRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": "146"
+      }
+    ],
+    "pmdExit": 4,
+    "spotBugsRaw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-receipt-cleanup-spotbugs/spotbugs.xml",
+      "sha256": "33f1112e4cc93a36eb6dce3d063e382597db1e02ff76fd6fe6456f851f6d6583"
+    },
+    "spotBugsExit": 1,
+    "spotBugsFacts": [
+      {
+        "type": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+        "priority": "3",
+        "sourceLine": "169"
+      }
+    ],
+    "style": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44838-current-receipt-cleanup-style/terminal.json",
+      "sha256": "7199229646bc6c42815250183b0c92273e8b7f19a4b46d5fabe4b33af42d4704"
+    }
+  },
+  "staticReview": {
+    "SpotBugs3": "First attempt was rejected; typed resource close must stay observable and owned.",
+    "SpotBugs1": "Current helper rethrows the same RuntimeException object from an owned close or rollback according to current Web precedence. It neither creates a generic RuntimeException nor absorbs a product failure. Quality disposition remains pending.",
+    "Pmd20": "Same originating typed catch sites, original profile and failure ordering maintained. Four finally-specific findings no longer present. Keep all 20 and request accountable interpretation; do not alter score or apply suppressions."
+  },
+  "isolatedUnitCounts": {
+    "firstAttemptPassed9ButInapplicable": 9,
+    "secondCandidatePassed9": 9,
+    "totalExecuted": 18,
+    "newApplicable": 9
+  },
+  "observedWholeScopeCountersOnly": false,
+  "rawSupplementInstructionGap": 21,
+  "noActualDriverServerDbOrNetwork": true,
+  "noSourcesExcludedFromQuality": true,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "newFormal": 0
+}

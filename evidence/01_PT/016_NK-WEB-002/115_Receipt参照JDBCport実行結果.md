@@ -100,3 +100,8 @@
 }
 
 再現command（成功の確認目的で再実行しない）：`env PYTHONPATH=tools/quality python3 -B /home/mini/codex/project1/work/pgpt-runs/PG379/media_range_port_driver.py run receipt 52f67513a56e5d67dd32f85bd7b36a39e2ab0f55`。独立postは同引数の`post receipt`で終了0。実command/start/end/OS終了値は公開manifest/stage exit、TestID001～009は114とselectedTestMethodsで一意に対応。再現にはinput038、PG18884 compile/PG18886 static、正常Main PG18642 artifact pinが必要。
+
+
+## BUG-3811の現候補再試験
+
+製品 `8e2a6b055c45f9f868433c73174b87bc72972d77`、JDK代理同一fixture9/9、失敗・エラー・スキップ各0。直接のcloseとrollbackを保持し、cleanup時の失敗伝播を共通化した。原execで行104/104、メソッド10/10、実行コードクラス1/1、分岐32/32。Workはabstract、命令は352/373。先行是正ではSpotBugs資源所有3件が発生したため適用成績に算入しない。最終静的はNullAway・書式・Checkstyle 0、SpotBugs Low 1とPMD20は生出力・担当判断残。実DB、正式451は未了。 [PG44836/38](evidence/PG44836-receipt-cleanup-branch-specific-proof/manifest.json)
