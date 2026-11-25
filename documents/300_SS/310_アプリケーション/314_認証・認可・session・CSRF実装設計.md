@@ -489,7 +489,7 @@ AuthenticationContextVerifier.verify/readSessionの三owned statement/二row取�
 
 BUG3039/3040、YKT2546/2553、状態:設計確定・main反映前、PG/PT/正式未完。
 
-2026-11-15 SSC427継続補足（BUG3041）: private field名のみsessionId/authenticatedActor、既id()/actor()/nonnull invariant/SQL/public結果は不変、新fixture user labelは新側constant化・元6期待除去inverse保持。初回static32/未実行8を保存しfresh必要資格へ。
+2026-11-15 SSC427継続補足（BUG3041）: private fieldと既id()/actor() methodの規約上重複を避ける上記field名だけを確定。constructor引数/idactor accessor/nonnull invariant/外部結果/SQLは不変、新fixture user labelは新側constantのみでまとめ、元6期待は除去inverseで保持。元設計の履歴と未実行8/初回static32は保存し、再試験前に完了扱いしない。
 
 ## SSC-428 ADMIN前処理資源nonnullと明示終了（2026-11-15）
 
