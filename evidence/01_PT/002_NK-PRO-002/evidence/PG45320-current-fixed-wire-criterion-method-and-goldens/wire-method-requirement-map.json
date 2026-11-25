@@ -1,0 +1,366 @@
+{
+  "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf",
+  "approved": [
+    {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+      "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  ],
+  "methodRows": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden001HangulJamoFitsComposedByteWidth",
+      "requirementIds": [
+        "MQ-018",
+        "MQ-025",
+        "MQ-028",
+        "MQ-031",
+        "MQ-033"
+      ],
+      "testId": "PT-CODEC-NFCGOLD001",
+      "expected": "Hangul Jamo three-byte golden and padded widths; width 2 and non-NFC wire rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest.xml",
+        "sha256": "14f84798de26b01787dfe0fbe82b7bbaa56010bf6ba1b553e2af0281e6a680db"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+        "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+      "requirementIds": [
+        "MQ-018",
+        "MQ-025",
+        "MQ-028",
+        "MQ-033"
+      ],
+      "testId": "PT-CODEC-NFCGOLD002",
+      "expected": "literal C3 85 after normalization, exact width 2 then right-padding, one-byte and noncanonical decode rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest.xml",
+        "sha256": "14f84798de26b01787dfe0fbe82b7bbaa56010bf6ba1b553e2af0281e6a680db"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+        "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+      "requirementIds": [
+        "MQ-018",
+        "MQ-025",
+        "MQ-028",
+        "MQ-033"
+      ],
+      "testId": "PT-CODEC-NFCGOLD003",
+      "expected": "hard-coded canonical combining-order hex; incorrect scalar order and width 4 rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest.xml",
+        "sha256": "14f84798de26b01787dfe0fbe82b7bbaa56010bf6ba1b553e2af0281e6a680db"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+        "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "booleanAndReservedFieldsRejectUnknownBytes",
+      "requirementIds": [
+        "MQ-024",
+        "MQ-026",
+        "MQ-027"
+      ],
+      "testId": "PT-PRO-002-B01",
+      "expected": "false/true with literal 0/1, permitted filler and illegal byte profile",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+        "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+        "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericErrorFillerDoesNotBecomeBusinessZero",
+      "requirementIds": [
+        "MQ-024",
+        "MQ-025",
+        "MQ-026"
+      ],
+      "testId": "PT-PRO-002-N02",
+      "expected": "error-profile filler and normal business zero remain distinguishable",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+        "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+        "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+      "requirementIds": [
+        "MQ-024"
+      ],
+      "testId": "PT-PRO-002-N03",
+      "expected": "non-digit byte at the end of an oversized digit sequence is reported before numeric accumulation",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+        "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+        "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+      "requirementIds": [
+        "MQ-018",
+        "MQ-025",
+        "MQ-028",
+        "MQ-029",
+        "MQ-031",
+        "MQ-033"
+      ],
+      "testId": "PT-PRO-002-X01/X02",
+      "expected": "UTF-8 byte length precedes right 0x20 padding; forbidden controls and overflow rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+        "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+        "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textDecodeIsStrictCanonicalAndOptionalAware",
+      "requirementIds": [
+        "MQ-018",
+        "MQ-026",
+        "MQ-029",
+        "MQ-031",
+        "MQ-033"
+      ],
+      "testId": "PT-PRO-002-X03",
+      "expected": "strict decode, empty filler/function, noncanonical bytes and split scalar rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+        "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+        "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "method": "zeroAndMaximumAreAcceptedAtEverySupportedWidth",
+      "requirementIds": [
+        "MQ-017",
+        "MQ-024"
+      ],
+      "testId": "PT-PRO-001-RANGE18-001",
+      "expected": "literal zero and maximum per supported width, up to width 18; typed boundary",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "method": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth",
+      "requirementIds": [
+        "MQ-017",
+        "MQ-028"
+      ],
+      "testId": "PT-PRO-001-RANGE18-002",
+      "expected": "explicit negative and first overflow at each supported width",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "method": "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation",
+      "requirementIds": [
+        "MQ-017",
+        "MQ-028"
+      ],
+      "testId": "PT-PRO-001-RANGE18-003",
+      "expected": "width outside supported domain fails before numeric evaluation",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "method": "nullNameIsRejectedBeforeWidthAndValueValidation",
+      "requirementIds": [
+        "MQ-017"
+      ],
+      "testId": "PT-PRO-001-RANGE18-004",
+      "expected": "missing field name keeps named invariant and precedence",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest.xml",
+        "sha256": "30039762d100973164c314beceedeb849b0e95a51c10f92796243acb28eec409"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java",
+        "sha256": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "method": "headerEncodingMatchesIndependentUi232GoldenVector",
+      "requirementIds": [
+        "MQ-006",
+        "MQ-014",
+        "MQ-015",
+        "MQ-030"
+      ],
+      "testId": "PT-PRO-002-H01",
+      "expected": "literal layout offsets and length for standard header",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "method": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+      "requirementIds": [
+        "MQ-006",
+        "MQ-015",
+        "MQ-030"
+      ],
+      "testId": "PT-PRO-002-H02",
+      "expected": "mutate individual offsets and decode type/profile fields; no external restart claimed",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "method": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+      "requirementIds": [
+        "MQ-014",
+        "MQ-030"
+      ],
+      "testId": "PT-PRO-002-M02",
+      "expected": "255/256 and exact maximum boundaries, oversized or declared mismatches rejected",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+        "source": "fcdd5c2b0809f7e0648d7d8d740d3174d6d207bf"
+      }
+    }
+  ],
+  "productPhysical": [
+    {
+      "name": "dev/codex/schubert/nk/protocol/codec/FieldCodec.class",
+      "sha256": "97a648fe4bfb519ef36d61e2f582dc621a859340a6f73e40a6ccc2f10e70db77"
+    },
+    {
+      "name": "dev/codex/schubert/nk/protocol/codec/FieldCodecRules.class",
+      "sha256": "24c93fa54e600518ac002121f96a1a38e26cb94bc2f6b09cd3b442e6e8baa310"
+    },
+    {
+      "name": "dev/codex/schubert/nk/protocol/codec/HeaderCodec.class",
+      "sha256": "a6065f2c4db802a85d308b5e503ddc286c74046e7c7531048e2e74fe4f672733"
+    },
+    {
+      "name": "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.class",
+      "sha256": "ebde0f1ae2e978937605cb720b78ca2d5478ac8b62d32cc9959369088224d5aa"
+    },
+    {
+      "name": "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.class",
+      "sha256": "2ecc5704fff579424146e7670ce8d662ee411e8cfd8b1284823fec6edff62f3a"
+    },
+    {
+      "name": "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class",
+      "sha256": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7"
+    }
+  ],
+  "confirmations": [
+    "NFC right padding and byte rejection",
+    "typed numeric bounds",
+    "boolean and error filler",
+    "header layout and actual-body length"
+  ],
+  "limitations": [
+    "MQ-032 actual restart",
+    "JMS transport",
+    "global trace and 451 acceptance"
+  ]
+}
