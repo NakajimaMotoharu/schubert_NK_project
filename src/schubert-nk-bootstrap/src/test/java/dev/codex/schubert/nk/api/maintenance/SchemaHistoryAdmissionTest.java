@@ -31,6 +31,11 @@ import org.junit.jupiter.api.Test;
 
 /** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
 final class SchemaHistoryAdmissionTest {
+  private static final String TYPE_COLUMN = "type";
+  private static final String VERSION_BEFORE_ASSET_PERMISSIONS = "030";
+  private static final String ASSET_PERMISSIONS_VERSION = "031";
+  private static final int SUPPRESSED_GRAPH_CASE = 1;
+  private static final int CYCLIC_GRAPH_CASE = 2;
   private static final String SCHEMA_SCRIPT = "\"schubert_meta\"";
   private static final String FIXTURE_SET_QUERY_TIMEOUT = "setQueryTimeout";
   private static final String FIXTURE_EXECUTE_QUERY = "executeQuery";
@@ -113,7 +118,7 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             FIXTURE_INSTALLED_RANK_C438B369,
             FIXTURE_VERSION_43CCC4D0,
-            "type",
+            TYPE_COLUMN,
             FIXTURE_SCRIPT_5BBD8BBB,
             FIXTURE_CHECKSUM_CCB2C25E,
             FIXTURE_SUCCESS_68E7A699)) {
@@ -159,10 +164,10 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             SCHEMA_ROW,
             new Row(1, "029", FIXTURE_SQL_5B7E398D, previousScript, 29, true),
-            new Row(2, "030", FIXTURE_SQL_5B7E398D, currentScript, -30, true));
+            new Row(2, VERSION_BEFORE_ASSET_PERMISSIONS, FIXTURE_SQL_5B7E398D, currentScript, -30, true));
     var admission = new SchemaHistoryAdmission(expected);
     var previous = versionedRow(1, "029", previousScript, 29);
-    var current = versionedRow(2, "030", currentScript, -30);
+    var current = versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, -30);
     var exact = new Probe(List.of(schema(), previous, current));
     assertEquals(expected, admission.inspect(exact.connection()));
     assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
@@ -170,9 +175,9 @@ final class SchemaHistoryAdmissionTest {
     for (var rows :
         List.of(
             List.of(schema(), previous),
-            List.of(schema(), previous, versionedRow(2, "031", "V031__unknown.sql", -30)),
-            List.of(schema(), previous, versionedRow(2, "030", "V030__different.sql", -30)),
-            List.of(schema(), previous, versionedRow(2, "030", currentScript, 30)))) {
+            List.of(schema(), previous, versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__unknown.sql", -30)),
+            List.of(schema(), previous, versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, "V030__different.sql", -30)),
+            List.of(schema(), previous, versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, 30)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
       assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
@@ -188,19 +193,19 @@ final class SchemaHistoryAdmissionTest {
     var expected =
         List.of(
             SCHEMA_ROW,
-            new Row(1, "030", FIXTURE_SQL_5B7E398D, priorScript, priorChecksum, true),
-            new Row(2, "031", FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
+            new Row(1, VERSION_BEFORE_ASSET_PERMISSIONS, FIXTURE_SQL_5B7E398D, priorScript, priorChecksum, true),
+            new Row(2, ASSET_PERMISSIONS_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
     var admission = new SchemaHistoryAdmission(expected);
-    var prior = versionedRow(1, "030", priorScript, priorChecksum);
-    var exact = new Probe(List.of(schema(), prior, versionedRow(2, "031", aclScript, aclChecksum)));
+    var prior = versionedRow(1, VERSION_BEFORE_ASSET_PERMISSIONS, priorScript, priorChecksum);
+    var exact = new Probe(List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, aclChecksum)));
     assertEquals(expected, admission.inspect(exact.connection()));
     assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
 
     for (var rows :
         List.of(
             List.of(schema(), prior),
-            List.of(schema(), prior, versionedRow(2, "031", aclScript, 1880247818)),
-            List.of(schema(), prior, versionedRow(2, "031", "V031__different.sql", aclChecksum)),
+            List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, 1880247818)),
+            List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__different.sql", aclChecksum)),
             List.of(schema(), prior, versionedRow(2, "032", "V032__unknown.sql", aclChecksum)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
@@ -500,7 +505,7 @@ final class SchemaHistoryAdmissionTest {
     var row = new HashMap<String, Object>();
     row.put(FIXTURE_INSTALLED_RANK_C438B369, 0);
     row.put(FIXTURE_VERSION_43CCC4D0, null);
-    row.put("type", FIXTURE_SCHEMA_E38F1889);
+    row.put(TYPE_COLUMN, FIXTURE_SCHEMA_E38F1889);
     row.put(FIXTURE_SCRIPT_5BBD8BBB, SCHEMA_SCRIPT);
     row.put(FIXTURE_CHECKSUM_CCB2C25E, null);
     row.put(FIXTURE_SUCCESS_68E7A699, true);
@@ -514,7 +519,7 @@ final class SchemaHistoryAdmissionTest {
         rank,
         FIXTURE_VERSION_43CCC4D0,
         version,
-        "type",
+        TYPE_COLUMN,
         FIXTURE_SQL_5B7E398D,
         FIXTURE_SCRIPT_5BBD8BBB,
         script,
@@ -531,7 +536,7 @@ final class SchemaHistoryAdmissionTest {
             1,
             FIXTURE_VERSION_43CCC4D0,
             FIXTURE_001_A3FEAA64,
-            "type",
+            TYPE_COLUMN,
             FIXTURE_SQL_5B7E398D,
             FIXTURE_SCRIPT_5BBD8BBB,
             FIXTURE_V001_FIRST_SQL_F20888AE,
@@ -656,8 +661,8 @@ final class SchemaHistoryAdmissionTest {
         var marker = new LinkageError("synthetic SQL fatal");
         var failure = new SQLException("synthetic SQL provider", "P0001");
         if (graph == 0) failure.initCause(marker);
-        else if (graph == 1) failure.addSuppressed(marker);
-        else if (graph == 2) {
+        else if (graph == SUPPRESSED_GRAPH_CASE) failure.addSuppressed(marker);
+        else if (graph == CYCLIC_GRAPH_CASE) {
           var cycle = new SQLException("synthetic SQL cycle", failure);
           failure.initCause(cycle);
           cycle.addSuppressed(marker);
