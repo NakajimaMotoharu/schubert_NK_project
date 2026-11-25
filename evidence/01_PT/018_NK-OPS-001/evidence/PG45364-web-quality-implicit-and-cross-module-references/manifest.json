@@ -1,0 +1,900 @@
+{
+  "run": "PG45364",
+  "source": "62c6a6ae19202c3f8589296b619f977fcc0aaf6d",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T15:15:28.541140+00:00",
+  "actualExit": 0,
+  "priorSourceRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45306-explicit-hold-dependency-with-typed-source-roster/scope-by-path.json",
+    "sha256": "de82eabf2071c782cd839ae0d474a59a80e8c8a4e844a3414b851767a8647643"
+  },
+  "existingHoldHistory": {
+    "path": "documents/400_PGPT/450_品質/460_基盤残件・再開優先順.md",
+    "sha256": "a9efbb90838495d526ea0b8f3a46328b22040b32058ba71da8fa54ff68c3e6e6"
+  },
+  "webMain": 262,
+  "webTyped": 197,
+  "reclassifiedDirectOrTransitive": 43,
+  "priorRuntimeClassInitializerHold": 1,
+  "remainingUnknownScopeForSyntheticNativeCodecs": 1,
+  "aggregateNamedWebNotCleared": 64,
+  "originalUnknown": 45,
+  "scopeBefore": {
+    "transitiveExplicitHoldReference": 9,
+    "typedReceipt": 197,
+    "noExplicitHoldChainInThisParser": 45,
+    "explicitlyHeldType": 1,
+    "directExplicitHoldReference": 10
+  },
+  "claimsByPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "WebStartupException",
+      "lineReferences": [
+        33,
+        44,
+        48,
+        49,
+        68,
+        72,
+        73
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "f82e6d347b761871a0ffd3839c844275b6c2dfe6",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "sha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java": {
+      "status": "crossModuleAdmissionNotEstablished",
+      "firstType": "ServiceCredentialSet",
+      "lineReferences": [
+        42
+      ],
+      "preserving": [
+        "no real credential consumption",
+        "synthetic test is eligible only after the complete Bootstrap/Web credential type and initialization closure is admitted"
+      ],
+      "dynamicPTApproved": false,
+      "gitBlob": "c56a5c0972df7a61191424b3d4cfb0bdbb38a660",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+        "sha256": "8c6616da95480f339028ca37e23f2eda7e83621c93899526016a4445358a7a0f"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessMain.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "WebTerminalCapture",
+      "lineReferences": [
+        26,
+        34,
+        41
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessMain.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebTerminalCapture.java",
+        "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint"
+      ],
+      "gitBlob": "96d2d742cae152ee5470268a511540a8986aa61a",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessMain.java",
+        "sha256": "0385c45ca8d20d56427ebe362ba7a6b205c96ce8f187e6a7fedc8755c9220669"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java": {
+      "status": "existingNamedClassInitializerHold",
+      "firstType": "ServiceProcessResources",
+      "lineReferences": [
+        19
+      ],
+      "prior": {
+        "path": "documents/400_PGPT/450_品質/460_基盤残件・再開優先順.md",
+        "line": 12662
+      },
+      "dynamicPTApproved": false,
+      "gitBlob": "ca9b33fcdd94b38f1758cc3c4618a86a1fc1f9d6",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+        "sha256": "235cc4be5c53236588f6dc1556e85ad872ada175d3c223abeb6fa913ffda7163"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/AnimationMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        18
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/AnimationMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "acb5be06d01e59a20529996108bbcc64acad8a22",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/AnimationMvcConfiguration.java",
+        "sha256": "b98da8327c1b4932baec0546c2be54953a3b08f81611fd1f3b2fdcc888fc5738"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ContentDetailMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        23
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ContentDetailMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "47ad32814b3b83fbac609152066a5d9deb931f56",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ContentDetailMvcConfiguration.java",
+        "sha256": "4273811e7c020bcb4aac897770e5628296ba649506ec2890d1722628dd5847a2"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        17
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "f6035a09d1db4588b27291adac2f6a17dbe0e783",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java",
+        "sha256": "2bd503e7b08e3b6cb85f7bf14f8677c50a98c086509d8dfebc66049615e29958"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        21
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "b06a148f751a8d552bf3a70fa44fcc47cc9cf20f",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java",
+        "sha256": "ef08039f88a085d44aaffc003c072b298c0fdba1b9e688773f45a70402eef62f"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        18
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "eb6b0bdffcc622cd8791d7f9aaf936dbacef0f2f",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java",
+        "sha256": "681d5853d5f5bdb1f2927b0808daee17771e7be5a440ab5880353b90532bb986"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        21
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "2c3a7b9e6255e21c31b3b2ed9786193aad918d50",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java",
+        "sha256": "b80f7275d73a387f3cddc4ae12c90d3182296bf3cd19b60904dcd85780ee3bba"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "NotificationController",
+      "lineReferences": [
+        17,
+        19
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "14663ffc3c84836aa8d18f60f21cbf829e8c8a44",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java",
+        "sha256": "d72bcfd34e479f47dca4593d01bb8c0404f818f7e9dfc7a00450d34a4f8e159e"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionAcceptanceMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        23
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionAcceptanceMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "80ecc35f6f0d638cf9ede3c125fc2a1a7ce1628c",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionAcceptanceMvcConfiguration.java",
+        "sha256": "4a0b8f748fe6e7fd825763821a5c7ebcc09b3215a3e299d1617e45433518ea15"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "QuestionController",
+      "lineReferences": [
+        17,
+        19
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "6f9c3ddffdd6696ca68ef11fd65781ffdad413ed",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionMvcConfiguration.java",
+        "sha256": "f32797744b1bdf9afbb4ce4e0be1f78d87775957a1b52070b5529c9152d81616"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "LogMvcConfiguration",
+      "lineReferences": [
+        11
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "40e4017e8480fc7c1c785c52bf69911d77f8cedb",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.java",
+        "sha256": "65811bdf21928fec013a473ea67a7df07752e2531587e847b821f21c888b66ba"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        21
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "0f357809e4adc6f075f8ca6c21c02e8db471ddf5",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java",
+        "sha256": "747df2fc1f4e02239af03a172f99c8731634d59dac907d0235371f1b48b5a933"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        21
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "4206ba45a7c26fa4ff744f29df4ce43136881335",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java",
+        "sha256": "9a0131aad87ee4373e6cf7ffe19a171380d1d514f601e463e848f7a28b6702f6"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "UserAdminController",
+      "lineReferences": [
+        17,
+        19
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "eb50bcfc33fddc2f09ae75bd245cd152ff036972",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/UserMvcConfiguration.java",
+        "sha256": "b7f00a8a6a8ffa84b4d756e25d985e0b516571d11635fe22e96ff4872ba19d24"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        44,
+        47
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "45dd57bd5d5a718252ab104d1d9034fcb5278f95",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
+        "sha256": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        62,
+        70
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "328b70a41da20538f90330f83dc8a358a44cec90",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+        "sha256": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        44,
+        47
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "e62fcc99a0fb725cb78d55cce3f14296eef4cee5",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java",
+        "sha256": "918e32335e79eb0f7d093e4fdb3c08f093d92ecfcfcaa8d853caf3ee53d41eb7"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        48,
+        55
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "86925ccb0574f56588cd0cdd7b2450bfa7bbdfa7",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java",
+        "sha256": "e3d5ab3db698c38d1b825a09b5197dea8e490ef6bef1cc1f8a394b658b081d34"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        45,
+        48
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "be3010f545579fc73af1f16301710bad226efd65",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java",
+        "sha256": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        56,
+        69
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "675dc763983fd491b2395a24ae094d483a5dc690",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+        "sha256": "6f507bdd12f8a37dbeafdc0f58183ffe1b46ae2113b9d96f7bc01b0fe40aa366"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        68,
+        83
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "128f16816d2ee66ac786e6493fff56a6bd492fc6",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+        "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "ApiSessionInvalidHandler",
+      "lineReferences": [
+        58,
+        61
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "50bea498526fcac595931ac36f060046db497e37",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+        "sha256": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SessionOperationTokenLifecycle",
+      "lineReferences": [
+        75,
+        99
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "c8fd3f50de56f6275247b822de357d82445ca3e4",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+        "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "WebRequestLogProducer",
+      "lineReferences": [
+        18,
+        20
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "2324938fbf7816fe04ace6c32e515f8d4e3f59fb",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java",
+        "sha256": "19af893a76f867e565339218b60043d667f745d494df1085916036f6c3f0a66f"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "WebLogDispatcher",
+      "lineReferences": [
+        26,
+        50,
+        71,
+        121,
+        124
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "d1a9ceb6552fc987f13318121099f3a2a20de3df",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+        "sha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "HttpMetricValve",
+      "lineReferences": [
+        59,
+        60,
+        76,
+        78
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "84989e072f0680dd1bf1f3fe9c1c1b0dd97179c1",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+        "sha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "RevocationRetryCoordinator",
+      "lineReferences": [
+        45,
+        63
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "09b0e73f80f3e97f5ef549230ab8434bea605fcd",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+        "sha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringEncryptedSessionRepository",
+      "lineReferences": [
+        23,
+        27
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "613039ca51d0d99c12958b305fed7f867bf19c5d",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "sha256": "6a9133ccab69b519ad0d6a3b4e359b9c7d056a24c7fe04eb93c6bdc545c424ed"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedSessionSecurityContextRepository",
+      "lineReferences": [
+        17,
+        20
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "107ce402fbdfd8cf38e0fa1032a13738e9bc305e",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java",
+        "sha256": "ce68220123914829f5a3c91593760e4bb71db658693c0c378e98a0aa325ac30f"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringWebSession",
+      "lineReferences": [
+        41,
+        65
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringWebSession.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "ba4b3ad255e9b5e8a5598b1aaa68dbee5ba0cf24",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+        "sha256": "a6635c9d50282a5e9b7cbe318c51bddcea3334a5ec8f543768aa0e64106efcc9"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringEncryptedSessionRepository",
+      "lineReferences": [
+        28,
+        30
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "c081c5ab82ba5b4fb38e9ecbe26a59467a23ac2d",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "sha256": "c113970e17d8e8c17805e67415671e9a0bdc0fcbe93d90d31b49e716c372c6d7"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringEncryptedSessionRepository",
+      "lineReferences": [
+        27,
+        29
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "cdac0633744bdb0ade562b7f0fa7f43d3f0b19d7",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+        "sha256": "14d69f5999d9c225bde9190ef757635553ce7da8322f129ea4206bd0924e758d"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedSessionSecurityContextRepository",
+      "lineReferences": [
+        16
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "c50203615f541459c72ed63f7bd2c2093c731757",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory.java",
+        "sha256": "0bc4ec886408b545a0e212345bf7a3ec43e675e4c2d168a0f69dc67843abdb4e"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedSessionRequestCache",
+      "lineReferences": [
+        23,
+        28
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "e4c3001ac60b52b47773c630bb226752382ad669",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java",
+        "sha256": "7110dd99b3f90c82230d2884f7818df52c392a2368db505f9ccf67b90d31100c"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "WebAccessFailureHandler",
+      "lineReferences": [
+        13
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "80d3a492bbf96d7bd9c2b6a28bfb7a68060c38c4",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java",
+        "sha256": "715a348155606f4b507c0c61fb4b6d52d02132da5ea707a312c8b2917ef72e81"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedSessionRequestCache",
+      "lineReferences": [
+        33,
+        36
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "ee42242b57224ddef8f3ebee17453bcad75e5e29",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
+        "sha256": "4e164255bc480266cb6bafc631f85217fcc215478ce3f3198c3925868180171a"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedSessionCsrfTokenRepository",
+      "lineReferences": [
+        13
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringWebSession.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "58fc2eb92478dadafc11a89ac4f8096abf305def",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java",
+        "sha256": "59b90846fa612073e4c38e0e8bcce4c92db29360fff001817dd3ebae014b8730"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringEncryptedSessionRepository",
+      "lineReferences": [
+        29
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "e017328760ccad135b5eede3a2bb73de80dec82e",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java",
+        "sha256": "6a12be19cd84bfe7800443cc104a65b615d9c26c116b12fac184d719c0305a7a"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedWebSessionRepository",
+      "lineReferences": [
+        23,
+        27,
+        32
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "ddebc434194d15eb2b81115b54e2091d1b63e7c2",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java",
+        "sha256": "10a9e72bf9e7379e3c866612bb413aeafa00d3326260e2f7fee36d2e06e46fba"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedWebSessionRepository",
+      "lineReferences": [
+        13,
+        16
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "87c8f4a06437327a11d8405bdce573996aa4465d",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "sha256": "c4c124a2893d09b38e3beab0f7c48bee31e984e185006de1383793f411782c1d"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringWebSession.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "EncryptedWebSessionRepository",
+      "lineReferences": [
+        31,
+        37
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringWebSession.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "90366334a73b4e01ab2ebfc4b9708943af82e15a",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringWebSession.java",
+        "sha256": "601e30bd1114d33dbb062359ecf756b14f3ed42f4f64d757f0cc244294c6adca"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionFilterFactory.java": {
+      "status": "verifiedSourceReferenceToExistingHold",
+      "firstType": "SpringEncryptedSessionRepository",
+      "lineReferences": [
+        11
+      ],
+      "chain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionFilterFactory.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupException.java"
+      ],
+      "gitBlob": "3159124d7e2bfe5e28ebb9a41fb18bc91f80cca6",
+      "input": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionFilterFactory.java",
+        "sha256": "ca39758e27ed9274db65700b5807ef1c86b79faf10c3a098886d49870044d58b"
+      }
+    }
+  },
+  "actualCompiles": 0,
+  "actualTrials": 0,
+  "heldNamedTypeInputOpened": false,
+  "actualCredentialsOrDbUsed": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
