@@ -66,8 +66,7 @@ class ScenarioRecordStreamTest {
   void w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels()
       throws InterruptedException, ExecutionException, TimeoutException {
     var prepared = new ScenarioRecordStream(records(3));
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new TransferFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
       for (int i = 0; i < 16; i++) {
         Path path = root.resolve("parallel-" + i);
@@ -82,14 +81,11 @@ class ScenarioRecordStreamTest {
             });
       }
       String first = null;
-      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) {
         String actual = result.get(10, TimeUnit.SECONDS);
         if (first == null) first = actual;
         assertEquals(first, actual);
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "record stream executor terminated");
     }
   }
 

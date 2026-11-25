@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.CapacityExceededException;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
@@ -139,8 +138,7 @@ class TransferCapacityTest {
     for (var capacity :
         List.of(new TransferCapacity(0, 8999), new TransferCapacity(4_499_999_999L, 100))) {
       var before = capacity.snapshot();
-      var executor = Executors.newFixedThreadPool(16);
-      try {
+      try (var workers = new TransferFixtureWorkers(Executors.newFixedThreadPool(16))) {
         List<Callable<Optional<TransferCapacity.Reservation>>> tasks = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
           tasks.add(
@@ -154,7 +152,7 @@ class TransferCapacityTest {
               });
         }
         int accepted = 0;
-        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+        for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) {
           var result = future.get(10, TimeUnit.SECONDS);
           if (result.isPresent()) {
             accepted++;
@@ -162,9 +160,6 @@ class TransferCapacityTest {
           }
         }
         assertEquals(1, accepted);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "capacity executor terminated");
       }
       assertEquals(before.bytes() + 4800, capacity.snapshot().bytes());
       assertEquals(before.files() + 1, capacity.snapshot().files());
@@ -176,11 +171,11 @@ class TransferCapacityTest {
   void c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose()
       throws InterruptedException, ExecutionException, TimeoutException {
     var capacity = new TransferCapacity(0, 0);
-    var executor = Executors.newVirtualThreadPerTaskExecutor();
     var acquired = new AtomicReference<TransferCapacity.Reservation>();
-    try {
+    try (var workers = new TransferFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor())) {
       synchronized (capacity) {
-        executor
+        workers
+            .executor()
             .submit(
                 () -> {
                   acquired.set(capacity.reserve(4800));
@@ -190,7 +185,8 @@ class TransferCapacityTest {
       }
       var reservation = acquired.get();
       synchronized (reservation) {
-        executor
+        workers
+            .executor()
             .submit(
                 () -> {
                   reservation.retain();
@@ -202,16 +198,9 @@ class TransferCapacityTest {
       assertEquals(4800, capacity.snapshot().bytes());
       assertEquals(1, capacity.snapshot().files());
     } finally {
-      executor.shutdownNow();
-      try {
-        assertTrue(
-            executor.awaitTermination(10, TimeUnit.SECONDS),
-            "capacity virtual executor terminated");
-      } finally {
-        var reservation = acquired.get();
-        if (reservation != null) {
-          reservation.close();
-        }
+      var reservation = acquired.get();
+      if (reservation != null) {
+        reservation.close();
       }
     }
   }
@@ -220,8 +209,8 @@ class TransferCapacityTest {
   @Test
   void c03CompetingCloseAndRetainDischargeTheSameReservationOnce()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new TransferFixtureWorkers(Executors.newFixedThreadPool(2))) {
+      var executor = workers.executor();
       for (int trial = 0; trial < 8; trial++) {
         var capacity = new TransferCapacity(128, 7);
         var reservation = capacity.reserve(4800);
@@ -259,10 +248,6 @@ class TransferCapacityTest {
           reservation.close();
         }
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(
-          executor.awaitTermination(10, TimeUnit.SECONDS), "reservation executor terminated");
     }
   }
 
