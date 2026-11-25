@@ -1,0 +1,81 @@
+{
+  "run": "PG45154",
+  "source": "4518e03dc99fd4414b01f5583eacc4ae51e16c41",
+  "productionCoreMain": "119f6b67cfe4eac9e22386d0a3a6bc956afa30cb",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T10:09:38.800195+00:00",
+  "ownedSample": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "07ccf831ef7e491d5d58cc4de65904228da27e225175d44c35e4f9727549374b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "37b2aca8c1bc67d91baea35d3b5e214b82bb083e24d0ac36a67deedbd25c6e62"
+    }
+  ],
+  "sourceScope": 14,
+  "physicalScope": 19,
+  "spotBugsAnalysis": {
+    "exit": 1,
+    "findings": [
+      {
+        "type": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "owner": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticator",
+        "method": "owner",
+        "line": "126"
+      },
+      {
+        "type": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "owner": "dev.codex.schubert.nk.api.security.AuthenticationContextVerifier",
+        "method": "readSession",
+        "line": "142"
+      }
+    ],
+    "errors": 0,
+    "missing": 0
+  },
+  "pmd": {
+    "exit": 4,
+    "raw": 33
+  },
+  "compiledNullAway": 0,
+  "previousBaseline": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44756-api-authorization-bounded-analysis-raw-findings/manifest.json",
+    "sha256": "df7381825a2fd8f725436eab096d70fc04d8ebd21fb38b59816e52cc4f4fafaf"
+  },
+  "lateralEarlier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45122-current-jdbc-acquisition-horizontal-roster/manifest.json",
+    "sha256": "c6f6d0badcfd71fbab5a7be77078353a8eba86c181a7b6e7166532a043261d14"
+  },
+  "compile": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45154-current-jdbc-owner-two-types/begin.json",
+      "sha256": "5022a78f5d8fe66d1bd10f07d5534f85be7e5e60db820f194eedc407f3f3974a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45154-current-jdbc-owner-two-types/terminal.json",
+      "sha256": "f84679e84f71351fde4a7330aa379e6842666e7817d38dd6219c633100df7dda"
+    }
+  ],
+  "static": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45154-current-jdbc-owner-two-static/begin.json",
+      "sha256": "1395fe41d5dc0e861ea338ea7dee28f3531ea0ac89ceaf24dc4abbcdf22f480c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45154-current-jdbc-owner-two-static/terminal.json",
+      "sha256": "72927c60e96a1ba1d74128dfebb3eae95440a3b0ec8c617e238ef77aedcd7b37"
+    }
+  ],
+  "actualAuthOrDb": false,
+  "actualRuntimeTests": 0,
+  "relatedBug": [
+    "BUG-3822",
+    "BUG-3820"
+  ],
+  "relatedYkt": "YKT-2978",
+  "formalAcceptanceId": null,
+  "whole451": false
+}
