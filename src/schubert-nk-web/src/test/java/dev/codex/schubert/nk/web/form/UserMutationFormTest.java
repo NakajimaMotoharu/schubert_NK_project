@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -489,8 +490,7 @@ class UserMutationFormTest {
   @Test
   void change015OneHundredIndependentParallelOperations()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Callable<Void>>();
       for (int i = 1; i <= 100; i++) {
         final int index = i;
@@ -518,9 +518,6 @@ class UserMutationFormTest {
       }
       for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS))
         future.get(30, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

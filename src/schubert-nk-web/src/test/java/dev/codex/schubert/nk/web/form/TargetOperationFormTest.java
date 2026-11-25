@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -189,8 +190,7 @@ class TargetOperationFormTest {
   void target008OneHundredParallelBindHasNoSharedMutableState()
       throws InterruptedException, ExecutionException, TimeoutException {
     var futures = new ArrayList<Future<?>>();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       for (int n = 0; n < 100; n++) {
         String operation = n % 2 == 0 ? CANCEL_OPERATION : DELETE_OPERATION;
         futures.add(
@@ -202,9 +202,6 @@ class TargetOperationFormTest {
                 }));
       }
       for (var future : futures) future.get(5, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
