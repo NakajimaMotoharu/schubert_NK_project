@@ -1,0 +1,130 @@
+{
+  "run": "PG44808",
+  "wbs": "WBS-G13.07/2",
+  "relatedWbs": [
+    "WBS-P020-01.03/2"
+  ],
+  "source": "7ff7ce71b02a7c2da8fddfd9fc3054c6d2389484",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T02:15:52.075483+00:00",
+  "actualExit": 0,
+  "canonicalAnyOwnerEvidence": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "cc093223b34a029a3cdcf1db4f90ddda57a7dc811085f7a89ff07bde98a019ac"
+  },
+  "canonicalWbsOwner": "WBS-P020-01",
+  "designSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "requirements": [
+    "TST-001",
+    "TST-004",
+    "CHR-G01"
+  ],
+  "canonicalDesign": {
+    "264": {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "canonicalCommit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "blob": "8f16dbebd855fcc752b3734bc50b9389d8c7f539",
+      "canonicalSha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    },
+    "355": {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "canonicalCommit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "blob": "4f59005eba4be6551e6473335cfc3c597e8aa0a7",
+      "canonicalSha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    }
+  },
+  "relevantLeaf": {
+    "ID": "WBS-P020-01.03/2",
+    "元行": "WBS-P020-01.03/2",
+    "費目": "B",
+    "主担当": "WBS-P020-01.03",
+    "状態": "計画",
+    "作業": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+    "残pp": "0.488",
+    "着手": "設計355・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SCP-004、TST-001、TST-002、TST-003、TST-004、TST-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.163",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-CHR-001",
+    "lineNumber": 818,
+    "改訂残pp": "0.488",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "sourceMain": {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+    "sha256": "a8aaaaaccfb98336d6a13ab012c96ebe1fdae941a55f402016b6ccd5a9335c70"
+  },
+  "testSource": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+    "sha256": "2cdd33d1226c14e832f1499b3ffabc5873a23ea7ecbe63147498df2a23d7317e"
+  },
+  "definition": {
+    "path": "program/characterization/tests/resources/cases/schema.json",
+    "sha256": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8"
+  },
+  "acceptedNormalArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44804-schema-additional-keyword-normal-package/source/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "4069a5a43214ddde4e96a8de2b322902ebcc6397699bb3db9382a0f9a0118f8d"
+  },
+  "testId": "PT-CHR-DEF-SCHEMA002",
+  "testMethod": "GateDefinitionDocumentsTest.fixedSchemaCannotAcceptAdditionalConstraints",
+  "independentSpec": {
+    "path": "evidence/01_PT/020_NK-CHR-001/093_固定caseスキーマ追加制約の単体仕様.md",
+    "sha256": "a1822655bf8a664513533676ee5e0b2704f053cad910b46764f4b73fc599c865"
+  },
+  "proofNoDuplicates": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44804-fixed-schema-additional-rules/manifest.json",
+      "sha256": "981a72cee71a04306e203f33fd7914b2d9df742fa055c02aa03984ad513ccb1d"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG44806-current-packaged-gate-definitions-88/manifest.json",
+      "sha256": "5a4a265b784fbaad1a3fbe28bf3df792cba29d7b41be737538815f51d5240d24"
+    }
+  ],
+  "applicableLocalCounters": {
+    "INSTRUCTION": [
+      0,
+      3126
+    ],
+    "BRANCH": [
+      0,
+      303
+    ],
+    "LINE": [
+      0,
+      558
+    ],
+    "COMPLEXITY": [
+      0,
+      228
+    ],
+    "METHOD": [
+      0,
+      73
+    ],
+    "CLASS": [
+      0,
+      2
+    ]
+  },
+  "bug": "BUG-3809",
+  "ykt": "YKT-2967",
+  "productExecutions": 0,
+  "newCollectedTestDefinitions": 0,
+  "holds": [
+    "実NK/Currentの相関、実DOM、六製品451、承認済QA-051保留と正式終了依存"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
