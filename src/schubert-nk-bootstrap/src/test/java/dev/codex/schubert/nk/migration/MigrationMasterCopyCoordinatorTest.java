@@ -353,36 +353,35 @@ final class MigrationMasterCopyCoordinatorTest {
     var job = new MigrationMasterCopyCoordinator();
     var mapping = mappings();
     var declared = data();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Void>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
-                  var target = f.connection();
-                  var seen = new ArrayList<String>();
-                  var result =
-                      job.transfer(
-                          target,
-                          mapping,
-                          declared,
-                          (c, t, rows) -> {
-                            assertSame(target, c);
-                            assertEquals(PREPARE_SQL, f.sql.size());
-                            seen.add(t);
-                            return rows.size();
-                          });
-                  assertEquals(TABLES, seen);
-                  assertEquals(NORMAL_HASH, result.sha256());
-                  assertEquals(ALL_SQL, f.sql.size());
-                  return null;
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
+                      var target = f.connection();
+                      var seen = new ArrayList<String>();
+                      var result =
+                          job.transfer(
+                              target,
+                              mapping,
+                              declared,
+                              (c, t, rows) -> {
+                                assertSame(target, c);
+                                assertEquals(PREPARE_SQL, f.sql.size());
+                                seen.add(t);
+                                return rows.size();
+                              });
+                      assertEquals(TABLES, seen);
+                      assertEquals(NORMAL_HASH, result.sha256());
+                      assertEquals(ALL_SQL, f.sql.size());
+                      return null;
+                    }));
       for (var future : futures) assertNull(future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

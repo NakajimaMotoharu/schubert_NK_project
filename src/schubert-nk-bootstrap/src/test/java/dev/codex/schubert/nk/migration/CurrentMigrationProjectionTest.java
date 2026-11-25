@@ -31,11 +31,18 @@ import org.junit.jupiter.api.Test;
 final class CurrentMigrationProjectionTest {
   private static final List<String> SQL =
       List.of(
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER BY id",
-          "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM scenario.script_files ORDER BY id",
-          "SELECT id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block FROM scenario.script_entries ORDER BY id",
-          "SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id",
-          "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER"
+              + " BY id",
+          "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size"
+              + " FROM scenario.script_files ORDER BY id",
+          "SELECT"
+              + " id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block"
+              + " FROM scenario.script_entries ORDER BY id",
+          "SELECT"
+              + " id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256"
+              + " FROM scenario.audio_files ORDER BY id",
+          "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY"
+              + " entry_id,audio_file_id,link_type COLLATE \"C\"");
   private static final String NAME = " Namé ";
   private static final String NORMALIZED = "stored_norm";
   private static final String ROLE = "movie_audio";
@@ -295,23 +302,22 @@ final class CurrentMigrationProjectionTest {
   void snapshot012FiniteConcurrentCallsOwnAllFiveFixtures()
       throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentMigrationProjection();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int i = 0; i < TASKS; i++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = normal();
-                  var v = reader.read(f.connection(), 1, 1, 1, 1, 1);
-                  assertEquals(10, f.closes.size());
-                  assertEquals(1, f.connectionsCreated);
-                  return v.speakers().get(0).get(2);
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var f = normal();
+                      var v = reader.read(f.connection(), 1, 1, 1, 1, 1);
+                      assertEquals(10, f.closes.size());
+                      assertEquals(1, f.connectionsCreated);
+                      return v.speakers().get(0).get(2);
+                    }));
       for (var future : futures) assertEquals(NAME, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

@@ -2,12 +2,13 @@ package dev.codex.schubert.nk.migration;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-CURRENTASSEMBLY001..024; synthetic Current rows through the projection, literal target
+ * PT-MIG-CURRENTASSEMBLY001..025; synthetic Current rows through the projection, literal target
  * rows and wire.
  */
 final class CurrentMigrationAssemblerTest {
@@ -662,23 +664,22 @@ final class CurrentMigrationAssemblerTest {
   void assembly020FiniteParallelCallsOwnSeparateSnapshots()
       throws InterruptedException, ExecutionException, TimeoutException {
     var m = assembler();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int i = 0; i < TASKS; i++)
         futures.add(
-            executor.submit(
-                () ->
-                    m.assemble(snapshot(fixture()), media(STAMP), at())
-                        .content()
-                        .audio()
-                        .linkRows()
-                        .get(0)
-                        .get(4)));
+            workers
+                .executor()
+                .submit(
+                    () ->
+                        m.assemble(snapshot(fixture()), media(STAMP), at())
+                            .content()
+                            .audio()
+                            .linkRows()
+                            .get(0)
+                            .get(4)));
       for (var future : futures) assertEquals("7", future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
@@ -784,6 +785,47 @@ final class CurrentMigrationAssemblerTest {
         result.rowCounts());
     assertEquals(
         "94e90234d64532dc9af1dd9d1361dbcee36e9ec03ba12401f10a64e444a2e254", result.mappingSha256());
+  }
+
+  @Test
+  void assembly025RetainsFirstCheckWhenBoundedWorkerCleanupFails() {
+    var events = new ArrayList<String>();
+    var executor =
+        (ExecutorService)
+            Proxy.newProxyInstance(
+                ExecutorService.class.getClassLoader(),
+                new Class<?>[] {ExecutorService.class},
+                (ignored, method, args) ->
+                    switch (method.getName()) {
+                      case "shutdownNow" -> {
+                        events.add("cancel");
+                        yield List.of();
+                      }
+                      case "awaitTermination" -> {
+                        assertEquals(10L, args[0]);
+                        assertSame(TimeUnit.SECONDS, args[1]);
+                        events.add("wait");
+                        yield false;
+                      }
+                      case "isShutdown" -> false;
+                      default ->
+                          throw new AssertionError("unexpected executor call: " + method.getName());
+                    });
+    var primary = new AssertionError("first fixture check failed");
+    var observed =
+        assertThrows(
+            AssertionError.class,
+            () -> {
+              try (var workers = new MigrationFixtureWorkers(executor, TERMINATION_SECONDS)) {
+                assertFalse(workers.executor().isShutdown());
+                throw primary;
+              }
+            });
+    assertSame(primary, observed);
+    assertEquals(List.of("cancel", "wait"), events);
+    assertEquals(1, primary.getSuppressed().length);
+    assertEquals(
+        "migration fixture workers did not terminate", primary.getSuppressed()[0].getMessage());
   }
 
   private static CurrentMigrationProjectionTest.Fixture fixture() {

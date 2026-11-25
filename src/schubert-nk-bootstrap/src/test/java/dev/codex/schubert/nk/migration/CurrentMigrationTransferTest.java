@@ -492,30 +492,29 @@ final class CurrentMigrationTransferTest {
     var media = List.copyOf(media());
     var at = Instant.parse(STAMP);
     var count = counts(1);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int i = 0; i < TASKS; i++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var source = source();
-                  var target = target();
-                  return job.transfer(
-                          source.connection(),
-                          target.connection(),
-                          a,
-                          count,
-                          media,
-                          at,
-                          (c, t, rows) -> rows.size())
-                      .sha256();
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var source = source();
+                      var target = target();
+                      return job.transfer(
+                              source.connection(),
+                              target.connection(),
+                              a,
+                              count,
+                              media,
+                              at,
+                              (c, t, rows) -> rows.size())
+                          .sha256();
+                    }));
       for (var future : futures)
         assertEquals(NORMAL_HASH, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

@@ -293,17 +293,17 @@ final class MigrationMasterCopyVerifierTest {
     var bytes = wire();
     var mappings = mappings();
     var data = data();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int index = 0; index < TASKS; index++)
-        futures.add(executor.submit(() -> job.verify(bytes, NORMAL_SHA, mappings, data).sha256()));
+        futures.add(
+            workers
+                .executor()
+                .submit(() -> job.verify(bytes, NORMAL_SHA, mappings, data).sha256()));
       for (var future : futures)
         assertEquals(NORMAL_SHA, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
       assertArrayEquals(wire(), bytes);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
