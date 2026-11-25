@@ -18,7 +18,7 @@ if [[ ! -d "$1" ]]; then
   exit 2
 fi
 
-repository=$(CDPATH= cd -- "$1" && pwd -P)
+repository=$(CDPATH='' cd -- "$1" && pwd -P)
 unset MAVEN_ARGS
 exec ./mvnw --offline --batch-mode --strict-checksums --no-transfer-progress \
   "-Dmaven.repo.local=$repository" -DskipTests=false -Dmaven.test.skip=false \

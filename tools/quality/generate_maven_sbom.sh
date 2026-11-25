@@ -21,7 +21,7 @@ if [[ ! -x ./mvnw || ! -f pom.xml || ! -f "$module_dir/pom.xml" ]]; then
   exit 2
 fi
 
-repository=$(CDPATH= cd -- "$2" && pwd -P)
+repository=$(CDPATH='' cd -- "$2" && pwd -P)
 timestamp=$3
 target="$PWD/$module_dir/target"
 if [[ -L "$target" ]]; then

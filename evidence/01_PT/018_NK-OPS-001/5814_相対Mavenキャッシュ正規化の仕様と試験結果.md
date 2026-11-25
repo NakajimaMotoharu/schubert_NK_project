@@ -11,3 +11,5 @@ PG43562、source `667558f950329245e67201c1a0ea687d994bdae1`、bash構文2件成�
 
 - manifest `evidence/01_PT/018_NK-OPS-001/evidence/PG43562-release-cache-path-corrected-id-v1/manifest.json`
 - SHA-256 `311ae4b933c08a8a9a8f2d753f1d310e4c685affa587aa14bd16d131e4b2010a`
+
+BUG-3862／YKT-3000。ShellCheck SC1007を再確認し、文字列として空のCDPATHを二入口に明示する。元の相対パス、CDPATHの囮、cache欠落の試験を含む現12件を再実行する。先行の正規SBOMの入出力結果およびProtocol全製品PTは各元証跡で保持する。実製品試験の再実行は行わない。
