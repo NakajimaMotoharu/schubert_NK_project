@@ -1,0 +1,93 @@
+{
+  "run": "PG45244",
+  "source": "8a56491ad317ce5d96e48d0dcf8488138f404baf",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:19:01.953516+00:00",
+  "basis": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45242-current-migration-assembly-precise-twenty-four/manifest.json",
+    "sha256": "179943a3386782162621be51ea278fd5c38f60c7bad5e06f18eeefb7a6e02b42"
+  },
+  "rawPmdFromOriginal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45242-current-assembly-twenty-four/pmd.xml",
+    "sha256": "ebd6f13e11c3a49385ea33fa131a683705617639f3946f582c762fda6e5855f3"
+  },
+  "sourceInput": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java",
+    "sha256": "15eda5918055f68334a05d79fd87d139bac3272d07b1ca6be85512db8773f4f6"
+  },
+  "sevenRecords": [
+    {
+      "line": 308,
+      "rule": "CloseResource",
+      "lineText": "for (var sink : output) assertEquals(0, sink.size());",
+      "localReason": "純粋なin-memory ByteArrayOutputStream。外部FD・接続・ファイルを所有しない。出力0 byteを全6本で確認。",
+      "ownerDecision": null
+    },
+    {
+      "line": 314,
+      "rule": "NullAssignment",
+      "lineText": "f.tables.get(2).get(0)[9] = null;",
+      "localReason": "合成のCurrent投影の既存列にSQL NULLを明示してターゲットへ補完しないことを検査する。NULLを空文字に替えると入力意図を失う。",
+      "ownerDecision": null
+    },
+    {
+      "line": 665,
+      "rule": "CloseResource",
+      "lineText": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "localReason": "このJUnitだけが固定8 workerを所有。finallyでshutdownNow、10秒のawaitTerminationとassertを実施。業務にpoolを移さない。",
+      "ownerDecision": null
+    },
+    {
+      "line": 665,
+      "rule": "DoNotUseThreads",
+      "lineText": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "localReason": "同じ純値組立を64別合成入力で同時試験するために有限JUnit executorを開始。",
+      "ownerDecision": null
+    },
+    {
+      "line": 670,
+      "rule": "DoNotUseThreads",
+      "lineText": "executor.submit(",
+      "localReason": "各taskが新fixture、独立snapshot、固定時刻から結果を構築。待機5秒の期待値7を全taskに検査。",
+      "ownerDecision": null
+    },
+    {
+      "line": 680,
+      "rule": "DoNotUseThreads",
+      "lineText": "executor.shutdownNow();",
+      "localReason": "失敗経路を含むfinallyで試験所有のworkerを取り消す。",
+      "ownerDecision": null
+    },
+    {
+      "line": 681,
+      "rule": "DoNotUseThreads",
+      "lineText": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "localReason": "試験の残workerの終端を10秒に限定し、未終了を失敗にする。",
+      "ownerDecision": null
+    }
+  ],
+  "apiPmd": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/manifest.json",
+    "sha256": "5489b59c4bcdbd2f64dc1dab8fd3665693871a3219494e78a866dd0772f89f88"
+  },
+  "chrContract": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45234-current-chr-contract-case-trace/manifest.json",
+    "sha256": "08ff74987755e2acfa0fea266b581fad279b28125225c18c9e6cd5e1bc98ce1d"
+  },
+  "dossier": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/4327_11月25日四担当引渡し現候補・12月2日判定資料.md",
+    "sha256": "aa4e17427a54e85200872539c1f94a68c88e57150beb599e2ddb338f9e4c98dc"
+  },
+  "publicRemoteObservedBeforeUpdate": {
+    "main": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "devFoundation": "8a56491ad317ce5d96e48d0dcf8488138f404baf",
+    "openOriginatingPr": 0,
+    "openTargetingPr": 0,
+    "newReviewerDecisionKnown": 0
+  },
+  "whole451": false,
+  "formalAcceptanceId": null
+}
