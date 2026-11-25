@@ -1,0 +1,58 @@
+{
+  "run": "PG45006",
+  "source": "e914f8965df99c180f7f5a42a094e050e3a3b37e",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "P002再判定-a",
+  "terminalAtUTC": "2026-11-25T06:57:49.477900+00:00",
+  "actualExit": 0,
+  "scopeCriterion": "MSG-004/SS322 6.2 verifies every numeric byte before arithmetic",
+  "testId": "PT-PRO-002-N03",
+  "independentExpected": "20-byte literal w/ trailing 0x2b or 0xff after 9223372036854775808; independent expected nonnumeric protocol diagnostic",
+  "testActual": {
+    "suite": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+    "method": "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+    "passObserved": true,
+    "junitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+    }
+  },
+  "currentWholeProtocol": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45004-current-protocol-canonical-ci-174/manifest.json",
+    "sha256": "a634e531b1af4d3eaf249e6ff357f32c1550c52f0c0af3bd4f3fd86d86c46f64"
+  },
+  "originalNumericScope": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG41300-protocol-numeric-byte-precedence-fixed-v1/manifest.json",
+    "sha256": "1be4b0348d648972df1c545c689bcfcbb3d1f07f3fe6f5053f751f1b852d6f70"
+  },
+  "previousCurrentNumeric": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43950-p002-current-numeric-scope-and-redecision/manifest.json",
+    "sha256": "42b622ee6b6c34dce3da489284ccf6119b028d1da45192a28038192c5694a2f3"
+  },
+  "priorDecision": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44210-p002-redecision-current-gate-dossier/manifest.json",
+    "sha256": "8e5da90067f5c1fcb19bad8fd459fc417007fcf292ea818c9e4b92d06ecdebdd"
+  },
+  "approvedDesign": {
+    "ref": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+    "section": "6.2",
+    "gitBlob": "9621b7b37927d2e3a60625934508f3cd1d7f2b6c"
+  },
+  "unfilteredFieldCodec": "CLASS\tdev/codex/schubert/nk/protocol/codec/FieldCodec\ta3fd9264ad99b2ee\ttrue\t126\t1537\tINSTRUCTION:0:488\tBRANCH:0:86\tLINE:0:120\tCOMPLEXITY:0:59\tMETHOD:0:15\tCLASS:0:1",
+  "otherCasesRerun": 0,
+  "whole451": false,
+  "technicalRecheckCandidateComplete": true,
+  "ownerDecision": null,
+  "originalGrossPriceAdopted": 0,
+  "shortRowPricePp": 0.3,
+  "shortPriceCompleted": 0,
+  "restoredAcceptanceCount": 0,
+  "remaining": [
+    "MSG-001/007 actual authenticated JMS",
+    "MSG-009 QA-062, RDF-001 and SSC-480",
+    "F02/F03 current six product 451 and CHR",
+    "original end dependencies and accountable sign-off"
+  ],
+  "formalAcceptanceId": null
+}
