@@ -1,0 +1,145 @@
+{
+  "run": "PG45248",
+  "source": "7f2b6543ec9bab79fb6f42fde25c60c082534bdf",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.03/2",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:21:45.378226+00:00",
+  "reusedOriginal": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45140-current-migration-five-fixture-recovery/manifest.json",
+    "sha256": "9b27eb256672bff41951a049437fdcf12025f5b2a58ccb582b58e9466cad4d6a"
+  },
+  "qualifiedTests": [
+    {
+      "testId": "PT-MIG-CONSTRAINT019",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint019AllFaultKindsPreserveResultThenStatementSuppression",
+      "proxyOracle": "一次例外・行とstatement閉鎖の順序"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT007",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint007ExtraMetadataRowsAreNotReadAsAnotherConstraint",
+      "proxyOracle": "余分なmetadataを既定扱いしない"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT017",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint017EveryResultCloseFailureStopsLaterQueries",
+      "proxyOracle": "閉じ損ねた場合は後続SQLを呼ばない"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT006",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint006AnyMissingDeclaredConstraintIsRejected",
+      "proxyOracle": "欠けた既定制約を検出"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT020",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint020SamePrimaryAndEqualValuedDistinctCleanupIdentities",
+      "proxyOracle": "同一primaryと値が等しい別インスタンスを区別"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT010",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint010AllStringMetadataSqlNullsDifferFromEmptyFlags",
+      "proxyOracle": "SQL NULLと文字列の空を区別"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT009",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint009EveryConstraintAttributeMismatchIsDetected",
+      "proxyOracle": "制約属性が異なれば失敗"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT008",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint008NullZeroNegativeDuplicateAndWrongOrdinalsFail",
+      "proxyOracle": "null、0、負、重複、順序値の誤りを拒否"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT011",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint011SqlNullBooleanCannotMasqueradeAsFalse",
+      "proxyOracle": "SQL NULLのbooleanをfalseへ変換しない"
+    },
+    {
+      "testId": "PT-MIG-CONSTRAINT012",
+      "fixture": "MigrationMasterConstraintVerifierTest",
+      "method": "constraint012EveryConstraintValidatedEnforcedLocalStatusIsRequired",
+      "proxyOracle": "validated/enforced/localの各条件"
+    },
+    {
+      "testId": "PT-MIG-FINAL012",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final012LastMaxMismatchCannotIssueSequenceOrAnalyze",
+      "proxyOracle": "最後の最大値不一致ではsequence・ANALYZEが未発行"
+    },
+    {
+      "testId": "PT-MIG-FINAL024",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final024EachAnalyzeWrongCountWarningAndOriginalFailures",
+      "proxyOracle": "ANALYZEの件数／管理結果／原失敗を伝播"
+    },
+    {
+      "testId": "PT-MIG-FINAL021",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder",
+      "proxyOracle": "一次例外と三資源の抑制順を保持"
+    },
+    {
+      "testId": "PT-MIG-FINAL007",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final007EveryPreflightResultShapeIsStrict",
+      "proxyOracle": "事前照会の欠落・extra・SQL NULL・不正型を拒否"
+    },
+    {
+      "testId": "PT-MIG-FINAL029",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence",
+      "proxyOracle": "遅延constraint成功前はMAX/sequenceを発行しない"
+    },
+    {
+      "testId": "PT-MIG-FINAL017",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final017EverySetvalResultShapeIsStrict",
+      "proxyOracle": "setval応答の形を厳格に検査"
+    },
+    {
+      "testId": "PT-MIG-FINAL013",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final013EachPrepareNullOrOriginalFailureStopsFollowingCalls",
+      "proxyOracle": "prepareにnull／原例外を返せば後続なし"
+    },
+    {
+      "testId": "PT-MIG-FINAL030",
+      "fixture": "MigrationMasterFinalizerTest",
+      "method": "final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity",
+      "proxyOracle": "両遅延フェーズの原例外と所有closeを保持"
+    }
+  ],
+  "otherSuccessesRemainInSourceRun": 111,
+  "sourceSuiteSuccesses": 129,
+  "originalScopeXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45140-five-migration-proxy-fixtures-v3/reports/TEST-junit-jupiter.xml",
+    "sha256": "a2b223029c5abaf6937f68e0d06e90123910a4b89043b441828ecf93212a139a"
+  },
+  "originalRunCore": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "currentBootstrapProductionTree": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+  "canonicalDesign": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "sections": [
+      "SSC382",
+      "SSC387",
+      "SSC406",
+      "SSC407"
+    ]
+  },
+  "scopeLimit": "代理での結果形、順序、一次例外とcloseを当候補で採用。実DBのsequence、副作用、schema、切戻し、SSC417／451と別。",
+  "realCopyOrDb": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
