@@ -1,0 +1,100 @@
+{
+  "run": "PG44844",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "be36d20ab67007c75b0e3dc720955efe4537d215",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:04:13.137780+00:00",
+  "independentPriorSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1448_Web_SQLcatalog・REQUEST投影graph単体テスト仕様.md",
+    "sha256": "bbc211ee2fd11163133748e34ce212f8ec370d99724902a7f023e5c24c727a5d"
+  },
+  "previousBundle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27238-web-receipt12-independent-v1/manifest.json",
+    "sha256": "2f5ce69a4e42763d8272dde82c0a15a7078b074d4aa1620f8d62f332e49a2d5f"
+  },
+  "currentPureFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptFailureGraph329Test.java",
+    "sha256": "f5a92b64eb2f5b560963454360422666731cc2fcc995ad8a5b35d3c320fdd466"
+  },
+  "threeCases": [
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptFailureGraph329Test",
+      "receipt329001SelectedSqlGraphPreservesFatalAfterOwnedSetupClose"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptFailureGraph329Test",
+      "receipt329002BothSqlCleanupGraphsCannotDisappearBeforeFixedCatalog"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptFailureGraph329Test",
+      "receipt329003ExistingUnknownPriorityAndFixedNonFatalCyclesAreUnchanged"
+    ]
+  ],
+  "actualCounts": {
+    "tests": 3,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "newProductTests": 3,
+  "proofs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/begin.json",
+      "sha256": "8bb70037e96f54f0a630c124e2c910adb9a5af90703e6ea5038733fe622009c9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/terminal.json",
+      "sha256": "455b3699e6d61c680f79ea3f36b04c2e3f11cfea1f67841d2f40012ac16894e8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/result/TEST-junit-jupiter.xml",
+      "sha256": "62dc183c48366affa305aa469d106cc5e63762633e4361be7e8fbdf5481da8aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/pt.exec",
+      "sha256": "21b312524f76c4e6e4a4d118f5d6894be21ae5862fd1b06a0f6e4edbc7bd6b3d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/raw.out",
+      "sha256": "464f2e7fb6d74da8a535322f9dfd7e2807098a6eb1d973bb5ce89d241d41b001"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44844-receipt-graph329-owned-three/companion.out",
+      "sha256": "9b3fa9d295a80eea1162c97574e5ae8d3692a9e336c68f1e00f55743f92d7499"
+    }
+  ],
+  "originalCurrentReceiptNine": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44836-receipt-cleanup-branch-specific-proof/manifest.json",
+    "sha256": "0ccc995ead5b9d756a1a7c37c6e9eec401eca96c6e0bfb926b47f221d3a70fda"
+  },
+  "sameCrcButUnionNotPerformed": true,
+  "partialCoverageOnly": {
+    "INSTRUCTION": {
+      "missed": 189,
+      "covered": 184
+    },
+    "BRANCH": {
+      "missed": 15,
+      "covered": 17
+    },
+    "LINE": {
+      "missed": 32,
+      "covered": 72
+    },
+    "COMPLEXITY": {
+      "missed": 11,
+      "covered": 15
+    },
+    "METHOD": {
+      "missed": 1,
+      "covered": 9
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "scopeFootnote": "Single suite for SQL cause/suppressed/next ordering on an in-memory proxy, no live driver or authentication path.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
