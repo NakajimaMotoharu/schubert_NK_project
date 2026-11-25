@@ -1,0 +1,148 @@
+{
+  "run": "PG45122",
+  "source": "85a51e7d1ee72e6e0862d15e95a45ca19e6699d3",
+  "productionCoreMain": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T09:28:09.138729+00:00",
+  "bug": "BUG-3820",
+  "horizontal": "YKT-2978",
+  "matchSiteCount": 20,
+  "matchSourceCount": 5,
+  "latestClosedAudit": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/manifest.json",
+    "sha256": "598d2deb7e0c372fbcd43e6a9456cf95f7777edac9506a5bdef2ed7aa095bc98"
+  },
+  "exactBeforeInputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45118-current-api-auth-probe-thirteen-typed/manifest.json",
+      "sha256": "f3be488d5e7ebb7d3e160b22f620763f5a64fb0ea9b9de7c271f0838c847a8cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44756-api-authorization-bounded-analysis-raw-findings/manifest.json",
+      "sha256": "df7381825a2fd8f725436eab096d70fc04d8ebd21fb38b59816e52cc4f4fafaf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44758-p00405-current-jdbc-caller-cleanup-proof/manifest.json",
+      "sha256": "759fd8008680a920d307cb6bda0a3c6a699892ce82ffcaf2f688ead45d7c1e87"
+    }
+  ],
+  "remaining": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+        "sha256": "07ccf831ef7e491d5d58cc4de65904228da27e225175d44c35e4f9727549374b"
+      },
+      "sameBefore": true,
+      "directSites": [
+        82,
+        126,
+        159
+      ],
+      "staticDisposition": "earlier exact source positive; new helper ABI and actual owner prior separate",
+      "priorFinding": {
+        "type": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "className": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticator",
+        "method": "owner",
+        "line": "126"
+      },
+      "fixtureExisting": true,
+      "fixturePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "fixtureAuthorization": "held existing test uses database fixture; no execution",
+      "closureStatus": "PENDING_OWNER_AND_REQUIRED_PT"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+        "sha256": "e333b1f5d203642942c0a94578003fe23a6f9f67c981a68b3ce35d309bd2e0bb"
+      },
+      "sameBefore": true,
+      "directSites": [
+        76,
+        108,
+        218,
+        246,
+        318
+      ],
+      "staticDisposition": "current local positive finding",
+      "priorFinding": {
+        "method": "update",
+        "line": 319,
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45120-current-two-audit-resource-statics/terminal.json",
+          "sha256": "7e7861c69dbbe7e0f41dae57fbbf095b14ce9811c741286fa2e4a002d3853037"
+        }
+      },
+      "fixtureExisting": true,
+      "fixturePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "fixtureAuthorization": "held existing test uses database fixture; no execution",
+      "closureStatus": "PENDING_OWNER_AND_REQUIRED_PT"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+        "sha256": "ca0a8a417ddfac9bce26135a86a22c408bc1b43e353282dc9381eb7e8128b4ae"
+      },
+      "sameBefore": true,
+      "directSites": [
+        85,
+        119,
+        145,
+        168
+      ],
+      "staticDisposition": "earlier scoped analyzer no finding for this class; direct implementation contract and runtime absent",
+      "priorFinding": null,
+      "fixtureExisting": true,
+      "fixturePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java",
+      "fixtureAuthorization": "held existing test uses database fixture; no execution",
+      "closureStatus": "PENDING_OWNER_AND_REQUIRED_PT"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+        "sha256": "37b2aca8c1bc67d91baea35d3b5e214b82bb083e24d0ac36a67deedbd25c6e62"
+      },
+      "sameBefore": true,
+      "directSites": [
+        54,
+        81,
+        142
+      ],
+      "staticDisposition": "earlier exact source positive; new helper ABI and actual owner prior separate",
+      "priorFinding": {
+        "type": "OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE",
+        "className": "dev.codex.schubert.nk.api.security.AuthenticationContextVerifier",
+        "method": "readSession",
+        "line": "142"
+      },
+      "fixtureExisting": true,
+      "fixturePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "fixtureAuthorization": "held existing test uses database fixture; no execution",
+      "closureStatus": "PENDING_OWNER_AND_REQUIRED_PT"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+        "sha256": "15d5a5a1ffe4de19519c49a83540bf2bdf942ef7fd523eb8fe1472c147f4950e"
+      },
+      "sameBefore": true,
+      "directSites": [
+        64,
+        113,
+        128,
+        190,
+        211
+      ],
+      "staticDisposition": "earlier scoped analyzer no finding for this class; direct implementation contract and runtime absent",
+      "priorFinding": null,
+      "fixtureExisting": true,
+      "fixturePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "fixtureAuthorization": "held existing test uses database fixture; no execution",
+      "closureStatus": "PENDING_OWNER_AND_REQUIRED_PT"
+    }
+  ],
+  "productTestsExecuted": 0,
+  "fullHorizontalPending": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
