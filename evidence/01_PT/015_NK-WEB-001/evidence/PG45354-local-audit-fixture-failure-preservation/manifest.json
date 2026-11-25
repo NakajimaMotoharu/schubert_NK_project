@@ -1,0 +1,194 @@
+{
+  "run": "PG45354",
+  "source": "23c3b438814f6831d5412a0d750633a52362d327",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T15:02:26.555119+00:00",
+  "actualExit": 0,
+  "bugs": [
+    "BUG-3851",
+    "BUG-3852"
+  ],
+  "horizontal": "YKT-2997",
+  "initialCompileOnly": {
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic/ordinary-terminal.json",
+      "sha256": "95579b3cded070c72ba22393c4063375abc78f9ff8c8ad18ff1b9c76f40c7b9a"
+    },
+    "actualJUnit": 0,
+    "reason": "void method reference needs a Runnable overload; checked AutoCloseable interruption caused four strict lint diagnostics"
+  },
+  "finalCompileAndOrdinary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/ordinary-terminal.json",
+    "sha256": "9845517422a12923b8ee57ec8924ef0b81897ed609d1627e4a3742c1fb6038d2"
+  },
+  "proofInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/begin.json",
+    "sha256": "e86b671d325e24fe6e9d66e880d808c07080aa297f945868baa700869fc1563f"
+  },
+  "actualProductTrials": 7,
+  "actualToolTests": 3,
+  "ordinaryXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "2fb4af81480f73db8e1bf79c51b3d572b72006fcaf38028d3ad53bbfcd800cb6"
+  },
+  "cases": {
+    "WebRequestTraceTest": [
+      "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit()",
+      "req008HundredConcurrentRequestsDoNotCrossContaminate()"
+    ],
+    "ViewFixtureWorkersTest": [
+      "successfulWorkAndStandaloneTimeoutBothRequireFiniteCleanup()",
+      "timeoutIsSuppressedBehindTheFirstFailure()",
+      "cleanupInterruptSurvivesAsSuppressedAndRestoresTheThreadFlag()"
+    ],
+    "MenuAuditContractTest": [
+      "menu003SuccessfulUserAndAdminModelsMarkOnlyTheirOwnTrace()",
+      "menu002ClosedKindsHaveLiteralMetadataAndNullContracts()",
+      "menu004FailedOrMissingScopeDoesNotForgeAMenuSuccess()",
+      "menu001EveryGateAndBoundaryUsesIndependentTruthTable()",
+      "menu005NestedMarkersDoNotInheritAndEachNoMqEventSelfCorrelates()"
+    ]
+  },
+  "cumulativeLocalProductTrialsGross": 2360,
+  "workerRules": [
+    "primary identity",
+    "secondary preserved in suppressed exceptions",
+    "interruption flags restored",
+    "original InterruptedException as direct cause of cleanup failure",
+    "cancel, then one await 10 seconds"
+  ],
+  "format": {
+    "scope": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/static/begin.json",
+      "sha256": "5baa66def657bf6b6ca0f2b94c314d10ac990e930684b43a24add76f230fb2de"
+    },
+    "firstSpotlessZeroSelectionNotCounted": true,
+    "absoluteSpotless": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/static/spotless-fixed.json",
+      "sha256": "7178f4f1b7d8a2ce3deb6cd3552e580932fff31d19abd61683d433bf556274e5"
+    },
+    "localGoogleSourceFiles": 2,
+    "actualSpotlessSelected": 2
+  },
+  "coverage": {
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/static/coverage.xml",
+      "sha256": "5c96cc968dca095576a14bfdb9677a77a24ec75e7fbacb868f4e6cfc668ecbaa"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/jacoco.exec",
+      "sha256": "debfa97fd17667c9a4f9d7acdaab3806ed6624cdf0eed71f01204934d6ab0fcc"
+    },
+    "rawByFourTargets": {
+      "MenuController": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 31
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "WebRequestTrace": {
+        "INSTRUCTION": {
+          "missed": 87,
+          "covered": 324
+        },
+        "BRANCH": {
+          "missed": 8,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 20,
+          "covered": 47
+        },
+        "COMPLEXITY": {
+          "missed": 11,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 6,
+          "covered": 14
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "WebHttpLogKind": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 74
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "ViewFixtureWorkers": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 41
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 13
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "noExecUnion": true
+  },
+  "qualityPending": [
+    "the 12 existing screen fixtures must be strictly compiled against the repaired helper and requalified",
+    "current full F03/451 and owner decisions",
+    "no live API Web DB JMS actual CHR"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
