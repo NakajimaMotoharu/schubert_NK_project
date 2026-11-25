@@ -1,0 +1,228 @@
+{
+  "run": "PG44942",
+  "source": "bdb6135e01ade0a85f42fe6a953464d8947e0b76",
+  "currentProductCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-25T05:23:04.617371+00:00",
+  "actualExit": 0,
+  "utcCriterion": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44082-p00405-current-batch-utc-and-vendor-identity/manifest.json",
+    "sha256": "d7e6664e4b55a00ef87e5a53cb54d7c48fa468169a0f26331d19bd4d91b0be6e"
+  },
+  "currentOrdinaryBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "currentOrdinaryBatchReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+    "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+  },
+  "backupOriginal": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43954-ssc481-error-checked-and-pmd-site-evidence/manifest.json",
+    "sha256": "57189c0b7b5b806e2febe56a54d7404379ac17ebf91903cbef2e2f5503a285fa"
+  },
+  "backupInputs": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java": "7f9b408e0290f33861c3b1f136630698f91723644cea16bb2afe8f538cfc8025",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureUtcProjectionTest.java": "d7d6697543b803b05830a2393b87ad201b955101e4bd1b3fd00c80e5666290a5",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSqlDiagnosticTest.java": "60b66222509454b8ef2dee939362981e740b85c32d330d0f287e470e120388ec",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshotValueTest.java": "3b91ef5f5460b5ab4e843273718096fe9f7c71ad0d741777c509857f39a8587a"
+  },
+  "backupTerminal": {
+    "path": "../pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/terminal.json",
+    "sha256": "160f121d0804304113bf0bed30503d9ae2c153c3458652d6273d926d323a9e17"
+  },
+  "backupTwelve": [
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc004EveryOtherRequiredProjectionColumnRejectsNullIndependently()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc005MissingHandlesAndUnexpectedRowCountsRetainOnlyOwnedCloses()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc006RunIdentityMustRemainConsistentBeforeAndAfterBothRows()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc007ProjectionAndBothOwnedCloseFailuresKeepOneFixedDiagnostic()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc008SameProviderExceptionFromUseAndReleaseKeepsFixedDiagnostic()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc009DistinctCloseFailuresRemainOrderedOnTheOriginalRuntimeFailure()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc010EachCloseOnlyFailureUsesTheFixedDiagnosticAfterBothReleases()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc011RepeatedErrorRemainsPrimaryAndKeepsDistinctStatementFailure()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.BackupFailureUtcProjectionTest",
+      "utc012CheckedGuardFailureAfterRowCloseSurvivesStatementClose()"
+    ]
+  ],
+  "wholeOriginalBackupXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/reports/TEST-junit-jupiter.xml",
+    "sha256": "14ff047589e44065c28d1dba5b0ee49e85be8eec59ba9803fa84619ec947d4bd"
+  },
+  "auxiliaryOrdinaryJars": {
+    "batch": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    }
+  },
+  "backupUsedAuxiliary": {
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": {
+      "owner": "batch",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": {
+      "owner": "batch",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": {
+      "owner": "batch",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": {
+      "owner": "batch",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": {
+      "owner": "batch",
+      "sha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+    },
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": {
+      "owner": "batch",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": {
+      "owner": "batch",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "owner": "bootstrap",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class": {
+      "owner": "bootstrap",
+      "sha256": "cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea"
+    },
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class": {
+      "owner": "bootstrap",
+      "sha256": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "owner": "storage",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "owner": "storage",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  },
+  "preparation": "First proof attempt assumed all dependencies came from Batch; published scope identifies Bootstrap and Storage values too.",
+  "exactBackupClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43954-ssc481-primary-kinds-regular/product/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class",
+    "sha256": "bbb31f9553a0cb3da6ecc222175324148d6776fe8f4dbd1b9af13789a77dcc87"
+  },
+  "jdbcOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/manifest.json",
+    "sha256": "a5de7bb6d72db02d4bdc4b9db2e604b4b9809bd2be2e20a635eaab172e542ab1"
+  },
+  "jdbcPreviousComparison": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44758-p00405-current-jdbc-caller-cleanup-proof/manifest.json",
+    "sha256": "759fd8008680a920d307cb6bda0a3c6a699892ce82ffcaf2f688ead45d7c1e87"
+  },
+  "jdbcExactInput": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java": "4b217bc193580f03e3a9b2106aca425996a59a71bac1457b3e9ae7eb4cef06c9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java": "65eb6947a987e0d912344cda4c5d993e66e271ec4d21fc49e1a52a47028fa548"
+  },
+  "jdbcPhysical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/target/classes/dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class",
+      "sha256": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44756-current-api-authorization-declarations-nullaway/target/classes/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class",
+      "sha256": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+    }
+  ],
+  "jdbcOriginalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/terminal.json",
+    "sha256": "955f22c1a0c0cae8c9a91246f7270a11ea714496f45070a34988d5b2f5628ea9"
+  },
+  "jdbcEight": [
+    "cleanup002SuccessfulCloseRunsOnceAndLeavesThePrimaryGraphUnchanged()",
+    "cleanup004FailedCloseRetainsTheExactPrimaryAndSuppressedIdentity()",
+    "cleanup005AliasedFailurePreservesTheJdkSelfSuppressionCause()",
+    "cleanup001NullActionFailsAtTheExplicitCallBoundary()",
+    "preservesExistingSuppressionAndAppendsBothFailuresInCallOrder()",
+    "cleanup003FailedCloseWithoutPrimaryPropagatesTheSameSqlRuntimeOrError()",
+    "cleanup007TypedRowOwnerPreservesAllFailureGraphsAndClosesOnce()",
+    "cleanup006TypedStatementOwnerPreservesAllFailureGraphsAndClosesOnce()"
+  ],
+  "jdbcOriginalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "270f5320bac3ec0bd12d73a980dbf4d8ea39a102d2236562bf2b5c1a563469a5"
+  },
+  "jdbcOriginalRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/coverage-unfiltered.tsv",
+    "sha256": "8290dfec9bf356592a67e41c4d112d07250101331ad7726a10d5e7e05cadc1ee"
+  },
+  "originalCounterScopesDistinct": true,
+  "newProductExecutions": 0,
+  "coverageMerged": false,
+  "realJdbcOps": 0,
+  "remaining": [
+    "A1-02 held app/owners",
+    "A3-03 actual API/transaction integration",
+    "F02/F03 and exact same-source 451",
+    "formal reviewer receipt"
+  ],
+  "formalAcceptanceId": null,
+  "jdbcOriginalBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/begin.json",
+    "sha256": "ad6ece260c6b134fbbce9184b3e9612b8a7ace7098cfbc7ff57119c19a99d954"
+  },
+  "jdbcExactOriginalBytePins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod/dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class",
+      "sha256": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class",
+      "sha256": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+    }
+  ]
+}
