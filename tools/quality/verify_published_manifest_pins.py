@@ -16,6 +16,7 @@ COMMIT = re.compile(r"[0-9a-f]{40}")
 SHA256 = re.compile(r"[0-9a-f]{64}")
 PUBLIC_ROOTS = {"documents", "evidence", "program", "src", "tools"}
 CURRENT_BASELINE = ("program", "characterization", "baseline", "current")
+REGULAR_FILE_MODES = {b"100644", b"100755"}
 
 
 def git(repo, *arguments, required=True):
@@ -89,27 +90,40 @@ def audit(repo, start, end, *, staged=False):
     current = staged_tree or end
     comparison = (start, staged_tree) if staged_tree else (span,)
     changed = git(
-        repo, "diff", "--name-only", "--diff-filter=AMR", "-z", *comparison, "--", "evidence/01_PT"
+        repo, "diff", "--name-only", "--diff-filter=AMRT", "-z", *comparison, "--", "evidence/01_PT"
     )
     paths = changed.stdout.decode("utf-8").split("\0")
     manifests = sorted(p for p in paths if PurePosixPath(p).name == "manifest.json")
     counts = Counter(current=0, historical=0, externalOrProtected=0)
     unresolved = []
 
-    @cache
-    def blob_hash(revision, path):
+    def read_regular_file(revision, path):
         if revision != staged_tree and not is_commit(revision):
             return None
-        result = git(repo, "cat-file", "blob", f"{revision}:{path}", required=False)
-        return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
+        entry = git(
+            repo, "ls-tree", "-z", "--format=%(objectmode) %(objectname)", revision, "--", path
+        ).stdout
+        mode, _, object_id = entry.rstrip(b"\0").partition(b" ")
+        if mode not in REGULAR_FILE_MODES:
+            return None
+        return git(repo, "cat-file", "blob", object_id.decode("ascii")).stdout
+
+    @cache
+    def blob_hash(revision, path):
+        content = read_regular_file(revision, path)
+        return hashlib.sha256(content).hexdigest() if content is not None else None
 
     @cache
     def path_history(path):
         return git(repo, "log", "--format=%H", span, "--", path).stdout.decode().splitlines()
 
     for manifest in manifests:
+        raw_manifest = read_regular_file(current, manifest)
+        if raw_manifest is None:
+            unresolved.append({"manifest": manifest, "reason": "NON_REGULAR_MANIFEST"})
+            continue
         content = json.loads(
-            git(repo, "cat-file", "blob", f"{current}:{manifest}").stdout,
+            raw_manifest,
             object_pairs_hook=unique_object,
             parse_constant=invalid_constant,
         )

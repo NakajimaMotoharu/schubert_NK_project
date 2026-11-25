@@ -221,6 +221,46 @@ class PublishedManifestPinsTest(unittest.TestCase):
         self.assertEqual(1, result["current"])
         self.assertEqual([], result["unresolved"])
 
+    def test_manifest_type_change_is_reported_in_both_git_snapshots(self):
+        self.manifest({"reference": pin(FIXTURE, INITIAL)})
+        start = self.commit()
+        manifest = self.repo / MANIFEST
+        manifest.unlink()
+        manifest.symlink_to("unused-fixture.json")
+        self.git("add", MANIFEST)
+
+        staged = audit(self.repo, start, start, staged=True)
+        committed = audit(self.repo, start, self.commit())
+
+        for result in (staged, committed):
+            with self.subTest(staged="stagedTree" in result):
+                self.assertEqual(1, result["manifests"])
+                self.assertEqual(0, result["current"])
+                self.assertEqual(
+                    [{"manifest": MANIFEST, "reason": "NON_REGULAR_MANIFEST"}],
+                    result["unresolved"],
+                )
+
+    def test_public_pin_requires_the_bytes_of_a_regular_git_file(self):
+        linked = "src/linked.txt"
+        target = Path(FIXTURE).name
+        (self.repo / linked).symlink_to(target)
+        reference = pin(linked, target.encode())
+        self.manifest({"link": reference, "regular": pin(FIXTURE, INITIAL)})
+        self.git("add", linked, MANIFEST)
+
+        staged = audit(self.repo, self.original, self.original, staged=True)
+        committed = audit(self.repo, self.original, self.commit())
+
+        for result in (staged, committed):
+            with self.subTest(staged="stagedTree" in result):
+                self.assertEqual(1, result["current"])
+                self.assertEqual(0, result["historical"])
+                self.assertEqual(
+                    [{"manifest": MANIFEST, **reference, "source": None}],
+                    result["unresolved"],
+                )
+
     def test_implicit_reference_uses_its_published_history(self):
         self.write(FIXTURE, UPDATED)
         self.commit()
