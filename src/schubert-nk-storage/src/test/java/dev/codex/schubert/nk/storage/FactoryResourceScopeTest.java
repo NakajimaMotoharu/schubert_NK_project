@@ -318,20 +318,16 @@ final class FactoryResourceScopeTest {
         List.of(
             "open-outer", "open-inner", "body-inner", "close-inner", "body-outer", "close-outer"),
         order);
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new StorageFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var a = new Harness();
       var b = new Harness();
-      var first = executor.submit(() -> a.run(null, null));
-      var second = executor.submit(() -> b.run(null, null));
+      var first = workers.executor().submit(() -> a.run(null, null));
+      var second = workers.executor().submit(() -> b.run(null, null));
       assertEquals("result", first.get(10, TimeUnit.SECONDS));
       assertEquals("result", second.get(10, TimeUnit.SECONDS));
       a.closed();
       b.closed();
       assertNotSame(a.token, b.token);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -575,30 +571,33 @@ final class FactoryResourceScopeTest {
           assertTrue(owned.live);
           return owned;
         };
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new StorageFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var first =
-          executor.submit(
-              () ->
-                  ResourceScope.<Token, Token, IOException>handoff(
-                      () -> {
-                        opened.incrementAndGet();
-                        a.live = true;
-                        return a;
-                      },
-                      owned -> closed.incrementAndGet(),
-                      assembly));
+          workers
+              .executor()
+              .submit(
+                  () ->
+                      ResourceScope.<Token, Token, IOException>handoff(
+                          () -> {
+                            opened.incrementAndGet();
+                            a.live = true;
+                            return a;
+                          },
+                          owned -> closed.incrementAndGet(),
+                          assembly));
       var second =
-          executor.submit(
-              () ->
-                  ResourceScope.<Token, Token, IOException>handoff(
-                      () -> {
-                        opened.incrementAndGet();
-                        b.live = true;
-                        return b;
-                      },
-                      owned -> closed.incrementAndGet(),
-                      assembly));
+          workers
+              .executor()
+              .submit(
+                  () ->
+                      ResourceScope.<Token, Token, IOException>handoff(
+                          () -> {
+                            opened.incrementAndGet();
+                            b.live = true;
+                            return b;
+                          },
+                          owned -> closed.incrementAndGet(),
+                          assembly));
       assertSame(a, first.get(10, TimeUnit.SECONDS));
       assertSame(b, second.get(10, TimeUnit.SECONDS));
       assertNotSame(a, b);
@@ -610,9 +609,6 @@ final class FactoryResourceScopeTest {
       b.live = false;
       assertFalse(a.live);
       assertFalse(b.live);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
