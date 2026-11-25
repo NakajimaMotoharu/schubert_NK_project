@@ -29,7 +29,7 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-WEB-RCPTPORT001..010. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
+/** PT-WEB-RCPTPORT001..011. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
 final class ReceiptReferencePortTest {
   private static final String ID = "00000000000000000000000001";
   private static final String OTHER_ID = "00000000000000000000000002";
@@ -385,6 +385,31 @@ final class ReceiptReferencePortTest {
             POINT_ROLLBACK,
             POINT_CONNECTION_CLOSE),
         connection.events);
+  }
+
+  @Test
+  void nonUtcValuesProjectToTheSameInstantAndInsertBindsUtc() {
+    String utc = "1582-10-15T00:00:00.123Z";
+    Instant expected = Instant.parse(utc);
+    for (String stored :
+        List.of("1582-10-14T17:00:00.123-07:00", "1582-10-15T09:30:00.123+09:30")) {
+      Fixture fixture = new Fixture();
+      fixture.rows = List.of(new Row(ID, 7L, OffsetDateTime.parse(stored)));
+      var repository = new ReceiptReferenceRepository(fixture.source());
+
+      assertEquals(expected, repository.find(ID).orElseThrow().submittedAt());
+      repository.register(new ReceiptReference(ID, 7, expected));
+
+      assertEquals(2, fixture.connections.size());
+      Conn insert = fixture.connections.getLast();
+      assertEquals(OffsetDateTime.parse(utc), insert.statements.getFirst().bindings.get(3));
+      assertEquals(2, insert.statements.size());
+      for (Conn connection : fixture.connections) {
+        assertEquals(1, connection.commits);
+        assertEquals(0, connection.rollbacks);
+        assertEquals(1, connection.closeAttempts);
+      }
+    }
   }
 
   @Test

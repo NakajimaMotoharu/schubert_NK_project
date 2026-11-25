@@ -36,3 +36,7 @@ PG18874/source e8ccb3918は全8成功・F/E/S0だがregisterのstatement.close�
 ## PT-WEB-RCPTPORT010 捕捉したNPEの伝播
 
 451 §5、SS331 §9.4、SS332、QA-048。JDBC interfaceの合成ResultSetが最初の `next()` でテスト作成のNullPointerExceptionを送出する。受付参照の読取は元と同じ例外を呼出元へ伝える。空結果や成功を返さず、行と文のclose、rollback、connectionのcloseをこの順で各1回試みる。commitは0回。期待順は所有契約から固定する。入力nullを拒否する元PTと別に、広いRuntimeException catchの後条件を検証する。実DB、JDBC driver、ネットワークは使わない。
+
+## PT-WEB-RCPTPORT011 非ゼロoffsetとUTC bind
+
+SS331 §9.4、SS332 SSC056、QA-048、WBS-P004-05/2。合成ResultSetの提出時刻を `1582-10-14T17:00:00.123-07:00` または `1582-10-15T09:30:00.123+09:30` とする。どちらも手計算のUTC時刻 `1582-10-15T00:00:00.123Z` と一致する。読取はこのInstantを返し、登録時の書込は同じ時刻のUTC OffsetDateTimeを第3引数に渡す。登録時のreadbackも同時刻として照合し、読取・登録それぞれcommitと所有接続closeが1回、rollbackが0回。fixtureは日付・時刻・offsetが独立に固定された文字列で、実DBやJDBC driverは使わない。
