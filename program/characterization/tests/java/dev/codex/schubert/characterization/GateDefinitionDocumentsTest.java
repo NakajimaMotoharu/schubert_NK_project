@@ -495,6 +495,36 @@ final class GateDefinitionDocumentsTest {
     }
   }
 
+  /** PT-CHR-DEF-MEDIA001: UI264 requires both ordinary and first-range observations. */
+  @Test
+  void requiredVideoRangeObservationsCannotDisappearFromDefinitions() throws IOException {
+    var ordinaryOnly = fixture();
+    object(ordinaryOnly, REQUIREMENTS)
+        .withObject("/supplementalChecks")
+        .putArray("CHR-M04")
+        .add("no-range-200");
+    var rangeOnly = fixture();
+    object(rangeOnly, REQUIREMENTS)
+        .withObject("/supplementalChecks")
+        .putArray("CHR-M04")
+        .add("multi-range-first");
+    var omitted = fixture();
+    object(omitted, REQUIREMENTS).withObject("/supplementalChecks").remove("CHR-M04");
+    var replaced = fixture();
+    object(replaced, REQUIREMENTS)
+        .withObject("/supplementalChecks")
+        .putArray("CHR-M04")
+        .add("no-range-200")
+        .add("other-observation");
+    var diagnostic = List.of("REQ_VIDEO_RANGE_SUPPLEMENTAL");
+    assertAll(
+        () -> assertEquals(diagnostic, validate(ordinaryOnly)),
+        () -> assertEquals(diagnostic, validate(rangeOnly)),
+        () -> assertEquals(diagnostic, validate(omitted)),
+        () -> assertEquals(diagnostic, validate(replaced)),
+        () -> assertEquals(List.of(), validate(fixture())));
+  }
+
   /** PT-CHR-DEF-015: structure of a declared NK-only supplemental case. */
   @Test
   void declaredNkOnlySupplementalChecksMustBeDistinctNonblankStrings() throws Exception {
