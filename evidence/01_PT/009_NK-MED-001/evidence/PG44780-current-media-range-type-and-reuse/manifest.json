@@ -1,0 +1,119 @@
+{
+  "run": "PG44780",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P009-04/2"
+  ],
+  "source": "46a14b8342336fddd6e8458119ac7621ad62cda4",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:33:18.578282+00:00",
+  "actualExit": 4,
+  "matchingPrior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42916-web-media-without-private-reflection-v1/manifest.json",
+    "sha256": "5746dcf5445afa94517242266e78455c9e388c94074559d98b08307efdf7b1a3"
+  },
+  "matchingFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+    "sha256": "817b9474f10e064ef810459cbeb0920b9f6bd22955b68bd04941672f0cff23c2"
+  },
+  "matchingWebPhysical": 13,
+  "matchingProtocolMembers": 5,
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "prior12Names": [
+    "configuredBoundariesAndDefaultTwentyRejectTwentyFirstAndRecover",
+    "descriptorBindingRejectsEachMismatchBeforeSourceAdmission",
+    "directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit",
+    "eachCheckedFailureIsRedactedAndReleasesSinglePermit",
+    "headNeverRequestsBodyAndAttachmentIgnoresRange",
+    "invalidUnitAndOverLimitEndDoNotRequestOrReadABody",
+    "literalStatusHeadersAndByteIntervals",
+    "nullContractGuardsRejectBeforeAnyPortAndDoNotConsumePermit",
+    "replyFixtureRejectsMutableHeadersBeforeTakingItsSnapshot",
+    "runtimeFailureEscapesUnchangedAndStillReleasesPermit",
+    "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState",
+    "writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit"
+  ],
+  "priorXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "d93de984c215316ab129946538642fd12146668334cfe8ffcaf8091192662530"
+  },
+  "prior25RawCoverageNotSubset": {
+    "INSTRUCTION": {
+      "missed": 21,
+      "covered": 701
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 74
+    },
+    "LINE": {
+      "missed": 6,
+      "covered": 129
+    },
+    "COMPLEXITY": {
+      "missed": 3,
+      "covered": 73
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 36
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 9
+    }
+  },
+  "productExecutions": 0,
+  "requirements": [
+    "UI223/235/237",
+    "SS311/333",
+    "PT-MED-027..032のin-memory port oracle。実FileSourceと既存合成file suiteは別。"
+  ],
+  "rawIssues": [
+    {
+      "file": "MediaRangeService.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "96"
+    }
+  ],
+  "reviewDisposition": "Mapはrespond一呼出だけのローカル値。Map.copyOfで作った独立immutable値をResponseへ渡す。共有更新をしないため並行Mapは局所の契約に対して不要と判断。品質担当判定は未受領。",
+  "staticReceipts": {
+    "nullaway": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-nullaway/begin.json",
+        "sha256": "ad45668b1af2d2a3a3c04fae659268d980e86e8eac55fb8f900ed83d821ac5bf"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-nullaway/terminal.json",
+        "sha256": "62adeaa2f1acb0ce4a4b69356bb6aebe6c7535f9f450a9d9ca6740e7bf2460b9"
+      }
+    },
+    "spotbugs": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-spotbugs/begin.json",
+        "sha256": "a761a189aafc4836f6abaaca567510574c1295e1b387908e1dc8b51c67eb6fce"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-spotbugs/terminal.json",
+        "sha256": "b0bd02bb52d8c31850f982ad22d3b2c4cecffe58b4df4ba0189f6012aec2936a"
+      }
+    },
+    "pmd": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-pmd/begin.json",
+        "sha256": "17cc14050cd7dc7c0b51c4be8ee644eaf7a807337df8cc647fb090c7461127f5"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44780-current-web-http-range-and-memory-contract-pmd/terminal.json",
+        "sha256": "9148bc346d78edfe64e72020f377f490e25df78b664b45b6be04139245d75b55"
+      }
+    }
+  },
+  "allToolCleanAddition": 0,
+  "actualHttpFileNativeOrHeldTests": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
