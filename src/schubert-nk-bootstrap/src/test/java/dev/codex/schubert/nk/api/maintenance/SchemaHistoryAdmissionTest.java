@@ -32,8 +32,8 @@ import org.junit.jupiter.api.Test;
 /** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
 final class SchemaHistoryAdmissionTest {
   private static final String TYPE_COLUMN = "type";
-  private static final String VERSION_BEFORE_ASSET_PERMISSIONS = "030";
-  private static final String ASSET_PERMISSIONS_VERSION = "031";
+  private static final String AUDIO_ROLE_VERSION = "030";
+  private static final String ROUTINE_PRIVILEGES_VERSION = "031";
   private static final int SUPPRESSED_GRAPH_CASE = 1;
   private static final int CYCLIC_GRAPH_CASE = 2;
   private static final String SCHEMA_SCRIPT = "\"schubert_meta\"";
@@ -166,14 +166,14 @@ final class SchemaHistoryAdmissionTest {
             new Row(1, "029", FIXTURE_SQL_5B7E398D, previousScript, 29, true),
             new Row(
                 2,
-                VERSION_BEFORE_ASSET_PERMISSIONS,
+                AUDIO_ROLE_VERSION,
                 FIXTURE_SQL_5B7E398D,
                 currentScript,
                 -30,
                 true));
     var admission = new SchemaHistoryAdmission(expected);
     var previous = versionedRow(1, "029", previousScript, 29);
-    var current = versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, -30);
+    var current = versionedRow(2, AUDIO_ROLE_VERSION, currentScript, -30);
     var exact = new Probe(List.of(schema(), previous, current));
     assertEquals(expected, admission.inspect(exact.connection()));
     assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
@@ -184,15 +184,15 @@ final class SchemaHistoryAdmissionTest {
             List.of(
                 schema(),
                 previous,
-                versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__unknown.sql", -30)),
+                versionedRow(2, ROUTINE_PRIVILEGES_VERSION, "V031__unknown.sql", -30)),
             List.of(
                 schema(),
                 previous,
-                versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, "V030__different.sql", -30)),
+                versionedRow(2, AUDIO_ROLE_VERSION, "V030__different.sql", -30)),
             List.of(
                 schema(),
                 previous,
-                versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, 30)))) {
+                versionedRow(2, AUDIO_ROLE_VERSION, currentScript, 30)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
       assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
@@ -210,21 +210,21 @@ final class SchemaHistoryAdmissionTest {
             SCHEMA_ROW,
             new Row(
                 1,
-                VERSION_BEFORE_ASSET_PERMISSIONS,
+                AUDIO_ROLE_VERSION,
                 FIXTURE_SQL_5B7E398D,
                 priorScript,
                 priorChecksum,
                 true),
             new Row(
-                2, ASSET_PERMISSIONS_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
+                2, ROUTINE_PRIVILEGES_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
     var admission = new SchemaHistoryAdmission(expected);
-    var prior = versionedRow(1, VERSION_BEFORE_ASSET_PERMISSIONS, priorScript, priorChecksum);
+    var prior = versionedRow(1, AUDIO_ROLE_VERSION, priorScript, priorChecksum);
     var exact =
         new Probe(
             List.of(
                 schema(),
                 prior,
-                versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, aclChecksum)));
+                versionedRow(2, ROUTINE_PRIVILEGES_VERSION, aclScript, aclChecksum)));
     assertEquals(expected, admission.inspect(exact.connection()));
     assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
 
@@ -232,11 +232,11 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             List.of(schema(), prior),
             List.of(
-                schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, 1880247818)),
+                schema(), prior, versionedRow(2, ROUTINE_PRIVILEGES_VERSION, aclScript, 1880247818)),
             List.of(
                 schema(),
                 prior,
-                versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__different.sql", aclChecksum)),
+                versionedRow(2, ROUTINE_PRIVILEGES_VERSION, "V031__different.sql", aclChecksum)),
             List.of(schema(), prior, versionedRow(2, "032", "V032__unknown.sql", aclChecksum)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
