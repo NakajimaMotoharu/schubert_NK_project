@@ -7,15 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.LockSupport;
 import org.junit.jupiter.api.Test;
 
 /** 1870/APISTOP001..020: literal arithmetic and own finite clock ports, no runtime hooks/TERM. */
@@ -49,15 +50,30 @@ final class ApiStopBudgetTest {
     }
   }
 
+  private static void assertWaitingForOwner(long reader, long owner) {
+    var threads = ManagementFactory.getThreadMXBean();
+    long started = System.nanoTime();
+    while (System.nanoTime() - started < TimeUnit.SECONDS.toNanos(5)) {
+      var waiting = threads.getThreadInfo(reader);
+      if (waiting != null && waiting.getLockOwnerId() == owner) return;
+      LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+    }
+    throw new AssertionError("reader never waited for the first clock owner");
+  }
+
   @Test
   void apiStop019AtomicClaimPublishesStopAndWaitsForTheFirstClock() throws Exception {
     var f = new Fixture();
     f.now.set(37);
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
+    var readerStarted = new CountDownLatch(1);
+    var firstThread = new AtomicLong();
+    var readerThread = new AtomicLong();
     f.beforeTime =
         () -> {
           if (f.reads.get() == FIRST_CLOCK_READ) {
+            firstThread.set(Thread.currentThread().threadId());
             entered.countDown();
             await(release);
           }
@@ -69,8 +85,15 @@ final class ApiStopBudgetTest {
       try {
         await(entered);
         assertTrue(f.budget.stopping());
-        remaining = executor.submit(f.budget::remainingNanos);
-        assertThrows(TimeoutException.class, () -> remaining.get(50, TimeUnit.MILLISECONDS));
+        remaining =
+            executor.submit(
+                () -> {
+                  readerThread.set(Thread.currentThread().threadId());
+                  readerStarted.countDown();
+                  return f.budget.remainingNanos();
+                });
+        await(readerStarted);
+        assertWaitingForOwner(readerThread.get(), firstThread.get());
         assertEquals(1, f.reads.get());
       } finally {
         release.countDown();
