@@ -56,8 +56,7 @@ final class GateRepeatCompletenessTest {
   void equalCompleteCaptureWithARenameReportsEachSideOfTheDifference() throws Exception {
     Path first = capture("first", 26);
     Path second = capture("second", 26);
-    Files.move(
-        second.resolve(FIRST_ARTIFACT), second.resolve("artifacts").resolve("renamed.json"));
+    Files.move(second.resolve(FIRST_ARTIFACT), second.resolve("artifacts").resolve("renamed.json"));
     Path output = temporaryDirectory.resolve("complete-rename.json");
     var failure =
         assertThrows(
