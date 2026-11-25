@@ -1,0 +1,297 @@
+{
+  "source": "dee2957e71147f59e3cbc9086d76dda3acc9d496",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalDesign": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "unitAndToolContexts": {
+    "systemd/schubert-nk-maintenance.timer.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+        "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-008"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42370-g1306-daily-timer-explicit-values-v1/manifest.json",
+        "sha256": "801fd1f4e9088c490fb74ecc0b7491ea41257d6347b020f72ce4d6fee785d6c6"
+      },
+      "proofScope": "fixed calendar declaration only",
+      "currentOwnedInvocation": false
+    },
+    "operations/inbox-inspector.sh.template": {
+      "input": {
+        "path": "src/deployment/operations/inbox-inspector.sh.template",
+        "sha256": "4069033ac536e63c4d9507f31a8d152ee1dd8a89e211d3bb17100dac9e8cc6c3"
+      },
+      "scopeOwner": "WBS-C08",
+      "latestApprovedRd": [
+        "OPS-002",
+        "MON-003"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "local dispatch declaration; signed current ownership missing",
+      "currentOwnedInvocation": false
+    },
+    "systemd/artemis.service": {
+      "input": {
+        "path": "src/deployment/systemd/artemis.service",
+        "sha256": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009",
+        "MQ-001"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "dependency declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/caddy.service.d/schubert-nk-startup-policy.conf": {
+      "input": {
+        "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+        "sha256": "3ded75c5cfb8cb84ffc7a4bff695ed9f57558e1716a1fbb614a33902ebc92557"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+        "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+      },
+      "proofScope": "supplementary file declarations and ordering",
+      "currentOwnedInvocation": false
+    },
+    "systemd/caddy.service.d/schubert-nk-stop-policy.conf": {
+      "input": {
+        "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+        "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-003"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+        "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+      },
+      "proofScope": "supplementary file declarations",
+      "currentOwnedInvocation": false
+    },
+    "systemd/optional/inbox-inspector-context-previous.conf": {
+      "input": {
+        "path": "src/deployment/systemd/optional/inbox-inspector-context-previous.conf",
+        "sha256": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-002",
+        "MON-003"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "approved optional service description",
+      "currentOwnedInvocation": false
+    },
+    "systemd/optional/inbox-inspector-response-previous.conf": {
+      "input": {
+        "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
+        "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-002",
+        "MON-003"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "approved optional service description",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-api.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-api.service.template",
+        "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-backup.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+        "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009",
+        "OPS-010",
+        "OPS-017"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+        "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+      },
+      "proofScope": "fixed Backup service text",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-bootstrap-admin.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+        "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "FUN-009",
+        "MON-004"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+        "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+      },
+      "proofScope": "fixed bootstrap Admin declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-cleanup.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+        "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009",
+        "OPS-013",
+        "OPS-017"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-expiry-cleanup.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+        "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-inbox-inspector.service": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-inbox-inspector.service",
+        "sha256": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-002",
+        "MON-003"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-morning-controller.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+        "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-010"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source declaration",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-morning.target.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+        "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": null,
+      "proofScope": "source dependency ordering",
+      "currentOwnedInvocation": false
+    },
+    "systemd/schubert-nk-web.service.template": {
+      "input": {
+        "path": "src/deployment/systemd/schubert-nk-web.service.template",
+        "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+      },
+      "scopeOwner": "WBS-C02",
+      "latestApprovedRd": [
+        "OPS-001",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "designScope": "SS342/SS343",
+      "oldInputIdentical": true,
+      "sourceDeclarationReference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43734-caddy-web-order-current-readonly/manifest.json",
+        "sha256": "2228eada2de174dbe26f87482fe8c60b111bf68b8bdbb68b0cdfdba2a5589cc2"
+      },
+      "proofScope": "same configuration declaration checked by independent dependency graph",
+      "currentOwnedInvocation": false,
+      "configurationGraph": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43734-caddy-web-order-current-v2/independent-graph.json",
+        "sha256": "9a9ce273bbca9af9fb642a380783f5a97be413fcb39680803482a584534ab7d9"
+      }
+    }
+  }
+}
