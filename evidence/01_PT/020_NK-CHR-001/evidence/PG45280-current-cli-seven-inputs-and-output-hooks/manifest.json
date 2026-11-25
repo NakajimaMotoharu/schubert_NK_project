@@ -1,0 +1,162 @@
+{
+  "run": "PG45280",
+  "source": "bd5b803192fd377431a0327ce4865ec42268e234",
+  "toolSource": "4f69b6a033f8ffeee6c61352962a51116f112291",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P020-01.01/2-a",
+  "relatedWbs": [
+    "WBS-P020-01.01/2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T13:07:16.550117+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "actualToolTrials": 7,
+  "cumulativeScopeToolTrials": 200,
+  "qualifiedToolSuccesses": 199,
+  "productEvidenceAdded": 0,
+  "cliBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/begin.json",
+    "sha256": "a435024d1e670d35483573b5ccc042555eca872a20f92610bb7b5f6303a2414f"
+  },
+  "cliEnd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/terminal.json",
+    "sha256": "82877b5b3cd20807ff91da4d42a9c3bdd2681e44b2eecfccd02c2dd4787a19bd"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/junit/TEST-junit-jupiter.xml",
+    "sha256": "9cca6af4f1393d1feced7207acdc45baa07dbef9e5f1463829cff0a5f241932c"
+  },
+  "outputArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45228-chr-current-quality-package/source/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "e1f199c78f69b490e95474cf7d1ccf8ed6d359120b66c23eb14f0afd6b03f03e"
+  },
+  "oldCaseIdsSeparate": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45238-current-cli-packaged-lineage/manifest.json",
+    "sha256": "c3e6d42191af6b8f38beb2306d680289b2cb63d9f516d789d6f13ab3b4ea48dc"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/unit.exec",
+    "sha256": "07820c90f926689b03d73864eb796f721a3792a4a919e6bada50d5aebe2b0d86"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45280-current-chr-cli-seven-inputs-and-output-hooks/raw.log",
+    "sha256": "e52d85801624db2c85eeb66468861739b2c780011502a5d2ec255b5f3fec8292"
+  },
+  "rawMissAndHit": {
+    "INSTRUCTION": [
+      1763,
+      662
+    ],
+    "BRANCH": [
+      180,
+      50
+    ],
+    "LINE": [
+      324,
+      139
+    ],
+    "COMPLEXITY": [
+      150,
+      54
+    ],
+    "METHOD": [
+      51,
+      33
+    ],
+    "CLASS": [
+      0,
+      3
+    ]
+  },
+  "rawClassRecords": [
+    [
+      "CLASS",
+      "dev/codex/schubert/characterization/GateCli",
+      "b1d7f47de8928d6c",
+      "true",
+      "556",
+      "49",
+      "INSTRUCTION:1753:607",
+      "BRANCH:180:50",
+      "LINE:324:129",
+      "COMPLEXITY:147:45",
+      "METHOD:48:24",
+      "CLASS:0:1"
+    ],
+    [
+      "CLASS",
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput",
+      "600ee4481afbd7c4",
+      "true",
+      "5",
+      "48",
+      "INSTRUCTION:0:34",
+      "BRANCH:0:0",
+      "LINE:0:9",
+      "COMPLEXITY:0:5",
+      "METHOD:0:5",
+      "CLASS:0:1"
+    ],
+    [
+      "CLASS",
+      "dev/codex/schubert/characterization/GateCli$TreeStats",
+      "783e3a3a86ae5343",
+      "true",
+      "7",
+      "65584",
+      "INSTRUCTION:10:21",
+      "BRANCH:0:0",
+      "LINE:0:1",
+      "COMPLEXITY:3:4",
+      "METHOD:3:4",
+      "CLASS:0:1"
+    ]
+  ],
+  "selected": [
+    {
+      "fixture": "GateCliTest",
+      "method": "mainRejectsMissingUnknownAndIncompleteCommands",
+      "independentExpectation": "引数なし、未知、必要引数欠落、root未設定または空を固定例外で拒否"
+    },
+    {
+      "fixture": "GateCliTest",
+      "method": "hashRejectsNullSourceBeforeIoWithFixedDiagnostic",
+      "independentExpectation": "nullをI/O前に固定例外で拒否"
+    },
+    {
+      "fixture": "GateCliTest",
+      "method": "sourceInventoryContainsExactlyOneDocument",
+      "independentExpectation": "一つの合成目録で成功、追記文書や重複欄を拒否し出力なし"
+    },
+    {
+      "fixture": "GateCliTest",
+      "method": "sourceInventoryRejectsWrongJsonTypesEvenWhenTheCountTextMatches",
+      "independentExpectation": "合成目録の各数値型を固定件数と個別比較"
+    },
+    {
+      "fixture": "GateOutputFailureContractTest",
+      "method": "failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim",
+      "independentExpectation": "出力代理の三段階失敗で残留・二重所有なし"
+    },
+    {
+      "fixture": "GateOutputFailureContractTest",
+      "method": "nullPortIsRejectedBeforeAnyOutputClaim",
+      "independentExpectation": "出力port未指定では所有取得なし"
+    },
+    {
+      "fixture": "GateOutputRootValueTest",
+      "method": "destinationWithoutParentDoesNotInvokeOutputPort",
+      "independentExpectation": "親なしoutputをI/O前に拒否"
+    }
+  ],
+  "testedRealPreflight": false,
+  "testedActualCurrentOrNk": false,
+  "held": [
+    "runner FileStore 20GiB",
+    "real environment/ownership",
+    "Current transaction capture",
+    "whole451"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
