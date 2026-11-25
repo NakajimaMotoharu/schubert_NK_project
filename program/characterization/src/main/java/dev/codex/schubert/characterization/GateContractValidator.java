@@ -496,8 +496,9 @@ final class GateContractValidator {
     JsonNode supplemental = requirements.path("supplementalChecks");
     require(supplemental.isObject(), "REQ_SUPPLEMENTAL_NOT_OBJECT", failures);
     // UI264 CHR-M04 requires both observations, even when their case entry was omitted.
+    List<String> videoRangeChecks = strings(supplemental.path("CHR-M04"));
     require(
-        strings(supplemental.path("CHR-M04")).containsAll(List.of("no-range-200", "multi-range-first")),
+        videoRangeChecks.containsAll(List.of("no-range-200", "multi-range-first")),
         "REQ_VIDEO_RANGE_SUPPLEMENTAL",
         failures);
     supplemental
