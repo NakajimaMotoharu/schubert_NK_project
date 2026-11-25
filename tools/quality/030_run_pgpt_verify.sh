@@ -30,6 +30,7 @@ printf '%s\n' "$source_commit" > "$record.commit"
 printf '%s\n' "$source_branch" > "$record.branch"
 date --iso-8601=seconds > "$record.started"
 result=0
+unset MAVEN_ARGS
 JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify > "$record.log" 2>&1 || result=$?
 date --iso-8601=seconds > "$record.completed"
 if [ "$result" -eq 0 ]; then
