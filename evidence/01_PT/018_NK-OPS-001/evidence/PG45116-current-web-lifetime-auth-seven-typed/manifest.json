@@ -1,0 +1,145 @@
+{
+  "run": "PG45116",
+  "source": "c1381ebe8980b5821a60894ee7223b1f31a777f0",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 4,
+  "terminalAtUTC": "2026-11-25T09:16:30.637233+00:00",
+  "typedAdditional": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+      "sha256": "e3b00633a7e970eec6770d0ba60a57ef9cf907e4e34340f835b507cf1a1e9414"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+      "sha256": "f050814abef82cd0d2b02b4767b827348f3d111b8cfb02756e8f77f7db09d0be"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java",
+      "sha256": "b0d53b2888a852d64b75fc8c900895310fc644cf2a1dc83df5133374418d8f3c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+      "sha256": "235f3b543f74cd8efe684e12103e69da98e2369c8d6637d2510418fefa80c9a5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginContextProbe.java",
+      "sha256": "9b5d5d350fca0556892aa0bd6c48a6f759c27e1e13179da008d2ccb766e854c9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterFactory.java",
+      "sha256": "8599352c41f8941193422d94f01b0996fb5c48330d3bdc21c65987b58e96cc14"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java",
+      "sha256": "2011dfa51a0bf7c7c696fc23cc2c7333ecc1885f1aea1cab462b8f51c4d9c195"
+    }
+  ],
+  "before": {
+    "api": 177,
+    "web": 187
+  },
+  "after": {
+    "api": 177,
+    "web": 194
+  },
+  "sourceInputs": 22,
+  "physical": 26,
+  "explicitTargetPhysical": 9,
+  "nullAway": 0,
+  "initialMissingFullyQualifiedSdk": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45116-current-web-ready-auth-seven-types/terminal.json",
+    "sha256": "adceb24f011c25561c947cf477ee90b7093b62a7acd79fba792231137d23c5f4"
+  },
+  "initialCompilerDidNotRunTests": true,
+  "correctedSdk": "normal Tomcat embeds Servlet6.1; standalone servlet duplicate removed",
+  "spotbugs": {
+    "exit": 0,
+    "findings": 0,
+    "missingOrErrors": 0
+  },
+  "pmd": {
+    "exit": 4,
+    "findings": [
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 22,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 23,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 58,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 60,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 69,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "CompareObjectsWithEquals",
+        "line": 69,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 79,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebProcessLifetime.java",
+        "rule": "DoNotUseThreads",
+        "line": 114,
+        "technicalContext": "live process control owner and Thread identity"
+      },
+      {
+        "source": "WebRuntimeStop.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 35,
+        "technicalContext": "owned server shutdown retains failure with partial cleanup"
+      }
+    ],
+    "ownerDecisionPending": true
+  },
+  "priorReferenceGraph": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45112-source-only-api-web-additional-candidate-graph/manifest.json",
+    "sha256": "2afc261f6583bf22c8d764811ca6034d81b3202c9649697b76467d334e707b52"
+  },
+  "buildBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45116-current-web-ready-auth-seven-types-v2/begin.json",
+    "sha256": "94284ca498f02b6fe01ccb2224f3e61527e687fa0965ae60287b9ccfc216c398"
+  },
+  "buildTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45116-current-web-ready-auth-seven-types-v2/terminal.json",
+    "sha256": "c411eba3116977004c7bb1c25ea15bf09276e07c2b55a3745eeb2daf0e14b852"
+  },
+  "staticBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45116-current-web-ready-auth-seven-statics/begin.json",
+    "sha256": "6f0e329963d424a651544f73f47f7da52edd206691bf4599223ba996ebe06f4f"
+  },
+  "staticTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45116-current-web-ready-auth-seven-statics/terminal.json",
+    "sha256": "d8d9235284094087e689a1b44165856c30f0f51a82784251998b464709465457"
+  },
+  "newProductTrials": 0,
+  "noActualAuthenticationOrOwnedStop": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
