@@ -42,8 +42,16 @@ def verify(legacy, current, binding, tasks, git_names, separation_proofs):
             and type(binding['newAcceptance']) is int and binding['newAcceptance'] == 0
             and binding['effortRate'] is None, 'registry cannot transfer runtime/acceptance')
     require(value_digest(legacy) == binding['legacySemanticSha256'], 'frozen legacy changed')
-    require(value_digest(current) == binding['registrySemanticSha256'], 'unrecorded registry change')
     old, now = _rows(legacy), _rows(current)
+    if binding.get('projectRetiredLegacyRows') is True:
+        # Active registration follows the staged roster. The older preparation
+        # view can still show exact retired rows from the frozen legacy source.
+        retired = sorted(set(old) - set(now))
+        require(retired == binding['retainedRetiredHistoricalPaths']
+                and not set(retired).intersection(git_names), 'invalid retired legacy projection')
+        current = [*current, *(old[name] for name in retired)]
+        now = _rows(current)
+    require(value_digest(current) == binding['registrySemanticSha256'], 'unrecorded registry change')
     require(set(old) <= set(now), 'legacy registration removed')
     additions = sorted(set(now) - set(old))
     require(binding['registeredAdditions'] == additions, 'explicit exact additions required')

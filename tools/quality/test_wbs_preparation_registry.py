@@ -80,6 +80,20 @@ class RegistryTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'new artifact absent'):
             verify(old, current, b, TASKS, {A}, {})
 
+    def test_projection_uses_exact_retired_legacy_rows_without_changing_active_registration(self):
+        old, current, b = fixture()
+        active = current[1:]
+        b.update(projectRetiredLegacyRows=True, retainedRetiredHistoricalPaths=[A],
+                 registrySemanticSha256=independent_sha([current[1], old[0]]))
+        result = verify(old, active, b, TASKS, {B}, {})
+        self.assertEqual(2, result['preparationRows'])
+        self.assertEqual([B], [row['path'] for row in active])
+        self.assertFalse(result['runtimeQualified'])
+        for retired, names in [([A], {A, B}), ([], {B}), ([A, B], {B})]:
+            with self.subTest(retired=retired, names=names), self.assertRaisesRegex(
+                    ValueError, 'invalid retired legacy projection'):
+                verify(old, active, dict(b, retainedRetiredHistoricalPaths=retired), TASKS, names, {})
+
     def test_separate_cost_owner_needs_exact_pinned_existing_evidence(self):
         old, current, b = fixture(); current[1]['costOwner'] = 'WBS-Y'
         b['registrySemanticSha256'] = independent_sha(current)
