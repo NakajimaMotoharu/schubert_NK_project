@@ -1,0 +1,260 @@
+{
+  "run": "PG45426",
+  "source": "44ac69439121966c3e7cea6aaab408d044721afc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T16:45:18.741105+00:00",
+  "actualExit": 0,
+  "rawCount": 11,
+  "technicalCandidateClassifications": 11,
+  "siteMap": [
+    {
+      "rawRun": "PG45326",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java",
+        "sha256": "71da27de0b62213aef118d8fdcff2c91b6ce624fb432f25ac05295b4739ce455"
+      },
+      "rawLine": 263,
+      "rule": "DoNotUseThreads",
+      "method": "boundedConcurrentListsKeepBranchTitleAndRowsIsolated",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45326-current-content-dom-worker-fixtures/pmd.xml",
+        "sha256": "7e00f61c75a9c2ae092aa2e1398c04948a54f283fbdca4b280c12f1c5743933b"
+      },
+      "testId": "PT-ABROWSE-DOM008",
+      "workerCount": 2,
+      "closeBoundSeconds": 10,
+      "findingReference": "c8fcf2856ed5fd54588fe9c610f43d2ab825a4c4daeeb616cb58880cd9b10eba",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45326",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateResourcePortTest.java",
+        "sha256": "af987bdd6e3368a544cc979b98d253d886353a4c646cac30e20689b5849c614d"
+      },
+      "rawLine": 245,
+      "rule": "DoNotUseThreads",
+      "method": "ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45326-current-content-dom-worker-fixtures/pmd.xml",
+        "sha256": "7e00f61c75a9c2ae092aa2e1398c04948a54f283fbdca4b280c12f1c5743933b"
+      },
+      "testId": "PT-SCENE-DOM008",
+      "workerCount": 2,
+      "closeBoundSeconds": 10,
+      "findingReference": "973c00d2ff505e008a943790af590865dd75be3da7d44a13dd5ce3d75bee3521",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45326",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchTemplateResourcePortTest.java",
+        "sha256": "f23c6aa1e7586306bd4986628db1fa0e13b2e8398eebc618a675a66d44bc9064"
+      },
+      "rawLine": 341,
+      "rule": "DoNotUseThreads",
+      "method": "ownedConcurrentRenderersNeverShareFiltersOrRows",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45326-current-content-dom-worker-fixtures/pmd.xml",
+        "sha256": "7e00f61c75a9c2ae092aa2e1398c04948a54f283fbdca4b280c12f1c5743933b"
+      },
+      "testId": "PT-SEARCH-DOM008",
+      "workerCount": 2,
+      "closeBoundSeconds": 10,
+      "findingReference": "48e1a62904d097ad89d917565b2b062e10504eab7b6c960dfe3b7320afdb979a",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45328",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+        "sha256": "2b126dcf428070898018c3da7f121c8f2a4e7f32bf0c419036836f753cd7c396"
+      },
+      "rawLine": 335,
+      "rule": "DoNotUseThreads",
+      "method": "web237ConcurrentProjection",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45328-current-four-view-worker-fixtures-v3/pmd.xml",
+        "sha256": "450baeee038b80f85c2e837a5056f534040f443aade49f65dd26c131d9f1970c"
+      },
+      "testId": "PT-WEB-237",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "a20b6a760944683030da057f87b69d771c7fee48a269302465c6008e1f24ca12",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45328",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java",
+        "sha256": "b85d8d5b45a75cf2d6db17b825c39248932ada270cf39056b4a36d113b48ce19"
+      },
+      "rawLine": 127,
+      "rule": "DoNotUseThreads",
+      "method": "web179IndependentParallelProjection",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45328-current-four-view-worker-fixtures-v3/pmd.xml",
+        "sha256": "450baeee038b80f85c2e837a5056f534040f443aade49f65dd26c131d9f1970c"
+      },
+      "testId": "PT-WEB-179",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "555080d76a0fbd69a89757d319f317955b4f5fe3c2465c73256c291ac45742fe",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45328",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java",
+        "sha256": "49f3879d7814f2a44212da900f51101fa2dc3d3965ef4cadca2675ed8e946439"
+      },
+      "rawLine": 287,
+      "rule": "DoNotUseThreads",
+      "method": "web190ConcurrentProjection",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45328-current-four-view-worker-fixtures-v3/pmd.xml",
+        "sha256": "450baeee038b80f85c2e837a5056f534040f443aade49f65dd26c131d9f1970c"
+      },
+      "testId": "PT-WEB-190",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "7765f621fef94d049fd0912762fc30df8ca1042770d97b7fbaa77d75599fe153",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45328",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModelTest.java",
+        "sha256": "a77a439df01419a3b954dc976aad6d319dd06894aeeddfc576b817cf2ba1e647"
+      },
+      "rawLine": 332,
+      "rule": "DoNotUseThreads",
+      "method": "web213ConcurrentProjection",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45328-current-four-view-worker-fixtures-v3/pmd.xml",
+        "sha256": "450baeee038b80f85c2e837a5056f534040f443aade49f65dd26c131d9f1970c"
+      },
+      "testId": "PT-WEB-213",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "87a93a2fd0002d7896e46df3d0007445526f831ef5e131ad6bbb34ac67accab8",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45330",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+        "sha256": "d943386f50ea06ed0228736bb30c8efe3b64beaceb32bbba89650bcfb248e792"
+      },
+      "rawLine": 394,
+      "rule": "DoNotUseThreads",
+      "method": "animation053ConcurrentRendering",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45330-current-three-mock-view-worker-fixtures/pmd.xml",
+        "sha256": "79ea393e4317a12292803b13377dae2e642e7228c2978eb63841351fa2aa3ccd"
+      },
+      "testId": "PT-SCR-053",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "3400ea52fdeb337f3cf8ba1f91c32be944b1553af2af0a538f94319da2fb4358",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45330",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchTemplateResourcePortTest.java",
+        "sha256": "e9b647a0649d4afc2c07f574cd75bde58a1667c0bf63ad8e6f5dc17ffff9580d"
+      },
+      "rawLine": 235,
+      "rule": "DoNotUseThreads",
+      "method": "boundedConcurrentViewsKeepEachTitleAndStreamSeparate",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45330-current-three-mock-view-worker-fixtures/pmd.xml",
+        "sha256": "79ea393e4317a12292803b13377dae2e642e7228c2978eb63841351fa2aa3ccd"
+      },
+      "testId": "PT-WATCH-DOM003",
+      "workerCount": 2,
+      "closeBoundSeconds": 10,
+      "findingReference": "74fd493679a7f1dca7da1c59d495c777bba9a0f6c352fbeeff85f6a88102000a",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45330",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+        "sha256": "e51e06d45f58ed4b00e96687ff21c1393a1f14856905269697c2760d1dedaedf"
+      },
+      "rawLine": 408,
+      "rule": "DoNotUseThreads",
+      "method": "detail024ConcurrentRendering",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45330-current-three-mock-view-worker-fixtures/pmd.xml",
+        "sha256": "79ea393e4317a12292803b13377dae2e642e7228c2978eb63841351fa2aa3ccd"
+      },
+      "testId": "PT-SCR-024",
+      "workerCount": 8,
+      "closeBoundSeconds": 10,
+      "findingReference": "afbfde7c8a31b28d08ad0957f52845e2da6a2de46013a8e5d8e1c374fba9552a",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "既承認の並行独立性を調べるPTの明示worker。局所資源として回収、各取得は有限、既定終了10秒。製品で直接threadを開始する事象はこの指摘の対象に含まれない。",
+      "signedDecision": null
+    },
+    {
+      "rawRun": "PG45330",
+      "source": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+        "sha256": "e51e06d45f58ed4b00e96687ff21c1393a1f14856905269697c2760d1dedaedf"
+      },
+      "rawLine": 342,
+      "rule": "UseConcurrentHashMap",
+      "method": "detail023CssAndViewBoundary",
+      "rawReport": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45330-current-three-mock-view-worker-fixtures/pmd.xml",
+        "sha256": "79ea393e4317a12292803b13377dae2e642e7228c2978eb63841351fa2aa3ccd"
+      },
+      "testId": "PT-SCR-023",
+      "findingReference": "2dd69f0a71d5655714acc84303b4aabaaf7f763de46f4e209995067c689b4cf1",
+      "technicalDecision": "NOT_APPLICABLE_CANDIDATE",
+      "basis": "当method内だけのCSS独立期待値。順序を含めて文字列化し、他threadへ共有しない。並行Mapへの置換は元の順序期待値に影響する。",
+      "signedDecision": null
+    }
+  ],
+  "priorRawResults": {
+    "PG45326": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45326-current-content-dom-worker-fixtures/manifest.json",
+      "sha256": "d51acfea6c55066ab2e231aed6f2c69db5af52fbd1b57660998365220cb49d02"
+    },
+    "PG45328": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45328-current-four-view-worker-fixtures/manifest.json",
+      "sha256": "bc366df5503cdcf57f17dc911a86e250994c5a352ccb04b938fa74a123c8bb3b"
+    },
+    "PG45330": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45330-current-three-mock-view-worker-fixtures/manifest.json",
+      "sha256": "fbfa8feec5d194c727dcf8efed867a0f8bae13ff0b76ea34af30a4c706d9fd11"
+    }
+  },
+  "qualityOwnerSigned": 0,
+  "noSuppressionChanges": true,
+  "sourcesOrTestsReexecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
