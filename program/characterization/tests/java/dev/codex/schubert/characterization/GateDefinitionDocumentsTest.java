@@ -16,8 +16,10 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -35,6 +37,20 @@ final class GateDefinitionDocumentsTest {
   private static final String VERSION = "version";
   private static final String CASES = "cases";
   private static final String ACTION_CASE = "CHR-A01";
+  private static final String FIELD_BROWSER = "browser";
+  private static final String FIELD_CASE_ORDER = "caseOrder";
+  private static final String FIELD_DIFFERENCES = "differences";
+  private static final String FIELD_TYPE = "type";
+  private static final String SCHEMA_CASES = "/properties/cases";
+  private static final String SCHEMA_VERSION = "/properties/version";
+  private static final String FIELD_SELECTORS = "selectors";
+  private static final String REQUIREMENTS_POINTER = "/requirements";
+  private static final String SECOND_AUTH_CASE = "CHR-A02";
+  private static final String SUPPLEMENTAL_POINTER = "/supplementalChecks";
+  private static final String VIDEO_RANGE_CASE = "CHR-M04";
+  private static final String VIDEO_NO_RANGE = "no-range-200";
+  private static final String VIDEO_FIRST_RANGE = "multi-range-first";
+  private static final String JSON_NULL = "null";
   private static final List<String> RESOURCES =
       List.of(
           "cases/gate-contract.json",
@@ -45,7 +61,7 @@ final class GateDefinitionDocumentsTest {
           "cases/case-requirements.json");
 
   @Test
-  void expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow() throws Exception {
+  void expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow() throws IOException {
     for (JsonNode invalid :
         List.of(
             JSON.nullNode(),
@@ -54,7 +70,7 @@ final class GateDefinitionDocumentsTest {
             JSON.getNodeFactory().numberNode(0),
             JSON.getNodeFactory().numberNode(-1))) {
       List<JsonNode> input = fixture();
-      ObjectNode expectedBrowser = (ObjectNode) object(input, CONTRACT).path("browser");
+      ObjectNode expectedBrowser = (ObjectNode) object(input, CONTRACT).path(FIELD_BROWSER);
       expectedBrowser.set("browserRevision", invalid);
       assertContains(input, "BROWSER_REVISION");
     }
@@ -68,25 +84,25 @@ final class GateDefinitionDocumentsTest {
     for (List<String> pair :
         List.of(
             List.of("playwrightJava", "1.54.0", "BROWSER_PLAYWRIGHT"),
-            List.of("browser", "firefox", "BROWSER_NAME"),
+            List.of(FIELD_BROWSER, "firefox", "BROWSER_NAME"),
             List.of("locale", "en-US", "BROWSER_LOCALE"),
             List.of("timezone", "UTC", "BROWSER_TIMEZONE"))) {
       String field = pair.get(0);
       List<JsonNode> input = fixture();
-      ObjectNode contract = (ObjectNode) object(input, CONTRACT).path("browser");
+      ObjectNode contract = (ObjectNode) object(input, CONTRACT).path(FIELD_BROWSER);
       ObjectNode browser = object(input, BROWSER);
       contract.put(field, pair.get(1));
       browser.put(field, pair.get(1));
       List<String> expected = List.of(pair.get(2));
       checks.add(() -> assertEquals(expected, validate(input), field));
       List<JsonNode> missing = fixture();
-      ((ObjectNode) object(missing, CONTRACT).path("browser")).remove(field);
+      ((ObjectNode) object(missing, CONTRACT).path(FIELD_BROWSER)).remove(field);
       object(missing, BROWSER).remove(field);
       checks.add(() -> assertEquals(expected, validate(missing), field + " absent"));
     }
 
     List<JsonNode> input = fixture();
-    ObjectNode contract = (ObjectNode) object(input, CONTRACT).path("browser");
+    ObjectNode contract = (ObjectNode) object(input, CONTRACT).path(FIELD_BROWSER);
     ObjectNode browser = object(input, BROWSER);
     contract.put("browserRevision", 1186);
     browser.put("browserRevision", 1186);
@@ -111,11 +127,11 @@ final class GateDefinitionDocumentsTest {
 
   @Test
   void acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()
-      throws Exception {
+      throws IOException {
     List<JsonNode> input = fixture();
     List<JsonNode> unchanged = input.stream().<JsonNode>map(JsonNode::deepCopy).toList();
-    assertEquals(24, input.get(CONTRACT).path("caseOrder").size());
-    assertEquals(16, input.get(DIFFERENCES).path("differences").size());
+    assertEquals(24, input.get(CONTRACT).path(FIELD_CASE_ORDER).size());
+    assertEquals(16, input.get(DIFFERENCES).path(FIELD_DIFFERENCES).size());
     assertEquals("Log", input.get(CATALOG).path(CASES).get(20).path("group").asText());
     List<String> result = validate(input);
     assertEquals(List.of(), result);
@@ -124,7 +140,7 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void rejectsEveryJavaNullDocumentWithFixedSignal() throws Exception {
+  void rejectsEveryJavaNullDocumentWithFixedSignal() throws IOException {
     for (int index = 0; index < RESOURCES.size(); index++) {
       List<JsonNode> input = fixture();
       input.set(index, null);
@@ -135,7 +151,7 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void malformedJsonShapesProduceFailuresRatherThanNpe() throws Exception {
+  void malformedJsonShapesProduceFailuresRatherThanNpe() throws IOException {
     for (int index = 0; index < RESOURCES.size(); index++) {
       for (JsonNode replacement :
           List.of(
@@ -148,7 +164,7 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void allFourVersionCallersRejectCoercionOverflowMissingAndNull() throws Exception {
+  void allFourVersionCallersRejectCoercionOverflowMissingAndNull() throws IOException {
     int[] indices = {CONTRACT, CATALOG, DIFFERENCES, REQUIREMENTS};
     String[] codes = {"CONTRACT_VERSION", "CATALOG_VERSION", "DIF_VERSION", "REQ_VERSION"};
     List<JsonNode> invalid =
@@ -175,11 +191,11 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void contractCountsOrderIdentifiersAndHashesUseIndependentConstraints() throws Exception {
+  void contractCountsOrderIdentifiersAndHashesUseIndependentConstraints() throws IOException {
     List<JsonNode> input = fixture();
     ObjectNode contract = object(input, CONTRACT);
     contract.putArray("gates").add("CHR-G01");
-    ArrayNode cases = contract.withArray("caseOrder");
+    ArrayNode cases = contract.withArray(FIELD_CASE_ORDER);
     cases.set(1, cases.get(0));
     cases.remove(23);
     contract.putArray("differenceIds");
@@ -199,7 +215,7 @@ final class GateDefinitionDocumentsTest {
   @Test
   void contractRejectsAnUnapprovedIdAtTheSameSize() throws IOException {
     List<JsonNode> input = fixture();
-    ArrayNode order = object(input, CONTRACT).withArray("caseOrder");
+    ArrayNode order = object(input, CONTRACT).withArray(FIELD_CASE_ORDER);
     assertEquals(24, order.size());
     assertEquals("CHR-A03", order.get(2).asText());
     order.set(2, JSON.getNodeFactory().textNode("CHR-A99"));
@@ -210,7 +226,7 @@ final class GateDefinitionDocumentsTest {
   @Test
   void contractRejectsReorderedApprovedIds() throws IOException {
     List<JsonNode> input = fixture();
-    ArrayNode order = object(input, CONTRACT).withArray("caseOrder");
+    ArrayNode order = object(input, CONTRACT).withArray(FIELD_CASE_ORDER);
     JsonNode first = order.get(0);
     order.set(0, order.get(1));
     order.set(1, first);
@@ -240,12 +256,12 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void schemaDraftShapeAndItemConstraintsCannotBeWeakened() throws Exception {
+  void schemaDraftShapeAndItemConstraintsCannotBeWeakened() throws IOException {
     List<JsonNode> input = fixture();
     ObjectNode schema = object(input, SCHEMA);
-    schema.put("$schema", "invalid").put("type", "array");
+    schema.put("$schema", "invalid").put(FIELD_TYPE, "array");
     schema.putArray("required").add(CASES);
-    ObjectNode cases = schema.withObject("/properties/cases");
+    ObjectNode cases = schema.withObject(SCHEMA_CASES);
     cases.put("minItems", 23).put("maxItems", 25);
     cases.withObject("/items").putArray("required").add("id");
     assertContains(
@@ -260,50 +276,50 @@ final class GateDefinitionDocumentsTest {
 
   /** PT-CHR-DEF-SCHEMA001 / BUG-3805. */
   @Test
-  void fixedSchemaVersionAndContainerTypesAreCheckedIndependently() throws Exception {
+  void fixedSchemaVersionAndContainerTypesAreCheckedIndependently() throws IOException {
     assertEquals(List.of(), validate(fixture()));
     assertAll(
         () ->
             rejectSchemaValue(
-                "/properties/version",
+                SCHEMA_VERSION,
                 "const",
                 JSON.getNodeFactory().textNode("1"),
                 "SCHEMA_VERSION_CONST"),
         () ->
             rejectSchemaValue(
-                "/properties/version",
+                SCHEMA_VERSION,
                 "const",
                 JSON.getNodeFactory().numberNode(2),
                 "SCHEMA_VERSION_CONST"),
         () ->
             rejectSchemaValue(
-                "/properties/version", "const", MissingNode.getInstance(), "SCHEMA_VERSION_CONST"),
+                SCHEMA_VERSION, "const", MissingNode.getInstance(), "SCHEMA_VERSION_CONST"),
         () ->
             rejectSchemaValue(
-                "/properties/cases",
-                "type",
+                SCHEMA_CASES,
+                FIELD_TYPE,
                 JSON.getNodeFactory().textNode("object"),
                 "SCHEMA_CASES_TYPE"),
         () ->
             rejectSchemaValue(
-                "/properties/cases", "type", MissingNode.getInstance(), "SCHEMA_CASES_TYPE"),
+                SCHEMA_CASES, FIELD_TYPE, MissingNode.getInstance(), "SCHEMA_CASES_TYPE"),
         () ->
             rejectSchemaValue(
                 "/properties/cases/items",
-                "type",
+                FIELD_TYPE,
                 JSON.getNodeFactory().textNode("array"),
                 "SCHEMA_CASE_ITEM_TYPE"),
         () ->
             rejectSchemaValue(
                 "/properties/cases/items",
-                "type",
+                FIELD_TYPE,
                 MissingNode.getInstance(),
                 "SCHEMA_CASE_ITEM_TYPE"));
   }
 
   /** PT-CHR-DEF-SCHEMA002 / BUG-3809. */
   @Test
-  void fixedSchemaCannotAcceptAdditionalConstraints() throws Exception {
+  void fixedSchemaCannotAcceptAdditionalConstraints() throws IOException {
     assertEquals(List.of(), validate(fixture()));
     List<JsonNode> root = fixture();
     object(root, SCHEMA).put("maxProperties", 1);
@@ -317,13 +333,13 @@ final class GateDefinitionDocumentsTest {
                 "SCHEMA_EXTRA_KEYWORD:properties"),
         () ->
             rejectSchemaValue(
-                "/properties/version",
+                SCHEMA_VERSION,
                 "minimum",
                 JSON.getNodeFactory().numberNode(2),
                 "SCHEMA_EXTRA_KEYWORD:version"),
         () ->
             rejectSchemaValue(
-                "/properties/cases",
+                SCHEMA_CASES,
                 "enum",
                 JSON.createArrayNode().add(JSON.createArrayNode()),
                 "SCHEMA_EXTRA_KEYWORD:cases"),
@@ -348,7 +364,7 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes() throws Exception {
+  void catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes() throws IOException {
     List<JsonNode> input = fixture();
     ArrayNode cases = object(input, CATALOG).withArray(CASES);
     for (int index : List.of(0, 1)) {
@@ -375,7 +391,7 @@ final class GateDefinitionDocumentsTest {
 
   @Test
   void everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions()
-      throws Exception {
+      throws IOException {
     String[] pointers = {
       "/playwrightJava",
       "/browser",
@@ -423,20 +439,21 @@ final class GateDefinitionDocumentsTest {
   }
 
   @Test
-  void differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues() throws Exception {
+  void differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues()
+      throws IOException {
     List<JsonNode> input = fixture();
-    ArrayNode differences = object(input, DIFFERENCES).withArray("differences");
+    ArrayNode differences = object(input, DIFFERENCES).withArray(FIELD_DIFFERENCES);
     ObjectNode first = (ObjectNode) differences.get(0);
     first.put("mode", "all").put("selectorType", "unknown").put("current", "").put("nk", "");
     first.putArray(CASES);
-    first.putArray("selectors");
+    first.putArray(FIELD_SELECTORS);
     ObjectNode second = (ObjectNode) differences.get(1);
     second.put("field", first.path("field").asText());
     second.putArray(CASES).add(ACTION_CASE).add(ACTION_CASE).add(UNKNOWN_CASE);
-    second.putArray("selectors").add("same").add("same");
+    second.putArray(FIELD_SELECTORS).add("same").add("same");
     String[] invalid = {"", "all*", "a..b", "$.all"};
     for (int index = 0; index < invalid.length; index++) {
-      ((ObjectNode) differences.get(index + 2)).putArray("selectors").add(invalid[index]);
+      ((ObjectNode) differences.get(index + 2)).putArray(FIELD_SELECTORS).add(invalid[index]);
     }
     ((ObjectNode) differences.get(14)).put("id", "MISSING-015");
     assertContains(
@@ -458,20 +475,20 @@ final class GateDefinitionDocumentsTest {
         "DIF_ID_SEQUENCE",
         "DIF-015_CASE_COVERAGE");
     List<JsonNode> malformed = fixture();
-    object(malformed, DIFFERENCES).put("differences", "not-array");
+    object(malformed, DIFFERENCES).put(FIELD_DIFFERENCES, "not-array");
     assertContains(malformed, "DIF_NOT_ARRAY", "DIF_ID_SEQUENCE");
   }
 
   @Test
   void requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals()
-      throws Exception {
+      throws IOException {
     List<JsonNode> input = fixture();
     ObjectNode requirements = object(input, REQUIREMENTS);
-    requirements.withObject("/requirements").putArray(ACTION_CASE).add("caseId").add("caseId");
-    requirements.withObject("/requirements").putArray("CHR-A02").add("status");
-    requirements.withObject("/requirements").remove("CHR-O01");
-    ObjectNode supplemental = requirements.withObject("/supplementalChecks");
-    supplemental.putArray("CHR-A02");
+    requirements.withObject(REQUIREMENTS_POINTER).putArray(ACTION_CASE).add("caseId").add("caseId");
+    requirements.withObject(REQUIREMENTS_POINTER).putArray(SECOND_AUTH_CASE).add("status");
+    requirements.withObject(REQUIREMENTS_POINTER).remove("CHR-O01");
+    ObjectNode supplemental = requirements.withObject(SUPPLEMENTAL_POINTER);
+    supplemental.putArray(SECOND_AUTH_CASE);
     supplemental.putArray("CHR-A03").add("unsafe-post-denied").add("unsafe-post-denied");
     supplemental.putArray(UNKNOWN_CASE).add("unknown");
     ObjectNode nkOnly = requirements.withObject("/nkOnlySupplementalChecks");
@@ -500,21 +517,21 @@ final class GateDefinitionDocumentsTest {
   void requiredVideoRangeObservationsCannotDisappearFromDefinitions() throws IOException {
     var ordinaryOnly = fixture();
     object(ordinaryOnly, REQUIREMENTS)
-        .withObject("/supplementalChecks")
-        .putArray("CHR-M04")
-        .add("no-range-200");
+        .withObject(SUPPLEMENTAL_POINTER)
+        .putArray(VIDEO_RANGE_CASE)
+        .add(VIDEO_NO_RANGE);
     var rangeOnly = fixture();
     object(rangeOnly, REQUIREMENTS)
-        .withObject("/supplementalChecks")
-        .putArray("CHR-M04")
-        .add("multi-range-first");
+        .withObject(SUPPLEMENTAL_POINTER)
+        .putArray(VIDEO_RANGE_CASE)
+        .add(VIDEO_FIRST_RANGE);
     var omitted = fixture();
-    object(omitted, REQUIREMENTS).withObject("/supplementalChecks").remove("CHR-M04");
+    object(omitted, REQUIREMENTS).withObject(SUPPLEMENTAL_POINTER).remove(VIDEO_RANGE_CASE);
     var replaced = fixture();
     object(replaced, REQUIREMENTS)
-        .withObject("/supplementalChecks")
-        .putArray("CHR-M04")
-        .add("no-range-200")
+        .withObject(SUPPLEMENTAL_POINTER)
+        .putArray(VIDEO_RANGE_CASE)
+        .add(VIDEO_NO_RANGE)
         .add("other-observation");
     var diagnostic = List.of("REQ_VIDEO_RANGE_SUPPLEMENTAL");
     assertAll(
@@ -531,12 +548,14 @@ final class GateDefinitionDocumentsTest {
     assertEquals(List.of(), validate(fixture()));
     for (List<String> checks :
         List.of(
-            List.of("no-range-200"),
-            List.of("multi-range-first"),
-            List.of("no-range-200", "multi-range-first"))) {
+            List.of(VIDEO_NO_RANGE),
+            List.of(VIDEO_FIRST_RANGE),
+            List.of(VIDEO_NO_RANGE, VIDEO_FIRST_RANGE))) {
       var input = fixture();
       var declaration =
-          object(input, REQUIREMENTS).withObject("/nkOnlySupplementalChecks").putArray("CHR-M04");
+          object(input, REQUIREMENTS)
+              .withObject("/nkOnlySupplementalChecks")
+              .putArray(VIDEO_RANGE_CASE);
       checks.forEach(declaration::add);
       assertEquals(
           List.of("REQ_VIDEO_RANGE_CURRENT_SUPPLEMENTAL"), validate(input), checks.toString());
@@ -545,12 +564,12 @@ final class GateDefinitionDocumentsTest {
 
   /** PT-CHR-DEF-015: structure of a declared NK-only supplemental case. */
   @Test
-  void declaredNkOnlySupplementalChecksMustBeDistinctNonblankStrings() throws Exception {
+  void declaredNkOnlySupplementalChecksMustBeDistinctNonblankStrings() throws IOException {
     assertEquals(List.of(), validate(fixture()));
     for (String malformed :
         List.of(
             "[]",
-            "null",
+            JSON_NULL,
             "{}",
             "\"web-log-outbox-retry\"",
             "[null]",
@@ -571,14 +590,14 @@ final class GateDefinitionDocumentsTest {
     assertEquals(List.of(), validate(fixture()));
     var requiredObject = fixture();
     object(requiredObject, REQUIREMENTS)
-        .withObject("/requirements")
+        .withObject(REQUIREMENTS_POINTER)
         .putObject(ACTION_CASE)
         .put("first", "caseId")
         .put("second", "status");
     var supplementalObject = fixture();
     object(supplementalObject, REQUIREMENTS)
-        .withObject("/supplementalChecks")
-        .putObject("CHR-A02")
+        .withObject(SUPPLEMENTAL_POINTER)
+        .putObject(SECOND_AUTH_CASE)
         .put("first", "ip-limit-observed-not-hardcoded");
 
     List<Executable> checks = new ArrayList<>();
@@ -587,16 +606,16 @@ final class GateDefinitionDocumentsTest {
         () ->
             assertEquals(List.of("REQ_SUPPLEMENTAL_CHECKS:CHR-A02"), validate(supplementalObject)));
     for (JsonNode invalid :
-        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
+        List.of(JSON.readTree("7"), JSON.readTree(JSON_NULL), JSON.readTree("\" \""))) {
       var invalidRequired = fixture();
       object(invalidRequired, REQUIREMENTS)
-          .withObject("/requirements")
+          .withObject(REQUIREMENTS_POINTER)
           .withArray(ACTION_CASE)
           .add(invalid);
       var invalidSupplemental = fixture();
       object(invalidSupplemental, REQUIREMENTS)
-          .withObject("/supplementalChecks")
-          .withArray("CHR-A02")
+          .withObject(SUPPLEMENTAL_POINTER)
+          .withArray(SECOND_AUTH_CASE)
           .add(invalid);
       checks.add(() -> assertEquals(List.of("REQ_FIELDS:CHR-A01"), validate(invalidRequired)));
       checks.add(
@@ -616,17 +635,17 @@ final class GateDefinitionDocumentsTest {
     object(emptyFonts, BROWSER).putArray("fonts");
     checks.add(() -> assertEquals(fontFailure, validate(emptyFonts)));
     for (JsonNode invalid :
-        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
+        List.of(JSON.readTree("7"), JSON.readTree(JSON_NULL), JSON.readTree("\" \""))) {
       var input = fixture();
       object(input, BROWSER).putArray("fonts").add(invalid);
       checks.add(() -> assertEquals(fontFailure, validate(input)));
     }
     for (JsonNode invalid :
-        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("false"))) {
+        List.of(JSON.readTree("7"), JSON.readTree(JSON_NULL), JSON.readTree("false"))) {
       var input = fixture();
-      var difference = (ObjectNode) object(input, DIFFERENCES).withArray("differences").get(1);
+      var difference = (ObjectNode) object(input, DIFFERENCES).withArray(FIELD_DIFFERENCES).get(1);
       assertEquals("DIF-002", difference.path("id").textValue());
-      difference.putArray("selectors").add(invalid);
+      difference.putArray(FIELD_SELECTORS).add(invalid);
       checks.add(() -> assertEquals(List.of("DIF_SELECTOR_EMPTY:DIF-002"), validate(input)));
     }
     assertAll(checks);
@@ -643,13 +662,14 @@ final class GateDefinitionDocumentsTest {
     assertThrows(UnsupportedOperationException.class, () -> read.add("third"));
     assertEquals(List.of(), GateContractValidator.strings(null));
     for (String malformed :
-        List.of("null", "[]", "\"first\"", "{\"a\":\"first\"}", "[\"first\",7]", "[false]")) {
+        List.of(JSON_NULL, "[]", "\"first\"", "{\"a\":\"first\"}", "[\"first\",7]", "[false]")) {
       assertEquals(List.of(), GateContractValidator.strings(JSON.readTree(malformed)), malformed);
     }
   }
 
   @Test
-  void concurrentValidAndInvalidDefinitionsRemainIndependent() throws Exception {
+  void concurrentValidAndInvalidDefinitionsRemainIndependent()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, CONTRACT).put(VERSION, 2);

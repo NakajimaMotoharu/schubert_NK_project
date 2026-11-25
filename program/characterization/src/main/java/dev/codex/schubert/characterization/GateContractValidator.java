@@ -36,6 +36,9 @@ final class GateContractValidator {
   private static final int CASE_GROUP_OFFSET = 4;
   private static final String FIELD_BASELINECOMMIT = "baselineCommit";
   private static final String FIELD_VERSION = "version";
+  private static final String FIELD_REQUIRED = "required";
+  private static final String FIELD_TYPE = "type";
+  private static final String MODE_REQUIRED = "required";
   private static final String FIELD_CASES = "cases";
   private static final String FIELD_CURRENT = "current";
   private static final String FIELD_DEVICESCALEFACTOR = "deviceScaleFactor";
@@ -64,7 +67,7 @@ final class GateContractValidator {
   private static final List<String> REQUIRED_CURRENT_VIDEO_OBSERVATIONS =
       List.of("no-range-200", "multi-range-first");
 
-  private static final Set<String> MODES = Set.of("difference", "required", "contract");
+  private static final Set<String> MODES = Set.of("difference", MODE_REQUIRED, "contract");
   private static final Set<String> SELECTOR_TYPES = Set.of("semantic", "header", "json-pointer");
 
   private GateContractValidator() {
@@ -237,14 +240,17 @@ final class GateContractValidator {
   private static void validateSchema(JsonNode schema, List<String> failures) {
     require(schema.isObject(), "SCHEMA_NOT_OBJECT", failures);
     requireKnownSchemaKeys(
-        schema, Set.of("$schema", "title", "type", "required", "properties"), "root", failures);
+        schema,
+        Set.of("$schema", "title", FIELD_TYPE, FIELD_REQUIRED, "properties"),
+        "root",
+        failures);
     require(
         "https://json-schema.org/draft/2020-12/schema".equals(schema.path("$schema").asText()),
         "SCHEMA_DRAFT",
         failures);
-    require("object".equals(schema.path("type").asText()), "SCHEMA_ROOT_TYPE", failures);
+    require("object".equals(schema.path(FIELD_TYPE).asText()), "SCHEMA_ROOT_TYPE", failures);
     require(
-        strings(schema.path("required")).equals(List.of(FIELD_VERSION, FIELD_CASES)),
+        strings(schema.path(FIELD_REQUIRED)).equals(List.of(FIELD_VERSION, FIELD_CASES)),
         "SCHEMA_REQUIRED",
         failures);
     JsonNode properties = schema.path("properties");
@@ -257,15 +263,15 @@ final class GateContractValidator {
         failures);
     JsonNode cases = properties.path(FIELD_CASES);
     requireKnownSchemaKeys(
-        cases, Set.of("type", "minItems", "maxItems", "items"), "cases", failures);
-    require("array".equals(cases.path("type").textValue()), "SCHEMA_CASES_TYPE", failures);
+        cases, Set.of(FIELD_TYPE, "minItems", "maxItems", "items"), "cases", failures);
+    require("array".equals(cases.path(FIELD_TYPE).textValue()), "SCHEMA_CASES_TYPE", failures);
     require(integerEquals(cases.path("minItems"), 24), "SCHEMA_MIN_ITEMS", failures);
     require(integerEquals(cases.path("maxItems"), 24), "SCHEMA_MAX_ITEMS", failures);
     JsonNode item = cases.path("items");
-    requireKnownSchemaKeys(item, Set.of("type", "required"), "item", failures);
-    require("object".equals(item.path("type").textValue()), "SCHEMA_CASE_ITEM_TYPE", failures);
+    requireKnownSchemaKeys(item, Set.of(FIELD_TYPE, FIELD_REQUIRED), "item", failures);
+    require("object".equals(item.path(FIELD_TYPE).textValue()), "SCHEMA_CASE_ITEM_TYPE", failures);
     require(
-        strings(item.path("required")).equals(List.of("id", "group", FIELD_CURRENT, "nk")),
+        strings(item.path(FIELD_REQUIRED)).equals(List.of("id", "group", FIELD_CURRENT, "nk")),
         "SCHEMA_CASE_REQUIRED",
         failures);
   }
