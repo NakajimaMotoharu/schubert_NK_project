@@ -1,0 +1,104 @@
+{
+  "eventId": "PGPT-20261008-10749",
+  "source": "09a013d4e0de77743100d1450eca525151ed2409",
+  "sourceBeforeWork": "09a013d4e0de77743100d1450eca525151ed2409",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P018-02/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P018-02/2",
+    "第58版ID": "WBS-P018-02/2",
+    "費用主担当項目": "P018-02",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-10までの計画週",
+    "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+    "担当": "配布・基盤担当",
+    "旧短期残pp": "0.65",
+    "改訂残pp": "0.65",
+    "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+    "参照する元項目": "P018-02、P019-02",
+    "lineNumber": 49
+  },
+  "run": "PG45218",
+  "startEvent": "PGPT-20261008-10748",
+  "workCategory": "REVIEW",
+  "outcome": "公開RFC10は現正規Bootstrap三物理で一致。BOM18は共有SchemaHistoryAdmission class一差があるため旧結果として保持。正式配布には署名・所有・方針が残る。",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45218-current-release-local-reuse-and-signer-criteria/manifest.json",
+    "sha256": "c1b01f7e9888fe8f5b9282460b7316f55ba7c17cb0d6e368f59a6fbc5f86040f"
+  },
+  "nextEvidence": "BOM原18の現SchemaHistoryAdmission class差について、許可済みZoned合成fixtureと実使用閉包を確認し、必要な同候補通常PTのみ。実署名・鍵・hostは保留。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T11:44:31+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "73b925a28d16e4280cf3750645e7236cb313e9668d889a65f7c5c0077f5e885a",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T11:44:31+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 51,
+        "remainingPercent": 49,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T11:44:17.624951+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
