@@ -1,0 +1,139 @@
+{
+  "run": "PG45048",
+  "source": "e6f45494379e5e2e20ba21431811d33aeb1039d3",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P015-02"
+  ],
+  "terminalAtUTC": "2026-11-25T07:54:19.488935+00:00",
+  "actualExit": 0,
+  "priorPureNine": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20408-form-csrf-request-nine-v1/manifest.json",
+    "sha256": "f14f5f83428bfbd75ef3c2611d45c292c0d934ec61e436e9a62c707bf0342eec"
+  },
+  "currentMavenTarget": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45046-form-and-mvc-current-typing/manifest.json",
+    "sha256": "03192871d3968cc851e52c3ed42395b4fb7ac297695ad4a52eadf6d40c5f5dda"
+  },
+  "bugTrace": "BUG-2707",
+  "independentTestSpec": {
+    "path": "evidence/01_PT/015_NK-WEB-001/052_FormCsrfHandlerメモリ境界単体仕様.md",
+    "sha256": "12ae2bcaaca30bcbb9bf8b44b1831e917b72376aa22e9fdbc2cf8a817b3015b3"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/begin.json",
+    "sha256": "01b9e62621159fa9e64654888268553a78d9b9b1cea0583075b3254e3373e7dc"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/terminal.json",
+    "sha256": "e46a714a451c7d04f32feaa6a568e42451bd9ee4dec69b5d11be28afac4957fc"
+  },
+  "firstAttempt": {
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten/terminal.json",
+      "sha256": "43a7137d3b7656aa29fb8a03439ed648193742bbff01730e785e3627b1b8b35e"
+    },
+    "status": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 3,
+      "skipped": 0
+    },
+    "caseErrors": [
+      [
+        "deferredNullAndFailureAreNotMadeIntoValidValues()",
+        "java.lang.NoClassDefFoundError"
+      ],
+      [
+        "sharedHandlerKeepsParallelRequestAttributesSeparate()",
+        "java.util.concurrent.ExecutionException"
+      ],
+      [
+        "lazyHandlingSetsOnlyTheTwoRequestAliases()",
+        "java.lang.NoClassDefFoundError"
+      ]
+    ],
+    "cause": "isolated SDK omitted fixed commons-logging 1.4.0; application source and fixture unchanged"
+  },
+  "secondAttempt": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "caseMap": {
+    "PT-WEB-CSRFPORT001": "lazyHandlingSetsOnlyTheTwoRequestAliases",
+    "PT-WEB-CSRFPORT002": "nullApiBoundariesRejectBeforeDelegation",
+    "PT-WEB-CSRFPORT003": "validSchemaReturnsSubmittedValueWithoutReadingToken",
+    "PT-WEB-CSRFPORT004": "missingMultipleNullAndMalformedValuesReturnNull",
+    "PT-WEB-CSRFPORT005": "queryCsrfAndInvalidEscapesRejectBeforeBodyRead",
+    "PT-WEB-CSRFPORT006": "absentEmptyAndDifferentCaseQueryNamesKeepBodyValue",
+    "PT-WEB-CSRFPORT007": "deferredNullAndFailureAreNotMadeIntoValidValues",
+    "PT-WEB-CSRFPORT008": "bodyArgumentFaultIsNullButOutsideQueryAndFatalPropagate",
+    "PT-WEB-CSRFPORT009": "sharedHandlerKeepsParallelRequestAttributesSeparate",
+    "PT-WEB-CSRFPORT010": "wrappedFatalBodyFaultsEscapeWithTheirOriginalIdentity"
+  },
+  "newTestIds": [
+    "PT-WEB-CSRFPORT010"
+  ],
+  "totalProductTrialsThisGroup": 20,
+  "thisAcceptedTestExecutions": 10,
+  "cumulativeLocalProductTrials": 1308,
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "be5b00953788604efe1f459eaf22c495f6beb2bfd703468d1b6bff4621f3755c"
+  },
+  "scopeReceipt": {
+    "ordinary": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/jacoco.xml",
+      "sha256": "b9d1e424cb735c2265c3cfc6c128070a6aee742ff7d901df5bf6688550f3dbdb"
+    },
+    "unfiltered": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/raw.log",
+      "sha256": "04590f320aa4817709668df321f73c86eb42956c3af7198bca3733ce0f246939"
+    },
+    "originalExec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-current-form-request-ten-v2/one.exec",
+      "sha256": "de2a6af3a1603a1b8f27e0f9c0e0a841f5fe1b0ac415d5b771b7638c63b38010"
+    },
+    "counters": {
+      "INSTRUCTION": [
+        0,
+        97
+      ],
+      "BRANCH": [
+        0,
+        12
+      ],
+      "LINE": [
+        0,
+        20
+      ],
+      "COMPLEXITY": [
+        0,
+        9
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "physicalClassId": "91c9beb893f01fe0"
+  },
+  "oneFixtureFormat": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-format-one/spotless.log",
+    "sha256": "91e8ec034806d9d5d1e4d9e7a7d425fa5da7052cabaa0802f0ff6d303153e0c8"
+  },
+  "checkstyle": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45048-format-one/checkstyle.xml",
+    "sha256": "8a074b16f9e13ee083e21552e383f069e2251e1bf29a56a78f9a293e742e6348"
+  },
+  "actualBackend": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

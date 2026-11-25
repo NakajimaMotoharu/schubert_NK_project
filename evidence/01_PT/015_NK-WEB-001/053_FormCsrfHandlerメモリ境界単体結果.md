@@ -9,3 +9,7 @@ Source app初期化handler/WebCsrfToken/新Testだけ、Cipher/SecurityContextHo
 BUG2330/YKT2075はProxy getParameterValues4literalの一規約指摘を修正前起票、METHOD_PARAMETERS定数化のみ/inverse byte（format前）一致/期待値不変。原20402 raw7保持、最新20406 raw6はconfined Map1・JDK defining-loader2・Proxy identity equals1・自己所有pool2を各非該当確認、同rule0/CS0/抑制追加0。是正Test commit db61a3f8097203bdad92d772af34f50e7f931b8b push0・全9/四100/post0で有限CLOSED、旧staticをPASSに正常化しない。
 
 4003/4004訂正→4005原0.5/2/4pp cap6、真正終端後fresh共有1pp/ordinary25-all32/S7残3/第一V同HOLD、専有N/Tnull。各source技術55→56、元282交差36→37/残245、partial80結合17/残63不変。直近十二対象137unique=Java111+HTML26。正式1964/53・歴史17/190・新leaf0・工数null/全451/実CSRF・session/native/CHR/Root未受入、詳細969/970。後続独立PGPTへ継続。
+
+### 現例外保持と独立010
+
+PG45048の現版で001～010が成功。行20/20、メソッド3/3、クラス1/1、分岐12/12は一つの実行で測定した。原因と抑制例外に入れた別々の合成fatalは同一インスタンスのまま送出された。初回はSDKのcommons-logging指定漏れで3エラー。終端の証跡を保全し、固定SDKを補った後の10件のみ採用する。書式／Checkstyleは対象1件で指摘0。実HTTPと正式品質の証拠は別途必要。 [現実行](evidence/PG45048-current-form-request-ten/manifest.json)
