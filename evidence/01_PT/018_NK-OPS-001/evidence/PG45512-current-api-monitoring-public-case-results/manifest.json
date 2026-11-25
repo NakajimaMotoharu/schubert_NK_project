@@ -1,0 +1,345 @@
+{
+  "run": "PG45512",
+  "source": "0faa36cc05df68036b03c65c7b64a643165f7a27",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P018-09/2",
+  "related": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T18:28:24.294429+00:00",
+  "actualExit": 0,
+  "startDescriptionCorrection": "5583以降の適用品質番号は451。開始票5593の701は表記誤り。",
+  "sourceRunResults": [
+    {
+      "run": "PG45482",
+      "testSource": "2432a5038fa39a8a4ecd41b36f5e29a74efd703d",
+      "coveredCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45482-current-async-gauge-worker-ownership/manifest.json",
+        "sha256": "f52a305b509aa0b1415b7361b806b0ed8bef58fd1d1b31a817cf86cdcd11bde7"
+      },
+      "rawXmlSha256": "cf0e024ea814d59f298df57c023d2f608477e214ce028db04ceaa8d16f7cff5f",
+      "testCount": 2,
+      "passed": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "selected": [
+        {
+          "testId": "ASYNCGAUGE007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+          "method": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1623_APIAsyncJobMetric_単体テスト仕様書.md",
+            "sha256": "ffcd17be9bbe9a55dd9138b1dde55a7f43a98f483b932ed0fc1c7068b41f5d52"
+          }
+        },
+        {
+          "testId": "PT-OPS-ASYNCGAUGE009",
+          "suite": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+          "method": "asyncGauge009CleanupRetainsFirstFailureAndStopsOnlyOnce",
+          "result": "PASS",
+          "scope": "test helper",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1623_APIAsyncJobMetric_単体テスト仕様書.md",
+            "sha256": "ffcd17be9bbe9a55dd9138b1dde55a7f43a98f483b932ed0fc1c7068b41f5d52"
+          }
+        }
+      ],
+      "publicCoveragePerRun": {
+        "LINE": {
+          "missed": 9,
+          "hit": 38
+        },
+        "METHOD": {
+          "missed": 3,
+          "hit": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "hit": 3
+        },
+        "BRANCH": {
+          "missed": 10,
+          "hit": 9
+        }
+      }
+    },
+    {
+      "run": "PG45488",
+      "testSource": "1d1388091e24b730817b0f7d696e834095e5cfe9",
+      "coveredCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45488-current-outbox-metric-shared-workers/manifest.json",
+        "sha256": "74f538613acc9f29f3f1eb549c84f8d2b51bc1d353b94f0129472f8029bf0853"
+      },
+      "rawXmlSha256": "306d534f60684c7701070cb78918167dcb6a50b86ffed848f6b2da25a391f06b",
+      "testCount": 3,
+      "passed": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "selected": [
+        {
+          "testId": "OUTBOXAGE006",
+          "suite": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+          "method": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1660_APIOutboxAgeMetric_単体テスト仕様書.md",
+            "sha256": "58cd944ecd0eb3f4a7b8ec8ab027e3df31ee71f8a03d475065576cfee5f2db5e"
+          }
+        },
+        {
+          "testId": "OUTBOXMET006",
+          "suite": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+          "method": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1647_APIOutboxRowsMetric_単体テスト仕様書.md",
+            "sha256": "a6083af14eac11abbac3301a2762885dd16a73127c4bf8d3da2c22977a209f6b"
+          }
+        },
+        {
+          "testId": "PT-OPS-ASYNCGAUGE009",
+          "suite": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+          "method": "asyncGauge009CleanupRetainsFirstFailureAndStopsOnlyOnce",
+          "result": "PASS",
+          "scope": "test helper",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1623_APIAsyncJobMetric_単体テスト仕様書.md",
+            "sha256": "ffcd17be9bbe9a55dd9138b1dde55a7f43a98f483b932ed0fc1c7068b41f5d52"
+          }
+        }
+      ],
+      "publicCoveragePerRun": {
+        "LINE": {
+          "missed": 26,
+          "hit": 49
+        },
+        "METHOD": {
+          "missed": 12,
+          "hit": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "hit": 5
+        },
+        "BRANCH": {
+          "missed": 26,
+          "hit": 16
+        }
+      }
+    },
+    {
+      "run": "PG45494",
+      "testSource": "a4913a9c09d2406548cc6a2a4f4aaec1d1ac2d53",
+      "coveredCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45494-current-five-api-metric-fixture-owners/manifest.json",
+        "sha256": "3af8df8e5f02c514f55fb2c9fc00c4a29e9f9e4996f696d1e0cf37bb7c0d4099"
+      },
+      "rawXmlSha256": "5985d633b60816b0daf40f88a79b8960f1799d3c407ac3866244961f4c63e1d8",
+      "testCount": 5,
+      "passed": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "selected": [
+        {
+          "testId": "INBOXMET007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.InboxReplayMetricRecorderTest",
+          "method": "inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1691_APIInboxReplayMetric_単体テスト仕様書.md",
+            "sha256": "7600aa1bbfe1d9494524ae7e7b54087e4647d14dd6949989956eeeb29a14fedf"
+          }
+        },
+        {
+          "testId": "MQPRESS006",
+          "suite": "dev.codex.schubert.nk.api.monitoring.MqPressureMetricRecorderTest",
+          "method": "mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1693_MQ供給圧力Metric_単体テスト仕様書.md",
+            "sha256": "16c7d2eea26d56794b5d2f92d1f5c6eaab698f118ddc488fd206010fa392a2d9"
+          }
+        },
+        {
+          "testId": "MQREDEL007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.MqRedeliveryMetricRecorderTest",
+          "method": "mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1695_MQ再配送Metric_単体テスト仕様書.md",
+            "sha256": "709ca42041b9cd9b4136ee6421c194010be5ae88eb255c996c80668d56198fd3"
+          }
+        },
+        {
+          "testId": "OPMIS007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+          "method": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1643_APIOperationMismatchMetric_単体テスト仕様書.md",
+            "sha256": "983af802012d2175f9a77b08a84404f7dbb7ca7af3c3e91e8c35ac29c36743e5"
+          }
+        },
+        {
+          "testId": "POOLMET006",
+          "suite": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+          "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1635_APIDbPoolMetric_単体テスト仕様書.md",
+            "sha256": "792cc3848ee1857ada6105291fd2fb5e4ebe281b79c491e169093a79cd74a8a1"
+          }
+        }
+      ],
+      "publicCoveragePerRun": {
+        "LINE": {
+          "missed": 36,
+          "hit": 150
+        },
+        "METHOD": {
+          "missed": 12,
+          "hit": 22
+        },
+        "CLASS": {
+          "missed": 0,
+          "hit": 9
+        },
+        "BRANCH": {
+          "missed": 50,
+          "hit": 43
+        }
+      }
+    },
+    {
+      "run": "PG45498",
+      "testSource": "886debf1b4efad7074800f0fe033273eb85b7ba2",
+      "coveredCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json",
+        "sha256": "ad1c6d9a8a12bfdafa4eeba5a033e41edb7b03a00aa2d8b776379d9748f5fe39"
+      },
+      "rawXmlSha256": "896b0347d94377e125f86bb4bd8cc958686e120363f8c5210b86ae1c10c53ca3",
+      "testCount": 3,
+      "passed": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "selected": [
+        {
+          "testId": "MQEVENT007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.MqMessageMetricRecorderTest",
+          "method": "mqEvent007ConcurrentCountsUsePrecomputedStageOwnerVectorsAndSeparateRegistry",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1718_MqMessageMetric_単体テスト仕様書.md",
+            "sha256": "d713321abf5d474c074c006f0816d3bae4f2436e94e962d0416bb5596c5a340c"
+          }
+        },
+        {
+          "testId": "MQTIME007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.MqProcessingDurationMetricRecorderTest",
+          "method": "mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1716_MqProcessingDurationMetric_単体テスト仕様書.md",
+            "sha256": "c317a4917bf3f1ac65a8c36c13357dcb66c26578f097e9b47560f8fc2b68f0a4"
+          }
+        },
+        {
+          "testId": "PT-OPS-DBQUERYTIME-007",
+          "suite": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "result": "PASS",
+          "scope": "local product",
+          "specification": {
+            "path": "evidence/01_PT/018_NK-OPS-001/1712_DbQueryDurationMetric_単体テスト仕様書.md",
+            "sha256": "2c2be250bd86a57e86d240aabae29750b2f3bdf04849c24929c73c674a40839c"
+          }
+        }
+      ],
+      "publicCoveragePerRun": {
+        "LINE": {
+          "missed": 21,
+          "hit": 106
+        },
+        "METHOD": {
+          "missed": 7,
+          "hit": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "hit": 7
+        },
+        "BRANCH": {
+          "missed": 32,
+          "hit": 21
+        }
+      }
+    }
+  ],
+  "otherFormattingOrStatic": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45492-current-outbox-fixtures-canonical-spotless/manifest.json",
+      "sha256": "dfbb0df0db092d92d8364c20072aa89f4f2fd79909b9828604ccf6a0c5f5096b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45496-current-five-metric-fixtures-canonical-spotless/manifest.json",
+      "sha256": "127b1359d9d89d353f6b9021c8cad8301049bb678284a9e929a5c685920106f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45508-current-duration-and-message-checkstyle/manifest.json",
+      "sha256": "e525aacf19fa2048c167a4ca000757c118ba0b4ec8137ac007fc9d0d1f76a162"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45510-current-eight-metric-checkstyle/manifest.json",
+      "sha256": "143eb2fdc0f4154f1ffa76c614da1fd6487d40a00d090a304602ed2057f10ff8"
+    }
+  ],
+  "identityCorrection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45500-dbtime-suite-identities-and-oracles/manifest.json",
+    "sha256": "684a2dc0087082a9377e4fb4212a6bcdad3aa8e63ff54dea8a53c019464c72c8"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+      "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986"
+    }
+  ],
+  "totalGrossObserved": 13,
+  "distinctIds": 12,
+  "localProductObserved": 11,
+  "fixtureObservations": 2,
+  "publishedFields": [
+    "explicit identifiers",
+    "per-run counts",
+    "raw XML SHA-256",
+    "per-run four counters",
+    "source provenance"
+  ],
+  "rawPropertiesOrOutputCopied": 0,
+  "newActualTrials": 0,
+  "combinedCounters": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
