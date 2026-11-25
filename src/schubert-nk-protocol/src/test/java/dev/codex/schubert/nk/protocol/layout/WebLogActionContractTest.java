@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.codec.FieldEncodingException;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.fixture.ProtocolFixtureWorkers;
 import dev.codex.schubert.nk.protocol.layout.log.WebLogEventData;
 import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
 import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
@@ -209,18 +209,15 @@ class WebLogActionContractTest {
   @Test // PT-PRO-QA054-011
   void independentConcurrentCallersDoNotMixCategories()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var first = workers.submit(() -> encode(legacy(Optional.empty())));
-      var second = workers.submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));
+    try (var workers = new ProtocolFixtureWorkers(Executors.newFixedThreadPool(2))) {
+      var first = workers.executor().submit(() -> encode(legacy(Optional.empty())));
+      var second =
+          workers.executor().submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));
       assertArrayEquals(
           golden(REQUEST_CATEGORY, ""), first.get(10, java.util.concurrent.TimeUnit.SECONDS));
       assertArrayEquals(
           golden(ACTION_CATEGORY, MENU_ACTION),
           second.get(10, java.util.concurrent.TimeUnit.SECONDS));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 

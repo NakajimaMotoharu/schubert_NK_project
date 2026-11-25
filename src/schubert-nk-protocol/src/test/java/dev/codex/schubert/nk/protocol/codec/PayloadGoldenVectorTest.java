@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.fixture.ProtocolFixtureWorkers;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.layout.FieldDefinition;
 import dev.codex.schubert.nk.protocol.layout.FieldValue;
@@ -161,28 +162,30 @@ class PayloadGoldenVectorTest {
     expected[320] = 'A';
     CountDownLatch ready = new CountDownLatch(8);
     CountDownLatch start = new CountDownLatch(1);
-    var executor = Executors.newFixedThreadPool(8);
-    try {
-      List<Future<byte[]>> futures = new ArrayList<>();
-      for (int index = 0; index < 8; index++) {
-        futures.add(
-            executor.submit(
-                () -> {
-                  ready.countDown();
-                  assertTrue(start.await(10, java.util.concurrent.TimeUnit.SECONDS));
-                  return codec.encode(values, false).copyData();
-                }));
+    try (var workers = new ProtocolFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      try {
+        List<Future<byte[]>> futures = new ArrayList<>();
+        for (int index = 0; index < 8; index++) {
+          futures.add(
+              workers
+                  .executor()
+                  .submit(
+                      () -> {
+                        ready.countDown();
+                        assertTrue(start.await(10, java.util.concurrent.TimeUnit.SECONDS));
+                        return codec.encode(values, false).copyData();
+                      }));
+        }
+        assertTrue(ready.await(10, java.util.concurrent.TimeUnit.SECONDS));
+        start.countDown();
+        for (Future<byte[]> future : futures) {
+          assertTrue(
+              MessageDigest.isEqual(
+                  expected, future.get(10, java.util.concurrent.TimeUnit.SECONDS)));
+        }
+      } finally {
+        start.countDown();
       }
-      assertTrue(ready.await(10, java.util.concurrent.TimeUnit.SECONDS));
-      start.countDown();
-      for (Future<byte[]> future : futures) {
-        assertTrue(
-            MessageDigest.isEqual(expected, future.get(10, java.util.concurrent.TimeUnit.SECONDS)));
-      }
-    } finally {
-      start.countDown();
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
     assertSame(codec, PayloadCodec.standard());
   }

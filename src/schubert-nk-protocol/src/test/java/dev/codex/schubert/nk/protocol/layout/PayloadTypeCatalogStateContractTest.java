@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.protocol.fixture.ProtocolFixtureWorkers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -55,18 +56,17 @@ class PayloadTypeCatalogStateContractTest {
           }
           return List.copyOf(result);
         };
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var first = workers.submit(readAll);
-      var second = workers.submit(readAll);
-      assertTrue(ready.await(10, TimeUnit.SECONDS));
-      start.countDown();
-      assertEquals(expected, first.get(10, TimeUnit.SECONDS));
-      assertEquals(expected, second.get(10, TimeUnit.SECONDS));
-    } finally {
-      start.countDown();
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
+    try (var workers = new ProtocolFixtureWorkers(Executors.newFixedThreadPool(2))) {
+      try {
+        var first = workers.executor().submit(readAll);
+        var second = workers.executor().submit(readAll);
+        assertTrue(ready.await(10, TimeUnit.SECONDS));
+        start.countDown();
+        assertEquals(expected, first.get(10, TimeUnit.SECONDS));
+        assertEquals(expected, second.get(10, TimeUnit.SECONDS));
+      } finally {
+        start.countDown();
+      }
     }
   }
 }
