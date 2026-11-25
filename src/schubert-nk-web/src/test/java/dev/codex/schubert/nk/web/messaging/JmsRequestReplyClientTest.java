@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.jms.JMSException;
 import java.time.Clock;
 import java.time.Duration;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -168,13 +168,12 @@ final class JmsRequestReplyClientTest {
       CountDownLatch release = new CountDownLatch(1);
       AtomicInteger sends = new AtomicInteger();
       List<Future<byte[]>> waits = new ArrayList<>();
-      ExecutorService executor = Executors.newFixedThreadPool(maximum);
-      try {
+      try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(maximum), 5)) {
         try {
           for (int index = 1; index <= maximum; index++) {
             UUID id = new UUID(0, index);
             waits.add(
-                executor.submit(
+                workers.submit(
                     () ->
                         client.exchange(
                             id,
@@ -205,9 +204,6 @@ final class JmsRequestReplyClientTest {
         } finally {
           release.countDown();
         }
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
       assertEquals(maximum, sends.get());
       assertEquals(0, client.pendingCount());
