@@ -512,10 +512,17 @@ final class InspectionSummaryPortTest {
               });
     }
 
-    private void hit(String point) throws Throwable {
+    private void hit(String point) throws SQLException {
       visited.add(point);
-      Throwable failure = faults.get(point);
-      if (failure != null) throw failure;
+      switch (faults.get(point)) {
+        case null -> {}
+        case SQLException sql -> throw sql;
+        case IllegalStateException state -> throw state;
+        case IllegalArgumentException argument -> throw argument;
+        case NullPointerException nullValue -> throw nullValue;
+        case AssertionError fatal -> throw fatal;
+        default -> throw new AssertionError("Unexpected inspection summary fixture failure");
+      }
     }
 
     private void assertClosed() {
