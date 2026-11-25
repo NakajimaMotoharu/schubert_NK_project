@@ -333,13 +333,12 @@ class LogSearchResultsViewModelTest {
   void web269ConcurrentProjection()
       throws InterruptedException, ExecutionException, TimeoutException {
     var input = List.of(record(1, TIME, 1023, "shared"));
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
         futures.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   var p =
                       LogSearchResultsViewModel.from(
@@ -351,9 +350,6 @@ class LogSearchResultsViewModelTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals("shared", input.getFirst().message());
     assertEquals(1, input.size());

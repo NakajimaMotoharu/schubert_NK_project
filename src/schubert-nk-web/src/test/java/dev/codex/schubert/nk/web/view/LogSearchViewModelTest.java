@@ -357,13 +357,12 @@ class LogSearchViewModelTest {
   @Test
   void web293ConcurrentViews() throws InterruptedException, ExecutionException, TimeoutException {
     var shared = List.of(row(2, "shared"), row(1, "second"));
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<LogSearchViewModel>>();
       for (int i = 0; i < 64; i++) {
         final int index = i;
         futures.add(
-            pool.submit(
+            workers.submit(
                 () ->
                     LogSearchViewModel.success(
                         actor("r" + index, UserRole.ADMIN),
@@ -384,9 +383,6 @@ class LogSearchViewModelTest {
         assertTrue(v.getPreviousHref().isEmpty());
         assertTrue(v.getNextHref().isEmpty());
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(List.of(2L, 1L), shared.stream().map(r -> r.logId().value()).toList());
   }
