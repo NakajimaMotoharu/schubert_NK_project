@@ -1,0 +1,467 @@
+{
+  "source": "720f58e84f6b1ab2c1d14403cee261ebc26ba76c",
+  "items": [
+    {
+      "run": "PG45678",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+        "sha256": "52be6e6ad521890b422da8305c447b407c32f562e39b3b96ac8bee75091314b3"
+      },
+      "line": 264,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45678",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+        "sha256": "10e85630a403ffd2316573bfe38a5e83b18523d4d960575ebd6fcc361c4cee8b"
+      },
+      "line": 92,
+      "rule": "AvoidLiteralsInIfCondition",
+      "currentFileIdentical": false,
+      "ownerSignoff": null,
+      "disposition": "FIXED_AND_RETESTED",
+      "basis": "Independently specified schema position named; other token inputs and expected values fixed.",
+      "replacement": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45712-backup-schema-boundary-single-pmd/manifest.json",
+        "sha256": "ff1ca59c2777f318abe2a70da029ac0f92eda8eed13c4bf8e7e892b51fcafb3f"
+      }
+    },
+    {
+      "run": "PG45678",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+        "sha256": "10e85630a403ffd2316573bfe38a5e83b18523d4d960575ebd6fcc361c4cee8b"
+      },
+      "line": 264,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": false,
+      "ownerSignoff": null,
+      "replacement": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45712-backup-schema-boundary-single-pmd/manifest.json",
+        "sha256": "ff1ca59c2777f318abe2a70da029ac0f92eda8eed13c4bf8e7e892b51fcafb3f"
+      },
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "sha256": "4a244485e43c596d5fe9fefa26446eeb53146507af8f121cefd7d5494a343e8a"
+      },
+      "line": 215,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "sha256": "4a244485e43c596d5fe9fefa26446eeb53146507af8f121cefd7d5494a343e8a"
+      },
+      "line": 227,
+      "rule": "AvoidSynchronizedStatement",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Holding the caller-visible monitor while worker operations run tests independent use of the private lock. No operational lock is used.",
+      "replacement": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45686-current-five-alert-owned-worker-regressions/manifest.json",
+        "sha256": "2617833e0604b5acb1dcd1b7334ffe0f1c76b1caf5bddc02b305017e6809ed92"
+      }
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "sha256": "4a244485e43c596d5fe9fefa26446eeb53146507af8f121cefd7d5494a343e8a"
+      },
+      "line": 294,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+        "sha256": "0ef8a4ccdbb11869edcc593293b11c3f59819dfed07dbe67300235e61d36dc8c"
+      },
+      "line": 136,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+        "sha256": "d1c2bed5c99600a7908bd80bd77e9cf9b44f946bf61295df39738ef661a567ef"
+      },
+      "line": 251,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45686",
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+        "sha256": "ea3b0a87f2dce7644311e11ce50ebd46b2e31d97576ff3b0c7c89c9a6aee2b60"
+      },
+      "line": 136,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "sha256": "3a2c2fdaf72c26a61d2518309d0b73dd269410b042db358ed3c996e94899d19d"
+      },
+      "line": 433,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "sha256": "3a2c2fdaf72c26a61d2518309d0b73dd269410b042db358ed3c996e94899d19d"
+      },
+      "line": 668,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "Connection"
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "sha256": "3a2c2fdaf72c26a61d2518309d0b73dd269410b042db358ed3c996e94899d19d"
+      },
+      "line": 692,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "Statement"
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "sha256": "3a2c2fdaf72c26a61d2518309d0b73dd269410b042db358ed3c996e94899d19d"
+      },
+      "line": 732,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "ResultSet"
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+        "sha256": "acf9c8228c8a5cac965d81fc53fa15c6d73f51a331f3da5cf3238ab99db501d9"
+      },
+      "line": 451,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+        "sha256": "acf9c8228c8a5cac965d81fc53fa15c6d73f51a331f3da5cf3238ab99db501d9"
+      },
+      "line": 598,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "Connection"
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+        "sha256": "acf9c8228c8a5cac965d81fc53fa15c6d73f51a331f3da5cf3238ab99db501d9"
+      },
+      "line": 622,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "Statement"
+    },
+    {
+      "run": "PG45690",
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+        "sha256": "acf9c8228c8a5cac965d81fc53fa15c6d73f51a331f3da5cf3238ab99db501d9"
+      },
+      "line": 662,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "JAVA_INTERFACE_LOADER_REVIEW",
+      "basis": "JDK proxy uses the defining loader of its only public java.sql interface; does not depend on an arbitrary context loader.",
+      "interface": "ResultSet"
+    },
+    {
+      "run": "PG45698",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+        "sha256": "dc50b65124c5eaae72e3f2794576754edbb464979bc7cf54467a35a2ef102e7f"
+      },
+      "line": 336,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45698",
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+        "sha256": "3f67e970fdf851229ffefa794cc1e65b51077e6dfda94511b1b4f6e42a840f86"
+      },
+      "line": 360,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+        "sha256": "c6024eb3787dbaf8b5a685e35e1b7a521e35b4663861f23ae076119bea3aa531"
+      },
+      "line": 321,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+        "sha256": "c6024eb3787dbaf8b5a685e35e1b7a521e35b4663861f23ae076119bea3aa531"
+      },
+      "line": 568,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+        "sha256": "c6024eb3787dbaf8b5a685e35e1b7a521e35b4663861f23ae076119bea3aa531"
+      },
+      "line": 574,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+        "sha256": "e51dfb7ea5e52d9938b21d47ac751e40a9914a2daf28f924bc4fe7705ead6578"
+      },
+      "line": 249,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkers.java",
+        "sha256": "6dc2106620c0c287784fcab69ae6dcc4343637eb81a047c7d2808ce9d71f5834"
+      },
+      "line": 7,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkers.java",
+        "sha256": "6dc2106620c0c287784fcab69ae6dcc4343637eb81a047c7d2808ce9d71f5834"
+      },
+      "line": 10,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkers.java",
+        "sha256": "6dc2106620c0c287784fcab69ae6dcc4343637eb81a047c7d2808ce9d71f5834"
+      },
+      "line": 12,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkers.java",
+        "sha256": "6dc2106620c0c287784fcab69ae6dcc4343637eb81a047c7d2808ce9d71f5834"
+      },
+      "line": 16,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 70,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 73,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 77,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 78,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 80,
+      "rule": "UseProperClassLoader",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "NARROW_TO_INTERFACE_LOADER_CANDIDATE",
+      "basis": "The loader belongs to the test class while the sole proxy interface is JDK ExecutorService. It can be narrowed in the test without touching the product."
+    },
+    {
+      "run": "PG45700",
+      "fixture": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFixtureWorkersTest.java",
+        "sha256": "e6e59165abbf02515d495dd92c61d0da23379f9ebd10ad0585f8b8cfc616040f"
+      },
+      "line": 81,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    },
+    {
+      "run": "PG45704",
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+        "sha256": "9a12bc76176665e79aac930c93a11eadcdd131405650ce76176bcc8692d2ac78"
+      },
+      "line": 119,
+      "rule": "DoNotUseThreads",
+      "currentFileIdentical": true,
+      "ownerSignoff": null,
+      "disposition": "TEST_ORACLE_RETAIN_REVIEW",
+      "basis": "Owned finite local parallel fixture or shutdown/interrupt assertion; replacing concurrency drops part of the specified test or the actual teardown check."
+    }
+  ],
+  "rawMarkersRetained": 34,
+  "pmdWarningSuppression": false
+}
