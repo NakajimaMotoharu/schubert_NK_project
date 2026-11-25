@@ -45,6 +45,12 @@ public interface JdbcResourceCleanup {
     }
   }
 
+  /** Release a statement acquisition that can fail to supply a handle. */
+  static void closeStatementIfPresent(
+      @Nullable Throwable primary, @WillClose @Nullable Statement statement) throws SQLException {
+    if (statement != null) closeStatement(primary, statement);
+  }
+
   /** Discharge the established ResultSet ownership once, preserving the body failure graph. */
   static void closeRows(@Nullable Throwable primary, @WillClose ResultSet rows)
       throws SQLException {

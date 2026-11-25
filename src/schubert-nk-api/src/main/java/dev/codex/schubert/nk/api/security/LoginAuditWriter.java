@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.text.Normalizer;
@@ -47,14 +48,14 @@ public final class LoginAuditWriter {
         Normalizer.normalize(usernameKey, Normalizer.Form.NFC)
             .replaceAll("[\\r\\n\\t\\u2028\\u2029]", " ");
     {
-      var statement =
-          requireValue(
-              connection.prepareStatement(
-                  "insert into schubert.app_logs"
-                      + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,actor_username,remote_address,details)"
-                      + " values(?,'API','SECURITY',?,?,?,?,?,?,?,cast(? as inet),cast(? as jsonb))"));
+      @Nullable PreparedStatement acquired =
+          connection.prepareStatement(
+              "insert into schubert.app_logs"
+                  + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,actor_username,remote_address,details)"
+                  + " values(?,'API','SECURITY',?,?,?,?,?,?,?,cast(? as inet),cast(? as jsonb))");
       @Nullable Throwable jdbcFailure1 = null;
       try {
+        var statement = requireValue(acquired);
         statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setString(2, success ? "INFO" : "WARN");
         statement.setString(3, action);
@@ -73,7 +74,7 @@ public final class LoginAuditWriter {
         jdbcFailure1 = failure;
         throw failure;
       } finally {
-        JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);
+        JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure1, acquired);
       }
     }
   }

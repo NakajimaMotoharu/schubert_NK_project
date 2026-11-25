@@ -118,6 +118,21 @@ final class SessionAuditPortTest {
     }
   }
 
+  /** PT-AUT-AUDIT-PREPARE002. */
+  @Test
+  void missingPreparedStatementDoesNotBindOrCloseAnyBorrowedResource() {
+    var fixture = new Fixture();
+    fixture.missingPreparedStatement = true;
+    var failure =
+        assertThrows(
+            SQLException.class,
+            () -> invoke(fixture, Optional.empty(), SessionRevocationReason.EXPIRED));
+    assertEquals("22004", failure.getSQLState());
+    assertEquals("required database value is missing", failure.getMessage());
+    assertEquals(List.of(JDBC_PREPARE), fixture.operations);
+    assertTrue(fixture.bindings.isEmpty());
+  }
+
   @Test
   void executionFailuresStillCloseTheStatementOnce() {
     for (Throwable original : failures()) {
@@ -279,6 +294,7 @@ final class SessionAuditPortTest {
     private @Nullable Throwable prepareFailure;
     private @Nullable Throwable executeFailure;
     private @Nullable Throwable closeFailure;
+    private boolean missingPreparedStatement;
     private int affectedRows = 1;
 
     private Fixture() {
@@ -317,7 +333,7 @@ final class SessionAuditPortTest {
                 operations.add(JDBC_PREPARE);
                 preparedSql = (String) args[0];
                 throwIfPresent(prepareFailure);
-                return statementProxy;
+                return missingPreparedStatement ? null : statementProxy;
               });
     }
   }

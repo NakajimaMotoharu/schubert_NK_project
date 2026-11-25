@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.Instant;
@@ -38,15 +39,15 @@ public final class SessionAuditWriter {
     details.addProperty("targetUserId", targetId);
     details.addProperty("reason", reason.name());
     details.addProperty("resultCode", result.wireValue());
-    var statement =
-        requireValue(
-            connection.prepareStatement(
-                "insert into schubert.app_logs"
-                    + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,remote_address,details)"
-                    + " values(?,'API','SECURITY','INFO','SESSION_REVOKED','SESSION_REVOKED',?,?,?,cast(?"
-                    + " as inet),cast(? as jsonb))"));
+    @Nullable PreparedStatement acquired =
+        connection.prepareStatement(
+            "insert into schubert.app_logs"
+                + " (logged_at,service,category,level,action,message,message_id,correlation_id,actor_user_id,remote_address,details)"
+                + " values(?,'API','SECURITY','INFO','SESSION_REVOKED','SESSION_REVOKED',?,?,?,cast(?"
+                + " as inet),cast(? as jsonb))");
     @Nullable Throwable primary = null;
     try {
+      var statement = requireValue(acquired);
       statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(2, messageId);
       statement.setObject(3, correlationId);
@@ -60,7 +61,7 @@ public final class SessionAuditWriter {
       primary = failure;
       throw failure;
     } finally {
-      JdbcResourceCleanup.closeStatement(primary, statement);
+      JdbcResourceCleanup.closeStatementIfPresent(primary, acquired);
     }
   }
 }

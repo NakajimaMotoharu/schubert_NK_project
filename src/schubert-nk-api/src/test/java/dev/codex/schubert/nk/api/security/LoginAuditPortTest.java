@@ -225,6 +225,20 @@ final class LoginAuditPortTest {
                     NOW));
   }
 
+  /** PT-AUT-AUDIT-PREPARE001. */
+  @Test
+  void missingPreparedStatementIsAnIntegrityFailureWithoutBorrowedOperations() {
+    var fixture = new Fixture();
+    fixture.missingPreparedStatement = true;
+    var failure =
+        assertThrows(
+            SQLException.class, () -> write(fixture, DENIED, LoginAuditReason.NO_ACCOUNT, USER));
+    assertEquals("22004", failure.getSQLState());
+    assertEquals("required database value is missing", failure.getMessage());
+    assertEquals(List.of(PREPARE), fixture.events);
+    assertEquals(0, fixture.closeAttempts);
+  }
+
   @Test
   void concurrentWriterUsesOnlyEachCallersSeparateStatement() throws Exception {
     Fixture first = new Fixture();
@@ -304,6 +318,7 @@ final class LoginAuditPortTest {
     int changed = 1;
     int updates;
     int closeAttempts;
+    boolean missingPreparedStatement;
 
     void event(String point) throws Throwable {
       events.add(point);
@@ -321,7 +336,7 @@ final class LoginAuditPortTest {
                   throw new AssertionError("borrowed connection lifetime mutated");
                 sql = (String) args[0];
                 event(PREPARE);
-                return statement();
+                return missingPreparedStatement ? null : statement();
               });
     }
 
