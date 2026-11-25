@@ -212,7 +212,8 @@ final class UserMutationOutcomeValuePortTest {
     assertNotEquals(
         accepted, new UserMutationResult(ResultCode.IDEMPOTENT_SUCCESS, Optional.of(response)));
     assertNotEquals(accepted, new UserMutationResult(ResultCode.SUCCESS, Optional.of(otherUser)));
-    assertNotEquals(accepted, new UserMutationResult(ResultCode.SUCCESS, Optional.of(otherVersion)));
+    assertNotEquals(
+        accepted, new UserMutationResult(ResultCode.SUCCESS, Optional.of(otherVersion)));
     assertNotEquals(accepted, new UserMutationResult(ResultCode.NOT_FOUND, Optional.empty()));
   }
 
@@ -233,6 +234,7 @@ final class UserMutationOutcomeValuePortTest {
     assertNotEquals(metadata, new UserCommandMetadata(message, new UUID(0, 23), time));
     assertNotEquals(
         metadata,
-        new UserCommandMetadata(message, correlation, Instant.parse("2026-09-08T00:00:00.123457Z")));
+        new UserCommandMetadata(
+            message, correlation, Instant.parse("2026-09-08T00:00:00.123457Z")));
   }
 }
