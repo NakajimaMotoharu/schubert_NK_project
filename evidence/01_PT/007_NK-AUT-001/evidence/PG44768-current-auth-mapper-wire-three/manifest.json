@@ -1,0 +1,91 @@
+{
+  "run": "PG44768",
+  "source": "5b127aed4962aad13d1aadd458ec4dd5e2749e70",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-P007-04/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P007-03/2"
+  ],
+  "terminalAtUTC": "2026-11-25T01:20:08.424304+00:00",
+  "actualExit": 0,
+  "groupBeginOwnerCorrected": {
+    "started": "WBS-P007-03/2",
+    "owner": "WBS-P007-04/2",
+    "reason": "canonical original P007-04 owns authentication message mapping; P007-03 reuses only scope reference",
+    "completedPriceTransferred": 0
+  },
+  "testIds": {
+    "PT-AUT-WIRE-001": "loginSuccessMatchesIndependentUserAndAdminByteVectors",
+    "PT-AUT-WIRE-002": "failuresLocksAndInfrastructureNeverExposeIdentity",
+    "PT-AUT-WIRE-003": "logoutNullAndBoundaryResultsPreserveTheOriginalInstant"
+  },
+  "specification": {
+    "path": "evidence/01_PT/007_NK-AUT-001/001_NK-AUT-001_単体テスト仕様書.md",
+    "sha256": "f4f1101b02a88fef1a7fb247640a672f94886a69dff3d66891949159863b0603"
+  },
+  "actualProductTests": 3,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "explicitPrimaryRaw": [
+    34,
+    6,
+    1,
+    6
+  ],
+  "rawMissedZero": true,
+  "separateExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44768-api-response-values-three-current/unit.exec",
+    "sha256": "e61de89743ac75a3c3760fb4e4f0c0937cfdf963d10668c924109a4c58dc249e"
+  },
+  "rawReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44768-api-response-values-three-current/raw.out",
+    "sha256": "f427ea657dfa43a54c0e16e7e873c7bfa3b61a91d065101bda8eccf712040101"
+  },
+  "changedUsedProtocol": [
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.class",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class"
+  ],
+  "newNormalProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "oldNormalProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "6c33b2a1c55b3f0d116083e5e99ef8a3e5b3a15245b170dc4d0794f85d2964f9"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44768-api-response-values-three-current/begin.json",
+    "sha256": "2a5eabf829c15496aa872e2fe6a8adb475f7c97de055fb3ef3c9f40203975b08"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44768-api-response-values-three-current/terminal.json",
+    "sha256": "b85a091c138f6c212c19ad986e281783c4ac46013b64ad4b65ed51f182a7617c"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44768-api-response-values-three-current/result/TEST-junit-jupiter.xml",
+    "sha256": "7d94cc4c55325d262755f4b0fa3b1131ceb73b887e332520800c13c7b1d07450"
+  },
+  "separateWebFixedRevocationEvidence": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41362-p01810-revoke-ownership-independent-v1/manifest.json",
+      "sha256": "940e512fc4e2e9aae9c30ab3bf4685e6d84f8b9e47096dd5d30f96ed2e468004"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41360-p01810-revoke-ownership-qualified-v1/manifest.json",
+      "sha256": "b07633cd02b3387141b0702a1b75961895fdf0434e28a4dc635ee6f8633864ba"
+    }
+  ],
+  "webExactClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-nullaway/target/classes/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.class",
+    "sha256": "f616b2d05ac6e2476e2584e09152c5f213987abe7206d2483cd02a8b02e6f031"
+  },
+  "webRetainedOriginalRaw": "CLASS\tdev/codex/schubert/nk/web/revocation/RevocationPayloadCodec\t5f8d77c1570f3a2f\ttrue\t112\t49\tINSTRUCTION:6:510\tBRANCH:0:40\tLINE:0:109\tCOMPLEXITY:0:30\tMETHOD:0:10\tCLASS:0:1",
+  "newWebExec": 0,
+  "boundInboxTestRetainedHold": "BeforeAll is real PostgreSQL in entire fixture, no partial selector used",
+  "actualLoginLogoutCredentialOrDb": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
