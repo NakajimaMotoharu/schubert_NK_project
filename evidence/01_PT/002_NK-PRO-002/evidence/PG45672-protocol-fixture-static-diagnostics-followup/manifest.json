@@ -1,0 +1,189 @@
+{
+  "run": "PG45672",
+  "source": "060265a207f73cadd0a4c99540fc22d7a27f652e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T22:01:57.619225+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3911",
+  "horizontal": "YKT-2997",
+  "prefixedLedgerCommit": "95542f9d3d2e14c819b127f4e66a043d77ce2bfc",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/begin.json",
+    "sha256": "a98306456d57020429b3777038211dfad7cf9dd2b881270043bf3b9a6672c22b"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/terminal.json",
+    "sha256": "c4d02125795a70236614d993b167bc08f73e64e597135e7a3ba2ad9c97840878"
+  },
+  "existingJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aba8510ab9e549ec5dc38a8f72eefce9209396e48b9b0d9ca8f6360382d1f924"
+  },
+  "productTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+  "sourceAndTestChanges": {
+    "testFiles": 5,
+    "productionFiles": 0
+  },
+  "specification": {
+    "path": "evidence/01_PT/002_NK-PRO-002/103_Protocol有限workerの診断保持単体仕様.md",
+    "sha256": "a45bf70f8e50a7f3882ca6b3e82eed6a1827ed4fbb8764e010616659f333a0d9"
+  },
+  "independentInputs": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv",
+      "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/resources/protocol/named-types-ss323.tsv",
+      "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+    }
+  ],
+  "unchangedPrimaryExpected": true,
+  "normalTests": 3,
+  "regressionTests": 2,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/xml/TEST-junit-jupiter.xml",
+    "sha256": "92ab3ac27fce950b7e1b0959caf3c15ac39210bc60eae4358c1321948680d645"
+  },
+  "testIds": {
+    "PT-PRO-002-P09": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse",
+    "PT-PRO-CATALOG-STATE001": "layout.PayloadTypeCatalogStateContractTest#concurrentReadersRetainAllIndependentSixtyFourTypeBindings",
+    "PT-PRO-QA054-011": "layout.WebLogActionContractTest#independentConcurrentCallersDoNotMixCategories",
+    "PT-PRO-WORKER001": "fixture.ProtocolFixtureWorkersTest#timeoutIsSuppressedAfterAnAssertionAndSurfacedOnItsOwn",
+    "PT-PRO-WORKER002": "fixture.ProtocolFixtureWorkersTest#interruptedCleanupRetainsTheCauseAndRestoresTheThreadFlag"
+  },
+  "gates": {
+    "compile": 0,
+    "unit": 0,
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 4
+  },
+  "checkstyleXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/checkstyle.xml",
+    "sha256": "1a2eb8ed74f502a5b82d3e3e767aa1b733154e21cb127a8616707ce1a77308f6"
+  },
+  "rawPmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45672-protocol-three-worker-fixtures/pmd.xml",
+    "sha256": "38630654f85882a20d184645f66ff333f31909c7430e0e434f2b18d3c69dcfd0"
+  },
+  "rawPmdRetained": [
+    {
+      "file": "PayloadGoldenVectorTest.java",
+      "line": 165,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "PayloadTypeCatalogStateContractTest.java",
+      "line": 59,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 11,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 13,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 17,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 23,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 26,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkers.java",
+      "line": 29,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 20,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 36,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 49,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 65,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 68,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "ProtocolFixtureWorkersTest.java",
+      "line": 72,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "line": 182,
+      "rule": "NullAssignment",
+      "proposedDisposition": "unchanged public-constructor null input for required reference invariants"
+    },
+    {
+      "file": "WebLogActionContractTest.java",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "standalone owned JUnit executor fixture with fixed shutdown, no service runtime"
+    }
+  ],
+  "previousRaw": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45670-three-protocol-worker-fixtures-preserve-diagnostics/manifest.json",
+    "sha256": "b5161d4523c91c616190ca43951898569c0824f7b2fdb78b82bd665d79a34483"
+  },
+  "initialFindingCount": 19,
+  "afterFindingCount": 16,
+  "allPmdAppliedDispositionAccepted": false,
+  "oldOrdinaryQualification": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "oldResultNotMerged": true,
+  "formalAcceptanceId": null,
+  "noDbOrBrokerOrManagedServiceUse": true,
+  "cumulativeProductTrialsGross": 2870,
+  "testFixtureEngineeringTrials": 2,
+  "whole451": false
+}
