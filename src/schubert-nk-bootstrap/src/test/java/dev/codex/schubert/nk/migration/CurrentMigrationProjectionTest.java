@@ -17,9 +17,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +58,7 @@ final class CurrentMigrationProjectionTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void snapshot001AllFiveFixedQueriesTypedValuesAndCloseOrder() throws Exception {
+  void snapshot001AllFiveFixedQueriesTypedValuesAndCloseOrder() throws SQLException {
     var f = normal();
     var value = read(f, ones());
     assertEquals(
@@ -94,7 +96,7 @@ final class CurrentMigrationProjectionTest {
   }
 
   @Test
-  void snapshot002AllEmptyListsRemainEmpty() throws Exception {
+  void snapshot002AllEmptyListsRemainEmpty() throws SQLException {
     var f = normal();
     for (var rows : f.tables) rows.clear();
     var value = read(f, new int[TABLES]);
@@ -147,7 +149,7 @@ final class CurrentMigrationProjectionTest {
   }
 
   @Test
-  void snapshot005RepeatableAndSerializableOnlyAndNoModeChange() throws Exception {
+  void snapshot005RepeatableAndSerializableOnlyAndNoModeChange() throws SQLException {
     for (int mode : new int[] {0, 1, 2, 3, 5, 7, 9, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
       var f = normal();
       f.mode = mode;
@@ -259,7 +261,7 @@ final class CurrentMigrationProjectionTest {
   }
 
   @Test
-  void snapshot010DeepImmutableRowsRetainNullableStoredValues() throws Exception {
+  void snapshot010DeepImmutableRowsRetainNullableStoredValues() throws SQLException {
     var f = normal();
     var value = read(f, ones());
     f.tables.get(0).get(0)[2] = "changed";
@@ -275,7 +277,7 @@ final class CurrentMigrationProjectionTest {
   }
 
   @Test
-  void snapshot011FailureDoesNotPoisonSharedCoordinatorAndNoPartialSuccess() throws Exception {
+  void snapshot011FailureDoesNotPoisonSharedCoordinatorAndNoPartialSuccess() throws SQLException {
     var reader = new CurrentMigrationProjection();
     var bad = normal();
     bad.nullResultTable = 4;
@@ -290,7 +292,8 @@ final class CurrentMigrationProjectionTest {
   }
 
   @Test
-  void snapshot012FiniteConcurrentCallsOwnAllFiveFixtures() throws Exception {
+  void snapshot012FiniteConcurrentCallsOwnAllFiveFixtures()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentMigrationProjection();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -495,9 +498,9 @@ final class CurrentMigrationProjectionTest {
                                           : name.equals("getBigDecimal") ? "D" : "S")
                               + column);
                   return switch (name) {
-                    case GET_LONG -> value == null ? 0L : (Long) value;
-                    case "getInt" -> value == null ? 0 : (Integer) value;
-                    case "getBoolean" -> value == null ? false : (Boolean) value;
+                    case GET_LONG -> value == null ? Long.valueOf(0L) : (Long) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
+                    case "getBoolean" -> value == null ? Boolean.FALSE : (Boolean) value;
                     default -> value;
                   };
                 }
@@ -505,11 +508,11 @@ final class CurrentMigrationProjectionTest {
               });
     }
 
-    void hit(String phase) throws Throwable {
+    void hit(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failureHits++;
-        if (failureHits == 1 && failure != null) throw failure;
+        if (failureHits == 1 && failure != null) MigrationFixtureFailures.raise(failure);
       }
     }
   }
