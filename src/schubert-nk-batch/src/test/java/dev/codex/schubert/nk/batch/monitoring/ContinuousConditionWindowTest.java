@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
 import dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindow.State;
 import java.time.Duration;
@@ -131,20 +132,17 @@ class ContinuousConditionWindowTest {
   @Test
   void monWindow007ConcurrentSamePointHasOneOrigin()
       throws InterruptedException, ExecutionException {
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "monitoring window")) {
       var tasks = new ArrayList<Callable<Duration>>();
       for (int index = 0; index < 64; index++)
         tasks.add(
             () -> window.observe(State.VIOLATING, Duration.ofSeconds(100), true).orElseThrow());
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(Duration.ZERO, future.get());
       assertEquals(
           Duration.ofSeconds(1),
           window.observe(State.VIOLATING, Duration.ofSeconds(101), true).orElseThrow());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

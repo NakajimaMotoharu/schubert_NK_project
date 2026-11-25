@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Event;
@@ -210,8 +211,8 @@ class AlertLifecycleTest {
   void alert009ConcurrentSameTickCountsAndPrivateMonitor() throws Exception {
     var owner = lifecycle();
     signal(owner, Severity.WARNING, Duration.ZERO);
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "alert lifecycle")) {
       var tasks = new ArrayList<Callable<BigInteger>>();
       for (int index = 0; index < 64; index++) {
         tasks.add(
@@ -224,16 +225,14 @@ class AlertLifecycleTest {
       }
       var counts = new HashSet<BigInteger>();
       synchronized (owner) {
-        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) counts.add(future.get());
+        for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+          counts.add(future.get());
       }
       var expected = new HashSet<BigInteger>();
       for (int value = 2; value <= 65; value++) expected.add(BigInteger.valueOf(value));
       assertEquals(expected, counts);
       assertEquals(BigInteger.valueOf(65), owner.snapshot().orElseThrow().count());
       assertEquals(TIME, owner.snapshot().orElseThrow().firstSeen());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -291,13 +290,10 @@ class AlertLifecycleTest {
         var cause = i % 2 == 0 ? CauseClearance.CONFIRMED : CauseClearance.UNCONFIRMED;
         tasks.add(() -> normal(owner, Duration.ofSeconds(Long.MAX_VALUE, 999_999_999), cause));
       }
-      var executor = Executors.newFixedThreadPool(8);
-      try {
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      try (var workers =
+          new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "alert lifecycle")) {
+        for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           assertSame(first, result.get());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertSame(first, owner.snapshot().orElseThrow());
       assertTrue(first.isOpen());

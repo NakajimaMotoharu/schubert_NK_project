@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
@@ -131,8 +132,8 @@ class AlertRegistryTest {
   void alertReg004ConcurrentCallersShareOneKeyOwner()
       throws InterruptedException, ExecutionException {
     var registry = new AlertRegistry();
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "alert registry")) {
       var tasks = new ArrayList<Callable<String>>();
       for (int index = 0; index < 64; index++) {
         tasks.add(
@@ -141,16 +142,13 @@ class AlertRegistryTest {
               return "recorded";
             });
       }
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals("recorded", future.get());
       var events = registry.activeEvents();
       assertEquals(1, events.size());
       assertEquals(BigInteger.valueOf(64), events.getFirst().count());
       assertEquals(TIME, events.getFirst().firstSeen());
       assertEquals(TIME, events.getFirst().lastSeen());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

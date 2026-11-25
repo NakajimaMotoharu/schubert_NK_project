@@ -2,8 +2,8 @@ package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -233,7 +233,6 @@ class AlertThresholdsTest {
   @Test
   void threshold014ConcurrentStatelessEvaluations()
       throws InterruptedException, ExecutionException {
-    var executor = Executors.newFixedThreadPool(4);
     var expected =
         List.of(
             Severity.WARNING,
@@ -248,7 +247,8 @@ class AlertThresholdsTest {
             Severity.WARNING,
             Severity.WARNING,
             Severity.CRITICAL);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "alert thresholds")) {
       var tasks = new ArrayList<Callable<List<Severity>>>();
       for (int index = 0; index < 64; index++)
         tasks.add(
@@ -266,11 +266,8 @@ class AlertThresholdsTest {
                     thresholds.backup(true, false, 1),
                     thresholds.restarts(1, false),
                     thresholds.integrity(1)));
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(expected, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
