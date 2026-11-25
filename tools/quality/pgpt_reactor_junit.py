@@ -55,6 +55,15 @@ def is_successful_reactor_exit(value):
     return type(value) is int and value == 0
 
 
+def require_index_visibility(repo, paths):
+    """Reject index flags that suppress worktree comparisons for evidence inputs."""
+    visibility = subprocess.check_output(
+        ["git", "ls-files", "-v", "-z", "--", *paths], cwd=repo,
+    )
+    if any(row[:1].islower() or row.startswith(b"S ") for row in visibility.split(b"\0")):
+        raise ValueError("incomplete Git index visibility in reactor evidence collection scope")
+
+
 def require_collection_inputs_unchanged(repo, commit, paths):
     """Compare the recorded inputs against the reactor's actual commit object."""
     if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
@@ -66,11 +75,7 @@ def require_collection_inputs_unchanged(repo, commit, paths):
     )
     if resolved.returncode or resolved.stdout.strip() != commit:
         raise ValueError("collection baseline must be a full Git commit")
-    visibility = subprocess.check_output(
-        ["git", "ls-files", "-v", "-z", "--", *paths], cwd=repo,
-    )
-    if any(row[:1].islower() or row.startswith(b"S ") for row in visibility.split(b"\0")):
-        raise ValueError("incomplete Git index visibility in reactor evidence collection scope")
+    require_index_visibility(repo, paths)
     subprocess.run(
         ["git", "--no-replace-objects", "diff", "--quiet", commit, "--", *paths],
         cwd=repo, check=True,

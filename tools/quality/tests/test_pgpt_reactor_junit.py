@@ -1,7 +1,10 @@
 """Fixed synthetic receipts for PT-OPS-G09-JUNIT001..010 and PT-OPS-G08-RAW001..004."""
 
 import ast
+from contextlib import redirect_stdout
 import hashlib
+import importlib.util
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -515,6 +518,43 @@ class ReactorJunitTest(unittest.TestCase):
                 finally:
                     self.git("update-index", "--no-" + flag, "src/original.txt")
         require_collection_inputs_unchanged(self.repo, recorded, ("src",))
+
+    def test_persisted_verifier_requires_visible_index_before_accepting_manifest(self):
+        tracked = self.repo / "src/persisted-input.txt"
+        tracked.write_text("preserved fixture\n")
+        self.git("add", "src/persisted-input.txt")
+        recorded = self.commit_fixture("persisted input")
+        runner = Path(__file__).resolve().parents[1] / "018_collect_verified_evidence_set.py"
+        spec = importlib.util.spec_from_file_location("persisted_collector_fixture", runner)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        candidate = self.repo.parent / "candidate"
+        manifest = candidate / module.ROOT_MANIFEST
+        manifest.parent.mkdir(parents=True)
+        run = "PT-WEB-SYNTHETIC-" + self.repo.parent.name.replace("_", "-")
+        manifest.write_text(json.dumps(dict(runId=run, targetCommit=recorded, exitCode=0)))
+        invocation = [str(runner), run, "--validate-only", "--candidate-root", str(candidate)]
+        checkout_runner = self.repo / "tools/quality" / runner.name
+
+        with (
+            patch.object(module, "__file__", str(checkout_runner)),
+            patch("sys.argv", invocation),
+            patch.object(module, "validate_all", return_value=[]) as validate,
+            redirect_stdout(io.StringIO()) as output,
+        ):
+            module.main()
+            self.assertEqual("PASS_PERSISTED_EVIDENCE_ONLY", json.loads(output.getvalue())["result"])
+            validate.assert_called_once_with(candidate, run, recorded, BRANCH)
+            validate.reset_mock()
+            for flag in ("assume-unchanged", "skip-worktree"):
+                with self.subTest(flag=flag):
+                    self.git("update-index", "--" + flag, "src/persisted-input.txt")
+                    try:
+                        with self.assertRaisesRegex(ValueError, "index visibility"):
+                            module.main()
+                    finally:
+                        self.git("update-index", "--no-" + flag, "src/persisted-input.txt")
+            validate.assert_not_called()
 
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()

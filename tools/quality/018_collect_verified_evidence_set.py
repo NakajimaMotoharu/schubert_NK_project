@@ -13,6 +13,7 @@ from pgpt_reactor_junit import (
     is_successful_reactor_exit,
     reactor_run_record,
     require_collection_inputs_unchanged,
+    require_index_visibility,
     verify_reactor_junit,
 )
 from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
@@ -267,6 +268,7 @@ def main():
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
     paths = ["src", "pom.xml", "program/characterization"]
     if args.validate_only:
+        require_index_visibility(repo, paths)
         subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo,
                        check=True)
     else:
