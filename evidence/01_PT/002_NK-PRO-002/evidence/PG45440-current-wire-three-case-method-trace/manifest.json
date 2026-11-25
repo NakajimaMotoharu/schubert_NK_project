@@ -1,0 +1,229 @@
+{
+  "run": "PG45440",
+  "source": "13600df608be7d99fdf06bbb039d7872f80c0f49",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.01",
+  "terminalAtUTC": "2026-11-25T17:00:48.941528+00:00",
+  "localRows": [
+    {
+      "case": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerEncodingMatchesIndependentUi232GoldenVector",
+      "specIdsOrScope": [
+        "PT-PRO-002-H01"
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "f94f49a8036c24c7d548c041a4b4c2d7d9789ed07a99f47e9cf457a766704aa5"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "02cdbae5208f35e6c437ce14180090e451505e73041c45c3f620ca0ead2bf1ab"
+      },
+      "testGitBlob": "df6eaae877b7fc8f5245ef19bf742271b234ab37",
+      "sourceMethods": [
+        {
+          "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+          "physical": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+          "method": "encode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/CommonHeader;)[B",
+          "owner": "WBS-P002-03",
+          "requirements": "MQ-015;MQ-030;MQ-035"
+        },
+        {
+          "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+          "physical": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+          "method": "peek",
+          "descriptor": "([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;",
+          "owner": "WBS-P002-03",
+          "requirements": "MQ-015;MQ-030;MQ-035"
+        }
+      ],
+      "regularJarPhysical": {
+        "member": "dev/codex/schubert/nk/protocol/codec/HeaderCodec.class",
+        "byteSha256": "a6065f2c4db802a85d308b5e503ddc286c74046e7c7531048e2e74fe4f672733"
+      },
+      "approvedSource": [
+        {
+          "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+        }
+      ],
+      "independentOracle": "独立QS LGNREQ01の256byte比較とpeek、null及び255byteの拒否",
+      "selectedProof": {
+        "path": "evidence/01_PT/001_NK-PRO-001/evidence/PG45368-independent-valid-headers-before-decode-corruption/manifest.json",
+        "sha256": "d6ad43ce3a52776bfb0c4f21b8d2903a3fd7d2f980dfc454992790c1df07e0d2"
+      }
+    },
+    {
+      "case": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+      "specIdsOrScope": [
+        "PT-PRO-002-H01",
+        "PT-PRO-002-H02"
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "f94f49a8036c24c7d548c041a4b4c2d7d9789ed07a99f47e9cf457a766704aa5"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "02cdbae5208f35e6c437ce14180090e451505e73041c45c3f620ca0ead2bf1ab"
+      },
+      "testGitBlob": "df6eaae877b7fc8f5245ef19bf742271b234ab37",
+      "sourceMethods": [
+        {
+          "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+          "physical": "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+          "method": "peek",
+          "descriptor": "([B)Ldev/codex/schubert/nk/protocol/header/CommonHeader;",
+          "owner": "WBS-P002-03",
+          "requirements": "MQ-015;MQ-030;MQ-035"
+        }
+      ],
+      "regularJarPhysical": {
+        "member": "dev/codex/schubert/nk/protocol/codec/HeaderCodec.class",
+        "byteSha256": "a6065f2c4db802a85d308b5e503ddc286c74046e7c7531048e2e74fe4f672733"
+      },
+      "approvedSource": [
+        {
+          "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+        }
+      ],
+      "independentOracle": "QSとSSの成立を確認後、既23破損を個別に拒否",
+      "selectedProof": {
+        "path": "evidence/01_PT/001_NK-PRO-001/evidence/PG45368-independent-valid-headers-before-decode-corruption/manifest.json",
+        "sha256": "d6ad43ce3a52776bfb0c4f21b8d2903a3fd7d2f980dfc454992790c1df07e0d2"
+      }
+    },
+    {
+      "case": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest#decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+      "specIdsOrScope": [
+        "NK-PRO-002 P03/P05"
+      ],
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+        "sha256": "19f2bbeed1c7a4af44f64055ff7dc2287a01e98053371e51403ce1e428e0c70c"
+      },
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+        "sha256": "e28eccecf0fb962509ac9ce46a8a696b5389daa81e0d3365a843c725ba184322"
+      },
+      "testGitBlob": "68c2032c78561ce15d473b9c247a91033ca365de",
+      "sourceMethods": [
+        {
+          "source": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+          "physical": "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+          "method": "decode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/List;Z)Ldev/codex/schubert/nk/protocol/layout/PayloadValues;",
+          "owner": "WBS-P002-02",
+          "requirements": "MQ-014;MQ-017;MQ-024;MQ-025;MQ-026"
+        }
+      ],
+      "regularJarPhysical": {
+        "member": "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+        "byteSha256": "193f1c4544fcc02256343f277d67d00b9eb7c5f12e7af02040cf5fcbad50390d"
+      },
+      "approvedSource": [
+        {
+          "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+          "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+        }
+      ],
+      "independentOracle": "三layoutで元の独立固定byteを受理後、予約とX/N/B四変更を拒否",
+      "selectedProof": {
+        "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45370-payload-independent-reserved-and-error-filler/manifest.json",
+        "sha256": "da43276c35ce0716e6bdd45c083ce96234dd284883019ee1e9cdb23b7e6826b6"
+      }
+    }
+  ],
+  "canonicalProtocol": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "oldMethodMap": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45176-current-protocol-method-requirement-join/manifest.json",
+    "sha256": "26080f47a3a8c3bfc6bd1f4d63053661289bcc4fe2691095ad16854bf0873e25"
+  },
+  "caseRoster": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/sanitized-case-roster.json",
+    "sha256": "481079e8516ea2cd9229169db9d960fc668e4a9f4abed6635b9fd26675609482"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/coverage-counters.json",
+    "sha256": "d7dcecc523469d7c4fcea553085cdcd2e2d2f9a354fa5a1e61ff94e68b1af135"
+  },
+  "artifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aba8510ab9e549ec5dc38a8f72eefce9209396e48b9b0d9ca8f6360382d1f924"
+  },
+  "currentSuiteCount": 40,
+  "currentMethodCount": 174,
+  "headerMutationCount": 23,
+  "payloadIndependentVectors": [
+    [
+      "LGNREQ01",
+      384,
+      365,
+      "reserved SPACE"
+    ],
+    [
+      "LGNRSP01",
+      432,
+      0,
+      "X SPACE"
+    ],
+    [
+      "LGNRSP01",
+      432,
+      167,
+      "N ZERO"
+    ],
+    [
+      "ANMRSP01",
+      16,
+      6,
+      "B SPACE"
+    ]
+  ],
+  "productTrials": 0,
+  "methodCoverageInterpretation": "Suites share the original PG45374 exec; runtime counters are module evidence, independent case assertions give the method links.",
+  "remaining": [
+    "残るTest IDとmethod単位の一意接続",
+    "実MQ/CHR、六製品同一run451、担当判定、P002-01別再判定"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0
+}
