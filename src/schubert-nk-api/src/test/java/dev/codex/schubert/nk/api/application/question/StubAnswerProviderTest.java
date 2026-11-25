@@ -116,18 +116,14 @@ class StubAnswerProviderTest {
     Set<Instant> expected = new HashSet<>();
     for (int i = 0; i < 64; i++) expected.add(NOW.plusSeconds(i));
     Set<Instant> actual = new HashSet<>();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new QuestionFixtureWorkers(Executors.newFixedThreadPool(8))) {
       java.util.List<Callable<AnswerResult>> tasks = new java.util.ArrayList<>();
       for (int i = 0; i < 64; i++) tasks.add(() -> provider.answer(PUBLIC_QUESTION));
-      for (var future : executor.invokeAll(tasks, 5, TimeUnit.SECONDS)) {
+      for (var future : workers.executor().invokeAll(tasks, 5, TimeUnit.SECONDS)) {
         AnswerResult answer = future.get();
         assertEquals("", answer.body());
         assertTrue(actual.add(answer.answeredAt()));
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "stub test executor terminated");
     }
     assertEquals(expected, actual);
     assertEquals(64, calls.get());
