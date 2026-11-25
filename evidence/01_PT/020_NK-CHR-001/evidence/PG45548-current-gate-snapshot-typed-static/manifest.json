@@ -1,0 +1,171 @@
+{
+  "run": "PG45548",
+  "source": "28bde53f569bf298b0f939f73ccfc9dc93533ac7",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T19:21:34.761775+00:00",
+  "ordinaryTarget": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45532-current-chr-comparison-report-single-snapshot/manifest.json",
+    "sha256": "d7b4a0c6c967af8ded9e8f8c54069df51d6fdc94828fa6415b0f46ffc962a7c7"
+  },
+  "sameExactEight": [
+    "dev.codex.schubert.characterization.GateCli",
+    "dev.codex.schubert.characterization.GateCli$BaselineNumbers",
+    "dev.codex.schubert.characterization.GateCli$FileJsonOutput",
+    "dev.codex.schubert.characterization.GateCli$JsonOutput",
+    "dev.codex.schubert.characterization.GateCli$TreeStats",
+    "dev.codex.schubert.characterization.GateCli$UsableSpace",
+    "dev.codex.schubert.characterization.GateContractValidator",
+    "dev.codex.schubert.characterization.GateContractValidator$ValidationResult"
+  ],
+  "typedSupportCount": 9,
+  "pmdRaw": [
+    {
+      "file": "GateCli.java",
+      "line": 167,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 269,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 316,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 392,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 563,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 642,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "file": "GateContractValidator.java",
+      "line": 157,
+      "rule": "UseConcurrentHashMap"
+    }
+  ],
+  "spotbugsRaw": [],
+  "rawAnalysisStatus": {
+    "spotbugs": 0,
+    "pmd": 4
+  },
+  "ruleDispositionSigned": false,
+  "processingError": 0,
+  "scopedInput": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "f6ae97fbe307efa09f1e3983717d14009b44622701395c3521799ff4bfd9c9d1"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "0999614e0fa3e75eb23d4ed49ca0063b7f743e303faa9656232cbbec3ee93ebd"
+    }
+  ],
+  "previousStaticScopes": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45464-current-packaged-repeat-static-delta/manifest.json",
+      "sha256": "26c886c32df20838d59031b3e0614f62e7fc064737f700af108feb38c84efc47"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45228-current-definition-quality-ninety/manifest.json",
+      "sha256": "c0dca7c4b5b68886132d725dffcc036be10b013df6c38b6a8f60e4ad3a1ad224"
+    }
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45548-chr-current-repeat-static-delta/begin.json",
+    "sha256": "6552f59a74ceba1b168d0a942b02ffecb023ba4cb99c664aed515eeb394ff3cf"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45548-chr-current-repeat-static-delta/terminal.json",
+    "sha256": "ce0259cca056ab4e399bfba278f6d1e6d8ab2c553d29f2e4c541d6ea30170fe6"
+  },
+  "raw": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45548-chr-current-repeat-static-delta/spotbugs.xml",
+      "sha256": "4e39027ae7db2ef1db9c7e48d0f8b9ae230a8ac0f698d99c8504370d803ac363"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45548-chr-current-repeat-static-delta/pmd.xml",
+      "sha256": "bf87d5b25b7fe1a4f74313f19a83bf0187c5d31e0dd25161287debfa37c820c1"
+    }
+  },
+  "realRuntimeOrAuthority": 0,
+  "newToolOrProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "actualExit": 0,
+  "applicabilityCandidateOnly": [
+    {
+      "file": "GateCli.java",
+      "line": 167,
+      "rule": "UseConcurrentHashMap",
+      "method": "verifySource",
+      "reason": "Method-local report map, synchronously populated and handed to the existing writer within the call.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 269,
+      "rule": "UseConcurrentHashMap",
+      "method": "preflight",
+      "reason": "Method-local result with no shared writable reference, serialized once by the existing writer.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 316,
+      "rule": "UseConcurrentHashMap",
+      "method": "compareCurrent",
+      "reason": "Single comparison owns local sorted observations and its report map; write is synchronous.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 392,
+      "rule": "UseConcurrentHashMap",
+      "method": "report",
+      "reason": "Map built from single parsed comparison validation snapshot and written synchronously in the call.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 563,
+      "rule": "UseConcurrentHashMap",
+      "method": "promoteCurrent",
+      "reason": "The manifest frame is local through sequential assembly/serialization. Runtime promotion remains on hold.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateCli.java",
+      "line": 642,
+      "rule": "UseConcurrentHashMap",
+      "method": "fileHashes",
+      "reason": "One private bounded iteration fills a fresh TreeMap. It is returned to its caller; there is no shared map reference within the tool.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    },
+    {
+      "file": "GateContractValidator.java",
+      "line": 157,
+      "rule": "UseConcurrentHashMap",
+      "method": "gateMetrics",
+      "reason": "Method-local map populated with scalar fields, then immutable copy returned.",
+      "status": "QUALITY_OWNER_DISPOSITION_PENDING"
+    }
+  ],
+  "matchedSevenRawFindings": 7,
+  "newUnreviewedAnalyzerFindings": 0,
+  "mavenProductGate": false,
+  "programCanonicalSource": "d8992c8a0240f8743d786450298672f36b7ddb41"
+}
