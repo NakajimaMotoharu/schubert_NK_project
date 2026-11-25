@@ -15,6 +15,13 @@ require_clean_checkout() {
     state=$(git status --porcelain --untracked-files=normal) || return $?
     test -z "$state"
 }
+require_recorded_checkout() {
+    current_commit=$(git rev-parse HEAD) || return $?
+    current_branch=$(git branch --show-current) || return $?
+    test "$source_commit" = "$current_commit" || return $?
+    test "$source_branch" = "$current_branch" || return $?
+    require_clean_checkout
+}
 require_clean_checkout
 source_branch=$(git branch --show-current)
 test -n "$source_branch"
@@ -35,19 +42,13 @@ unset MAVEN_ARGS _JAVA_OPTIONS
 JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify > "$record.log" 2>&1 || result=$?
 date --iso-8601=seconds > "$record.completed"
 if [ "$result" -eq 0 ]; then
-    final_commit=$(git rev-parse HEAD) || result=$?
-    final_branch=$(git branch --show-current) || result=$?
-    if [ "$result" -eq 0 ]; then
-        if [ "$source_commit" != "$final_commit" ] || [ "$source_branch" != "$final_branch" ]; then
-            result=1
-        fi
-    fi
-    if [ "$result" -eq 0 ]; then
-        require_clean_checkout || result=$?
-    fi
-    if [ "$result" -eq 0 ]; then
-        python3 -B tools/quality/pgpt_reactor_junit.py "$run_id" "$source_commit" || result=$?
-    fi
+    require_recorded_checkout || result=$?
+fi
+if [ "$result" -eq 0 ]; then
+    python3 -B tools/quality/pgpt_reactor_junit.py "$run_id" "$source_commit" || result=$?
+fi
+if [ "$result" -eq 0 ]; then
+    require_recorded_checkout || result=$?
 fi
 printf '%s\n' "$result" > "$record.claim/terminal"
 mv "$record.claim/terminal" "$record.exit"
