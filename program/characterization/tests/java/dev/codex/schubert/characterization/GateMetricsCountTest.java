@@ -150,15 +150,11 @@ final class GateMetricsCountTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, 0).put(CURRENT_COUNT, "23");
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var good = workers.submit(() -> metrics(valid));
-      var bad = workers.submit(() -> metrics(invalid));
+    try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
+      var good = workers.executor().submit(() -> metrics(valid));
+      var bad = workers.executor().submit(() -> metrics(invalid));
       assertEquals(23, good.get(5, TimeUnit.SECONDS).get(CURRENT_COUNT));
       assertFalse(bad.get(5, TimeUnit.SECONDS).containsKey(CURRENT_COUNT));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(23, metrics(valid).get(CURRENT_COUNT));
   }

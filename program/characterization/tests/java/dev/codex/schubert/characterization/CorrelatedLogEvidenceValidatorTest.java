@@ -327,15 +327,11 @@ final class CorrelatedLogEvidenceValidatorTest {
     ObjectNode unchanged = healthy.deepCopy();
     ObjectNode faulty = fixture();
     object(faulty, "/observed/nk/after/1/payload").put(FIXTURE_REQUEST, "WRONG_REQUEST");
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var good = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(healthy));
-      var bad = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(faulty));
+    try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
+      var good = workers.executor().submit(() -> CorrelatedLogEvidenceValidator.validate(healthy));
+      var bad = workers.executor().submit(() -> CorrelatedLogEvidenceValidator.validate(faulty));
       assertEquals(List.of(), good.get(5, TimeUnit.SECONDS));
       assertTrue(bad.get(5, TimeUnit.SECONDS).contains("LOG_PROJECTION_DB_UNEXPECTED"));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(unchanged, healthy);
   }

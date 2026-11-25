@@ -673,15 +673,11 @@ final class GateDefinitionDocumentsTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, CONTRACT).put(VERSION, 2);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var first = workers.submit(() -> validate(valid));
-      var second = workers.submit(() -> validate(invalid));
+    try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
+      var first = workers.executor().submit(() -> validate(valid));
+      var second = workers.executor().submit(() -> validate(invalid));
       assertEquals(List.of(), first.get(5, TimeUnit.SECONDS));
       assertTrue(second.get(5, TimeUnit.SECONDS).contains("CONTRACT_VERSION"));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(List.of(), validate(valid));
   }
