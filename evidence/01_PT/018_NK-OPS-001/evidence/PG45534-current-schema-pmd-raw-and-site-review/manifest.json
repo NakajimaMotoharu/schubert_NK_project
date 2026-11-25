@@ -1,0 +1,176 @@
+{
+  "run": "PG45534",
+  "source": "0f1cc73c239d095c5ac0236d61ec97ae6027c98b",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T19:05:57.496264+00:00",
+  "actualExit": 0,
+  "pmdActualExit": 4,
+  "pmdFiles": 1,
+  "pmdProcessingErrors": 0,
+  "input": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+    "sha256": "4e1a6c6799cbcee788e742682cf20b9bf27a4e2b62142cd839d2c62d39b983d9"
+  },
+  "rawCountBefore": 22,
+  "rawCountAfter": 18,
+  "rawCountsByRule": {
+    "AvoidDuplicateLiterals": 3,
+    "DoNotUseThreads": 11,
+    "UseConcurrentHashMap": 1,
+    "UseProperClassLoader": 1,
+    "AvoidLiteralsInIfCondition": 2
+  },
+  "clearedByRule": {
+    "DoNotUseThreads": 3,
+    "CloseResource": 1
+  },
+  "sites": [
+    {
+      "line": 116,
+      "rule": "AvoidDuplicateLiterals",
+      "proposedDisposition": "APPLICABLE_LITERAL_DRIFT",
+      "reason": "Name and reuse independent synthetic column or version literals without switching to Product expected values."
+    },
+    {
+      "line": 162,
+      "rule": "AvoidDuplicateLiterals",
+      "proposedDisposition": "APPLICABLE_LITERAL_DRIFT",
+      "reason": "Name and reuse independent synthetic column or version literals without switching to Product expected values."
+    },
+    {
+      "line": 173,
+      "rule": "AvoidDuplicateLiterals",
+      "proposedDisposition": "APPLICABLE_LITERAL_DRIFT",
+      "reason": "Name and reuse independent synthetic column or version literals without switching to Product expected values."
+    },
+    {
+      "line": 405,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 408,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 411,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 417,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 420,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 440,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 443,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 452,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 546,
+      "rule": "UseConcurrentHashMap",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "The synthetic Probe and fault map are created inside each independent test task. Shared immutable schema input is not this fault map."
+    },
+    {
+      "line": 574,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 582,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 597,
+      "rule": "DoNotUseThreads",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "Private synthetic flag set/observe/reset for explicit interruption cases or existing finite independent worker scopes. No product-managed thread change."
+    },
+    {
+      "line": 641,
+      "rule": "UseProperClassLoader",
+      "proposedDisposition": "FIXTURE_APPLICABILITY_REVIEW",
+      "reason": "The loader comes from the JDK interface implemented by its own test proxy. Production classloader behavior is outside this input."
+    },
+    {
+      "line": 659,
+      "rule": "AvoidLiteralsInIfCondition",
+      "proposedDisposition": "APPLICABLE_LITERAL_DRIFT",
+      "reason": "Choose names for the distinct synthetic expected failure graph variants without changing construction or test identity."
+    },
+    {
+      "line": 660,
+      "rule": "AvoidLiteralsInIfCondition",
+      "proposedDisposition": "APPLICABLE_LITERAL_DRIFT",
+      "reason": "Choose names for the distinct synthetic expected failure graph variants without changing construction or test identity."
+    }
+  ],
+  "appliedFindingCountPendingRemoval": 5,
+  "fixtureSpecificFindingsPendingOwnerSignature": 13,
+  "priorPmd": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45164-current-schema-fixture-exceptions-qualified/manifest.json",
+    "sha256": "512a547300c0631143ae9ce867f865d3a5ec26b957cb0fb4be33897963b774f8"
+  },
+  "sameCandidatePostFormatUnit": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45528-current-schema-fixture-diagnostics-and-format/manifest.json",
+    "sha256": "cf12fa7b983abc716a5153c4fc62be2b87c28c1725cdd639a19c09bc5cebe3e1"
+  },
+  "guard": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45534-current-schema-test-pmd-delta/guard.json",
+    "sha256": "56587048f2daa0eba9c32e6b5fe57e962ca466baeefa705090eea8c0cc575806"
+  },
+  "actualProof": [
+    {
+      "path": "../pgpt-runs/PG379/PG45534-current-schema-test-pmd-delta/begin.json",
+      "sha256": "c22ae3cd2d30464bf77d9759cf65011e8a4c2610a8addad57e620c74099e9b13"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG45534-current-schema-test-pmd-delta/terminal.json",
+      "sha256": "0d29d699b192d3b13b434e5051d3d4d6679f131a293f128ffc9345f66d79dd97"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45534-current-schema-test-pmd-delta/pmd.xml",
+      "sha256": "52fd2214e7874a1d0c653c268f918212218ec6e98038660379f2c5d75f1e3077"
+    }
+  ],
+  "firstPreflight": {
+    "actionStarted": false,
+    "reason": "helper support was pinned under bothInputs, target list had only the analyzer target"
+  },
+  "sameProductInputs": 7,
+  "newProductTests": 0,
+  "coverageIncrease": 0,
+  "realDbFlywayOrCurrent": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
