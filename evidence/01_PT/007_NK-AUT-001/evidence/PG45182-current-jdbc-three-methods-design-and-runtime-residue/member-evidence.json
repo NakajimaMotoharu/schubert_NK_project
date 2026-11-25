@@ -1,0 +1,99 @@
+[
+  {
+    "source": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+    },
+    "privateMethod": "update",
+    "line": 314,
+    "canonicalDesignContext": "SS312 Logout/session sequence, SS314 §6.3, SS332 session/audit transaction",
+    "focusedStatic": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45152-current-revocation-update-owner-static/manifest.json",
+      "sha256": "bedf6f488b185ac9512b16eb68c97e7debfe1a597ec4cd8a98c2bd215452b70e"
+    },
+    "nullAwayFindings": 0,
+    "spotBugsFindings": 0,
+    "fixtureSpecification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/047_Logout管理失効自己所有境界単体仕様.md",
+      "sha256": "c79ad2e02bd2724b3976c89d7d23e8ce36f9653506e6a47280a6c07dd81e90c6"
+    },
+    "oldQualification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/048_Logout管理失効自己所有境界単体結果.md",
+      "sha256": "bc16f322a95a9d2c67546c769c56a957c0f0032e9dc3f22a40266e957d594732"
+    },
+    "oldRun": "PG20958",
+    "oldFixtureTotal": 8,
+    "methodCriterionTestIds": [
+      "PT-AUT-REV001",
+      "PT-AUT-REV003",
+      "PT-AUT-REV004",
+      "PT-AUT-REV006"
+    ],
+    "currentRuntimeQualified": false
+  },
+  {
+    "source": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+    },
+    "privateMethod": "owner",
+    "line": 122,
+    "canonicalDesignContext": "SS314 §9.2 management authorization and SS332 §12 lock ordering",
+    "focusedStatic": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/manifest.json",
+      "sha256": "82a6fbc43e6eb94605bcc9af02d849693cd159c40234d7648b56fdc7acbada8f"
+    },
+    "nullAwayFindings": 0,
+    "spotBugsFindings": 0,
+    "fixtureSpecification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/043_AdminPrelude自己所有JDBC境界単体仕様.md",
+      "sha256": "76ebeda23961020bd89a8465a088e2493c9dd7251e64562ae7aa60bb01bcafe2"
+    },
+    "oldQualification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/044_AdminPrelude自己所有JDBC境界単体結果.md",
+      "sha256": "6f9c21d21966100b617c104b18708d916a50f7b58f43920dd250d7c02321e2a9"
+    },
+    "oldRun": "PG20874",
+    "oldFixtureTotal": 8,
+    "methodCriterionTestIds": [
+      "PT-AUT-PRE001",
+      "PT-AUT-PRE003",
+      "PT-AUT-PRE005",
+      "PT-AUT-PRE007"
+    ],
+    "currentRuntimeQualified": false
+  },
+  {
+    "source": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+    },
+    "privateMethod": "readSession",
+    "line": 140,
+    "canonicalDesignContext": "SS312 authentication sequence, SS314 §6, SS332 shared session SQL",
+    "focusedStatic": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45156-current-two-jdbc-owner-static-fix/manifest.json",
+      "sha256": "82a6fbc43e6eb94605bcc9af02d849693cd159c40234d7648b56fdc7acbada8f"
+    },
+    "nullAwayFindings": 0,
+    "spotBugsFindings": 0,
+    "fixtureSpecification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/041_AuthenticationVerifier自己所有JDBC境界単体仕様.md",
+      "sha256": "72d1ac798fd0e7a37084ba72253123f29e3beec66b5e664d6df02ff65080d821"
+    },
+    "oldQualification": {
+      "path": "evidence/01_PT/007_NK-AUT-001/042_AuthenticationVerifier自己所有JDBC境界単体結果.md",
+      "sha256": "22ca9fe365b1522806fae634db29e64daa6ed4cecf7a6ed47f23531ccab41881"
+    },
+    "oldRun": "PG20840",
+    "oldFixtureTotal": 6,
+    "methodCriterionTestIds": [
+      "PT-AUT-JDBC001",
+      "PT-AUT-JDBC002",
+      "PT-AUT-JDBC003",
+      "PT-AUT-JDBC004",
+      "PT-AUT-JDBC005"
+    ],
+    "currentRuntimeQualified": false
+  }
+]
