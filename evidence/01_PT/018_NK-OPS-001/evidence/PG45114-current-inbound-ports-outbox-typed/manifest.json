@@ -1,0 +1,219 @@
+{
+  "run": "PG45114",
+  "source": "c25cd50f35e5c2f61bd04444a855db49c585b2cb",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 4,
+  "terminalAtUTC": "2026-11-25T09:14:31.367798+00:00",
+  "newTyped": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame.java",
+      "sha256": "b32e54c7f098fe4b5ed5737a7130df263e54f427cc8c5544acfe457e5d123845"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundConsumerGroup.java",
+      "sha256": "a540f01769d36ddfcd0747c1c37097fd823757c8b95b7277e9b24d67a3bf2766"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "sha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InternalEventProcessor.java",
+      "sha256": "b9d8a661e85cceaca6fddc73de6e12faae9f9337e563cd33fe3df77f601c42d1"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+      "sha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.java",
+      "sha256": "c2915b65b2313f4586a6bcba6f8e7b67d11667f6de40bb6b9d54f369a98a5ece"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+      "sha256": "a662046d796e9c6905d4938a129f5ad9273a2ffaffc140678fac5e802fe4656d"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+      "sha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+      "sha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sha256": "1db71eadabee0bb1ae3de1bc8e04930e97a6d1c68d30f01362c6acaa915c2173"
+    }
+  ],
+  "before": {
+    "api": 167,
+    "web": 187
+  },
+  "after": {
+    "api": 177,
+    "web": 187
+  },
+  "sourceInputs": 34,
+  "physical": 35,
+  "explicitTargetPhysical": 10,
+  "nullAway": 0,
+  "spotbugs": {
+    "exit": 0,
+    "findings": 0,
+    "missingOrErrors": 0
+  },
+  "pmd": {
+    "exit": 4,
+    "findings": [
+      {
+        "source": "InboundTransactions.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 62,
+        "technicalContext": "rollback failure identity and same-object suppression avoidance"
+      },
+      {
+        "source": "InboundTransactions.java",
+        "rule": "CompareObjectsWithEquals",
+        "line": 63,
+        "technicalContext": "rollback failure identity and same-object suppression avoidance"
+      },
+      {
+        "source": "InboundTransactions.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 86,
+        "technicalContext": "rollback failure identity and same-object suppression avoidance"
+      },
+      {
+        "source": "InboundTransactions.java",
+        "rule": "CompareObjectsWithEquals",
+        "line": 87,
+        "technicalContext": "rollback failure identity and same-object suppression avoidance"
+      },
+      {
+        "source": "SyncRequestListener.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 92,
+        "technicalContext": "one delivery failure and fixed rollback consequence"
+      },
+      {
+        "source": "TransactedEventListener.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 92,
+        "technicalContext": "owned delivery rollback receives provider failure"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 64,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 90,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 96,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 102,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 122,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 131,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 139,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 145,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 165,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 170,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "CloseResource",
+        "line": 202,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 211,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 225,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      },
+      {
+        "source": "JdbcOutboxRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 237,
+        "technicalContext": "query resource ownership, unchanged cause and fixed transaction terminal"
+      }
+    ],
+    "ownerDecisionPending": true
+  },
+  "priorReferenceGraph": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45112-source-only-api-web-additional-candidate-graph/manifest.json",
+    "sha256": "2afc261f6583bf22c8d764811ca6034d81b3202c9649697b76467d334e707b52"
+  },
+  "previousCoreContextHashNotIncluded": true,
+  "knownJmsAndJdbcInputsOnly": true,
+  "buildBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45114-current-api-inbound-outbox-types/begin.json",
+    "sha256": "1e8d5196ce60d517c9872cc9f219a6ce08ff01c1f50531e6b1a315e662cc1df0"
+  },
+  "buildTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45114-current-api-inbound-outbox-types/terminal.json",
+    "sha256": "d02f18874fdafb2f9ea2c39c5afa80dfa15d703a3da2e3ab4728f9a5dbc9795d"
+  },
+  "staticBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45114-current-api-inbound-outbox-statics/begin.json",
+    "sha256": "0975714b16f0b5c20762f9213805277ec1841a5deee85c95c1e0b2c32bc14395"
+  },
+  "staticTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45114-current-api-inbound-outbox-statics/terminal.json",
+    "sha256": "ee551bed703a59de41973e1c42558695db0f4af2455446a5cb5ded5e163c46bc"
+  },
+  "newProductTrials": 0,
+  "noActualBrokerJDBCOrRoot": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
