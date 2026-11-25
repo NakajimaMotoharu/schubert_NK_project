@@ -18,9 +18,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-WEB-INPUT-001..006; source-to-startup-input composition only. */
 final class WebStartupInputsTest {
+  private static final String CONFIG_DIRECTORY_ENV = "SCHUBERT_NK_CONFIG_DIR";
+  private static final String CREDENTIALS_DIRECTORY_ENV = "CREDENTIALS_DIRECTORY";
   private static final String ROOT = "/run/credentials/schubert-nk-web.service";
   private static final Map<String, String> ENV =
-      Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk", "CREDENTIALS_DIRECTORY", ROOT);
+      Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk", CREDENTIALS_DIRECTORY_ENV, ROOT);
 
   @Test
   void opsWebInput001CombinesIndependentFixedInputs() throws Exception {
@@ -53,7 +55,7 @@ final class WebStartupInputsTest {
                 IllegalArgumentException.class,
                 () ->
                     new WebStartupInputs(
-                        source, Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk")))
+                        source, Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk")))
             .getMessage());
     assertEquals(0, reads.get());
   }
@@ -72,7 +74,7 @@ final class WebStartupInputsTest {
                         },
                         ENV)
                     .load()));
-    var badEnv = Map.of("SCHUBERT_NK_CONFIG_DIR", "/other", "CREDENTIALS_DIRECTORY", ROOT);
+    var badEnv = Map.of(CONFIG_DIRECTORY_ENV, "/other", CREDENTIALS_DIRECTORY_ENV, ROOT);
     assertEquals(
         "Web non-secret environment unavailable",
         assertThrows(
@@ -106,7 +108,7 @@ final class WebStartupInputsTest {
     new WebStartupInputs(unopened, ENV).validateEnvironment();
 
     Map<String, String> wrongDirectory =
-        Map.of("SCHUBERT_NK_CONFIG_DIR", "/other", "CREDENTIALS_DIRECTORY", ROOT);
+        Map.of(CONFIG_DIRECTORY_ENV, "/other", CREDENTIALS_DIRECTORY_ENV, ROOT);
     assertEquals(
         "Web non-secret environment unavailable",
         assertThrows(
@@ -119,7 +121,7 @@ final class WebStartupInputsTest {
   void opsWebInput006ShowsRedactedValuesWithoutChangingComponentIdentity() throws Exception {
     String fixtureDirectory = "/test-fixture/startup-config-value";
     var location =
-        ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", fixtureDirectory));
+        ServiceCredentialLocation.read(Map.of(CREDENTIALS_DIRECTORY_ENV, fixtureDirectory));
     var distinctLocation = ServiceCredentialLocation.read(ENV);
     var config = WebNonSecretConfig.parse("", "");
     var values = new WebStartupInputs.Values(config, location);
