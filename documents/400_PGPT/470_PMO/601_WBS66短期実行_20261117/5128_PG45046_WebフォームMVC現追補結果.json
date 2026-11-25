@@ -1,0 +1,104 @@
+{
+  "eventId": "PGPT-20261008-10574",
+  "source": "037f4009f90a6f8dacff0621b815ca79942bbd48",
+  "sourceBeforeWork": "037f4009f90a6f8dacff0621b815ca79942bbd48",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-F03/2-2-b"
+  ],
+  "planRow": {
+    "新版ID": "WBS-F03/2-2-b",
+    "第58版ID": "WBS-F03/2-2",
+    "費用主担当項目": "F03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "許可済みの型付き品質検査を差分実行。失敗・未検査・適用外と実際の終端を記録",
+    "先行ID・着手条件": "WBS-F03/2-2-a",
+    "担当": "品質担当",
+    "旧短期残pp": "1.8",
+    "改訂残pp": "3.6",
+    "終了条件": "許可済みの型付き品質検査を差分実行。失敗・未検査・適用外と実際の終端を記録",
+    "元項目の正式受入に必要な証拠": "保留32テスト、Root11・QA-056の適用と全6製品の型付き検査。比較工具の結果を独立表示。",
+    "参照する元項目": "F03、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P018-07",
+    "lineNumber": 5
+  },
+  "run": "PG45046",
+  "startEvent": "PGPT-20261008-10573",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "フォームの現6源を型付き、旧正規MVCの30源・固定JARと当3controllerを照合。局所Web176/262。",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45046-form-and-mvc-current-typing/manifest.json",
+    "sha256": "03192871d3968cc851e52c3ed42395b4fb7ac297695ad4a52eadf6d40c5f5dda"
+  },
+  "nextEvidence": "現FormCsrfTokenRequestHandlerはPG20408以降に例外保持を変更。既9件と現classを対応。既scopeの重複が無ければ現選択実行、追加観点は元BUG2707/SS方針の判断。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T07:51:12+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "d9a33d35900aea587082f891cc3c05731121504dab629360e0885493d258529e",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T07:51:12+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 41,
+        "remainingPercent": 59,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T07:50:59.018872+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
