@@ -1,5 +1,7 @@
 # 1712 DB query duration metric 単体テスト仕様書
 
+APIの正本IDは `PT-OPS-DBQUERYTIME-001～009`。旧 `DBTIME001～009` はこのsuite内の別名として保持する。Batch時系列警報のDBTIME001～008は1603参照。 [クラス・メソッドと元XML](evidence/PG45500-dbtime-suite-identities-and-oracles/manifest.json)
+
 2026-10-24 BUG1676/YKT1427是正追記（下記開始計画を履歴保持）: 元source a2d/7830は真正verify1・138中6failure、7834compile0/PT0。fixed-boundaryのceil(long)量子化を避けるためpublishPercentiles(.95)を明示しdouble histogramを選択する。DBTIME002の独立小数CDF/秒sum/max/2MAX期待値は不変更。DBTIME001/005は四primary SummaryとSDK補助Gauge（各五le＋一phi=.95）を全量検証し、部分登録もprimary1＋補助6を厳密確認する。p95設定要求/自己所有SDKの表現は確認するが実exporterの公開/p95品質は未受入。変更後7844当138/17→7846独立/7848正常六compile→7850物理→7852trace→7854review→7856scanで1713へ記録する。元失敗/元工具はb3c8e7449へ保全、群1934/3-5-9pp上限10の手戻りで見積付替え0。
 
 NK-OPS-001/P01809/C07/RD171 MON006・010～013/UI252/SS331332351/PG-D568。DbQueryDurationMetricRecorder constructor/record/detailedMetricsRequested・Query/Outcome parse/values/valueOf。query_idは既AsyncJobCountRepository.readのSTATE集計をASYNC_JOB_STATE_COUNTS、既OutboxObservationRepository.readのstatus件数/最古をOUTBOX_STATUS_COUNTS_OLDESTとする内部閉二値。outcomeは供給SUCCESS/FAILURE二値。SQL文字列/parameter/任意ID/例外をlabelへ受けずDEBUG固定4series/STD詳細登録0。これ以外の業務SQL/全DB監視や実query hookは本群未受入。
@@ -8,14 +10,15 @@ Micrometer1.17.1のDistributionSummaryをbaseUnit seconds/percentile histogram�
 
 | Test ID | 目的/fixture・操作/独立期待値 |
 |---|---|
-| DBTIME001 | 手書Query二×Outcome二の4series/SDK summary型・baseUnit seconds/label key2・初期count/sum0、histogram flagと固定五bucket設定を取得factoryで確認 |
-| DBTIME002 | 各pairに0/1ns/0.5s/1.5s→count4/sum2.000000001s、五境界CDFを独立入力から確認。別fresh registryのMAX ns二回→count2/sum1.8446744073709553E10s finite、long wrapなし |
-| DBTIME003 | 四typed enum literal/strict parsers・未知/空/lowercase/null、values配列独立/valueOf既知/未知/nullを直接検証、生成新4method |
-| DBTIME004 | 両modeでnull query/outcome・負-1/MIN拒否/既値不変、STD全pair登録/record0、constructor null/未知mode CONFIG_INVALID |
-| DBTIME005 | 第2summary factory Runtime/Error同一identity・呼出2/残1/close0、caller finally close1 |
-| DBTIME006 | record前/増分後のRuntime/Error同一再throw・呼出1/partial count-sum保持/補償・retry・close0 |
-| DBTIME007 | 64fixtureの整数ns/count/maxをproduction前に独立集計、全4series/有限future/別owner0.25s独立。浮動小数点sum tolerance1e-12は1ns差を検出可能な幅、時計は自己所有固定fixture |
-| DBTIME008 | foreign Counter同seriesをSummaryへ置換せず例外・同一meter/値7/close0 |
+| PT-OPS-DBQUERYTIME-001 | 手書Query二×Outcome二の4series/SDK summary型・baseUnit seconds/label key2・初期count/sum0、histogram flagと固定五bucket設定を取得factoryで確認 |
+| PT-OPS-DBQUERYTIME-002 | 各pairに0/1ns/0.5s/1.5s→count4/sum2.000000001s、五境界CDFを独立入力から確認。別fresh registryのMAX ns二回→count2/sum1.8446744073709553E10s finite、long wrapなし |
+| PT-OPS-DBQUERYTIME-003 | 四typed enum literal/strict parsers・未知/空/lowercase/null、values配列独立/valueOf既知/未知/nullを直接検証、生成新4method |
+| PT-OPS-DBQUERYTIME-004 | 両modeでnull query/outcome・負-1/MIN拒否/既値不変、STD全pair登録/record0、constructor null/未知mode CONFIG_INVALID |
+| PT-OPS-DBQUERYTIME-005 | 第2summary factory Runtime/Error同一identity・呼出2/残1/close0、caller finally close1 |
+| PT-OPS-DBQUERYTIME-006 | record前/増分後のRuntime/Error同一再throw・呼出1/partial count-sum保持/補償・retry・close0 |
+| PT-OPS-DBQUERYTIME-007 | 64fixtureの整数ns/count/maxをproduction前に独立集計、全4series/有限future/別owner0.25s独立。浮動小数点sum tolerance1e-12は1ns差を検出可能な幅、時計は自己所有固定fixture |
+| PT-OPS-DBQUERYTIME-008 | foreign Counter同seriesをSummaryへ置換せず例外・同一meter/値7/close0 |
+| PT-OPS-DBQUERYTIME-009 | 0、1ns、Long.MAX_VALUE×2、1nsの二順序、全四seriesでcount5、有限total/max、固定五bucketで各3、他のregistryを閉じない。 |
 
 新8＋必要既API130を当138/17予定、7830 ordinary→7832独立(34Java/実28＋metadata1)・7834正常六compileを別snapshot→7836全1777(当API29physical/歴史Batch65-Web14)→7838全123delta/108追加physical/歴史元Stepのcurrent移転0→7840生成新4＋既41=45/current ordinary/raw全理由→7842公開scan、1713結果へsource/run/実日時/OS-JDK-tool/branch/command/exit/XML/input/期待/実際/CRC/四coverage/BUG/hashを結合。SQL/接続・実時計/DB/Root/VM/配備等操作0、SDK4＋API専用2/既protocol依存は既版を再利用・変更0。
 

@@ -1,5 +1,7 @@
 # 1603 DBPool時系列警報 単体テスト仕様書
 
+この仕様のDBTIME001～008は `TimedDbPoolMonitorTest` 専用。APIの同名旧ラベルは1712に示す別suite、現API IDは[対応表](evidence/PG45500-dbtime-suite-identities-and-oracles/manifest.json)を参照。
+
 Program NK-OPS-001/P018-09、共有C07追加費0。RD171 MON005～013/UI252/SS351§7/10、PG-D534。TimedDbPoolMonitor constructor/observe/snapshot/Evaluation、独立DBTIME001～008。実JDBC/DB/Hikari接続・操作はしない。fixtureは明示percent/既知pending・timeout件数/UTC・monotonic経過だけ、未知countを0で代用する呼出は禁止。
 
 | Test ID | 目的・入力/操作 | 独立期待値・算出根拠 |

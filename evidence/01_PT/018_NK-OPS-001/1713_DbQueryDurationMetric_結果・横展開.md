@@ -1,5 +1,7 @@
 # 1713 DB query duration metric 結果・横展開
 
+元API実行結果中のDBTIME001～009は `DbQueryDurationMetricRecorderTest` に限定する。現行の一意IDと各元XMLは[対応表](evidence/PG45500-dbtime-suite-identities-and-oracles/manifest.json)へ記録した。
+
 1712/DBTIME001..008/PG-D568/group1934（開始event1934、手戻り1935）。当資格source `1540267d33d2cbe93b7d7ec9f917df78a54ac3be`。製造新8＋必要既API130を当138/17で実行し、別sourceの成功/coverageを算術合算しない。
 
 | provisional原run | 真正結果 | manifest SHA256 |
