@@ -1,0 +1,346 @@
+{
+  "run": "PG44990",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "e4f104cb244bba52bc658447378cadee14748551",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T06:30:17.183366+00:00",
+  "actualExit": 0,
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43812-three-local-monitor-owner-lock-closure/manifest.json",
+    "sha256": "a908ec5409a28b622c8dfbb95613daea06f0beaafad7afc03f8ed14b381115d4"
+  },
+  "currentProofs": {
+    "async": {
+      "parent": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/begin.json",
+        "sha256": "115f2f50c2d50d8e36ce8737427328945db9d981bd631bf354161f0a4aad7718"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/terminal.json",
+        "sha256": "0c9487a5d99545b0e5d8cdc7f07a24175514ea6e60aa7c6abb2663a7cd9a5b1b"
+      },
+      "compileLog": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/compile.out",
+        "sha256": "7cf9dbbb2b1c3d5fe5b56193b8dc56c2fb0f8f64d828d9dfcf10e85ab7003097"
+      },
+      "isolatedPom": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/scope/pom.xml",
+        "sha256": "0d87dcd8eef34a2cbb4c7b19fa11a586ced4a8175a2caae23f20df966111e529"
+      },
+      "exactSourceSha": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+          "digest": "73f21152e53b0c511e6dd4b2750d000aa09555c05fa670134d388ac3e443fead"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java",
+          "digest": "bcbe814f37ba7a9cdba482369fa7ab70c5688713249ab780c35b6eeba3190cd6"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+          "digest": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+          "digest": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76"
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobCountRepositoryTest.java",
+          "digest": "5e97b19bfad8df6c7d324c3dc0c43e6f1c5b712e59dbd53e37497adc8824f51b"
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java",
+          "digest": "6377ab4703425dd9015760e369c4deb839e1c1c5a5ddf8a4d76c1a10f68c15d9"
+        }
+      ],
+      "mavenSelected": 4,
+      "newCheckedMain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java"
+      ],
+      "declaredSdkPins": {
+        "micrometer-core": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+          "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+        },
+        "jspecify": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        },
+        "jsr305": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        }
+      },
+      "physicalReceipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/inputs.json",
+        "sha256": "42b5651ab2fba670647575dcc1cbdd0ed9a24aacae793eaed473a6f7f51d7e71"
+      },
+      "pmdExit": 4,
+      "spotbugsExit": 0,
+      "appliedExistingCases": 8,
+      "rawPmdEntries": [
+        [
+          "AvoidCatchingGenericException",
+          37
+        ],
+        [
+          "AvoidCatchingGenericException",
+          37
+        ]
+      ],
+      "rawFiles": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/pmd.xml",
+          "sha256": "6ab47bd86ea062214499e5b0e4f3ef2d49b2d861aa8170169f7a1903a27db990"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/spotbugs.xml",
+          "sha256": "2cc686d6d473b22e2a8f4ef8d425588e9e87fe053d27e3646b6aeaaa7b2e7b81"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/unfiltered.out",
+          "sha256": "65e80d8dfef1e5b91a13e5aef5488998f66b760949ddb13a89916b5a37ece6d0"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-async-after-v1/typed.inventory.json",
+          "sha256": "2ece9e9cda8ac2e7430f1ff89f3cf7ea6e7994f46580b67dc99d63477ac87494"
+        }
+      ],
+      "commonInterpretation": "catch clears the borrowed observation on SQL/JDK failure and rethrows the original; owner acceptance still open"
+    },
+    "api-outbox": {
+      "parent": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/begin.json",
+        "sha256": "fb03b5d124c3b6ba3d7394d03208fb59db6d3adb04fc000cf3088988abb6fc4b"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/terminal.json",
+        "sha256": "4916c200e13d1bdfbd29d3d5036e35a7a80a69c7d8ae0c536c29eee32b3d37a2"
+      },
+      "compileLog": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/compile.out",
+        "sha256": "3506407f792f77069089a293b0e177035869374f2b1065009da7582d6dce7139"
+      },
+      "isolatedPom": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/scope/pom.xml",
+        "sha256": "0d87dcd8eef34a2cbb4c7b19fa11a586ced4a8175a2caae23f20df966111e529"
+      },
+      "exactSourceSha": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+          "digest": "dd027385f27bbe03bebbd5e7dd67a78626d8e27550eb1ed7428e876fc3ab9700"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+          "digest": "13b06cf3427ee808690a294df631f3593affcd949ed09a6e30cf6419c8f53d23"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+          "digest": "c0d709475517e31192afe8486be24f7a88232a87dd43d0db4e77ce34dd78a7d5"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+          "digest": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+          "digest": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+          "digest": "6da731e49ec76e444e8f4c71a7c2a82982c4ff40e9a2a264996a42e78d089c98"
+        },
+        {
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+          "digest": "a9a157c14fd0d4abc4582c0add1b2f5fbebb969086f1d28f3149c24b384166f9"
+        }
+      ],
+      "mavenSelected": 5,
+      "newCheckedMain": [
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java"
+      ],
+      "declaredSdkPins": {
+        "micrometer-core": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+          "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+        },
+        "jspecify": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        },
+        "jsr305": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        }
+      },
+      "physicalReceipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/inputs.json",
+        "sha256": "bf5f9fe0814735a9cd6c37d293d62a315486d18f0d1e8a38f6a01f4dd104ee8b"
+      },
+      "pmdExit": 4,
+      "spotbugsExit": 0,
+      "appliedExistingCases": 8,
+      "rawPmdEntries": [
+        [
+          "AvoidCatchingGenericException",
+          43
+        ],
+        [
+          "AvoidCatchingGenericException",
+          43
+        ]
+      ],
+      "rawFiles": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/pmd.xml",
+          "sha256": "86e2c7065fcaa4e6894a4d432a926108e75a5f864dc48daf146b26eeb1ecaeda"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/spotbugs.xml",
+          "sha256": "055a5b0a89c329b867b52ae757ca5b87af3acde15395ecdc629ecc667d954b6d"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/unfiltered.out",
+          "sha256": "5b12922729e5cf317cc023591ae0890531776f4f6fe9ff8eed36226e12e4619e"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-api-outbox-after-v1/typed.inventory.json",
+          "sha256": "4645e638d3a77d7f345fc1f6af0b1f2b88073548eefc0e603eeebfd1fa26ca45"
+        }
+      ],
+      "commonInterpretation": "catch clears the borrowed observation on SQL/JDK failure and rethrows the original; owner acceptance still open"
+    },
+    "web-outbox": {
+      "parent": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-v1/begin.json",
+        "sha256": "9c0d7a9d070c6f1f6ce2b849b1a25b42675f1afafd62affafb06cd1dadb1c96a"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/terminal.json",
+        "sha256": "120a986f0050c1696817e215dcb9d18c1cfb844b8e9744d19efb003e39d9adc2"
+      },
+      "compileLog": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-v1/compile.out",
+        "sha256": "3089a3a8930c8372c363b32f7bf9f74fc25174700d2ca641d5c9203834c1aafa"
+      },
+      "isolatedPom": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-v1/scope/pom.xml",
+        "sha256": "0d87dcd8eef34a2cbb4c7b19fa11a586ced4a8175a2caae23f20df966111e529"
+      },
+      "exactSourceSha": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+          "digest": "e5555372be4ee6227ca3ba017d62cfc838658b7eeb3b82c125541fbac2111595"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java",
+          "digest": "08425aad41ff6a7d17b0a2307392e888a8bbebf21189515573a301439eeae8eb"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+          "digest": "49ba9cd13ef3c79e6e49c90b9771227edbeed70db48e6aafd19ea759709f19e6"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+          "digest": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+          "digest": "1f93771700b7243bb3f2d0eef683ccae3b8f5c4b19e031265f49af2399c15cb4"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+          "digest": "32cd090e7a5a0633885522b1fce924b0e53bde3570419df2bf06b14e3c676ea2"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+          "digest": "2af89183ec9c59b87845e3a75b7ccfbc80a7afa3276971f3b36b4111bc7d0ead"
+        }
+      ],
+      "mavenSelected": 4,
+      "newCheckedMain": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java"
+      ],
+      "declaredSdkPins": {
+        "micrometer-core": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+          "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+        },
+        "jspecify": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+          "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        },
+        "jsr305": {
+          "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        }
+      },
+      "physicalReceipt": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/inputs.json",
+        "sha256": "7838dfedd12722aeadfb255875e697dd35b6ea41f644c65352d9774723ab950a"
+      },
+      "pmdExit": 4,
+      "spotbugsExit": 0,
+      "appliedExistingCases": 8,
+      "rawPmdEntries": [
+        [
+          "AvoidCatchingGenericException",
+          37
+        ],
+        [
+          "AvoidCatchingGenericException",
+          37
+        ]
+      ],
+      "rawFiles": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/pmd.xml",
+          "sha256": "aa2961532ca785ee82da8a219f68e8d726d3f955b827391526509a7f8c222b0c"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/spotbugs.xml",
+          "sha256": "be1ff7d197f52f1af1e9712b3d44f6b9c5eb4a6526fc217d2e694cd790f5ffa7"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/unfiltered.out",
+          "sha256": "de3dfd1051330fbe86d73452380d72e40814ff3cca71b0079a9eb1fd6343c893"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43812-web-outbox-after-retest-v1/typed.inventory.json",
+          "sha256": "d41c74d6370fad20bc6090c93e4646c898ce23c05a875f574f4b276feb666d1c"
+        }
+      ],
+      "commonInterpretation": "catch clears the borrowed observation on SQL/JDK failure and rethrows the original; owner acceptance still open"
+    }
+  },
+  "qualificationNewSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollector.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java"
+  ],
+  "permittedLocalNullAwayLowerBound": {
+    "api": 137,
+    "web": 150
+  },
+  "previous": {
+    "api": 134,
+    "web": 148
+  },
+  "previousRepeatOfWebEight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44988-current-web-outbox-collector-eight/manifest.json",
+    "sha256": "857c7dbbffd153f5bad79067b937091be86881fa66ffe6ffac98a86f1b022e39"
+  },
+  "newProductExecutions": 0,
+  "duplicateCaseCountAdded": 0,
+  "originalPmdFindingCount": 6,
+  "originalPmdFailuresRetained": true,
+  "existingWhole451": false,
+  "actualDb": 0,
+  "ownerAcknowledged": false,
+  "formalAcceptanceId": null,
+  "firstPreparationCorrection": "Resolved actual isolated POM dependencies, which explicitly declare micrometer-core, jspecify and provided jsr305. The initial assumed direct Micrometer list was incorrect. No analyses or tests were started."
+}
