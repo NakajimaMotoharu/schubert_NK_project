@@ -13,6 +13,8 @@ from wbs_index_binding import ACCEPTANCE, INVENTORY, _GUARD, validate_index
 class WbsIndexBindingTest(unittest.TestCase):
     API = "src/schubert-nk-api/src/main/java/sample/ApiType.java"
     BATCH = "src/schubert-nk-batch/src/main/java/sample/BatchType.java"
+    RESOURCE = "src/schubert-nk-web/src/main/resources/templates/view.html"
+    DEPLOYMENT = "src/deployment/test/example.conf"
 
     def setUp(self):
         temp = self.enterContext(TemporaryDirectory(prefix="wbs-index-"))
@@ -87,11 +89,66 @@ class WbsIndexBindingTest(unittest.TestCase):
         self.git("add", "--", path)
         return target
 
-    def stage_roster(self, artifacts):
-        value = json.dumps({"artifacts": artifacts}).encode()
+    def stage_roster(self, artifacts, **metadata):
+        value = json.dumps({"artifacts": artifacts, **metadata}).encode()
         self.inventory.write_bytes(value)
         self.set_reference(value)
         self.git("add", "--", INVENTORY, ACCEPTANCE)
+
+    def test_product_roster_requires_staged_resources_and_deployment_entries(self):
+        self.stage_product_java(self.RESOURCE)
+        self.stage_product_java(self.DEPLOYMENT)
+        resource = dict(path=self.RESOURCE, owner="WBS-A", costOwner="WBS-A")
+        deployment = dict(path=self.DEPLOYMENT, owner="WBS-B", costOwner="WBS-B")
+        self.stage_roster([resource])
+        self.assertTrue(validate_index(self.root, check_java_roster=True)["bindingValid"])
+        with self.assertRaisesRegex(ValueError, "resource roster mismatch:.*example.conf"):
+            validate_index(self.root, check_product_roster=True)
+
+        self.stage_roster([resource, deployment])
+        result = validate_index(self.root, check_product_roster=True)
+        self.assertEqual(2, result["trackedProductResources"])
+        self.assertEqual(1, result["productResourcesByGroup"]["web"])
+        self.assertEqual(1, result["productResourcesByGroup"]["deployment"])
+        self.assertEqual(0, result["retiredProductResources"])
+
+    def test_product_roster_rejects_resource_duplicate_and_missing_owner(self):
+        self.stage_product_java(self.RESOURCE)
+        resource = dict(path=self.RESOURCE, owner="WBS-A", costOwner="WBS-A")
+        for rows, expectation in (
+            ([resource, resource], "duplicate resource registration"),
+            ([dict(resource, costOwner=None)], "missing resource costOwner"),
+        ):
+            with self.subTest(expectation=expectation):
+                self.stage_roster(rows)
+                with self.assertRaisesRegex(ValueError, expectation):
+                    validate_index(self.root, check_product_roster=True)
+
+    def test_retired_resource_is_only_valid_with_its_exact_deletion(self):
+        self.stage_product_java(self.RESOURCE)
+        resource = dict(path=self.RESOURCE, owner="WBS-A", costOwner="WBS-A")
+        commit = ("-c", "user.email=fixture@example.invalid", "-c", "user.name=fixture", "commit")
+        self.git(*commit, "-qm", "fixture resource")
+        added = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.root).decode().strip()
+        self.git("rm", "--", self.RESOURCE)
+        self.git(*commit, "-qm", "fixture resource retirement")
+        removed = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.root).decode().strip()
+
+        self.stage_roster([resource])
+        with self.assertRaisesRegex(ValueError, "obsolete=.*view.html"):
+            validate_index(self.root, check_product_roster=True)
+        self.stage_roster([resource], retiredProductResources=[dict(path=self.RESOURCE, removedBy=added)])
+        with self.assertRaisesRegex(ValueError, "commit did not delete"):
+            validate_index(self.root, check_product_roster=True)
+
+        self.stage_roster([resource], retiredProductResources=[dict(path=self.RESOURCE, removedBy=removed)])
+        result = validate_index(self.root, check_product_roster=True)
+        self.assertEqual(0, result["trackedProductResources"])
+        self.assertEqual(1, result["retiredProductResources"])
+
+        self.stage_product_java(self.RESOURCE)
+        with self.assertRaisesRegex(ValueError, "invalid retired product resource"):
+            validate_index(self.root, check_product_roster=True)
 
     def test_java_roster_reads_staged_names_and_ignores_test_paths_and_worktree_edits(self):
         old_api = self.stage_product_java(self.API)
