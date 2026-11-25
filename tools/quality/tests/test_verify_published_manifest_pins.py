@@ -176,6 +176,39 @@ class PublishedManifestPinsTest(unittest.TestCase):
                         result["unresolved"],
                     )
 
+    def test_unrepresentable_path_is_never_classified_as_external(self):
+        expected = hashlib.sha256(INITIAL).hexdigest()
+        for malformed in ("src/invalid\0name", "../invalid\0name"):
+            self.manifest(
+                {
+                    "invalid": {"path": malformed, "sha256": expected},
+                    "valid": pin(FIXTURE, INITIAL),
+                    "external": pin("../public-fixture.txt", INITIAL),
+                }
+            )
+            self.git("add", ".")
+            head = self.git("rev-parse", "HEAD")
+            staged = audit(self.repo, self.original, head, staged=True)
+            end = self.commit()
+            committed = audit(self.repo, self.original, end)
+
+            for result in (staged, committed):
+                with self.subTest(stage="stagedTree" in result, form=malformed.split("/")[0]):
+                    self.assertEqual(1, result["current"])
+                    self.assertEqual(1, result["externalOrProtected"])
+                    self.assertEqual(
+                        [
+                            {
+                                "manifest": MANIFEST,
+                                "path": None,
+                                "sha256": expected,
+                                "source": None,
+                                "reason": "INVALID_EXPLICIT_PATH",
+                            }
+                        ],
+                        result["unresolved"],
+                    )
+
     def test_current_tree_is_from_commit_and_never_from_worktree(self):
         self.manifest([pin(FIXTURE, INITIAL), pin(FIXTURE, INITIAL)])
         self.manifest([pin(FIXTURE, UPDATED)], "documents/manifest.json")
