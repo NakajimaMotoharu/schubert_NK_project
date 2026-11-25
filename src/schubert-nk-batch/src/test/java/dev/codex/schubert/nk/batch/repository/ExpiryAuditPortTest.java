@@ -685,6 +685,7 @@ final class ExpiryAuditPortTest {
       if (failure instanceof SQLException sql) throw sql;
       if (failure instanceof IllegalStateException runtime) throw runtime;
       if (failure instanceof AssertionError fatal) throw fatal;
+      if (failure instanceof LinkageError linkage) throw linkage;
       throw new AssertionError("unexpected fixture fault type", failure);
     }
 
