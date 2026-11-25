@@ -11,3 +11,5 @@ PT-OPS-G09-JUNIT025（BUG-3874／YKT-3006）。合成Gitの確定sourceを選び
 BUG-3884／YKT-3006、PT-OPS-G09-JUNIT026。現collector 003・005・007～010・015・016・020～040の29入口で元commit・四pathを固定し、既共通guardを使用。元のみで拒否できなかった合成未追跡29、修正後拒否29、対象外と生成targetを許容29。元の残り処理の構造を独立に比較し、工具34成功。実業務と実collectorは実行待ちの状態を維持。 [PG45502](evidence/PG45502-formal-child-collectors-scope-check/manifest.json)
 
 PT-OPS-G09-JUNIT027（BUG-3886／YKT-3010）。新規収集のsourceは完全なGit commit object。合成repoのHEAD別名・短縮参照・treeを拒否し、完全commit、元の追跡／未追跡の範囲を保持。工具65成功。 [PG45516](evidence/PG45516-collection-full-git-commit-identity/manifest.json)
+
+PT-OPS-G09-JUNIT028（BUG-3887／YKT-3011）。正式子28の合成型7種を個別判定し、整数0のみ受理。元56誤受理を修正。親018の従来型判定を独立7例で同等確認し、003・006の平文契約は同一。工具66成功。 [PG45518](evidence/PG45518-formal-collection-integer-success/manifest.json)
