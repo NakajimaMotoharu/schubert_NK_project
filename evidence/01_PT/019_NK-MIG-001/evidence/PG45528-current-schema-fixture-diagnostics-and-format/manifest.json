@@ -1,0 +1,167 @@
+{
+  "run": "PG45528",
+  "source": "9d93fb381fdafb8cd6a825a9c4f60886f00d90db",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-01.02/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T18:55:35.956715+00:00",
+  "actualExit": 0,
+  "bugs": [
+    "BUG-3893",
+    "BUG-3894"
+  ],
+  "horizontal": "YKT-2997",
+  "current": [
+    {
+      "testId": "PT-OPS-SCHEMA008",
+      "method": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest#opsSchema008IndependentConcurrentOwners",
+      "actualExit": 0,
+      "source": "9d93fb381fdafb8cd6a825a9c4f60886f00d90db"
+    },
+    {
+      "testId": "PT-BOOT-MIG-WORKER004",
+      "method": "dev.codex.schubert.nk.migration.MigrationFixtureWorkersTest#worker004TerminationFailureIsSuppressedUnderThePrimaryFailure",
+      "actualExit": 0,
+      "source": "9d93fb381fdafb8cd6a825a9c4f60886f00d90db"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "sha256": "4e1a6c6799cbcee788e742682cf20b9bf27a4e2b62142cd839d2c62d39b983d9"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+      "sha256": "3e84daf390806be875ca14272276cc4c13bf00bd5a3e7edc558bb1adda520f26"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkersTest.java",
+      "sha256": "5f3a578fe0d1326c9968615a141efb47e4b646a57ccd3cea218155b7ba051217"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/182_移行fixtureの有限終了単体仕様.md",
+      "sha256": "b3db508a7e687dbecf9608982f5a29047a09640a7fe4eaa7c2784ba7cf189f55"
+    }
+  ],
+  "canonicalArchives": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    }
+  ],
+  "exactPhysicalInputs": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+      "sha256": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+      "sha256": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+      "sha256": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/package-info.class",
+      "sha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583"
+    }
+  ],
+  "sourcePins": {
+    "firstBehaviorFix": "c02407d30fc1aaab9060cfe792ddf8dc9ed97216",
+    "whitespaceFix": "9d93fb381fdafb8cd6a825a9c4f60886f00d90db"
+  },
+  "historicalSameCoverageScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45164-current-schema-fixture-exceptions-qualified/manifest.json",
+    "sha256": "512a547300c0631143ae9ce867f865d3a5ec26b957cb0fb4be33897963b774f8"
+  },
+  "proof": [
+    {
+      "path": "../pgpt-runs/PG379/PG45528-current-schema-workers-selected-two-v3/begin.json",
+      "sha256": "6c6723409893159e68db94f14b3ed292ca0f3fc914636cab6ae83af86a3df7b6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG45528-current-schema-workers-selected-two-v3/terminal.json",
+      "sha256": "04805232e08a63761e9813fa8ae7dd8408c59695300d65f11043873fb859f988"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG45528-current-two-bootstrap-fixtures-format-v2/begin.json",
+      "sha256": "0caa6d47a49b7974ece546cf1c3f2e1e6322a5e8aad8ca097d6b2812c8bdacd8"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG45528-current-two-bootstrap-fixtures-format-v2/terminal.json",
+      "sha256": "d8d8217f454edacc82ef61ecd7a5da4fd6a45a00b5f66381e461da99f65d5697"
+    }
+  ],
+  "priorCandidateResults": {
+    "source": "c02407d30fc1aaab9060cfe792ddf8dc9ed97216",
+    "localProductTrials": 1,
+    "fixtureTrials": 1,
+    "JUnit": {
+      "path": "../pgpt-runs/PG379/PG45528-current-schema-workers-selected-two-v2/terminal.json",
+      "sha256": "c0fae74d622efe4c50b402c928fdc4d1139a93cb434710bb85f44e8f81213ef8"
+    },
+    "formatExit": 1,
+    "formatManifest": {
+      "path": "../pgpt-runs/PG379/PG45528-current-two-bootstrap-fixtures-format/terminal.json",
+      "sha256": "7bcbf1595dfc3ba30183ce1067eefaf7eb1bca7bc667cd6b564da17b6f290a86"
+    },
+    "retainedSeparate": true
+  },
+  "firstPreflight": {
+    "reason": "Storage came from its canonical Storage archive rather than the Bootstrap archive",
+    "testLaunched": false
+  },
+  "rawCoverage": {
+    "selectedProduct": "SchemaHistoryAdmission and Row",
+    "missedThenCovered": {
+      "LINE": [
+        20,
+        73
+      ],
+      "METHOD": [
+        5,
+        13
+      ],
+      "CLASS": [
+        0,
+        2
+      ],
+      "BRANCH": [
+        34,
+        38
+      ]
+    },
+    "oldExecMerged": false
+  },
+  "testSupportClosureInProductionArchive": false,
+  "currentCanonicalSpotlessSelected": 2,
+  "currentCanonicalSpotlessClean": 2,
+  "productTrialsAcrossBothCandidates": 2,
+  "finalProductTrials": 1,
+  "newProductTestIds": 0,
+  "fixtureTrialCountBothCandidates": 2,
+  "newFixtureTestIds": 1,
+  "cumulativeLocalProductTrialsGross": 2725,
+  "actualDatabaseFlywayRuntime": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
