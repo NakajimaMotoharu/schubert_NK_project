@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -464,11 +466,10 @@ class MqMessageMetricRecorderTest {
 
   @Test
   void mqEvent007ConcurrentCountsUsePrecomputedStageOwnerVectorsAndSeparateRegistry()
-      throws Exception {
-    var registry = new Registry();
-    var other = new Registry();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+      throws InterruptedException, ExecutionException, TimeoutException {
+    try (var registry = new Registry();
+        var other = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var a =
           new MqMessageMetricRecorder(
               registry, DEBUG_MODE, new LayoutId("QSBREQ01"), BrokerTopology.SYNC_REQUEST);
@@ -490,7 +491,7 @@ class MqMessageMetricRecorderTest {
               return null;
             });
       }
-      for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+      for (var f : workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
       for (int i = 0; i < 7; i++) {
         assertEquals(
             expected.get("A/" + i).longValue(),
@@ -505,14 +506,6 @@ class MqMessageMetricRecorderTest {
       independent.record(Stage.DLQ);
       assertEquals(1, counter(other, QUESTION_WORK_LAYOUT, "nk.async.work", 6).count());
       assertEquals(64, registry.increments.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-      try {
-        other.close();
-      } finally {
-        registry.close();
-      }
     }
   }
 
