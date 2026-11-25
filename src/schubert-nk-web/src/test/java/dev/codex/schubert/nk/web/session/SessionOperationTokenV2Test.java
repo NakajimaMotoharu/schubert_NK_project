@@ -83,8 +83,7 @@ class SessionOperationTokenV2Test {
         completedValues.contains(
             new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, completedAt)));
     assertThrows(
-        IllegalArgumentException.class,
-        () -> new SessionOperationToken("UNKNOWN1", ID, ISSUED));
+        IllegalArgumentException.class, () -> new SessionOperationToken("UNKNOWN1", ID, ISSUED));
   }
 
   @Test
