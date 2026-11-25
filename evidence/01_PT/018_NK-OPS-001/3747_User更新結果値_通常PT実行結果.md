@@ -7,3 +7,8 @@ ADM-VALUE-001..004をsource9f2243e固定で一度実行、4/4成功・失敗/例
 独立profile表は0000/0200+payload、0100/0104/0105/9001+なし、他組合せ全拒否。応答N9は0/999999999、ISO six-vectorにはepoch直前とInstant両端、fieldsはUser ID/更新後versionの別fixtureの数値を直接検証。承認済み業務SQL/認証/失効/audit backendを実行していない。三target Codeは全counter100だが周辺protocol依存全体/全451の合格ではない。三record標準生成filterは独立post normal metadataに全名保存し手動filter0、raw probeの完全実行を主張しない。
 
 次: Continue477 actual independent PG/PT, review full UserAuditWriter plus nested UserCommandService.State/Change and UserMutationResult/UserCommandMetadata current graph and prior Unit evidence before considering declared caller-owned JDBC-interface audit binding PT. Do not invoke UserCommandService/real command/DB/password/session/held4/Root/native/VM. If operation cannot be separated by actual effects, keep it HOLD and select independent safe work. Reuse value4/current three SourceFile proof and pool2 without repeat; current unique453=Java349+HTML97+CSS7, provisional93/named pending seven, original282intersection73/rem209/partial18/rem62, formal1964-53/newleaf0/effort null. Usage01:59:24/d92f5b20 N/Tnull next02:59:24 JST.
+
+
+## 現候補 ADM-VALUE-001～006
+
+BUG-3812/YKT-2970。現候補の固定ProtocolとJDKの一つのexecで6/6、失敗・エラー・スキップ各0。API二値とProtocol応答の3物理は行34、メソッド23、クラス3、分岐6、命令187が全て到達。分岐対象0の二型も分けて記録。Fixture書式・Checkstyle・PMDは0。実DB・実Admin・全451は未了。 [PG44864](evidence/PG44864-current-api-and-protocol-record-value-six/manifest.json)
