@@ -1,0 +1,560 @@
+{
+  "rows": [
+    {
+      "wbs": "WBS-P001-01",
+      "program": "NK-PRO-001",
+      "requirementReferences": [
+        "MQ-014",
+        "MQ-015",
+        "MQ-016",
+        "MQ-017",
+        "MQ-018"
+      ],
+      "condition": "共通header、公開種別・結果codeの固定値と負条件",
+      "design": [
+        {
+          "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+          "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+            "sha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f"
+          },
+          "sourceBlob": "1a5821f8962ba1e859e665846fb07af72c5219c3",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/EnumWireCompatibilityTest.java",
+            "sha256": "f10256fe2dc31f7892b0c6eb8711b1f5d1fc8485f2cee0c4b3f3b05833702674"
+          },
+          "sourceBlob": "d1c21787020f132b2fa2575a078afa214f04bbeb",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+            "sha256": "6e5fe49a0402c659ca6f7730f3b63fe0e0e5affc2543d6c7afccb8fd480d701b"
+          },
+          "sourceBlob": "e6f8e09dbc8565320c34a0f064fdbae7b688d929",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+            "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45440-current-wire-three-case-method-trace/manifest.json",
+            "sha256": "12c95f9b2f105fc4db06fa7ea731e2554cb15e3fd6afe81736a28b0efe0b56c1"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45614-current-protocol-class-denominator/manifest.json",
+            "sha256": "88dacc4d9928c6aeff454ca362b57c428fd422d90f0449c37b5fc9c6050e486a"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "別の実送信完了と終端依存は継承。",
+      "acceptanceBefore": "ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P001-03",
+      "program": "NK-PRO-001",
+      "requirementReferences": [],
+      "condition": "型安全な要求／応答カタログと独立フィールド型",
+      "design": [
+        {
+          "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+          "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+            "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+          },
+          "sourceBlob": "d1ee2bc6f4bb04fdd545f92ebfa993b83933b778",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+            "sha256": "e9874b5e5694d43f8050d1c1a7b24fd94c8b69d3d780478bcabff513c393e5af"
+          },
+          "sourceBlob": "5072b018aca683b339fb2bfa9a394609de726a23",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java",
+            "sha256": "dd40230045fec910c3ab2d1cada147a56859a8ff1d3081c70891551b061ba5aa"
+          },
+          "sourceBlob": "36d3d59aa26f68f288b74730edd366e9870e90d4",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+            "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45440-current-wire-three-case-method-trace/manifest.json",
+            "sha256": "12c95f9b2f105fc4db06fa7ea731e2554cb15e3fd6afe81736a28b0efe0b56c1"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "承認済みの原判定と当候補の適用範囲は別に保持。",
+      "acceptanceBefore": "ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P002-03",
+      "program": "NK-PRO-002",
+      "requirementReferences": [],
+      "condition": "固定header、メッセージencodingとGolden vector",
+      "design": [
+        {
+          "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+          "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+            "sha256": "02cdbae5208f35e6c437ce14180090e451505e73041c45c3f620ca0ead2bf1ab"
+          },
+          "sourceBlob": "df6eaae877b7fc8f5245ef19bf742271b234ab37",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+            "sha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f"
+          },
+          "sourceBlob": "1a5821f8962ba1e859e665846fb07af72c5219c3",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+            "sha256": "3cf877d0090ae12698c7c5f2da4ec12f0f61aac57aa3731f7be8640dad1fd492"
+          },
+          "sourceBlob": "6808b5e2ae0726a31dad4f226c3079de253856bc",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+            "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45440-current-wire-three-case-method-trace/manifest.json",
+            "sha256": "12c95f9b2f105fc4db06fa7ea731e2554cb15e3fd6afe81736a28b0efe0b56c1"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45614-current-protocol-class-denominator/manifest.json",
+            "sha256": "88dacc4d9928c6aeff454ca362b57c428fd422d90f0449c37b5fc9c6050e486a"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "正規実配送と実差分、P002全子を別判定。",
+      "acceptanceBefore": "ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P002-04",
+      "program": "NK-PRO-002",
+      "requirementReferences": [],
+      "condition": "認証エラープロファイル、固定layoutと幅境界",
+      "design": [
+        {
+          "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+          "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+            "sha256": "7798ee26e927182bce667e18b9075934603f9a395656fbdf43bd88b4d015f414"
+          },
+          "sourceBlob": "bc1d3f7d0f19e5f9b06b3e8145e3954b2a21268e",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+            "sha256": "2883db960fdee214c91b63320f76b8e72af15a9713942e1b629c71b4c21bce7f"
+          },
+          "sourceBlob": "7028272d81fc05f050555214687b2a5fd9648d57",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+            "sha256": "e28eccecf0fb962509ac9ce46a8a696b5389daa81e0d3365a843c725ba184322"
+          },
+          "sourceBlob": "68c2032c78561ce15d473b9c247a91033ca365de",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+            "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45614-current-protocol-class-denominator/manifest.json",
+            "sha256": "88dacc4d9928c6aeff454ca362b57c428fd422d90f0449c37b5fc9c6050e486a"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "実通信と影響するDIF・終了依存は別。",
+      "acceptanceBefore": "ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P011-03",
+      "program": "NK-QST-001",
+      "requirementReferences": [],
+      "condition": "受付メタデータのUTCと固定秘匿、operation fingerprintの候補所在",
+      "design": [
+        {
+          "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+          "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java",
+            "sha256": "35defc94dd7470149d6e4c741ee00cc9196d5ad6731dd5290aecbcd61f9ce71c"
+          },
+          "sourceBlob": "6d24eabd1c2d5383d7452f770e7c6fba1f8f17f0",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+            "sha256": "80c34a19492c1e5c8585c6573d598c02c6820b14130260370b1c0f1431901bbe"
+          },
+          "sourceBlob": "6b40580120f23c136079b84e5f60a17723358efb",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": true
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/011_NK-QST-001/evidence/PG45192-current-typed-question-id-and-metadata/manifest.json",
+            "sha256": "a8c77bcec86edd73bcfaa3db95ce6f17d09daa0664dc9f144763f2ee8154e5da"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45000-current-fingerprint-typed-pmd-and-spotbugs/manifest.json",
+            "sha256": "2077adb02f43201a50257ef48c7f75a3c8119d11ab72858f2418451777480f84"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "HMAC・同一payloadの実再送、QA-056とInbox／Outboxを未受入。",
+      "acceptanceBefore": "NOT_ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P015-06",
+      "program": "NK-WEB-001",
+      "requirementReferences": [],
+      "condition": "固定長Web業務client、共通表示code、0102終了との境界",
+      "design": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+          "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+            "sha256": "cb1324a03568c69d1091d4a3294641ef545616b1dac66a779b0967ce18c4d56d"
+          },
+          "sourceBlob": "93d2a3807de745a700afbc4856f38b18f5e9f773",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": true
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCommittedTerminalAdmissionContractTest.java",
+            "sha256": "a96bc72f1f958b47a65fc12b60d28befc29b3d92f6c3a9990ac9ed4e132ce080"
+          },
+          "sourceBlob": "2d291bb49084b6cf50106b8e68fc2947461b1ef8",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+            "sha256": "5281fb091ca71ccd137785253a8a668db4fe7703eecaadb8d01be432ecd01b4f"
+          },
+          "sourceBlob": "c10eea5cc4a5f25e34ff1ae9cd974e4b6463c0f1",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45606-scr090-current-nine-pure-and-dom-witnesses/manifest.json",
+            "sha256": "daa914f0d9b3b8970e97c43c24f1ec99e5c6da867505b35f3ab22f508a738add"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45616-current-scr090-error-controller-golden-eight/manifest.json",
+            "sha256": "34289321a918f033c4e199d2e6ae4b9a3d366fa118775f8425b7b3cfcc587823"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "当候補の実MQ、0102終端と同sourceの六製品。",
+      "acceptanceBefore": "NOT_ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P018-10",
+      "program": "NK-OPS-001",
+      "requirementReferences": [],
+      "condition": "固定監査属性、filterしたログ詳細、値の固定表示",
+      "design": [
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [
+        {
+          "fixture": {
+            "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+            "sha256": "b0659ff613078fd893ca30bf263b3d372d99dde987f5475a14f84c409a76ee77"
+          },
+          "sourceBlob": "b29347b9ff3fa87eecbf4836484778582b96fc59",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsRawContractTest.java",
+            "sha256": "6f0af98b85c3409b60a365937c5718313adfb776a9363b9f5ca2136e8e6c38df"
+          },
+          "sourceBlob": "a1c42da5e6685a0648ff47d7c24de40f79b15d1a",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        },
+        {
+          "fixture": {
+            "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.java",
+            "sha256": "9fe33599067434488f4d4f46e25e65dbe585cfb81a36757598a7ecb5330a19f0"
+          },
+          "sourceBlob": "a7d5f45b4395c6c7311958fd0293df863e080417",
+          "referenceNotAuthority": true,
+          "heldExecutionRetained": false
+        }
+      ],
+      "anchoredProcedureSpecifications": [],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45138-current-startup-values-redaction-twelve/manifest.json",
+            "sha256": "d184e9153a1051a4f33ab5250c0242b64b5bf8fb3e0bc9b2419d4410ff9180d3"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45410-current-two-web-audit-worker-diagnostics/manifest.json",
+            "sha256": "9993cdaaf84a67c8b00bc2c1b6f9cca32c90390ecc24d61c06537bb6501b4742"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "全入口の同source negative・監査sinkと担当判定。",
+      "acceptanceBefore": "NOT_ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": false
+    },
+    {
+      "wbs": "WBS-P019-04",
+      "program": "NK-MIG-001",
+      "requirementReferences": [
+        "MIG-DAT-001",
+        "MIG-DAT-002",
+        "MIG-001",
+        "MIG-002"
+      ],
+      "condition": "切替四子の入力、承認、前後保全、戻り手順",
+      "design": [
+        {
+          "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+          "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [],
+      "anchoredProcedureSpecifications": [
+        {
+          "path": "evidence/01_PT/019_NK-MIG-001/009_P01904切替四子・入力承認合成前後保全手順期待値.md",
+          "sha256": "0d8c61f6987ba7e19cb16d94cf8301d41830392f48a62083aed0eea43d437e9f"
+        }
+      ],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30244-p01904-four-cutover-contract-preparations-v1/manifest.json",
+            "sha256": "c4388513df2a5ff6f63d6cbef7f1b5f301a30a2f9718ae2c853b08bffa49d29c"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30246-cutover-independent-synthetic-oracles-v1/manifest.json",
+            "sha256": "5582495c5402069027e0a00df74684ca14b440bc6ce794dd161274965e1b34c3"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "実切替、対象の権限・書込み停止、DB・asset・構成の前後照合。",
+      "acceptanceBefore": "NOT_ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": true
+    },
+    {
+      "wbs": "WBS-P019-05",
+      "program": "NK-MIG-001",
+      "requirementReferences": [
+        "MIG-DAT-007",
+        "MIG-DAT-008",
+        "MIG-007",
+        "MIG-008"
+      ],
+      "condition": "切戻し四子の版、原本、復元期待とV031/V030の履歴",
+      "design": [
+        {
+          "path": "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+          "sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "candidateTestPathLocators": [],
+      "anchoredProcedureSpecifications": [
+        {
+          "path": "evidence/01_PT/019_NK-MIG-001/010_P01905切戻四子・版対象保全復元未実行期待値.md",
+          "sha256": "6a534010be8949036b2f52a977bf50416b718bd1959969f5bd2815bd56153213"
+        }
+      ],
+      "priorScopeWitnesses": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30254-p01905-four-cutback-contract-preparations-v1/manifest.json",
+            "sha256": "3b34b93e2dfbc4f2f95d230761a437bd470b804bda5cc460d925b7bfe4ef2ea0"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30256-cutback-independent-synthetic-oracles-v1/manifest.json",
+            "sha256": "6e536c1b256a04bb4ca6ad8783e1be9a55e66361a3d547960fc0b6d97311b24a"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45590-v031-cutback-release-history-boundary/manifest.json",
+            "sha256": "ac66ced936d21d050037ec878291e1a81afe6a9f7e877a51a0f85d4ecf6c974a"
+          },
+          "scopedEvidenceOnly": true
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45610-current-31-ddl-history-and-processed-resource-lineage/manifest.json",
+            "sha256": "51a2b2c7ef3a9045ba78ec399e4dc8d442e653d9a5c01bfe10f88deb1a52a558"
+          },
+          "scopedEvidenceOnly": true
+        }
+      ],
+      "remaining": "実復元・既設V030履歴、役割・退役前後の独立証拠・判断。",
+      "acceptanceBefore": "NOT_ACCEPTED",
+      "formalAcceptanceIdNew": null,
+      "procedureOnly": true
+    }
+  ]
+}
