@@ -43,7 +43,6 @@ def local_path(repo, value):
         not path.parts
         or path.parts[0] not in PUBLIC_ROOTS
         or ".." in path.parts
-        or "\0" in value
         or path.parts[:4] == CURRENT_BASELINE
     ):
         return None
@@ -55,7 +54,9 @@ def pins(value):
         path, sha = value.get("path"), value.get("sha256")
         if "path" in value and "sha256" in value and (path is not None or sha is not None):
             digest = sha if isinstance(sha, str) and SHA256.fullmatch(sha) else None
-            explicit_path = path if isinstance(path, str) and path.strip() else None
+            explicit_path = None
+            if isinstance(path, str) and path.strip() and "\0" not in path:
+                explicit_path = path
             yield explicit_path, digest, exact_source(value.get("source")), "source" in value
         for child in value.values():
             yield from pins(child)
