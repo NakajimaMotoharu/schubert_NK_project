@@ -1,0 +1,74 @@
+{
+  "eventId": "PGPT-20261008-11249",
+  "groupId": "PGPT-20261126-PG45714-qualified",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T22:55:23+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "bcba49500a4b31acee6d673a2ecc91f1059b1e12",
+    "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+    "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "run": "PG45714",
+    "managementWorkIds": [
+      "候補再資格-31.01"
+    ],
+    "planRow": {
+      "新版ID": "候補再資格-31.01",
+      "第58版ID": "候補再資格-31.01",
+      "費用主担当項目": "P004-03",
+      "計画窓": "繰越",
+      "予定期間・週末": "2026-12-13までの計画週",
+      "作業・成果物": "変更した試験の既存証跡の適用範囲を照合（MaintenanceRecordsTest.java）",
+      "先行ID・着手条件": "A1-15、WBS-P004-03/1、閉/WBS-F02、閉/WBS-F03",
+      "担当": "DB・資源管理担当",
+      "旧短期残pp": "0.15",
+      "改訂残pp": "0.15",
+      "終了条件": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+      "参照する元項目": "P004-03",
+      "lineNumber": 14
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月24日_PGPT再開実行計画.txt",
+        "sha256": "702ef0dfeb1b5efbf1b57f8e3d734a87a3c4d26c087c5980fcc9674ce9e15fa5"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "previousCheckpoint": 5794,
+    "startScope": "MaintenanceRecordsの変更1メソッドの現Batch正規6物理を照合し、未変更7件の旧適用と現concurrentUseを分離。候補03.01既チェックを参照しP004-03の資源後条件を整理。",
+    "groupCapPp": 0.45,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.15,
+      "high": 0.45
+    },
+    "workCategory": "CONTRACT_AUDIT",
+    "completedOriginalRowPricePp": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "speedRequested": "standard",
+    "modelObserved": null,
+    "reasoningObserved": null,
+    "speedObserved": null,
+    "actualAllocatedPp": null,
+    "priorUncommencedQuotaReceipt": {
+      "path": "../PMO/pgpt-execution-metrics/quota-receipts/PGPT-20261126-PG45714.json",
+      "sha256": "eb96148bcd5e359aa9bc6794b24fd8e2a89be12f188a232467c1c4a32e5fb583"
+    }
+  }
+}
