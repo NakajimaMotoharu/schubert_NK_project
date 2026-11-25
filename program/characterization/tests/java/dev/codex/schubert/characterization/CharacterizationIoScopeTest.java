@@ -2,13 +2,10 @@ package dev.codex.schubert.characterization;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -165,8 +162,7 @@ class CharacterizationIoScopeTest {
   }
 
   @Test
-  void staticToolFactoriesRejectReflectiveConstructionAndRestoreAccess()
-      throws ReflectiveOperationException {
+  void staticToolTypesPublishNoConstructors() {
     for (Class<?> type :
         List.of(
             ArtifactComparator.class,
@@ -174,18 +170,7 @@ class CharacterizationIoScopeTest {
             GateCli.class,
             GateContractValidator.class,
             CharacterizationIoScope.class)) {
-      var constructor = type.getDeclaredConstructor();
-      assertFalse(constructor.canAccess(null));
-      constructor.setAccessible(true);
-      try {
-        InvocationTargetException actual =
-            assertThrows(InvocationTargetException.class, constructor::newInstance);
-        assertInstanceOf(AssertionError.class, actual.getCause());
-        assertEquals(type.getSimpleName() + " is a static tool", actual.getCause().getMessage());
-      } finally {
-        constructor.setAccessible(false);
-      }
-      assertFalse(constructor.canAccess(null));
+      assertEquals(0, type.getConstructors().length, type.getSimpleName());
     }
   }
 
