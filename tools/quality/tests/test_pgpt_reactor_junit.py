@@ -1,5 +1,6 @@
 """Fixed synthetic receipts for PT-OPS-G09-JUNIT001..010 and PT-OPS-G08-RAW001..004."""
 
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -506,6 +507,39 @@ class ReactorJunitTest(unittest.TestCase):
         self.marker(".exit").write_text("0\n")
         with self.assertRaises(FileNotFoundError):
             self.verify()
+
+
+class FormalCollectorInputsTest(unittest.TestCase):
+    def test_formal_child_collectors_share_the_exact_input_guard(self):
+        """PT-OPS-G09-JUNIT026: exact scope and source receipt at each entrypoint."""
+        directory = Path(__file__).resolve().parents[1]
+        numbers = (3, 5, 7, 8, 9, 10, 15, 16, *range(20, 41))
+        source_arguments = {
+            3: "commit",
+            **{number: "validated['targetCommit']" for number in (5, 7, 8)},
+            16: "base['targetCommit']",
+        }
+        expected_paths = ["src", "pom.xml", "program/characterization", "tools/quality"]
+        for number in numbers:
+            with self.subTest(collector=number):
+                path, = directory.glob(f"{number:03d}_collect*.py")
+                tree = ast.parse(path.read_text(encoding="utf-8"))
+                guards = [
+                    node for node in ast.walk(tree)
+                    if isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Name)
+                    and node.func.id == "require_collection_inputs_unchanged"
+                ]
+                self.assertEqual(len(guards), 1)
+                guard, = guards
+                self.assertEqual(len(guard.args), 3)
+                self.assertFalse(guard.keywords)
+                self.assertEqual(ast.unparse(guard.args[0]), "repo")
+                self.assertEqual(
+                    ast.unparse(guard.args[1]),
+                    source_arguments.get(number, "verified['targetCommit']"),
+                )
+                self.assertEqual(ast.literal_eval(guard.args[2]), expected_paths)
 
 
 if __name__ == "__main__":
