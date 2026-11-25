@@ -1,0 +1,83 @@
+{
+  "run": "PG45394",
+  "source": "814372a11e41452baa2312c54bb0e7d5a1591254",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G04",
+  "terminalAtUTC": "2026-11-25T16:04:36.987653+00:00",
+  "actualExit": 0,
+  "originalLedger": {
+    "path": "documents/900_OTHER/910_台帳/915_障害表.md",
+    "sha256": "740986b3638319dffde33c9695206b490235dc21a5bddee9bf34d0fde0c60e02"
+  },
+  "reboundLedger": {
+    "path": "documents/900_OTHER/910_台帳/915_障害表.md",
+    "sha256": "2ae1ed59691cfd1e996db151bd1326e61496a97e29a206175734f790474406d0"
+  },
+  "horizontalLedger": {
+    "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+    "sha256": "f4dcd64d44ad94ab7122cc4dcef9383582ad3c19d6d953712ad86c1a974869dc"
+  },
+  "rows": [
+    {
+      "bug": "BUG-3859",
+      "horizontal": "YKT-2997",
+      "heading": "## BUG-3859 対象指定・ユーザ変更form並行試験の終了診断",
+      "resultParagraphSha256": "f544ea5abc39bf7d0cc10400ccdb69811bc247d963e140a022a4e64d79dde682",
+      "evidence": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45390-current-remaining-form-concurrent-failure-preservation/manifest.json",
+        "sha256": "f1f0e2f93121019207b70dcc955a6aafe8a852f8bd5e4bb573d7d62ab4f8edad"
+      },
+      "localRetest": true,
+      "fixCommit": "e248d9b1e1ad27296053c738fcb08a1503793dc1",
+      "testedCommit": "e248d9b1e1ad27296053c738fcb08a1503793dc1",
+      "verifiedTerminalExit": 0
+    },
+    {
+      "bug": "BUG-3858",
+      "horizontal": "YKT-2997",
+      "heading": "## BUG-3858 Web検索・質問・ユーザ入力の並行fixtureで一次原因消失",
+      "resultParagraphSha256": "958c82ed12d44d3caf68e90f8d5d1c74395b4b0f1ced396fe0baa2fb5efb1c0d",
+      "evidence": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45388-current-form-concurrent-failure-preservation/manifest.json",
+        "sha256": "377b8e08a1717425be6a9a486e074c7abbdeb4fd7d14ef809c06d70e89b837bf"
+      },
+      "localRetest": true,
+      "fixCommit": "19e2ba81dbc5230dba7b54f8f73213b6b622b365",
+      "testedCommit": "19e2ba81dbc5230dba7b54f8f73213b6b622b365",
+      "verifiedTerminalExit": 0
+    },
+    {
+      "bug": "BUG-3857",
+      "horizontal": "YKT-2997",
+      "heading": "## BUG-3857 Range parserと応答portの並行PTで終了失敗が一次を覆う",
+      "resultParagraphSha256": "dbd4074c36553e1afde27d39e1c7d1f5c311eeb74ed53f91b07ccd547b376e4c",
+      "evidence": {
+        "path": "evidence/01_PT/009_NK-MED-001/evidence/PG45384-local-range-worker-failure-preservation/manifest.json",
+        "sha256": "c1fbe3a4969da30886a068079633b1cfcaa9ade125eb063f7bad6ccceff0e301"
+      },
+      "localRetest": true,
+      "fixCommit": "0875fd9c070f66a1ec290dcf2035f77376e2047a",
+      "testedCommit": "0875fd9c070f66a1ec290dcf2035f77376e2047a",
+      "verifiedTerminalExit": 0
+    },
+    {
+      "bug": "BUG-3852",
+      "horizontal": "YKT-2997",
+      "heading": "## BUG-3852 Web fixture補助のInterruptedExceptionで厳格試験コンパイルが停止",
+      "resultParagraphSha256": "9dec13a5d54b2c0e005791cfdd94c80d2c875b8054cca46dbb882ab9267814c4",
+      "evidence": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45356-web-view-worker-horizontal-strict/manifest.json",
+        "sha256": "c75fda0b3cff1f45a105681543a823f54a1f4a99ec01a2c18d8f53d2299bbe89"
+      },
+      "localRetest": true,
+      "fixCommit": "23c3b438814f6831d5412a0d750633a52362d327",
+      "testedCommit": "a3419942cadd909b5d9b321782b45138c8be0c8b",
+      "verifiedTerminalExit": 0
+    }
+  ],
+  "unchangedLineMultiset": true,
+  "newProductionTrials": 0,
+  "allMajorDefectsClosed": null,
+  "formalAcceptanceId": null,
+  "sixProduct451": false
+}
