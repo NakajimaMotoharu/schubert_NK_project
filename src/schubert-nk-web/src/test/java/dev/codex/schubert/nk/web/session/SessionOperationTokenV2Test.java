@@ -2,12 +2,15 @@ package dev.codex.schubert.nk.web.session;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -61,6 +64,27 @@ class SessionOperationTokenV2Test {
     assertThrows(
         NullPointerException.class,
         () -> new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, null));
+  }
+
+  /** PT-WEB-TOKVAL001. Equal values are interchangeable; completion remains part of the value. */
+  @Test
+  void tokenValuesDistinguishCompletionWhenReconstructed() {
+    var pending = new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED);
+    var equivalentPending =
+        new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, Optional.empty());
+    var completedAt = Optional.of(ISSUED.plusSeconds(1));
+    var completed = new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, completedAt);
+
+    var pendingValues = new HashSet<>(List.of(pending));
+    assertTrue(pendingValues.contains(equivalentPending));
+    assertFalse(pendingValues.contains(completed));
+    var completedValues = new HashSet<>(List.of(completed));
+    assertTrue(
+        completedValues.contains(
+            new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, completedAt)));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new SessionOperationToken("UNKNOWN1", ID, ISSUED));
   }
 
   @Test
