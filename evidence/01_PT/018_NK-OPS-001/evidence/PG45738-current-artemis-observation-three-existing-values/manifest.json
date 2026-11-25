@@ -1,0 +1,91 @@
+{
+  "run": "PG45738",
+  "source": "7f2a3ff75e38f395f56fe10b85dfe30ca92e46d6",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "terminalAtUTC": "2026-11-25T23:24:12.892502+00:00",
+  "actualExit": 0,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "previousProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/manifest.json",
+    "sha256": "39127844d3df8f2539f3f531d3c8fef3184bc84b5806a7f95bfe22b683af3215"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/4699_Artemis観測値の独立所有と固定診断の単体仕様.md",
+    "sha256": "320a5f782b0a7207652849e6d2afae573f220a0b50607857088b71b148f46326"
+  },
+  "localSelected": [
+    "PT-P01810-CATALOG-062A",
+    "PT-P01810-CATALOG-062B",
+    "PT-P01810-CATALOG-062C"
+  ],
+  "independentMethodRoster": [
+    "comparesOwnedValueDataWhileItsGeneralDiagnosticsStayFixed",
+    "ownsAllNestedValueInputsBeforeAndAfterCallerMutatesThem",
+    "rejectsMissingNestedInputsWhileTakingOwnership"
+  ],
+  "exactCurrentTest": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupEvidenceValueTest.java",
+    "sha256": "b8163935386deaceab0ee3c59fc4d2bd0489ba2d3e62226486d540f69b5165ce"
+  },
+  "exactTestedPhysical": "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation$Evidence.class",
+  "comparedFivePhysical": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class": "2d7614909c8cf0be136c735b31e8ccffb8b23d63ad741acb3d17fcee563783e2",
+    "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation$Evidence.class": "b5550b056bfdcc6c3472e3fc9b4c413c1ec1fcb2f9724ea08d52af447890f23f",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.class": "5cb48867f74f3049721234f8f5e01c31044a1a72af0a5439eb0e06cf686a04af",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Pressure.class": "bc3f280e53376f940e152c9432d8af509bbccfb3b031a694255669ed4856156f",
+    "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Value.class": "4ae7521075bf46ab9848fdb2deb7e3aa751ab998a1a406a0c1bfd09f69babfe2"
+  },
+  "historicalOuterDelta": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class": {
+      "old": "21b8964502dc53714d8c48ef2f88a4e63ac62d43bec5c4d152885780fc5bc1ee",
+      "candidate": "2d7614909c8cf0be136c735b31e8ccffb8b23d63ad741acb3d17fcee563783e2"
+    }
+  },
+  "outerInitialized": false,
+  "previousInitializerEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/class-init.log.gz",
+    "sha256": "c4ab3ab4a35638dd1e92b0106467b0eb1d659cfa98d89c55efbb2f1e03ea6df6"
+  },
+  "oldNormalObserved": 3,
+  "newTestExecutions": 0,
+  "oldJunit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "5d5149abe9c02cffd604e7f981216afe2e19982195ba9bbe6f79fb2eec49e9d7"
+  },
+  "legacyScopeCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 116
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 21
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 14
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 14
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "oldExecCombined": false,
+  "previousCandidatePreflightOnly": "Source delta did not change executable value bytes; no compiler, test, or process started.",
+  "noBrokerOrCallerOrSinkOperated": true,
+  "cumulativeProductTrialsGross": 3088,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
