@@ -1,0 +1,320 @@
+[
+  {
+    "testId": "PT-AUT-AUDIT-PREPARE001",
+    "test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "sha256": "62d696d4583c15d2b89f1bfc8faa154e689d1d219232e397dce6bf6c8f61d161"
+    },
+    "suite": "dev.codex.schubert.nk.api.security.LoginAuditPortTest",
+    "method": "missingPreparedStatementIsAnIntegrityFailureWithoutBorrowedOperations",
+    "program": "NK-AUT-001",
+    "spec": {
+      "path": "evidence/01_PT/007_NK-AUT-001/001_NK-AUT-001_単体テスト仕様書.md",
+      "sha256": "2dc33d58f09100078b9570b5148aba18e5c1488a66bddf7f15654401f0774748"
+    },
+    "design": [
+      "SS332",
+      "SS352"
+    ],
+    "requirements": [
+      "DAT-009",
+      "AUT-004"
+    ],
+    "ui": [
+      "UI226",
+      "UI241"
+    ],
+    "sourceMethods": [
+      {
+        "className": "LoginAuditWriter",
+        "method": "write",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+          "sha256": "1281ed64afe5449f771c4a44825cdc20d950171d8b2e667b2b21a5138842e275"
+        },
+        "gitBlob": "a6db3e6e0e35a9c805473524faadcdbad0c34c03",
+        "requirementsFromRoster": [
+          "FUN-001"
+        ],
+        "ownerWbs": "WBS-P007-01"
+      },
+      {
+        "className": "JdbcResourceCleanup",
+        "method": "closeStatementIfPresent",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+          "sha256": "fef9a289334d37edd7630e3bcbbdf1ef8b9ab0a5357f0ff1001606b37b929d80"
+        },
+        "gitBlob": "131a249e3c91fc335311096860e78e4ca1ff16b2",
+        "requirementsFromRoster": [
+          "SYS-004",
+          "SYS-005",
+          "MQ-007"
+        ],
+        "ownerWbs": "WBS-P004-05"
+      }
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/manifest.json",
+      "sha256": "598d2deb7e0c372fbcd43e6a9456cf95f7777edac9506a5bdef2ed7aa095bc98"
+    },
+    "expectation": "absent allocated statement returns fixed SQLSTATE22004; no binding, execution, resource close or borrowed transaction operation"
+  },
+  {
+    "testId": "PT-AUT-AUDIT-PREPARE002",
+    "test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "sha256": "d17c8e8c06593025830d0a560cb995822c4ca021654714d1feb8bbb92a31bc11"
+    },
+    "suite": "dev.codex.schubert.nk.api.security.SessionAuditPortTest",
+    "method": "missingPreparedStatementDoesNotBindOrCloseAnyBorrowedResource",
+    "program": "NK-AUT-001",
+    "spec": {
+      "path": "evidence/01_PT/007_NK-AUT-001/001_NK-AUT-001_単体テスト仕様書.md",
+      "sha256": "2dc33d58f09100078b9570b5148aba18e5c1488a66bddf7f15654401f0774748"
+    },
+    "design": [
+      "SS332",
+      "SS352"
+    ],
+    "requirements": [
+      "DAT-009",
+      "AUT-004"
+    ],
+    "ui": [
+      "UI226",
+      "UI241"
+    ],
+    "sourceMethods": [
+      {
+        "className": "SessionAuditWriter",
+        "method": "write",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+          "sha256": "dff2fc203087c5d7d9e9ded9485bcddc2670ad990aea8866220fa29a7e00fbf7"
+        },
+        "gitBlob": "efa8791c16418bbe52da283e57b61e4c75dc3e68",
+        "requirementsFromRoster": [
+          "AUT-004"
+        ],
+        "ownerWbs": "WBS-P007-02"
+      },
+      {
+        "className": "JdbcResourceCleanup",
+        "method": "closeStatementIfPresent",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+          "sha256": "fef9a289334d37edd7630e3bcbbdf1ef8b9ab0a5357f0ff1001606b37b929d80"
+        },
+        "gitBlob": "131a249e3c91fc335311096860e78e4ca1ff16b2",
+        "requirementsFromRoster": [
+          "SYS-004",
+          "SYS-005",
+          "MQ-007"
+        ],
+        "ownerWbs": "WBS-P004-05"
+      }
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/manifest.json",
+      "sha256": "598d2deb7e0c372fbcd43e6a9456cf95f7777edac9506a5bdef2ed7aa095bc98"
+    },
+    "expectation": "absent allocated statement returns fixed SQLSTATE22004; no binding, execution, resource close or borrowed transaction operation"
+  },
+  {
+    "testId": "PT-OPS-API-INPUT-005",
+    "test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputsTest.java",
+      "sha256": "d40f7199b220a3330c7435d92faedba86f185561052a5dbeed870bd28df43881"
+    },
+    "suite": "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest",
+    "method": "opsApiInput005ChecksEnvironmentBeforeOpeningConfigSource",
+    "program": "NK-OPS-001",
+    "sourceMethods": [
+      {
+        "className": "ApiStartupInputs",
+        "method": "validateEnvironment",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs.java",
+          "sha256": "e6d69bfa6580bba22f2558c37d0ab43799ee5cc515e00a8d64370168333648e6"
+        },
+        "gitBlob": "49e59a7bc8aed75cbb22e249ef20c684f9122c7f",
+        "requirementsFromRoster": [
+          "OPS-005",
+          "OPS-009"
+        ],
+        "ownerWbs": "WBS-P018-05"
+      }
+    ],
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/2895_ApiStartupInputs原whole四_単体テスト仕様.md",
+      "sha256": "ac37a35ddbdc9c5f6542cfb70125cab9fda06bce4597b5ef1a95b16884af4e76"
+    },
+    "design": [
+      "SS342・343 §4/6"
+    ],
+    "requirements": [
+      "SYS-002",
+      "SYS-004"
+    ],
+    "ui": [
+      "UI243",
+      "UI253"
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45138-current-startup-values-redaction-twelve/manifest.json",
+      "sha256": "d184e9153a1051a4f33ab5250c0242b64b5bf8fb3e0bc9b2419d4410ff9180d3"
+    },
+    "expectation": "valid fixed location returns normally; alternate fixed location rejects with fixed diagnostic; injected source unopened"
+  },
+  {
+    "testId": "PT-OPS-API-INPUT-006",
+    "test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputsTest.java",
+      "sha256": "d40f7199b220a3330c7435d92faedba86f185561052a5dbeed870bd28df43881"
+    },
+    "suite": "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest",
+    "method": "opsApiInput006ShowsRedactedValuesWithoutChangingComponentIdentity",
+    "program": "NK-OPS-001",
+    "sourceMethods": [
+      {
+        "className": "ApiStartupInputs",
+        "method": "Values.toString/equals/hashCode",
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs.java",
+          "sha256": "e6d69bfa6580bba22f2558c37d0ab43799ee5cc515e00a8d64370168333648e6"
+        },
+        "gitBlob": "49e59a7bc8aed75cbb22e249ef20c684f9122c7f",
+        "requirementsFromRoster": [
+          "OPS-005",
+          "OPS-009"
+        ],
+        "ownerWbs": "WBS-P018-05"
+      }
+    ],
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/2895_ApiStartupInputs原whole四_単体テスト仕様.md",
+      "sha256": "ac37a35ddbdc9c5f6542cfb70125cab9fda06bce4597b5ef1a95b16884af4e76"
+    },
+    "design": [
+      "SS351 §3/12、SS343 §6.2"
+    ],
+    "requirements": [
+      "MON-004",
+      "OPS-009"
+    ],
+    "ui": [
+      "UI243",
+      "UI253"
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45138-current-startup-values-redaction-twelve/manifest.json",
+      "sha256": "d184e9153a1051a4f33ab5250c0242b64b5bf8fb3e0bc9b2419d4410ff9180d3"
+    },
+    "expectation": "equal component references preserve equality/hash; other path unequal; diagnostic redacts both nested values and never emits the synthetic path"
+  },
+  {
+    "testId": "PT-OPS-WEB-INPUT-005",
+    "test": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebStartupInputsTest.java",
+      "sha256": "5ec3c969a52b65adff9ee32dd989a3c8d8546b0b44f586358a61f3b55d27ae99"
+    },
+    "suite": "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest",
+    "method": "opsWebInput005ChecksEnvironmentBeforeOpeningConfigSource",
+    "program": "NK-OPS-001",
+    "sourceMethods": [
+      {
+        "className": "WebStartupInputs",
+        "method": "validateEnvironment",
+        "source": {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupInputs.java",
+          "sha256": "aacdcad0881ad85dee12ca67a92396bcfa4f0aefd91e24c033d7e46d1f840042"
+        },
+        "gitBlob": "f98ac8f431e317ce39bfce88eab466e5f28f4bdb",
+        "requirementsFromRoster": [
+          "OPS-009",
+          "OPS-012",
+          "AVL-007",
+          "MON-001",
+          "SYS-005"
+        ],
+        "ownerWbs": "WBS-P018-06"
+      }
+    ],
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/2933_Web入力・MockLogin原whole八_現source単体テスト仕様.md",
+      "sha256": "0a76e63cf70f7fa1eb3f00f10b525683ad87cc1d912a4be5f03d0a494b9a5b87"
+    },
+    "design": [
+      "SS342・343 §4/6"
+    ],
+    "requirements": [
+      "SYS-002",
+      "SYS-004"
+    ],
+    "ui": [
+      "UI243",
+      "UI253"
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45138-current-startup-values-redaction-twelve/manifest.json",
+      "sha256": "d184e9153a1051a4f33ab5250c0242b64b5bf8fb3e0bc9b2419d4410ff9180d3"
+    },
+    "expectation": "valid fixed location returns normally; alternate fixed location rejects with fixed diagnostic; injected source unopened"
+  },
+  {
+    "testId": "PT-OPS-WEB-INPUT-006",
+    "test": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebStartupInputsTest.java",
+      "sha256": "5ec3c969a52b65adff9ee32dd989a3c8d8546b0b44f586358a61f3b55d27ae99"
+    },
+    "suite": "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest",
+    "method": "opsWebInput006ShowsRedactedValuesWithoutChangingComponentIdentity",
+    "program": "NK-OPS-001",
+    "sourceMethods": [
+      {
+        "className": "WebStartupInputs",
+        "method": "Values.toString/equals/hashCode",
+        "source": {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebStartupInputs.java",
+          "sha256": "aacdcad0881ad85dee12ca67a92396bcfa4f0aefd91e24c033d7e46d1f840042"
+        },
+        "gitBlob": "f98ac8f431e317ce39bfce88eab466e5f28f4bdb",
+        "requirementsFromRoster": [
+          "OPS-009",
+          "OPS-012",
+          "AVL-007",
+          "MON-001",
+          "SYS-005"
+        ],
+        "ownerWbs": "WBS-P018-06"
+      }
+    ],
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/2933_Web入力・MockLogin原whole八_現source単体テスト仕様.md",
+      "sha256": "0a76e63cf70f7fa1eb3f00f10b525683ad87cc1d912a4be5f03d0a494b9a5b87"
+    },
+    "design": [
+      "SS351 §3/12、SS343 §6.2"
+    ],
+    "requirements": [
+      "MON-004",
+      "OPS-009"
+    ],
+    "ui": [
+      "UI243",
+      "UI253"
+    ],
+    "result": "PASS",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45138-current-startup-values-redaction-twelve/manifest.json",
+      "sha256": "d184e9153a1051a4f33ab5250c0242b64b5bf8fb3e0bc9b2419d4410ff9180d3"
+    },
+    "expectation": "equal component references preserve equality/hash; other path unequal; diagnostic redacts both nested values and never emits the synthetic path"
+  }
+]
