@@ -1,0 +1,427 @@
+{
+  "run": "PG44928",
+  "source": "e89aaa117772379a6afba5f8c9c032048e27d017",
+  "currentProductCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T05:06:19.370861+00:00",
+  "wbs": "WBS-C07",
+  "accepted": false,
+  "formalAcceptanceId": null,
+  "actualExit": 0,
+  "originalRun": "PG43690",
+  "originalSource": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "canonicalDesign": {
+    "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+    "section": "7"
+  },
+  "newProductExecutions": 0,
+  "originalCounts": {
+    "tests": 72,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "originalManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43690-batch-monitor-lock-final-72/manifest.json",
+    "sha256": "0f2bf61ee9a47ee95525886495c0086262e27d10307b392852c427435b0c6e8d"
+  },
+  "originalBegin": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/begin.json",
+    "sha256": "0a16482076089ee4b4b12cf20801211248b106267985f13e825376495fee3f8c"
+  },
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/terminal.json",
+    "sha256": "ff36f4683451e8ea9dfb032db66078ae217b23939190364674ad83dba1084f8f"
+  },
+  "originalJUnit": {
+    "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "28e802dc2f670b6f6f1592bec858421d2f77987f64976d80a2803de391fd0b91"
+  },
+  "originalScopedRaw": {
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43690-batch-monitor-lock-final-72/coverage.unfiltered.tsv",
+      "sha256": "03f9cf6039da53753f5bf79eb4598b06f39149b6b5fd30e15023f7f42b9a186b"
+    },
+    "counters": {
+      "INSTRUCTION": [
+        0,
+        1681
+      ],
+      "BRANCH": [
+        0,
+        132
+      ],
+      "LINE": [
+        0,
+        300
+      ],
+      "COMPLEXITY": [
+        0,
+        155
+      ],
+      "METHOD": [
+        0,
+        89
+      ],
+      "CLASS": [
+        0,
+        17
+      ]
+    },
+    "sameExec": {
+      "path": "../pgpt-runs/PG379/PG43690-current-monitor-lock-pt-v2/unit.exec",
+      "sha256": "160826c83c482a162fde8928138c4a90dcef34b4fc9fd99058c5756d8bf429e8"
+    },
+    "classes": {
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+        "crc64": "0b522f9b17ff6871",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+        "crc64": "29da7d7aac629468",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+        "crc64": "265d89d43ac427f8",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+        "crc64": "a5228fadcac1921d",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+        "crc64": "33b7e7037e5187db",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State": {
+        "crc64": "d9d97f271b5a1101",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+        "crc64": "dcc593e5682fe55b",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+        "crc64": "ed848fa8601ab4fd",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+        "crc64": "37e00458b90bb1b8",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+        "crc64": "9d9aaa2421138556",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+        "crc64": "4c1d31dffe682bfe",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+        "crc64": "ef83941de2419afc",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+        "crc64": "0f0ade2c7c19bc9e",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+        "crc64": "8d044fdfaa87f647",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+        "crc64": "2dbce6339dcd0a81",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+        "crc64": "0e788b56667cc990",
+        "singleExecObserved": true
+      },
+      "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+        "crc64": "6e80738be9c3d357",
+        "singleExecObserved": true
+      }
+    },
+    "noMergedExecutions": true
+  },
+  "originalJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5450a2884f297fce02052a152763ec3dbce82f6fa4e8fc3348b7c2e1397dfc25"
+  },
+  "candidateJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "candidateJarParent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+    "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+  },
+  "exactProductSourceSha256": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java": "ceb7f4597c15d6db02714faeefc6911dbda7d4eee5792503d65a062b692071a2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java": "ee933bc6a1237c89ffb8e6f92dabf05d9ed8010991e4460f7f72161d304c261a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java": "42cf352f32843e11ccef2abb1338425f8139a0da1a0226f15ce0ead9576f4325",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java": "d490ac5e7946eaf67c1da504cb05a7e8e16ccd0aae0282f69f070e302574cb7d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java": "99972961fe20b5b4ce765ff650b8176e73e85395ef5d1e8b08f077f4debf2749",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java": "056bb329bb251189434c73b8914141be9974b50686f7df227b8ef935e4bc93f8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java": "3f152853fbd798a28dd56d0566fd9f873a5c1bce6ec83f4004916ae3c4a745f3",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java": "31b30e2b7ad7d3dcdb0dd9df1e0d4bd00c3c9f694443955ad600709d0485dc8a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java": "d621cd46c14d56df1dd147c69014c4fb43dc3fe65ecb6369a80c9f2a254709d5",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java": "453a2bc07a2c4b714eff3d36c6e22e0dd7cf568ae56e2c79b179a230fb24eee2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java": "99f3c44c98bc83de2c52aaec13b696feec1fd21eec44b81a2615cd77af3d2c53",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java": "235978e47a69d00132a0dd79ccf925619f07041aa396c33cd29d54cea41cc2e8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java": "3c247ca6424505d64b17c346023cc6f776d44c37dc675392c74f21f63b886746",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java": "69ed366f5ae4f60315bacff13e904285f860c4e58953e0827a4396bdb14b2c29",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+  },
+  "exactFixtureSha256": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java": "a0bd8efc24fd8062d77966e82251af46c2511245ec62f469df6dc1c31c546936",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java": "4c4bda479a43021bd08338dd1ef7896ed4b6eba7d4eb10217169fe04c522ea93",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java": "f66f5eefe7409adf245a148a7f7fda9428ee15a83adad610d0fde54a34bd006f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java": "257a6f62b8386c709fc29c6260c77287c9171cc341b60fcbce567c00517cead9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/GeneratedBatchValueContractTest.java": "3dd71d87a53a2764c6c26a672d718fc345adf0045e0a9eb649d546ede9924e6e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java": "eac2d421862bfc554dc6e4f4a38ee222e0adedc317de7537bc98ab35ba222e57",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java": "3256f3e096c1f89b59e5d03bb2b128b4f158ac9cca10ee1b4dae3054b9ce8695",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java": "d5fad997b53cdb2f570ec3c513d3f052a030b5571259c22b7b5e745fac8d5d4f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java": "3082160bac6b33b50bef6d63b2981424cb3ab775a44abc2a0c940cd22a7af666",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+  },
+  "exactJarMemberSha256": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "a970748255e48eba8630f16d92620d38749205b11c82ab83643b66bccec515f3",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "1b3e729ba49ac50fe0c7274b2aebc1f415e64cdd9b1ecd853e7d0d7ffb7c2389",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "66b736642a640060d7eca336282c566727413d6a618c404f69763a754d13e7ac",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ffafebf7acde9841c62d3b2ce8a358770ece99a5d5456f7a415c8ff79a63c848",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "bedd266b398c2f063dfc4e78679cbaca9018b157b11f93d20b1797c000a7b357",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "bf1a0a3462feeb22d70c8bd3e41c2a1f4949ea6cad42276a854db7e19f0e2e6f",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "c06ee5ef5a9ed3b2af734ad391032a3b24c98ddf1755412b3ee0fabcf07ae64a",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Status.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+      "sha256": "04eea81c82f2f3ebe325fb98b562bd6b3f534d7c10ab757790836c802dfbeed9",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+      "sha256": "577169daf95bbd68e6bd847af9ec446bae7fd4731557f1bd7b304ddb83bccf97",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+      "sha256": "6bedbe3fa4e9bb08b73fd91afde4586f56c077752d9440df830a5387e8760044",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sha256": "f21b79de7b090942ba46e95b6da9d881147b236263912f36a609facce03e0893",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sha256": "4143fbcd31d97ba162822fa04e22218086f2a65651c831500464c690fdbb755a",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java",
+      "sha256": "ca314ebd93bda5f4b3db6b8d9652dec54b9976a75a0fcc9ed7fdef670a73d3c8",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java",
+      "sha256": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "sha256": "3437405816efa5b8685e06f6af4f27f647085a92c16ef44d38bbca651761ffdc",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "sha256": "452824388b2830e531c85f63e6b8d2c41e05d1b441c882eeeb4439045ac54688",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+      "sha256": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sha256": "33dff0947c6e119f6d8ac0bb1595865bd06cc8b4b7a49228d057ff5e9eabac49",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sha256": "377b96e9a7e6c15393191cd8841ad92512422fd447b09789b448dec193332bbe",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "8253dcefdd04d564a26821cd5b5193e212908773b06587cb1d0ef80b0c6e5032",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "f8ff9a21e9383e33a2cc59af99873ca1045970f6f09f2f6770c470fea08f8670",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "f7c9330d0472c3371a50f563f77c3628f4d7bd92420fb766724aa87629549d47",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "5925f342ee5d323559f962beced5d3a61cb2b06d1db356f4caa52494db83b805",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sha256": "11ee17de85c10b654f1f83485fbb4b1c9589fb1edd8768ee88329edc7091b37f",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sha256": "c1d5bda70814af4b97cb1e70891a64175ab7e2eae9f6d0fc476d5439d41eb9bc",
+      "directTarget": true
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor$Evaluation.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+      "sha256": "4f7ad9c97774b3667fe7e096108071de561c540c008b74f7e004ef879696fd22",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+      "sha256": "930fb2d0f0b625fed4bb48fc9aabeea2dfb1f6aaf70d302e4290f27a64a30bae",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Counts.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "sha256": "423ee9fb32f0c0ef09ab95dd504694861c56ddd84cf71253cd6eaa31db1d0f2a",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "sha256": "f0d311b18e46b9340b57c284991829715b2d5144fd4acaac02d863ce495ba355",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "sha256": "31acf6df095f2e777e7b8cc5f27f0c096407b474eb14a7e41a25ad543f4936c2",
+      "directTarget": false
+    },
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077",
+      "directTarget": false
+    }
+  },
+  "localToolPinsAtRead": {
+    "jspecify-1.0.1.jar": {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "junit-platform-console-standalone-1.13.4.jar": {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    "org.jacoco.agent-0.8.15-runtime.jar": {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    "java": {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    }
+  },
+  "validity": {
+    "scope": "fixture, Bytecode and tool pins on classpath; the 17 scoped original counters refer to the existing single/unaltered exec only",
+    "covers": [
+      "condition/service deduplication and last-seen updates",
+      "Warning 5min contiguous-normal close",
+      "Critical 10min and independently confirmed resolution",
+      "Protected conditions remain open",
+      "DB pool/filesystem/JVM heap/sync latency boundaries and local state"
+    ],
+    "remaining": [
+      "eight runtime configuration inputs and delivery environments",
+      "effective endpoint and storage/retention at runtime",
+      "six-product 451"
+    ],
+    "environmentActions": 0
+  },
+  "auditPreparation": {
+    "exitCodes": [
+      1,
+      0
+    ],
+    "first": "read indexing error; original command map uses junit key, no product execution or persisted artifact before correction"
+  }
+}
