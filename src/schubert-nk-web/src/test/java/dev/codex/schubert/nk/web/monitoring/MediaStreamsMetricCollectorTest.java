@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -31,7 +32,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
-/** MEDIACONN001..008/1704; owned function/SDK/thread fixtures, no media/HTTP/file I/O. */
+/** MEDIACONN001..009/1704; owned function/SDK/thread fixtures, no media/HTTP/file I/O. */
 class MediaStreamsMetricCollectorTest {
   private static final int BLOCKED_READ_ORDINAL = 2;
   private static final String STREAMS_NAME = "nk_media_streams";
@@ -241,6 +242,46 @@ class MediaStreamsMetricCollectorTest {
       assertThrows(NullPointerException.class, () -> collector.collect(null));
       assertThrows(NullPointerException.class, () -> collector.snapshot(null));
       shape(registry);
+    }
+  }
+
+  @Test
+  void mediaConn009SuppliedNullPointerLeavesOtherTypesAndDoesNotRetainLock() throws Exception {
+    var failure = new NullPointerException("owned supplier failure");
+    var musicReads = new AtomicInteger();
+    try (var registry = new Registry()) {
+      var collector =
+          new MediaStreamsMetricCollector(
+              type -> {
+                if (type == MediaType.VIDEO) return OptionalLong.of(5);
+                if (type != MediaType.MUSIC) throw new AssertionError("unexpected media type");
+                return switch (musicReads.incrementAndGet()) {
+                  case 1 -> OptionalLong.of(3);
+                  case 2 -> throw failure;
+                  case 3 -> OptionalLong.of(0);
+                  default -> throw new AssertionError("unexpected retry");
+                };
+              },
+              registry,
+              DEBUG_MODE);
+      assertEquals(OptionalLong.of(5), collector.collect(MediaType.VIDEO));
+      assertEquals(OptionalLong.of(3), collector.collect(MediaType.MUSIC));
+      assertSame(
+          failure,
+          assertThrows(NullPointerException.class, () -> collector.collect(MediaType.MUSIC)));
+      assertEquals(2, musicReads.get());
+      assertTrue(collector.snapshot(MediaType.MUSIC).isEmpty());
+      assertTrue(Double.isNaN(gauge(registry, "MUSIC")));
+      assertEquals(OptionalLong.of(5), collector.snapshot(MediaType.VIDEO));
+      assertTrue(collector.snapshot(MediaType.AUDIO).isEmpty());
+
+      var next = new FutureTask<>(() -> collector.collect(MediaType.MUSIC));
+      Thread.ofVirtual().name("media-observation-recovery").start(next);
+      assertEquals(OptionalLong.of(0), next.get(5, TimeUnit.SECONDS));
+      assertEquals(3, musicReads.get());
+      assertEquals(0, gauge(registry, "MUSIC"));
+      assertEquals(5, gauge(registry, VIDEO_TYPE));
+      assertEquals(0, registry.closes.get());
     }
   }
 

@@ -12,6 +12,7 @@ NK-OPS-001/P01809/C07/RD171/UI252/SS333351/PG-D564。MediaStreamsMetricCollector
 | MEDIACONN006 | 同owner二callerの一方をlatchで停止、後続workerの待機先が先行workerであることを有限確認、第一完了前source呼出増0/旧Gauge不変→各順公開。待機時間だけで成功を推定しない |
 | MEDIACONN007 | 64caller fixture入力をproduction呼出前に独立IdentityHashMapへ保存、戻りobject identity/原値と3type別集合・最終fixture100/101/102、別ownerは独立 |
 | MEDIACONN008 | constructor第2Gauge Runtime/Error同一伝播/残1/close0/source0、foreign meter衝突も不置換、caller finallyがclose |
+| MEDIACONN009 | MUSICの供給元が固定NPEを投げたとき同じ例外を返し、MUSICのみ欠測、VIDEO 5と未観測AUDIOを保持する。回復要求は別のworkerが有限時間内に処理し、MUSICの真の0を公開する。再試行・借用レジストリcloseは0。 |
 
 sourceの単一完全OptionalLongをread→検証→publicationまでprivate lock、STDは詳細source未呼出。snapshotは既atomic観測を読み、provider失敗/null/負値を真0/成功へ変換しない。Runtime/Errorはmissing後元再throwしcause探索/format/retry/closeしない。レジストリscrape間原子性や別ownerへのglobal lockは約束しない。
 
