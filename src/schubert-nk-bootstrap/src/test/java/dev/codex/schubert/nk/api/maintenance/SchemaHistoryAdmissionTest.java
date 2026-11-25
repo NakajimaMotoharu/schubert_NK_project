@@ -164,7 +164,13 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             SCHEMA_ROW,
             new Row(1, "029", FIXTURE_SQL_5B7E398D, previousScript, 29, true),
-            new Row(2, VERSION_BEFORE_ASSET_PERMISSIONS, FIXTURE_SQL_5B7E398D, currentScript, -30, true));
+            new Row(
+                2,
+                VERSION_BEFORE_ASSET_PERMISSIONS,
+                FIXTURE_SQL_5B7E398D,
+                currentScript,
+                -30,
+                true));
     var admission = new SchemaHistoryAdmission(expected);
     var previous = versionedRow(1, "029", previousScript, 29);
     var current = versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, -30);
@@ -175,9 +181,18 @@ final class SchemaHistoryAdmissionTest {
     for (var rows :
         List.of(
             List.of(schema(), previous),
-            List.of(schema(), previous, versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__unknown.sql", -30)),
-            List.of(schema(), previous, versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, "V030__different.sql", -30)),
-            List.of(schema(), previous, versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, 30)))) {
+            List.of(
+                schema(),
+                previous,
+                versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__unknown.sql", -30)),
+            List.of(
+                schema(),
+                previous,
+                versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, "V030__different.sql", -30)),
+            List.of(
+                schema(),
+                previous,
+                versionedRow(2, VERSION_BEFORE_ASSET_PERMISSIONS, currentScript, 30)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
       assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
@@ -193,19 +208,35 @@ final class SchemaHistoryAdmissionTest {
     var expected =
         List.of(
             SCHEMA_ROW,
-            new Row(1, VERSION_BEFORE_ASSET_PERMISSIONS, FIXTURE_SQL_5B7E398D, priorScript, priorChecksum, true),
-            new Row(2, ASSET_PERMISSIONS_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
+            new Row(
+                1,
+                VERSION_BEFORE_ASSET_PERMISSIONS,
+                FIXTURE_SQL_5B7E398D,
+                priorScript,
+                priorChecksum,
+                true),
+            new Row(
+                2, ASSET_PERMISSIONS_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
     var admission = new SchemaHistoryAdmission(expected);
     var prior = versionedRow(1, VERSION_BEFORE_ASSET_PERMISSIONS, priorScript, priorChecksum);
-    var exact = new Probe(List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, aclChecksum)));
+    var exact =
+        new Probe(
+            List.of(
+                schema(),
+                prior,
+                versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, aclChecksum)));
     assertEquals(expected, admission.inspect(exact.connection()));
     assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
 
     for (var rows :
         List.of(
             List.of(schema(), prior),
-            List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, 1880247818)),
-            List.of(schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__different.sql", aclChecksum)),
+            List.of(
+                schema(), prior, versionedRow(2, ASSET_PERMISSIONS_VERSION, aclScript, 1880247818)),
+            List.of(
+                schema(),
+                prior,
+                versionedRow(2, ASSET_PERMISSIONS_VERSION, "V031__different.sql", aclChecksum)),
             List.of(schema(), prior, versionedRow(2, "032", "V032__unknown.sql", aclChecksum)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
