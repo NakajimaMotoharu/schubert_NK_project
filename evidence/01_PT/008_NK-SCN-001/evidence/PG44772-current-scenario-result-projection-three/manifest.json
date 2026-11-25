@@ -1,0 +1,157 @@
+{
+  "run": "PG44772",
+  "wbs": "WBS-P008-03/2",
+  "source": "39d6e6b7820bec4f5a21ba1412ff60f27c5ab85e",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:26:01.029387+00:00",
+  "actualExit": 0,
+  "firstAttempt": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "productExecutions": 3
+  },
+  "testIds": {
+    "PT-SCN-008-R01": "r01ZeroThrough200RecordsStayInlineAndNeverPublish",
+    "PT-SCN-008-R02": "r02Above200PublishesOnceAndProjectsEveryFileDescriptorField",
+    "PT-SCN-008-R03": "r03NullPortFailureAndMismatchedDescriptorNeverFallbackOrRegenerate"
+  },
+  "requirements": [
+    "RD FUN-004/005、FIL-001～009",
+    "UI234 §10/237",
+    "SS333 §4/5"
+  ],
+  "independentOracle": [
+    "UI234の手書きbyte offset。0・1・199・200件はI／4800B固定レコード、publisher 0回、200件は961984B。",
+    "201・10000件はF、publisher 1回、固定ID・相対名・SHA文字列を投影、長さは4800×件数、INLINE件数0。",
+    "null、注入したIOExceptionの同一性、件数不一致で例外。各呼出の回数を照合し、file再生成なし。"
+  ],
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26906-scenario-current148-v1/manifest.json",
+    "sha256": "c9dae12eca72e16b280d66e72ad4ad300ffe6b14951fbdadee8a44a7a4375708"
+  },
+  "priorUsableForCurrentExecution": false,
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDeliveryTest.java",
+    "sha256": "59127e08ee2dc63a31dbd13070add804f721caf9bebf2d5b3934868448767fd5"
+  },
+  "changedScope": [
+    "ScenarioDetailSnapshot.class",
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.class",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/EntryId.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class"
+  ],
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "currentCompiledScope": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDelivery.class",
+      "sha256": "b9230f7794336f4bfbcb361dd9fbdc7f5fd69d490397442d676ed4091ae43de0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/application/scenario/package-info.class",
+      "sha256": "78fa64c63f4c9d33ac7a3c04ba0611383696970e4b2ba8f72fad567ac1a5dde4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.class",
+      "sha256": "ba3f320b9c4acfe6a3b1a720a802687ad58b67eacebf959260c78a0a4430151c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/persistence/package-info.class",
+      "sha256": "30b5ca01e005432485691c73ea7dff278e3dcb1394253c8fdea02734127166f9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/file/ScenarioFilePublisher.class",
+      "sha256": "476268a90eb1483c6989d15f1de9b866cf241ab3c0c21bd95cdb02adb8ff0f90"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44772-scenario-result-projection-three/main/dev/codex/schubert/nk/api/file/package-info.class",
+      "sha256": "8233168f74fa3796cef9603013aa8f112fd3ef4778dd08e1f9d56d318d4c2417"
+    }
+  ],
+  "exactTools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar",
+      "sha256": "e516743a316dcf83c572ffc9cb6e8c5e8c134880c8c5155b02f7b34e9c5dc3cf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar",
+      "sha256": "aa77eaf29293a868c47372194f7c5287d77d9370b04ea25d3fffc1e4904b5880"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "sha256": "0a1bd4e9b0d670e632d40ee8c625ad376233502f03c2f5889baea95d025b47a7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    }
+  ],
+  "localInputs": [
+    {
+      "path": "../pgpt-runs/PG379/PG44772-scenario-result-projection-three/begin.json",
+      "sha256": "6f164a4fc5e5b3bdf30515a362049d49ad79926c141b907f7f0e6e46c97e38c1"
+    }
+  ],
+  "publicEvidenceHashes": [
+    {
+      "path": "../pgpt-runs/PG379/PG44772-scenario-result-projection-three/terminal.json",
+      "sha256": "6cff50b187ce5cc35aa6f09ff4c6664b810d80fab3dba4d675599c406ff61e7c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44772-scenario-result-projection-three/raw.out",
+      "sha256": "bb42ccbf5ff8a09df6bd9b2f7e53b2fb237fdc5e7734e0fc750a062d7b685776"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44772-scenario-result-projection-three/result/TEST-junit-jupiter.xml",
+      "sha256": "6423d89b684cadb0c6f266a76eedcf4443c23ed44058e128ebf2fccbd553b83d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44772-scenario-result-projection-three/unit.exec",
+      "sha256": "f346a2941c30da791db7c516eac9583ce23439122dbe659cbafa714c52f5e7a5"
+    }
+  ],
+  "coverage": {
+    "target": "ScenarioDetailDelivery",
+    "line": [
+      32,
+      32
+    ],
+    "method": [
+      4,
+      4
+    ],
+    "clazz": [
+      1,
+      1
+    ],
+    "branch": [
+      4,
+      4
+    ],
+    "instruction": [
+      118,
+      118
+    ]
+  },
+  "remaining": [
+    "実48MB生成の容量予約、writer/state/owner、原子公開、DB後条件、実CHRと451全体"
+  ],
+  "actualFilePublicationOrDatabase": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
