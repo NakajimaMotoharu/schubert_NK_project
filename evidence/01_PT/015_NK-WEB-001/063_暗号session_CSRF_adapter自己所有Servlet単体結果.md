@@ -1,5 +1,7 @@
 # CSRF session adapter 自己所有Servlet単体結果
 
+旧結果のIDは `EncryptedSessionCsrfPortTest` のもの。現行の一意IDへは[対応票](evidence/PG45522-distinct-form-and-session-test-identity/manifest.json)を参照し、元run・実行結果・coverageの数字を保持する。
+
 2026-11-07T01:07:12.158906+09:00、仕様062/PT-WEB-CSRFPORT001～008。Test source f07d3e507a31dd8103caca3f395a99defa913c39、Production Core4217/通常20990・六NullAway/SpotBugs20992の同byte、Main変更無し。PG21164一回全8/FESabort0/OS0、physical1のLINE33/METHOD5/CLASS1/BRANCH28未網羅0、単一JaCoCo0.8.15 session/通常Jar CRC・手動除外/旧exec合成無し。strictpost sha7501be679d4af7f6a3cff669206b112452bdfaf80a3a707cd8da3e506edebe41、独立21174 sha6173b835162e65bdc5e0853fe3c69c6e5e7ef372fa45eb5f9ff6eadb7f2bfb46、元XML/input Git/全command/終了code/日時/OS/JDK25.0.4/期待actual・hashをmanifestへ結合。新規8、既存成功再試験0。
 
 実装reviewは既Mainで承認契約を満たす。新session無しfalse→trueのみ/既sessionのnull・消失・戻り/観測不一致・同値rotation拒否、old属性非読取、load欠落時非生成、wrong type/empty/63/129/blank、null saveの一回invalidateと無しno-op、saveのname/header/persisted値全照合・不一致/欠落拒否/書込0、null参照guard、callbackRuntime/Error identity/no再送no取得、二worker8frame分離を独立literalでassert。結果Token objectは供給public canaryのmaterializeだけで乱数発行0、実session発行/暗号/DB/HTTP/Login/Logout権限行使0。原DB-backed Testの部分抽出0、response全methodと許可以外のsession/request methodはTest内fail。SessionStoreExceptionはconstructor固定型だけ、graph classifierを呼ばず、SpringWebSessionも初期化無し。

@@ -1,5 +1,7 @@
 # FormCsrfTokenRequestHandler メモリ境界 単体仕様
 
+この仕様の `PT-WEB-CSRFPORT001～009` はForm scope。別Session adapterにあった旧名の解決は[対応票](evidence/PG45522-distinct-form-and-session-test-identity/manifest.json)。
+
 NK-WEB-001/WBS-P015-02、RD FUN001/AUT004・UI226・SS313/314§8.1/352、PG-D100。MainD8不変更、constructor/handle/resolveCsrfTokenValue全Source。PT_DEFAULT、969/event4003原0.5/2/4pp cap6。
 
 新JDK memory Servlet proxyと固定合成placeholderだけ。SpringSecurity7.1.1 CsrfTokenRequestAttributeHandler/SupplierCsrfTokenのjavapを確認し、handleは_csrf/class-name二属性へlazy wrapperを保持、sourceはsession/store/token generation/matchingを呼ばない。固定supplierは実key/実token無し、null/failureはvalidへ変換しない。64/128文字と許容alphabet、null/multi/null要素/短長/不正alphabet、queryの正確_csrf・percent decode/壊れescapeの早期null、別case/unknown query正常、query取得外側例外とbody内側IllegalArg/fatal等を独立期待値で区別する。戻り文字列を実CSRF認可と解釈しない。
