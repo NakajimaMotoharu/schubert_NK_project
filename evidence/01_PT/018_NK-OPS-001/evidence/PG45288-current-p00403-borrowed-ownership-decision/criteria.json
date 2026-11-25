@@ -1,0 +1,185 @@
+[
+  {
+    "prior": {
+      "row": "A1-15.01",
+      "category": "partial",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45190-current-a115-transitive-revocation-and-batch-lock-owner/manifest.json",
+          "sha256": "1f2650bae8ea38f136dbd8bdd269033016acf0376fd511a1415430d7b11d35bf"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/manifest.json",
+          "sha256": "61f0ce26a7175e470954ccbb3ae50272ed744126ec748fe9078b19b8e0af286f"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45186-current-jdbc-read-boundary-methods/manifest.json",
+          "sha256": "b3bf3b57668416c8efb9b5c22d9f66cec8b52e204de965530ab1b6e5e699b271"
+        },
+        {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/manifest.json",
+          "sha256": "5489b59c4bcdbd2f64dc1dab8fd3665693871a3219494e78a866dd0772f89f88"
+        }
+      ],
+      "point": "Logout組立と中の独立JDBC値を区別。修正された更新は限定選択5件のうち該当だけ。古いassembly試験から現経路を認定しない。",
+      "required": "QA-056対象の二型、正規API JAR、現所有・DB、Logout組立の当全結果",
+      "owner": "ビルド・DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45282-current-jdbc-acquired-or-missing-nine/manifest.json",
+          "sha256": "df89e418a7a51b0d864cdf87432fd6ecc6c5924cd2da46f0e7844d1486fc1c0c"
+        },
+        "applicability": "JDBC helperのStatementない場合と取得後close。Logout全体とは別"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "ビルド・DB・資源管理担当",
+    "missing": "QA-056対象の二型、正規API JAR、現所有・DB、Logout組立の当全結果",
+    "formalAcceptanceId": null
+  },
+  {
+    "prior": {
+      "row": "A1-15.02",
+      "category": "static only",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45190-current-a115-transitive-revocation-and-batch-lock-owner/manifest.json",
+          "sha256": "1f2650bae8ea38f136dbd8bdd269033016acf0376fd511a1415430d7b11d35bf"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "InspectorLockHandoffの正規物理を固定。元9はDB所有を含む歴史。",
+      "required": "現候補でのadvisory所有・元session・同一DBの真正9件",
+      "owner": "DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45268-batch-bounded-jdbc-worker-two-cohorts/manifest.json",
+          "sha256": "664f816ddd1ae97d8184c6f68bd4d06faf2f8453f0f86f766490360261be4bac"
+        },
+        "applicability": "InspectionSummaryの独立13。InspectorLockHandoffの実advisoryとは別"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "DB・資源管理担当",
+    "missing": "現候補でのadvisory所有・元session・同一DBの真正9件",
+    "formalAcceptanceId": null
+  },
+  {
+    "prior": {
+      "row": "A1-15.03",
+      "category": "held",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44458-a11503-current-git-identity-and-owner-gap/manifest.json",
+          "sha256": "57be79014e0c75ddd61c4a25ab4e1ba3d2523d666e8ae9414ad9f5fff6e33824"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "DurableRecordFilesの入力4の同一性。元12のrunner終了1、利用可能0。",
+      "required": "現候補の自所有native FileStore、試験の実行許可・独立終端",
+      "owner": "DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG45286-current-storage-local-three-scope-witnesses/manifest.json",
+          "sha256": "7bfe82caee1ecc0a8464ebc9b8d515fbcf971adfdedb90f40d4e7b60afe19776"
+        },
+        "applicability": "Storageの純値・非対応のJDK代理。実FileStoreやnative所有への適用なし"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "DB・資源管理担当",
+    "missing": "現候補の自所有native FileStore、試験の実行許可・独立終端",
+    "formalAcceptanceId": null
+  },
+  {
+    "prior": {
+      "row": "A1-15.04",
+      "category": "held",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44304-inspector-static-grammar-current-package-and-run/manifest.json",
+          "sha256": "651bfb154218877e77703ce36740cf623833cade05a767b97a4bb6ccfe34daed"
+        }
+      ],
+      "knownLiveTests": 0,
+      "point": "環境grammarの局所確認。元8と現10の所有依存を分離。",
+      "required": "現候補の環境ファイル所有、native形式と現試験の真正終端",
+      "owner": "DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG45286-current-storage-local-three-scope-witnesses/manifest.json",
+          "sha256": "7bfe82caee1ecc0a8464ebc9b8d515fbcf971adfdedb90f40d4e7b60afe19776"
+        },
+        "applicability": "Storageの純値・非対応のJDK代理。実FileStoreやnative所有への適用なし"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "DB・資源管理担当",
+    "missing": "現候補の環境ファイル所有、native形式と現試験の真正終端",
+    "formalAcceptanceId": null
+  },
+  {
+    "prior": {
+      "row": "候補再資格-03.01",
+      "category": "proxy only",
+      "current": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/manifest.json",
+          "sha256": "4998892b9d1fa41164ded221013e6e2841c79900c7cf4e52cad88af2101fb153"
+        }
+      ],
+      "point": "参照repo10/10と現在9製品物理、元exception/close順を採用。",
+      "required": "実DBと現原本の読み取り・保持、全451",
+      "owner": "DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45268-batch-bounded-jdbc-worker-two-cohorts/manifest.json",
+          "sha256": "664f816ddd1ae97d8184c6f68bd4d06faf2f8453f0f86f766490360261be4bac"
+        },
+        "applicability": "Batch参照repoの現11。L59/M6/C1/B24。旧10に足し合わせない。"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "DB・資源管理担当",
+    "missing": "実DBと現原本の読み取り・保持、全451",
+    "formalAcceptanceId": null
+  },
+  {
+    "prior": {
+      "row": "候補再資格-31.01",
+      "category": "codec lineage only",
+      "current": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41622-p00403-maintenance-test-requalification-v1/manifest.json",
+          "sha256": "9ee00ee4f9d964e92afd7809a000274a748474d6a0d9ff4fad30d4f9aad17252"
+        }
+      ],
+      "point": "元8合成・6物理の対象と現在同一の試験入力。",
+      "required": "保持原本への実FileStore/DB境界、退役とF02/F03",
+      "owner": "DB・資源管理担当"
+    },
+    "newEvidence": [
+      {
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44168-p00403-current-original-value-and-reference/manifest.json",
+          "sha256": "fa7e5a85e6cbf59cc0b3f7ee34f21ed25881a4ba793b51ea7119334f08f1a352"
+        },
+        "applicability": "原本の値fixtureと実-retentionを区別"
+      }
+    ],
+    "eligibleOwnedPTForThisPass": 0,
+    "owner": "DB・資源管理担当",
+    "missing": "保持原本への実FileStore/DB境界、退役とF02/F03",
+    "formalAcceptanceId": null
+  }
+]
