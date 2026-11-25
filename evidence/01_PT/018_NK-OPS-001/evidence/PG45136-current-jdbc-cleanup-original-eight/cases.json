@@ -1,0 +1,58 @@
+[
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup001NullActionFailsAtTheExplicitCallBoundary",
+    "testId": "PT-JDBC-CLEANUP001",
+    "independent": "Null action raises NullPointerException at the helper boundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup002SuccessfulCloseRunsOnceAndLeavesThePrimaryGraphUnchanged",
+    "testId": "PT-JDBC-CLEANUP002",
+    "independent": "Successful action called exactly once; incoming primary retains an empty suppressed list",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup003FailedCloseWithoutPrimaryPropagatesTheSameSqlRuntimeOrError",
+    "testId": "PT-JDBC-CLEANUP003",
+    "independent": "Each SQL/runtime/Error failure remains the same object without primary and close was called once",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup004FailedCloseRetainsTheExactPrimaryAndSuppressedIdentity",
+    "testId": "PT-JDBC-CLEANUP004",
+    "independent": "A distinct secondary is the sole suppressed reference on the original primary; action called once",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup005AliasedFailurePreservesTheJdkSelfSuppressionCause",
+    "testId": "PT-JDBC-CLEANUP005",
+    "independent": "Self-suppression keeps JDK IllegalArgumentException with the exact original cause and zero appended values",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup006TypedStatementOwnerPreservesAllFailureGraphsAndClosesOnce",
+    "testId": "PT-JDBC-CLEANUP006",
+    "independent": "Typed Statement proxy sees just its close once per case; null/primary/alias/branch cases retain identity",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "method": "cleanup007TypedRowOwnerPreservesAllFailureGraphsAndClosesOnce",
+    "testId": "PT-JDBC-CLEANUP007",
+    "independent": "Typed ResultSet proxy sees just its close once per case; null/primary/alias/branch cases retain identity",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupOrderTest",
+    "method": "preservesExistingSuppressionAndAppendsBothFailuresInCallOrder",
+    "testId": "PT-JDBC-CLEANUP008",
+    "independent": "Statement then ResultSet close exactly once each; prior suppression followed by both same secondary exception references.",
+    "outcome": "PASS"
+  }
+]

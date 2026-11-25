@@ -1,0 +1,214 @@
+{
+  "run": "PG45136",
+  "source": "bea1dc5d79ca509169b148da0ea84878414cce92",
+  "productionCoreMain": "10a9fe27e6a7977f8c16f59878bafbdb8a797829",
+  "wbs": "WBS-P004-05/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T09:46:12.905770+00:00",
+  "traceDesign": "SS332/SQL exception, primary identity, suppression and owning resource boundaries",
+  "fixtureTestIdsAndIndependentExpectations": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45136-current-jdbc-cleanup-original-eight/cases.json",
+    "sha256": "2e8118d3e630ebd7ec8d80a9b183c37c51a856e019d49eb43a0214764e8a4e17"
+  },
+  "tests": 8,
+  "suites": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physicalCrc": [
+    [
+      "CLASS",
+      "dev/codex/schubert/nk/api/database/JdbcResourceCleanup",
+      "7b305a9b2dcf44b7",
+      "true"
+    ],
+    [
+      "CLASS",
+      "dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose",
+      "781b6f85d61c7a2e",
+      "false"
+    ]
+  ],
+  "rawMethods": [
+    {
+      "name": "close",
+      "descriptor": "(Ljava/lang/Throwable;Ldev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose;)V",
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          16
+        ],
+        "BRANCH": [
+          0,
+          2
+        ],
+        "LINE": [
+          0,
+          7
+        ],
+        "COMPLEXITY": [
+          0,
+          2
+        ],
+        "METHOD": [
+          0,
+          1
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "closeStatement",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/sql/Statement;)V",
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          16
+        ],
+        "BRANCH": [
+          0,
+          2
+        ],
+        "LINE": [
+          0,
+          7
+        ],
+        "COMPLEXITY": [
+          0,
+          2
+        ],
+        "METHOD": [
+          0,
+          1
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "closeStatementIfPresent",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/sql/Statement;)V",
+      "counters": {
+        "INSTRUCTION": [
+          6,
+          0
+        ],
+        "BRANCH": [
+          2,
+          0
+        ],
+        "LINE": [
+          2,
+          0
+        ],
+        "COMPLEXITY": [
+          2,
+          0
+        ],
+        "METHOD": [
+          1,
+          0
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "closeRows",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/sql/ResultSet;)V",
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          16
+        ],
+        "BRANCH": [
+          0,
+          2
+        ],
+        "LINE": [
+          0,
+          7
+        ],
+        "COMPLEXITY": [
+          0,
+          2
+        ],
+        "METHOD": [
+          0,
+          1
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "changedMainFixtureInput": [
+    {
+      "member": "dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class",
+      "sha256": "5cd7dd5acc4f39d602828be4e5663c2fa6389f935000f294773854d14a357a45"
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class",
+      "sha256": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e"
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/database/package-info.class",
+      "sha256": "3cca901840ef72be16132784cbf33e12e200e334b58e3807a4a03d0cdb2ef69a"
+    }
+  ],
+  "originalFixtureInputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "sha256": "4b217bc193580f03e3a9b2106aca425996a59a71bac1457b3e9ae7eb4cef06c9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java",
+      "sha256": "65eb6947a987e0d912344cda4c5d993e66e271ec4d21fc49e1a52a47028fa548"
+    }
+  ],
+  "viewOfPreviouslyHeldNormativeSqlTransaction": "real owner transaction and JDBC UTC actual database remain held separately",
+  "boundedCurrentBatchUtcEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44082-p00405-current-batch-utc-and-vendor-identity/manifest.json",
+    "sha256": "d7e6664e4b55a00ef87e5a53cb54d7c48fa468169a0f26331d19bd4d91b0be6e"
+  },
+  "matchedPreviousBatchJdbcGraph": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44976-current-jdbc-ownership-pure-eight/manifest.json",
+    "sha256": "81e41d66d886132d1119394d049121f5bbd3198484bb3ca19ee04c17a866582c"
+  },
+  "unchangedPriorMethodCoverageClaimInCurrentThisRun": "3 original owner methods covered; new helper otherwise measured in audit group only",
+  "newNullableOwnerEvidence": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45120-current-audit-writers-owned-handle-18/manifest.json",
+    "sha256": "598d2deb7e0c372fbcd43e6a9456cf95f7777edac9506a5bdef2ed7aa095bc98"
+  },
+  "notMergedCoverage": true,
+  "newTestDefinitions": 0,
+  "newRuntimeTrials": 8,
+  "cumulativeLocalTrials": 1380,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45136-jdbc-cleanup-current-eight-v2/begin.json",
+    "sha256": "e1cbfdd16886ed01dd5032df0b5529fc13255d1984104f248763d30e80eb86dc"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45136-jdbc-cleanup-current-eight-v2/terminal.json",
+    "sha256": "033dfbfb937f35779a6fbc59d79d2b5348f786d192fc5b64b9b7d42819080125"
+  },
+  "oldProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/manifest.json",
+    "sha256": "a5de7bb6d72db02d4bdc4b9db2e604b4b9809bd2be2e20a635eaab172e542ab1"
+  },
+  "xmlSha256": "770d1700034fdd508a8dd6a137575b39dc87c99f75293dea6f05346904f8108f",
+  "execSha256": "f2a95bcfdbe74a98d24f549ededdd0e7c696f73e5bbb61ff950b877c069013e7",
+  "earlierPreparationOnly": "archived analyzer source no longer matched working copy, so reused the latest qualified analyzer runtime",
+  "actualDbOrJmsOrNative": false,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
