@@ -10,13 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 /** Independent test of cleanup order and primary failure identity for BUG-3846. */
 final class ViewFixtureWorkersTest {
+  private static final List<String> WORKER_CALLS = List.of("execute", "cancel", "10 SECONDS");
+
   @Test // PT-WEB-VIEW-WORKER001
   void timeoutIsSuppressedBehindTheFirstFailure() {
     var executor = new ObservedExecutor(false, null);
@@ -34,20 +38,27 @@ final class ViewFixtureWorkersTest {
     assertSame(firstFailure, observed);
     assertEquals(1, observed.getSuppressed().length);
     assertInstanceOf(AssertionFailedError.class, observed.getSuppressed()[0]);
-    assertEquals(List.of("execute", "cancel", "10 SECONDS"), executor.calls);
+    assertEquals(WORKER_CALLS, executor.calls);
   }
 
   @Test // PT-WEB-VIEW-WORKER002
-  void successfulWorkAndStandaloneTimeoutBothRequireFiniteCleanup() throws InterruptedException {
+  void successfulWorkAndStandaloneTimeoutBothRequireFiniteCleanup()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var successful = new ObservedExecutor(true, null);
-    new ViewFixtureWorkers(successful).close();
-    assertEquals(List.of("cancel", "10 SECONDS"), successful.calls);
+    runOneTask(successful);
+    assertEquals(WORKER_CALLS, successful.calls);
 
     var stalled = new ObservedExecutor(false, null);
-    var timeout =
-        assertThrows(AssertionFailedError.class, () -> new ViewFixtureWorkers(stalled).close());
+    var timeout = assertThrows(AssertionFailedError.class, () -> runOneTask(stalled));
     assertTrue(timeout.getMessage().contains("view fixture workers did not stop"));
-    assertEquals(List.of("cancel", "10 SECONDS"), stalled.calls);
+    assertEquals(WORKER_CALLS, stalled.calls);
+  }
+
+  private static void runOneTask(ObservedExecutor executor)
+      throws InterruptedException, ExecutionException, TimeoutException {
+    try (var workers = new ViewFixtureWorkers(executor)) {
+      assertEquals(17, workers.submit(() -> 17).get(1, TimeUnit.SECONDS));
+    }
   }
 
   @Test // PT-WEB-VIEW-WORKER003
@@ -68,7 +79,7 @@ final class ViewFixtureWorkersTest {
       assertSame(firstFailure, observed);
       assertArrayEquals(new Throwable[] {cleanup}, observed.getSuppressed());
       assertTrue(Thread.currentThread().isInterrupted());
-      assertEquals(List.of("execute", "cancel", "10 SECONDS"), executor.calls);
+      assertEquals(WORKER_CALLS, executor.calls);
     } finally {
       Thread.interrupted();
     }
