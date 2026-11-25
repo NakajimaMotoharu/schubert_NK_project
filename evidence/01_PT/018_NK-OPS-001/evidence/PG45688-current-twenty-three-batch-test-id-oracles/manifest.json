@@ -1,0 +1,496 @@
+{
+  "run": "PG45688",
+  "source": "4ec4697969e7286c188503a4f206ee61d30879d2",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G03.05",
+  "terminalAtUTC": "2026-11-25T22:19:46.946286+00:00",
+  "actualExit": 0,
+  "independentCases": [
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461003PreserveFatalPrimaryOrRollbackGraphIdentity",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461003",
+      "expected": "元Error同一参照、順序、無変換",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#parentIdentityMustSurviveBeforeAfterAndCompletionReadbackCannotBeManufactured",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT008",
+      "expected": "identity第1/第2read喪失拒否、UPDATE後RUNNING/違う終端は失敗",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461006ConfirmedCommitIsNotRepresentedAsRollbackOnLateFailure",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461006",
+      "expected": "確定commitをrollbackと示さず、所有スレッドが試験後に割込み解除",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#terminalFalseSkipBranchAndTypedColumnFailuresDoNotCreateCapabilities",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT010",
+      "expected": "skip-expected不一致拒否、静的borrowedrow getterSQL/RTE/Errorは同一参照",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#nullAndObservationBoundsRejectBeforeBorrowingResourcesIncludingMaximumAcceptedTime",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT009",
+      "expected": "null/不正時刻はSQL0、+10000/past/subµs拒否、9999最終µs受理",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461005CompoundFailuresPreserveTheDeclaredPrecedence",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461005",
+      "expected": "既知だけ固定、元未知同一参照、固定二次だけ、借用close0",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#everyRequiredColumnAndRunningCounterOrIdentityDifferenceRejectsIndependently",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT004",
+      "expected": "必須11nullとidentity5差/ended混入/zero4差/error2差を一fieldずつ拒否",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bodyAndBothCloseFailuresFollowIndependentDeclaredPrecedenceAndRedactSecondary",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT007",
+      "expected": "body/rowclose/stmtclose18複合のSSC063優先と固定secondaryだけ",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#successRequiresExactFilesBytesErrorsAndMicrosecondContentObservationWindow",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT005",
+      "expected": "SUCCESSの件数bytes/失敗・error差、content前/未来/subµs拒否、contentfinish等号許可",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#missingDuplicateExtraUnknownAndMixedPairsNeverBecomeComplete",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT003",
+      "expected": "row0/1/3・重複/未知id・RUNNING-SUCCESS混在/時刻差は固定例外",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#eachJdbcFailurePreservesUnknownIdentityCatalogsSqlAndClosesOwnedScopes",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT006",
+      "expected": "全22JDBC箇所SQL固定・RTE/Error原値、nullstmt/row拒否と全close",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461001FreshPairAndReplayPreserveCommitOrder",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461001",
+      "expected": "begin→commit→復元、2更新と0更新、固定元時刻、借用close0",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461002MissingInputsAndInvalidParentStateHaveNoOwnedCalls",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461002",
+      "expected": "開始・SQL・復元0、公開契約のnullまたは固定失敗",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#completeWritesIndependentFourteenBindingsAndReplayRetainsOriginalTimeWithoutUpdate",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT002",
+      "expected": "db/config14bindは1-2filesと3-12bytes、全setter型、既成功END維持/UPDATE0",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#bkpcommit461004RepositoryFailureRollsBackAndRestoresBeforeFixedFailure",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPCOMMIT461004",
+      "expected": "rollback→復元、更新／commit0、固定・causeなし",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+        "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+      }
+    },
+    {
+      "run": "PG45674",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupPairPortTest#runningAndSuccessReadExactPairSqlBindingsAndCloseBeforeReturning",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+        "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42"
+      },
+      "gitBlob": "8a29f48c866a6584752ef7b63e8fdb1715a4e51b",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45674-current-backup-pair-commit-sixteen/xml/TEST-junit-jupiter.xml",
+        "sha256": "f26ef2f636f92aaac6ccd7e8cfdcdfb8386bbdff1d7b8029d90b8b5dc712ddb6"
+      },
+      "result": "PASS",
+      "testId": "BKPPORT001",
+      "expected": "RUNNINGペアempty、SUCCESS同END、literal SQL/order/timeout5/id7-8・closed2",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      }
+    },
+    {
+      "run": "PG45678",
+      "method": "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest#concurrentValueUse",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+        "sha256": "10e85630a403ffd2316573bfe38a5e83b18523d4d960575ebd6fcc361c4cee8b"
+      },
+      "gitBlob": "0b988b9fdc89211fae961bffda5a042521871332",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "34f61db9c947daa0b834c53f2118311eb432020fd4b16974421c739b845cab83"
+      },
+      "result": "PASS",
+      "testId": "PT-BAT-185",
+      "expected": "64並行、固定directory name・収録end・713/712bytes",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/033_NK-BAT-001_backup_manifest値_単体テスト仕様書.md",
+        "sha256": "99803516650353d3eaa5fa63c3a30db98fbad2ab0891aa8a8bbd2e56bc45b7e7"
+      }
+    },
+    {
+      "run": "PG45678",
+      "method": "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest#concurrentCanonicalRoundTrips",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+        "sha256": "52be6e6ad521890b422da8305c447b407c32f562e39b3b96ac8bee75091314b3"
+      },
+      "gitBlob": "dcf37e3d0ad2f60ad9e31b20657da8d6003ea9a7",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45678-current-backup-manifest-two-owned-fixtures-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "34f61db9c947daa0b834c53f2118311eb432020fd4b16974421c739b845cab83"
+      },
+      "result": "PASS",
+      "testId": "PT-BAT-193",
+      "expected": "固定manifest goldenへ64並行一致、返却byte配列も64実体",
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/035_NK-BAT-001_backup_manifest_codec_単体テスト仕様書.md",
+        "sha256": "d83adaf35eeb2c470683a473dad75f4f9b9eeb0df24a213931b044e8288e8591"
+      }
+    },
+    {
+      "run": "PG45686",
+      "method": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest#monWindow007ConcurrentSamePointHasOneOrigin",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+        "sha256": "ea3b0a87f2dce7644311e11ce50ebd46b2e31d97576ff3b0c7c89c9a6aee2b60"
+      },
+      "gitBlob": "96b3beb5de08ce70ef61764725e8163a6c14410a",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45686-current-alert-five-finite-owned-workers/xml/TEST-junit-jupiter.xml",
+        "sha256": "f7ed599082867fa432e581852d5522541363342582f7be1bbcf28287a555a584"
+      },
+      "result": "PASS",
+      "testId": "MONWINDOW007",
+      "expected": "64並行が同一時点から始まり、次の違反経過は一意",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1561_ContinuousConditionWindow_単体テスト仕様書.md",
+        "sha256": "dbd817d61bf4ab922d16b3a4d231c0c241e2422b9ceabe117978d242fb941ed7"
+      }
+    },
+    {
+      "run": "PG45686",
+      "method": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest#alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "sha256": "4a244485e43c596d5fe9fefa26446eeb53146507af8f121cefd7d5494a343e8a"
+      },
+      "gitBlob": "9d056e8bb4057df433ce2a053688de9e38769eea",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45686-current-alert-five-finite-owned-workers/xml/TEST-junit-jupiter.xml",
+        "sha256": "f7ed599082867fa432e581852d5522541363342582f7be1bbcf28287a555a584"
+      },
+      "result": "PASS",
+      "testId": "ALERT009",
+      "expected": "固定時刻でcount2から65を重複なし、owner public monitorと分離",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1545_AlertLifecycle_単体テスト仕様書.md",
+        "sha256": "80a5617cc8e9e3ea7258d37a52573a724e74e62f75bb9f2ec41eaf424a6806d1"
+      }
+    },
+    {
+      "run": "PG45686",
+      "method": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest#protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "sha256": "4a244485e43c596d5fe9fefa26446eeb53146507af8f121cefd7d5494a343e8a"
+      },
+      "gitBlob": "9d056e8bb4057df433ce2a053688de9e38769eea",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45686-current-alert-five-finite-owned-workers/xml/TEST-junit-jupiter.xml",
+        "sha256": "f7ed599082867fa432e581852d5522541363342582f7be1bbcf28287a555a584"
+      },
+      "result": "PASS",
+      "testId": "PROTECTEDALERT002",
+      "expected": "DLQとINTEGRITY_CONFIG各64観測でも同一critical eventが開いたまま",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1681_調査対象警報の自動close禁止_単体テスト仕様書.md",
+        "sha256": "2a7630e7d408959203498111e913c99ccbff23573645278b1130daa6fb0b37c9"
+      }
+    },
+    {
+      "run": "PG45686",
+      "method": "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest#threshold014ConcurrentStatelessEvaluations",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+        "sha256": "d1c2bed5c99600a7908bd80bd77e9cf9b44f946bf61295df39738ef661a567ef"
+      },
+      "gitBlob": "39bbb185f3bb7a30e2187e685b4587d9d20a7bee",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45686-current-alert-five-finite-owned-workers/xml/TEST-junit-jupiter.xml",
+        "sha256": "f7ed599082867fa432e581852d5522541363342582f7be1bbcf28287a555a584"
+      },
+      "result": "PASS",
+      "testId": "THRESHOLD014",
+      "expected": "64並行と12条件の固定結果に一致、閾値の共有変異なし",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1547_AlertThresholds_単体テスト仕様書.md",
+        "sha256": "31cc093d19106e5b33e1f05fe9b76554d96be4cbcfbf672400ba963f29d46644"
+      }
+    },
+    {
+      "run": "PG45686",
+      "method": "dev.codex.schubert.nk.batch.monitoring.AlertRegistryTest#alertReg004ConcurrentCallersShareOneKeyOwner",
+      "sourceFile": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+        "sha256": "0ef8a4ccdbb11869edcc593293b11c3f59819dfed07dbe67300235e61d36dc8c"
+      },
+      "gitBlob": "c2772fdd059a40a4a90ca35f865a860d3e75e6b5",
+      "originalXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45686-current-alert-five-finite-owned-workers/xml/TEST-junit-jupiter.xml",
+        "sha256": "f7ed599082867fa432e581852d5522541363342582f7be1bbcf28287a555a584"
+      },
+      "result": "PASS",
+      "testId": "ALERTREG004",
+      "expected": "同一keyの64発火を単一ownerへ集約し分離と確定時刻を保持",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5693_警報時刻と合成FileStoreのfixture是正単体仕様.md",
+        "sha256": "b5def12defec1f24477c9792265b4ba2a7c46a07c7af6428489085e13146a5bb"
+      }
+    }
+  ],
+  "selectedReceipts": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45674-current-backup-pair-commit-sixteen-unfiltered/manifest.json",
+      "sha256": "7ce27da614d7e666e1c5ec8de9c703c89fc158549d8b91314506cf2161dd52b3"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45678-current-backup-manifest-two-fixture-diagnostics/manifest.json",
+      "sha256": "cbf3e168f8aa61d0f52d651a53ac3d901af88ba580fb5891b76551f0c06b114e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45686-current-five-alert-owned-worker-regressions/manifest.json",
+      "sha256": "2617833e0604b5acb1dcd1b7334ffe0f1c76b1caf5bddc02b305017e6809ed92"
+    }
+  ],
+  "publishedTestIdCount": 23,
+  "checkPairsNotMergedExec": true,
+  "heldCasesNotExecuted": [
+    "ISSCOMP001",
+    "ISSCOMP002",
+    "ISSCOMP003"
+  ],
+  "actualArtemisDbFileStoreOrRoot": false,
+  "productTrialsNew": 0,
+  "cumulativeProductTrialsGross": 2893,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
