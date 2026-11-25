@@ -54,8 +54,7 @@ final class WebStartupInputsTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                    new WebStartupInputs(
-                        source, Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk")))
+                    new WebStartupInputs(source, Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk")))
             .getMessage());
     assertEquals(0, reads.get());
   }

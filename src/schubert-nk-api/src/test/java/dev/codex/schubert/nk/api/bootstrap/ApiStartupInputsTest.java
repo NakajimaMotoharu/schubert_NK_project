@@ -54,8 +54,7 @@ final class ApiStartupInputsTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                    new ApiStartupInputs(
-                        source, Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk")))
+                    new ApiStartupInputs(source, Map.of(CONFIG_DIRECTORY_ENV, "/etc/schubert-nk")))
             .getMessage());
     assertEquals(0, reads.get());
   }
