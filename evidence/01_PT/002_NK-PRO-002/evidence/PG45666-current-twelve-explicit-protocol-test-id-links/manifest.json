@@ -1,0 +1,294 @@
+{
+  "run": "PG45666",
+  "source": "7af58a0530fef8c39af285bc578295c06c2e81c7",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.01",
+  "terminalAtUTC": "2026-11-25T21:52:36.140760+00:00",
+  "actualExit": 0,
+  "originalRun": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "originalCases": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/sanitized-case-roster.json",
+    "sha256": "481079e8516ea2cd9229169db9d960fc668e4a9f4abed6635b9fd26675609482"
+  },
+  "previousSeparateMethodLink": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45440-current-wire-three-case-method-trace/manifest.json",
+    "sha256": "12c95f9b2f105fc4db06fa7ea731e2554cb15e3fd6afe81736a28b0efe0b56c1"
+  },
+  "testIdTraces": [
+    {
+      "testId": "PT-CODEC-AUTHERR-001",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#loginLockAndFailurePreserveOnlyApprovedErrorFields",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "c57eb1d8857937a134d31026e6e2acae22270ffd9635245751b140dfe3da5015"
+      },
+      "expected": "UI234の432byteをspaceで初期化、offset167に6桁retry、173に000、176に固定message UTF-8を独立配置。0106は0/1/900、他errorは0、任意機密fieldを出力しない。正常error decodeも保持",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+        "sha256": "7798ee26e927182bce667e18b9075934603f9a395656fbdf43bd88b4d015f414"
+      },
+      "gitBlob": "bc1d3f7d0f19e5f9b06b3e8145e3954b2a21268e",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+        "sha256": "dd5ff48eb52ffda5aa8e9c8b176fe852239b5d47fd1d0be49955a1d2149a9ef2"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-CODEC-AUTHERR-002",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#malformedLoginErrorBoundariesAndTypesAreRejected",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "c57eb1d8857937a134d31026e6e2acae22270ffd9635245751b140dfe3da5015"
+      },
+      "expected": "retry901/負値/型違い/欠落、message256/257byte/control/null、秘密field非spaceとnumeric filler不正をencode/decode両側で検査。期待値をproduction関数で作らない",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+        "sha256": "7798ee26e927182bce667e18b9075934603f9a395656fbdf43bd88b4d015f414"
+      },
+      "gitBlob": "bc1d3f7d0f19e5f9b06b3e8145e3954b2a21268e",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+        "sha256": "dd5ff48eb52ffda5aa8e9c8b176fe852239b5d47fd1d0be49955a1d2149a9ef2"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-CODEC-AUTHERR-003",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest#allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+        "sha256": "c57eb1d8857937a134d31026e6e2acae22270ffd9635245751b140dfe3da5015"
+      },
+      "expected": "全31response/全error code。Loginだけ2field、NTC0107だけ最新state、他29は全blank/zeroと0record。既存独立goldenは変更せず追加vectorで検査",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+        "sha256": "7798ee26e927182bce667e18b9075934603f9a395656fbdf43bd88b4d015f414"
+      },
+      "gitBlob": "bc1d3f7d0f19e5f9b06b3e8145e3954b2a21268e",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+        "sha256": "dd5ff48eb52ffda5aa8e9c8b176fe852239b5d47fd1d0be49955a1d2149a9ef2"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-PAGE001",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page001SecondPageHasIndependentExpectedBounds",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/006_Page境界_単体テスト仕様書.md",
+        "sha256": "86eb7c04246aa2c6a452b77538a068eb91c435fc92ddd94b877b40dfd7fc4878"
+      },
+      "expected": "SRCRSP01、size100/Effective2/Total101/Total pages2/First101/Last101/record1を直接validate",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+        "sha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d"
+      },
+      "gitBlob": "7440a6b52e9e1388fd4964faf3ef4ad4bd341d58",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml",
+        "sha256": "e6297547daaacf00a86acfaa35cd08ff4417c60c2fc125b814bdbe5524b5c215"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-PAGE002",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page002MaximumEffectivePageKeepsExactNineDigitArithmetic",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/006_Page境界_単体テスト仕様書.md",
+        "sha256": "86eb7c04246aa2c6a452b77538a068eb91c435fc92ddd94b877b40dfd7fc4878"
+      },
+      "expected": "size100/Effective999999/Total99999900/Total pages999999/First99999801/Last99999900/record100",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+        "sha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d"
+      },
+      "gitBlob": "7440a6b52e9e1388fd4964faf3ef4ad4bd341d58",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml",
+        "sha256": "e6297547daaacf00a86acfaa35cd08ff4417c60c2fc125b814bdbe5524b5c215"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-PAGE003",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest#page003RejectsIndependentRangeAndOneFieldArithmeticChanges",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/006_Page境界_単体テスト仕様書.md",
+        "sha256": "86eb7c04246aa2c6a452b77538a068eb91c435fc92ddd94b877b40dfd7fc4878"
+      },
+      "expected": "正常page2からEffective0、First100、Last102、record0、Total pages3へ一つずつ変更。最大pageからEffective1000000へ一つだけ変更",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+        "sha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d"
+      },
+      "gitBlob": "7440a6b52e9e1388fd4964faf3ef4ad4bd341d58",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml",
+        "sha256": "e6297547daaacf00a86acfaa35cd08ff4417c60c2fc125b814bdbe5524b5c215"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-SEM001",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem001PasswordCharacterByteAndUsernameLimits",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/011_Semantic未網羅条件_単体テスト仕様書.md",
+        "sha256": "11da40b5fb4df8a9ab653df15981ef99af33034e85beeab225ff07b7a3b3a8d8"
+      },
+      "expected": "UCRREQ01 Username FixtureOwner、passwordの12/128 ASCII、64絵文字、11/129文字、65絵文字、末尾ASCII space、username同値/大文字同値、username記号。UPWREQ01は128ASCII/64絵文字",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+        "sha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef"
+      },
+      "gitBlob": "4e32b8e84e3bead99a548299c27808a633f9465a",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest.xml",
+        "sha256": "f46b9ba09ef1bf070eb289c23725b55bcda09b788c77a1c3e442ce1946fbe93a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-SEM002",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem002InclusiveDateLimitsAndOneSidedFilters",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/011_Semantic未網羅条件_単体テスト仕様書.md",
+        "sha256": "11da40b5fb4df8a9ab653df15981ef99af33034e85beeab225ff07b7a3b3a8d8"
+      },
+      "expected": "LGSREQ01 Page1/size100、20260101→20260201/同+1ms、逆転、両側なし/片側のみ。NTSREQ01 Page1/size50、20260101→20270102/同+1ms",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+        "sha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef"
+      },
+      "gitBlob": "4e32b8e84e3bead99a548299c27808a633f9465a",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest.xml",
+        "sha256": "f46b9ba09ef1bf070eb289c23725b55bcda09b788c77a1c3e442ce1946fbe93a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-002-SEM003",
+      "originalCriterionOwner": "WBS-P002-04",
+      "method": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest#sem003QuestionAndWebLogTextContracts",
+      "independentSpecification": {
+        "path": "evidence/01_PT/002_NK-PRO-002/011_Semantic未網羅条件_単体テスト仕様書.md",
+        "sha256": "11da40b5fb4df8a9ab653df15981ef99af33034e85beeab225ff07b7a3b3a8d8"
+      },
+      "expected": "QSBREQ01質問の正常/空/末尾space、WLGEVT01 GET/ABCDEFGH/get/GE/ABCDEFGHIと/safe、relative、query付きpath",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+        "sha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef"
+      },
+      "gitBlob": "4e32b8e84e3bead99a548299c27808a633f9465a",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest.xml",
+        "sha256": "f46b9ba09ef1bf070eb289c23725b55bcda09b788c77a1c3e442ce1946fbe93a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-003-T03",
+      "originalCriterionOwner": "WBS-P003-03",
+      "method": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+      "independentSpecification": {
+        "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+        "sha256": "1932d1fcd286fb7812e0ab911a3507e3299197d0f489ba451d6c0c063420d932"
+      },
+      "expected": "year+10000/-0001、Instant.MIN/MAX millisはcauseなしIllegalArgumentException。通常17桁の上下と既存parse非回帰、拡張/符号入力拒否",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+        "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+      },
+      "gitBlob": "2b5395a80c4987878bcbb591f1b498a5f5a841e1",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+        "sha256": "26818c109755453603d5f83f21328e52a36fecae7070bd5e415746646a29972a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-003-T04",
+      "originalCriterionOwner": "WBS-P003-03",
+      "method": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+      "independentSpecification": {
+        "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+        "sha256": "1932d1fcd286fb7812e0ab911a3507e3299197d0f489ba451d6c0c063420d932"
+      },
+      "expected": "同4値でHeader encodeは固定変換例外、出力bodyなし。最大正常日時のoffset96/17byteと次offset113/64byteがliteralに一致",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+        "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+      },
+      "gitBlob": "2b5395a80c4987878bcbb591f1b498a5f5a841e1",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+        "sha256": "26818c109755453603d5f83f21328e52a36fecae7070bd5e415746646a29972a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    },
+    {
+      "testId": "PT-PRO-003-T05",
+      "originalCriterionOwner": "WBS-P003-03",
+      "method": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#bug037RequiredAndOptionalDataSendersRejectBadTime",
+      "independentSpecification": {
+        "path": "evidence/01_PT/003_NK-PRO-003/001_NK-PRO-003_単体テスト仕様書.md",
+        "sha256": "1932d1fcd286fb7812e0ab911a3507e3299197d0f489ba451d6c0c063420d932"
+      },
+      "expected": "必須N日時/任意X日時の同4値拒否、99991231235959999の独立numeric/text、Optional.emptyのUnset不変",
+      "testSource": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+        "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+      },
+      "gitBlob": "2b5395a80c4987878bcbb591f1b498a5f5a841e1",
+      "originalJUnitXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+        "sha256": "26818c109755453603d5f83f21328e52a36fecae7070bd5e415746646a29972a"
+      },
+      "result": "PASS",
+      "originalRun": "PG45374",
+      "artifactTree": "3e049d0773acd661b69473dd69bc2d41725fde9b"
+    }
+  ],
+  "attachedCount": 12,
+  "normalProductTests": 0,
+  "cumulativeProductTrialsGross": 2864,
+  "otherCasesNotReplayed": true,
+  "allMethodsMapped": false,
+  "noDbOrJmsOrExternalOperation": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
