@@ -7,29 +7,52 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.function.Supplier;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-CURRENTASSEMBLY001..022; real projection input, independently literal target rows and
- * wire.
+ * PT-MIG-CURRENTASSEMBLY001..024; synthetic Current rows through the projection, literal target
+ * rows and wire.
  */
 final class CurrentMigrationAssemblerTest {
   private static final String EMPTY_VECTOR =
-      "NKMIGMAPPING1\nFILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\nNKMIGFILEORDER1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\n"
+          + "NKMIGFILEORDER1\n"
+          + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
   private static final String EMPTY_VECTOR_HASH =
       "83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9";
   private static final String ONE_FILE_VECTOR =
-      "NKMIGMAPPING1\nFILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\nNKMIGFILEORDER1\n1\t9\t90\t1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\n"
+          + "NKMIGFILEORDER1\n"
+          + "1\t9\t90\t1\n"
+          + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
   private static final String ONE_FILE_VECTOR_HASH =
       "ac411723896848964fb14c8fac3945bc758ffa1bdc1ffc83ac9a872775df07f5";
 
@@ -58,7 +81,8 @@ final class CurrentMigrationAssemblerTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void assembly001AllSixTablesHaveIndependentLiteralValues() throws Exception {
+  void assembly001AllSixTablesHaveIndependentLiteralValues()
+      throws SQLException, NoSuchAlgorithmException {
     var master = normal();
     assertEquals(
         List.of(
@@ -99,7 +123,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly002SixBorrowedStreamsMatchHandwrittenGoldenBytes() throws Exception {
+  void assembly002SixBorrowedStreamsMatchHandwrittenGoldenBytes()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var sinks = sinks();
     normal()
         .writeAll(
@@ -234,7 +259,7 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly004AllAssembleNullsFailBeforePartialReturn() throws Exception {
+  void assembly004AllAssembleNullsFailBeforePartialReturn() throws SQLException {
     var m = assembler();
     assertEquals("CurrentMigrationAssembler[REDACTED]", m.toString());
     var source = snapshot(fixture());
@@ -253,7 +278,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly005AllEmptyDeclarationsAndSourcesYieldSixEmptyStreams() throws Exception {
+  void assembly005AllEmptyDeclarationsAndSourcesYieldSixEmptyStreams()
+      throws SQLException, IOException {
     var f = fixture();
     for (var t : f.tables) t.clear();
     var file = new ScenarioFileMigrationMap(List.of());
@@ -283,7 +309,7 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly006NullableCurrentRawIsNotRepairedForTarget() throws Exception {
+  void assembly006NullableCurrentRawIsNotRepairedForTarget() throws SQLException {
     var f = fixture();
     f.tables.get(2).get(0)[9] = null;
     var source = snapshot(f);
@@ -292,7 +318,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly007SpeakerStoredMetadataAndGameStayAuthoritative() throws Exception {
+  void assembly007SpeakerStoredMetadataAndGameStayAuthoritative()
+      throws SQLException, NoSuchAlgorithmException {
     var f = fixture();
     f.tables.get(0).get(0)[2] = "Preserved 名";
     f.tables.get(0).get(0)[3] = "saved-normal";
@@ -308,7 +335,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly008FileExactPathHashAndSizeClaimsAreEnforced() throws Exception {
+  void assembly008FileExactPathHashAndSizeClaimsAreEnforced()
+      throws SQLException, NoSuchAlgorithmException {
     var path = fixture();
     path.tables.get(1).get(0)[2] = "p/other";
     reject(path);
@@ -334,7 +362,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly009EntryFileIndexSpeakerAndBodyAreNotRepaired() throws Exception {
+  void assembly009EntryFileIndexSpeakerAndBodyAreNotRepaired()
+      throws SQLException, NoSuchAlgorithmException {
     var file = fixture();
     file.tables.get(2).get(0)[2] = -99L;
     reject(file);
@@ -361,7 +390,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly010AudioExactMillisecondsRoleAndClaimBoundaries() throws Exception {
+  void assembly010AudioExactMillisecondsRoleAndClaimBoundaries()
+      throws SQLException, NoSuchAlgorithmException {
     var f = fixture();
     f.tables.get(3).get(0)[7] = new java.math.BigDecimal("0.001");
     assertEquals(
@@ -389,7 +419,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly011LinksUseExplicitSparseOrderAndKnownTriples() throws Exception {
+  void assembly011LinksUseExplicitSparseOrderAndKnownTriples()
+      throws SQLException, NoSuchAlgorithmException {
     assertEquals("7", normal().content().audio().linkRows().get(0).get(4));
     var entry = fixture();
     entry.tables.get(4).get(0)[0] = -99L;
@@ -403,7 +434,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly012MediaRebindsExactKindTargetSizeHashAndCount() throws Exception {
+  void assembly012MediaRebindsExactKindTargetSizeHashAndCount()
+      throws SQLException, NoSuchAlgorithmException {
     var source = snapshot(fixture());
     for (int index :
         List.of(MEDIA_STORAGE_INDEX, MEDIA_BYTES_INDEX, MEDIA_HASH_INDEX, MEDIA_PARENT_INDEX)) {
@@ -428,7 +460,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly013OneCommonTimestampAndYearMicrosecondBoundaries() throws Exception {
+  void assembly013OneCommonTimestampAndYearMicrosecondBoundaries()
+      throws SQLException, NoSuchAlgorithmException {
     var source = snapshot(fixture());
     for (String stamp :
         List.of(
@@ -447,7 +480,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly014FourAssetKindsAreSeparatedWithoutMetadataLoss() throws Exception {
+  void assembly014FourAssetKindsAreSeparatedWithoutMetadataLoss()
+      throws SQLException, NoSuchAlgorithmException {
     var result = normal();
     assertEquals(4, assets().entries().size());
     assertEquals(1, result.content().scenario().files().rows().size());
@@ -458,7 +492,7 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly015MismatchedIdentityDeclarationsCannotPassAssembly() throws Exception {
+  void assembly015MismatchedIdentityDeclarationsCannotPassAssembly() throws SQLException {
     var other =
         new ScenarioFileMigrationMap(List.of(new ScenarioFileMigrationMap.FilePair(1, -3, 502)));
     var m =
@@ -488,7 +522,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly016Utf8StoredWhitespaceAndSqlNullHaveLiteralWire() throws Exception {
+  void assembly016Utf8StoredWhitespaceAndSqlNullHaveLiteralWire()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var source = fixture();
     source.tables.get(0).get(0)[5] = "\\N";
     var result = assembler().assemble(snapshot(source), media(STAMP), at());
@@ -501,7 +536,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly017ConstructorAndSourceListsAreDeepSnapshots() throws Exception {
+  void assembly017ConstructorAndSourceListsAreDeepSnapshots()
+      throws SQLException, NoSuchAlgorithmException {
     var audio = new ArrayList<AudioMigrationMap.@Nullable AudioMapping>(audioMappings());
     var links = new ArrayList<CurrentAudioLinkMapper.@Nullable LinkOrder>(orders());
     var m =
@@ -522,33 +558,48 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly018MediaCollectionRuntimeAndErrorPropagateUnchanged() throws Exception {
+  void assembly018MediaCollectionRuntimeAndErrorPropagateUnchanged() throws SQLException {
     var source = snapshot(fixture());
-    for (Throwable expected :
-        List.of(
-            new IllegalStateException("synthetic collection"),
-            new AssertionError("synthetic collection"))) {
-      var fault =
-          new AbstractList<@Nullable MediaAssetCopyRow>() {
-            @Override
-            public @Nullable MediaAssetCopyRow get(int index) {
-              if (expected instanceof RuntimeException runtime) throw runtime;
-              throw (Error) expected;
-            }
+    var runtime = new IllegalStateException("synthetic collection");
+    assertMediaFailureIdentity(
+        source,
+        runtime,
+        () -> {
+          throw runtime;
+        });
+    var error = new AssertionError("synthetic collection");
+    assertMediaFailureIdentity(
+        source,
+        error,
+        () -> {
+          throw error;
+        });
+  }
 
-            @Override
-            public int size() {
-              return 1;
-            }
-          };
-      assertSame(
-          expected,
-          assertThrows(expected.getClass(), () -> assembler().assemble(source, fault, at())));
-    }
+  private static void assertMediaFailureIdentity(
+      CurrentMigrationProjection.SourceSnapshot source,
+      Throwable expected,
+      Supplier<@Nullable MediaAssetCopyRow> read) {
+    var fault =
+        new AbstractList<@Nullable MediaAssetCopyRow>() {
+          @Override
+          public @Nullable MediaAssetCopyRow get(int index) {
+            return read.get();
+          }
+
+          @Override
+          public int size() {
+            return 1;
+          }
+        };
+    assertSame(
+        expected,
+        assertThrows(expected.getClass(), () -> assembler().assemble(source, fault, at())));
   }
 
   @Test
-  void assembly019TwoGameBindingsRetainAllDeclaredIds() throws Exception {
+  void assembly019TwoGameBindingsRetainAllDeclaredIds()
+      throws SQLException, NoSuchAlgorithmException {
     var f = fixture();
     f.tables.get(0).add(new Object[] {1L, 2, "Other", "saved", false, null});
     f.tables.get(1).add(new Object[] {2L, 2, "p/f2", "f2", null, null, null, null});
@@ -608,7 +659,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly020FiniteParallelCallsOwnSeparateSnapshots() throws Exception {
+  void assembly020FiniteParallelCallsOwnSeparateSnapshots()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var m = assembler();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -631,7 +683,7 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly021EmptyDeclaredMappingsHaveIndependentManifest() throws Exception {
+  void assembly021EmptyDeclaredMappingsHaveIndependentManifest() throws NoSuchAlgorithmException {
     var files = new ScenarioFileMigrationMap(List.of());
     var entries =
         new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
@@ -651,7 +703,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly022ConfiguredFileIdsAreBoundAndFreshManifestIsDefensive() throws Exception {
+  void assembly022ConfiguredFileIdsAreBoundAndFreshManifestIsDefensive()
+      throws NoSuchAlgorithmException {
     var files =
         new ScenarioFileMigrationMap(List.of(new ScenarioFileMigrationMap.FilePair(1, 9, 90)));
     var entries =
@@ -684,7 +737,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly023EmptyCopyManifestUsesSameDeclaredAssembly() throws Exception {
+  void assembly023EmptyCopyManifestUsesSameDeclaredAssembly()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var files = new ScenarioFileMigrationMap(List.of());
     var placement =
         new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
@@ -710,7 +764,8 @@ final class CurrentMigrationAssemblerTest {
   }
 
   @Test
-  void assembly024NormalCopyManifestCountsAndSameMappingBinding() throws Exception {
+  void assembly024NormalCopyManifestCountsAndSameMappingBinding()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var result = assembler().copyManifest(snapshot(fixture()), media(STAMP), at());
     assertEquals(
         java.util.Map.of(
@@ -738,7 +793,7 @@ final class CurrentMigrationAssemblerTest {
   }
 
   private static CurrentMigrationProjection.SourceSnapshot snapshot(
-      CurrentMigrationProjectionTest.Fixture f) throws Exception {
+      CurrentMigrationProjectionTest.Fixture f) throws SQLException {
     return new CurrentMigrationProjection()
         .read(
             f.connection(),
@@ -790,7 +845,8 @@ final class CurrentMigrationAssemblerTest {
         files(), placement(), speakers(), audioMappings(), orders(), assets(), ROOT_ONE, ROOT_TWO);
   }
 
-  private static ArrayList<@Nullable MediaAssetCopyRow> media(String stamp) throws Exception {
+  private static ArrayList<@Nullable MediaAssetCopyRow> media(String stamp)
+      throws NoSuchAlgorithmException {
     return new ArrayList<>(
         List.of(
             new MediaAssetCopyRow(
@@ -833,7 +889,7 @@ final class CurrentMigrationAssemblerTest {
                     stamp))));
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  private static MigrationMasterCopyDataset normal() throws SQLException, NoSuchAlgorithmException {
     return assembler().assemble(snapshot(fixture()), media(STAMP), at());
   }
 
@@ -841,7 +897,7 @@ final class CurrentMigrationAssemblerTest {
     return Instant.parse(STAMP);
   }
 
-  private static void reject(CurrentMigrationProjectionTest.Fixture f) throws Exception {
+  private static void reject(CurrentMigrationProjectionTest.Fixture f) throws SQLException {
     var source = snapshot(f);
     assertThrows(
         IllegalArgumentException.class, () -> assembler().assemble(source, media(STAMP), at()));
