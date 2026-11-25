@@ -1,0 +1,2684 @@
+{
+  "run": "PG45376",
+  "source": "b3ea5fecbec44f353beeb5b3bea1e5f045fd555e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P002-01",
+  "relatedWbs": [
+    "WBS-P002-01",
+    "WBS-P001-01",
+    "WBS-P001-02",
+    "WBS-F03"
+  ],
+  "terminalAtUTC": "2026-11-25T15:37:49.148445+00:00",
+  "actualExit": 0,
+  "decisionReportRowPrepared": true,
+  "originalCostNotAdded": true,
+  "applicableRevisedRowPlanPricePp": 0.3,
+  "newFormal": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "priorNumericPortable": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG41300-protocol-numeric-byte-precedence-fixed-v1/manifest.json",
+    "sha256": "1be4b0348d648972df1c545c689bcfcbb3d1f07f3fe6f5053f751f1b852d6f70"
+  },
+  "scopeLineage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41566-p002-current-three-scope-fixed-run-v1/manifest.json",
+    "sha256": "0beaf2497e5043e38c5615f5f17fe9f5545a2c5813c346828b1bbfe307f591aa"
+  },
+  "currentBuild": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "testId": "PT-PRO-002-N03",
+  "currentJunitCase": [
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue"
+  ],
+  "testInputsEqual": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java": "130a643497d24521b3920f90b2f300aca636077f19633f24f50ed5841d93469c",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+  },
+  "independentExpectation": "UI232 and SS322 require ASCII digits for every byte before accumulation. The existing independent test contains a nonnumeric byte after the numeric overflow position; diagnostic must be malformed, not overflow.",
+  "canonicalDesign": {
+    "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+    "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+    "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+  },
+  "ownedCurrent70": 70,
+  "physical77": 77,
+  "scopes": {
+    "WBS-P001-01": {
+      "priorFormalStatus": "ACCEPTED",
+      "priorFormalAcceptanceId": null,
+      "productionSources": 6,
+      "physical": 6,
+      "matchClassAndCounters": {
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+          "crc": "a931162e0a83d341",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              54
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              13
+            ],
+            "COMPLEXITY": [
+              0,
+              10
+            ],
+            "METHOD": [
+              0,
+              7
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/header/CommonHeader": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java",
+          "crc": "635561c9b38fcc05",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              420
+            ],
+            "BRANCH": [
+              0,
+              70
+            ],
+            "LINE": [
+              0,
+              69
+            ],
+            "COMPLEXITY": [
+              0,
+              61
+            ],
+            "METHOD": [
+              0,
+              26
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/header/InteractionKind": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "crc": "59edd232c0a667b6",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              88
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              16
+            ],
+            "COMPLEXITY": [
+              0,
+              11
+            ],
+            "METHOD": [
+              0,
+              7
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/header/MessageKind": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "crc": "9ffaa7b0e8de22aa",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              88
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              16
+            ],
+            "COMPLEXITY": [
+              0,
+              11
+            ],
+            "METHOD": [
+              0,
+              7
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/header/ResultCode": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "crc": "f58efe6d2d007087",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              200
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              24
+            ],
+            "COMPLEXITY": [
+              0,
+              10
+            ],
+            "METHOD": [
+              0,
+              10
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/header/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java",
+          "crc": "61ea674b4f3bb183",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "observedQualifiedCases": [
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "authenticationContextValidatesAndRedacts"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "enumsMapOnlyApprovedWireValues"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "headerConstructorRejectsEveryStructuralViolation"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "headerReferencesRejectNullAtTheNamedInvariantBoundary"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "headerValidateAgainstRejectsEachMetadataMismatch"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "validHeadersCoverRequestResponseErrorAndEventProfiles"
+        ]
+      ],
+      "scopeCounters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 138
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 57
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 88
+        },
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 850
+        }
+      }
+    },
+    "WBS-P001-02": {
+      "priorFormalStatus": "ACCEPTED",
+      "priorFormalAcceptanceId": null,
+      "productionSources": 20,
+      "physical": 27,
+      "matchClassAndCounters": {
+        "dev/codex/schubert/nk/protocol/layout/FieldArea": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java",
+          "crc": "27abd0ad2f563454",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              50
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldDefinition": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+          "crc": "fe2cba0678cc224f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              184
+            ],
+            "BRANCH": [
+              0,
+              16
+            ],
+            "LINE": [
+              0,
+              30
+            ],
+            "COMPLEXITY": [
+              0,
+              25
+            ],
+            "METHOD": [
+              0,
+              17
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValue": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+          "crc": "643aefabf56fbc50",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Flag": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+          "crc": "9bbf3c338556d416",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              19
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              1
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+          "crc": "c95b8c562e6611e7",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              19
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              1
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Text": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+          "crc": "d0c16605ffc1b5eb",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              25
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              5
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+          "crc": "1ae321176443d8b6",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              30
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              2
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/FieldValueSet": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java",
+          "crc": "a7faad52f1cb4185",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              107
+            ],
+            "BRANCH": [
+              0,
+              10
+            ],
+            "LINE": [
+              0,
+              20
+            ],
+            "COMPLEXITY": [
+              0,
+              13
+            ],
+            "METHOD": [
+              0,
+              8
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java",
+          "crc": "722f79b5130af6e4",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              220
+            ],
+            "BRANCH": [
+              0,
+              28
+            ],
+            "LINE": [
+              0,
+              41
+            ],
+            "COMPLEXITY": [
+              0,
+              30
+            ],
+            "METHOD": [
+              0,
+              16
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+          "crc": "a9b95908816c4323",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              571
+            ],
+            "BRANCH": [
+              0,
+              64
+            ],
+            "LINE": [
+              0,
+              135
+            ],
+            "COMPLEXITY": [
+              0,
+              54
+            ],
+            "METHOD": [
+              0,
+              22
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+          "crc": "e07ea46c9908b5b9",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              13
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              3
+            ],
+            "COMPLEXITY": [
+              0,
+              1
+            ],
+            "METHOD": [
+              0,
+              1
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutFields": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java",
+          "crc": "ff81c75440765671",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              102
+            ],
+            "BRANCH": [
+              0,
+              8
+            ],
+            "LINE": [
+              0,
+              20
+            ],
+            "COMPLEXITY": [
+              0,
+              13
+            ],
+            "METHOD": [
+              0,
+              9
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "crc": "240169cacdc45dd7",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              52
+            ],
+            "BRANCH": [
+              0,
+              2
+            ],
+            "LINE": [
+              0,
+              10
+            ],
+            "COMPLEXITY": [
+              0,
+              9
+            ],
+            "METHOD": [
+              0,
+              8
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutPayload": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutPayload.java",
+          "crc": "6b44e50690f4ded9",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "crc": "df8b252679de0740",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              921
+            ],
+            "BRANCH": [
+              0,
+              30
+            ],
+            "LINE": [
+              0,
+              113
+            ],
+            "COMPLEXITY": [
+              0,
+              28
+            ],
+            "METHOD": [
+              0,
+              13
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java",
+          "crc": "172946afc5ba5e3f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              9
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              2
+            ],
+            "METHOD": [
+              0,
+              2
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/Padding": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java",
+          "crc": "d9775c1418df6134",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              50
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+          "crc": "bf57c50adeefa51f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              763
+            ],
+            "BRANCH": [
+              0,
+              18
+            ],
+            "LINE": [
+              0,
+              159
+            ],
+            "COMPLEXITY": [
+              0,
+              20
+            ],
+            "METHOD": [
+              0,
+              11
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+          "crc": "8f646d0141418110",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              4
+            ],
+            "METHOD": [
+              0,
+              4
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+          "crc": "3efa2ea95468366d",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              15
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              6
+            ],
+            "COMPLEXITY": [
+              0,
+              3
+            ],
+            "METHOD": [
+              0,
+              3
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/Presence": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java",
+          "crc": "7e2703671f0abfae",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              60
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              5
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java",
+          "crc": "5ece31da32ca0751",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              4
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              2
+            ],
+            "COMPLEXITY": [
+              0,
+              1
+            ],
+            "METHOD": [
+              0,
+              1
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/WireMessage": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java",
+          "crc": "bd621d5883054703",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              53
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              9
+            ],
+            "COMPLEXITY": [
+              0,
+              9
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/WireType": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java",
+          "crc": "671b22c03f0baa67",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              50
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java",
+          "crc": "4d826d1b0d56d19e",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/time/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java",
+          "crc": "bb29a4ba6786e039",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/transport/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java",
+          "crc": "0381fe2a01e5279d",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "observedQualifiedCases": [
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+          "catalogMatchesIndependentUi234To236Fixture"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+          "layoutFieldsRejectWrongAreaGapLengthAndNull"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+          "parserRejectsMalformedUnknownAndDuplicateRows"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "layoutDefinitionChecksEveryLengthAndKindInvariant"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "layoutIdAndFieldDefinitionAreStrictAndOneBased"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "registryMatchesIndependentUi233Catalog"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "registryRejectsEmptyNullDuplicateAndKindMismatches"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest",
+          "concurrentReadersRetainAllIndependentSixtyFourTypeBindings"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "allNamedTypesHaveIndependentDirectionalFieldMeaning"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "explicitCatalogMatchesIndependentSs323NamedTypeFixture"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "typedModelsAndHelpersRejectNullMissingAndWrongKinds"
+        ]
+      ],
+      "scopeCounters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 586
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 161
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 22
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 182
+        },
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3338
+        }
+      }
+    },
+    "WBS-P002-01": {
+      "priorFormalStatus": "RECHECK_REQUIRED",
+      "priorFormalAcceptanceId": null,
+      "productionSources": 44,
+      "physical": 44,
+      "matchClassAndCounters": {
+        "dev/codex/schubert/nk/protocol/codec/FieldCodec": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+          "crc": "a3fd9264ad99b2ee",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              488
+            ],
+            "BRANCH": [
+              0,
+              86
+            ],
+            "LINE": [
+              0,
+              120
+            ],
+            "COMPLEXITY": [
+              0,
+              59
+            ],
+            "METHOD": [
+              0,
+              15
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/FieldCodecRules": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java",
+          "crc": "50b25332651accbd",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/FieldEncodingException": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java",
+          "crc": "32a69404c09340a6",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              9
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              2
+            ],
+            "METHOD": [
+              0,
+              2
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java",
+          "crc": "55a0779b316e3338",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              141
+            ],
+            "BRANCH": [
+              0,
+              10
+            ],
+            "LINE": [
+              0,
+              28
+            ],
+            "COMPLEXITY": [
+              0,
+              8
+            ],
+            "METHOD": [
+              0,
+              3
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.java",
+          "crc": "74876ec2d7f71dda",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              110
+            ],
+            "BRANCH": [
+              0,
+              2
+            ],
+            "LINE": [
+              0,
+              26
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              4
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/ProtocolValidator": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+          "crc": "64fc30562aa9b935",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              114
+            ],
+            "BRANCH": [
+              0,
+              24
+            ],
+            "LINE": [
+              0,
+              23
+            ],
+            "COMPLEXITY": [
+              0,
+              13
+            ],
+            "METHOD": [
+              0,
+              1
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/codec/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java",
+          "crc": "2c09672c6d6e58f5",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.java",
+          "crc": "249f79279c5e5d13",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.java",
+          "crc": "574bef8547cf42d7",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/AnswerState": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.java",
+          "crc": "0f4d6b56d371fe60",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.java",
+          "crc": "f624931cdd328e88",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/AudioId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AudioId.java",
+          "crc": "70127cbb0ed8f0fc",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition.java",
+          "crc": "40285d611f4cf4ce",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode.java",
+          "crc": "343a91aab675285b",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java",
+          "crc": "de2adccf039644a0",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              72
+            ],
+            "BRANCH": [
+              0,
+              16
+            ],
+            "LINE": [
+              0,
+              17
+            ],
+            "COMPLEXITY": [
+              0,
+              14
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.java",
+          "crc": "b36b344e43cf04e9",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              57
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              11
+            ],
+            "COMPLEXITY": [
+              0,
+              11
+            ],
+            "METHOD": [
+              0,
+              8
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/EntryId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryId.java",
+          "crc": "864a16c450eb845f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/EntryType": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryType.java",
+          "crc": "b5ed6e117c678b9e",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/GameCode": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/GameCode.java",
+          "crc": "722f87ad835e40c1",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.java",
+          "crc": "83171279e58ba282",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              58
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              11
+            ],
+            "COMPLEXITY": [
+              0,
+              11
+            ],
+            "METHOD": [
+              0,
+              8
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/IdValue": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+          "crc": "a6c6b30cd0a3ff55",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              14
+            ],
+            "BRANCH": [
+              0,
+              4
+            ],
+            "LINE": [
+              0,
+              3
+            ],
+            "COMPLEXITY": [
+              0,
+              3
+            ],
+            "METHOD": [
+              0,
+              1
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/LogId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogId.java",
+          "crc": "b7499913594c7e6f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/LogLevel": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.java",
+          "crc": "6e60fc5bd313d854",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/LogType": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogType.java",
+          "crc": "b1bde21e7548dc83",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              92
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              11
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType.java",
+          "crc": "457629e6c35be785",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              92
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              11
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode.java",
+          "crc": "bb3d44f54a2df976",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              81
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              10
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/NotificationId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.java",
+          "crc": "d83fadff2daf1bdf",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/NotificationState": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.java",
+          "crc": "72959348659e549f",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              81
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              10
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/NotificationType": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.java",
+          "crc": "9836ac1ddf71e0db",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/PairRole": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PairRole.java",
+          "crc": "eb6202074a617a07",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+          "crc": "a10e734acbb81409",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              33
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              3
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.java",
+          "crc": "5efdcbaf7a3692c5",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/QuestionId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.java",
+          "crc": "51b30c8b3e1d1727",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/RelativePath": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java",
+          "crc": "d84508dc74656a4b",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              121
+            ],
+            "BRANCH": [
+              0,
+              28
+            ],
+            "LINE": [
+              0,
+              26
+            ],
+            "COMPLEXITY": [
+              0,
+              21
+            ],
+            "METHOD": [
+              0,
+              7
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.java",
+          "crc": "715a2d18a490f323",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.java",
+          "crc": "efd9558409811739",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              54
+            ],
+            "BRANCH": [
+              0,
+              6
+            ],
+            "LINE": [
+              0,
+              12
+            ],
+            "COMPLEXITY": [
+              0,
+              10
+            ],
+            "METHOD": [
+              0,
+              7
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.java",
+          "crc": "d1804b64bfc34517",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/UserId": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserId.java",
+          "crc": "f9f4d8bac350f136",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              21
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              4
+            ],
+            "COMPLEXITY": [
+              0,
+              5
+            ],
+            "METHOD": [
+              0,
+              5
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/UserRole": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java",
+          "crc": "eac28f21a8f745c7",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/UserState": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserState.java",
+          "crc": "69d1cdbc8e9a3ff9",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              59
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              8
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.java",
+          "crc": "e620b22b4eccab88",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              70
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              9
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition.java",
+          "crc": "a42cdb75b0d0a611",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              48
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              7
+            ],
+            "COMPLEXITY": [
+              0,
+              6
+            ],
+            "METHOD": [
+              0,
+              6
+            ],
+            "CLASS": [
+              0,
+              1
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java",
+          "crc": "7f2f7ef669673da2",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        },
+        "dev/codex/schubert/nk/protocol/layout/semantic/package-info": {
+          "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/package-info.java",
+          "crc": "19e325ab0f55d088",
+          "counters": {
+            "INSTRUCTION": [
+              0,
+              0
+            ],
+            "BRANCH": [
+              0,
+              0
+            ],
+            "LINE": [
+              0,
+              0
+            ],
+            "COMPLEXITY": [
+              0,
+              0
+            ],
+            "METHOD": [
+              0,
+              0
+            ],
+            "CLASS": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "observedQualifiedCases": [
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+          "nfcGolden001HangulJamoFitsComposedByteWidth"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+          "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+          "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "booleanAndReservedFieldsRejectUnknownBytes"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "numericCodecChecksDigitsRangeAndOverflow"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "numericErrorFillerDoesNotBecomeBusinessZero"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "numericSemanticCeilingIsIndependentOfWireAndLongCapacity"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "textDecodeIsStrictCanonicalAndOptionalAware"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "textEncodeNormalizesUtf8AndPadsWithAsciiSpace"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+          "enum001SerializedAnswerStateMatchesIndependentProtocolVector"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+          "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+          "n12Value001IndependentPositiveRangeAndFixedDiagnosticForEveryDeclaredKind"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+          "n12Value002SameKindRecordContractIndependentHashAndLiteralText"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+          "n12Value003AllKindPairsAndRealHashCollectionKeepEqualNumbersDistinct"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+          "pathValue001RelativeNormalBoundariesAndTypedHashContract"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+          "pathValue002RelativeRejectsEachRootSegmentAndByteBoundary"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+          "pathValue003DisplayOnlyPathsPreservePermittedTextAndRejectTraversal"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+          "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+          "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "allN12IdentifierTypesEnforceTheSharedPositiveRange"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+          "wireValue001ClosedNamesOrderOrdinalWireAndActualGeneratedFactoryMatchIndependentTables"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+          "wireValue002GeneratedNameLookupRejectsUnknownEmptyCaseSpaceNullAndWireAliases"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+          "wireValue003ReturnedValueArraysAreIndependentCallerOwnedCopies"
+        ],
+        [
+          "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+          "wireValue004RealHashCollectionKeepsAllFiftyEightTypedSingletonKeys"
+        ]
+      ],
+      "scopeCounters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 472
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 218
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 39
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 194
+        },
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2566
+        }
+      }
+    }
+  },
+  "currentModuleSpotBugs": {
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45374-protocol-two-oracles-full-module-174/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+      "sha256": "c87747771bb0b61f31c6349b722f14e2e4688da43ab5cee6291e57a6d3c735fb"
+    },
+    "version": "4.10.4",
+    "classStats": 176,
+    "distinctClassStats": 176,
+    "missingClasses": 0,
+    "analysisErrors": 0,
+    "bugInstances": 0
+  },
+  "outstanding": [
+    "same-source formal end criteria for both P001 dependencies",
+    "actual impacted JMS and CHR",
+    "same-source mandatory scope 451, three unsigned PMD dispositions",
+    "formal reviewer receipt"
+  ],
+  "actualProductTrials": 0,
+  "shortPlanRow": "P002再判定-a"
+}
