@@ -525,6 +525,23 @@ final class GateDefinitionDocumentsTest {
         () -> assertEquals(List.of(), validate(fixture())));
   }
 
+  /** PT-CHR-DEF-MEDIA002: Current must demonstrate both approved video observations. */
+  @Test
+  void requiredVideoRangeObservationsCannotBeDeclaredNkOnly() throws IOException {
+    assertEquals(List.of(), validate(fixture()));
+    for (List<String> checks :
+        List.of(
+            List.of("no-range-200"),
+            List.of("multi-range-first"),
+            List.of("no-range-200", "multi-range-first"))) {
+      var input = fixture();
+      var declaration =
+          object(input, REQUIREMENTS).withObject("/nkOnlySupplementalChecks").putArray("CHR-M04");
+      checks.forEach(declaration::add);
+      assertEquals(List.of("REQ_VIDEO_RANGE_CURRENT_SUPPLEMENTAL"), validate(input), checks.toString());
+    }
+  }
+
   /** PT-CHR-DEF-015: structure of a declared NK-only supplemental case. */
   @Test
   void declaredNkOnlySupplementalChecksMustBeDistinctNonblankStrings() throws Exception {
