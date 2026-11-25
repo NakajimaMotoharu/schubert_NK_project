@@ -32,3 +32,7 @@ PG18874/source e8ccb3918は全8成功・F/E/S0だがregisterのstatement.close�
 |PT-WEB-RCPTPORT009|insertStatementCloseUsesIndependentPrimaryAndSecondarySelectionTable。登録body primaryなし/SQL/RTE/Error×statement.close SQL/RTE/Error。primaryなしはsecondary、SQLprimary＋SQLsecondaryは固定catalog、SQLprimary＋unknownはsecondary同一性、unknownprimaryはその同一性と固定suppressed。全12組でstatement一個、read/commit0、rollback/connectionclose各1、statementclose1を検査。SS331/332と既rcpt005順位から手作成した表。|
 
 当追加も765の同じ普通群。Main不変更、同じJDBC interface fixtureのみ。新9件全class・新単exec/sessionを実行し、元8のexecは合算しない。新compile PG18880、static PG18882、unit予定PG18888。
+
+## PT-WEB-RCPTPORT010 捕捉したNPEの伝播
+
+451 §5、SS331 §9.4、SS332、QA-048。JDBC interfaceの合成ResultSetが最初の `next()` でテスト作成のNullPointerExceptionを送出する。受付参照の読取は元と同じ例外を呼出元へ伝える。空結果や成功を返さず、行と文のclose、rollback、connectionのcloseをこの順で各1回試みる。commitは0回。期待順は所有契約から固定する。入力nullを拒否する元PTと別に、広いRuntimeException catchの後条件を検証する。実DB、JDBC driver、ネットワークは使わない。

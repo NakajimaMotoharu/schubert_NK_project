@@ -29,7 +29,7 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-WEB-RCPTPORT001..009. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
+/** PT-WEB-RCPTPORT001..010. JDBC interfaces only; no driver, SQL engine, DB or real locator. */
 final class ReceiptReferencePortTest {
   private static final String ID = "00000000000000000000000001";
   private static final String OTHER_ID = "00000000000000000000000002";
@@ -355,6 +355,36 @@ final class ReceiptReferencePortTest {
             RuntimeException.class,
             () -> new ReceiptReferenceRepository(noSuppression.source()).find(ID)));
     assertEquals(0, disabled.getSuppressed().length);
+  }
+
+  @Test
+  void providerNullPointerFailureEscapesAfterRollbackAndOwnedClose() {
+    var supplied = new NullPointerException("synthetic result navigation failure");
+    Fixture fixture = new Fixture();
+    fixture.faults = Map.of(POINT_FIRST_NEXT, supplied);
+
+    var actual =
+        assertThrows(
+            NullPointerException.class,
+            () -> new ReceiptReferenceRepository(fixture.source()).find(ID));
+
+    assertSame(supplied, actual);
+    Conn connection = fixture.connections.getFirst();
+    assertEquals(0, connection.commits);
+    assertEquals(
+        List.of(
+            POINT_AUTO,
+            POINT_READONLY,
+            POINT_ISOLATION,
+            POINT_SELECT,
+            "bind1",
+            "query",
+            POINT_FIRST_NEXT,
+            POINT_ROW_CLOSE,
+            POINT_STATEMENT_CLOSE,
+            POINT_ROLLBACK,
+            POINT_CONNECTION_CLOSE),
+        connection.events);
   }
 
   @Test
