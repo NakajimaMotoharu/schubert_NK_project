@@ -142,6 +142,44 @@ class PublishedManifestPinsTest(unittest.TestCase):
                     result["unresolved"],
                 )
 
+    def test_malformed_declared_paths_are_not_counted_as_external_or_ignored(self):
+        expected = hashlib.sha256(INITIAL).hexdigest()
+        self.manifest(
+            {
+                "attempted": [
+                    {"path": " ", "sha256": expected},
+                    {"path": None, "sha256": expected},
+                    {"path": 12, "sha256": expected},
+                    {"path": [], "sha256": expected},
+                    {"path": "", "sha256": expected},
+                ],
+                "unobserved": {"path": None, "sha256": None},
+                "valid": pin(FIXTURE, INITIAL),
+                "external": pin("../public-fixture.txt", INITIAL),
+            }
+        )
+        self.git("add", ".")
+        staged = audit(self.repo, self.original, self.original, staged=True)
+        end = self.commit()
+        committed = audit(self.repo, self.original, end)
+
+        for result in (staged, committed):
+            with self.subTest(staged="stagedTree" in result):
+                self.assertEqual(1, result["current"])
+                self.assertEqual(1, result["externalOrProtected"])
+                self.assertEqual(
+                    [
+                        {
+                            "manifest": MANIFEST,
+                            "path": None,
+                            "sha256": expected,
+                            "source": None,
+                            "reason": "INVALID_EXPLICIT_PATH",
+                        }
+                    ],
+                    result["unresolved"],
+                )
+
     def test_current_tree_is_from_commit_and_never_from_worktree(self):
         self.manifest([pin(FIXTURE, INITIAL), pin(FIXTURE, INITIAL)])
         self.manifest([pin(FIXTURE, UPDATED)], "documents/manifest.json")
