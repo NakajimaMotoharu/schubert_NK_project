@@ -17,3 +17,7 @@ PT_DEFAULT対象は既whole ApiStopBudgetTestの同Fixture/await/own有限latch/
 PG22080のpreflightではApiStopBudgetの符号折返しは既差分演算/既010で正しく、Web BUG2409と同じabsolute比較不備ではなかった。LongSupplierを持つ22Mainの時間取得/期限判定の指定spanも点検したが、その22は旧2564のPMD synchronized22rawとは別集合。関連資源やnativeを実行せず、未読callee/全sourceの正当性へ昇格しない。今回の新原因は停止状態の別公開である。
 
 正常Main-only六module/NullAway、六静的、3sourceのPMD/Checkstyle/format、whole20/四counter/CRC/session/全source・Test・command・OS/JDK・真正exit・BUGを3634へ記録する。実caller/HOLD/CHR/native/451/正式1964-53/工数nullは別未完、BUG/YKTは必要動的callerが無ければOPENを維持する。
+
+## 停止公開中の後続待機を独立に観測
+
+BUG-3816／YKT-2974。PT-OPS-API-STOP019の後続workerが予算ownerを実際に待ったことを自己所有JDK threadのowner IDで確認する。固定時間に未完だけを期待した旧判定は未着手も受理する。先行時計が保持中に停止通知true、時計読取1、解放後の既60秒と総2回、以後停止通知trueを維持する。外部接続・停止操作なし。
