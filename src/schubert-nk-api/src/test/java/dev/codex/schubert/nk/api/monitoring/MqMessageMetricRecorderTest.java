@@ -491,7 +491,8 @@ class MqMessageMetricRecorderTest {
               return null;
             });
       }
-      for (var f : workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+      for (var f : workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS))
+        f.get(5, TimeUnit.SECONDS);
       for (int i = 0; i < 7; i++) {
         assertEquals(
             expected.get("A/" + i).longValue(),

@@ -481,7 +481,8 @@ class MqProcessingDurationMetricRecorderTest {
               return null;
             });
       }
-      for (var f : workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+      for (var f : workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS))
+        f.get(5, TimeUnit.SECONDS);
       for (String layout : List.of(SUBMIT_REQUEST_LAYOUT, QUESTION_WORK_LAYOUT))
         for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
           var value = summary(registry, layout, outcome);
@@ -490,8 +491,7 @@ class MqProcessingDurationMetricRecorderTest {
           assertEquals(sums.get(key) / 1e9, value.totalAmount(), 1e-12);
           assertEquals(max.get(key) / 1e9, value.max());
         }
-      new MqProcessingDurationMetricRecorder(
-              other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT))
+      new MqProcessingDurationMetricRecorder(other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT))
           .record(Outcome.SUCCESS, 250000000);
       assertEquals(1, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).count());
       assertEquals(.25, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).totalAmount());
