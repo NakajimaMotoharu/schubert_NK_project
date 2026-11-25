@@ -1,0 +1,116 @@
+{
+  "run": "PG45764",
+  "source": "816dd00eef33087c5e34072692d0f682197cd70b",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P017-05/2",
+  "terminalAtUTC": "2026-11-25T23:48:02.455193+00:00",
+  "actualExit": 0,
+  "originalSpec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4191_P01705全八artifact契約・独立期待値対応.md",
+    "sha256": "becede1c0497b93ef9611408f51a7acc3f47500598ddeed300116c922c92f8a2"
+  },
+  "directCurrentGitObjects": {
+    "BackupManifest": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+      "blob": "c542241b522833fe101de1dbb4d97dc972748331"
+    },
+    "BackupVersions": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+      "blob": "f79ed36724bdd7ad4fe878c9a20b18bfb8e28d21"
+    },
+    "BackupFileDigest": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java",
+      "blob": "da0753aa43e503862bcc44790550d4c372d89fd1"
+    },
+    "BackupManifestCodec": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+      "blob": "f60a0a043e603cf3430ec8aea330b7e288b862d8"
+    },
+    "BackupArtifactVerifier": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "blob": "98fbad2d10b0c0062199f5b43322f9e94ad6bffe"
+    },
+    "BackupCommitService": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "blob": "898d594ed77d77817f04bb74cfdc8286e035f075"
+    },
+    "BackupManifestPublisher": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java",
+      "blob": "c8edd992afe3359f63b7145441b379d21770aded"
+    },
+    "BackupManifestReader": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "blob": "38d3661390d7c33c6df0de59f9718c0f36852280"
+    },
+    "MorningBackupRetention": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRetention.java",
+      "blob": "4b6ca2cff46b6ebf600d44beb4117ba5d8b0a05d"
+    }
+  },
+  "originalOracleRows": 8,
+  "criteria": {
+    "P01705_ORACLE01": {
+      "status": "SCOPED",
+      "source": "BackupManifest / BackupFileDigest",
+      "proof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45762-current-metadata-codec-and-value-16/manifest.json",
+        "sha256": "a43cde6b69676325d94e5ea6ff56c5912c0b95d1f84a5e6cf0f5d44dd17b3953"
+      }
+    },
+    "P01705_ORACLE02": {
+      "status": "SCOPED",
+      "source": "BackupVersions",
+      "proof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45762-current-metadata-codec-and-value-16/manifest.json",
+        "sha256": "a43cde6b69676325d94e5ea6ff56c5912c0b95d1f84a5e6cf0f5d44dd17b3953"
+      }
+    },
+    "P01705_ORACLE03": {
+      "status": "SCOPED",
+      "source": "BackupManifestCodec",
+      "proof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45762-current-metadata-codec-and-value-16/manifest.json",
+        "sha256": "a43cde6b69676325d94e5ea6ff56c5912c0b95d1f84a5e6cf0f5d44dd17b3953"
+      }
+    },
+    "P01705_ORACLE04": {
+      "status": "OWNER_EXECUTION_NEEDED",
+      "source": "BackupArtifactVerifier",
+      "evidenceDoesNotProve": "current retained file and inode pair; actual device and root owner"
+    },
+    "P01705_ORACLE05": {
+      "status": "SCOPED_AND_HOLD",
+      "source": "BackupCommitService",
+      "proof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45674-current-backup-pair-commit-sixteen-unfiltered/manifest.json",
+        "sha256": "7ce27da614d7e666e1c5ec8de9c703c89fc158549d8b91314506cf2161dd52b3"
+      },
+      "otherRequired": "Actual JDBC and reviewer; BackupStepRepository.readTerminal not executed"
+    },
+    "P01705_ORACLE06": {
+      "status": "OWNER_EXECUTION_NEEDED",
+      "source": "BackupManifestPublisher",
+      "evidenceDoesNotProve": "actual create-once, durable sync and canonical readback"
+    },
+    "P01705_ORACLE07": {
+      "status": "OWNER_EXECUTION_NEEDED",
+      "source": "BackupManifestReader",
+      "evidenceDoesNotProve": "same owner for readback and retention descriptor"
+    },
+    "P01705_ORACLE08": {
+      "status": "OWNER_EXECUTION_NEEDED",
+      "source": "MorningBackupRetention",
+      "evidenceDoesNotProve": "actual seven retained, current bundle protected, independent durable delete postcondition"
+    }
+  },
+  "backup18Separate": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+    "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+  },
+  "originalExecsCombined": false,
+  "actualDbRetainedFileOrRemoval": false,
+  "newTests": 0,
+  "cumulativeProductTrialsGross": 3133,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
