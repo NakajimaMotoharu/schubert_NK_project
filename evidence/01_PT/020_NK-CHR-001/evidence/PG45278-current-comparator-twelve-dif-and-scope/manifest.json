@@ -1,0 +1,128 @@
+{
+  "run": "PG45278",
+  "source": "2b7e1aca03a9041cd5104535bd41ee8207743311",
+  "toolSource": "4f69b6a033f8ffeee6c61352962a51116f112291",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P020-01.02/2",
+  "terminalAtUTC": "2026-11-25T13:05:42.209720+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "actualToolTrials": 12,
+  "cumulativeScopeToolTrials": 193,
+  "qualifiedToolSuccesses": 192,
+  "productEvidenceAdded": 0,
+  "currentScope": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45278-current-chr-comparator-twelve-dif-and-scope-v2/begin.json",
+    "sha256": "86038e55d144038c0d825ac7b6a1fee1eb5a8ec2c5877ad222cb649d840e1b2a"
+  },
+  "currentEnd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45278-current-chr-comparator-twelve-dif-and-scope-v2/terminal.json",
+    "sha256": "70b3d0547b5ab0368f12618645eaab652019841410e5ea1b3aa4a92ae0c95b42"
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45278-current-chr-comparator-twelve-dif-and-scope-v2/junit/TEST-junit-jupiter.xml",
+    "sha256": "2ed6ea30713bb90ed1d0d5cfcfc379525ce27d437e524cd00aabf971e33f37f9"
+  },
+  "archive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45228-chr-current-quality-package/source/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "e1f199c78f69b490e95474cf7d1ccf8ed6d359120b66c23eb14f0afd6b03f03e"
+  },
+  "olderArchiveNotCombined": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "earlierSameArchiveDifferentScope": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45228-current-definition-quality-ninety/manifest.json",
+    "sha256": "c0dca7c4b5b68886132d725dffcc036be10b013df6c38b6a8f60e4ad3a1ad224"
+  },
+  "protectedCurrentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45278-current-chr-comparator-twelve-dif-and-scope-v2/raw.log",
+    "sha256": "b83193ef6e6604fbb27727ec95e4933fe6f0513f4c4bebc6b35e807f64398048"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45278-current-chr-comparator-twelve-dif-and-scope-v2/unit.exec",
+    "sha256": "3c2f65561eade5f80a96e06a7930983ce1b7c4f248b0b3714448cbf92162eb0d"
+  },
+  "rawMissAndHit": {
+    "INSTRUCTION": [
+      118,
+      1814
+    ],
+    "BRANCH": [
+      53,
+      139
+    ],
+    "LINE": [
+      12,
+      367
+    ],
+    "COMPLEXITY": [
+      56,
+      88
+    ],
+    "METHOD": [
+      7,
+      41
+    ],
+    "CLASS": [
+      0,
+      2
+    ]
+  },
+  "exactCases": [
+    {
+      "method": "rejectsCurrentRunCaseReportedAsNkOnly",
+      "expected": "CATALOG_CURRENT:CHR-A01"
+    },
+    {
+      "method": "rejectsNkOnlyCaseReportedAsCurrentRun",
+      "expected": "CATALOG_CURRENT:CHR-N01"
+    },
+    {
+      "method": "rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare",
+      "expected": "CATALOG_DUPLICATE:CHR-A01"
+    },
+    {
+      "method": "rejectsReorderedApprovedCatalogCasesWithAllArtifactsPresent",
+      "expected": "CATALOG_CASE_ORDER"
+    },
+    {
+      "method": "rejectsAnUnapprovedCaseAtTheSameCatalogSize",
+      "expected": "CATALOG_CASE_IDS"
+    },
+    {
+      "method": "rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize",
+      "expected": "DIF_RULE_IDS"
+    },
+    {
+      "method": "rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch",
+      "expected": "DIF_DUPLICATE:DIF-001"
+    },
+    {
+      "method": "requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift",
+      "expected": "CHR-U02の検索title観測欠落"
+    },
+    {
+      "method": "leavesNonBrandTitleChangeUnregistered",
+      "expected": "CHR-U02無申告の別title差"
+    },
+    {
+      "method": "requiresTheSecondMediaCaseToReportItsOwnRangeStatus",
+      "expected": "CHR-M07単独のrange観測必須"
+    },
+    {
+      "method": "refusesTheGameChangeClaimAtAnotherField",
+      "expected": "CHR-S02変更handler以外の項目を拒否"
+    },
+    {
+      "method": "requiresAnExplicitEmptySearchObservation",
+      "expected": "CHR-S04空表示観測必須"
+    }
+  ],
+  "methodSelectionPreflightTrials": 0,
+  "actualCurrentOrNk": 0,
+  "currentBaselineChange": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
