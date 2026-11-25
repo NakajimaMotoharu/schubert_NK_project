@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -171,12 +172,13 @@ final class GateSyntheticRunPortTest {
     ObjectNode item = (ObjectNode) JSON.readTree(invalid.resolve(FIRST + A01).toFile());
     item.put(STATUS, "FAIL");
     JSON.writeValue(invalid.resolve(FIRST + A01).toFile(), item);
-    try (var workers = Executors.newFixedThreadPool(2)) {
-      var first = workers.submit(() -> validate(valid));
-      var second = workers.submit(() -> validate(invalid));
-      assertTrue(first.get().passed());
-      assertFalse(second.get().passed());
-      assertTrue(second.get().failures().contains("run1_STATUS:CHR-A01"));
+    try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
+      var first = workers.executor().submit(() -> validate(valid));
+      var second = workers.executor().submit(() -> validate(invalid));
+      assertTrue(first.get(5, TimeUnit.SECONDS).passed());
+      var failed = second.get(5, TimeUnit.SECONDS);
+      assertFalse(failed.passed());
+      assertTrue(failed.failures().contains("run1_STATUS:CHR-A01"));
     }
     assertTrue(validate(valid).passed());
   }

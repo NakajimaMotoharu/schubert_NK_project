@@ -1,0 +1,8 @@
+# 比較二fixtureの有限待機と独立結果
+
+NK-CHR-001、WBS-P020-01.03/2、SS354/355、BUG-3906/YKT-2997。対象はGateSyntheticRunPortTestとGateBaselineMetadataTestの各並行method。既存CharacterizationTestWorkersが二workerを停止し、最大10秒待つ。各Futureの待機は最大5秒。JVMの既定Executor終了待機を使用しない。
+
+- 合成treeの並行操作は一方のPASSを維持し、もう一方から固定のA01ステータス異常を確認する。入力treeと比較reportの固定期待値は従来どおり。
+- メタデータ並行操作は、正常な24件のframeと、ローカルで23件に変えたframeを同時に確認する。後者の期待値はBASELINE_CASE_COUNT、正常側は永続して空の診断。二入力が混ざらないことを実結果で確認する。
+
+JDK25で二methodだけ選ぶ。既正規工具・固定SDK・93合成資源、CharacterizationTestWorkersの固定sourceを使用。書式・型付きcompile・選択結果・hash・終了値は105とmanifestに記録。実Current/NK、外部環境、製品PG/PTと全体451を別に維持する。

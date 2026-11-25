@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -168,11 +169,11 @@ final class GateBaselineMetadataTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, 0).put(CASE_COUNT, 23);
-    try (var workers = Executors.newFixedThreadPool(2)) {
-      var first = workers.submit(() -> validate(valid));
-      var second = workers.submit(() -> validate(invalid));
-      assertEquals(List.of(), first.get());
-      assertTrue(second.get().contains(CASE_FAILURE));
+    try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
+      var first = workers.executor().submit(() -> validate(valid));
+      var second = workers.executor().submit(() -> validate(invalid));
+      assertEquals(List.of(), first.get(5, TimeUnit.SECONDS));
+      assertTrue(second.get(5, TimeUnit.SECONDS).contains(CASE_FAILURE));
     }
     assertEquals(List.of(), validate(valid));
   }
