@@ -8,22 +8,23 @@ import java.util.concurrent.TimeUnit;
 
 /** Bounded cleanup for test-owned Protocol workers (BUG-3911/YKT-2997). */
 public final class ProtocolFixtureWorkers implements AutoCloseable {
-  private final ExecutorService executor;
+  private final ExecutorService ownedExecutor;
 
   public ProtocolFixtureWorkers(ExecutorService executor) {
-    this.executor = Objects.requireNonNull(executor, "executor");
+    this.ownedExecutor = Objects.requireNonNull(executor, "executor");
   }
 
   public ExecutorService executor() {
-    return executor;
+    return ownedExecutor;
   }
 
   @Override
   public void close() {
-    executor.shutdownNow();
+    ownedExecutor.shutdownNow();
     try {
       assertTrue(
-          executor.awaitTermination(10, TimeUnit.SECONDS), "Protocol fixture workers did not stop");
+          ownedExecutor.awaitTermination(10, TimeUnit.SECONDS),
+          "Protocol fixture workers did not stop");
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException(

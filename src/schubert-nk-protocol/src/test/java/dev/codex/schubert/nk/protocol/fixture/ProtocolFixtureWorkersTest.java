@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 final class ProtocolFixtureWorkersTest {
+  private static final List<String> EXPECTED_CLEANUP = List.of("cancel", "10 SECONDS");
+
   @Test // PT-PRO-WORKER001
   void timeoutIsSuppressedAfterAnAssertionAndSurfacedOnItsOwn() {
     var executor = new StalledExecutor(false);
@@ -29,11 +31,17 @@ final class ProtocolFixtureWorkersTest {
     assertSame(primary, actual);
     assertEquals(1, actual.getSuppressed().length);
     assertEquals(AssertionFailedError.class, actual.getSuppressed()[0].getClass());
-    assertEquals(List.of("cancel", "10 SECONDS"), executor.calls);
+    assertEquals(EXPECTED_CLEANUP, executor.calls);
 
     var stalled = new StalledExecutor(false);
-    assertThrows(AssertionFailedError.class, new ProtocolFixtureWorkers(stalled)::close);
-    assertEquals(List.of("cancel", "10 SECONDS"), stalled.calls);
+    assertThrows(
+        AssertionFailedError.class,
+        () -> {
+          try (var workers = new ProtocolFixtureWorkers(stalled)) {
+            assertSame(stalled, workers.executor());
+          }
+        });
+    assertEquals(EXPECTED_CLEANUP, stalled.calls);
   }
 
   @Test // PT-PRO-WORKER002
@@ -55,7 +63,7 @@ final class ProtocolFixtureWorkersTest {
       assertEquals(IllegalStateException.class, actual.getSuppressed()[0].getClass());
       assertSame(executor.interruption, actual.getSuppressed()[0].getCause());
       assertTrue(Thread.currentThread().isInterrupted());
-      assertEquals(List.of("cancel", "10 SECONDS"), executor.calls);
+      assertEquals(EXPECTED_CLEANUP, executor.calls);
     } finally {
       Thread.interrupted();
     }
