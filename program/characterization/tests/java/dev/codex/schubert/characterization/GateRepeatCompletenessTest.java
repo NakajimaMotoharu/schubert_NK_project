@@ -27,7 +27,7 @@ final class GateRepeatCompletenessTest {
     Path second = capture("second", 26);
     Path accepted = temporaryDirectory.resolve("complete-match.json");
     GateCli.compareCurrent(first, second, accepted);
-    assertReport(accepted, "PASS", 28, List.of());
+    assertReport(accepted, "PASS", 28, List.of(), List.of(), List.of());
 
     Files.writeString(second.resolve(FIRST_ARTIFACT), "{\"value\":\"bb\"}");
     Path rejected = temporaryDirectory.resolve("complete-difference.json");
@@ -35,7 +35,7 @@ final class GateRepeatCompletenessTest {
         assertThrows(
             IllegalStateException.class, () -> GateCli.compareCurrent(first, second, rejected));
     assertEquals(REPEAT_FAILED, failure.getMessage());
-    assertReport(rejected, "FAIL", 28, List.of("case-00.json"));
+    assertReport(rejected, "FAIL", 28, List.of(), List.of(), List.of("case-00.json"));
   }
 
   @Test
@@ -45,9 +45,25 @@ final class GateRepeatCompletenessTest {
     Path second = capture("second", 25);
     Path output = temporaryDirectory.resolve("incomplete-match.json");
     var failure =
-        assertThrows(IllegalStateException.class, () -> GateCli.compareCurrent(first, second, output));
+        assertThrows(
+            IllegalStateException.class, () -> GateCli.compareCurrent(first, second, output));
     assertEquals(REPEAT_FAILED, failure.getMessage());
-    assertReport(output, "FAIL", 27, List.of());
+    assertReport(output, "FAIL", 27, List.of(), List.of(), List.of());
+  }
+
+  @Test
+  @DisplayName("PT-CHR-G03-REPEAT-003 an equal-size rename reports a missing and an extra file")
+  void equalCompleteCaptureWithARenameReportsEachSideOfTheDifference() throws Exception {
+    Path first = capture("first", 26);
+    Path second = capture("second", 26);
+    Files.move(
+        second.resolve(FIRST_ARTIFACT), second.resolve("artifacts").resolve("renamed.json"));
+    Path output = temporaryDirectory.resolve("complete-rename.json");
+    var failure =
+        assertThrows(
+            IllegalStateException.class, () -> GateCli.compareCurrent(first, second, output));
+    assertEquals(REPEAT_FAILED, failure.getMessage());
+    assertReport(output, "FAIL", 28, List.of("case-00.json"), List.of("renamed.json"), List.of());
   }
 
   private Path capture(String name, int artifactCount) throws IOException {
@@ -63,14 +79,22 @@ final class GateRepeatCompletenessTest {
   }
 
   private static void assertReport(
-      Path file, String status, int observedCount, List<String> changed) throws IOException {
+      Path file,
+      String status,
+      int observedCount,
+      List<String> missing,
+      List<String> extra,
+      List<String> changed)
+      throws IOException {
     var expected = JSON.createObjectNode();
     expected.put("status", status);
     expected.put("expectedFileCount", 28);
     expected.put("firstFileCount", observedCount);
     expected.put("secondFileCount", observedCount);
-    expected.putArray("missing");
-    expected.putArray("extra");
+    var missingItems = expected.putArray("missing");
+    missing.forEach(missingItems::add);
+    var extraItems = expected.putArray("extra");
+    extra.forEach(extraItems::add);
     var changedItems = expected.putArray("changed");
     changed.forEach(changedItems::add);
 
