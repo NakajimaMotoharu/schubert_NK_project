@@ -77,7 +77,7 @@ final class StorageFixtureWorkersTest {
   private static ExecutorService executor(List<String> calls, Termination termination) {
     return (ExecutorService)
         Proxy.newProxyInstance(
-            StorageFixtureWorkersTest.class.getClassLoader(),
+            ClassLoader.getPlatformClassLoader(),
             new Class<?>[] {ExecutorService.class},
             (ignored, method, args) -> {
               calls.add(method.getName());
