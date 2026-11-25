@@ -1,0 +1,281 @@
+{
+  "run": "PG44738",
+  "source": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "priorProductionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "priorPmd": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44736-api-port-and-context-value-static/manifest.json",
+    "sha256": "f3ea469fac447db4556942455985f3db09b495585dd72fd05e6dea46678cf2f6"
+  },
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "WBS-P007-03/2"
+  ],
+  "terminalAtUTC": "2026-11-25T00:50:58.256697+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3808",
+  "horizontalId": "YKT-2966",
+  "issueCommit": "402ce4f24e7ea213eb184ceef1628d0273f2c63b",
+  "fixCommit": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "changedProductionPath": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+    "sha256": "fb73b80c161461f8d7cf3d147dca7c4e3d357262ef3458dfb105787ce2806067"
+  },
+  "sourceDifference": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java"
+  ],
+  "otherPreviouslySavedTestChanges": [
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationMixedClaimsTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributesValueTest.java"
+  ],
+  "confirmedPureTests": 6,
+  "failures": 0,
+  "skipped": 0,
+  "errors": 0,
+  "currentResumeExecuted": 848,
+  "currentResumeApplicableSuccess": 726,
+  "publishedCoverageScope": "ContextHash plus two emitted inner types. DigestOperations has two declarations and no bytecode; no manual excludes.",
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/raw.out",
+    "sha256": "01f2ac37f7ae7feece81fb523c1b68d53806678bd07c474a71f584532a1677e6"
+  },
+  "rawByPhysical": [
+    {
+      "member": "dev/codex/schubert/nk/api/security/ContextHash",
+      "crc": "fb09c0662cd0bb31",
+      "realData": true,
+      "counts": {
+        "INSTRUCTION": [
+          0,
+          73
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          17
+        ],
+        "COMPLEXITY": [
+          0,
+          3
+        ],
+        "METHOD": [
+          0,
+          3
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/security/ContextHash$DigestOperations",
+      "crc": "c43f868b15438c42",
+      "realData": false,
+      "counts": {
+        "INSTRUCTION": [
+          0,
+          0
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          0
+        ],
+        "COMPLEXITY": [
+          0,
+          0
+        ],
+        "METHOD": [
+          0,
+          0
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/security/ContextHash$JdkOperations",
+      "crc": "f6e7167c127fb0bb",
+      "realData": true,
+      "counts": {
+        "INSTRUCTION": [
+          0,
+          15
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          5
+        ],
+        "COMPLEXITY": [
+          0,
+          3
+        ],
+        "METHOD": [
+          0,
+          3
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/unit.exec",
+    "sha256": "8b36aca0ab5c76680c783a66c14d2139f6e5f8266093bde797d28b8a6e0b9646"
+  },
+  "counters": {
+    "LINE": 22,
+    "METHOD": 6,
+    "CLASS": 2,
+    "BRANCH": 0,
+    "INSTRUCTION": 88
+  },
+  "unfilteredNoMiss": true,
+  "coverageUnion": false,
+  "publicAbiIdentical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/publicAbiAfter.out",
+    "sha256": "318cd5410192d3f914360f48131c3444a2d05ce50d31d28818980f120f0efe2a"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/report/TEST-junit-jupiter.xml",
+    "sha256": "c80af60977ea9862eea34e0b2a1f94185df790c0a3226da617a9debf960d8947"
+  },
+  "ordinaryTestIdMapping": {
+    "PT-AUT-005-MON": "bug036CallerMonitorCannotBlockSharedDigest",
+    "PT-AUT-005-H01": "asciiVectorsAndConcurrentCallsDoNotShareDigestState",
+    "PT-AUT-005-H02": "unavailableMandatoryDigestPreventsStartupAndRestoresProviders",
+    "PT-AUT-HASH-OWN001": "hashOwn001DigestAndFormatFailuresEraseOwnedBytesAndReleasePrivateLock",
+    "PT-AUT-HASH-OWN002": "hashOwn002NullOperationsFailBeforeAnySecretAcquisition",
+    "PT-AUT-HASH-OWN003": "hashOwn003AsciiAndDigestBoundariesUseFixedVectorAndDoNotBorrowCallerMonitor"
+  },
+  "scopePins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-nullaway-v2/begin.json",
+      "sha256": "1ce318f6b09c790a36c53d4e649c79e1cac747d085937f5171430e595cceae56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-spotbugs/begin.json",
+      "sha256": "1fd29b31edc58167945bc062db3a6c346fa97922dc15258de219174034d8522f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-pmd/begin.json",
+      "sha256": "30681bdfb9ef4f138dcb11b4fdb8e5a419743c756464a0c75d67f2ee57bdf16c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-source-style/begin.json",
+      "sha256": "5fce6f8deb635b9e760ac97f889c2fd6e5b0900b63b02290faecff49ec5cd8c2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/begin.json",
+      "sha256": "241623dc90b2d83cc1685d1e24697495e40b792d91c54e47c8386c70d171bc5b"
+    }
+  ],
+  "terminalPins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-nullaway-v2/terminal.json",
+      "sha256": "06202f81a8a3d151bba98ce8e3c0ed866902421c32c67858ac1fcebac2b7f9a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-spotbugs/terminal.json",
+      "sha256": "e5954317b366e79fb5b8ccaa0f918a28cc110ff4115111c6a1378581e82b4418"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-private-lock-pmd/terminal.json",
+      "sha256": "dc9c65cf958a2ba4509c5120ff3189a022c440f7e6756c74f90daf1c6dfc1ea4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-source-style/terminal.json",
+      "sha256": "b936bf5a49599660732d61c92be55cc30196c3a2ab646beca43725447485a655"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44738-context-hash-existing-six-coverage/terminal.json",
+      "sha256": "ec0785c6066a109fd96af7c474fb558a9fb0b9f650a07b59c16da78fad6a6fac"
+    }
+  ],
+  "priorDisjointTechnologiesNotRuntimeReused": false,
+  "configuredNullAway": 2,
+  "physicalSpotBugs": 4,
+  "appliedPmdSources": 2,
+  "checkstyleFiles": 1,
+  "sourceFormatting": 0,
+  "horizontalCurrent": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+      "sha256": "fb73b80c161461f8d7cf3d147dca7c4e3d357262ef3458dfb105787ce2806067",
+      "balancedLockPairs": 1,
+      "applicablePriorProof": null,
+      "changedNow": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "sha256": "b742768678f98f3bf36d4ac46eb82a064c52ad787669ffed6809c86b56e4bf48",
+      "balancedLockPairs": 3,
+      "applicablePriorProof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41374-p01810-auth-context-ownership-independent-v1/manifest.json",
+        "sha256": "377a5ff92b8ae03f9a424997d13346c155bed1cad361638d70f1987837b923ec"
+      },
+      "changedNow": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadCodec.java",
+      "sha256": "a370d5dfad29a81c5faec572084043a6f0402b74e33db63a35c609d828f49886",
+      "balancedLockPairs": 3,
+      "applicablePriorProof": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG44722-session-json-strict-end-and-envelope-current/manifest.json",
+        "sha256": "30e26c9152f602b58c67a7043cbc52274507a6deb1e963e771bbf926e24e3078"
+      },
+      "changedNow": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java",
+      "sha256": "1d7fa0b563266650d4935afb59ef7309f81be8491e59e4bd18f59b3fbbf5a750",
+      "balancedLockPairs": 3,
+      "applicablePriorProof": {
+        "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG44690-current-web-log-codec-static/manifest.json",
+        "sha256": "c8143e219106866ab888eb2475e71bf8ef98f8c91d5f8b8f74dfb05b88d3f4e4"
+      },
+      "changedNow": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java",
+      "sha256": "bdedaea6e5a6caa6dc84cc581d999792399c222cdea2cf86670489438461103c",
+      "balancedLockPairs": 1,
+      "applicablePriorProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44728-current-metric-observation-independent-proofs/manifest.json",
+        "sha256": "95c74ca186e143ea35f8039518622cf0d08d3f75f9a9502881bd43ce6c362a9c"
+      },
+      "changedNow": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+      "sha256": "52ac3392ec528b30edc59dd3add2d74fdb578fbe2642e81b08d3b00cd284b964",
+      "balancedLockPairs": 1,
+      "applicablePriorProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44728-current-metric-observation-independent-proofs/manifest.json",
+        "sha256": "95c74ca186e143ea35f8039518622cf0d08d3f75f9a9502881bd43ce6c362a9c"
+      },
+      "changedNow": false
+    }
+  ],
+  "excludedParentMonitor": "WipingByteArrayOutputStream must follow inherited buffer contract, YKT-032",
+  "realAuthDbCredentialsOrCaddyOperations": 0,
+  "normalApiJarApplicability": "API packaging and formal same-source six product suite are not yet measured; other production paths unchanged.",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "localScopeOnly": true
+}
