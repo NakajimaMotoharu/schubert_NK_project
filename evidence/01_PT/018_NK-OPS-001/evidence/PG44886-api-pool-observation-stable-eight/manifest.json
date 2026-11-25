@@ -1,0 +1,159 @@
+{
+  "run": "PG44886",
+  "wbs": "WBS-P018-09/2",
+  "relatedWbs": [
+    "WBS-P004-05/2"
+  ],
+  "source": "309991f8c23ecab7ea31cf5713d2d655960b88a3",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:03:12.224452+00:00",
+  "originalCaseEight": [
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead004NullOwnersAreRejectedBeforeAnyGetter()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead002TrueZeroWithPositiveMaximumIsKnownNotMissing()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead001FourBorrowedGettersHaveIndependentValuesAndExactCalls()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead003InvalidStatisticsRemainUnknownNotZero()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead006MaximumIntegersBecomeExactLongsWithoutSumOrWrap()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead008LaterGetterValuesAndSeparateOwnersCannotMutateSnapshots()",
+      "nonPass": []
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest",
+      "name": "poolRead005ProviderFailuresPreserveIdentityWithoutRetryOrLaterGetters()",
+      "nonPass": []
+    }
+  ],
+  "caseAuthority": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25382-api-pool-observation-whole16-independent-v1/testcases.safe.xml",
+    "sha256": "babb0255c5d1ae340bc95811e529e0800c3e7c350905f26152c1fa6d8d38ddfc"
+  },
+  "originalIndependentlyVerified": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25382-api-pool-observation-whole16-independent-v1/manifest.json",
+    "sha256": "6eadf97663153f033b14254af944c538482ddf5f6859feefced1d1a5ff634f64"
+  },
+  "currentTypedContext": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44882-api-memory-http-all-twenty-five/manifest.json",
+    "sha256": "432dd2f4897953d8f1080b0b83011796830ce1fd26db8ec438e89635fa27c29e"
+  },
+  "directFixedSourceAndSdk": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java",
+      "sha256": "238a440449f9b0cb5302514261a290adf21749073dccfdde7eddf2ed0c5025df"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java",
+      "sha256": "9e3ef2251b559d4905787fe5ebf2154857e9190b03f54f0f26bb7363ddd78cfc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+      "sha256": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c"
+    },
+    {
+      "HikariCP-7.1.0.jar": "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b",
+      "jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "physicalMainExact": {
+    "DbPoolMetricObservation": {
+      "sha256": "425e05f35248d3248386bfb13ac2f40349cab0ce5e151ad0629935efcd19792f",
+      "crc64": "bcc936c51a579ded"
+    },
+    "DbPoolMetricRecorder$Counts": {
+      "sha256": "ff4f3d1fdad3b2a3259f4308910956510098dd41545c0a2402682fe849846f47",
+      "crc64": "2e1e8387f818d8d9"
+    },
+    "DbPoolMetricRecorder": {
+      "sha256": "58a88a076e477ae7719a1fe9be444b19ba5789030eccd438e53958a950b35c87",
+      "crc64": "6238e84975bc9945"
+    },
+    "DbPoolMetricRecorder$State": {
+      "sha256": "d9baa87093cc828ae23ab0b17bcc7a7a1fec80f519afd2356901d295a2c21b7e",
+      "crc64": "c2418589b505c301"
+    }
+  },
+  "fixtureCodeComparisons": [
+    {
+      "lhs": {
+        "path": "../pgpt-runs/PG379/pg25378-api-pool-observation-original-whole16-v1/classes/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.class",
+        "sha256": "f6f77242e993f912707e1dcdb8bf9330ddc3ed497c8d198c8b1088f7bb6cd9bc"
+      },
+      "rhs": {
+        "path": "../pgpt-runs/PG379/PG44882-current-api-memory-http-full25/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.class",
+        "sha256": "b6062cf9b4ce2e8749a1dbb163421947ce12d1bb527d7af70f212a98d0c15bf2"
+      },
+      "disassemblySha256": "6bc79b8a56bcafcd18958b14b601fb5ec4d3640746ad5d42bad0088ffedc7a77",
+      "physicalEqual": false
+    },
+    {
+      "lhs": {
+        "path": "../pgpt-runs/PG379/pg25378-api-pool-observation-original-whole16-v1/classes/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest$Fixture.class",
+        "sha256": "7be50c096e719468ba222e4ff0d74ac06cf99f76c94053490fe49b58d712704d"
+      },
+      "rhs": {
+        "path": "../pgpt-runs/PG379/PG44882-current-api-memory-http-full25/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest$Fixture.class",
+        "sha256": "65233c5e0e4dcbd56cc75c678a26b2cb1eeabcaaabccd758f46e70f1b5c7501f"
+      },
+      "disassemblySha256": "59fa5977065c9b9010831dddc64c671b80882126e72340d9c68c1ff2c12c5a3d",
+      "physicalEqual": false
+    }
+  ],
+  "codeOracle": "Same entire JDK javap -p -c -s -constants executable rendering after normalizing only constant-pool indices; debug physical difference retained.",
+  "originalOwnClassCountersFromSixteen": {
+    "INSTRUCTION": {
+      "covered": 47,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 8,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 9,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 6,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 2,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "otherCollectorFromOriginalNotApplicable": true,
+  "newProductTests": 0,
+  "independentActualPoolOrDB": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
