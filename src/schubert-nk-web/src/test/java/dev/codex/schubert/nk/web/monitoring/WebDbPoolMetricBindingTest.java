@@ -11,12 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest.Fixture;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
 import org.junit.jupiter.api.Test;
 
 /** 1825 WEBPOOLB001..010: public typed getter fixtures only, no actual pool/DB. */
@@ -446,7 +449,8 @@ final class WebDbPoolMetricBindingTest {
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
     var secondEntered = new CountDownLatch(1);
-    var secondThread = new AtomicReference<Thread>();
+    var firstThreadId = new AtomicLong();
+    var secondThreadId = new AtomicLong();
     f.beforeActive =
         () -> {
           entered.countDown();
@@ -456,20 +460,31 @@ final class WebDbPoolMetricBindingTest {
       var binding = binding(f, registry, DEBUG_MODE);
       var workers = Executors.newFixedThreadPool(2);
       try {
-        var first = workers.submit(binding::refresh);
+        var first =
+            workers.submit(
+                () -> {
+                  firstThreadId.set(Thread.currentThread().threadId());
+                  binding.refresh();
+                });
         await(entered);
         var second =
             workers.submit(
                 () -> {
-                  secondThread.set(Thread.currentThread());
+                  secondThreadId.set(Thread.currentThread().threadId());
                   secondEntered.countDown();
                   binding.refresh();
                 });
         await(secondEntered);
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30);
-        while (secondThread.get().getState() != Thread.State.BLOCKED
-            && System.nanoTime() < deadline) Thread.onSpinWait();
-        assertEquals(Thread.State.BLOCKED, secondThread.get().getState());
+        var threads = ManagementFactory.getThreadMXBean();
+        var waiter = threads.getThreadInfo(secondThreadId.get());
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+        while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
+            && System.nanoTime() < deadline) {
+          LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+          waiter = threads.getThreadInfo(secondThreadId.get());
+        }
+        assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
+        assertFalse(second.isDone());
         assertEquals(List.of(ACTIVE_STATE), f.calls);
         release.countDown();
         first.get(30, TimeUnit.SECONDS);

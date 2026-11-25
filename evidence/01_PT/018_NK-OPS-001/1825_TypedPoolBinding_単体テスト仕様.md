@@ -15,7 +15,7 @@ NK-OPS-001/RD171 MON010～013/UI252/SS311342351/PG-D621、group2055/主P018-09�
 |POOLB007|fixture変異・snapshot借用|last snapshotは不変、次refreshだけ更新・鮮度証明ではない|
 |POOLB008|実部品context Consumer接続、二render|承認family四値が固定literalで変化、SDKはcontextだけclose/借用bean controls0|
 |POOLB009|四getter Integer.MAX_VALUE|long/doubleへ正確、clamp/wrap/0補完0|
-|POOLB010|own二worker・first getter latch/second BLOCKED|同一retained collectorがserialize、四read×二回/series4。親は解放後にFuture/getter確認、30秒上限・sleepなし|
+|POOLB010|二workerを所有。先行getterをlatchで保持し後続refreshを開始|5秒以内に後続の待ち先が先行workerと一致し、後続Futureは未完了、getterは先行active一度。解放後は四getterの固定順が二回で四系列。両Future・executorは30秒以内に回収（BUG-3810／YKT-2968）|
 |MHTTP020|新binding→context refresh→既Handler二memory GET|200/ready1/approved値・UTF8 byte長/header/close1、max0後はNaN/empty snapshot（0へ偽装0）|
 
 期待はSS承認name/tag、API/Web固定数値・four read順序、NaN/真0の区別、元例外identity/owner、明示HTTP header/status/byte長の独立算出。production refresh/renderでexpectedを生成しない。snapshot/daemon/source不変をactual runtime生存・全scrape atomic/freshness/healthと誤認しない。
