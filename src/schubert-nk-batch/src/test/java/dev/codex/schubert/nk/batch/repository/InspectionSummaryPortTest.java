@@ -310,10 +310,10 @@ final class InspectionSummaryPortTest {
   void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag()
       throws ExecutionException, InterruptedException, TimeoutException {
     boolean parentFlag = Thread.currentThread().isInterrupted();
-    var worker = Executors.newSingleThreadExecutor();
-    try {
+    try (var worker = new BoundedJdbcTestWorkers(Executors.newSingleThreadExecutor(), 5)) {
       for (boolean before : List.of(false, true)) {
         worker
+            .executor()
             .submit(
                 () -> {
                   Fixture fixture = new Fixture();
@@ -332,9 +332,6 @@ final class InspectionSummaryPortTest {
                 })
             .get(5, TimeUnit.SECONDS);
       }
-    } finally {
-      worker.shutdownNow();
-      assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(parentFlag, Thread.currentThread().isInterrupted());
   }

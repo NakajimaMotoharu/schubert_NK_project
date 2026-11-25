@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
-/** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..009; no database or native calls. */
+/** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..010; no database or native calls. */
 final class RunReferenceRepositoryPureJdbcTest {
   private static final String STATEMENT_CLOSE = "statement.close";
   private static final String ROW_GET_OBJECT = "row.getObject";
@@ -295,23 +296,62 @@ final class RunReferenceRepositoryPureJdbcTest {
   @Test
   void independentConnectionsCanRunConcurrently()
       throws ExecutionException, InterruptedException, TimeoutException {
-    var executor = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var workers =
+        new BoundedJdbcTestWorkers(Executors.newVirtualThreadPerTaskExecutor(), 10)) {
       List<Future<Boolean>> results = new ArrayList<>();
       for (int index = 0; index < 32; index++) {
         results.add(
-            executor.submit(
-                () -> {
-                  var fixture = new Fixture();
-                  var result = fixture.read(RUN);
-                  fixture.closed();
-                  return result.identityConsistent() && !result.anyReference();
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var fixture = new Fixture();
+                      var result = fixture.read(RUN);
+                      fixture.closed();
+                      return result.identityConsistent() && !result.anyReference();
+                    }));
       }
       for (var result : results) assertTrue(result.get(10, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void retainedReadKeepsTheOriginalFailureWhenWorkersDoNotTerminate() {
+    for (long timeout : new long[] {5, 10}) {
+      var events = new ArrayList<String>();
+      var executor =
+          proxy(
+              ExecutorService.class,
+              (name, args) ->
+                  switch (name) {
+                    case "shutdownNow" -> {
+                      events.add("cancel");
+                      yield List.of();
+                    }
+                    case "awaitTermination" -> {
+                      assertEquals(timeout, args[0]);
+                      assertSame(TimeUnit.SECONDS, args[1]);
+                      events.add("wait");
+                      yield false;
+                    }
+                    case "isShutdown" -> false;
+                    default -> throw new AssertionError("unexpected executor call: " + name);
+                  });
+      var primary = new AssertionError("original retained read verification");
+      var observed =
+          assertThrows(
+              AssertionError.class,
+              () -> {
+                try (var workers = new BoundedJdbcTestWorkers(executor, timeout)) {
+                  assertFalse(workers.executor().isShutdown());
+                  throw primary;
+                }
+              });
+      assertSame(primary, observed);
+      assertEquals(List.of("cancel", "wait"), events);
+      assertEquals(1, primary.getSuppressed().length);
+      assertEquals(
+          "JDBC fixture workers did not terminate", primary.getSuppressed()[0].getMessage());
     }
   }
 
