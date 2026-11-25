@@ -1,0 +1,117 @@
+{
+  "run": "PG44830",
+  "wbs": "WBS-P018-09/2",
+  "source": "4238906e324193090cbdaff24d68e90165a6111e",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T02:46:51.773624+00:00",
+  "apiCurrentFixtureSource": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+      "sha256": "5e7aef1ed9441e0eb26db2229bb70ea77c2d3c7e2ddd68abf74938091d0cdb5b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java",
+      "sha256": "238a440449f9b0cb5302514261a290adf21749073dccfdde7eddf2ed0c5025df"
+    }
+  ],
+  "apiFreshCases": [
+    "apimhttp019SampledBindingUpdatesActualHttpBodyWithoutLifecycleTransfer",
+    "apimhttp015",
+    "apimhttp022ServiceDefaultSourceIsExplicitlyMissingAtHttpBoundary",
+    "apimhttp021DeferredFactoryReachesHttpWithoutReacquiringBorrowedReferences",
+    "apimhttp020TypedBorrowedPoolRefreshesIntoActualResponseWithoutControlOperations",
+    "apimhttp003"
+  ],
+  "actualCounts": {
+    "tests": 6,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "ordinaryExecuted": 6,
+  "applicable": 6,
+  "apiTyped": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-http-handler-nullaway/begin.json",
+      "sha256": "cde144ea3abc41cfe8538b62e390a823fd5b6cea2ee400c59400162804fd3d02"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-http-handler-nullaway/terminal.json",
+      "sha256": "c43708823b90562447855cdafa91f192732a407b042bc01b16d562616953c40f"
+    }
+  ],
+  "webTyped": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-web-http-handler-nullaway/begin.json",
+      "sha256": "6863fbfe3d49739b05177f5ecf94fdc691ffa4f28d8694d7bb0a2cf0700075d1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-web-http-handler-nullaway/terminal.json",
+      "sha256": "c2e9542ce93735339905e5e035b57964b87ca19c558fcbcdc9c95f52668a447a"
+    }
+  ],
+  "apiExplicitTestRun": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-memory-http-handler-delta-six/begin.json",
+      "sha256": "0036c215dff03f0aa168bc2de87eb72d949c97dbe0f72f56d7b910a7cc49841a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-memory-http-handler-delta-six/terminal.json",
+      "sha256": "b7b7025321c01d253510ebc04aeb2e4bc6dbbfbb4f5f98ef56c3c11c6bfb16d6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-memory-http-handler-delta-six/result/TEST-junit-jupiter.xml",
+      "sha256": "00a6b7c9226129777895bfd4eab9e43df521029510bf8f202304032ad06115b5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-memory-http-handler-delta-six/unit.exec",
+      "sha256": "9bc11059e2eb4a0628d5343cc27dcb795285b20e1d21dd8baec4e9d5ce858ebd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44830-api-memory-http-handler-delta-six/raw.out",
+      "sha256": "d53899a2a06b5424f248cd5d9578551046a1b9155fd274d3e956e78afd09d38d"
+    }
+  ],
+  "handlerOnlyRaw": {
+    "INSTRUCTION": {
+      "hit": 86,
+      "miss": 29
+    },
+    "BRANCH": {
+      "hit": 2,
+      "miss": 4
+    },
+    "LINE": {
+      "hit": 26,
+      "miss": 10
+    },
+    "COMPLEXITY": {
+      "hit": 4,
+      "miss": 3
+    },
+    "METHOD": {
+      "hit": 4,
+      "miss": 0
+    },
+    "CLASS": {
+      "hit": 1,
+      "miss": 0
+    }
+  },
+  "earlier25OnlyHistoricalOrReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42160-p01809-api-memory-exchange-owner-v1/manifest.json",
+    "sha256": "7320d305a6fc7b4cc5f18c42d0353925c139263a201ce1942c1019c3de8c2eef"
+  },
+  "priorOldCoverageNotAggregated": true,
+  "apiOwnedClosure": "changed ExactDurationMeterRegistry and DbPoolMetricCollector. Same physical handler and three fixture classes; focused branch measurements for changed routes.",
+  "webScope": "NullAway only; executing existing large fixture would introduce Tomcat connector and external servlet dependency closure not qualified here",
+  "declaredReasons": [
+    "Web service fixture imports Connector and WebRequestTrace",
+    "No test body or fixture is cut from a held scenario",
+    "No candidate full Web JAR admitted"
+  ],
+  "runtimeNetworkSocketJmsDbActual": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0
+}
