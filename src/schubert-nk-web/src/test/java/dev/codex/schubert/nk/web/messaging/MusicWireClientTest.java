@@ -27,6 +27,7 @@ import dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
 import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException.Reason;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
@@ -328,13 +329,12 @@ class MusicWireClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
         futures.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   String type =
                       List.of(MUSIC_CATEGORY_KIND, MUSIC_SECTION_KIND, MUSIC_TRACK_KIND).get(n % 3);
@@ -347,9 +347,6 @@ class MusicWireClientTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, observed.size());
     assertEquals(0, wire.pendingCount());

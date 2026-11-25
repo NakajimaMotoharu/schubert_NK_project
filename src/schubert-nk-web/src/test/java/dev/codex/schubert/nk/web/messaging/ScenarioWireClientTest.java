@@ -33,6 +33,7 @@ import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import dev.codex.schubert.nk.web.messaging.ScenarioWireException.Reason;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
@@ -497,13 +498,12 @@ class ScenarioWireClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Future<?>>();
       for (int n = 0; n < 100; n++) {
         int index = n;
         tasks.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   String context = String.format(Locale.ROOT, "%064x", index + 1);
                   active.set(context);
@@ -521,9 +521,6 @@ class ScenarioWireClientTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(100, seen.size());
     assertEquals(100, sent.size());

@@ -23,6 +23,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory;
 import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException.Reason;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
@@ -320,13 +321,12 @@ class AnimationWireClientTest {
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
             WAIT);
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int index = i;
         futures.add(
-            pool.submit(
+            workers.submit(
                 () -> {
                   var context =
                       AuthenticationContext.of(String.format(Locale.ROOT, "%064x", index + 1));
@@ -341,9 +341,6 @@ class AnimationWireClientTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, observed.size());
     assertEquals(0, wire.pendingCount());
