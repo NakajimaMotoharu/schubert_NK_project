@@ -271,7 +271,8 @@ class AsyncJobMetricRecorderTest {
                         return read == first || read == second;
                       })
               .toList();
-      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertTrue(result.get());
       assertEquals(15, first.totalJobs());
       recorder.record(second);
       assertSame(second, recorder.snapshot().orElseThrow());
@@ -314,7 +315,8 @@ class AsyncJobMetricRecorderTest {
             });
     assertSame(primary, observed);
     assertEquals(1, observed.getSuppressed().length);
-    assertEquals("async metric fixture workers did not stop", observed.getSuppressed()[0].getMessage());
+    assertEquals(
+        "async metric fixture workers did not stop", observed.getSuppressed()[0].getMessage());
     assertEquals(List.of("shutdownNow", "awaitTermination"), calls);
   }
 
@@ -328,7 +330,8 @@ class AsyncJobMetricRecorderTest {
         }
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
-        throw new IllegalStateException("async metric fixture worker termination interrupted", interrupted);
+        throw new IllegalStateException(
+            "async metric fixture worker termination interrupted", interrupted);
       }
     }
   }
