@@ -1,0 +1,406 @@
+{
+  "run": "PG44872",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "b7b6e8cb7b5f026e1bb45e5840b6d385f36bb358",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:41:27.965292+00:00",
+  "checkstyleBaseline": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44386-f03-checkstyle-all-admitted-current-sources/manifest.json",
+    "sha256": "87d6ce48045d11107c559f01fe9342736123d30805d8675bb13efd98574e9b3e"
+  },
+  "baselinePinnedSource": "acabe9d3f85018dafd3ff03990bcffb5ee83d681",
+  "sameRules": {
+    "path": "tools/quality/static/checkstyle.xml",
+    "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "sameAnalyzer": {
+    "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+    "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+  },
+  "scopePreflight": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44386-current-f03-checkstyle-lineage/preflight.json",
+    "sha256": "4b0737e2c2d9a5810496e2fa9cc38e4f011d0f79e662e8c1b490d24e51d571f6"
+  },
+  "rosterDenominator": "Tracked Java paths under six products; held source bodies neither read nor processed.",
+  "partitionByModule": {
+    "protocol": {
+      "main": {
+        "tracked": 169,
+        "admittedUnchanged": 169,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 169,
+        "held": 0
+      },
+      "test": {
+        "tracked": 41,
+        "admittedUnchanged": 41,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 41,
+        "held": 0
+      }
+    },
+    "storage": {
+      "main": {
+        "tracked": 25,
+        "admittedUnchanged": 25,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 25,
+        "held": 0
+      },
+      "test": {
+        "tracked": 38,
+        "admittedUnchanged": 36,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 36,
+        "held": 2
+      }
+    },
+    "bootstrap": {
+      "main": {
+        "tracked": 88,
+        "admittedUnchanged": 87,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 87,
+        "held": 1
+      },
+      "test": {
+        "tracked": 128,
+        "admittedUnchanged": 127,
+        "exactChangedOrNew": 1,
+        "withSuccessfulReceipt": 128,
+        "held": 0
+      }
+    },
+    "api": {
+      "main": {
+        "tracked": 286,
+        "admittedUnchanged": 281,
+        "exactChangedOrNew": 2,
+        "withSuccessfulReceipt": 283,
+        "held": 3
+      },
+      "test": {
+        "tracked": 340,
+        "admittedUnchanged": 332,
+        "exactChangedOrNew": 4,
+        "withSuccessfulReceipt": 336,
+        "held": 4
+      }
+    },
+    "web": {
+      "main": {
+        "tracked": 262,
+        "admittedUnchanged": 260,
+        "exactChangedOrNew": 1,
+        "withSuccessfulReceipt": 261,
+        "held": 1
+      },
+      "test": {
+        "tracked": 322,
+        "admittedUnchanged": 313,
+        "exactChangedOrNew": 9,
+        "withSuccessfulReceipt": 322,
+        "held": 0
+      }
+    },
+    "batch": {
+      "main": {
+        "tracked": 203,
+        "admittedUnchanged": 203,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 203,
+        "held": 0
+      },
+      "test": {
+        "tracked": 327,
+        "admittedUnchanged": 301,
+        "exactChangedOrNew": 0,
+        "withSuccessfulReceipt": 301,
+        "held": 26
+      }
+    }
+  },
+  "main": {
+    "tracked": 1033,
+    "withSuccessfulReceipt": 1028,
+    "held": 5
+  },
+  "test": {
+    "tracked": 1196,
+    "withSuccessfulReceipt": 1164,
+    "held": 32
+  },
+  "exactCurrentInputDelta": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailRenderingTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/terminal.json",
+        "sha256": "0d90317bc309c3f80c8af8e15dcc21b67abd18dbe24b2459307b5304eb1c6e27"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/checkstyle-plan.json",
+        "sha256": "33bda599de7d0115373db493622331d78dc6fe0761aea8206dd2a4571d4353e5"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44394-notification-cancelled-dom-before/checkstyle.xml",
+        "sha256": "250a584875defda95411ded626381c3619e1b92615c2afbb3013a80362432048"
+      },
+      "blob": "2d7f5dd1c54d037564c2320ac9abe192587b592c"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedRenderingTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44406-question-accepted-read-only-one/terminal.json",
+        "sha256": "4bd817d2d6f9082012b70c4f5a7ea046577a6c5194bfa81189f91bf0993155cd"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44406-question-accepted-read-only-one/checkstyle-plan.json",
+        "sha256": "7fa5481cfc3cbd6358557bc067b7f2c9ae3f246b65427d45d3506e6c8aa2a23e"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44406-question-accepted-read-only-one/checkstyle.xml",
+        "sha256": "4ec544d62f5a618c0fd01edc3b186d7a7d6599d326970e4043ab68f9d1d18d7a"
+      },
+      "blob": "5a318c22ce743e4baa5f4196f127db46e740f431"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44426-current-question-required-label-fixture-static/terminal.json",
+        "sha256": "76b49114c18341d5acac3982c640a6bf5b1289d7f6a72d3ae5a0e4618f01c6b3"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44426-current-question-required-label-fixture-static/checkstyle-plan.json",
+        "sha256": "03f061fdf29649cddca6729cc95dc0bdc6f51912be02cca282b38f8fb0d46766"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44426-current-question-required-label-fixture-static/checkstyle.xml",
+        "sha256": "39b70ed3b332e7203c430ca51de093ba971d1ac25f73ddc0439ff911c77e437f"
+      },
+      "blob": "0b2cfb0927449a2a34feca3138ed4992d72b47e4"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ErrorTemplateResourcePortTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44432-error-page-production-type/terminal.json",
+        "sha256": "cbbc7ab5391929a852308edcc8f1b327114c1c406430567f9c0c31464025dccf"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44432-error-page-production-type/checkstyle-plan.json",
+        "sha256": "506b697109a56e6012b0f7a33ce7728c0841fda805b1ee1342048b8f48a7e45f"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44432-error-page-production-type/checkstyle.xml",
+        "sha256": "e0efddc9262d593cd940d84c9ba2a762d73f364c9e30b5ee44dc4bdc11cf3182"
+      },
+      "blob": "c93dfec64e3082699c3370e82435ec8501e040ed"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NavigationLandmarkResourceTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44452-navigation-fixture-source-quality/terminal.json",
+        "sha256": "2bcb036ab0130d6a8800dd1f2852e516bd54f2f2736ce2e1885fe6d9987dbb4d"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44452-navigation-fixture-source-quality/checkstyle-plan.json",
+        "sha256": "be44284fff89bdb37d0b61a94cd8c343a949936b0d286736f81327db2a194fac"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44452-navigation-fixture-source-quality/checkstyle.xml",
+        "sha256": "5234a853a210590c8e27121f4107d6e976c9b4afb356ba8eb7f8651f9eb3ab6b"
+      },
+      "blob": "e38740594135deafaeffdb7ec12159c8fd7b0e98"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NarrowListTableResourceTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44492-narrow-table-source-quality/terminal.json",
+        "sha256": "de8b8d245904dcb80fcb3a1bd33bad2ac95b5e6c558c99541c9dfdc76c26f0ae"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44492-narrow-table-source-quality/checkstyle-plan.json",
+        "sha256": "e384d237f80057e05b1577d6d86de6cf6526b8a32fe2461da09b39b4834a6a5f"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44492-narrow-table-source-quality/checkstyle.xml",
+        "sha256": "2cfa96361736bc2bd1aa1d41152aabfaf8755532631567e8bdb15fe95b8ca682"
+      },
+      "blob": "0a5f768d3f37c365835f3d2355a0f4edadc03fab"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/RequiredFormLabelResourceTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44504-warning-secondary-fixture-quality/terminal.json",
+        "sha256": "c86e434a7820fdfd941380dde34268c4b709388364c667781f914956e07754cd"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44504-warning-secondary-fixture-quality/checkstyle-plan.json",
+        "sha256": "bb40640edfb9be55e9aa1ee91cba71da22653b1eeedacd36b5fc2e542bbbcf25"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44504-warning-secondary-fixture-quality/checkstyle.xml",
+        "sha256": "7c8c8d67a7153a5e934cff704195c2c997a299893820d46a6a568763de4e1466"
+      },
+      "blob": "fa1dc61d1b5ea4489003d5d4e249321293fc50f6"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44550-fingerprint-enum-only-source-quality/terminal.json",
+        "sha256": "3c32336eb6804437578c3736c239115f5ffc57017ce7d6ec0de204ade08109a0"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44550-fingerprint-enum-only-source-quality/checkstyle-plan.json",
+        "sha256": "99b07c3d313f790805be51bbe421de79a2dbc1472ce8801e235db5aab6ef57ce"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44550-fingerprint-enum-only-source-quality/checkstyle.xml",
+        "sha256": "8973642e7504444cd7dac65208140fe623f4ee416970d10d6407738a32de577b"
+      },
+      "blob": "6b40580120f23c136079b84e5f60a17723358efb"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/terminal.json",
+        "sha256": "f90a1e3a6340237bbefe4c2187f6b136fa49d69294f16cf49fcd4c051219b297"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/checkstyle-plan.json",
+        "sha256": "7fe88326838973d233aa68eb9092c3384462d5ca4da6352f8ed50a4acd64d5fd"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/checkstyle.xml",
+        "sha256": "ab74686ca6ba488cb9cd3180daa3c6154a29c302d05eb375a2d8da25e2cfb864"
+      },
+      "blob": "2c78d098e895233b0882bd3e3ea9c6c1ff6aa9c8"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/terminal.json",
+        "sha256": "f90a1e3a6340237bbefe4c2187f6b136fa49d69294f16cf49fcd4c051219b297"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/checkstyle-plan.json",
+        "sha256": "7fe88326838973d233aa68eb9092c3384462d5ca4da6352f8ed50a4acd64d5fd"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44584-buffer-diagnostic-source-style/checkstyle.xml",
+        "sha256": "ab74686ca6ba488cb9cd3180daa3c6154a29c302d05eb375a2d8da25e2cfb864"
+      },
+      "blob": "7b8a67095ad4bb0ef85225d231d24aceeb276cad"
+    },
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationMixedClaimsTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44612-migration-assets-mixed-claims/terminal.json",
+        "sha256": "6a48a8ef79733312258d445a9f9259823eb78c3557be73c7a27efd7da060b61f"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44612-migration-assets-mixed-claims/checkstyle.plan.json",
+        "sha256": "c91a5ad5267211669992b9820d7468c16a578bb58e6b4719ab17782e3a47ca04"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44612-migration-assets-mixed-claims/checkstyle.xml",
+        "sha256": "97939babef880047efd204644a9eaaadf6e63f783cd4b3317730c768ed3db354"
+      },
+      "blob": "641ff13c7cb812b0595f3a435358b00cf92596fb"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributesValueTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44648-current-session-attributes-final/terminal.json",
+        "sha256": "afd697a229bc939a4b79737f4ee997809f0ff633d77636988432f1ca763fae03"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44648-current-session-attributes-final/checkstyle.plan.json",
+        "sha256": "2e6583e8f7cf63d90fd1464a202de281fb69b95cc9355dd129b9356a36a55506"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44648-current-session-attributes-final/checkstyle.xml",
+        "sha256": "ed78962b3de2f6ecd963ef9711af067980a93f3855862667226198b41f24e9e6"
+      },
+      "blob": "464bd971bac603615c267d74c1df296b75802d36"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44738-context-hash-source-style/terminal.json",
+        "sha256": "b936bf5a49599660732d61c92be55cc30196c3a2ab646beca43725447485a655"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44738-context-hash-source-style/checkstyle-plan.json",
+        "sha256": "2a9dd5f5f41f3d2f47b9e54e36c46f72a2814d01e4c7a50b81a5d583e802d458"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44738-context-hash-source-style/checkstyle.xml",
+        "sha256": "acf342d4a7a363ba79e1f4451d581f345deaca3a1864dc0604cc6b9f068f6818"
+      },
+      "blob": "db5e14b6825ae0618c22bc15ec2d64dc1c36e1a9"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBindingTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/terminal.json",
+        "sha256": "b2213f85ec7575c52cb6697a2e9ff73eb994e7febcad75e306a3107093861413"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/checkstyle-plan.json",
+        "sha256": "9d12c1a36b1f550fe4a33355b0c6eb3bb3cea91f5d39d3c42555a816a8a86376"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/checkstyle.xml",
+        "sha256": "7eda7ef99526fb427e56eeb9fec087323f6daa6d0c68148eaea770aa7f81154d"
+      },
+      "blob": "9b66c26308312f4a9fa4bd9e956bd4e511b654a5"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBindingTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/terminal.json",
+        "sha256": "b2213f85ec7575c52cb6697a2e9ff73eb994e7febcad75e306a3107093861413"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/checkstyle-plan.json",
+        "sha256": "9d12c1a36b1f550fe4a33355b0c6eb3bb3cea91f5d39d3c42555a816a8a86376"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44818-current-two-binding-fixtures-style/checkstyle.xml",
+        "sha256": "7eda7ef99526fb427e56eeb9fec087323f6daa6d0c68148eaea770aa7f81154d"
+      },
+      "blob": "3de8366e579bc4fcbdc50521673eb355c8c76f69"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44838-current-receipt-cleanup-style/terminal.json",
+        "sha256": "7199229646bc6c42815250183b0c92273e8b7f19a4b46d5fabe4b33af42d4704"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44838-current-receipt-cleanup-style/checkstyle-plan.json",
+        "sha256": "602440e794b1cce4e8e34e9888d9f23f0aee50e1a41b5125f2b36ffecd8eb625"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44838-current-receipt-cleanup-style/checkstyle.xml",
+        "sha256": "91f9ca38f8f079591f16f8f8b200758b002bd337d826b575f0bf7dd16e5f96ce"
+      },
+      "blob": "b6822500a7e087899f8b02fc967d01ed78dfd4f9"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationOutcomeValuePortTest.java": {
+      "receipt": {
+        "path": "../pgpt-runs/PG379/PG44864-admin-value-fixture-style-final/terminal.json",
+        "sha256": "1597cb45d9e2610e2b13b86bb307794bbf9d56e20b54d5c88e5df6bc3f86fff0"
+      },
+      "plan": {
+        "path": "../pgpt-runs/PG379/PG44864-admin-value-fixture-style-final/checkstyle-plan.json",
+        "sha256": "08dd7e0f84cfb7ee2d023762e2549a1e991c7d939e7a82d1a7cd2c95ee82866b"
+      },
+      "xml": {
+        "path": "../pgpt-runs/PG379/PG44864-admin-value-fixture-style-final/checkstyle.xml",
+        "sha256": "86c41f0ec80a18abda096a402003918e47947415907ccb18a0b32b6b03e6300c"
+      },
+      "blob": "6d56fafbb649bdc2aa17c8327f7e14ff750f57f8"
+    }
+  },
+  "incomplete": {
+    "spotlessRoster": "Separate, requires exact configured formatter receipt for active inputs",
+    "wholeTyped": [
+      "NullAway",
+      "SpotBugs",
+      "PMD",
+      "whole 451"
+    ],
+    "formalOwnerAcknowledgement": null,
+    "previouslyHeldRoot11Unchanged": true
+  },
+  "checkstyleNewExecutions": 0,
+  "productPtNewExecutions": 0,
+  "sourceOnlyEvidenceNotToolGateUnification": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
