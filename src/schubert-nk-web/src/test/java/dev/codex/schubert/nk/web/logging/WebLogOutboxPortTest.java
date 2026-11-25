@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -452,8 +453,7 @@ final class WebLogOutboxPortTest {
 
   @Test
   void port020SharedRepositoryHasIndependentConcurrentJdbcState() throws Exception {
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var first = workers.submit(() -> readWorker(1));
       var second = workers.submit(() -> readWorker(2));
       var a = first.get(5, TimeUnit.SECONDS);
@@ -462,9 +462,6 @@ final class WebLogOutboxPortTest {
       assertEquals(2L, b.id());
       assertEquals(new UUID(0, 1), a.identity().messageId());
       assertEquals(new UUID(0, 2), b.identity().messageId());
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

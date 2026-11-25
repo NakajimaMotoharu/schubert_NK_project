@@ -32,3 +32,5 @@ Program NK-WEB-001/NK-MSG-002・WebLogOutboxRepository全method。canonical owne
 command: archived input/007_owned_web_outbox_unit.py prepare/static/run/post (新unused slotsだけ)、post後に047結果とmanifestへOS/JDK/tool/source/argv/exit/XML/coverage/CRC/exec/hashを記録。全line/method/class/branch100、normal全physicalと単一exec/sessionで確認。安易除外/合成0。静的指摘は適用性を個別根拠付き分類、抑制せず適用不備は是正。
 
 NPE排除: @NullMarked package/normal NullAway、constructor/境界null契約、collection row各欠落と正常fixture、NPEを製品で正常扱いcatchしない。並行=own2workerのstate分離、再送=MessageUK conflict/attempt/CASのSQL構造と戻値。実PostgreSQL SQL構文/row競合/commit、暗号真正性、broker/再送workerの実行、producer/ingest全体、Runtime/CHR/native/451全体/IT-STは本試験で受入しない。BUG/実績は結果へ追記。
+
+WLG-PORT-020（BUG-3865／YKT-2997）。従来の二worker、異なる保存IDと借用JDBCの固定期待、各Future期限を維持。有限共用補助で終了10秒と一次・抑制例外を管理する。PG45412の単独再試験と元23試験を別の実行として保存する。
