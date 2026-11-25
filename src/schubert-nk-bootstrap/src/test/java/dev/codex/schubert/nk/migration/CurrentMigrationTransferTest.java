@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +58,8 @@ final class CurrentMigrationTransferTest {
           "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
 
   @Test
-  void transfer001NormalCurrentReadPrecedesSameTargetCopyAndFinalization() throws Exception {
+  void transfer001NormalCurrentReadPrecedesSameTargetCopyAndFinalization()
+      throws NoSuchAlgorithmException, SQLException, IOException {
     var source = source();
     var target = target();
     var connection = target.connection();
@@ -94,7 +97,8 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer002EmptyFiveProjectionsAndSixCopiesRemainExplicit() throws Exception {
+  void transfer002EmptyFiveProjectionsAndSixCopiesRemainExplicit()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var source = empty();
     var target = MigrationMasterTargetPublisherTest.coordinatorFixture(true);
     var tables = new ArrayList<String>();
@@ -121,7 +125,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer003AllSevenNullsRejectBeforeBothPeersAreQueried() throws Exception {
+  void transfer003AllSevenNullsRejectBeforeBothPeersAreQueried() throws NoSuchAlgorithmException {
     for (int missing = 0; missing < 7; missing++) {
       final int field = missing;
       var source = source();
@@ -153,7 +157,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer004SameConnectionReferenceRejectsBeforeEitherQuery() throws Exception {
+  void transfer004SameConnectionReferenceRejectsBeforeEitherQuery() {
     var source = source();
     var c = source.connection();
     var a = assembler(false);
@@ -169,7 +173,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer005AutocommitTargetNeverReadsSource() throws Exception {
+  void transfer005AutocommitTargetNeverReadsSource() {
     var source = source();
     var target = target();
     target.autoCommit = true;
@@ -181,7 +185,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer006ReadOnlyTargetNeverReadsSource() throws Exception {
+  void transfer006ReadOnlyTargetNeverReadsSource() {
     var source = source();
     var target = target();
     target.readOnly = true;
@@ -193,7 +197,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer007EveryTargetAttributeFailurePropagatesUntouched() throws Exception {
+  void transfer007EveryTargetAttributeFailurePropagatesUntouched() {
     for (boolean readOnly : List.of(false, true))
       for (Throwable failure : failures()) {
         var source = source();
@@ -208,7 +212,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer008SourceAttributeFailuresNeverReachTargetSql() throws Exception {
+  void transfer008SourceAttributeFailuresNeverReachTargetSql() {
     for (String phase : List.of("auto:begin", "readonly:begin", "isolation:begin"))
       for (Throwable failure : failures()) {
         var source = source();
@@ -223,7 +227,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer009EachSourceQueryFaultStopsAllTargetWork() throws Exception {
+  void transfer009EachSourceQueryFaultStopsAllTargetWork() {
     for (int table = 0; table < 5; table++)
       for (Throwable failure : failures()) {
         var source = source();
@@ -238,7 +242,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer010EveryExpectedCountIsBoundToItsOwnReader() throws Exception {
+  void transfer010EveryExpectedCountIsBoundToItsOwnReader() {
     for (int index = 0; index < 5; index++) {
       var source = source();
       var target = target();
@@ -269,7 +273,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer011UnknownCurrentMappingCannotMutateTarget() throws Exception {
+  void transfer011UnknownCurrentMappingCannotMutateTarget() {
     var source = source();
     var target = target();
     source.tables.get(0).getFirst()[0] = Long.MIN_VALUE;
@@ -279,7 +283,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer012MediaClaimMismatchRejectsBeforeTargetPrepare() throws Exception {
+  void transfer012MediaClaimMismatchRejectsBeforeTargetPrepare() {
     var source = source();
     var target = target();
     var a = assembler(false);
@@ -300,7 +304,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer013InvalidSubmicrosecondTimeNeverMutatesTarget() throws Exception {
+  void transfer013InvalidSubmicrosecondTimeNeverMutatesTarget() {
     var source = source();
     var target = target();
     var a = assembler(false);
@@ -322,7 +326,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer014EveryCopyFailurePreservesIdentityAndNeverFinalizes() throws Exception {
+  void transfer014EveryCopyFailurePreservesIdentityAndNeverFinalizes() {
     for (int table = 0; table < 6; table++)
       for (Throwable failure : copyFailures()) {
         final int slot = table;
@@ -343,7 +347,7 @@ final class CurrentMigrationTransferTest {
                           if (index == slot) {
                             if (failure instanceof SQLException sql) throw sql;
                             if (failure instanceof IOException io) throw io;
-                            if (failure instanceof RuntimeException runtime) throw runtime;
+                            if (failure instanceof IllegalStateException runtime) throw runtime;
                             throw (Error) failure;
                           }
                           return rows.size();
@@ -355,7 +359,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer015CountMismatchAtEveryCopyStopsWithoutRetry() throws Exception {
+  void transfer015CountMismatchAtEveryCopyStopsWithoutRetry() {
     for (int table = 0; table < 6; table++) {
       final int slot = table;
       var source = source();
@@ -378,7 +382,7 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer016PrepareAndFinalFailuresDoNotRepeatSourceOrCopy() throws Exception {
+  void transfer016PrepareAndFinalFailuresDoNotRepeatSourceOrCopy() {
     for (int sql : List.of(0, 18, 19, 94))
       for (Throwable failure : failures()) {
         var source = source();
@@ -458,7 +462,8 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer019StatelessReuseKeepsIndependentResourcesAndRedaction() throws Exception {
+  void transfer019StatelessReuseKeepsIndependentResourcesAndRedaction()
+      throws NoSuchAlgorithmException, SQLException, IOException {
     var job = new CurrentMigrationTransfer();
     for (int i = 0; i < 2; i++) {
       var source = source();
@@ -480,7 +485,8 @@ final class CurrentMigrationTransferTest {
   }
 
   @Test
-  void transfer020FiniteParallelCallsNeverShareConnectionsOrMutableRows() throws Exception {
+  void transfer020FiniteParallelCallsNeverShareConnectionsOrMutableRows()
+      throws ExecutionException, InterruptedException, TimeoutException, NoSuchAlgorithmException {
     var job = new CurrentMigrationTransfer();
     var a = assembler(false);
     var media = List.copyOf(media());
@@ -548,7 +554,7 @@ final class CurrentMigrationTransferTest {
       CurrentMigrationProjectionTest.Fixture source,
       MigrationMasterTargetPublisherTest.Fixture target,
       MigrationCopyPort copy)
-      throws Exception {
+      throws SQLException, IOException, NoSuchAlgorithmException {
     return new CurrentMigrationTransfer()
         .transfer(
             source.connection(),
