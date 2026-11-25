@@ -271,9 +271,13 @@ final class ResourceScopeTest {
   }
 
   static void raise(Throwable value) throws IOException {
-    if (value instanceof IOException io) throw io;
-    if (value instanceof RuntimeException runtime) throw runtime;
-    throw (Error) value;
+    switch (value) {
+      case IOException io -> throw io;
+      case IllegalStateException state -> throw state;
+      case NullPointerException invariant -> throw invariant;
+      case Error error -> throw error;
+      default -> throw new AssertionError("Unexpected resource scope fixture failure");
+    }
   }
 
   static void fixed(StorageIoException actual, StorageIoException.Reason expected) {

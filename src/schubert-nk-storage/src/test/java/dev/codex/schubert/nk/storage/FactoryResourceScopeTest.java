@@ -635,10 +635,15 @@ final class FactoryResourceScopeTest {
 
   private static void raise(@org.jspecify.annotations.Nullable Throwable failure)
       throws IOException {
-    if (failure instanceof IOException io) throw io;
-    if (failure instanceof RuntimeException runtime) throw runtime;
-    if (failure instanceof Error error) throw error;
-    assertNull(failure, "fixture supports declared IO/Runtime/Error only");
+    switch (failure) {
+      case null -> {}
+      case IOException io -> throw io;
+      case IllegalStateException state -> throw state;
+      case IllegalArgumentException argument -> throw argument;
+      case NullPointerException invariant -> throw invariant;
+      case Error error -> throw error;
+      default -> throw new AssertionError("Unexpected factory resource scope fixture failure");
+    }
   }
 
   private static void fixed(StorageIoException failure, StorageIoException.Reason reason) {
