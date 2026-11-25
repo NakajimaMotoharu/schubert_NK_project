@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorderTest.Registry
 import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorderTest.Unformattable;
 import dev.codex.schubert.nk.web.monitoring.WebOutboxObservationRepositoryTest.Fixture;
 import dev.codex.schubert.nk.web.monitoring.WebOutboxObservationRepositoryTest.Row;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
 import java.time.Duration;
@@ -237,8 +238,7 @@ class WebOutboxMetricCollectorTest {
   void webObxConn006OwnedContenderReallyBlocksUntilReadonlyAcquisitionAndPublicationFinish()
       throws Exception {
     try (var registry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(2);
-      try {
+      try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(2), 5)) {
         var collector =
             new WebOutboxMetricCollector(
                 new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
@@ -297,9 +297,6 @@ class WebOutboxMetricCollectorTest {
         }
         first.complete();
         second.complete();
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
     }
   }
@@ -309,8 +306,7 @@ class WebOutboxMetricCollectorTest {
       throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8), 5)) {
         var collector =
             new WebOutboxMetricCollector(
                 new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
@@ -362,9 +358,6 @@ class WebOutboxMetricCollectorTest {
         f.complete();
         assertSame(selected, collector.snapshot().orElseThrow());
         values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
     }
   }

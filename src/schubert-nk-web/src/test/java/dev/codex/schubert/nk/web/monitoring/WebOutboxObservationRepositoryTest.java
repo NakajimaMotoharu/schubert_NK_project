@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder.Status;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -470,14 +471,10 @@ class WebOutboxObservationRepositoryTest {
             return actual.pending();
           });
     }
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(8), 5)) {
       var results = pool.invokeAll(tasks, 5, TimeUnit.SECONDS);
       for (int index = 0; index < 64; index++)
         assertEquals(index + 1L, results.get(index).get(5, TimeUnit.SECONDS));
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(5, TimeUnit.SECONDS));
     }
     var later = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 1, 3));
     assertEquals(
