@@ -1,5 +1,17 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-26 02:33 JST　比較工具の正規成果物と実CHRの前提
+
+製品Core `cf08e414be9f877b851a387704350d5e7c980209`。比較工具の当正規JARは17物理、SHA-256 `51fd608cc46efbe28c3dae6aa6af027b4b9af45dfa9349d3fe0cc141e1338a08`。収録区分の同名が片方の内容を隠さないよう修正し、固定合成6と欠落ディレクトリ1を別々に確認した。Current baseline（843de94）のGit treeは維持。正規GateCli六物理はSpotBugs指摘・欠落0、PMD生6は局所Mapの適用判断待ち。 [同名収録の合成証跡](../../../evidence/01_PT/020_NK-CHR-001/evidence/PG45460-current-chr-repeat-unique-input-name-gate/manifest.json) [現正規工具と欠落境界](../../../evidence/01_PT/020_NK-CHR-001/evidence/PG45462-current-chr-regular-tool-and-missing-directory/manifest.json) [静的裁定資料](../../../evidence/01_PT/020_NK-CHR-001/evidence/PG45466-current-repeat-map-rules-and-debug-classes/manifest.json)
+
+| 担当 | Linuxで取得する受入証拠 |
+| --- | --- |
+| ビルド／品質 | 正規六製品と配布の署名付きBOM、SS362の担当受領、六製品同一source/runの451と未成立QA-056／062・SSC-461の決着。 |
+| 環境／運用 | 許可済み現boot、Invocation・owner、実DB/JMS/FileStore、実効Caddy/HTTPS、起動から所有停止・独立後条件。Linuxの容量／性能・時刻・ログI/Oを実測する。 |
+| 互換性担当 | 承認済みCurrent定義・基準と同一版の比較工具を固定し、所有確認済みの新規専用出力から同条件の二runを照合。重複名、欠損、未承認差分を保持し、実NKのCHR-A01/L01と他必要ケースを相関した所定証跡で判定。QA-051 finalとDIF-001～016の境界を維持。 |
+
+正式16/190、四担当の新規受領0。IT/ST開始・完了の判定条件は引き続き未成立。 [現時点の四担当資料](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45458-current-acceptance-owner-delta/manifest.json)
+
 ## 現候補のLinux引継ぎ差分
 
 対象Core `cf08e414be9f877b851a387704350d5e7c980209`。正式PG/PTの受入と主管が承認した対象環境の確認後に、IT/STの開始を判定する。現候補の署名付きBOM、六製品の正規JAR、現source/runの全451、担当受領が前提。QA-056、QA-062、SSC-461、QA-061の配布について未成立の条件を四担当資料に保持する。ビルド・環境の役割と受領済み結果を別に記録する。 [四担当資料](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45332-four-owner-candidate-same-core-nov25/manifest.json)
