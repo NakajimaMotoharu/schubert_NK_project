@@ -1,0 +1,160 @@
+{
+  "run": "PG44960",
+  "source": "1f65fbc97c0f0d13e87a8ad82d495dbad7629c1c",
+  "currentProductCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T05:48:50.672694+00:00",
+  "actualExit": 1,
+  "wbs": "WBS-F03/2-2-b",
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44960-batch-run-repository-typed-two/begin.json",
+    "sha256": "917b45b5ece480188a2a114f42d3d92ad00bab41540afc61c8daeb3c34d37128"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44960-batch-run-repository-typed-two/terminal.json",
+    "sha256": "d8999acb7387abb36cf2b8100beef3ff6eedac02ed1696f3182aa02858c4445b"
+  },
+  "authorizationAndTarget": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44958-current-batch-twenty-six-differed-static-lineage/manifest.json",
+    "sha256": "225f08147db7a17093e1c340cffe2cd8e7a6164594c3f5192e04fb15e77c074d"
+  },
+  "originalAdmitted": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41140-f03-current-batch-admitted-typed-delta-v1/manifest.json",
+    "sha256": "f2156ae3c6cc696047e4db759781dd8278f4504abb4cee458c1c171e26dab2d5"
+  },
+  "currentNormalJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "byteScope": {
+    "target": 2,
+    "applicationAuxiliary": 13
+  },
+  "static": {
+    "findings": [
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      },
+      {
+        "type": "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE",
+        "priority": "2",
+        "rank": "18"
+      }
+    ],
+    "errors": 0,
+    "missing": 0,
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44960-batch-run-repository-typed-two/spotbugs.xml",
+      "sha256": "7b8edcb7232e6f100b343cd7cb9f58cfa75f7b88c60c818a9ff2f717f7adb885"
+    }
+  },
+  "findingTreatment": "Raw retained. Separate quality disposition is required for a nonzero analyzer finding.",
+  "noDriverOrDbOrExternalAccess": 0,
+  "newProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "exactSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sha256": "04024c0597717b5606d85b6e82b1054139f0fd6edb4e707b61fe273d6a5b372d"
+  },
+  "findingSites": [
+    {
+      "method": "abandon",
+      "line": 295,
+      "bytecodeIndex": 14,
+      "boundary": "PreparedStatement",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "finish",
+      "line": 141,
+      "bytecodeIndex": 80,
+      "boundary": "PreparedStatement",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "history",
+      "line": 231,
+      "bytecodeIndex": 37,
+      "boundary": "PreparedStatement",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "history",
+      "line": 238,
+      "bytecodeIndex": 87,
+      "boundary": "ResultSet",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "insert",
+      "line": 329,
+      "bytecodeIndex": 16,
+      "boundary": "PreparedStatement",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "insert",
+      "line": 343,
+      "bytecodeIndex": 181,
+      "boundary": "ResultSet",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "replayed",
+      "line": 380,
+      "bytecodeIndex": 16,
+      "boundary": "PreparedStatement",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    },
+    {
+      "method": "replayed",
+      "line": 387,
+      "bytecodeIndex": 60,
+      "boundary": "ResultSet",
+      "rawDisposition": "retained",
+      "qualityDisposition": null
+    }
+  ],
+  "perSiteTechnicalObservation": "Input guard for provider handles; retain the fixed diagnostic and do not assume a syntactically nullable/hostile or failed provider handle is a SQL empty row. Owner disposition needed.",
+  "existingTest": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunRepositoryTest.java",
+  "existingTestRerun": 0
+}
