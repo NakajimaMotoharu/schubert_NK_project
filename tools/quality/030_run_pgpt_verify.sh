@@ -18,8 +18,8 @@ require_clean_checkout() {
 require_recorded_checkout() {
     current_commit=$(git rev-parse HEAD) || return $?
     current_branch=$(git branch --show-current) || return $?
-    test "$source_commit" = "$current_commit" || return $?
-    test "$source_branch" = "$current_branch" || return $?
+    test "$source_commit" = "$current_commit" || return 1
+    test "$source_branch" = "$current_branch" || return 1
     require_clean_checkout
 }
 require_clean_checkout
