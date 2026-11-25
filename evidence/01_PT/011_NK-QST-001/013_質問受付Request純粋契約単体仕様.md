@@ -16,3 +16,5 @@ PT_DEFAULT、PMO961/event3995原1/3/6pp cap8。shared012/profile064 prepare/stat
 |PT-QST-PORT006|closeIsTerminalAndReturnedCanonicalStaysOwned|
 |PT-QST-PORT007|traceMetadataExcludedAndActorBodyIncluded|
 |PT-QST-PORT008|parallelCopiesAndControlledCloseKeepIndependentOwnership|
+
+BUG-3878／YKT-2997。PORT008のrequestを先に所有し、2 workerを先に有限終了してからrequestを閉じる。元8 copy、相互latchおよびFuture各10秒、呼出後の同値・close条件は維持。共用補助へ移したRID007／009／010と併せ、一候補の局所PTを確認。実鍵、JMS、DBを使用しない。

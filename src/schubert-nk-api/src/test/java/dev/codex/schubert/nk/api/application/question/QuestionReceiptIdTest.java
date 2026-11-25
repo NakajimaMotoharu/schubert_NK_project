@@ -18,7 +18,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -151,7 +150,7 @@ final class QuestionReceiptIdTest {
     Map<String, Integer> expected = new HashMap<>();
     for (String value : literalCycles) expected.put(value, 4);
     Map<String, Integer> actual = new HashMap<>();
-    try (var workers = new ReceiptWorkers(Executors.newFixedThreadPool(8))) {
+    try (var workers = new QuestionFixtureWorkers(Executors.newFixedThreadPool(8))) {
       List<Callable<QuestionReceiptId>> tasks = new ArrayList<>();
       for (int i = 0; i < 64; i++) tasks.add(generator::generate);
       // Holding the caller-visible monitor must not block the private generator lock.
@@ -208,7 +207,7 @@ final class QuestionReceiptIdTest {
                 return 0;
               });
       assertSame(failure, assertThrows(failure.getClass(), generator::generate));
-      try (var worker = new ReceiptWorkers(Executors.newSingleThreadExecutor())) {
+      try (var worker = new QuestionFixtureWorkers(Executors.newSingleThreadExecutor())) {
         assertEquals(
             "00000000000000000000000000",
             worker.submit(generator::generate).get(5, TimeUnit.SECONDS).value());
@@ -248,7 +247,7 @@ final class QuestionReceiptIdTest {
         assertThrows(
             IllegalStateException.class,
             () -> {
-              try (var worker = new ReceiptWorkers(pool)) {
+              try (var worker = new QuestionFixtureWorkers(pool)) {
                 worker.submit(() -> FORWARD);
               }
             });
@@ -257,25 +256,5 @@ final class QuestionReceiptIdTest {
     assertEquals("question receipt workers did not stop", actual.getSuppressed()[0].getMessage());
     assertEquals(1, shutdowns.get());
     assertEquals(1, waits.get());
-  }
-
-  private record ReceiptWorkers(ExecutorService executor) implements AutoCloseable {
-    <T> Future<T> submit(Callable<T> task) {
-      return executor.submit(task);
-    }
-
-    @Override
-    public void close() {
-      executor.shutdownNow();
-      try {
-        if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
-          throw new AssertionError("question receipt workers did not stop");
-        }
-      } catch (InterruptedException interrupted) {
-        Thread.currentThread().interrupt();
-        throw new IllegalStateException(
-            "question receipt worker termination interrupted", interrupted);
-      }
-    }
   }
 }
