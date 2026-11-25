@@ -1,0 +1,67 @@
+{
+  "run": "PG45024",
+  "source": "58cb2971f1207ca3b4370a9728176b53eec9569d",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-G08",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T07:26:57.301679+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3817",
+  "horizontal": "YKT-2975",
+  "firstIssueCommit": "15bbf42c10cf31dc27d316924693c443faad4045",
+  "tool": {
+    "path": "tools/quality/verify_published_manifest_pins.py",
+    "sha256": "429f7b1ce7459ade1b6be3fa7c1a013f386cc2c7be73a42aac835795db68fc67"
+  },
+  "fixture": {
+    "path": "tools/quality/tests/test_verify_published_manifest_pins.py",
+    "sha256": "137ad44676d433ca187ddfea830847087faee226b6d27f8ead31ee681276e8ab"
+  },
+  "testIds": {
+    "PT_OPS_PINTYPE001": "test_manifest_type_change_is_reported_in_both_git_snapshots",
+    "PT_OPS_PINTYPE002": "test_public_pin_requires_the_bytes_of_a_regular_git_file"
+  },
+  "before": {
+    "exit": 1,
+    "tests": 2,
+    "assertionFailures": 4,
+    "result": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45024-public-pin-file-types/before.log",
+      "sha256": "0cd16fef929970656189bb6a03832d011fd080dac90093059d27c9d202cdeabe"
+    }
+  },
+  "after": {
+    "exit": 0,
+    "tests": 47,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "result": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45024-public-pin-file-types/after.log",
+      "sha256": "09445b328f1baa1782788f4e24bf45bd3c380056d7f8f49da4e74a21926d3dc7"
+    }
+  },
+  "testsCommand": "PYTHONPATH=tools/quality:tools/quality/tests python3 -B -m unittest test_verify_published_manifest_pins test_wbs_index_binding test_static_input_scope",
+  "python": "3.14.4",
+  "git": "git version 2.53.0",
+  "publicSlice": {
+    "rangeStart": "e335c548a923304bc765ca3ef615609449d311e9",
+    "rangeEnd": "58cb2971f1207ca3b4370a9728176b53eec9569d",
+    "manifests": 25,
+    "current": 162,
+    "historical": 8,
+    "externalOrProtected": 106,
+    "unresolved": [],
+    "evidence": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45024-public-pin-file-types/public-slice.json",
+      "sha256": "e44c83d9b984219a8157d619e51e84a812a73105d1041b82fb9bb4daa50c7e21"
+    }
+  },
+  "eligibility": "synthetic three-scope tool tests and changed public Git manifest pins only",
+  "sourceProductionModified": 0,
+  "productTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
