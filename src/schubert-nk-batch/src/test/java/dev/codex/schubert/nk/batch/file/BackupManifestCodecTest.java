@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -258,16 +259,19 @@ final class BackupManifestCodecTest {
       throws IOException, InterruptedException, ExecutionException, TimeoutException {
     byte[] expected = golden();
     var value = manifest();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "backup manifest codec")) {
       var tasks = new ArrayList<Future<byte[]>>();
       for (int i = 0; i < 64; i++)
         tasks.add(
-            pool.submit(
-                () -> {
-                  assertEquals(value, BackupManifestCodec.decode(expected));
-                  return BackupManifestCodec.encode(value);
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      assertEquals(value, BackupManifestCodec.decode(expected));
+                      return BackupManifestCodec.encode(value);
+                    }));
       Set<byte[]> identities = Collections.newSetFromMap(new IdentityHashMap<>());
       for (var task : tasks) {
         byte[] actual = task.get(5, java.util.concurrent.TimeUnit.SECONDS);
@@ -275,9 +279,6 @@ final class BackupManifestCodecTest {
         assertTrue(identities.add(actual));
       }
       assertEquals(64, identities.size());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 

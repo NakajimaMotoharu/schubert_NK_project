@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.BatchStep;
 import java.time.Instant;
@@ -258,25 +259,25 @@ final class BackupManifestValuesTest {
   @Test
   void concurrentValueUse() throws InterruptedException, ExecutionException, TimeoutException {
     var value = manifest();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "backup manifest values")) {
       var work = new ArrayList<Future<String>>();
       for (int i = 0; i < 64; i++)
         work.add(
-            pool.submit(
-                () -> {
-                  assertEquals(713, value.totalBytes());
-                  assertEquals(712, value.configurationBytes());
-                  assertEquals(END, value.contentFinishedAt());
-                  return value.directoryName();
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      assertEquals(713, value.totalBytes());
+                      assertEquals(712, value.configurationBytes());
+                      assertEquals(END, value.contentFinishedAt());
+                      return value.directoryName();
+                    }));
       for (var f : work)
         assertEquals(
             "20260913-000002-12345678-9abc-def0-8123-456789abcdef",
             f.get(5, java.util.concurrent.TimeUnit.SECONDS));
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
