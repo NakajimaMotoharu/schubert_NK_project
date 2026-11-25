@@ -261,7 +261,6 @@ final class WebRequestTraceTest {
   }
 
   @Test
-  @SuppressWarnings("try")
   void req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit() throws Exception {
     var first = trace(new MockHttpServletRequest(), 6);
     var second = trace(new MockHttpServletRequest(), 7);
@@ -303,7 +302,6 @@ final class WebRequestTraceTest {
   }
 
   @Test
-  @SuppressWarnings("try")
   void req008HundredConcurrentRequestsDoNotCrossContaminate() throws Exception {
     try (var pool = new ViewFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor())) {
       var jobs = new ArrayList<Future<Integer>>();

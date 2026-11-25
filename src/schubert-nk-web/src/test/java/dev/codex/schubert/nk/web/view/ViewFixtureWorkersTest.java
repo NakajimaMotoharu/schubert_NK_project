@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.web.view;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -77,7 +76,10 @@ final class ViewFixtureWorkersTest {
                 }
               });
       assertSame(firstFailure, observed);
-      assertArrayEquals(new Throwable[] {cleanup}, observed.getSuppressed());
+      assertEquals(1, observed.getSuppressed().length);
+      var terminalFailure =
+          assertInstanceOf(IllegalStateException.class, observed.getSuppressed()[0]);
+      assertSame(cleanup, terminalFailure.getCause());
       assertTrue(Thread.currentThread().isInterrupted());
       assertEquals(WORKER_CALLS, executor.calls);
     } finally {

@@ -20,15 +20,19 @@ public final class ViewFixtureWorkers implements AutoCloseable {
     return executor.submit(task);
   }
 
+  public Future<?> submit(Runnable task) {
+    return executor.submit(task);
+  }
+
   @Override
-  public void close() throws InterruptedException {
+  public void close() {
     executor.shutdownNow();
     try {
       assertTrue(
           executor.awaitTermination(10, TimeUnit.SECONDS), "view fixture workers did not stop");
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
-      throw interrupted;
+      throw new IllegalStateException("Web fixture worker termination interrupted", interrupted);
     }
   }
 }

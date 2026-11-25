@@ -125,7 +125,6 @@ final class MenuAuditContractTest {
   }
 
   @Test
-  @SuppressWarnings("try")
   void menu005NestedMarkersDoNotInheritAndEachNoMqEventSelfCorrelates() throws Exception {
     var first = WebRequestTraceTest.trace(new MockHttpServletRequest(), 430);
     var second = WebRequestTraceTest.trace(new MockHttpServletRequest(), 431);
