@@ -1,0 +1,105 @@
+{
+  "run": "PG45082",
+  "source": "d7b748e42c3974c19914023dae04feda167dd324",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 4,
+  "terminalAtUTC": "2026-11-25T08:28:50.017550+00:00",
+  "scope": "TWO_REQUEST_METADATA_TARGETS",
+  "typedExisting": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44734-current-web-request-metadata-compile-only/manifest.json",
+    "sha256": "ccb80a6eec4fe3dd3195efb2ba348b8368ad5e9646dc12d1a70272cfac24414e"
+  },
+  "compiledInputs": 10,
+  "targetSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "sha256": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+      "sha256": "09758f7eb669d78245636629df215e1d3ce0345be0532385f4b27b2244df4f48"
+    }
+  ],
+  "targetPhysical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44734-current-web-request-trace-nullaway/target/classes/dev/codex/schubert/nk/web/logging/WebRequestTrace.class",
+      "sha256": "bb4b12d9c9812cfbb449e6838b11660204ef8b94ab3affc2d3cf02d9eb9d48c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44734-current-web-request-trace-nullaway/target/classes/dev/codex/schubert/nk/web/security/WebRequestContext.class",
+      "sha256": "aef693443bc47a8e0b93f320357b5d006f924da1dc417070839359a96401963b"
+    }
+  ],
+  "rawPmdExit": 4,
+  "rawPmdFindings": [
+    {
+      "line": 64,
+      "rule": "AvoidUsingVolatile",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "cross-dispatch visibility of immutable Optional actor value"
+    },
+    {
+      "line": 137,
+      "rule": "CloseResource",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "borrowed ThreadLocal reference, no scope acquisition in this method"
+    },
+    {
+      "line": 188,
+      "rule": "DoNotUseThreads",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "existing caller Thread identity retained; creates no thread"
+    },
+    {
+      "line": 194,
+      "rule": "DoNotUseThreads",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "records current caller; creates no thread"
+    },
+    {
+      "line": 202,
+      "rule": "CompareObjectsWithEquals",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "same Thread ownership by reference; creates no thread"
+    },
+    {
+      "line": 202,
+      "rule": "DoNotUseThreads",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "same Thread ownership by reference; creates no thread"
+    },
+    {
+      "line": 205,
+      "rule": "CompareObjectsWithEquals",
+      "name": "WebRequestTrace.java",
+      "roleAssessment": "scope stack must check exact owning instance by identity"
+    }
+  ],
+  "rawSpotbugsExit": 0,
+  "rawSpotbugsFindings": 0,
+  "toolErrors": 0,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45082-current-web-request-metadata-static/begin.json",
+    "sha256": "1b51175a5644aa85900913a625e9645655d0850c0735a5491c6db47b9859cfb7"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45082-current-web-request-metadata-static/terminal.json",
+    "sha256": "aed07a09b221044aec3d288783e77431b908ca5ec5266fdc46f6a955e2c64254"
+  },
+  "xml": {
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45082-current-web-request-metadata-static/pmd.xml",
+      "sha256": "3b07074768a7491cff973662a0800f78ca25e4f5f54f2153168edd8da2480ee9"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45082-current-web-request-metadata-static/spotbugs.xml",
+      "sha256": "9a4f8ab3ba15c5b4d9ce8c64177d3fab2c74e886d536ab9be8925af2917beb76"
+    }
+  },
+  "pmdOwnerDecision": "PENDING_RAW_RESULTS_UNSUPPRESSED",
+  "productTestCount": 0,
+  "hold": "HttpRequestLoggingValve depends on held WebStartupException through WebRequestLogProducer; not included",
+  "formalAcceptanceId": null,
+  "whole451": false
+}
