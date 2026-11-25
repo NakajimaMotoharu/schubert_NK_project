@@ -1,0 +1,133 @@
+{
+  "run": "PG44726",
+  "source": "22e4d6c91a228b078e4c505a3705b01f02569e8a",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T00:32:51.513019+00:00",
+  "actualExit": 0,
+  "admittedSourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java",
+      "sha256": "bdedaea6e5a6caa6dc84cc581d999792399c222cdea2cf86670489438461103c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+      "sha256": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "sha256": "8d1961d0ec2e51b4970102b5a3b810c9fbdc8d1398059de460249274d3bad01a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+      "sha256": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollector.java",
+      "sha256": "52ac3392ec528b30edc59dd3add2d74fdb578fbe2642e81b08d3b00cd284b964"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java",
+      "sha256": "ff09f8d1258c04d3b6d59136310a8d9681fe7f6172258d08d079c36f972d204d"
+    }
+  ],
+  "oldUnique": 114,
+  "newlyQualified": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricCollector.java"
+  ],
+  "currentUnique": 115,
+  "denominator": 286,
+  "alreadyScoped": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java"
+  ],
+  "actualNullAwayFiles": 7,
+  "actualSpotBugsPhysical": 12,
+  "actualPmdFiles": 7,
+  "rawPmd": [
+    {
+      "file": "MqPressureMetricCollector.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "40"
+    },
+    {
+      "file": "MqPressureMetricCollector.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "40"
+    }
+  ],
+  "pmdExit": 4,
+  "needsRuleDisposition": "two registered occurrences for RuntimeException and Error caught to clear values and rethrow; preserve raw findings",
+  "compilerFirstTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-nullaway/terminal.json",
+    "sha256": "c118c68816fe46d843b5093ce4d91a35dd06fb74e02a94d42f1768b4e8ee41cb"
+  },
+  "lastKnownRemote": "c3eb3572c5dd43c213cf2ac722480378973956f9",
+  "remotePushPending": true,
+  "beginnings": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-nullaway-v2/begin.json",
+      "sha256": "51966469c947341acf1cb3d20549cfd4766353ff258b006ebec04699f6229007"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-spotbugs/begin.json",
+      "sha256": "fecf7a25a42fe5d1bdc13b2a6c8eb00559565e4459731712094f8a072aea6785"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-pmd/begin.json",
+      "sha256": "e620b1302f8b89d2ebb971dedc650eeda003954cacd288dae3007f398a51b71a"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-nullaway-v2/terminal.json",
+      "sha256": "6ca3ecd647ad63dfefdec58eec5e65688ec07b662fbe8d46c4bfc3d6cecc5d28"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-spotbugs/terminal.json",
+      "sha256": "675227186b7b0f7dd9261b8b9e67e6831036d7963bcb7374c4c34f13d6b8038b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44726-current-api-monitor-collectors-pmd/terminal.json",
+      "sha256": "cb77ff9d24306f5c5705e531308c22742fbfc1d2d1ea120c8fd74cb0176f176b"
+    }
+  ],
+  "priorInputUnion": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44660-current-f03-unique-typed-inputs/paths.json",
+      "sha256": "d1dbfdaa8fcbb275bdaf4703167065844539833095fddd78e276e790df08c5d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44670-current-api-login-value-bounds-static/manifest.json",
+      "sha256": "c7db8251d11871c273b43853b0cf8fe7a5c967682df551c699a0f3ae7508f886"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44676-current-api-declared-boundary-static/manifest.json",
+      "sha256": "378d9843587d61cdf280d8ecf26f3ceb6831f0affbe25e461b8b186a35743ec1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44682-current-api-web-standard-metrics-static/manifest.json",
+      "sha256": "d012a6d2186f9466b8e1a94f4e8c0de7b6869174957b0e8f6984c5bd527dc008"
+    },
+    {
+      "path": "evidence/01_PT/011_NK-QST-001/evidence/PG44686-current-receipt-nine-single-coverage/manifest.json",
+      "sha256": "29e0f23726fe7b41b54f7190984496dbc9b609312b65b203f8af89eefdab5d2a"
+    },
+    {
+      "path": "evidence/01_PT/011_NK-QST-001/evidence/PG44688-current-submit-eight-coverage/manifest.json",
+      "sha256": "6923eff1fdf34af83318d0c87456361ac5fbfb1bc1377ab43834a92bc260925b"
+    }
+  ],
+  "noRealProviderOperation": true,
+  "testsExecuted": 0,
+  "normalFullApiJarProduced": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
