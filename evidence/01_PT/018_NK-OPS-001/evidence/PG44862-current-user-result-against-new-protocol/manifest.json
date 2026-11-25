@@ -1,0 +1,94 @@
+{
+  "run": "PG44862",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "9170a8f8428eea628f5082c57472e3089a7abda1",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:25:05.092237+00:00",
+  "localThreeTestScope": [
+    "value001ClosedProfileTableRejectsEveryOtherPayloadCombination",
+    "value002FactoriesKeepIdentityAndN9BoundsWithoutFabricatingFailureData",
+    "value004ResponseProjectionAndParsingUseIndependentNamedLiteralFields"
+  ],
+  "actualCounts": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "executedAndApplicable": 3,
+  "oldCasesMerged": false,
+  "inputAndResults": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/begin.json",
+      "sha256": "7160900ebdf19a14273f6e8c24b3b994189bdc03b7699fdbde82194a76ee30d8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/terminal.json",
+      "sha256": "d1d3bb1ec8c82e2160a57c96d6107ee0b8af731fc5d206f615cda9a3f549d724"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/result/TEST-junit-jupiter.xml",
+      "sha256": "31aa6d4232b6b87a1550b2f15117d0dc968324c4ca4dd81c37f9a375a3ae6faf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/raw.out",
+      "sha256": "15a3018df4b7b5fce3f38a3d726acdece8607f11e3fc40b1b348e71c771804b1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/unit.exec",
+      "sha256": "01ebb3556b6e6863910b956b71ab5e4ad40f82ba83e9531648ebfdff84e214a3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44862-current-command-result-delta-three/compile-continuation.json",
+      "sha256": "b3ca0d2bf91e493ee191179f6704c0a9f2ca5e9ffbb6f2d40e52589cb3d2515e"
+    }
+  ],
+  "typedChangedProtocol": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44860-current-admin-value-protocol-lineage-gap/manifest.json",
+    "sha256": "e209192c13a43c577d574fd879ccb8c05f5924e6e964f21d7e422ba98be474d5"
+  },
+  "zeroBackendActions": true,
+  "observedCounters": {
+    "dev/codex/schubert/nk/api/application/admin/UserMutationResult": [
+      "INSTRUCTION:7:68",
+      "BRANCH:0:6",
+      "LINE:0:14",
+      "COMPLEXITY:2:9",
+      "METHOD:2:6",
+      "CLASS:0:1"
+    ],
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": [
+      "INSTRUCTION:7:60",
+      "BRANCH:0:0",
+      "LINE:0:13",
+      "COMPLEXITY:2:6",
+      "METHOD:2:6",
+      "CLASS:0:1"
+    ]
+  },
+  "uncoveredGeneratedValueMethods": [
+    {
+      "type": "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "method": "hashCode",
+      "line": 11
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "method": "equals",
+      "line": 11
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "method": "hashCode",
+      "line": 14
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "method": "equals",
+      "line": 14
+    }
+  ],
+  "nextIndependentTestObjective": "Use equal and distinct fixed metadata/response tuples in an immutable lookup, cover equals/hash through natural value contracts without changing Production behavior.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
