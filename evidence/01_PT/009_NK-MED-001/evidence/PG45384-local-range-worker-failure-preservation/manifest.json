@@ -1,0 +1,284 @@
+{
+  "run": "PG45384",
+  "source": "0875fd9c070f66a1ec290dcf2035f77376e2047a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T15:53:18.571372+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3857",
+  "horizontal": "YKT-2997",
+  "selection": [
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest#oneHundredConcurrentParsesHaveNoSharedState",
+    "dev.codex.schubert.nk.web.media.MediaRangePortTest#twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState"
+  ],
+  "tests": 2,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "identifiedFlaky": 0,
+  "sources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+      "sha256": "a6102d39be6807bc44751ccf13dd0b573b89e1c06ed2ea4a5ed14c782cd98977"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+      "sha256": "43bc7db25bd8aec1f21086c671c871cabf818f9b98de60ddc14b6d1ed39a8317"
+    }
+  ],
+  "productSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+      "sha256": "03f48ae2174399c97ec18e3f72451cc1efc698304226bb38c7eeb958a187891f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "sha256": "0a3e8d580e8155d808dca5e9d87ac70d51cd36a3b931c33233fe62a6ef2eca28"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+      "sha256": "1b67c19a97f0cd35f193bc38ad1e155a4691f54ce6ad0c58d9bb37728cc77585"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java",
+      "sha256": "87aa576aafd6cb17a6778ce25d60bbbeb7df444fc089e749a68a70232215fc4e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+      "sha256": "dccf3918d3891a520cf7a01537c774a5450dd450e28bf77b922ea1134b6ad163"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/009_NK-MED-001/001_NK-MED-001_単体テスト仕様書.md",
+    "sha256": "1ae87fbc89addfaed11106effa49018d9b110a32035171e9b5596cf082f0162d"
+  },
+  "priorAttempt": {
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures/terminal.json",
+      "sha256": "2c227dd75e2c9d82fdaf096e36a1ab131963d3952af04b6c8271f200710a06cb"
+    },
+    "failure": "Two compile dependencies were absent from the initial allowlist. No JUnit ran. The corrected closed input adds two exact previously admitted product sources."
+  },
+  "currentTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/terminal.json",
+    "sha256": "b7e858c4059da6458c1ac9127482b444aea7fe050ebd469b0444f654ebc11a16"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/begin.json",
+    "sha256": "41f1ad0130d7aa2085508ac2c49b469763cb53020d03f491cc302de86b522cb4"
+  },
+  "ordinaryXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/xml/TEST-junit-jupiter.xml",
+    "sha256": "17bff64a375614e77532cd1bf0147409310b8c081a45b0e473ec425d8a14661b"
+  },
+  "producedExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/jacoco.exec",
+    "sha256": "a3e235c7e430986676ed0f49074fb3934aaa3176a259f495f80edfcebd033ded"
+  },
+  "coverageInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/coverage-inputs.json",
+    "sha256": "6c5dc9f4bb8e70e1d6a2c254e4348b80b4565673266321596c25af2ad42937bb"
+  },
+  "coverageXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/coverage.xml",
+    "sha256": "e1013f3c30e03c1fe951d73bf3297fe3a17867a6d8633c5a0ba91579a94f9133"
+  },
+  "scope": {
+    "BRANCH": {
+      "covered": 35,
+      "missed": 39
+    },
+    "LINE": {
+      "covered": 85,
+      "missed": 47
+    },
+    "METHOD": {
+      "covered": 16,
+      "missed": 6
+    },
+    "CLASS": {
+      "covered": 7,
+      "missed": 2
+    }
+  },
+  "coverageByClass": {
+    "dev/codex/schubert/nk/web/media/MediaRangeService$FileSource": {},
+    "dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation": {},
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial": {
+      "BRANCH": {
+        "covered": 3,
+        "missed": 3
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/ContentDispositionFactory": {
+      "BRANCH": {
+        "covered": 0,
+        "missed": 2
+      },
+      "LINE": {
+        "covered": 0,
+        "missed": 9
+      },
+      "METHOD": {
+        "covered": 0,
+        "missed": 2
+      },
+      "CLASS": {
+        "covered": 0,
+        "missed": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason": {
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser": {
+      "BRANCH": {
+        "covered": 14,
+        "missed": 10
+      },
+      "LINE": {
+        "covered": 25,
+        "missed": 7
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer": {
+      "BRANCH": {
+        "covered": 0,
+        "missed": 12
+      },
+      "LINE": {
+        "covered": 0,
+        "missed": 21
+      },
+      "METHOD": {
+        "covered": 0,
+        "missed": 2
+      },
+      "CLASS": {
+        "covered": 0,
+        "missed": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException": {
+      "BRANCH": {
+        "covered": 1,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable": {
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaRangeService": {
+      "BRANCH": {
+        "covered": 16,
+        "missed": 10
+      },
+      "LINE": {
+        "covered": 41,
+        "missed": 9
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection": {},
+    "dev/codex/schubert/nk/web/media/MediaRangeService$Response": {},
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full": {
+      "BRANCH": {
+        "covered": 1,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "helper": {
+    "oldPhysical": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45354-web-audit-worker-diagnostic-v2/classes/dev/codex/schubert/nk/web/view/ViewFixtureWorkers.class",
+      "sha256": "7543c22b7f42876eb6b24b056fb5361c53e3b7bcc14c66266b8aa98572360d40"
+    },
+    "currentPhysical": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45384-local-range-concurrent-fixtures-completed-scope/test/dev/codex/schubert/nk/web/view/ViewFixtureWorkers.class",
+      "sha256": "d3d189fd2624a69976d21f7d1ea40f9b3d60681ad52cb5f7b396f3d65d015a20"
+    },
+    "oldIndependentProof": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45354-local-audit-fixture-failure-preservation/manifest.json",
+      "sha256": "16d615dc2a4a1fe0c112cc6a652cbc03202819524f6684175c47cc6dc4730eef"
+    },
+    "oldMethodsUnchanged": true,
+    "newMethod": "invokeAll direct delegate with same collection, timeout and unit"
+  },
+  "observedScope": "pure JVM byte range and in-memory reader fixtures",
+  "sixProduct451": false,
+  "formalAcceptanceId": null,
+  "grossProductLocalTrialsSince4197": 2662
+}
