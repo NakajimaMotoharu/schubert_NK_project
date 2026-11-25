@@ -1,0 +1,195 @@
+{
+  "run": "PG45232",
+  "wbs": "WBS-G13.07/2",
+  "relatedWbs": [
+    "WBS-P019-03.01/2",
+    "WBS-P019-03.02/2",
+    "WBS-F03/2-2-b"
+  ],
+  "source": "dddf13d6e736a1927f3e6d82e399412e6c911b66",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesign": {
+    "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+  },
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/001_NK-MIG-001_単体テスト仕様書.md",
+    "sha256": "d9fdcd83245df6f2f23e55b9111dcdf8ef386c0f25a4efbbbd138846ba0fdffa"
+  },
+  "suiteTrace": [
+    {
+      "id": "CurrentMigrationProjection",
+      "productionMethods": [
+        "read",
+        "SourceSnapshot"
+      ],
+      "production": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java",
+        "sha256": "b1defeb746f70baf41b840e35da8eaaf312dc5fa323f04dfc4af8ecca2410f52"
+      },
+      "test": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+        "sha256": "13948804bbbfe3f2e21e2188fd705c6a3111ee5bd146c6117605da1297dfc30d"
+      },
+      "designSection": "SSC401",
+      "ptSpecification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/122_Current五projection借用接続・独立十二仕様.md",
+        "sha256": "dc3cc877544e5b554d5a02fd4957fef5284eeb847b91269149eedfb972aaac72"
+      },
+      "run": "PG45202",
+      "originalSuccessfulManifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45202-current-projection-twelve-precise-fixture/manifest.json",
+        "sha256": "d77facb89d797e0d467f93488e3371b8fd810e16c11358ae7707f3c295538d85"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45202-current-migration-projection-twelve/junit/TEST-junit-jupiter.xml",
+        "sha256": "2643e1358b93ec35c5238972309e77251156f5bcc30a21925bfb8cec581c3f12"
+      },
+      "physicalCoverageAttribution": "original selected run only",
+      "successes": 12
+    },
+    {
+      "id": "MigrationMasterTargetPublisher",
+      "productionMethods": [
+        "prepare",
+        "transferAndFinalize"
+      ],
+      "production": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java",
+        "sha256": "a1edd16c1d88d7a703c7ec11f03f7fda3e9aa7772ccf90f8f637f66bc9c2d55e"
+      },
+      "test": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+        "sha256": "780e1f2632dfa992303778e030f013cd51e5a395c99099ee004fbee61040ad70"
+      },
+      "designSection": "SSC373",
+      "ptSpecification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/070_六表target準備・転記・検査・最終化接続・独立十六仕様.md",
+        "sha256": "98d0124fc5b693e8cea219c597bd40c0a429027d6a5e87ad2902017da2f7894e"
+      },
+      "run": "PG45208",
+      "originalSuccessfulManifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45208-current-target-publisher-precise-fixture/manifest.json",
+        "sha256": "58cb97036074014ff3df6c8045e06b984e65f5e0bda1c1f53521aaf147226d7b"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45208-current-target-publisher-thirty-eight-v2/junit/TEST-junit-jupiter.xml",
+        "sha256": "0666cb805899235b739381d324993c6a2cfe949d827cc0289eac32904eee6b43"
+      },
+      "physicalCoverageAttribution": "original selected run only",
+      "successes": 38
+    },
+    {
+      "id": "CurrentMigrationTransfer",
+      "productionMethods": [
+        "transfer"
+      ],
+      "production": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java",
+        "sha256": "0d3ccea6313fd02ef9130d8b52f0261d79da887c1c5fe457f260749a2a50c14a"
+      },
+      "test": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java",
+        "sha256": "8f2400f950e5636dbb112a29341a886f58445879c29c1cf3b7e32e50578aa2d4"
+      },
+      "designSection": "SSC415",
+      "ptSpecification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/144_Current読取から六COPY接続・全1030独立仕様.md",
+        "sha256": "25fe17b1cef3c9085207a113b5eba4dfcf4b22441c442fa14a0dd7f6956bde06"
+      },
+      "run": "PG45212",
+      "originalSuccessfulManifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45212-current-transfer-twenty-and-shared-static/manifest.json",
+        "sha256": "dc716c00a50ad1353ffdc5dfca4a3d183056b694b03e8d58079b35ede45cdf16"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45212-current-transfer-fixture-twenty/junit/TEST-junit-jupiter.xml",
+        "sha256": "9b5607388e1e7b4ab3b092f2172efab6b409f5306d39f06f78e07a1c8dab40ed"
+      },
+      "physicalCoverageAttribution": "original selected run only",
+      "successes": 20
+    },
+    {
+      "id": "MigrationMasterCopyCoordinator",
+      "productionMethods": [
+        "transfer"
+      ],
+      "production": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java",
+        "sha256": "3299ff40a3eef6ea67f0428950e835339a673e741ddac8493f8cc4aed3aef180"
+      },
+      "test": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+        "sha256": "0e919be17797374a8a2358c925dc505b79da2766148c66527184aa9fd680ba99"
+      },
+      "designSection": "SSC414",
+      "ptSpecification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/142_同target六COPY接続・全1010独立仕様.md",
+        "sha256": "432b7e8f150d76052e2b117daaad55d822c5e7db8aeefc91f9366bf6f853219b"
+      },
+      "run": "PG45214",
+      "originalSuccessfulManifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45214-current-coordinator-verifier-forty-complete-local/manifest.json",
+        "sha256": "7bdad8a243bfcd69c9872b08eb28b146241da8b31afea33b63a0b3131256d902"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45214-current-coordinator-verifier-forty/junit/TEST-junit-jupiter.xml",
+        "sha256": "567847b317578e30d875642131f7b38f0731bc94848db0319f935e368fb95051"
+      },
+      "physicalCoverageAttribution": "original selected run only",
+      "successes": 20
+    },
+    {
+      "id": "MigrationMasterCopyVerifier",
+      "productionMethods": [
+        "verify"
+      ],
+      "production": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java",
+        "sha256": "745f41fafe37d522a0a039f040bf6c9b6299d722a532b06a128835e54e2100d6"
+      },
+      "test": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifierTest.java",
+        "sha256": "ee7baa586574564ec8c258b86bfa070462ab2aab4a2e2622b9980b7789182973"
+      },
+      "designSection": "SSC416",
+      "ptSpecification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/146_保持COPY宣言読戻しと六wire照合・全1050独立仕様.md",
+        "sha256": "73e7c0938da1401596821884813c6f7525faf40c0f4310e52a8dc3c1315f8330"
+      },
+      "run": "PG45214",
+      "originalSuccessfulManifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45214-current-coordinator-verifier-forty-complete-local/manifest.json",
+        "sha256": "7bdad8a243bfcd69c9872b08eb28b146241da8b31afea33b63a0b3131256d902"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45214-current-coordinator-verifier-forty/junit/TEST-junit-jupiter.xml",
+        "sha256": "567847b317578e30d875642131f7b38f0731bc94848db0319f935e368fb95051"
+      },
+      "physicalCoverageAttribution": "original selected run only",
+      "successes": 20
+    }
+  ],
+  "caseTrace": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45232-five-current-migration-scope-trace/trace.tsv",
+    "sha256": "0973c8b9e73fae9b9f91d99df0cab3c9fd3a0dd19d7121a521fd74cc8624c5d9"
+  },
+  "linkedTestCases": 110,
+  "actualTrials": 0,
+  "terminalAtUTC": "2026-11-25T12:05:41.167585+00:00",
+  "actualExit": 0,
+  "excludedSeparateOverlappingFixtureUse": [
+    "PG45204:transfer008,transfer009",
+    "PG45206:assembly001"
+  ],
+  "uncreditedFirstFailedScope": "PG45208 first 38",
+  "uncreditedMissingOriginalChildTerminal": "PG45210",
+  "scopeLimit": "五試験群の入出力と当Coreの実装を結ぶ。生DB、COPY、全20Program/CHR24、全体品質、試験別実測probeは未証明。",
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "publicationPreflightCorrection": "未公開TSVの行末をLFに正規化。行内容・試験結果は同じ。元計測eventは保持。",
+  "correctsEvents": [
+    "PGPT-20261008-10763"
+  ]
+}
