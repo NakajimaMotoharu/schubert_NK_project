@@ -25,3 +25,7 @@ BUG1715/YKT1466：修正前source50b82b219の二fixtureはcatalog外任意名・
 group2047開始2/4/8pp cap10、fresh43残57→fresh43残57/reset1793382075・同窓の丸め共有差0は専有費0でない。usage ab0f179574ac80403b65716b030cd3eefffab7878daac7cb0553be1a27c36f86（前cursor2026-10-24 23:51:39→10-25 00:12:40JST、明示usage新record0/完全性未証明）、N/T・専有費・工数null。原/v4/v5/追加発見・手戻りを別記し固定見積を差替えない。技術新Test累計532→564/Main29→31（異source部品値で単一source全体資格や正式進捗でない）。formal1964PT/53scope・原190新受入0/歴史受入17、QA051final/PTALT0・全actualHOLD・原本等不変更、未配備。
 
 全ownsession32833(失敗1)/68232/34194/4861/32995(後四0)元終端を回収、二重起動0。未発行8754/56/58はUNRUNのまま。次8770公開差分scan/保存push、その後同C07管理境界の供給・owner接続を、許可PG/通常memoryPT/未実施nativeに分けて進める。小受入/commit/報告で全体停止しない。
+
+## 現候補のAPI監視HTTP全25件
+
+APIMHTTP001～025は、JDKのHttpExchange代理オブジェクトと所有する監視SDKで実施した。旧選択6件に加え、405・404の優先、null・未初期化・中断時の結果、borrowed/ownedの終了、閉鎖例外の元identityと抑制順を同じexecで確認した。25成功、失敗・エラー・skip・未実行0。対象ApiMetricHttpHandlerのrawは行36、method4、class1、branch6、instruction115に未到達0。元選択6の重複を除く今回の追加適用は19件。実HTTP・Web fixture・全451は保留。 [PG44882](evidence/PG44882-api-memory-http-all-twenty-five/manifest.json)
