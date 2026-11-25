@@ -34,6 +34,8 @@ from pathlib import Path
 
 arguments = sys.argv[1:]
 Path('arguments.json').write_text(json.dumps(arguments), encoding='utf-8')
+if os.environ.get('NK_SIMULATED_MAVEN_CHATTER') == '1':
+    print('[INFO] Maven fixture diagnostic')
 if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') == 'exit':
     sys.exit(41)
 if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
@@ -44,8 +46,13 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
         )
         self.wrapper.chmod(0o700)
 
-    def invoke(self, *args, output="success", cdpath=""):
-        env = dict(os.environ, NK_SIMULATED_MAVEN_OUTCOME=output, CDPATH=str(cdpath))
+    def invoke(self, *args, output="success", cdpath="", chatter=False):
+        env = dict(
+            os.environ,
+            NK_SIMULATED_MAVEN_OUTCOME=output,
+            NK_SIMULATED_MAVEN_CHATTER=str(int(chatter)),
+            CDPATH=str(cdpath),
+        )
         return subprocess.run(
             ["bash", str(SCRIPT), *map(str, args)],
             cwd=self.root,
@@ -146,6 +153,18 @@ if os.environ.get('NK_SIMULATED_MAVEN_OUTCOME') != 'no-output':
         args = json.loads((self.root / "arguments.json").read_bytes())
         repositories = [arg for arg in args if arg.startswith("-Dmaven.repo.local=")]
         self.assertEqual([f"-Dmaven.repo.local={self.repository}"], repositories)
+
+    def test_sbom030_only_artifact_path_is_sent_to_stdout(self):
+        for output, expected_exit in (("success", 0), ("exit", 41)):
+            with self.subTest(output=output):
+                result = self.invoke("protocol", self.repository, STAMP, output=output, chatter=True)
+                self.assertEqual(expected_exit, result.returncode, result.stderr)
+                self.assertEqual("[INFO] Maven fixture diagnostic\n", result.stderr)
+                if expected_exit == 0:
+                    artifact, = result.stdout.splitlines()
+                    self.assertEqual(FIXTURE, Path(artifact).read_bytes())
+                else:
+                    self.assertEqual("", result.stdout)
 
 
 if __name__ == "__main__":
