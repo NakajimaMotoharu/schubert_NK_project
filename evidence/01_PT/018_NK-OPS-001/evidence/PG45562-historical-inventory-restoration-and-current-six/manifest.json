@@ -1,0 +1,215 @@
+{
+  "run": "PG45562",
+  "source": "d639658d798a1d5924529a1e239d1b08c2b4f14e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.07/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T19:45:41.855118+00:00",
+  "bug": "BUG-3902",
+  "horizontal": "YKT-3020",
+  "correctsEvents": [
+    "PGPT-20261008-11095"
+  ],
+  "priorReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45560-current-six-artifact-sha-and-pt-pointer-corrections/manifest.json",
+    "sha256": "30232160d6fa4dfcba5064b3583593e471486c1c11980ddef4e9729ff2de71ba"
+  },
+  "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+  "historicalRegistryBinding": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "bf81c338de4c7844160da389d68417c259d0ca54aa7b04d3972e7160fb367d3f",
+    "source": "3d04fce95b15a69587d5dfd2f1398779d30157e0"
+  },
+  "restrictedSixHistoricalBlobsVerified": 6,
+  "restoredAllHistoricalRows": 1140,
+  "historicalFourChangedHashesRestored": true,
+  "preservedCurrentTraceRows": [
+    {
+      "programType": "OutboxDestination",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+      "oldSha256": "c0ef91276b51f9c0e410958ae62ef4ff38eb203d9f26c650801940a587cfded6",
+      "owner": "WBS-P006-02",
+      "testIds": [
+        "PT-IDEM-DEST-POLICY-001"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/006_NK-MSG-002/4570_Outbox集計・再送policy原十単体仕様.md",
+        "sha256": "732ab673f68c324a58842ca8bce693f0e044fc41c7f59557ebd72e085a8f4db3"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38294-outbox-report-retry-independent-v1/manifest.json",
+        "sha256": "41be1e3a3d4d6141e90b7442426073e39df0769906781efdab92cd3383e4eda5"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    },
+    {
+      "programType": "OutboxRetrySchedule",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854",
+      "oldSha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854",
+      "owner": "WBS-P006-02",
+      "testIds": [
+        "PT-IDEM-010"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/006_NK-MSG-002/4570_Outbox集計・再送policy原十単体仕様.md",
+        "sha256": "732ab673f68c324a58842ca8bce693f0e044fc41c7f59557ebd72e085a8f4db3"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45552-current-outbox-timing-exact-three-original-methods/manifest.json",
+        "sha256": "b668377866d2de6f0a3eefdc99ce8e2566b75482a2ff8dd1556a61f77d498a0e"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    },
+    {
+      "programType": "BackupFailureSnapshot",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "sha256": "7f9b408e0290f33861c3b1f136630698f91723644cea16bb2afe8f538cfc8025",
+      "oldSha256": "7802746f57280dfba402b282ce7f2dec67588f546f9e5df77d81579105b62c77",
+      "owner": "WBS-P017-06",
+      "testIds": [
+        "PT-BAT-BACKUP-UTC001",
+        "PT-BAT-BACKUP-UTC002",
+        "PT-BAT-BACKUP-UTC003",
+        "PT-BAT-BACKUP-UTC004",
+        "PT-BAT-BACKUP-UTC005",
+        "PT-BAT-BACKUP-UTC006",
+        "PT-BAT-BACKUP-UTC007",
+        "PT-BAT-BACKUP-UTC008",
+        "PT-BAT-BACKUP-UTC009",
+        "PT-BAT-BACKUP-UTC010"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/4748_Backup失敗行の時刻瞬間照合単体仕様.md",
+        "sha256": "40e6568da8fc894199724fb86d0e2081bd0ec27f133797d20f7d1548b52f9324"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+        "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    },
+    {
+      "programType": "RunReferenceRepository",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "oldSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "owner": "WBS-P004-03",
+      "testIds": [
+        "RRF-PURE-001",
+        "RRF-PURE-002",
+        "RRF-PURE-003",
+        "RRF-PURE-004",
+        "RRF-PURE-005",
+        "RRF-PURE-006",
+        "RRF-PURE-007",
+        "RRF-PURE-008"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+        "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/manifest.json",
+        "sha256": "4998892b9d1fa41164ded221013e6e2841c79900c7cf4e52cad88af2101fb153"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    },
+    {
+      "programType": "SchemaHistoryAdmission",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+      "oldSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "owner": "WBS-P019-01",
+      "testIds": [
+        "PT-OPS-SCHEMA016"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/170_V031履歴新旧と固定checksum単体仕様.md",
+        "sha256": "e7cd3c80284162cdf1d832ac7514f4a4df2ff5a8659467c1296609b93e592bf8"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45546-current-schema-version-trace-and-fixture-name-correction/manifest.json",
+        "sha256": "fce6f6ac03a61ad9ddad33d5408a25fcabdc37ae3a2c49a1775900a532cd50ad"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    },
+    {
+      "programType": "PageViewModel",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java",
+      "sha256": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
+      "oldSha256": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
+      "owner": "WBS-P015-07",
+      "testIds": [
+        "PT-WEB-174",
+        "PT-WEB-175",
+        "PT-WEB-176",
+        "PT-WEB-177",
+        "PT-WEB-178",
+        "PT-WEB-179",
+        "PT-WEB-180",
+        "PT-WEB-181"
+      ],
+      "specification": {
+        "path": "evidence/01_PT/016_NK-WEB-002/5000_NK-WEB-002_表示値worker単体テスト仕様書.md",
+        "sha256": "6e1b4c56b7cd66ca33eb08aabe3971514110f539695114b8288df26899fffb7c"
+      },
+      "localProof": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45328-current-four-view-worker-fixtures/manifest.json",
+        "sha256": "bc366df5503cdcf57f17dc911a86e250994c5a352ccb04b938fa74a123c8bb3b"
+      },
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSource": "cf08e414be9f877b851a387704350d5e7c980209",
+      "existingWitnessOnly": true
+    }
+  ],
+  "acceptedLeafDelta": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newTestRuns": 0,
+  "separateImmutableLegacyPath": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37814-wbs-registry-separation-input-v1/frozen-legacy-artifacts1061.json",
+    "sha256": "36ca212ef1f608ef501edf72232f57219247fa419b42f0bed26f42b4fbde1275"
+  },
+  "immutableLegacyAndCandidateDigestsMatch": true,
+  "historicalEmbeddedDescriptorDigest": {
+    "expected": "ac5dee93b15167133a713c60d255b490400cbaee12362d7f1d0328161318ef99",
+    "beforePG45560": "c9031998b7837e50ef169504480ce0c56bc69e354fec6f85c55f6ea16c51ac98",
+    "regressedAtPG45560": "4916c8a16307f25fddd97373c601335a47685f75b1921b6db4472c1503c6a635",
+    "restored": "c9031998b7837e50ef169504480ce0c56bc69e354fec6f85c55f6ea16c51ac98",
+    "fullLegacyVerificationClaimed": false,
+    "notes": "Current checker verifies separately pinned legacy descriptor and the later preparation registry."
+  },
+  "laterPreparationRegistryPreExistingHold": {
+    "reason": "unrecorded registry change",
+    "originalBindingCommit": "24ba9b4365d88b0302665db217e3a14daf9160ca",
+    "originalBinding": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42436-g1307-stop-assessment-owner-v1/preparation-registry-binding.json",
+      "sha256": "32fdb1b905bf12d92e26229fd5340c678082d1315817868826d5a8ce01a96445"
+    },
+    "unchangedPriorReceipts": true,
+    "datedRegistryPrePG45560Restored": true,
+    "removed": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdSession.java"
+    ],
+    "added": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+      "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql"
+    ],
+    "samePathRowsChanged": 0
+  }
+}

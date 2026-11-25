@@ -1,10 +1,10 @@
 {
-  "currentEveningEvidencePG45560": {
+  "currentEveningEvidencePG45562": {
     "wbs": "WBS-G13.07/2",
     "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
     "proof": {
-      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45560-current-six-artifact-sha-and-pt-pointer-corrections/manifest.json",
-      "sha256": "30232160d6fa4dfcba5064b3583593e471486c1c11980ddef4e9729ff2de71ba"
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45562-historical-inventory-restoration-and-current-six/manifest.json",
+      "sha256": "9aefcfad030ea5a236ece08f37c2c3d95ee525f63000a9e03c4a378f3aa503cf"
     },
     "whole451": false,
     "formalAcceptanceId": null,
@@ -549626,21 +549626,10 @@
       "class": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
       "owner": "WBS-P006-02",
       "basis": "v1対象の責務分離/共通費主担当",
-      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+      "sha256": "c0ef91276b51f9c0e410958ae62ef4ff38eb203d9f26c650801940a587cfded6",
       "costOwner": "WBS-P006-02",
       "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "localSpec": {
-        "path": "evidence/01_PT/006_NK-MSG-002/4570_Outbox集計・再送policy原十単体仕様.md",
-        "sha256": "732ab673f68c324a58842ca8bce693f0e044fc41c7f59557ebd72e085a8f4db3"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38294-outbox-report-retry-independent-v1/manifest.json",
-        "sha256": "41be1e3a3d4d6141e90b7442426073e39df0769906781efdab92cd3383e4eda5"
-      },
-      "testIds": [
-        "PT-IDEM-DEST-POLICY-001"
-      ]
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
@@ -549757,18 +549746,7 @@
       "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854",
       "costOwner": "WBS-P006-02",
       "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "localSpec": {
-        "path": "evidence/01_PT/006_NK-MSG-002/4570_Outbox集計・再送policy原十単体仕様.md",
-        "sha256": "732ab673f68c324a58842ca8bce693f0e044fc41c7f59557ebd72e085a8f4db3"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45552-current-outbox-timing-exact-three-original-methods/manifest.json",
-        "sha256": "b668377866d2de6f0a3eefdc99ce8e2566b75482a2ff8dd1556a61f77d498a0e"
-      },
-      "testIds": [
-        "PT-IDEM-010"
-      ]
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
     {
       "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSendException.java",
@@ -553383,30 +553361,10 @@
       "class": "dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot",
       "owner": "WBS-P017-06",
       "basis": "Backup原本/worker/再用",
-      "sha256": "7f9b408e0290f33861c3b1f136630698f91723644cea16bb2afe8f538cfc8025",
+      "sha256": "7802746f57280dfba402b282ce7f2dec67588f546f9e5df77d81579105b62c77",
       "costOwner": "WBS-P017-06",
       "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "localSpec": {
-        "path": "evidence/01_PT/017_NK-BAT-001/4748_Backup失敗行の時刻瞬間照合単体仕様.md",
-        "sha256": "40e6568da8fc894199724fb86d0e2081bd0ec27f133797d20f7d1548b52f9324"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
-        "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
-      },
-      "testIds": [
-        "PT-BAT-BACKUP-UTC001",
-        "PT-BAT-BACKUP-UTC002",
-        "PT-BAT-BACKUP-UTC003",
-        "PT-BAT-BACKUP-UTC004",
-        "PT-BAT-BACKUP-UTC005",
-        "PT-BAT-BACKUP-UTC006",
-        "PT-BAT-BACKUP-UTC007",
-        "PT-BAT-BACKUP-UTC008",
-        "PT-BAT-BACKUP-UTC009",
-        "PT-BAT-BACKUP-UTC010"
-      ]
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
@@ -553791,7 +553749,7 @@
       "class": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
       "owner": "WBS-P004-03",
       "basis": "v1対象の責務分離/共通費主担当",
-      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "sha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
       "costOwner": "WBS-P004-03",
       "acceptance": "UNASSESSED",
       "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
@@ -553801,25 +553759,7 @@
           "sha256": "bcca857c873f922e5565e7848eeeb2520551cd330596de915e9548d791297dcb"
         }
       ],
-      "changeEvidence": "Source7fff/hygiene260; genuine3714/545/1643/native20points18streams; existing17/51 individually revalidated, all other scopes remain unaccepted",
-      "localSpec": {
-        "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
-        "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45166-current-reference-jdbc-fixture-ten/manifest.json",
-        "sha256": "4998892b9d1fa41164ded221013e6e2841c79900c7cf4e52cad88af2101fb153"
-      },
-      "testIds": [
-        "RRF-PURE-001",
-        "RRF-PURE-002",
-        "RRF-PURE-003",
-        "RRF-PURE-004",
-        "RRF-PURE-005",
-        "RRF-PURE-006",
-        "RRF-PURE-007",
-        "RRF-PURE-008"
-      ]
+      "changeEvidence": "Source7fff/hygiene260; genuine3714/545/1643/native20points18streams; existing17/51 individually revalidated, all other scopes remain unaccepted"
     },
     {
       "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
@@ -553883,7 +553823,7 @@
       "class": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
       "owner": "WBS-P019-01",
       "basis": "起動/署名/DB受入の補助型",
-      "sha256": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+      "sha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
       "costOwner": "WBS-P019-01",
       "acceptance": "UNASSESSED",
       "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
@@ -553893,18 +553833,7 @@
           "sha256": "a1dac2ad153443fd09c929f8133764f5197bc7aa85152a4bdaf853725c5edd53"
         }
       ],
-      "changeEvidence": "Source7fff/hygiene260; genuine3714/545/1643/native20points18streams; existing17/51 individually revalidated, all other scopes remain unaccepted",
-      "localSpec": {
-        "path": "evidence/01_PT/019_NK-MIG-001/170_V031履歴新旧と固定checksum単体仕様.md",
-        "sha256": "e7cd3c80284162cdf1d832ac7514f4a4df2ff5a8659467c1296609b93e592bf8"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45546-current-schema-version-trace-and-fixture-name-correction/manifest.json",
-        "sha256": "fce6f6ac03a61ad9ddad33d5408a25fcabdc37ae3a2c49a1775900a532cd50ad"
-      },
-      "testIds": [
-        "PT-OPS-SCHEMA016"
-      ]
+      "changeEvidence": "Source7fff/hygiene260; genuine3714/545/1643/native20points18streams; existing17/51 individually revalidated, all other scopes remain unaccepted"
     },
     {
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
@@ -559884,25 +559813,7 @@
       "sha256": "29de4e2f08b7d0ca5bcb61952e3e50b6d7a501846b61da67e02e3f7e882a6593",
       "costOwner": "WBS-P015-07",
       "acceptance": "UNASSESSED",
-      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED",
-      "localSpec": {
-        "path": "evidence/01_PT/016_NK-WEB-002/5000_NK-WEB-002_表示値worker単体テスト仕様書.md",
-        "sha256": "6e1b4c56b7cd66ca33eb08aabe3971514110f539695114b8288df26899fffb7c"
-      },
-      "localProof": {
-        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45328-current-four-view-worker-fixtures/manifest.json",
-        "sha256": "bc366df5503cdcf57f17dc911a86e250994c5a352ccb04b938fa74a123c8bb3b"
-      },
-      "testIds": [
-        "PT-WEB-174",
-        "PT-WEB-175",
-        "PT-WEB-176",
-        "PT-WEB-177",
-        "PT-WEB-178",
-        "PT-WEB-179",
-        "PT-WEB-180",
-        "PT-WEB-181"
-      ]
+      "counterApplicability": "EXECUTABLE_OR_MEASUREMENT_REQUIRED"
     },
     {
       "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModel.java",
