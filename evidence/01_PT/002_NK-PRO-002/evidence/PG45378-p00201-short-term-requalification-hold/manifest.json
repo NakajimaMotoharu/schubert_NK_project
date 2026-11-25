@@ -1,0 +1,85 @@
+{
+  "run": "PG45378",
+  "source": "97f0c91cbffbb9af09b8dca1e170ddadb4542885",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P002-01",
+  "shortPlanRow": "P002再判定-b",
+  "terminalAtUTC": "2026-11-25T15:39:31.275586+00:00",
+  "actualExit": 0,
+  "preparation": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45376-p00201-numeric-order-short-term-preparation/manifest.json",
+    "sha256": "5ae24af83cc7e6b40690d9aab860269d9835ab5e28af8b79c3f4b3fdabdffde9"
+  },
+  "fullProtocolPartial": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "qualityRules": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "1612ea760b1802d217977060fd0a0f6fc8230121d2af0497c075d0941151d828"
+  },
+  "originalWbs": {
+    "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "sha256": "3f053f3bb8e0c5eeb2707dcde28bd6e4cb9e952da7f3abc04b72de41032ee5c1"
+  },
+  "judgmentReport": {
+    "path": "evidence/01_PT/002_NK-PRO-002/108_P00201現四十四Sourceと二終了依存.md",
+    "sha256": "b97662684df0a37369a5837d13ccb521e1c68747ecb4b764c118252b4e0b656e"
+  },
+  "decision": "RECHECK_REQUIRED",
+  "scopes": {
+    "P002_01": [
+      44,
+      44
+    ],
+    "withTwoDependencies": [
+      70,
+      77
+    ]
+  },
+  "currentAcceptanceChecks": {
+    "WBS-P002-01:contract": "固定長fieldのNFC・UTF8・padding検査：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MSG-001,MSG-002,MSG-003,MSG-004,MSG-005,MSG-006,MSG-007,MSG-008,MSG-009,MSG-010,MSG-011",
+    "WBS-P002-01:scope": "485のownedArtifactsとsharedClassReferencesを全件照合。主担当共通費を再計上せず、必要下位型/例外/組立/資源も欠落0。",
+    "WBS-P002-01:quality": "451の該当品質条件、同source/byte、独立正常/境界/異常/null/例外/再送/競合、F/E/S/flaky/not-run0、資源後条件を照合。非該当は根拠を明記。"
+  },
+  "dependencyHistoricalStates": {
+    "WBS-P001-01": {
+      "status": "ACCEPTED",
+      "source": "7fffab57a567914956b66452e5e54388642efdec",
+      "criteria": [
+        "WBS-P001-01:contract",
+        "WBS-P001-01:scope",
+        "WBS-P001-01:quality"
+      ]
+    },
+    "WBS-P001-02": {
+      "status": "ACCEPTED",
+      "source": "7fffab57a567914956b66452e5e54388642efdec",
+      "criteria": [
+        "WBS-P001-02:contract",
+        "WBS-P001-02:scope",
+        "WBS-P001-02:quality"
+      ]
+    }
+  },
+  "historicalFormalAggregate": {
+    "tests": 1964,
+    "scopes": 53
+  },
+  "activeOriginal": 16,
+  "totalOriginal": 190,
+  "priorityAccepted": 0,
+  "shortAccepted": 0,
+  "newFormal": 0,
+  "formalAcceptanceId": null,
+  "qualityMissing": [
+    "same source reactor verify and mandatory evidence collection",
+    "disposition of three raw PMD findings",
+    "same-core impacted real JMS and CHR evidence",
+    "same-core verification of the two exit dependencies and signed review"
+  ],
+  "noUnstartedJobsLaunched": true,
+  "actualProductTrials": 0,
+  "newOriginalPriceCreditPp": 0,
+  "whole451": false
+}
