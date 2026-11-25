@@ -53,9 +53,10 @@ def local_path(repo, value):
 def pins(value):
     if isinstance(value, dict):
         path, sha = value.get("path"), value.get("sha256")
-        if isinstance(path, str) and "sha256" in value:
+        if "path" in value and "sha256" in value and (path is not None or sha is not None):
             digest = sha if isinstance(sha, str) and SHA256.fullmatch(sha) else None
-            yield path, digest, exact_source(value.get("source")), "source" in value
+            explicit_path = path if isinstance(path, str) and path.strip() else None
+            yield explicit_path, digest, exact_source(value.get("source")), "source" in value
         for child in value.values():
             yield from pins(child)
     elif isinstance(value, list):
@@ -114,8 +115,19 @@ def audit(repo, start, end, *, staged=False):
         parent_source = exact_source(content.get("source")) if isinstance(content, dict) else None
         references = set(pins(content))
         for raw_path, expected, source, has_explicit_source in sorted(
-            references, key=lambda row: (row[0], row[1] or "", row[2] or "", row[3])
+            references, key=lambda row: (row[0] or "", row[1] or "", row[2] or "", row[3])
         ):
+            if raw_path is None:
+                unresolved.append(
+                    {
+                        "manifest": manifest,
+                        "path": None,
+                        "sha256": expected,
+                        "source": source,
+                        "reason": "INVALID_EXPLICIT_PATH",
+                    }
+                )
+                continue
             path = local_path(repo, raw_path)
             if path is None:
                 counts["externalOrProtected"] += 1
