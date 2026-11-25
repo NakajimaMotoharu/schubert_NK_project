@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-11228",
+  "source": "c8535bb72b0d2aa63fd7854bd1d1098bf00d30e2",
+  "sourceBeforeWork": "c8535bb72b0d2aa63fd7854bd1d1098bf00d30e2",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P005-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P005-01/2",
+    "元行": "WBS-P005-01/2",
+    "費目": "B",
+    "主担当": "WBS-P005-01",
+    "状態": "計画",
+    "作業": "Artemis明示address・queue・DLQ・Expiry catalog／同source証拠による受入判定",
+    "残pp": "0.423",
+    "着手": "現sourceへ適用可能なPT-JMS-002の実broker証跡とC04・P002-03を確認。保存証跡が使えない場合はN04の条件成立後",
+    "終了証拠": "Artemis明示address・queue・DLQ・Expiry catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MQ-001,MQ-002,MQ-003,MQ-004,MQ-005",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "MQ-001、MQ-002、MQ-003、MQ-004、MQ-005",
+    "保存証跡": "６宛先・routing・durability・ACLの実測＋MQ-001～005の寄与証拠＋451",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.163",
+    "慎重pp": "0.845",
+    "要求設計の版差": "PT基準仕様 NK-MSG-001",
+    "lineNumber": 321,
+    "改訂残pp": "0.423",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG45692",
+  "startEvent": "PGPT-20261008-11227",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "旧ACLの成功は旧版。当と同設定の後続要約は個別ACLを証明せず、現owner/実経路の元個別終端が必要。Broker・実環境操作0、正式16/190。",
+  "proof": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG45692-artemis-legacy-runtime-receipt-and-config-lineage/manifest.json",
+    "sha256": "908af828d25a1f8a9c2cd9a3654ed094fa20d847f5c9dc21b6d146b9e5c23ee7"
+  },
+  "nextEvidence": "既認定BUILDの適用差分と別の独立WBSの作業へ進む。PT-JMS-002や憶測のACL操作は再試行しない。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T22:26:19+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 73,
+    "remainingPercent": 27,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "74f3c9cf8c74a09f00380eb24e58bdd23767ce5dd944b28ff09e01e10a63ddb0",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T22:26:19+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 73,
+        "remainingPercent": 27,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T22:26:09.206014+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 73,
+    "remainingPercent": 27,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
