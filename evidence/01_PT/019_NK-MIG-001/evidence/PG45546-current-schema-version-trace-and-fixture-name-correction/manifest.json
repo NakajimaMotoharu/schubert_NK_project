@@ -1,0 +1,192 @@
+{
+  "run": "PG45546",
+  "source": "8f1465e47bb4aa69ae2fdeee3d4fd8d057a37ec2",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-01.02/2",
+  "terminalAtUTC": "2026-11-25T19:18:52.228867+00:00",
+  "actualExit": 0,
+  "approvedDesignRefs": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519"
+    }
+  ],
+  "approvalBranch": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "criteria": [
+    {
+      "testId": "PT-OPS-SCHEMA014",
+      "method": "opsSchema014CurrentTailRequiresTheExactVersionScriptAndChecksum",
+      "fixtureVersions": [
+        "V029",
+        "V030"
+      ],
+      "local": [
+        "exact parent receipt",
+        "older tail refused",
+        "unknown script or checksum mismatch refused"
+      ]
+    },
+    {
+      "testId": "PT-OPS-SCHEMA016",
+      "method": "opsSchema016V031RequiresTheNewAclMigrationReceipt",
+      "fixtureVersions": [
+        "V030",
+        "V031"
+      ],
+      "local": [
+        "actual version labels independent fixture",
+        "V031 missing or unequal rejected",
+        "unknown V032 rejected",
+        "borrowed connection not closed"
+      ]
+    }
+  ],
+  "oldSelectedFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45536-current-schema-five-static-fixes-and-fourteen-tests/manifest.json",
+    "sha256": "a0ff64504521a738f0f5952db024fc23c11d23f1be8896978e94b3ddec78ef0f"
+  },
+  "priorOriginalExactXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45536-current-schema-fourteen/reports/TEST-junit-jupiter.xml",
+    "sha256": "08287a9a05bd6acfeedf093776f37a608a81ded620b6da8c94b1442f7559c5d5"
+  },
+  "standaloneIndependentVersionSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/168_現移行版と旧・範囲外の区別_単体テスト仕様・結果.md",
+      "sha256": "38a58110d0dfc7635e892073b042c15137e3efa955dbecb407410496a6622298"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/170_V031履歴新旧と固定checksum単体仕様.md",
+      "sha256": "e7cd3c80284162cdf1d832ac7514f4a4df2ff5a8659467c1296609b93e592bf8"
+    }
+  ],
+  "productArchive": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    }
+  ],
+  "renamedInput": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+    "sha256": "53d7a185bb19611e7681da769e9a0cdad52dd595fe5d2f85935e31011d379c1f"
+  },
+  "rawSemanticCorrectionOnly": true,
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-single-schema-fixture-format/terminal.json",
+    "sha256": "3f2b7dd3fcbc0a64fa71735f86df9813c35e181b0d40ade2a58ebe095a569a14"
+  },
+  "normalizedBytecodeEqualityCount": 3,
+  "normalizedInstructions": {
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest$Probe.class": "87cb3ecf3cdf3dffc2f2fcd54650d0d2be662e3693ac7444d8c930e0785cc66c",
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest$RowInput.class": "7a53a266c1f8cc8672d247705d3b0b0458dabff7d5e8210502e692d13659961e",
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.class": "bc0f207943338b14d2755ccddeab97a57d58330d0407629ceda6c433d769c121"
+  },
+  "commands": {
+    "old": {
+      "compile": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45536-current-schema-fourteen/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG45536-current-schema-fourteen/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/old/classes",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/old/SchemaHistoryAdmissionTest.java"
+      ],
+      "compiled": 3,
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/old/compiler.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "renamed": {
+      "compile": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45536-current-schema-fourteen/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG45536-current-schema-fourteen/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/renamed/classes",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/renamed/SchemaHistoryAdmissionTest.java"
+      ],
+      "compiled": 3,
+      "log": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45546-schema-fixture-equivalence-v2/renamed/compiler.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "observedTestReplays": 0,
+  "sourceFixturesStillRequireNewFormalScope": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "firstPreflightLaunchedNoCompiler": true,
+  "correctsEvents": [
+    "PGPT-20261008-11079"
+  ],
+  "supersededMemo": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/5626_PG45544_G08公開九manifest.json",
+    "sha256": "74de8fb100fc47dff442a68b34c9a36acb9b5a58475532b81bbd2d1d62309039"
+  },
+  "memoCorrection": "The operating-system reference in checkpoint 5626 is corrected to the approved Linux execution environment. The project plan and runtime permissions are unchanged.",
+  "actualDatabaseOrMigration": false,
+  "sameThreeMigrationSqlInputs": [
+    {
+      "version": "029",
+      "currentSql": {
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+        "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878"
+      },
+      "previousIndependentSourceCrc": -1202088028
+    },
+    {
+      "version": "030",
+      "currentSql": {
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+        "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be"
+      },
+      "previousIndependentSourceCrc": -1529040748
+    },
+    {
+      "version": "031",
+      "currentSql": {
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+        "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3"
+      },
+      "previousIndependentSourceCrc": 1880247817
+    }
+  ],
+  "independentChecksumSources": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43276-g1302-migration-crc-basis-v1/manifest.json",
+      "sha256": "8b881ab48d37197f29e62a3469b7372d78040d5128c1607e36613c61c4b440b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43658-ssc479-routine-acl-source-v1/manifest.json",
+      "sha256": "1353d9b4a617083903a4c4d6d6805d4d87ab2325ab27b77ebb839ce49fd4ff04"
+    }
+  ],
+  "historicalCrcUsedAsRealReleaseHistory": false
+}
