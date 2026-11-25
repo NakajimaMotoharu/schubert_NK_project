@@ -1,0 +1,111 @@
+{
+  "run": "PG45436",
+  "source": "3e018216fb6fbe9adc82f9b515404c84fd46a71e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G09",
+  "terminalAtUTC": "2026-11-25T16:56:28.551197+00:00",
+  "actualExit": 0,
+  "originalLauncherTestFailures": 2,
+  "newToolTestIds": [
+    "PT-OPS-G09-RUN013",
+    "PT-OPS-CI-PRO007"
+  ],
+  "tests": 19,
+  "errors": 0,
+  "failed": 0,
+  "skipped": 0,
+  "actualProductTrials": 0,
+  "actualReactorInvocations": 0,
+  "jdkOracle": {
+    "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/fixed-synthetic-jvm-oracle.json",
+    "sha256": "c38aac0f05e6470546c8d237a1e30447494cb835f683a88fe71b109ebc13bd44"
+  },
+  "before": {
+    "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/before.json",
+    "sha256": "207e826855c6f61d6a6a0752684d9603078257a4de6bf57c310b4c6e7c01e06d"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/terminal.json",
+    "sha256": "a6ab8d9f20c513cc3d62c787f09f43bd9e69e7e9175d7b43452e149b080823ec"
+  },
+  "launcherAndTestInputs": [
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "02b1c7d33ac86a515e33188c6c348c5aecfdea63a3357f375dc878e20c4f7875"
+    },
+    {
+      "path": "tools/quality/verify_protocol_ci.sh",
+      "sha256": "c22c76cfaf11bc491ba09af3e4f1fe82073c288c2339bac6b31b1ba350c93eec"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_verify_runner.py",
+      "sha256": "c47e94a8849ec5e67470cbcd50820c62c068067dafc4ae9bf0a898d4bfad489c"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_protocol_ci.py",
+      "sha256": "89fa2a85cd9a27b6aa643428d6e05ed34b8ba95b0748016ca93bca37928f3891"
+    }
+  ],
+  "shellcheck": {
+    "path": "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck",
+    "sha256": "311de5f94ecea1d98052ccdc94166591dce89e031e7357debd2f3213b547f7df"
+  },
+  "perStep": {
+    "unit": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_pgpt_verify_runner",
+        "test_verify_protocol_ci"
+      ],
+      "exitCode": 0,
+      "report": {
+        "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/unit.log",
+        "sha256": "2ae21b9c4526e5bc5fbe286f5d701bbb757c98f3f1bc59295571780a22707d90"
+      }
+    },
+    "sh": {
+      "command": [
+        "sh",
+        "-n",
+        "tools/quality/030_run_pgpt_verify.sh"
+      ],
+      "exitCode": 0,
+      "report": {
+        "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/sh.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "bash": {
+      "command": [
+        "bash",
+        "-n",
+        "tools/quality/verify_protocol_ci.sh"
+      ],
+      "exitCode": 0,
+      "report": {
+        "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/bash.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "shellcheck": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck",
+        "tools/quality/030_run_pgpt_verify.sh",
+        "tools/quality/verify_protocol_ci.sh"
+      ],
+      "exitCode": 0,
+      "report": {
+        "path": "../pgpt-runs/PG379/PG45436-canonical-java-encoding/shellcheck.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "bug": "BUG-3870",
+  "horizontal": "YKT-3002",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
