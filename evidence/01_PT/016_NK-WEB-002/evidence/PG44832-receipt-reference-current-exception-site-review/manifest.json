@@ -1,0 +1,476 @@
+{
+  "run": "PG44832",
+  "source": "6ee2b298208e0d00f4f31b1a349944daf2b1f572",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T02:48:26.491908+00:00",
+  "sourceFile": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sha256": "91ca27ecb2aea560cd08b26c0ef605b2bbbac756afb673722eef816a1ddfb2c4"
+  },
+  "rawPmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44778-current-web-receipt-reference-jdbc-declarations-pmd/pmd.xml",
+    "sha256": "079763559e67ab7d45e873e61105d5e82fba2d4e791cb7cceacc44b3590211b3"
+  },
+  "rawExit": 4,
+  "retainedSites": [
+    {
+      "beginline": "49",
+      "endline": "49",
+      "begincolumn": "35",
+      "endcolumn": "51",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "register statement body",
+      "localRationale": "body failure is saved and immediately rethrown for finally close",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT009"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "49",
+      "endline": "49",
+      "begincolumn": "54",
+      "endcolumn": "59",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "register statement body",
+      "localRationale": "body failure is saved and immediately rethrown for finally close",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT009"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "52",
+      "endline": "58",
+      "begincolumn": "13",
+      "endcolumn": "12",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "priority": "4",
+      "physicalSite": "register statement finally",
+      "localRationale": "only unsuccessful close may determine the result; established primary policy is applied",
+      "retainedLineToken": "",
+      "oracle": [
+        "PT-WEB-RCPTPORT009"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "55",
+      "endline": "55",
+      "begincolumn": "37",
+      "endcolumn": "53",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "register owned statement.close",
+      "localRationale": "same precedence as header write; release failure remains observable",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT009"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "55",
+      "endline": "55",
+      "begincolumn": "56",
+      "endcolumn": "61",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "register owned statement.close",
+      "localRationale": "same precedence as header write; release failure remains observable",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT009"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "98",
+      "endline": "98",
+      "begincolumn": "31",
+      "endcolumn": "47",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read ResultSet body",
+      "localRationale": "projection row failure is saved and rethrown for its owned close",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "98",
+      "endline": "98",
+      "begincolumn": "50",
+      "endcolumn": "55",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read ResultSet body",
+      "localRationale": "projection row failure is saved and rethrown for its owned close",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "101",
+      "endline": "107",
+      "begincolumn": "9",
+      "endcolumn": "8",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "priority": "4",
+      "physicalSite": "read ResultSet finally",
+      "localRationale": "only allowed precedence propagates failure; no successful row escapes on a failing sole close",
+      "retainedLineToken": "",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "104",
+      "endline": "104",
+      "begincolumn": "33",
+      "endcolumn": "49",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read ResultSet.close",
+      "localRationale": "known SQL and unknown secondary are distinct; policy selects one or fixed suppressed diagnostic",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "104",
+      "endline": "104",
+      "begincolumn": "52",
+      "endcolumn": "57",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read ResultSet.close",
+      "localRationale": "known SQL and unknown secondary are distinct; policy selects one or fixed suppressed diagnostic",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "108",
+      "endline": "108",
+      "begincolumn": "29",
+      "endcolumn": "45",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read statement body",
+      "localRationale": "row read or release can fail; statement close must still run",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "108",
+      "endline": "108",
+      "begincolumn": "48",
+      "endcolumn": "53",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read statement body",
+      "localRationale": "row read or release can fail; statement close must still run",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "111",
+      "endline": "117",
+      "begincolumn": "7",
+      "endcolumn": "6",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "priority": "4",
+      "physicalSite": "read statement finally",
+      "localRationale": "inner row failure is kept or replaced per fixed table before returning a result",
+      "retainedLineToken": "",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "114",
+      "endline": "114",
+      "begincolumn": "31",
+      "endcolumn": "47",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read statement.close",
+      "localRationale": "statement is closed even if owned row projection/release throws",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "114",
+      "endline": "114",
+      "begincolumn": "50",
+      "endcolumn": "55",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "read statement.close",
+      "localRationale": "statement is closed even if owned row projection/release throws",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "132",
+      "endline": "132",
+      "begincolumn": "33",
+      "endcolumn": "49",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned transaction body and commit",
+      "localRationale": "work and commit errors reach one attempted rollback; rethrow failure before owned close",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "132",
+      "endline": "132",
+      "begincolumn": "52",
+      "endcolumn": "57",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned transaction body and commit",
+      "localRationale": "work and commit errors reach one attempted rollback; rethrow failure before owned close",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "135",
+      "endline": "135",
+      "begincolumn": "35",
+      "endcolumn": "51",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned Connection.rollback",
+      "localRationale": "known SQL and unknown rollback causes use the same precedence",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "135",
+      "endline": "135",
+      "begincolumn": "54",
+      "endcolumn": "59",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned Connection.rollback",
+      "localRationale": "known SQL and unknown rollback causes use the same precedence",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "140",
+      "endline": "140",
+      "begincolumn": "31",
+      "endcolumn": "47",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned connection setup/body",
+      "localRationale": "original failure recorded for finally, with no rollback when setup itself fails",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "140",
+      "endline": "140",
+      "begincolumn": "50",
+      "endcolumn": "55",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned connection setup/body",
+      "localRationale": "original failure recorded for finally, with no rollback when setup itself fails",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT003",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "143",
+      "endline": "149",
+      "begincolumn": "9",
+      "endcolumn": "8",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "priority": "4",
+      "physicalSite": "owned Connection finally",
+      "localRationale": "failed sole close prevents data escape even after successful commit",
+      "retainedLineToken": "",
+      "oracle": [
+        "PT-WEB-RCPTPORT001",
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "146",
+      "endline": "146",
+      "begincolumn": "33",
+      "endcolumn": "49",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned Connection.close",
+      "localRationale": "applies closure precedence without a second rollback",
+      "retainedLineToken": "RuntimeException",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    },
+    {
+      "beginline": "146",
+      "endline": "146",
+      "begincolumn": "52",
+      "endcolumn": "57",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "priority": "3",
+      "physicalSite": "owned Connection.close",
+      "localRationale": "applies closure precedence without a second rollback",
+      "retainedLineToken": "Error",
+      "oracle": [
+        "PT-WEB-RCPTPORT005",
+        "PT-WEB-RCPTPORT006",
+        "PT-WEB-RCPTPORT007"
+      ],
+      "state": "local rationale documented; current PortTest and accountable review pending"
+    }
+  ],
+  "priorNullAwayAndSpotBugs": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44778-current-receipt-repository-typed-issues/manifest.json",
+    "sha256": "1bdda883d6fb25a722d4f172648f3ee0bc3a908ed7cfa7455214f4cd053608d6"
+  },
+  "policy": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "summary": "SS331/332 SQL classification and resource ownership; SQLException cataloging is not the API TWR identity policy. Existing literal oracle PT-WEB-RCPTPORT001..009 and SSC329.",
+  "previousScopedNineAndCounters": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG18888-receipt-jdbc-port-nine-v1/manifest.json",
+    "sha256": "d0b93fb970b246fa7af1cf5d4b5b6d220bc2b94ec12bdf28dc9bdcfb1102dd02"
+  },
+  "oldRunReplayed": false,
+  "necessaryPortFixtureNewSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+    "sha256": "f9bfd77eaced4c281f9da52a5fd33bba3a1840e32690639324c7c71dea895744"
+  },
+  "fixtureReason": "changed worker shutdown, finite completion and failure diagnostic; full fixture hash differs",
+  "databaseFixtureStillHeld": {
+    "test": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceFaultTest.java",
+      "sha256": "cb047fc9ca40877f756a3dd7a0e70cf10be2a74f733297a82d634b0228dfd562"
+    },
+    "reason": "JDBC fixture @BeforeAll and @BeforeEach use real isolated DB. No execution authorized."
+  },
+  "needsCurrentUnifiedLocalNine": true,
+  "openQualityOwnerDecision": true,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "productTestsExecuted": 0
+}
