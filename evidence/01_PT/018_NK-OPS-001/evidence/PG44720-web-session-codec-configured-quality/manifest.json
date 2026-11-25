@@ -1,0 +1,132 @@
+{
+  "run": "PG44720",
+  "source": "dfb8928461518a4a07852c9d1909fcb6d14c96e6",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T00:26:01.601292+00:00",
+  "actualExit": 0,
+  "compilerSources": 14,
+  "spotBugsPhysical": 15,
+  "pmdSources": 14,
+  "currentBoundWeb": 117,
+  "denominator": 262,
+  "cleanNew": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadCodec.java"
+  ],
+  "pmdExit": 4,
+  "pmdFindings": [
+    {
+      "file": "SessionAttributeCodec.java",
+      "rule": "UnusedReturnValue",
+      "line": "124"
+    }
+  ],
+  "pmdNeedsOwnerDisposition": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java",
+    "sha256": "92f0f802ed612df710c9e1aa55395d075624e8476eb513cb3eb263330531fd6d"
+  },
+  "staticExplanation": "The finding is on strict JsonReader.peek after the closing object; the return value is unused because the operation serves as end-of-input validation. Owner classification and applied same-source test evidence are still required.",
+  "exactGsonDependency": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+    "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+  },
+  "pinnedEligibility": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/manifest.json",
+    "sha256": "8cac833ac9a1aaceec9b229b3727e7a120a1d04b03db446537b8f86df6ed3b37"
+  },
+  "firstMavenFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-nullaway/terminal.json",
+    "sha256": "b2ad69e3f0b9c055b2744bcb73b1d0abe492908d751da1a1afb2b29f9b9aa90d"
+  },
+  "beginnings": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-nullaway-v2/begin.json",
+      "sha256": "737fc17c71e21efe70122270c4fbe632532d20066b09a6c4bfca20be1b403bb3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-spotbugs/begin.json",
+      "sha256": "c52d7d73458deef5f351536793bb2927036be8e91e082f4ffae66645e7f4c90a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-pmd/begin.json",
+      "sha256": "524b869ea35699d124077f876bc88337735ed5fb03ac2ed3ec0b2eeda64f89ee"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-nullaway-v2/terminal.json",
+      "sha256": "29f9669a9b0d6005fef41a0f74c0f4e04777158e602811b1159429b346c0f95c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-spotbugs/terminal.json",
+      "sha256": "c96c953720bf4d373932b0fd27189f96f8ff14307f5783c15593fc66a12dc1f5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44720-current-web-session-codec-pmd/terminal.json",
+      "sha256": "4685f45c39d9ca6d90dfc446fd89888d18ce701783847d847cdc02069bdc8bf3"
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java",
+      "sha256": "92f0f802ed612df710c9e1aa55395d075624e8476eb513cb3eb263330531fd6d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadCodec.java",
+      "sha256": "a370d5dfad29a81c5faec572084043a6f0402b74e33db63a35c609d828f49886"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeException.java",
+      "sha256": "6402dedbe748c20ddded76903725f4efb13af7327d52d4aa6b271a9877b26bd7"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributes.java",
+      "sha256": "f5596cf6c90ff8bf6a648fb47e5b064bb5fbc3528c872aaf5f444a13bf0fa675"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationToken.java",
+      "sha256": "6a982c339aef53a2297725c114a8cfe023557b3cf36a953c599916e48eaa6f57"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+      "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+      "sha256": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedSessionPayload.java",
+      "sha256": "b2d8816f5704d9d5d879908bf6ae5f4e95d436c1397b5e6ad71b78d09c45d799"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadException.java",
+      "sha256": "93cef186b470be817f36dff0f390ee5b71a3f2b2a0299dac5c694e16b8bf374e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadIdentity.java",
+      "sha256": "f669b82c1ebce568c46198438b01ce65e9133eb1a50e7d94725ef060d3e1e25d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java",
+      "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/SavedRequestTarget.java",
+      "sha256": "35e564f94749c3d005a7e4041f33a77921aac492676ea26305c65b66096ff2e3"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java",
+      "sha256": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda"
+    }
+  ],
+  "productTests": 0,
+  "actualSessionOrCryptoOperation": 0,
+  "normalWebJarProduced": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
