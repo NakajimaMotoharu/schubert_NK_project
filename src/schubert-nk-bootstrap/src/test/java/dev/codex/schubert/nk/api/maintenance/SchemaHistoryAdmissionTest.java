@@ -454,13 +454,15 @@ final class SchemaHistoryAdmissionTest {
       var tasks = new ArrayList<java.util.concurrent.Future<int[]>>();
       for (int i = 0; i < 8; i++)
         tasks.add(
-            workers.executor().submit(
-                () -> {
-                  var probe = new Probe();
-                  barrier.await(5, java.util.concurrent.TimeUnit.SECONDS);
-                  admission.verify(probe.connection());
-                  return probe.closed;
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var probe = new Probe();
+                      barrier.await(5, java.util.concurrent.TimeUnit.SECONDS);
+                      admission.verify(probe.connection());
+                      return probe.closed;
+                    }));
       for (var task : tasks)
         assertArrayEquals(new int[] {1, 1, 0}, task.get(5, java.util.concurrent.TimeUnit.SECONDS));
     }
