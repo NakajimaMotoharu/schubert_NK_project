@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-10255",
+  "source": "6ebfd530755abbd1445158e6a7f88d3f38cebb26",
+  "productionCoreMain": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P018-09/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-09/2",
+    "元行": "WBS-P018-09/2",
+    "費目": "B",
+    "主担当": "WBS-P018-09",
+    "状態": "計画",
+    "作業": "Log/ACTION/REQUEST・metric/error catalog／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計351・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Log/ACTION/REQUEST・metric/error catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-008,MON-001,MON-002,MON-003,MON-004,MON-005,MON-006,MON-007,MON-008,MON-009,MON-010,MON-011,MON-012,MON-013",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-008、MON-001、MON-002、MON-003、MON-004、MON-005、MON-006、MON-007",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "3",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 563,
+    "改訂残pp": "0.65",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44728",
+  "startEvent": "PGPT-20261008-10254",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": {
+    "adoptedExistingCases": 16,
+    "appliedSourceMatched": true,
+    "rawPmdOccurrencesStillOpen": 2,
+    "realMetricsRun": 0,
+    "productTestsExecuted": 0,
+    "formal": 0,
+    "publicationPending": true
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44728-current-metric-observation-independent-proofs/manifest.json",
+    "sha256": "95c74ca186e143ea35f8039518622cf0d08d3f75f9a9502881bd43ce6c362a9c"
+  },
+  "nextEvidence": "F03/2-2-b next API or Web compiler-only set for servlet request attributes without actual HTTP. Check if Micrometer shared pending push can resume after service state review. Keep artifact-ambiguous SDK paths pending.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T00:35:46+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 26,
+    "remainingPercent": 74,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "32bacc6fb20aa0f13c32e60c0692a434c7090011a48c473a9b753c7e72d23d2f",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T00:35:46+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 26,
+        "remainingPercent": 74,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T00:35:27.904735+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 26,
+    "remainingPercent": 74,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
