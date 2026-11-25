@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -310,7 +311,7 @@ final class InspectionSummaryPortTest {
   void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag()
       throws ExecutionException, InterruptedException, TimeoutException {
     boolean parentFlag = Thread.currentThread().isInterrupted();
-    try (var worker = new BoundedJdbcTestWorkers(Executors.newSingleThreadExecutor(), 5)) {
+    try (var worker = new BoundedBatchFixtureWorkers(Executors.newSingleThreadExecutor(), 5, "JDBC fixture")) {
       for (boolean before : List.of(false, true)) {
         worker
             .executor()

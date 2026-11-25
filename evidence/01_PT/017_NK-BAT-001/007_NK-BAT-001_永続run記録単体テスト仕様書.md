@@ -24,3 +24,5 @@ PT038は4種の実encode返却byteを`target/maintenance-record-traces/PT-BAT-03
 | MaintenanceRecords.completion/readCompletion | PT038～045 |
 | MaintenanceActivation constructor/run/id/businessDate/toString/value equality | PT038～039・043～045 |
 | MaintenanceCompletion constructor/activation/endedAt/outcome/toString/value equality、Outcome constructor/exitCode | PT038～039・042～045 |
+
+PT-BAT-045（BUG-3860／YKT-2997）。8 worker、64合成完了記録、SUCCESS／WARNING 32ずつ、各Future 5秒、終了10秒と手書きASCII期待値を継承。共用Batch補助に一次失敗と抑制例外の保持を委譲する。実保持原本・DB・実行退役は別試験。PG45398で変更した経路だけの再試験を記録する。

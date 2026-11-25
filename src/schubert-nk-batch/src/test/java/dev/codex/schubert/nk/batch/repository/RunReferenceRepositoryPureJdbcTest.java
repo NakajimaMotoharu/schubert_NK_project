@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -297,7 +298,7 @@ final class RunReferenceRepositoryPureJdbcTest {
   void independentConnectionsCanRunConcurrently()
       throws ExecutionException, InterruptedException, TimeoutException {
     try (var workers =
-        new BoundedJdbcTestWorkers(Executors.newVirtualThreadPerTaskExecutor(), 10)) {
+        new BoundedBatchFixtureWorkers(Executors.newVirtualThreadPerTaskExecutor(), 10, "JDBC fixture")) {
       List<Future<Boolean>> results = new ArrayList<>();
       for (int index = 0; index < 32; index++) {
         results.add(
@@ -342,7 +343,7 @@ final class RunReferenceRepositoryPureJdbcTest {
           assertThrows(
               AssertionError.class,
               () -> {
-                try (var workers = new BoundedJdbcTestWorkers(executor, timeout)) {
+                try (var workers = new BoundedBatchFixtureWorkers(executor, timeout, "JDBC fixture")) {
                   assertFalse(workers.executor().isShutdown());
                   throw primary;
                 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
@@ -23,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -282,14 +285,15 @@ final class MaintenanceRecordsTest {
   }
 
   @Test
-  void concurrentUse() throws Exception {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+  void concurrentUse() throws InterruptedException, ExecutionException, TimeoutException {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "owned maintenance record")) {
       var futures = new ArrayList<Future<MaintenanceCompletion>>();
       for (int index = 1; index <= 64; index++) {
         final int value = index;
         futures.add(
-            executor.submit(
+            workers.executor().submit(
                 () -> {
                   String id = String.format(Locale.ROOT, "00000000-0000-0000-0000-%012x", value);
                   Outcome outcome = value % 2 == 0 ? Outcome.SUCCESS : Outcome.WARNING;
@@ -320,10 +324,6 @@ final class MaintenanceRecordsTest {
       }
       assertEquals(64, actual.size());
       assertEquals(32, warnings);
-    } finally {
-      executor.shutdownNow();
-      if (!executor.awaitTermination(10, TimeUnit.SECONDS))
-        throw new AssertionError("owned maintenance record workers did not terminate");
     }
   }
 
