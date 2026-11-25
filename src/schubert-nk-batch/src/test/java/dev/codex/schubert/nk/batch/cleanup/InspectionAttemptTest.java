@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001; SS341 7.3/SSC049/PG162; PT-BAT-122..129. Independent fixed count oracle. */
@@ -186,7 +188,8 @@ final class InspectionAttemptTest {
   }
 
   @Test
-  void independentConcurrentObservations() throws Exception {
+  void independentConcurrentObservations()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newVirtualThreadPerTaskExecutor();
     try {
       List<Future<InspectionAttempt>> results = new ArrayList<>();
