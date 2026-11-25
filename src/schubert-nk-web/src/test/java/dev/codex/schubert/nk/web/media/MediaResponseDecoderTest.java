@@ -18,6 +18,7 @@ import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.FixedPayload;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.Instant;
@@ -219,8 +220,7 @@ class MediaResponseDecoderTest {
   @Test
   void med040ConcurrentDecodeOwnsBytesAndIsolatesRequests()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var jobs = new ArrayList<java.util.concurrent.Future<Boolean>>();
       for (int i = 0; i < 100; i++) {
         String id = "track-" + i;
@@ -251,10 +251,6 @@ class MediaResponseDecoderTest {
                 }));
       }
       for (var job : jobs) assertTrue(job.get(10, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(
-          executor.awaitTermination(10, TimeUnit.SECONDS), "media decoder executor terminated");
     }
   }
 

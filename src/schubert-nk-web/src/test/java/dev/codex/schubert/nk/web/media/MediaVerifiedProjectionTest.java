@@ -23,6 +23,7 @@ import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
 import dev.codex.schubert.nk.web.messaging.MediaDescriptorWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
 import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Duration;
@@ -166,8 +167,7 @@ final class MediaVerifiedProjectionTest {
     TypedPayloadValues valid = request(MediaType.AUDIO, LOGICAL_ID, ContentDisposition.INLINE);
     TypedPayloadValues wrong = request(MediaType.AUDIO, "8", ContentDisposition.INLINE);
     var response = exchange(valid, MediaType.AUDIO, LOGICAL_ID, ContentDisposition.INLINE, SUCCESS);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var success = workers.submit(() -> MediaResponseDecoder.decodeVerified(valid, response));
       var failure =
           workers.submit(
@@ -178,10 +178,6 @@ final class MediaVerifiedProjectionTest {
       assertEquals(
           LOGICAL_ID, success.get(5, TimeUnit.SECONDS).descriptor().orElseThrow().logicalId());
       assertTrue(failure.get(5, TimeUnit.SECONDS));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(
-          workers.awaitTermination(10, TimeUnit.SECONDS), "media projection executor terminated");
     }
     assertEquals("ProtectedReadResponse[REDACTED]", response.toString());
     assertEquals(
