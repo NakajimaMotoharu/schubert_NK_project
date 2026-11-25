@@ -1,0 +1,218 @@
+[
+  {
+    "ss343": "10・14",
+    "criterion": "元読取順、個別件数、欠落行と余剰行",
+    "independentExpectation": "個別の五固定SQL、各列・結果件数の固定値、誤件数では後続0を比較する。",
+    "localCases": [
+      {
+        "testId": "PT-MIG-CURRENTSNAPSHOT001",
+        "method": "snapshot001AllFiveFixedQueriesTypedValuesAndCloseOrder",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationProjectionTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-CURRENTSNAPSHOT008",
+        "method": "snapshot008EveryChildExactCardinalityAndNoExtraFields",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationProjectionTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-CURRENTTRANSFER010",
+        "method": "transfer010EveryExpectedCountIsBoundToItsOwnReader",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationTransferTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET020",
+        "method": "target020MissingAndExtraRowsHaveNoExtraColumnReads",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET028",
+        "method": "target028MissingExtraCatalogColumnsHaveNoExtraFieldRead",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      }
+    ]
+  },
+  {
+    "ss343": "10・10.1",
+    "criterion": "path、サイズ、hash、所有の不一致",
+    "independentExpectation": "不一致は組立を中断し、合成のTarget prepやFinalizeを起動しない。四資産が同じ種類に併合されない。",
+    "localCases": [
+      {
+        "testId": "PT-BOOT-MIG-ASSEMBLY008",
+        "method": "assembly008FileExactPathHashAndSizeClaimsAreEnforced",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationAssemblerTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-BOOT-MIG-ASSEMBLY012",
+        "method": "assembly012MediaRebindsExactKindTargetSizeHashAndCount",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationAssemblerTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-BOOT-MIG-ASSEMBLY014",
+        "method": "assembly014FourAssetKindsAreSeparatedWithoutMetadataLoss",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationAssemblerTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-CURRENTTRANSFER012",
+        "method": "transfer012MediaClaimMismatchRejectsBeforeTargetPrepare",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationTransferTest",
+        "result": "PASS"
+      }
+    ]
+  },
+  {
+    "ss343": "10.1・14",
+    "criterion": "COPY件数と途中例外",
+    "independentExpectation": "順序固定六stageで途中失敗の元インスタンスを保持。後続SQLなし、retryなし。",
+    "localCases": [
+      {
+        "testId": "PT-MIG-CURRENTTRANSFER014",
+        "method": "transfer014EveryCopyFailurePreservesIdentityAndNeverFinalizes",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationTransferTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-CURRENTTRANSFER015",
+        "method": "transfer015CountMismatchAtEveryCopyStopsWithoutRetry",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationTransferTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET010",
+        "method": "target010EveryTransferScalarMismatchCannotReachLaterStage",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COORD009",
+        "method": "coord009EveryCopySqlFailureStopsAfterOriginal",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyCoordinatorTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COORD010",
+        "method": "coord010EveryCopyIoFailureStopsAfterOriginal",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyCoordinatorTest",
+        "result": "PASS"
+      }
+    ]
+  },
+  {
+    "ss343": "10.1・14",
+    "criterion": "固定結果の型とNULL、破損と追加行",
+    "independentExpectation": "各手製のwire・digestの錯誤、prefix、extra、NULLを拒否。",
+    "localCases": [
+      {
+        "testId": "PT-MIG-TARGET021",
+        "method": "target021RequiredSqlNullNeverBecomesZeroFalseOrEmpty",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET029",
+        "method": "target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COPYVERIFY006",
+        "method": "copyverify006EveryByteChangeRejectsEvenWithMatchingIndependentSha",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyVerifierTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COPYVERIFY007",
+        "method": "copyverify007EveryTruncatedPrefixRejectsWithMatchingSha",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyVerifierTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COPYVERIFY008",
+        "method": "copyverify008AppendedByteAndExtraLineAreNotIgnored",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyVerifierTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COPYVERIFY013",
+        "method": "copyverify013EveryWireLengthIsExactlyBound",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyVerifierTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-COPYVERIFY014",
+        "method": "copyverify014EveryWireShaIsExactlyBound",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterCopyVerifierTest",
+        "result": "PASS"
+      }
+    ]
+  },
+  {
+    "ss343": "10.1・12.3",
+    "criterion": "制約失敗を後続成功へ進めない",
+    "independentExpectation": "orphan、型・列・制約失敗時、シーケンス変更なし。",
+    "localCases": [
+      {
+        "testId": "PT-MIG-TARGET011",
+        "method": "target011EveryReferenceOrphanAndOrderViolationPreventsSequenceMutation",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET026",
+        "method": "target026All141CatalogRowAttributesMismatchBeforeDdl",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET037",
+        "method": "target037DeferredConstraintRejectionStopsBeforeSequence",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      }
+    ]
+  },
+  {
+    "ss343": "10.1・14",
+    "criterion": "一次例外、所有資源の個別終端",
+    "independentExpectation": "ResultSet→Statementの抑制順。借用Connectionを閉じない。当追加は試験所有workerの一次失敗を保持。",
+    "localCases": [
+      {
+        "testId": "PT-MIG-CURRENTSNAPSHOT009",
+        "method": "snapshot009OwnedCleanupKeepsPrimarySuppressionOrderAndIdentity",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationProjectionTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET013",
+        "method": "target013EveryOwnedStatementCloseFailureKeepsExactPrefixAndOuterOwnership",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET014",
+        "method": "target014OriginalReadFailureKeepsResultThenStatementSuppressedOrder",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-MIG-TARGET038",
+        "method": "target038DeferredPhaseFailureKeepsPrimaryAndCleanupIdentity",
+        "fixture": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+        "result": "PASS"
+      },
+      {
+        "testId": "PT-BOOT-MIG-ASSEMBLY025",
+        "method": "assembly025RetainsFirstCheckWhenBoundedWorkerCleanupFails",
+        "fixture": "dev.codex.schubert.nk.migration.CurrentMigrationAssemblerTest",
+        "result": "PASS"
+      }
+    ]
+  }
+]
