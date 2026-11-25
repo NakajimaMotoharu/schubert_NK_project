@@ -1,0 +1,81 @@
+{
+  "run": "PG45234",
+  "wbs": "WBS-G13.07/2",
+  "relatedWbs": [
+    "WBS-P020-01.01/2-a",
+    "WBS-P020-01.02/2",
+    "WBS-P020-01.03/2"
+  ],
+  "source": "f036f447aa9dae02aceec1daf6267ab12d921bc3",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-25T12:07:45.605159+00:00",
+  "actualExit": 0,
+  "actualTrials": 0,
+  "design": {
+    "commit": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+    "blob": "4f59005eba4be6551e6473335cfc3c597e8aa0a7",
+    "sections": [
+      "§9",
+      "CHR-G01",
+      "CHR-G06"
+    ]
+  },
+  "contracts": [
+    {
+      "path": "program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/gate-contract.json",
+      "sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/case-requirements.json",
+      "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+    }
+  ],
+  "cases": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45234-current-chr-contract-case-trace/case-matrix.json",
+    "sha256": "fb3078cb0718750f200e8dcc285b996f55c68930421338de2f87e34a7c333b42"
+  },
+  "catalogCaseCount": 24,
+  "approvedDifCount": 16,
+  "currentApplicable": 23,
+  "caseLevelActualNkQualified": 0,
+  "protectedBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "baselineRef": "843de94906c0cd01a30641e7a6d542e3df794e45",
+  "historicGate": {
+    "path": "program/characterization/reports/gate-report.json",
+    "sha256": "5bad5851a1f92b7d33cf82aebe9666e5d54fc9371d09a89872a9c6a899ea016f"
+  },
+  "currentToolScope": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45228-current-definition-quality-ninety/manifest.json",
+    "sha256": "c0dca7c4b5b68886132d725dffcc036be10b013df6c38b6a8f60e4ad3a1ad224"
+  },
+  "localToolXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45228-chr-current-quality-ninety/reports/TEST-junit-jupiter.xml",
+    "sha256": "1963aa914fe2829e4fc954b4abb6048a06174fc757e0bb67e2c367180b5c08b8"
+  },
+  "purposeSampleFromExistingNinety": {
+    "requiredVideoRangeObservationsCannotBeDeclaredNkOnly": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+    "requiredVideoRangeObservationsCannotDisappearFromDefinitions": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+    "contractRejectsAnUnapprovedDifferenceIdAtTheSameSize": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+    "contractRejectsReorderedApprovedIds": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+    "rejectsAlteredBaselineManifestTreeAndCommit": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+    "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+  },
+  "normalToolSuccesses": 90,
+  "scopeKinds": [
+    "published definitions and historical inventory",
+    "candidate local synthetic test",
+    "live comparison pending"
+  ],
+  "noCurrentCaptureOrNkRerun": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
