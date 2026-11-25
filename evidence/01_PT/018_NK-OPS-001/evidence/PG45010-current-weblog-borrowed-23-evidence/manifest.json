@@ -1,0 +1,149 @@
+{
+  "run": "PG45010",
+  "source": "6265fef2855a13afc67e54593ee3dae4e2bc602a",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "wbs": "WBS-P004-05/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-25T07:02:25.382641+00:00",
+  "actualExit": 0,
+  "originalReceipts": {
+    "PG39672": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39672-bug3300-weblog-outbox-prepare-v1/manifest.json",
+      "sha256": "2fb509ba3555e96797f198f33c7df5fe2b6b24557246ba799f1841687ef4444b"
+    },
+    "PG39674": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39674-bug3300-weblog-outbox-static-v1/manifest.json",
+      "sha256": "7ed1461232457e29c3d0047f2d931240bbe3a1a1df34bbdd348744034076b164"
+    },
+    "PG39680": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39680-bug3300-weblog-outbox-unit-v1/manifest.json",
+      "sha256": "123300c6d4a4ffacba8090ffbc316f14d7093803b8722f83242f4a12bbf94c99"
+    },
+    "PG39684": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39684-bug3300-weblog-outbox-post-v1/manifest.json",
+      "sha256": "bd77999655bc4b06dca6043bd9e2ff4d964a98676f5f193013259d174e3adcb0"
+    }
+  },
+  "exactJavaInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+      "sha256": "814bd72413259f80b525baf207fda3fe43a35edd5aaa59670aa9ff4f96f7ed9d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "sha256": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "sha256": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+      "sha256": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "sha256": "aa76b6042461676e9c71e769e7b1e9176a9427544db573bd82677227a92afb18"
+    }
+  ],
+  "samePhysical": {
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class": "f506601c92c034e091d7c42ec324e09c5d48b446d5393e2eada973138641d8fe",
+    "dev/codex/schubert/nk/web/logging/ClaimedWebLog.class": "1c8e3fb53df55cb08a4cf46d1505715d43acec014ea1bd76eb9863e74ebe303f",
+    "dev/codex/schubert/nk/web/logging/package-info.class": "594fc1c1d366c85ccf868c0b6cb2b221738e869f6088a829c6b11c1c616465fd",
+    "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.class": "c3acaedf63090010a7c80377a19d27654f935adfe59f032390ddb93aa22347dd",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class": "4434658b9840f794697863ad69277453db865e1ebcf7cd978f5da65402bc166b"
+  },
+  "sameToolDependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "originalCaseNames": [
+    "port001SupplierNullIsRejected()",
+    "port002EnqueueFirstWriteAndDuplicateUseExactSqlBindings()",
+    "port003EnqueueRejectsEveryRequiredArgumentBeforeSql()",
+    "port004AllPublicOperationsRequireBorrowedExplicitTransaction()",
+    "port005ClaimEmptyAndLimitBoundsBindUtcAndTenSecondLease()",
+    "port006ClaimSortsDueThenIdAndReturnsIndependentImmutableRows()",
+    "port007ClaimRejectsInvalidWorkerLimitAndNullTime()",
+    "port008SentUsesOwnerStatusCasAndReportsUnchangedRows()",
+    "port009SentRejectsNullRowAndTime()",
+    "port010FailureBackoffAndSaturatedAttemptUseIndependentVectors()",
+    "port011DefaultJitterStaysWithinIndependentTenPercentBounds()",
+    "port012FailureRejectsMissingOrUnboundedErrorCode()",
+    "port013FailureRejectsOutOfRangeJitterBeforeSql()",
+    "port014EveryMissingDatabaseFieldProducesFixedSqlDataFailure()",
+    "port015InvalidStoredLayoutOrVersionRejectsBeforeOtherFields()",
+    "port016StoredConstructorInvariantsAreNotNormalizedAsSuccessfulRows()",
+    "port017TimeOverflowAndSupplierFailureKeepIdentityAndResourceOwnership()",
+    "port018JdbcFailuresPropagateWithoutTransactionOrConnectionOwnership()",
+    "port019BorrowedConnectionRemainsUntouchedOnSuppressedAndUnknownFailure()",
+    "port020SharedRepositoryHasIndependentConcurrentJdbcState()",
+    "port021AllFourMissingStatementsAreRejectedBeforeBind()",
+    "port022MissingRowsCloseOnlyTheAcquiredStatementOnce()",
+    "port023AliasedRowsFailureKeepsPrimaryCauseAndStatementSuppression()"
+  ],
+  "deferredRealRepositoryFixture": "WebLogOutboxRepositoryTest has a separate database fixture lifecycle. It was left outside this scope.",
+  "originalUnitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39680-bug3300-weblog-outbox-unit-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "aa916e3fce52cb5d6568c7a6933b674d30d879bae1cec5d4f22f7b8ec4dd0f45"
+  },
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "covered": 530,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 39,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 33,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 12,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 139,
+      "missed": 0
+    }
+  },
+  "priorPmdExit": 4,
+  "priorPmdCountByRule": {
+    "CloseResource": 6,
+    "AvoidCatchingGenericException": 7,
+    "DoNotUseThreads": 5,
+    "UseProperClassLoader": 1,
+    "UseConcurrentHashMap": 2
+  },
+  "unknownPmdNotPromoted": true,
+  "spotbugsOriginalFindings": 0,
+  "qualifiedAdditionalMain": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java"
+  ],
+  "scopeBefore": {
+    "api": 148,
+    "web": 153
+  },
+  "scopeAfter": {
+    "api": 148,
+    "web": 155
+  },
+  "noRerun": 23,
+  "productTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
