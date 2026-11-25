@@ -22,3 +22,5 @@
 | PT-USER-CHANGE016 | 既存wire4capability/API UserCommand/Mutation SQL・null/異常 | 各入力が既存固定requestへ渡る、self/last ADMIN/競合/全session失効はAPI正本を維持、formだけで認可/成功保証しない |
 
 Java25/strict null compile/static0・全対象4counter100、immutable constructor/factory、独立normal control/negative。実command/OS/tool/source/exit/counter/BUG/manifestは070へ実測保存、PG440全source採取/freeze後だけ実装。QA049更新token完成方式は未承認、POST/controller/template/全ordinaryWeb/Caddy/CHR/native100/正式品質は別未実行。期待wireはUI236 offsetから独立作成、SQL後条件は既存API実DBの関連suite、未実行やfailed/skipped/flakyを合格に算入しない。
+
+2026-11-26 JST、BUG-3859／YKT-2997。PG45390は対象008と変更015の各並行試験を明示的に選択。元の8 worker、100入力、各Future期限、合成値と固定の期待値は継承。終了はViewFixtureWorkersへ委譲し、同時に失敗した場合の一次例外と抑制例外を保持する。実業務・認証・DBの証跡には加算しない。
