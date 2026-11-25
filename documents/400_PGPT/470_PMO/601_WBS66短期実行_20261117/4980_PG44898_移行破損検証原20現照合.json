@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-10423",
+  "source": "800f52563fd6f1a8a29510e98ecb1934ffb7b16c",
+  "sourceBeforeWork": "800f52563fd6f1a8a29510e98ecb1934ffb7b16c",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P019-03.03/2-照合"
+  ],
+  "planRow": {
+    "ID": "WBS-P019-03.03/2-照合",
+    "元行": "WBS-P019-03.03/2",
+    "費目": "B",
+    "主担当": "WBS-P019-03.03",
+    "状態": "条件付き見積",
+    "作業": "不足TestIDを実行済み/1と照合し、未解決の期待値だけを補う",
+    "残pp": "0.3",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認。現在の/1で不足が解消済みなら発動不要。P019-03のCOPY/SDKを扱う範囲は当該owner確認後",
+    "終了証拠": "既存/1を読み、残る差分・受入に使える範囲・実行担当を保存。実装や回帰は元主担当。該当するSSC417の24試験は未実行。SDK/driver・独立fixture・同sourceの結果を回収。既存1050件を転記しない",
+    "補正根拠": "旧名簿の試験候補不足。名義差の費用は今回のGit比較に置換。原/1で既に解決していれば0",
+    "契約HOLD": "",
+    "対象": "P019-03親のSSC417・SDK/24未実行。子への一律配賦をせず対象TestIDの帰属を確認",
+    "範囲": "SCP-005、MIG-DAT-003、MIG-DAT-004、MIG-DAT-005、MIG-DAT-006、MIG-003、MIG-004、MIG-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "5",
+    "楽観pp": "0",
+    "慎重pp": "0.9",
+    "要求設計の版差": "PT基準仕様 NK-MIG-001、SS 343",
+    "lineNumber": 772,
+    "改訂残pp": "0.3",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44898",
+  "startEvent": "PGPT-20261008-10422",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "独立元JUnitは20件（開始見込12を訂正）。現正規Bootstrap40物理・fixture・補助一致、既raw L11/M4/C1/B14/I56と結合。再演0、SDK/DBは保留。",
+  "proof": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44898-copy-verifier-original20-current-raw/manifest.json",
+    "sha256": "55ae9d75e89ba91cf725bb54b9ddd32f85af3783b29788cf33a19eca2d02bef9"
+  },
+  "nextEvidence": "切戻しの合成fixtureの開始依存と既存方式を照合し、同候補の通常試験で本当に未実施かつ独立な作業へ進む。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T04:19:09+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 34,
+    "remainingPercent": 66,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "b05b7f63d8469aaaff1648401da7497b197824440db5d1176b7810bf51bce8ae",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T04:19:09+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 34,
+        "remainingPercent": 66,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T04:18:58.918799+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 34,
+    "remainingPercent": 66,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
