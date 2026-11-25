@@ -305,7 +305,6 @@ class UserCreateFormTest {
                 }));
       }
       for (var result : results) assertNull(result.get(10, TimeUnit.SECONDS));
-
     }
   }
 

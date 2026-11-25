@@ -242,7 +242,6 @@ final class UserSearchFormContractTest {
                 }));
       }
       for (var result : results) result.get(5, TimeUnit.SECONDS);
-
     }
   }
 }

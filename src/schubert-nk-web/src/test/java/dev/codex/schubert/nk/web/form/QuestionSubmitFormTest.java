@@ -263,7 +263,6 @@ class QuestionSubmitFormTest {
         assertArrayEquals(
             golden("question-" + i, token), results.get(i - 1).get(30, TimeUnit.SECONDS));
       }
-
     }
   }
 }

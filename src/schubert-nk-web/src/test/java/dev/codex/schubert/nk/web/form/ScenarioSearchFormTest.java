@@ -283,7 +283,6 @@ class ScenarioSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-
     }
   }
 }

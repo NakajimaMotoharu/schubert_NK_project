@@ -306,7 +306,6 @@ class LogSearchFormTest {
                 }));
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
-
     }
     assertEquals(Map.of(LEVEL_FIELD, List.of("WARN")), shared);
   }
