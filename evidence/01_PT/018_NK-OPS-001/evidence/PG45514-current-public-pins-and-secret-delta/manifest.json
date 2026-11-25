@@ -1,0 +1,88 @@
+{
+  "run": "PG45514",
+  "source": "49e8ce1eadf31e843a7df5334ca231344a2b69d3",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-25T18:29:29.472319+00:00",
+  "actualExit": 0,
+  "range": {
+    "rangeStart": "e2d2db91f9f7e243b1ec981a078740e85974def5",
+    "rangeEnd": "49e8ce1eadf31e843a7df5334ca231344a2b69d3",
+    "manifests": 17,
+    "current": 153,
+    "historical": 9,
+    "externalOrProtected": 120,
+    "unresolved": []
+  },
+  "previousCompletedReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45480-current-incremental-public-pins/manifest.json",
+    "sha256": "c763c1a211f594a4e386a85b6a4b34e75a17240cf9ef0e3ea9d2401206e159dd"
+  },
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+      "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+    },
+    {
+      "path": "tools/quality/verify_published_manifest_pins.py",
+      "sha256": "87d31ea38ad4ac5be6907ad684315115e5096d7c3d01ffcbea2adcc4ea8fceeb"
+    }
+  ],
+  "secretFindingCount": 0,
+  "steps": {
+    "pins": {
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/verify_published_manifest_pins.py",
+        "--start",
+        "e2d2db91f9f7e243b1ec981a078740e85974def5",
+        "--end",
+        "49e8ce1eadf31e843a7df5334ca231344a2b69d3"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/pins.stdout",
+        "sha256": "2b85f19a61924662db53b03a490267d2070f8098dcd20c7b933be00e337c06a7"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/pins.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "secret": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+        "git",
+        "--redact=100",
+        "--no-banner",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/secret.safe.json",
+        "--log-opts",
+        "e2d2db91f9f7e243b1ec981a078740e85974def5..49e8ce1eadf31e843a7df5334ca231344a2b69d3",
+        "."
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/secret.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/secret.stderr",
+        "sha256": "6684240656ee4201af75dcafa8858115bb11a0452bf50af2cd1b83a0e5afdc12"
+      }
+    }
+  },
+  "redactedReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45514-current-public-delta-audit/secret.safe.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "wholeHistoryRerun": false,
+  "olderG07UnknownCountUnchanged": true,
+  "currentProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
