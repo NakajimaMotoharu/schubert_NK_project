@@ -1,0 +1,134 @@
+{
+  "run": "PG44790",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P018-09/2"
+  ],
+  "source": "c223fd52a559fec8198e8d271195884fed8efd98",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:47:22.358192+00:00",
+  "actualExit": 0,
+  "priorBatch369Hold": {
+    "old": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41718-f03-current-batch-scope-receipt-v1/manifest.json",
+      "sha256": "9f0c50db98e8f985dfec248d922b3f662e77097af63834dba7fbb48d10d7e33c"
+    },
+    "qualifiedCurrent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44534-f03-current-batch-typed-complement-and-held-inventory/complement-by-package.json",
+      "sha256": "fa1b1ae8a5f7590101f4d45f0f4e48a639f84b4469bbeafa122d127f2cef89a3"
+    },
+    "unmeasured": 369,
+    "direct": 53,
+    "transitive": 316,
+    "unmeasuredOutsideKnownHold": 0,
+    "toolsRunOnHeldBatch": 0
+  },
+  "staticReceipts": {
+    "nullaway": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-nullaway/begin.json",
+        "sha256": "dc12c93619d9b15494915c07185724329a04266ad4da242a8ae5d71345dbe697"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-nullaway/terminal.json",
+        "sha256": "5cccbdc2fac18159e17d5a8b77026668c71721656422073a0fb253f0622fa738"
+      }
+    },
+    "spotbugs": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-spotbugs/begin.json",
+        "sha256": "208d0969bc585a8475425c256d9d47bc7abda7633845bc0d99b8a27539b9d3e1"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-spotbugs/terminal.json",
+        "sha256": "e1600b2fd76a48cf9d2646d76ab711bf3b88baea0d647b3fdda1db4174b0c207"
+      }
+    },
+    "pmd": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-pmd/begin.json",
+        "sha256": "298ade1dbaa453843c2a1c090c34da96731ff0a4c6add3433ca0d0345a77c1a4"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44790-current-web-metric-context-and-payload-v3-pmd/terminal.json",
+        "sha256": "e9f42680ffb2c7ae57eb53885814b5051c58cab7099c89cc0953b6fc96f71fef"
+      }
+    }
+  },
+  "checkedSources": 17,
+  "typedPrimary": 3,
+  "cleanAdded": [
+    "WebMetricContext",
+    "WebStandardMetricSource",
+    "WebCustomMetricPayload"
+  ],
+  "webScoped": 127,
+  "webTotal": 262,
+  "initialToolSetup": [
+    "Exact SDK name matched from filename rather than group directory before Maven.",
+    "First two local compiles omitted OverflowSafeHttpMeterRegistry, then its interface. Both ended1 and no analyzer/JUnit ran. Third compile matched the earlier approved 17 source roster."
+  ],
+  "standardPrevious17": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44260-current-web-standard-metric-17-exact-scope/manifest.json",
+    "sha256": "6e2c3c4dec08e0b5205e05506c384b0fbf5373e133a598e3a29f69de8d1d4907"
+  },
+  "matchedStandardPhysical": 12,
+  "matchedCompileSdkSharedNames": [
+    "jspecify-1.0.1.jar",
+    "micrometer-commons-1.17.1.jar",
+    "micrometer-core-1.17.1.jar",
+    "micrometer-observation-1.17.1.jar",
+    "micrometer-registry-prometheus-1.17.1.jar",
+    "prometheus-metrics-config-1.7.0.jar",
+    "prometheus-metrics-core-1.7.0.jar",
+    "prometheus-metrics-exposition-formats-1.7.0.jar",
+    "prometheus-metrics-exposition-textformats-1.7.0.jar",
+    "prometheus-metrics-model-1.7.0.jar",
+    "prometheus-metrics-tracer-common-1.7.0.jar"
+  ],
+  "previousRuntimeOnlyRetained": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+      "sha256": "22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "previousRawStandardScope": {
+    "className": "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource",
+    "crc64": "d426612cb2f8adf4",
+    "probes": 46,
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 208
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 16
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "productExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "actualServiceOrBindingOperations": 0
+}
