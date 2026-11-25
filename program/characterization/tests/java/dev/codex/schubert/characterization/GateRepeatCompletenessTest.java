@@ -100,7 +100,8 @@ final class GateRepeatCompletenessTest {
 
   private void assertOverlapRejected(Path first, Path second) {
     Path output = temporaryDirectory.resolve("overlapping-input.json");
-    var failure = assertThrows(IOException.class, () -> GateCli.compareCurrent(first, second, output));
+    var failure =
+        assertThrows(IOException.class, () -> GateCli.compareCurrent(first, second, output));
     assertEquals("repeat comparison file names overlap", failure.getMessage());
     assertFalse(Files.exists(output));
   }
