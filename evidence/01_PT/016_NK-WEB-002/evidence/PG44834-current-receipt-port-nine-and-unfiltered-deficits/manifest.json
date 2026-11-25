@@ -1,0 +1,134 @@
+{
+  "run": "PG44834",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "a17112fb6a487be3659cfadf75f1f8fa18f63ec2",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T02:51:00.551809+00:00",
+  "fixturePotentiallyEligible": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+    "sha256": "f9bfd77eaced4c281f9da52a5fd33bba3a1840e32690639324c7c71dea895744"
+  },
+  "setupAndExactCases": [
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "absentRepeatedAndConflictingTuplesNeverBecomeAnUpdateOrAcceptanceProof"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "concurrentIndependentReadsNeverShareConnectionsStatementsOrResults"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "eachProviderFailureRollsBackAndAttemptsOwnedCloseBeforeCatalogOrIdentityEscapes"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "impossibleUpdateCountsAreRejectedBeforeReadAndCommit"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "insertStatementCloseUsesIndependentPrimaryAndSecondarySelectionTable"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "knownPrimaryAndCleanupPrecedenceMatchIndependentSqlUnknownTable"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "literalSqlBindingsAndOwnedOrderMatchThreeColumnLocator"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "nullAcquisitionsColumnsAndInvalidProjectionFailWithoutNpeOrEscapingResources"
+    ],
+    [
+      "dev.codex.schubert.nk.web.receipt.ReceiptReferencePortTest",
+      "originalUnknownKeepsIdentityAndOnlyFixedSecondaryDiagnostics"
+    ]
+  ],
+  "compileAndJUnitProof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/begin.json",
+      "sha256": "2bc2a4a75cb729643ef3217bf7cea0adf27c08f0df9ff899598fae68b6110866"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/terminal.json",
+      "sha256": "94d3cc8c52d24d825c258adac4a82860d9c8d74a6ebd028c21b034a2fb4905b3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/result/TEST-junit-jupiter.xml",
+      "sha256": "af3825ac55f72adffcfa4ce6af8c976d10ae57e6dfed57ec15ec29d2f76d8eeb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/pt.exec",
+      "sha256": "4eecaffbf34921cf5b2e66811224a4cbd95caa395d1fec847372783340ba3328"
+    }
+  ],
+  "independentStaticAndSourceReview": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44832-receipt-reference-current-exception-site-review/manifest.json",
+    "sha256": "12dbe0c54802eda62f1e8d9eaeb5b96e2bd8368782eb1258fabdcffd927e647a"
+  },
+  "validJunit9": {
+    "tests": 9,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "newProductTests": 9,
+  "oldResultsCombined": false,
+  "physicalProducts": {
+    "dev/codex/schubert/nk/web/receipt/ReceiptReference.class": "06c7272e8a59a59ba8b6399ff3c02da744f6ae43bcbbf437784c0c9987a5ef3c",
+    "dev/codex/schubert/nk/web/receipt/ReceiptReferenceException.class": "1cca87209f39de88580c3e012d1a2772d137fc58e99b39d6d4dbd8840a8515ba",
+    "dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+    "dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "37a42b1b6cebe1d5964231888876841da2850b12fd05ffd102a44aa42aa50929",
+    "dev/codex/schubert/nk/web/session/InvalidSessionRowException.class": "b69afa5decd303c72293c68ba918d06c40d8a64b3d8a3e55189291620f5ec1a4",
+    "dev/codex/schubert/nk/web/session/SessionStoreException.class": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a",
+    "dev/codex/schubert/nk/web/session/package-info.class": "3fe914022b11d62e8a2782b393443c76c17914fda383f41dab62bd2feb23518a"
+  },
+  "unfiltered": {
+    "INSTRUCTION": {
+      "missed": 15,
+      "covered": 367
+    },
+    "BRANCH": {
+      "missed": 8,
+      "covered": 40
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 100
+    },
+    "COMPLEXITY": {
+      "missed": 6,
+      "covered": 27
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 9
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "unfilteredLines": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/raw-line.terminal.json",
+      "sha256": "30a6f4e06cf01d08f04ce179089160c6345ac970644f5fe73cbec1b9feb5f7a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/raw-line.out",
+      "sha256": "738b4e80c76b6dd141363bfe05f8406e5eb1025dba05383ceb34b22709cb75fb"
+    }
+  ],
+  "naturallyAbstractCompanion": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44834-receipt-memory-proxy-owned-nine/companion.out",
+    "sha256": "9b3fa9d295a80eea1162c97574e5ae8d3692a9e336c68f1e00f55743f92d7499"
+  },
+  "homeDbOrExternal": false,
+  "wholeLocalFourCounter100": false,
+  "nextCause": "raw branch deficit in finally copies on read, transaction and register; compare exact bytecode and source before selecting any refactor",
+  "noInstrumentationCoverageExclusions": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
