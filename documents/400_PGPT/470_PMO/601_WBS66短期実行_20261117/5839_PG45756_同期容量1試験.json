@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-11293",
+  "source": "d70873c27e1b8fd488a99162509abb3f6c09ae2c",
+  "sourceBeforeWork": "30cf8cab66293d848e2f3c46b8c32797b75b0eab",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "候補再資格-33.01"
+  ],
+  "planRow": {
+    "ID": "候補再資格-33.01",
+    "元行": "WBS-P005-02/2",
+    "費目": "B",
+    "主担当": "WBS-P005-02",
+    "状態": "差分証跡不足時のみ",
+    "作業": "変更した試験の既存証跡の適用範囲を照合",
+    "残pp": "0.6",
+    "着手": "新規の実行前に今回のsource・byte・期待値・同じ証跡の既有無を確認",
+    "終了証拠": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+    "補正根拠": "旧候補とのblob差分。Mainは1名義0.30、試験は0.15の暫定照合単価。A対象・閉鎖済だけのものは除外。既済みなら減額",
+    "契約HOLD": "",
+    "対象": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java、src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java、src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java、src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "範囲": "WBS-P005-02",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0",
+    "慎重pp": "1.8",
+    "要求設計の版差": "PT基準仕様 NK-MSG-001",
+    "lineNumber": 325,
+    "改訂残pp": "0.6",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG45756",
+  "startEvent": "PGPT-20261008-11292",
+  "workCategory": "IMPLEMENTATION",
+  "outcome": "P005-02局所製品1件、製品延べ3,117。実同期JMSと正式451は未成立。",
+  "proof": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG45756-current-in-memory-capacity-one/manifest.json",
+    "sha256": "d06a921b1aa263fe152d137c2e8cbf6d31a2e1d7f7de48b81f4f5d40253ac11a"
+  },
+  "nextEvidence": "F02/F03の最新同候補証拠を担当材料に追記し、並行可能なG13.06の承認済みBatch Unit対応へ。",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T23:42:48+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 76,
+      "remainingPercent": 24,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 76,
+    "remainingPercent": 24,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "87c95aec3cafd82f58b47411f39043f0e25601a826e49398ffbeade365f7b7c3",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T23:42:48+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 76,
+        "remainingPercent": 24,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T23:42:20.812051+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 76,
+    "remainingPercent": 24,
+    "resetsAt": 1796126528,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
