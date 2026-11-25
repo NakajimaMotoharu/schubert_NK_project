@@ -1,0 +1,242 @@
+{
+  "missingDeclared": [
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "method": "column006AnyMissingPhysicalColumnIsRejected",
+      "status": "PASS",
+      "testId": "PT-MIG-COLUMN006",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+        "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "method": "constraint006AnyMissingDeclaredConstraintIsRejected",
+      "status": "PASS",
+      "testId": "PT-MIG-CONSTRAINT006",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+        "sha256": "f3909c09e6ec09d30606fdd803ef2f405ac07393837f487772673d22ea0d728c"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "method": "content008MissingRowAtEveryTableRejectsWithNoLaterQuery",
+      "status": "PASS",
+      "testId": "PT-MIG-CONTENT008",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/080_移行六表全COPY列の型付き照合・独立二十八仕様.md",
+        "sha256": "f59fcef33c41ef7132b03fb2d1e3c2998d30768f6d679c2fd29ecc62700f56fd"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra",
+      "status": "PASS",
+      "testId": "PT-MIG-REF008",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    }
+  ],
+  "duplicateAndIncorrectOrdinal": [
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "method": "column008NullZeroNegativeDuplicateAndWrongOrdinalsFail",
+      "status": "PASS",
+      "testId": "PT-MIG-COLUMN008",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+        "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "method": "constraint008NullZeroNegativeDuplicateAndWrongOrdinalsFail",
+      "status": "PASS",
+      "testId": "PT-MIG-CONSTRAINT008",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+        "sha256": "f3909c09e6ec09d30606fdd803ef2f405ac07393837f487772673d22ea0d728c"
+      }
+    }
+  ],
+  "mismatchedRepresentation": [
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "method": "column009EveryColumnAttributeMismatchIsDetected",
+      "status": "PASS",
+      "testId": "PT-MIG-COLUMN009",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+        "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "method": "constraint009EveryConstraintAttributeMismatchIsDetected",
+      "status": "PASS",
+      "testId": "PT-MIG-CONSTRAINT009",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+        "sha256": "f3909c09e6ec09d30606fdd803ef2f405ac07393837f487772673d22ea0d728c"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "method": "final012LastMaxMismatchCannotIssueSequenceOrAnalyze",
+      "status": "PASS",
+      "testId": "PT-MIG-FINAL012",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/066_移行identity最大値整合と六表ANALYZE・独立二十八仕様.md",
+        "sha256": "0aa7123c17bdf62e9fbb24336acabc1685cb82404ed3c7089c95aaf7935ef428"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery",
+      "status": "PASS",
+      "testId": "PT-MIG-REF014",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks",
+      "status": "PASS",
+      "testId": "PT-MIG-REF015",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    }
+  ],
+  "midQueryPreservesFailure": [
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference009EveryQueryFailureStopsAtTheOriginalFailure",
+      "status": "PASS",
+      "testId": "PT-MIG-REF009",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference010EveryScalarReadPhasePreservesOriginalFailure",
+      "status": "PASS",
+      "testId": "PT-MIG-REF010",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    }
+  ],
+  "failedCloseStopsSuccessAndPreservesOrder": [
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "method": "column017EveryResultCloseFailureStopsLaterQueries",
+      "status": "PASS",
+      "testId": "PT-MIG-COLUMN017",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+        "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "method": "column018StatementCloseFailureCannotBecomeSuccess",
+      "status": "PASS",
+      "testId": "PT-MIG-COLUMN018",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+        "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "method": "constraint017EveryResultCloseFailureStopsLaterQueries",
+      "status": "PASS",
+      "testId": "PT-MIG-CONSTRAINT017",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+        "sha256": "f3909c09e6ec09d30606fdd803ef2f405ac07393837f487772673d22ea0d728c"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "method": "constraint018StatementCloseFailureCannotBecomeSuccess",
+      "status": "PASS",
+      "testId": "PT-MIG-CONSTRAINT018",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+        "sha256": "f3909c09e6ec09d30606fdd803ef2f405ac07393837f487772673d22ea0d728c"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "method": "content020EachResultCloseFailureIsNotSuccess",
+      "status": "PASS",
+      "testId": "PT-MIG-CONTENT020",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/080_移行六表全COPY列の型付き照合・独立二十八仕様.md",
+        "sha256": "f59fcef33c41ef7132b03fb2d1e3c2998d30768f6d679c2fd29ecc62700f56fd"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "method": "content021StatementCloseFailureIsNotSuccess",
+      "status": "PASS",
+      "testId": "PT-MIG-CONTENT021",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/080_移行六表全COPY列の型付き照合・独立二十八仕様.md",
+        "sha256": "f59fcef33c41ef7132b03fb2d1e3c2998d30768f6d679c2fd29ecc62700f56fd"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "method": "final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder",
+      "status": "PASS",
+      "testId": "PT-MIG-FINAL021",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/066_移行identity最大値整合と六表ANALYZE・独立二十八仕様.md",
+        "sha256": "0aa7123c17bdf62e9fbb24336acabc1685cb82404ed3c7089c95aaf7935ef428"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference011EveryResultCloseFailureCannotBeSuccess",
+      "status": "PASS",
+      "testId": "PT-MIG-REF011",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference013StatementCloseFailureIsNotNormalCompletion",
+      "status": "PASS",
+      "testId": "PT-MIG-REF013",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/068_移行六表件数と参照・link順・独立二十仕様.md",
+        "sha256": "d282d888fae28993cb6b592bad3dc3aa44f615f8c7d779624ebe053c22558610"
+      }
+    },
+    {
+      "suite": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "method": "reference022OuterCloseReturningPrimaryKeepsOnlyDistinctInnerFailure",
+      "status": "PASS",
+      "testId": "PT-MIG-REF022",
+      "originalSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/163_移行資源同一例外三分岐_仕様と結果.md",
+        "sha256": "307319114d1ca992ec946ede774cfb77f0f908f398c9d7d75b8e759d47cd12ad"
+      }
+    }
+  ]
+}
