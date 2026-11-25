@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import coverage_class_names, validate_module_coverage
-from pgpt_reactor_junit import compiled_class_paths, validate_passing_surefire_suite
+from pgpt_reactor_junit import compiled_class_paths, require_collection_inputs_unchanged, validate_passing_surefire_suite
 from pgpt_spotbugs_contract import validate_module_spotbugs
 
 
@@ -50,9 +50,10 @@ def main():
     if read(".exit") != "0":
         raise SystemExit("failed execution cannot be certified")
     commit = read(".commit")
-    subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True,
-                   stdout=subprocess.DEVNULL)
+    require_collection_inputs_unchanged(
+        repo, commit,
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     raw_log = (metadata / (args.run_id + ".log")).read_bytes()
     if b"BUILD SUCCESS" not in raw_log or b"[ERROR]" in raw_log:
         raise SystemExit("build log is not successful")

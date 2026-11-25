@@ -4,11 +4,10 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_jacoco_contract import validate_selected_class_coverage
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
 
@@ -122,9 +121,10 @@ def main():
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise ValueError("matching successful reactor run required")
-    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--",
-                    "src", "pom.xml", "program/characterization", "tools/quality"],
-                   cwd=repo, check=True)
+    require_collection_inputs_unchanged(
+        repo, verified['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     methods = {"NK-MSG-001": {}, "NK-MSG-002": {}}
     coverage = {"NK-MSG-001": {}, "NK-MSG-002": {}}
     for test_id, program, _, module, class_name, method, count, subject in SUBJECTS:

@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 
 
 def main():
@@ -22,8 +22,10 @@ def main():
     validated = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if validated["runId"] != args.run_id or validated["exitCode"] != 0:
         raise SystemExit("collect the matching verified Scenario run first")
-    subprocess.run(["git", "diff", "--exit-code", validated["targetCommit"], "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True, stdout=subprocess.DEVNULL)
+    require_collection_inputs_unchanged(
+        repo, validated['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     target = repo / "src/schubert-nk-protocol/target"
     evidence = evidence_output_root(repo) / "003_NK-PRO-003/evidence"
     old = json.loads((evidence / "manifest.json").read_text())

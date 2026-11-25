@@ -5,11 +5,10 @@ import hashlib
 import json
 import re
 from pathlib import Path
-import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validate_class_family_coverage
 import bootstrap_ownership
@@ -501,8 +500,10 @@ def main():
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
-    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True)
+    require_collection_inputs_unchanged(
+        repo, verified['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     target = repo / "src/schubert-nk-api/target"
     groups = DEPLOYMENT_GROUPS if args.deployment else GROUPS
     methods = validate_reports([ET.parse(repo / ("src/schubert-nk-" + module_for(g[0])) / "target/surefire-reports" / ("TEST-" + g[0] + ".xml")).getroot()

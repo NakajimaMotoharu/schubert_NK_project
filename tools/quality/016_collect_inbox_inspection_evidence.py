@@ -16,7 +16,7 @@ import xml.etree.ElementTree as ET
 import bootstrap_ownership
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validated_class_rows
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -111,9 +111,10 @@ def main():
     base = json.loads(certified.read_text())
     if base["runId"] != run or base["exitCode"] != 0:
         raise SystemExit("collect matching full reactor evidence first")
-    subprocess.run(["git", "diff", "--exit-code", base["targetCommit"], "--",
-                    "src", "pom.xml", "program/characterization", "tools/quality"],
-                   cwd=repo, check=True, stdout=subprocess.DEVNULL)
+    require_collection_inputs_unchanged(
+        repo, base['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     shared = args.aes_credential or args.credential_access or args.credential_loader
     target = repo / ("src/schubert-nk-storage/target" if args.inode_security else
                      "src/schubert-nk-bootstrap/target" if shared else "src/schubert-nk-api/target")

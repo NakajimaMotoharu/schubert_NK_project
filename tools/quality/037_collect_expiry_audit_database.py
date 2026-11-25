@@ -4,11 +4,10 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.database.DatabaseMigrationTest"
@@ -56,8 +55,10 @@ def main():
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
-    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True)
+    require_collection_inputs_unchanged(
+        repo, verified['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     xml = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + CLASS + ".xml")
     methods = validate_suite(ET.parse(xml).getroot())
     evidence = evidence_output_root(repo) / "004_NK-DAT-001/evidence/expiry-audit"

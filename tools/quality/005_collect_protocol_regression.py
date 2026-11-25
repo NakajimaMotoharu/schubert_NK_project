@@ -6,9 +6,9 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
-import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_reactor_junit import require_collection_inputs_unchanged
 from pgpt_evidence_checksums import write_scope_checksums
 
 
@@ -22,9 +22,10 @@ def main():
     validated = json.loads(auth.read_text())
     if validated["runId"] != args.run_id or validated["exitCode"] != 0:
         raise SystemExit("collect and validate the matching authentication run first")
-    subprocess.run(["git", "diff", "--exit-code", validated["targetCommit"], "--",
-                    "src", "pom.xml", "program/characterization", "tools/quality"],
-                   cwd=repo, check=True, stdout=subprocess.DEVNULL)
+    require_collection_inputs_unchanged(
+        repo, validated['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     protocol = args.program == "NK-PRO-002"
     module = "protocol" if protocol else "api"
     directory = "002_NK-PRO-002" if protocol else "006_NK-MSG-002"

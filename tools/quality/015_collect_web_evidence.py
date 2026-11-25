@@ -6,12 +6,11 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
-import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
-from pgpt_reactor_junit import validate_passing_surefire_suite
+from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
 
 
 def validate_session_resource_inventory(mapping):
@@ -174,9 +173,10 @@ def main():
     verified = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("collect the matching full verified reactor first")
-    subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
-                    "program/characterization", "tools/quality"], cwd=repo, check=True,
-                   stdout=subprocess.DEVNULL)
+    require_collection_inputs_unchanged(
+        repo, verified['targetCommit'],
+        ["src", "pom.xml", "program/characterization", "tools/quality"],
+    )
     expected = {}
     groups = {
         "dev.codex.schubert.nk.web.session.WebSessionIdTest": (
