@@ -11,7 +11,11 @@ import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
 from pgpt_evidence_destination import evidence_output_root
-from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
+from pgpt_reactor_junit import (
+    is_successful_reactor_exit,
+    require_collection_inputs_unchanged,
+    validate_passing_surefire_suite,
+)
 
 
 def main():
@@ -20,7 +24,7 @@ def main():
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[2]
     validated = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
-    if validated["runId"] != args.run_id or validated["exitCode"] != 0:
+    if validated["runId"] != args.run_id or not is_successful_reactor_exit(validated.get("exitCode")):
         raise SystemExit("collect the matching verified Scenario run first")
     require_collection_inputs_unchanged(
         repo, validated['targetCommit'],

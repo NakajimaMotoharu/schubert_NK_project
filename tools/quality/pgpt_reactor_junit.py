@@ -50,6 +50,11 @@ def reactor_run_record(directory, run, suffix):
     return path
 
 
+def is_successful_reactor_exit(value):
+    """Only the numeric integer exit code zero is evidence of successful termination."""
+    return type(value) is int and value == 0
+
+
 def require_collection_inputs_unchanged(repo, commit, paths):
     """Compare the recorded inputs against the reactor's actual commit object."""
     if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):

@@ -8,7 +8,7 @@ from pathlib import Path
 import shutil
 import xml.etree.ElementTree as ET
 
-from pgpt_reactor_junit import require_collection_inputs_unchanged
+from pgpt_reactor_junit import is_successful_reactor_exit, require_collection_inputs_unchanged
 from pgpt_evidence_checksums import write_scope_checksums
 
 
@@ -20,7 +20,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     auth = repo / "evidence/01_PT/007_NK-AUT-001/evidence/manifest.json"
     validated = json.loads(auth.read_text())
-    if validated["runId"] != args.run_id or validated["exitCode"] != 0:
+    if validated["runId"] != args.run_id or not is_successful_reactor_exit(validated.get("exitCode")):
         raise SystemExit("collect and validate the matching authentication run first")
     require_collection_inputs_unchanged(
         repo, validated['targetCommit'],

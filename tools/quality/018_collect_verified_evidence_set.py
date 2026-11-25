@@ -10,7 +10,10 @@ import subprocess
 import sys
 
 from pgpt_reactor_junit import (
-    reactor_run_record, require_collection_inputs_unchanged, verify_reactor_junit,
+    is_successful_reactor_exit,
+    reactor_run_record,
+    require_collection_inputs_unchanged,
+    verify_reactor_junit,
 )
 from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
 
@@ -100,8 +103,7 @@ def load_evidence_json(path, description):
 def load_success_manifest(path):
     manifest = load_evidence_json(path, "evidence manifest")
     if (not isinstance(manifest, dict)
-            or type(manifest.get("exitCode")) is not int
-            or manifest["exitCode"] != 0):
+            or not is_successful_reactor_exit(manifest.get("exitCode"))):
         raise ValueError("mixed or failed evidence run/source/branch")
     return manifest
 

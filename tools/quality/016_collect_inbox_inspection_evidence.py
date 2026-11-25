@@ -16,7 +16,11 @@ import xml.etree.ElementTree as ET
 import bootstrap_ownership
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validated_class_rows
-from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
+from pgpt_reactor_junit import (
+    is_successful_reactor_exit,
+    require_collection_inputs_unchanged,
+    validate_passing_surefire_suite,
+)
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -109,7 +113,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     certified = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     base = json.loads(certified.read_text())
-    if base["runId"] != run or base["exitCode"] != 0:
+    if base["runId"] != run or not is_successful_reactor_exit(base.get("exitCode")):
         raise SystemExit("collect matching full reactor evidence first")
     require_collection_inputs_unchanged(
         repo, base['targetCommit'],

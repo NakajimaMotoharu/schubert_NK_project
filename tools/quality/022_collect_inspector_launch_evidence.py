@@ -8,7 +8,11 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
-from pgpt_reactor_junit import require_collection_inputs_unchanged, validate_passing_surefire_suite
+from pgpt_reactor_junit import (
+    is_successful_reactor_exit,
+    require_collection_inputs_unchanged,
+    validate_passing_surefire_suite,
+)
 from pgpt_evidence_destination import evidence_output_root
 from pgpt_jacoco_contract import validate_class_family_coverage
 import bootstrap_ownership
@@ -498,7 +502,7 @@ def main():
     repo = Path(__file__).resolve().parents[2]
     full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
-    if verified["runId"] != run or verified["exitCode"] != 0:
+    if verified["runId"] != run or not is_successful_reactor_exit(verified.get("exitCode")):
         raise SystemExit("matching successful full reactor required")
     require_collection_inputs_unchanged(
         repo, verified['targetCommit'],
