@@ -1,0 +1,177 @@
+{
+  "run": "PG45706",
+  "source": "8e1ed6c69477f28209b96ae5ff8789d76e4b9113",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P006-01/2",
+  "terminalAtUTC": "2026-11-25T22:43:15.164457+00:00",
+  "actualExit": 0,
+  "originalWbsRef": "候補再資格-07.01",
+  "targetPackage": "dev.codex.schubert.nk.api.idempotency",
+  "canonicalSourceMatch": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "sha256": "4f82f83938dc0ef254756c3f38bbfe78b792620045d840cc15bb01535740d1f3"
+    }
+  ],
+  "approvedCanonicalReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44274-api-canonical-value-current-four-input-criteria/manifest.json",
+    "sha256": "81303064b18ca92155ed0ec4ebf36e6370d51ce41b128b4c42b83312984471df"
+  },
+  "canonicalCurrentCriteria": [
+    {
+      "testId": "PT-IDEM-CANONVALUE001",
+      "expected": "defensive copies of admitted fields and terminal wipe; absent differs from empty"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE002",
+      "expected": "fixed UTF-8 and signed-number hex vectors; invalid inputs rejected"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE003",
+      "expected": "NFC before admission; fixed layout identity and mandatory text"
+    },
+    {
+      "testId": "PT-IDEM-CANONVALUE004",
+      "expected": "snapshot keeps declared field order and owner cleanup"
+    }
+  ],
+  "oldReasonReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35842-ssc441-inbox21-post-v2/manifest.json",
+    "sha256": "9a7bce25913440d5931b84009d3d63ac8769f260a09d0aa3d879d40c3902674a"
+  },
+  "oldOrdinaryReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35840-ssc441-inbox21-unit-v2/manifest.json",
+    "sha256": "9c37039dc9e7a92d0ae97f288642fd9b736d507f080bc589653dc462def1519b"
+  },
+  "reasonInputMatches": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxException.java",
+      "sha256": "9af60235f7cda54717cfaf5c1542c5a51083bfdb1d38a5097c88a7b8ebcf82ae"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxExceptionValueContractTest.java",
+      "sha256": "95e3f22b71bcfac5fd14e5a8e272aa0a1feccad452d9b9b7829b2a9e3a7743f8"
+    }
+  ],
+  "reasonTestId": "PT-IDEM-REASONVALUE001",
+  "provedIndependentValues": [
+    "23000",
+    "23000",
+    "55000",
+    "XX000",
+    "25000"
+  ],
+  "reasonOriginalResult": {
+    "classname": "dev.codex.schubert.nk.api.idempotency.InboxExceptionValueContractTest",
+    "name": "reasonValue001ClosedCatalogSqlStateAndDefensiveEnumLookup()",
+    "failure": false,
+    "error": false,
+    "skipped": false
+  },
+  "oldCoverageNote": "class counters in the named historical run, no new exec",
+  "oldReasonClassCounters": {
+    "dev/codex/schubert/nk/api/idempotency/InboxException": {
+      "INSTRUCTION": {
+        "covered": 21,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/idempotency/InboxException$Reason": {
+      "INSTRUCTION": {
+        "covered": 49,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "otherSourcesDiffered": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletion.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecution.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxModelTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+    "pom.xml"
+  ],
+  "old21NotCombinedAndNotReplayed": true,
+  "candidateApiPackagingQualified": false,
+  "actualJdbcTransactionHmacOrServiceInvoked": false,
+  "newProductTrials": 0,
+  "cumulativeProductTrialsGross": 2901,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "canonicalExactFiveJavaAndTwoSdkInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+      "sha256": "11c7d766aa67847d77b2a6c69e96f167316a751e27744758be327e557920f7ac"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java",
+      "sha256": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "sha256": "4f82f83938dc0ef254756c3f38bbfe78b792620045d840cc15bb01535740d1f3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ]
+}
