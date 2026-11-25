@@ -1,0 +1,82 @@
+{
+  "eventId": "PGPT-20261008-11298",
+  "groupId": "PGPT-20261126-PG45762",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T23:46:40+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 76,
+      "remainingPercent": 24,
+      "resetsAt": 1796126528,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "f6799b8b90e935a8632f06a5700a08e24c923ff9",
+    "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+    "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "run": "PG45762",
+    "managementWorkIds": [
+      "候補再資格-62.01"
+    ],
+    "planRow": {
+      "ID": "候補再資格-62.01",
+      "元行": "WBS-P017-05/2",
+      "費目": "B",
+      "主担当": "WBS-P017-05",
+      "状態": "差分証跡不足時のみ",
+      "作業": "変更した試験の既存証跡の適用範囲を照合",
+      "残pp": "0.15",
+      "着手": "新規の実行前に今回のsource・byte・期待値・同じ証跡の既有無を確認",
+      "終了証拠": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "補正根拠": "旧候補とのblob差分。Mainは1名義0.30、試験は0.15の暫定照合単価。A対象・閉鎖済だけのものは除外。既済みなら減額",
+      "契約HOLD": "",
+      "対象": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "範囲": "WBS-P017-05",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "6",
+      "楽観pp": "0",
+      "慎重pp": "0.45",
+      "要求設計の版差": "PT基準仕様 NK-BAT-001、SS 341",
+      "lineNumber": 531,
+      "改訂残pp": "0.15",
+      "wholePlan": {
+        "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+        "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+      }
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月24日_PGPT再開実行計画.txt",
+        "sha256": "702ef0dfeb1b5efbf1b57f8e3d734a87a3c4d26c087c5980fcc9674ce9e15fa5"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "previousCheckpoint": 5843,
+    "startScope": "現在の二Backup Manifest fixture（境界・有限並行の差分）の同一execに16を固定。局所四指標を正規Batch七物理で測る。親Backup18とDB／媒体は対象外。",
+    "groupCapPp": 1.15,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.4,
+      "high": 1.15
+    },
+    "workCategory": "SELECTED_TEST",
+    "completedOriginalRowPricePp": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "speedRequested": "standard",
+    "modelObserved": null,
+    "reasoningObserved": null,
+    "speedObserved": null,
+    "actualAllocatedPp": null,
+    "parent": "WBS-P017-05/2"
+  }
+}
