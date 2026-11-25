@@ -1,0 +1,134 @@
+{
+  "run": "PG44852",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "16f1e221a73e629f47b81a117c5c699b265aa668",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:13:52.443704+00:00",
+  "priorDossier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44794-current-four-owner-handoff-and-plan-gap/manifest.json",
+    "sha256": "675c2241d0d1a62e75c5b1e042afabd686a15e7243e8b334112f046d5a84d473"
+  },
+  "currentF02": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44840-current-four-package-receipt-after-web-cleanup/manifest.json",
+    "sha256": "71bf492e5a54f7bc4c0659d34ebf69c7229ecef8fad35a86ea875c796fccc7da"
+  },
+  "sameMainTreesAndCurrentDenominators": {
+    "protocol": {
+      "sourcePaths": 169,
+      "oldTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+      "currentTree": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+      "same": true
+    },
+    "storage": {
+      "sourcePaths": 25,
+      "oldTree": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+      "currentTree": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+      "same": true
+    },
+    "bootstrap": {
+      "sourcePaths": 88,
+      "oldTree": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+      "currentTree": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+      "same": true
+    },
+    "api": {
+      "sourcePaths": 286,
+      "oldTree": "b8d1b503e1ed0575e100efb1bb0fddd4aa6aac26",
+      "currentTree": "b8d1b503e1ed0575e100efb1bb0fddd4aa6aac26",
+      "same": true
+    },
+    "web": {
+      "sourcePaths": 262,
+      "oldTree": "a7afa7b3eef2335c4feb7aa9800cd1b24bd6a9db",
+      "currentTree": "e25acc5a895ad0a15ff2305ab9a912d401fbc0da",
+      "same": false
+    },
+    "batch": {
+      "sourcePaths": 203,
+      "oldTree": "f713469ccd0424baf6339dd4748c043f23e4725e",
+      "currentTree": "f713469ccd0424baf6339dd4748c043f23e4725e",
+      "same": true
+    }
+  },
+  "changedWebSingleSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sha256": "00654a461c21b363ec8478c8bd89e98a9b28e2fecea6e10c52d574c72f65e38f"
+  },
+  "existingPublishedShape": {
+    "api": {
+      "numeratorFromPreviousScope": 139,
+      "denominatorCurrentSources": 286,
+      "currentMainUnchanged": true,
+      "newDeduplicatedCountProven": false
+    },
+    "web": {
+      "numeratorFromPreviousScope": 129,
+      "denominatorCurrentSources": 262,
+      "priorMatchingBoundUnderOneSourceDelta": [
+        128,
+        129
+      ],
+      "rationale": "The supplied prior summary does not enumerate membership. At most one Java Main changed. Keep the previous count and this bound as a migration estimate, not a current observed total."
+    },
+    "batch": {
+      "numeratorFromPreviousScope": 291,
+      "denominatorCurrentPhysical": 660,
+      "currentMainUnchanged": true,
+      "heldPhysical": 369,
+      "heldDirect": 53,
+      "heldTransitively": 316
+    }
+  },
+  "additionalExactComponentEvidence": {
+    "APIUTCRecordAndGenerated": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44848-current-api-command-time-and-record-counters/manifest.json",
+      "sha256": "0471826e1007949877cf9bbfa210f3bf3cee6bb1098374752e63ac4329794de2"
+    },
+    "APIOutboxThreeOrdinaryAndUnfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44850-current-outbox-three-original-six-and-unfiltered/manifest.json",
+      "sha256": "c7485cc870690128b5357d963a706334ec77afb927b465a616c528e616446266"
+    },
+    "WebSqlClassificationTwoExactPhysical": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44842-current-web-session-exception-two-class-lineage/manifest.json",
+      "sha256": "5621ac8ec9387052a037f68cfe8f8b8babcf0e72035263c71817f7ca15f83541"
+    },
+    "WebReceiptReferenceCoverageAndNewRaw": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44836-receipt-cleanup-branch-specific-proof/manifest.json",
+      "sha256": "0ccc995ead5b9d756a1a7c37c6e9eec401eca96c6e0bfb926b47f221d3a70fda"
+    },
+    "WebReceiptReferenceSsc329": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44844-current-receipt-fatal-precedence-three/manifest.json",
+      "sha256": "fe8026bf8a4c61e12a40cc35ddcdd0c031f1617c725ed47ba94bf959d13c1933"
+    }
+  },
+  "coverageAndStaticCountsNeverSummedAcrossRuns": true,
+  "unchangedToolRules": [
+    {
+      "path": "tools/quality/static/pmd.xml",
+      "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "open": {
+    "rulesApplication": "Receipt raw SpotBugs Low1 and PMD20, other rationales pending accountable disposition",
+    "quality": "six product identical source/run, classpath and normal packages",
+    "publishedHolds": {
+      "scopeMain": 5,
+      "fixture": 32,
+      "root11": 11,
+      "QA056": "pending",
+      "QA062": "pending",
+      "F03Signature": null
+    }
+  },
+  "priorTechnicalOriginIds": [
+    "8bb715d916aeca1c86e3bf0c3a6491389a8c7828",
+    "34427a4ef823dc4ff92955eb39428d7fe40c9b8a"
+  ],
+  "newProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
