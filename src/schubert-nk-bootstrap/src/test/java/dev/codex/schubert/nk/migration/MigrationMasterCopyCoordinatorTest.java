@@ -9,13 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-COORD001..020; fixed95SQL/six tuples and independent JDK digest, no actual DB/driver. */
@@ -46,7 +49,8 @@ final class MigrationMasterCopyCoordinatorTest {
           "pg_temp.nk_mig_entry_audio_links");
 
   @Test
-  void coord001FixedSixStagesSameTargetAndIndependentWireTuples() throws Exception {
+  void coord001FixedSixStagesSameTargetAndIndependentWireTuples()
+      throws NoSuchAlgorithmException, SQLException, IOException {
     var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
     var target = f.connection();
     var observed = new ArrayList<String>();
@@ -82,7 +86,8 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord002EmptyCopiesAreExplicitAndFinalizeNormally() throws Exception {
+  void coord002EmptyCopiesAreExplicitAndFinalizeNormally()
+      throws NoSuchAlgorithmException, SQLException, IOException {
     var f = MigrationMasterTargetPublisherTest.coordinatorFixture(true);
     var target = f.connection();
     var seen = new ArrayList<String>();
@@ -106,7 +111,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord003AllNullInputsRejectBeforeSql() throws Exception {
+  void coord003AllNullInputsRejectBeforeSql() throws NoSuchAlgorithmException {
     for (int missing = 0; missing < 4; missing++) {
       var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
       var target = f.connection();
@@ -134,7 +139,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord004AutoCommitRejectsBeforePrepare() throws Exception {
+  void coord004AutoCommitRejectsBeforePrepare() {
     var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
     f.autoCommit = true;
     invalid(
@@ -146,7 +151,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord005ReadOnlyTargetRejectsBeforePrepare() throws Exception {
+  void coord005ReadOnlyTargetRejectsBeforePrepare() {
     var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
     f.readOnly = true;
     invalid(
@@ -158,7 +163,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord006MetadataSqlFailurePropagatesBeforePrepare() throws Exception {
+  void coord006MetadataSqlFailurePropagatesBeforePrepare() {
     for (boolean readOnly : List.of(false, true)) {
       var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
       f.attributeFailure = new SQLException("synthetic attribute");
@@ -178,7 +183,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord007MetadataRuntimeErrorNeverStartsPrepare() throws Exception {
+  void coord007MetadataRuntimeErrorNeverStartsPrepare() {
     for (boolean readOnly : List.of(false, true))
       for (Throwable failure :
           List.of(
@@ -202,7 +207,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord008PrepareFaultsNeverInvokeCopy() throws Exception {
+  void coord008PrepareFaultsNeverInvokeCopy() {
     for (int index = 0; index < PREPARE_SQL; index++)
       for (Throwable failure : failures()) {
         var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
@@ -223,47 +228,48 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord009EveryCopySqlFailureStopsAfterOriginal() throws Exception {
+  void coord009EveryCopySqlFailureStopsAfterOriginal() {
     copyFault(new SQLException(COPY_FAILURE));
   }
 
   @Test
-  void coord010EveryCopyIoFailureStopsAfterOriginal() throws Exception {
+  void coord010EveryCopyIoFailureStopsAfterOriginal() {
     copyFault(new IOException(COPY_FAILURE));
   }
 
   @Test
-  void coord011EveryCopyRuntimeFailureStopsAfterOriginal() throws Exception {
+  void coord011EveryCopyRuntimeFailureStopsAfterOriginal() {
     copyFault(new IllegalStateException(COPY_FAILURE));
   }
 
   @Test
-  void coord012EveryCopyErrorStopsAfterOriginal() throws Exception {
+  void coord012EveryCopyErrorStopsAfterOriginal() {
     copyFault(new AssertionError(COPY_FAILURE));
   }
 
   @Test
-  void coord013EveryCopyTooFewRowsRejects() throws Exception {
+  void coord013EveryCopyTooFewRowsRejects() {
     badCount(0);
   }
 
   @Test
-  void coord014EveryCopyTooManyRowsRejects() throws Exception {
+  void coord014EveryCopyTooManyRowsRejects() {
     badCount(2);
   }
 
   @Test
-  void coord015EveryCopyNegativeCountRejects() throws Exception {
+  void coord015EveryCopyNegativeCountRejects() {
     badCount(-1);
   }
 
   @Test
-  void coord016EveryCopyHugeCountRejects() throws Exception {
+  void coord016EveryCopyHugeCountRejects() {
     badCount(Long.MAX_VALUE);
   }
 
   @Test
-  void coord017AllPassedRowsAndResultAreImmutable() throws Exception {
+  void coord017AllPassedRowsAndResultAreImmutable()
+      throws SQLException, IOException, NoSuchAlgorithmException {
     var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
     var result =
         invoke(
@@ -295,7 +301,7 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord018PostCopyFaultsNeverRetryTransport() throws Exception {
+  void coord018PostCopyFaultsNeverRetryTransport() {
     for (int index = PREPARE_SQL; index < ALL_SQL; index++)
       for (Throwable failure : failures()) {
         var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
@@ -319,7 +325,8 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord019RepeatedCallsOwnFreshResourcesAndRedactedState() throws Exception {
+  void coord019RepeatedCallsOwnFreshResourcesAndRedactedState()
+      throws NoSuchAlgorithmException, SQLException, IOException {
     var job = new MigrationMasterCopyCoordinator();
     assertEquals("MigrationMasterCopyCoordinator[REDACTED]", job.toString());
     for (int index = 0; index < 2; index++) {
@@ -341,7 +348,8 @@ final class MigrationMasterCopyCoordinatorTest {
   }
 
   @Test
-  void coord020FiniteParallelIndependentTargetAndCopyScopes() throws Exception {
+  void coord020FiniteParallelIndependentTargetAndCopyScopes()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var job = new MigrationMasterCopyCoordinator();
     var mapping = mappings();
     var declared = data();
@@ -393,27 +401,28 @@ final class MigrationMasterCopyCoordinatorTest {
         new AssertionError("synthetic target"));
   }
 
-  private static CurrentMigrationMappingManifest mappings() throws Exception {
+  private static CurrentMigrationMappingManifest mappings() throws NoSuchAlgorithmException {
     return MigrationMasterCopyManifestTest.mappings(-1, -2);
   }
 
-  private static MigrationMasterCopyDataset data() throws Exception {
+  private static MigrationMasterCopyDataset data() throws NoSuchAlgorithmException {
     return MigrationMasterTargetPublisherTest.normal();
   }
 
   private static MigrationMasterCopyManifest invoke(
-      MigrationMasterTargetPublisherTest.Fixture f, MigrationCopyPort copy) throws Exception {
+      MigrationMasterTargetPublisherTest.Fixture f, MigrationCopyPort copy)
+      throws SQLException, IOException, NoSuchAlgorithmException {
     return new MigrationMasterCopyCoordinator().transfer(f.connection(), mappings(), data(), copy);
   }
 
-  private static void invalid(MigrationMasterTargetPublisherTest.Fixture f, MigrationCopyPort copy)
-      throws Exception {
+  private static void invalid(
+      MigrationMasterTargetPublisherTest.Fixture f, MigrationCopyPort copy) {
     var failure = assertThrows(SQLException.class, () -> invoke(f, copy));
     assertEquals(BAD_STATE, failure.getMessage());
     assertNull(failure.getCause());
   }
 
-  private static void badCount(long count) throws Exception {
+  private static void badCount(long count) {
     for (int bad = 0; bad < TABLE_COUNT; bad++) {
       final int selected = bad;
       var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
@@ -430,7 +439,7 @@ final class MigrationMasterCopyCoordinatorTest {
     }
   }
 
-  private static void copyFault(Throwable failure) throws Exception {
+  private static void copyFault(Throwable failure) {
     for (int bad = 0; bad < TABLE_COUNT; bad++) {
       final int selected = bad;
       var f = MigrationMasterTargetPublisherTest.coordinatorFixture(false);
@@ -449,7 +458,7 @@ final class MigrationMasterCopyCoordinatorTest {
                           if (failure instanceof SQLException sql) throw sql;
                           if (failure instanceof IOException io) throw io;
                           if (failure instanceof Error error) throw error;
-                          throw (RuntimeException) failure;
+                          throw (IllegalStateException) failure;
                         }
                         return rows.size();
                       })));

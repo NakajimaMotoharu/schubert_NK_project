@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-COPYVERIFY001..020; original independent Python frames, not production expected. */
@@ -59,7 +61,8 @@ final class MigrationMasterCopyVerifierTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void copyverify001NormalFixedGoldenAndFullMappingCounts() throws Exception {
+  void copyverify001NormalFixedGoldenAndFullMappingCounts()
+      throws IOException, NoSuchAlgorithmException {
     var result = new MigrationMasterCopyVerifier().verify(wire(), NORMAL_SHA, mappings(), data());
     assertEquals(NORMAL_SHA, result.sha256());
     assertArrayEquals(wire(), result.canonicalBytes());
@@ -100,7 +103,7 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify003AllFourNullsAreExplicitDomainRejection() throws Exception {
+  void copyverify003AllFourNullsAreExplicitDomainRejection() throws NoSuchAlgorithmException {
     for (int missing = 0; missing < 4; missing++) {
       final int field = missing;
       var bytes = wire();
@@ -122,7 +125,7 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify004ExpectedShaSyntaxIsStrictLowerHex() throws Exception {
+  void copyverify004ExpectedShaSyntaxIsStrictLowerHex() throws NoSuchAlgorithmException {
     var mappings = mappings();
     var data = data();
     for (String value :
@@ -143,7 +146,7 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify005DifferentTrustedShaCannotQualifyCorrectBytes() throws Exception {
+  void copyverify005DifferentTrustedShaCannotQualifyCorrectBytes() throws NoSuchAlgorithmException {
     var mappings = mappings();
     var data = data();
     assertEquals(
@@ -157,7 +160,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify006EveryByteChangeRejectsEvenWithMatchingIndependentSha() throws Exception {
+  void copyverify006EveryByteChangeRejectsEvenWithMatchingIndependentSha()
+      throws NoSuchAlgorithmException {
     byte[] original = wire();
     for (int index = 0; index < original.length; index++) {
       byte[] changed = original.clone();
@@ -168,14 +172,14 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify007EveryTruncatedPrefixRejectsWithMatchingSha() throws Exception {
+  void copyverify007EveryTruncatedPrefixRejectsWithMatchingSha() throws NoSuchAlgorithmException {
     byte[] original = wire();
     for (int length = 0; length < original.length; length++)
       rejected(Arrays.copyOf(original, length));
   }
 
   @Test
-  void copyverify008AppendedByteAndExtraLineAreNotIgnored() throws Exception {
+  void copyverify008AppendedByteAndExtraLineAreNotIgnored() throws NoSuchAlgorithmException {
     for (byte value : new byte[] {0, 10, 13, 32}) {
       byte[] changed = Arrays.copyOf(wire(), wire().length + 1);
       changed[changed.length - 1] = value;
@@ -185,7 +189,7 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify009BomMalformedUtf8AndControlCannotBeNormalized() throws Exception {
+  void copyverify009BomMalformedUtf8AndControlCannotBeNormalized() throws NoSuchAlgorithmException {
     byte[] bom = new byte[wire().length + 3];
     bom[0] = (byte) 0xef;
     bom[1] = (byte) 0xbb;
@@ -200,12 +204,12 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify010CrLfIsNotSilentlyReframed() throws Exception {
+  void copyverify010CrLfIsNotSilentlyReframed() throws NoSuchAlgorithmException {
     rejected(NORMAL_FRAME.replace(LF, "\r\n").getBytes(StandardCharsets.US_ASCII));
   }
 
   @Test
-  void copyverify011AllSixTablePositionsAreFixed() throws Exception {
+  void copyverify011AllSixTablePositionsAreFixed() throws NoSuchAlgorithmException {
     var lines = new ArrayList<>(NORMAL_FRAME.lines().toList());
     for (int index = 2; index < 7; index++) {
       var changed = new ArrayList<>(lines);
@@ -215,31 +219,31 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify012EveryRowCountIsCanonicalAndExactlyBound() throws Exception {
+  void copyverify012EveryRowCountIsCanonicalAndExactlyBound() throws NoSuchAlgorithmException {
     for (int line = 2; line < 8; line++)
       for (String value : List.of(ZERO, "2", Long.toString(Long.MAX_VALUE), "01", "+1", "-1"))
         rejected(changed(line, 1, value));
   }
 
   @Test
-  void copyverify013EveryWireLengthIsExactlyBound() throws Exception {
+  void copyverify013EveryWireLengthIsExactlyBound() throws NoSuchAlgorithmException {
     for (int line = 2; line < 8; line++)
       for (String value : List.of(ZERO, Long.toString(Long.MAX_VALUE), "-1"))
         rejected(changed(line, 2, value));
   }
 
   @Test
-  void copyverify014EveryWireShaIsExactlyBound() throws Exception {
+  void copyverify014EveryWireShaIsExactlyBound() throws NoSuchAlgorithmException {
     for (int line = 2; line < 8; line++) rejected(changed(line, 3, ZERO.repeat(64)));
   }
 
   @Test
-  void copyverify015MappingDigestCannotBeSubstituted() throws Exception {
+  void copyverify015MappingDigestCannotBeSubstituted() throws NoSuchAlgorithmException {
     rejected(changed(1, 1, ZERO.repeat(64)));
   }
 
   @Test
-  void copyverify016MappingCountMismatchIsNeverRepaired() throws Exception {
+  void copyverify016MappingCountMismatchIsNeverRepaired() throws NoSuchAlgorithmException {
     var mappings = MigrationMasterCopyManifestTest.mappings(0, -2);
     var data = data();
     assertThrows(
@@ -248,7 +252,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify017SameCountDifferentMappingCannotReuseRetainedBytes() throws Exception {
+  void copyverify017SameCountDifferentMappingCannotReuseRetainedBytes()
+      throws NoSuchAlgorithmException {
     var mappings = MigrationMasterCopyManifestTest.mappings(-1, -3);
     var data = data();
     assertEquals(
@@ -260,7 +265,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify018CallerAndReturnedByteArraysNeverAlias() throws Exception {
+  void copyverify018CallerAndReturnedByteArraysNeverAlias()
+      throws IOException, NoSuchAlgorithmException {
     var bytes = wire();
     var result = new MigrationMasterCopyVerifier().verify(bytes, NORMAL_SHA, mappings(), data());
     Arrays.fill(bytes, (byte) 0);
@@ -272,7 +278,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify019StatelessReuseAndDiagnosticAreRedacted() throws Exception {
+  void copyverify019StatelessReuseAndDiagnosticAreRedacted()
+      throws IOException, NoSuchAlgorithmException {
     var job = new MigrationMasterCopyVerifier();
     for (int index = 0; index < 2; index++)
       assertEquals(NORMAL_SHA, job.verify(wire(), NORMAL_SHA, mappings(), data()).sha256());
@@ -280,7 +287,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify020FiniteSharedImmutableInputsRemainIndependent() throws Exception {
+  void copyverify020FiniteSharedImmutableInputsRemainIndependent()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var job = new MigrationMasterCopyVerifier();
     var bytes = wire();
     var mappings = mappings();
@@ -307,7 +315,7 @@ final class MigrationMasterCopyVerifierTest {
     return MigrationMasterCopyManifestTest.mappings(-1, -2);
   }
 
-  private static MigrationMasterCopyDataset data() throws Exception {
+  private static MigrationMasterCopyDataset data() throws NoSuchAlgorithmException {
     return MigrationMasterTargetPublisherTest.normal();
   }
 
@@ -315,7 +323,7 @@ final class MigrationMasterCopyVerifierTest {
     return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
   }
 
-  private static void rejected(byte[] bytes) throws Exception {
+  private static void rejected(byte[] bytes) throws NoSuchAlgorithmException {
     var mappings = mappings();
     var data = data();
     String expected = hash(bytes);
