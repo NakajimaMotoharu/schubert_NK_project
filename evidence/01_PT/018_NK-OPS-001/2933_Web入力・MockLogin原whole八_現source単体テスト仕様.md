@@ -26,3 +26,7 @@ command：python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality
 ## 当候補の早期検証 PT-OPS-WEB-INPUT-005
 
 SS342・343 §4/6、RD SYS-002/004、UI243・253。WebStartupInputs.validateEnvironment() へ固定の設定場所と異なる設定場所を入力する。正規入力は正常終了し、異常入力は固定の IllegalArgumentException 文言を返す。両者とも、呼ばれれば AssertionError で失敗する合成設定sourceを使用し、未読であることを独立に確認する。認証情報内容、実環境、実サービスは使用しない。実行対象と証拠はPG45134を参照。
+
+## 局所診断 PT-OPS-WEB-INPUT-006
+
+SS351 §3・§12、SS343 §6.2。起動入力の二つの構成値を自己所有の合成Map・設定文字列から準備する。同一構成値の組は等しく同一hashを返し、位置の構成値が異なる組は等しくない。一般診断に二つの固定の秘匿表示が現れ、fixtureの位置は表示されないことを独立した固定文字列で確認する。実設定、実ファイル、認証情報の内容、実サービスへアクセスしない。PG45138の単一execを参照。

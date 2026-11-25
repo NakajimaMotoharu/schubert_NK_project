@@ -1,8 +1,11 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -13,7 +16,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** PT-OPS-API-INPUT-001..005; source-to-startup-input composition only. */
+/** PT-OPS-API-INPUT-001..006; source-to-startup-input composition only. */
 final class ApiStartupInputsTest {
   private static final String ROOT = "/run/credentials/schubert-nk-api.service";
   private static final Map<String, String> ENV =
@@ -110,5 +113,26 @@ final class ApiStartupInputsTest {
                 IllegalArgumentException.class,
                 () -> new ApiStartupInputs(unopened, wrongDirectory).validateEnvironment())
             .getMessage());
+  }
+
+  @Test
+  void opsApiInput006ShowsRedactedValuesWithoutChangingComponentIdentity() throws Exception {
+    String fixtureDirectory = "/test-fixture/startup-config-value";
+    var location =
+        ServiceCredentialLocation.read(Map.of("CREDENTIALS_DIRECTORY", fixtureDirectory));
+    var distinctLocation = ServiceCredentialLocation.read(ENV);
+    var config = ApiNonSecretConfig.parse("", "");
+    var values = new ApiStartupInputs.Values(config, location);
+    var sameComponents = new ApiStartupInputs.Values(config, location);
+    var otherLocation = new ApiStartupInputs.Values(config, distinctLocation);
+
+    assertEquals(sameComponents, values);
+    assertEquals(sameComponents.hashCode(), values.hashCode());
+    assertNotEquals(otherLocation, values);
+
+    String diagnostic = values.toString();
+    assertTrue(diagnostic.contains("ApiNonSecretConfig[REDACTED]"));
+    assertTrue(diagnostic.contains("ServiceCredentialLocation[REDACTED]"));
+    assertFalse(diagnostic.contains(fixtureDirectory));
   }
 }
