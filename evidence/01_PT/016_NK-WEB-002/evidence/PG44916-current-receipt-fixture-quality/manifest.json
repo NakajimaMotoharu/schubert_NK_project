@@ -1,0 +1,139 @@
+{
+  "run": "PG44916",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-G02",
+    "WBS-P004-05/2"
+  ],
+  "source": "9d283d9cb34b8283307db52b321ee814a0d71847",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:52:13.952992+00:00",
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+    "sha256": "1b2c76dc15ce0563ecc4e12403262a196c9947b25b7e7aea9a03ba8ff0a3c810"
+  },
+  "recoveryReason": "初回のSpotless終端の文言を kept と誤認し、終了値保持を行う前に集計が停止。Spotlessの終了0と実選択1を保存。個別終了値未回収のPMD/SpotBugsだけ再取得し、製品試験0。",
+  "productScope": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44914-receipt-npe-owned-ten/manifest.json",
+    "sha256": "13fd10a4801f9a971bed320cf0b01ea47635e44ce79ba739004716aa61438cf0"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/begin.json",
+    "sha256": "93453eca0249d0474922b94256f46df2662848f136259f6aaeefcb1bb9bcd8a5"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/terminal.json",
+    "sha256": "d10288e3ce0ef7d528f35c6d7e80bf13926313ad4a185f6cfacd7cdbd42c4da5"
+  },
+  "initialOutputSummary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/initial-safe-output-and-incomplete-terminal.json",
+    "sha256": "cb255c91d910f9eb02d5fa0f3dbb8affd4a3944c0a485d660403d18563073f09"
+  },
+  "rawExitRecovery": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/typed-exit-recovery/receipt.json",
+    "sha256": "0b51c932ff1592dee38c3d89c66bb9f245976013da821b7570ad62804ea73c46"
+  },
+  "static": {
+    "spotlessSelected": 1,
+    "spotlessExit": 0,
+    "pmdExit": 4,
+    "pmdFindings": [
+      {
+        "rule": "AvoidDuplicateLiterals",
+        "line": 72,
+        "oldFixtureSourceLine": 72
+      },
+      {
+        "rule": "CloseResource",
+        "line": 394,
+        "oldFixtureSourceLine": 364
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 394,
+        "oldFixtureSourceLine": 364
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 396,
+        "oldFixtureSourceLine": 366
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 397,
+        "oldFixtureSourceLine": 367
+      },
+      {
+        "rule": "DoNotThrowExceptionInFinally",
+        "line": 404,
+        "oldFixtureSourceLine": 374
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 405,
+        "oldFixtureSourceLine": 375
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 406,
+        "oldFixtureSourceLine": 376
+      },
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 553,
+        "oldFixtureSourceLine": 523
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 624,
+        "oldFixtureSourceLine": 594
+      }
+    ],
+    "pmdProcessingErrors": 0,
+    "spotBugsExit": 1,
+    "spotBugsFindings": [
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "priority": "3",
+        "line": "392",
+        "oldFixtureSourceLine": 362
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+        "priority": "3",
+        "line": "467",
+        "oldFixtureSourceLine": 437
+      }
+    ],
+    "spotBugsProcessing": {
+      "errors": 0,
+      "missingClasses": 0
+    },
+    "existingCheckstyleSameFixture": true
+  },
+  "publishedRawRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/typed-exit-recovery/pmd.xml",
+      "sha256": "055c4f89337c12938b2f9937da681b88fa459670732be1e2ccb8638d74b1202d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44916-receipt-npe-fixture-quality/typed-exit-recovery/spotbugs.xml",
+      "sha256": "58ae305a7cb78e27011c6d9df40735b9bf43c34df4c1f3f206d31e8b257d4a82"
+    }
+  ],
+  "admission": {
+    "allowedProductPhysical": 7,
+    "testPhysical": 6,
+    "heldInputOrExecution": 0,
+    "actualJunit": 0
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0,
+  "fixtureQualityClassification": {
+    "sourceDiff": "全12出力位置の行は追記前のfixtureから同一。新NPE methodの報告位置なし。",
+    "priorToolResultAdopted": false,
+    "qualityOwnerApproval": null,
+    "rawCountsRemain": true
+  }
+}
