@@ -1,0 +1,81 @@
+{
+  "run": "PG44796",
+  "wbs": "WBS-P018-09/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "source": "4c906797558cf5a1b450b9e94804424a497506af",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:54:06.688249+00:00",
+  "actualExit": 0,
+  "contextPrior": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40892-p01809-api-web-metric-context-66-v1/public-manifest.json",
+      "sha256": "cb5a7969d6840375f2cf0fbf1c97b33b38c65d8b7bdc783fc6ae61a55ed104d0"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "sha256": "0806693c9d3190b437053c9d8276383704a5d7686f9d19ffead9cecae2ce0602"
+    },
+    "matchingMainInputs": 17,
+    "qualifyingCases": 33,
+    "sourceGate": "saved current input and prior selected result; raw exec bytes persist only as digests. No new coverage/whole merge.",
+    "originalPrivateManifestDigest": "aebae08a000cfa47ac4958c8f6ebfd8e7ec70b2373969712e93d33f79a0995c7"
+  },
+  "payloadPrior": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39486-bug3284-web-payload-unit-v1/manifest.json",
+      "sha256": "6b34bbcdc519846c4071ce82ec2782950ff7a19684f9b0d2608fc4313563cac6"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "sha256": "1025541294a001ae42827d0feff6b729e350931ee2f30102fd3b12451904d438"
+    },
+    "matchingPhysical": 21,
+    "changedPhysical": [
+      "dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.class"
+    ],
+    "originalCases": 26,
+    "matchedLegacyPortMethods": [
+      "webpay001StandardReadyPreservesLiteralWithoutSupplierRead()",
+      "webpay002StandardDownPreservesLiteralWithoutSupplierRead()",
+      "webpay003DebugReadyAppendsIndependentCustomAndReadsSupplierOnce()",
+      "webpay004DebugDownDoesNotInventHealthyReadiness()",
+      "webpay005UnknownModesNeverResolveSource()",
+      "webpay006NullModeAndSupplierFailBeforeResolution()",
+      "webpay007NullResolvedSourceNeverFallsBackToReadyOnly()",
+      "webpay008ProviderRuntimeAndErrorKeepIdentity()",
+      "webpay009IncompatibleSourceNeverReturnsReadyOnly()",
+      "webpay010FormatterRuntimeAndErrorKeepBorrowedOwner()",
+      "webpay011ClosedSourceIsNotReopenedOrClosedAgain()",
+      "webpay012SameRendererDoesNotRetainOneOfTwoSources()",
+      "webpay013FiniteConcurrentIndependentPayloads()"
+    ],
+    "legacyPortApplicability": "The three-argument overload does not use WebStandardMetricSource; other physical used by it matches.",
+    "fourArgumentCollaborationRequired": [
+      "webfull001StandardKeepsLegacyBytesAndNeverAcquiresEitherSource()",
+      "webfull002LiteralFullOrderAndActualOfficialSdkValue()",
+      "webfull003UnboundAndClosedStandardNeverBecomePartialSuccess()",
+      "webfull004NullAndUnknownBoundariesReadNeitherProvider()",
+      "webfull005CustomRuntimeWinsBeforeStandardFailure()",
+      "webfull006CustomErrorIdentityIsPreservedWithoutStandardRead()",
+      "webfull007CustomFormatterFailureKeepsBorrowedResources()",
+      "webfull008StandardRuntimeNeverFallsBackOrClosesBorrowedCustom()",
+      "webfull009StandardErrorIdentityNeverBecomesReadyOnlySuccess()",
+      "webfull010ContractViolatingNullTextIsRejectedNotConcatenated()",
+      "webfull011ConcurrentFullScrapesKeepIndependentGoldenAndOwnership()",
+      "webfull012CallerCloseBetweenSourcesCannotReturnPartialText()",
+      "webfull013HelperReleasesRejectedCandidateBeforeReturningOwner()"
+    ],
+    "reason": "The 13 four-argument fixtures call the associated WebStandardMetricSource. Its physical/Source differs from the old payload run, despite the payload and fixture matching."
+  },
+  "recommendedUnit": {
+    "count": 13,
+    "selector": "only existing webfull001..013; test has synthetic closed registry instances",
+    "requiresSameSdk": true,
+    "doesNotBindExternalSocket": true
+  },
+  "newTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
