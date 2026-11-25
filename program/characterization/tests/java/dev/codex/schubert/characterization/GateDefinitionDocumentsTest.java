@@ -538,7 +538,8 @@ final class GateDefinitionDocumentsTest {
       var declaration =
           object(input, REQUIREMENTS).withObject("/nkOnlySupplementalChecks").putArray("CHR-M04");
       checks.forEach(declaration::add);
-      assertEquals(List.of("REQ_VIDEO_RANGE_CURRENT_SUPPLEMENTAL"), validate(input), checks.toString());
+      assertEquals(
+          List.of("REQ_VIDEO_RANGE_CURRENT_SUPPLEMENTAL"), validate(input), checks.toString());
     }
   }
 

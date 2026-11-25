@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -59,6 +60,10 @@ final class GateContractValidator {
       new ObjectMapper()
           .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
           .enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY);
+  private static final String VIDEO_RANGE_CASE = "CHR-M04";
+  private static final List<String> REQUIRED_CURRENT_VIDEO_OBSERVATIONS =
+      List.of("no-range-200", "multi-range-first");
+
   private static final Set<String> MODES = Set.of("difference", "required", "contract");
   private static final Set<String> SELECTOR_TYPES = Set.of("semantic", "header", "json-pointer");
 
@@ -496,9 +501,9 @@ final class GateContractValidator {
     JsonNode supplemental = requirements.path("supplementalChecks");
     require(supplemental.isObject(), "REQ_SUPPLEMENTAL_NOT_OBJECT", failures);
     // UI264 CHR-M04 requires both observations, even when their case entry was omitted.
-    List<String> videoRangeChecks = strings(supplemental.path("CHR-M04"));
     require(
-        videoRangeChecks.containsAll(List.of("no-range-200", "multi-range-first")),
+        strings(supplemental.path(VIDEO_RANGE_CASE))
+            .containsAll(REQUIRED_CURRENT_VIDEO_OBSERVATIONS),
         "REQ_VIDEO_RANGE_SUPPLEMENTAL",
         failures);
     supplemental
@@ -523,6 +528,11 @@ final class GateContractValidator {
             });
     JsonNode nkOnly = requirements.path("nkOnlySupplementalChecks");
     require(nkOnly.isObject(), "REQ_NK_ONLY_NOT_OBJECT", failures);
+    require(
+        Collections.disjoint(
+            strings(nkOnly.path(VIDEO_RANGE_CASE)), REQUIRED_CURRENT_VIDEO_OBSERVATIONS),
+        "REQ_VIDEO_RANGE_CURRENT_SUPPLEMENTAL",
+        failures);
     nkOnly
         .properties()
         .forEach(
