@@ -1,0 +1,136 @@
+{
+  "run": "PG44766",
+  "source": "f089d485273a0c8786be2911b29da14caca5280f",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T01:18:03.507932+00:00",
+  "actualExit": 0,
+  "planningFile": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-source-scope-planning-advisory/lexical-scope.json",
+    "sha256": "60b9173f4fbf4034f3ba4187d8ba69d0e83ea45ddeb56830882bd26ef9d4670e"
+  },
+  "statesBefore": {
+    "api": {
+      "total": 286,
+      "alreadyLocal": 127,
+      "remainder": {
+        "review_exact_external_input": 33,
+        "depends_on_recorded_hold": 85,
+        "package_annotation_only": 4,
+        "review_java_only_candidate": 24,
+        "recorded_hold": 13
+      }
+    },
+    "web": {
+      "total": 262,
+      "alreadyLocal": 121,
+      "remainder": {
+        "recorded_hold": 21,
+        "depends_on_recorded_hold": 54,
+        "review_exact_external_input": 57,
+        "review_java_only_candidate": 9
+      }
+    }
+  },
+  "advisoryOnlyForUnexecuted": true,
+  "proof": {
+    "api": {
+      "explicitCompilerSources": 19,
+      "spotBugsPhysical": 3,
+      "pmdSources": 3,
+      "priorQualifier": 127,
+      "current": 130,
+      "newPrimary": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecution.java",
+          "sha256": "03914a804c99f24c16010075bf9854199049d4026a5e180c8fcc5d686fae8caa"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxHandler.java",
+          "sha256": "bfcea96518d70ad59e0391f616d4ae0fb13c26df6ffcab5cefcd0f44fca842b4"
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapper.java",
+          "sha256": "50338664a18e23204f238395928749ee9be293161ae6dc88d0cf3db98aaf23a2"
+        }
+      ],
+      "beginnings": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-nullaway/begin.json",
+          "sha256": "2decf221e9a86a8387fd7d6fb121650bf9f38f95360347b5ccaa5cbc53feefd0"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-spotbugs/begin.json",
+          "sha256": "2f296370dd3613d6a30f78f1a42f0701fb75435ebb46864bcbc53a1a60e760c0"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-pmd/begin.json",
+          "sha256": "38915f7a8d2bd894d6696c8cec4e3a1c620d00ffd41b443cfbbc91b66633b1ba"
+        }
+      ],
+      "terminals": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-nullaway/terminal.json",
+          "sha256": "4597c9234b5ed5bcda9172c743ef4e1565bda0005feb4aa4a937ead98531aba2"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-spotbugs/terminal.json",
+          "sha256": "093fcdb2846feaaa1adcfb95ab8c6e034eddc4052e47cf616fcc7b476ff6dd81"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-api-response-values-pmd/terminal.json",
+          "sha256": "448f0dc93c1655183a778eabc93375361a9d9a2ed2e66bd8ab6d44e04ac824c2"
+        }
+      ],
+      "nullAwayExit": 0,
+      "spotBugsAndPmdExit": 0
+    },
+    "web": {
+      "explicitCompilerSources": 8,
+      "spotBugsPhysical": 1,
+      "pmdSources": 1,
+      "priorQualifier": 121,
+      "current": 122,
+      "newPrimary": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java",
+          "sha256": "b7d1e2f12acc51de8dae944842bce8c553abc76a31e06d09fe8c56801913b054"
+        }
+      ],
+      "beginnings": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-nullaway/begin.json",
+          "sha256": "ccdf17d4b457fcb24d39124e9d6d70e431373eebfd5d6bbbbf9a9a5ee04e0ba3"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-spotbugs/begin.json",
+          "sha256": "448bfd666209451fc4ba289b1c5d14ee01d267f5c410130ea38d4189e6d7e2cd"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-pmd/begin.json",
+          "sha256": "9d3bb621545500978d8610b05a27dd670b657b2c0002f5558c5045075343bc0c"
+        }
+      ],
+      "terminals": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-nullaway/terminal.json",
+          "sha256": "d44b855f3e540df3bae71fc3c3dfb96811620ebb0b038bd400171fb2db319b03"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-spotbugs/terminal.json",
+          "sha256": "e31402e439079675faad567604a3d497a76b57e7b9b025ea8841bf13b6874f83"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44766-admitted-web-revocation-codec-pmd/terminal.json",
+          "sha256": "ff7d8430c83d11bc0fdc2c29fe61513c5dc59c5cc82bf17631fde6cc3aac023e"
+        }
+      ],
+      "nullAwayExit": 0,
+      "spotBugsAndPmdExit": 0
+    }
+  },
+  "actualProductTests": 0,
+  "actualNetworkOrCredentialActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
