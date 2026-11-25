@@ -1,0 +1,136 @@
+{
+  "run": "PG45466",
+  "source": "8b898559d7f781fc0a96ee03431b3f2e1a1cf9f9",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P020-01.01/2-b",
+  "terminalAtUTC": "2026-11-25T17:32:14.023261+00:00",
+  "actualExit": 0,
+  "currentPmdSource": {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sha256": "4e4ee3125cccfa019dcb015b8f071f3aae9ec07ad2e58ca8303993891a47e324"
+  },
+  "currentPmdReport": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45464-current-packaged-repeat-static-delta/manifest.json",
+    "sha256": "26c886c32df20838d59031b3e0614f62e7fc064737f700af108feb38c84efc47"
+  },
+  "dispositions": [
+    {
+      "line": 167,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, Object> actual = new LinkedHashMap<>();",
+      "method": "verifySource",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "追加した検証条件の件数と状態を呼び出し内で組み立て、同じstackのJSON出力へ渡す。別threadへ共有しない。"
+    },
+    {
+      "line": 269,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "preflight",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "同じ呼び出しが構成・容量の結果を固定順でoutputへ渡す。実環境は起動しない。"
+    },
+    {
+      "line": 316,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "compareCurrent",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "二入力比較で作った件数と差分を、その呼び出しのreport一つに渡す。規定のJSON順ピンを保持。"
+    },
+    {
+      "line": 392,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "report",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "単一呼び出しの検証／gate結果を出力する。異なるsourceのlive結果を使わない。"
+    },
+    {
+      "line": 563,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, Object> manifest = new LinkedHashMap<>();",
+      "method": "promoteCurrent",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "manifestの組立値は一回のstaging操作の局所変数。今回の作業では昇格・公開を実行しない。"
+    },
+    {
+      "line": 642,
+      "rule": "UseConcurrentHashMap",
+      "localSource": "Map<String, String> result = new TreeMap<>();",
+      "method": "fileHashes",
+      "assessment": "TECHNICAL_NONAPPLICABLE_PENDING_OWNER_SIGNOFF",
+      "reason": "ローカルTreeMap。名前の安定順がmissing/extra/changed順へ流れ、multi-thread共有なし。"
+    }
+  ],
+  "remainingUnsigned": 6,
+  "rawPmdExitUnchanged": 4,
+  "recordDebugOnly": {
+    "GateCli$BaselineNumbers.class": {
+      "raw": {
+        "older": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/older/GateCli$BaselineNumbers.class",
+          "sha256": "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/current/GateCli$BaselineNumbers.class",
+          "sha256": "02f74f4d8069d325a0f08f402cd84ea815f21175fcf7af33e4b1d35ae69e82a6"
+        }
+      },
+      "javap": {
+        "older": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/older/GateCli$BaselineNumbers.class.javap",
+          "sha256": "817fed4adb3d21e64f264df6e24572f7a572a9c33c163b2e4d5ea50e90ec38f3"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/current/GateCli$BaselineNumbers.class.javap",
+          "sha256": "c6bdfeb2b732f5d84b46b8dc7299a7e4a1d3984a589cf365e10ff87eefcee3f9"
+        }
+      },
+      "allNormalizedInstructionsSignaturesAndMetadataIdentical": true,
+      "onlyLineAndToolPrintHeaderDifferences": true
+    },
+    "GateCli$TreeStats.class": {
+      "raw": {
+        "older": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/older/GateCli$TreeStats.class",
+          "sha256": "a40344d1656e2f65073dcb4212c8f4503b13d8d200a4e144e8d4217993e3e899"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/current/GateCli$TreeStats.class",
+          "sha256": "d4e2a40e06aaf2c26f593fa60ce24bdef0f0ea9dfb5cd217df858de029bdf0b3"
+        }
+      },
+      "javap": {
+        "older": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/older/GateCli$TreeStats.class.javap",
+          "sha256": "c03e7f02cae1e8fa096765ed4fc093233451cc40301b179d5e5bc97afac58374"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45466-chr-debug-normalization/current/GateCli$TreeStats.class.javap",
+          "sha256": "22502ae5b90194019df8ed132147df8d9f4a899ddb7eba022452a4fcd0242bb7"
+        }
+      },
+      "allNormalizedInstructionsSignaturesAndMetadataIdentical": true,
+      "onlyLineAndToolPrintHeaderDifferences": true
+    }
+  },
+  "oldPackageRetained": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45228-current-definition-quality-ninety/manifest.json",
+    "sha256": "c0dca7c4b5b68886132d725dffcc036be10b013df6c38b6a8f60e4ad3a1ad224"
+  },
+  "currentPackage": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG45462-current-chr-regular-tool-and-missing-directory/manifest.json",
+    "sha256": "128e5395572e3414437b132516337edd7089336b49ad971a5be6670bae0602a8"
+  },
+  "javap": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+  },
+  "mainExecutableDeltaRetained": true,
+  "sourceOrFilterChanges": 0,
+  "dynamicTrials": 0,
+  "actualCurrentOrNk": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
