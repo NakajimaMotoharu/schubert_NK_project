@@ -3,6 +3,7 @@ import os
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -34,6 +35,11 @@ from pathlib import Path
 
 arguments = sys.argv[1:]
 Path('arguments.json').write_text(json.dumps(arguments), encoding='utf-8')
+names = ('MAVEN_ARGS', '_JAVA_OPTIONS', 'NK_SBOM_TEST_REQUEST_TAG')
+Path('execution-env.json').write_text(
+    json.dumps({name: os.environ.get(name) for name in names}),
+    encoding='utf-8',
+)
 if os.environ.get('NK_SIMULATED_MAVEN_CHATTER') == '1':
     print('[INFO] Maven fixture diagnostic')
 outcome = os.environ.get('NK_SIMULATED_MAVEN_OUTCOME')
@@ -183,6 +189,26 @@ if outcome != 'no-output':
                 self.assertEqual(1, result.returncode)
                 self.assertEqual("", result.stdout)
                 self.assertEqual(FIXTURE, earlier.read_bytes())
+
+
+    def test_sbom032_keeps_the_fixed_direct_goal_independent_of_parent_defaults(self):
+        with patch.dict(os.environ, {
+            "MAVEN_ARGS": "-Dtest.fixture.unlisted=true",
+            "_JAVA_OPTIONS": "-Dfile.encoding=US-ASCII",
+            "NK_SBOM_TEST_REQUEST_TAG": "unique-synthetic-tag",
+        }):
+            result = self.invoke("protocol", self.repository, STAMP)
+        self.assertEqual(0, result.returncode, result.stderr)
+        artifact, = result.stdout.splitlines()
+        self.assertEqual(FIXTURE, Path(artifact).read_bytes())
+        self.assertEqual(
+            {
+                "MAVEN_ARGS": None,
+                "_JAVA_OPTIONS": None,
+                "NK_SBOM_TEST_REQUEST_TAG": "unique-synthetic-tag",
+            },
+            json.loads((self.root / "execution-env.json").read_bytes()),
+        )
 
 
 if __name__ == "__main__":
