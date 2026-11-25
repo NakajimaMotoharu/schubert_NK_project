@@ -50,11 +50,7 @@ public final class ReceiptReferenceRepository {
             statementFailure = failure;
             throw failure;
           } finally {
-            try {
-              statement.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (replace(statementFailure, secondary)) throw secondary;
-            }
+            runCleanup(statementFailure, statement::close);
           }
           // READ COMMITTED sees the concurrent winner after ON CONFLICT waits.
           if (!read(connection, reference.receiptId()).equals(Optional.of(reference)))
@@ -99,21 +95,13 @@ public final class ReceiptReferenceRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        try {
-          row.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (replace(rowFailure, secondary)) throw secondary;
-        }
+        runCleanup(rowFailure, row::close);
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      try {
-        statement.close();
-      } catch (SQLException | RuntimeException | Error secondary) {
-        if (replace(statementFailure, secondary)) throw secondary;
-      }
+      runCleanup(statementFailure, statement::close);
     }
   }
 
@@ -130,22 +118,14 @@ public final class ReceiptReferenceRepository {
           connection.commit();
           return result; // owned finally close must also succeed before result escapes.
         } catch (SQLException | RuntimeException | Error failure) {
-          try {
-            connection.rollback();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (replace(failure, secondary)) throw secondary;
-          }
+          runCleanup(failure, connection::rollback);
           throw failure;
         }
       } catch (SQLException | RuntimeException | Error failure) {
         connectionFailure = failure;
         throw failure;
       } finally {
-        try {
-          connection.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (replace(connectionFailure, secondary)) throw secondary;
-        }
+        runCleanup(connectionFailure, connection::close);
       }
     } catch (SQLException failure) {
       SessionStoreException.preserveFatal(failure);
@@ -156,6 +136,16 @@ public final class ReceiptReferenceRepository {
   private static <T> T required(@Nullable T value) {
     if (value == null) throw new ReceiptReferenceException();
     return value;
+  }
+
+  /** Apply the same failure precedence to each owned release and rollback. */
+  private static void runCleanup(@Nullable Throwable primary, CleanupAction action)
+      throws SQLException {
+    try {
+      action.run();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (replace(primary, secondary)) throw secondary;
+    }
   }
 
   /** SS331/332: unknown close dominates known SQL; primary unknown retains fixed diagnostics. */
@@ -170,6 +160,11 @@ public final class ReceiptReferenceRepository {
         || (primary instanceof SQLException && !(secondary instanceof SQLException))) return true;
     if (!(primary instanceof SQLException)) primary.addSuppressed(new ReceiptReferenceException());
     return false;
+  }
+
+  @FunctionalInterface
+  private interface CleanupAction {
+    void run() throws SQLException;
   }
 
   @FunctionalInterface
