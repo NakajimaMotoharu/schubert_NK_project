@@ -1,0 +1,119 @@
+{
+  "run": "PG45524",
+  "source": "eb8824073281f762c125aef48ac9f46007f15cae",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-25T18:46:15.524495+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3891",
+  "horizontal": "YKT-3014",
+  "threeSeparateTraceKeys": [
+    {
+      "retainedJavaId": "PT-OPS-PUB-001",
+      "javaMethod": "createAndRetire",
+      "historicalToolId": "PT-OPS-ORDPUB-001",
+      "originalRun": "PG1691",
+      "scope": "original phase and generation checks"
+    },
+    {
+      "retainedJavaId": "PT-OPS-PUB-002",
+      "javaMethod": "sameRunAndDifferentRun",
+      "historicalToolId": "PT-OPS-ORDPUB-002",
+      "originalRun": "PG1693",
+      "scope": "original host qualification"
+    },
+    {
+      "retainedJavaId": "PT-OPS-PUB-003",
+      "javaMethod": "privatePartCollisions",
+      "historicalToolId": "PT-OPS-ORDPUB-003",
+      "originalRun": "PG1695",
+      "scope": "original operational receipt"
+    }
+  ],
+  "classifiedReuse": [
+    {
+      "specifications": [
+        "050",
+        "052"
+      ],
+      "labels": [
+        "PT-OPS-MQ-023",
+        "PT-OPS-MQ-024",
+        "PT-OPS-MQ-026"
+      ],
+      "classification": "same unit scope, managed historical revision with 052 precedence and stage split"
+    },
+    {
+      "specifications": [
+        "293",
+        "3421"
+      ],
+      "labels": [
+        "BROKERSTART003",
+        "EXPARENT005"
+      ],
+      "classification": "parent criteria and separately named unit methods; an explicit one-to-many association rather than a shared operation result"
+    }
+  ],
+  "historicalReviewedSha256": "1fe930dfb7aa79811a5647cc4c23dd44a93f62066b14a7c85f62d4a9ba1b5822",
+  "frozenHistoricManifests": [
+    {
+      "path": "../pgpt-runs/PG379/pg1693-frozen-v1.safe.json",
+      "sha256": "3a465f5d600cdb4b4a3bf282ba3463ff71d82a6fab5b6edf69b481159e273c2e",
+      "sourceScope": "historical host evidence only"
+    },
+    {
+      "path": "../pgpt-runs/PG379/pg1695-stage-v1.safe.json",
+      "sha256": "67726c28a16293dcaf8ce01e70f4d430a70a13f52a8e46570ec390819c5c1cd2",
+      "sourceScope": "historical host evidence only"
+    },
+    {
+      "path": "../pgpt-runs/PG379/pg1695-activate-v1.safe.json",
+      "sha256": "2d5e6f529b7d319d0ebdbaa34190a6e469f2a3ceae9364b529bee0e1166fbbbc",
+      "sourceScope": "historical host evidence only"
+    },
+    {
+      "path": "../pgpt-runs/PG379/pg1696-completed-publication-full-post-v1/manifest.safe.json",
+      "sha256": "e2638654f6a83d33dd4fb90e6fc7e2542927d410c854bddac5c4d50b9a3d3785",
+      "sourceScope": "historical host evidence only"
+    }
+  ],
+  "verifiedInputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/017_NK-OPS-001_run環境公開単体テスト仕様書.md",
+      "sha256": "281d8c7fd83c0462b6797acf143546c3827afe0b92f074390685b3c6f4e11644"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/018_NK-OPS-001_run環境公開実行結果.md",
+      "sha256": "bce8498009eced20b855151dc704d1807da61df47cd67a173d22d147627c2ca6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/050_NK-OPS-001_Expiry選択削除単体テスト仕様書.md",
+      "sha256": "55893218be7af8f99c5896df9ec5517cef9f248287203148fd9a0452466aafb7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/052_NK-OPS-001_Expiry観測削除境界単体テスト仕様書.md",
+      "sha256": "18a1c1deb13c7c413cd165b3d336f07d38c6f22ad2eda00148ce984ce7105ebc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/293_BrokerExpiry親接続_単体テスト仕様書.md",
+      "sha256": "2d65e932d869a9f9826092d877cbace774bb3190c7df4a558bb580affe075d07"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/678_新Source普通公開・起動前照合_単体テスト仕様・結果.md",
+      "sha256": "06b94747a380d5e7b60c16a393f1d61c73b900e80a494162dd58db7df9e239a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3421_公開Journal・親期限原九単体テスト仕様.md",
+      "sha256": "c88684737da9e52a3bc435f56cb535fcfe05a557ffc9140c4acfa8dcdef49e25"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/manifest.json",
+      "sha256": "475f18122f0a5834c32b48c6f1fdf5dbf6f222baeb2a6841c8964a6c6ad4d40a"
+    }
+  ],
+  "newTestExecuted": 0,
+  "historicalCommandsExecuted": 0,
+  "wholeCoverage": false,
+  "acceptanceId": null
+}
