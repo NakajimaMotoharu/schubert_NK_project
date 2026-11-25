@@ -164,13 +164,7 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             SCHEMA_ROW,
             new Row(1, "029", FIXTURE_SQL_5B7E398D, previousScript, 29, true),
-            new Row(
-                2,
-                AUDIO_ROLE_VERSION,
-                FIXTURE_SQL_5B7E398D,
-                currentScript,
-                -30,
-                true));
+            new Row(2, AUDIO_ROLE_VERSION, FIXTURE_SQL_5B7E398D, currentScript, -30, true));
     var admission = new SchemaHistoryAdmission(expected);
     var previous = versionedRow(1, "029", previousScript, 29);
     var current = versionedRow(2, AUDIO_ROLE_VERSION, currentScript, -30);
@@ -189,10 +183,7 @@ final class SchemaHistoryAdmissionTest {
                 schema(),
                 previous,
                 versionedRow(2, AUDIO_ROLE_VERSION, "V030__different.sql", -30)),
-            List.of(
-                schema(),
-                previous,
-                versionedRow(2, AUDIO_ROLE_VERSION, currentScript, 30)))) {
+            List.of(schema(), previous, versionedRow(2, AUDIO_ROLE_VERSION, currentScript, 30)))) {
       var mismatch = new Probe(rows);
       failed(() -> admission.inspect(mismatch.connection()));
       assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
@@ -208,13 +199,7 @@ final class SchemaHistoryAdmissionTest {
     var expected =
         List.of(
             SCHEMA_ROW,
-            new Row(
-                1,
-                AUDIO_ROLE_VERSION,
-                FIXTURE_SQL_5B7E398D,
-                priorScript,
-                priorChecksum,
-                true),
+            new Row(1, AUDIO_ROLE_VERSION, FIXTURE_SQL_5B7E398D, priorScript, priorChecksum, true),
             new Row(
                 2, ROUTINE_PRIVILEGES_VERSION, FIXTURE_SQL_5B7E398D, aclScript, aclChecksum, true));
     var admission = new SchemaHistoryAdmission(expected);
@@ -232,7 +217,9 @@ final class SchemaHistoryAdmissionTest {
         List.of(
             List.of(schema(), prior),
             List.of(
-                schema(), prior, versionedRow(2, ROUTINE_PRIVILEGES_VERSION, aclScript, 1880247818)),
+                schema(),
+                prior,
+                versionedRow(2, ROUTINE_PRIVILEGES_VERSION, aclScript, 1880247818)),
             List.of(
                 schema(),
                 prior,
