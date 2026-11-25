@@ -1,0 +1,150 @@
+[
+  {
+    "testId": "PT-PRO-002-N03",
+    "method": "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "fixtureOracle": "late non-digit byte takes precedence",
+    "specification": {
+      "path": "evidence/01_PT/002_NK-PRO-002/106_FieldCodec全byte検査順の実行結果.md",
+      "sha256": "146e02c92d49270d4b67dc31def56d084a1c509014a20cc9492edec4e70acf55"
+    },
+    "originalResult": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+    },
+    "use": "direct invocation in source or through this fixture own helper",
+    "entries": [
+      {
+        "physical": "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+        "method": "decodeNumeric",
+        "descriptor": "([BJJ)J",
+        "jvmAccessFlagsDecimal": 9
+      }
+    ]
+  },
+  {
+    "testId": "PT-CODEC-NUMMAX001",
+    "method": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "fixtureOracle": "fixed ceiling 99, Long.MAX_VALUE and semantic maximum boundaries",
+    "specification": {
+      "path": "evidence/01_PT/002_NK-PRO-002/001_NK-PRO-002_単体テスト仕様書.md",
+      "sha256": "c57eb1d8857937a134d31026e6e2acae22270ffd9635245751b140dfe3da5015"
+    },
+    "originalResult": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "7c5b59c1e23e48d140ea40402b848b77264b29514e43897fb43fa2fe06ab1832"
+    },
+    "use": "direct invocation in source or through this fixture own helper",
+    "entries": [
+      {
+        "physical": "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+        "method": "decodeNumeric",
+        "descriptor": "([BJJ)J",
+        "jvmAccessFlagsDecimal": 9
+      }
+    ]
+  },
+  {
+    "testId": "PT-PRO-002-NPAGE001",
+    "method": "fiftyRecordsFillTheFirstPageAndTheNextStartsAtFiftyOne",
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+      "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+    },
+    "fixtureOracle": "51 records fill 50 plus one",
+    "specification": {
+      "path": "evidence/01_PT/002_NK-PRO-002/112_通知50件ページ境界の単体仕様.md",
+      "sha256": "ff712cd27051d6a0fd405018e524c67e624b514ab3df46c7c013120a16d21b0d"
+    },
+    "originalResult": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+      "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+    },
+    "use": "direct invocation in source or through this fixture own helper",
+    "entries": [
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+        "method": "validate",
+        "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V",
+        "jvmAccessFlagsDecimal": 9
+      },
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+        "method": "<init>",
+        "descriptor": "(IIJIJJ)V",
+        "jvmAccessFlagsDecimal": 1
+      }
+    ]
+  },
+  {
+    "testId": "PT-PRO-002-NPAGE002",
+    "method": "largestSixDigitPageUsesTheNotificationBound",
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+      "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+    },
+    "fixtureOracle": "999999 times 50 and overflow by one",
+    "specification": {
+      "path": "evidence/01_PT/002_NK-PRO-002/112_通知50件ページ境界の単体仕様.md",
+      "sha256": "ff712cd27051d6a0fd405018e524c67e624b514ab3df46c7c013120a16d21b0d"
+    },
+    "originalResult": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+      "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+    },
+    "use": "direct invocation in source or through this fixture own helper",
+    "entries": [
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+        "method": "validate",
+        "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V",
+        "jvmAccessFlagsDecimal": 9
+      },
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+        "method": "<init>",
+        "descriptor": "(IIJIJJ)V",
+        "jvmAccessFlagsDecimal": 1
+      }
+    ]
+  },
+  {
+    "testId": "PT-PRO-002-NPAGE003",
+    "method": "rejectsSearchPageSizeAndNotificationOffsetOrRecordMismatch",
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/NotificationPaginationContractTest.java",
+      "sha256": "f066bdf065169111e7751562f57e1a2668a804a59a804a3d879c8ce2dcfaf076"
+    },
+    "fixtureOracle": "100-size, incorrect offset and record mismatch rejected",
+    "specification": {
+      "path": "evidence/01_PT/002_NK-PRO-002/112_通知50件ページ境界の単体仕様.md",
+      "sha256": "ff712cd27051d6a0fd405018e524c67e624b514ab3df46c7c013120a16d21b0d"
+    },
+    "originalResult": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.NotificationPaginationContractTest.xml",
+      "sha256": "5ba4ec0963070ce61524da47e19476934bd3807ed9dbfa1d0adba4b1d595794c"
+    },
+    "use": "direct invocation in source or through this fixture own helper",
+    "entries": [
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+        "method": "validate",
+        "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V",
+        "jvmAccessFlagsDecimal": 9
+      },
+      {
+        "physical": "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+        "method": "<init>",
+        "descriptor": "(IIJIJJ)V",
+        "jvmAccessFlagsDecimal": 1
+      }
+    ]
+  }
+]
