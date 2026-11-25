@@ -332,13 +332,12 @@ class AnimationViewModelTest {
   @Test
   void web237ConcurrentProjection()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;
         tasks.add(
-            executor.submit(
+            workers.submit(
                 () -> {
                   var actor =
                       new SessionPrincipal(
@@ -364,9 +363,6 @@ class AnimationViewModelTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

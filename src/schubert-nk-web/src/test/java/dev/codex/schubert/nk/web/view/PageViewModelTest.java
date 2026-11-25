@@ -124,17 +124,18 @@ class PageViewModelTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     var fixtures =
         List.of(fixture(1, 50, 0, 1, 0, 0, 0, 0), pages().get(1), pages().get(3), pages().get(5));
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<java.util.concurrent.Future<?>>();
       for (int i = 0; i < 100; i++) {
         Fixture value = fixtures.get(i % 4);
-        tasks.add(executor.submit(() -> check(value)));
+        tasks.add(
+            workers.submit(
+                () -> {
+                  check(value);
+                  return null;
+                }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

@@ -284,13 +284,12 @@ class ScenarioHierarchyViewModelTest {
   @Test
   void web190ConcurrentProjection()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 0; i < 100; i++) {
         final int n = i;
         tasks.add(
-            executor.submit(
+            workers.submit(
                 () -> {
                   var p = actor(UserRole.USER);
                   var g = GameCode.NUKITASHI_1;
@@ -307,9 +306,6 @@ class ScenarioHierarchyViewModelTest {
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
