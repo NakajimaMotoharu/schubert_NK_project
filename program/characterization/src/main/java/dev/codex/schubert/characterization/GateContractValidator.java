@@ -103,9 +103,9 @@ final class GateContractValidator {
     List<String> failures =
         new ArrayList<>(
             validateDefinitions(contract, catalog, schema, differences, browser, requirements));
-    List<String> caseOrder = strings(contract.path(FIELD_CASE_ORDER));
-    validateRun(firstRun, caseOrder, requirements, "run1", true, failures);
-    validateRun(secondRun, caseOrder, requirements, "run2", true, failures);
+    // Definition errors must not change the evidence selected for SS355's approved cases.
+    validateRun(firstRun, APPROVED_CASE_ORDER, requirements, "run1", true, failures);
+    validateRun(secondRun, APPROVED_CASE_ORDER, requirements, "run2", true, failures);
     failures.addAll(
         validateEvidenceDocuments(
             comparison,
@@ -122,7 +122,6 @@ final class GateContractValidator {
         baselineManifest,
         contract,
         sourceReport,
-        caseOrder,
         requirements,
         failures);
 
@@ -130,7 +129,7 @@ final class GateContractValidator {
         gateMetrics(
             contract,
             differences,
-            caseOrder.size(),
+            strings(contract.path(FIELD_CASE_ORDER)).size(),
             regularFiles(
                     projectRoot.resolve("program/characterization/baseline/current"), path -> true)
                 .size(),
@@ -915,7 +914,6 @@ final class GateContractValidator {
       JsonNode manifest,
       JsonNode contract,
       JsonNode sourceReport,
-      List<String> caseOrder,
       JsonNode requirements,
       List<String> failures)
       throws IOException, NoSuchAlgorithmException {
@@ -932,7 +930,7 @@ final class GateContractValidator {
             && "843de94".equals(contract.path(FIELD_BASELINECOMMIT).asText());
     boolean actualCommit = gateCommit.equals(contract.path(FIELD_BASELINECOMMIT).asText());
     require(anchoredLegacy || actualCommit, "BASELINE_GATE_COMMIT", failures);
-    validateRun(baselineRoot, caseOrder, requirements, "baseline", false, failures);
+    validateRun(baselineRoot, APPROVED_CASE_ORDER, requirements, "baseline", false, failures);
   }
 
   private static List<String> caseIds(Path artifactRoot) throws IOException {

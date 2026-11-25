@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PT-CHR-SYN001..008 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
+/** PT-CHR-SYN001..009 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
 final class GateSyntheticRunPortTest {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path OWN_INPUT = Path.of(System.getProperty("chr.unitProjectRoot"));
@@ -76,6 +77,27 @@ final class GateSyntheticRunPortTest {
     assertTrue(validate(root).failures().contains("run1_SCREENSHOT_DESKTOP_HASH"));
     Files.delete(root.resolve(FIRST + U01));
     assertTrue(validate(root).failures().contains("run1_MISSING:CHR-U01"));
+  }
+
+  @Test
+  void rejectedCaseDefinitionStillChecksForAnApprovedMissingArtifact() throws Exception {
+    Path root = fixture("unapproved-case");
+    Path contractPath = root.resolve(CONTRACT);
+    var contract = JSON.readTree(contractPath.toFile());
+    var order = (ArrayNode) contract.path("caseOrder");
+    assertEquals("CHR-A01", order.get(0).textValue());
+    order.set(0, JSON.getNodeFactory().textNode("CHR-A99"));
+    JSON.writeValue(contractPath.toFile(), contract);
+    Files.delete(root.resolve(FIRST + A01));
+
+    var result = validate(root);
+    assertFalse(result.passed());
+    assertEquals(24, result.metrics().get("caseCount"));
+    assertTrue(result.failures().contains("CONTRACT_CASE_ORDER"));
+    assertTrue(result.failures().contains("run1_MISSING:CHR-A01"));
+    assertFalse(result.failures().contains("run1_MISSING:CHR-A99"));
+    assertFalse(result.failures().contains("run2_CASE_COVERAGE"));
+    assertFalse(result.failures().contains("baseline_CASE_COVERAGE"));
   }
 
   @Test
