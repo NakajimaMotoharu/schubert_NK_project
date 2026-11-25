@@ -51,8 +51,20 @@ def reactor_run_record(directory, run, suffix):
 
 
 def require_collection_inputs_unchanged(repo, commit, paths):
-    """Keep new collection on the reactor's tracked inputs and reject new inputs."""
-    subprocess.run(["git", "diff", "--quiet", commit, "--", *paths], cwd=repo, check=True)
+    """Compare the recorded inputs against the reactor's actual commit object."""
+    if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("collection baseline must be a full Git commit")
+    resolved = subprocess.run(
+        ["git", "--no-replace-objects", "rev-parse", "--verify", "--end-of-options",
+         f"{commit}^{{commit}}"],
+        cwd=repo, capture_output=True, text=True, check=False,
+    )
+    if resolved.returncode or resolved.stdout.strip() != commit:
+        raise ValueError("collection baseline must be a full Git commit")
+    subprocess.run(
+        ["git", "--no-replace-objects", "diff", "--quiet", commit, "--", *paths],
+        cwd=repo, check=True,
+    )
     untracked = subprocess.check_output(
         ["git", "ls-files", "--others", "--exclude-standard", "-z", "--", *paths],
         cwd=repo,
