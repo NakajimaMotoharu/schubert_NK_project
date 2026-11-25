@@ -1,0 +1,123 @@
+{
+  "run": "PG45370",
+  "source": "5fc45ac01a4b826e0c3846e74084824c4f12601a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G03.01",
+  "terminalAtUTC": "2026-11-25T15:28:28.446173+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3854",
+  "horizontal": "YKT-1557",
+  "designSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "design": {
+    "232": {
+      "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+      "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288"
+    },
+    "234": {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    },
+    "235": {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  },
+  "fixture": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+    "sha256": "e28eccecf0fb962509ac9ce46a8a696b5389daa81e0d3365a843c725ba184322"
+  },
+  "spec": {
+    "path": "evidence/01_PT/002_NK-PRO-002/005_Payload全64layout・semantic条件個別受入matrix.md",
+    "sha256": "f47fdd55228c7f9ed43d24a3e8aeff1f305a985f2fe2a9337e35203b0b5be375"
+  },
+  "testIds": [
+    "NK-PRO-002 P03/P05"
+  ],
+  "proofTypes": [
+    [
+      "LGNREQ01",
+      384,
+      365,
+      "reserved SPACE"
+    ],
+    [
+      "LGNRSP01",
+      432,
+      0,
+      "X SPACE"
+    ],
+    [
+      "LGNRSP01",
+      432,
+      167,
+      "N ZERO"
+    ],
+    [
+      "ANMRSP01",
+      16,
+      6,
+      "B SPACE"
+    ]
+  ],
+  "positivelyAcceptedBeforeEachMutation": true,
+  "eachPreviouslyAssertedCorruptionKept": true,
+  "namedWlgevtUnchanged": true,
+  "canonicalArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "7975f333937787b5f7d8eec65835c273198a2c15a48fc00ea805f38f19d9c22e"
+  },
+  "selectedMethod": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+  "tools": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45370-payload-filler-independent-base/begin.json",
+    "sha256": "df5ffabced9fc954f49bfad2405abd0f8c97a81b85840a146410278a6e62bdaf"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45370-payload-filler-independent-base/terminal.json",
+    "sha256": "5c98580bf58dacbe466a81ff87c4b3448bd52e443d26f62db2ebcbe627c0ece1"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45370-payload-filler-independent-base/xml/TEST-junit-jupiter.xml",
+    "sha256": "3e00e3a242547f08abe3197a36548d5aca3e36c1f869beabce0251c2b82d32e2"
+  },
+  "scopeCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45370-payload-filler-independent-base/coverage.xml",
+    "sha256": "98c7fbd87f467fe407d348b2ac90dacd27d7386dbce44f888a54e343b60c5089"
+  },
+  "scopeExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45370-payload-filler-independent-base/jacoco.exec",
+    "sha256": "91e76eba57d62ad26fb9c346a58256c6a44d50f1935f574943fbefacaf7789e6"
+  },
+  "actualClassCounters": {
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec": {
+      "INSTRUCTION": {
+        "covered": 553,
+        "missed": 355
+      },
+      "BRANCH": {
+        "covered": 70,
+        "missed": 74
+      },
+      "LINE": {
+        "covered": 115,
+        "missed": 64
+      },
+      "COMPLEXITY": {
+        "covered": 42,
+        "missed": 53
+      },
+      "METHOD": {
+        "covered": 18,
+        "missed": 5
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "actualProductTrials": 1,
+  "cumulativeLocalProductTrialsGross": 2460,
+  "priorProtocol174NotCombined": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
