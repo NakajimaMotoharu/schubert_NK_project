@@ -22,3 +22,5 @@ PG7625のmetadata preflightは元PG7614正常Jar SHA32889546…と全176class/de
 PG7628host/7630独立/7632正常六compile/7634全Jar/7636trace/7638review/7640公開scan。source/run/OS-JDK-tool/日時/branch/command/終了/XML/input-output/CRC・四counter・静的・関連BUG/実hashを元manifestと1692へ記録。失敗/未完/skippedを成功にしない。全1643等の過去値ではなく当全1761Main/104src/92追加physicalを実測予定、旧1669byte不変を独立照合する。
 
 開始3/5/9pp上限10/fresh27残73・元窓0/reset1793306748/event1909。新製造8/既98再資格/再認証/追加発見/手戻り/tool費を分離。正式1964/53・原190新受入0・工数null・QA051final/PTALT0・whole451/native/CHR・全actualHOLD維持、実VM/Root/DB/JMS/Backup/key/intent/permit/配備/ネットワーク操作0。
+
+BUG-3881／YKT-2997。INBOXMET007の元の固定期待、8worker、64件、10秒、registry個別所有を保持。期限付き終了を共用し、二次失敗は一次を覆わない。現版の真正5件は[PG45494](evidence/PG45494-current-five-api-metric-fixture-owners/manifest.json)。実環境と正規全451は別。

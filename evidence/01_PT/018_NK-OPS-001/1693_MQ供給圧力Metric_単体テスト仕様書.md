@@ -22,3 +22,5 @@ expectedは上位表literal/明示算術・JDK primitive hash規約から独立�
 元製造新8＋必要既106を当sourceで普通114/14suite・28Java/実22＋metadata1予定。旧106/Batch237/Web27や依存Protocolのcoverageを合算0。新Snapshot生成9＋既32は当ordinary/actual byte/javap/既JDK-filter証拠で別確認し、四counterへ合成/除外追加0。全1762Main/106source/93追加physical予定、旧104source不変2新。7644host/7646独立/7648正常六compile/7650全Jar/7652trace/7654review/7656公開scan、1694結果へ実hash/command/OS/JDK/日時/branch/source/actual exit/XML/CRC/四100/静的/BUGを結合する。
 
 開始2/4/8pp上限10。fresh表示は使用0/残100/reset1793382075で、直前27/73/reset1793306748とmarkerが異なる。実reset・消費0・新たな90pp予算を推定せず、旧窓開始0/最後27と今回新観測を分離し区間消費null、券消費/追加課金/モデル変更0。原-v4-v5/旧cursor不変更。正式1964/53・原190新受入0・工数null・QA051final/PTALT0・whole451/native/CHR/全actualHOLD維持。
+
+BUG-3881／YKT-2997。MQPRESS006の元の固定期待、8worker、64件、10秒、registry個別所有を保持。期限付き終了を共用し、二次失敗は一次を覆わない。現版の真正5件は[PG45494](evidence/PG45494-current-five-api-metric-fixture-owners/manifest.json)。実環境と正規全451は別。

@@ -18,3 +18,5 @@ expectedはSS/既public catalogから独立した固定八literalと整数/SDK M
 新8＋必要既API48=56PT7suite/全15Java/実12＋metadata1・全1735physical/77sourceは予定未実測。元PG7376/7378以降のordinary verify/XML/真終了/FES0/単一sessionCRC/四counter100/NullAway/SB/PMD-CS/全Jar/traceへsource/branch/OS/JDK/tool・command/time/exit/coverage/BUG-SSC/path/hashを保存。Hikari/SDK等既六aux同byte・harness不変更、旧48成功や歴史Batch/Webへ当source成功を合算0。
 
 actual mismatch検知/業務hook/auth/鍵/DB/VM/Root/exporter/native/CHR/全体451は未受入HOLD。正式1964/53・歴史17/別source新7・原190新受入0/工数null/QA051final/PTALT0不変更、障害は修正前915/916。元見積/群1-3-6pp上限10/共有開始20・専有N-Tnull/通常区切り停止0。
+
+BUG-3881／YKT-2997。OPMIS007の元の固定期待、8worker、64件、10秒、registry個別所有を保持。期限付き終了を共用し、二次失敗は一次を覆わない。現版の真正5件は[PG45494](evidence/PG45494-current-five-api-metric-fixture-owners/manifest.json)。実環境と正規全451は別。

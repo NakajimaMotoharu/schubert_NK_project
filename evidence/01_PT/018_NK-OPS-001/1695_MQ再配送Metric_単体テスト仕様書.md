@@ -18,3 +18,5 @@ SS321の最大4は初回＋再配送3回。初回count1を再配送として計�
 expectedは上位literalと初回/再配送区分・明示算術で独立作成、Production methodから期待生成0。新generated型なし、既Snapshot等41生成methodの当ordinary/byte契約を維持する。元製造新8＋必要既114を当122/15suite・30Java/実24＋metadata1予定で再資格し、旧source114/Batch237/Web27/Protocol依存を合算しない。全1764Main/108source/95追加physical・旧106src不変2新予定、7674host/7676独立/7678正常六compile/7680全Jar/7682trace/7684review/7686公開scan、1696結果へ実hash/OS-JDK-tool/日時/branch/source/command/actual exit/XML/CRC/四counter/static/BUGを結合する。
 
 当群開始2/4/8pp上限10/fresh1/99/reset1793382075。旧marker1793306748/last27との不明区間・共有累積null、元90予算を再基底化せず、原-v4-v5・usagecursor維持/専有N-T/工数null。導入/install/DB/JMS/broker/Root/VM/key/配備等操作0、全actualHOLD・正式1964/53/原190新受入0・QA051final/PTALT0/whole451-native-CHR未受入不変更。
+
+BUG-3881／YKT-2997。MQREDEL007の元の固定期待、8worker、64件、10秒、registry個別所有を保持。期限付き終了を共用し、二次失敗は一次を覆わない。現版の真正5件は[PG45494](evidence/PG45494-current-five-api-metric-fixture-owners/manifest.json)。実環境と正規全451は別。
