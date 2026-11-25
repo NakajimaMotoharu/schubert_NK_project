@@ -5,6 +5,7 @@ import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -123,9 +124,10 @@ public final class AdminCommandAuthenticator {
         "select user_id from schubert.auth_sessions where context_hash=?"
             + (lock ? " for update" : "");
     {
-      var statement = requireValue(connection.prepareStatement(sql));
+      @Nullable PreparedStatement acquired = connection.prepareStatement(sql);
       @Nullable Throwable jdbcFailure3 = null;
       try {
+        var statement = requireValue(acquired);
         statement.setString(1, hash);
         {
           var row = requireValue(statement.executeQuery());
@@ -147,7 +149,7 @@ public final class AdminCommandAuthenticator {
         jdbcFailure3 = failure;
         throw failure;
       } finally {
-        JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);
+        JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure3, acquired);
       }
     }
   }

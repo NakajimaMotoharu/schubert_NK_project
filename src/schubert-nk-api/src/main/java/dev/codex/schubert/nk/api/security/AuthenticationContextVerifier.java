@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Objects;
@@ -139,9 +140,10 @@ public final class AuthenticationContextVerifier {
   private static VerifiedSession readSession(
       Connection connection, String sql, String hash, Instant now) throws SQLException {
     {
-      var statement = requireValue(connection.prepareStatement(sql));
+      @Nullable PreparedStatement acquired = connection.prepareStatement(sql);
       @Nullable Throwable jdbcFailure4 = null;
       try {
+        var statement = requireValue(acquired);
         statement.setString(1, hash);
         {
           var row = requireValue(statement.executeQuery());
@@ -176,7 +178,7 @@ public final class AuthenticationContextVerifier {
         jdbcFailure4 = failure;
         throw failure;
       } finally {
-        JdbcResourceCleanup.closeStatement(jdbcFailure4, statement);
+        JdbcResourceCleanup.closeStatementIfPresent(jdbcFailure4, acquired);
       }
     }
   }
