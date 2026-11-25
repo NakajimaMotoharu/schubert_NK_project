@@ -1,6 +1,7 @@
 package dev.codex.schubert.characterization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,6 +64,45 @@ final class GateRepeatCompletenessTest {
             IllegalStateException.class, () -> GateCli.compareCurrent(first, second, output));
     assertEquals(REPEAT_FAILED, failure.getMessage());
     assertReport(output, "FAIL", 28, List.of("case-00.json"), List.of("renamed.json"), List.of());
+  }
+
+  @Test
+  @DisplayName("PT-CHR-G03-REPEAT-004 rejects overlap with a separate inventory report")
+  void anArtifactCannotHideBehindTheInventoryReport() throws Exception {
+    Path first = capture("first", 26);
+    Path second = capture("second", 26);
+    Files.writeString(first.resolve("artifacts/inventory.json"), "{\"different\":true}");
+    assertOverlapRejected(first, second);
+  }
+
+  @Test
+  @DisplayName("PT-CHR-G03-REPEAT-005 rejects overlap with a separate screenshot")
+  void anArtifactCannotHideBehindTheSecondCaptureScreenshot() throws Exception {
+    Path first = capture("first", 26);
+    Path second = capture("second", 26);
+    Path aliases = Files.createDirectories(second.resolve("artifacts/screenshots"));
+    Files.write(aliases.resolve("synthetic.png"), new byte[] {9});
+    assertOverlapRejected(first, second);
+  }
+
+  @Test
+  @DisplayName("PT-CHR-G03-REPEAT-006 rejects two distinct Linux paths normalized to one name")
+  void twoArtifactPathsCannotShareOneNormalizedName() throws Exception {
+    Path first = capture("first", 25);
+    Path second = capture("second", 25);
+    for (Path capture : List.of(first, second)) {
+      Path folder = Files.createDirectories(capture.resolve("artifacts/nested"));
+      Files.writeString(folder.resolve("metadata.json"), "{}");
+    }
+    Files.writeString(first.resolve("artifacts/nested\\metadata.json"), "{\"different\":true}");
+    assertOverlapRejected(first, second);
+  }
+
+  private void assertOverlapRejected(Path first, Path second) {
+    Path output = temporaryDirectory.resolve("overlapping-input.json");
+    var failure = assertThrows(IOException.class, () -> GateCli.compareCurrent(first, second, output));
+    assertEquals("repeat comparison file names overlap", failure.getMessage());
+    assertFalse(Files.exists(output));
   }
 
   private Path capture(String name, int artifactCount) throws IOException {

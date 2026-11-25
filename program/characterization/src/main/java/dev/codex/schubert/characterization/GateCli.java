@@ -302,12 +302,8 @@ public final class GateCli {
 
   static void compareCurrent(Path first, Path second, Path output)
       throws IOException, NoSuchAlgorithmException {
-    Map<String, String> firstFiles = fileHashes(first.resolve(FIELD_ARTIFACTS));
-    firstFiles.putAll(prefixed("screenshots/", fileHashes(first.resolve(FIELD_SCREENSHOTS))));
-    addRunReportHashes(first, firstFiles);
-    Map<String, String> secondFiles = fileHashes(second.resolve(FIELD_ARTIFACTS));
-    secondFiles.putAll(prefixed("screenshots/", fileHashes(second.resolve(FIELD_SCREENSHOTS))));
-    addRunReportHashes(second, secondFiles);
+    Map<String, String> firstFiles = repeatFileHashes(first);
+    Map<String, String> secondFiles = repeatFileHashes(second);
     List<String> missing =
         firstFiles.keySet().stream().filter(key -> !secondFiles.containsKey(key)).toList();
     List<String> extra =
@@ -346,14 +342,19 @@ public final class GateCli {
     }
   }
 
-  private static void addRunReportHashes(Path run, Map<String, String> hashes)
+  private static Map<String, String> repeatFileHashes(Path run)
       throws IOException, NoSuchAlgorithmException {
+    Map<String, String> hashes = fileHashes(run.resolve(FIELD_ARTIFACTS));
+    for (var screenshot : fileHashes(run.resolve(FIELD_SCREENSHOTS)).entrySet()) {
+      putUniqueFileHash(hashes, "screenshots/" + screenshot.getKey(), screenshot.getValue());
+    }
     for (String name : List.of("inventory.json", "supplemental.json")) {
       Path report = run.resolve(name);
       if (Files.isRegularFile(report, LinkOption.NOFOLLOW_LINKS)) {
-        hashes.put(name, sha256(report));
+        putUniqueFileHash(hashes, name, sha256(report));
       }
     }
+    return hashes;
   }
 
   static void report(Path projectRoot, Path first, Path second, Path comparison, Path output)
@@ -630,17 +631,18 @@ public final class GateCli {
     return group * 100 + Integer.parseInt(id.substring(5));
   }
 
-  private static Map<String, String> prefixed(String prefix, Map<String, String> values) {
-    Map<String, String> result = new TreeMap<>();
-    values.forEach((key, value) -> result.put(prefix + key, value));
-    return result;
+  private static void putUniqueFileHash(Map<String, String> hashes, String name, String digest)
+      throws IOException {
+    if (hashes.putIfAbsent(name, digest) != null) {
+      throw new IOException("repeat comparison file names overlap");
+    }
   }
 
   static Map<String, String> fileHashes(Path root) throws IOException, NoSuchAlgorithmException {
     Map<String, String> result = new TreeMap<>();
     if (!Files.isDirectory(root)) return result;
     for (Path file : regularFiles(root, path -> true)) {
-      result.put(root.relativize(file).toString().replace('\\', '/'), sha256(file));
+      putUniqueFileHash(result, root.relativize(file).toString().replace('\\', '/'), sha256(file));
     }
     return result;
   }
