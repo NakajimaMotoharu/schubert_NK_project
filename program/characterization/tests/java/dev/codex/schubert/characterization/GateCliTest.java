@@ -2,6 +2,7 @@ package dev.codex.schubert.characterization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
@@ -31,6 +33,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -681,29 +684,89 @@ class GateCliTest {
     Path output = temporaryDirectory.resolve("atomic/concurrent.json");
     CountDownLatch serializationStarted = new CountDownLatch(1);
     CountDownLatch releaseSerialization = new CountDownLatch(1);
-    var executor = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var worker =
+        new JsonOutputWorker(Executors.newVirtualThreadPerTaskExecutor(), releaseSerialization)) {
       var first =
-          executor.submit(
-              (Callable<Void>)
-                  () -> {
-                    GateCli.writeJson(
-                        output, new BlockingValue(serializationStarted, releaseSerialization));
-                    return null;
-                  });
+          worker
+              .executor()
+              .submit(
+                  (Callable<Void>)
+                      () -> {
+                        GateCli.writeJson(
+                            output, new BlockingValue(serializationStarted, releaseSerialization));
+                        return null;
+                      });
       assertTrue(serializationStarted.await(5, TimeUnit.SECONDS));
       assertThrows(
           IllegalStateException.class, () -> GateCli.writeJson(output, Map.of("value", "second")));
       releaseSerialization.countDown();
       first.get(5, TimeUnit.SECONDS);
-    } finally {
-      releaseSerialization.countDown();
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals("first", JSON.readTree(output.toFile()).path("value").asText());
     assertFalse(Files.exists(output.resolveSibling("concurrent.json.part")));
     assertThrows(IllegalArgumentException.class, () -> GateCli.writeJson(null, Map.of()));
+  }
+
+  /** PT-CHR-OUTWORKER001; the latest failed assertion remains the primary diagnosis. */
+  @Test
+  void writerFixtureRetainsPrimaryWhenWorkerCannotTerminate() {
+    var release = new CountDownLatch(1);
+    var calls = new ArrayList<String>();
+    var executor =
+        (ExecutorService)
+            Proxy.newProxyInstance(
+                ExecutorService.class.getClassLoader(),
+                new Class<?>[] {ExecutorService.class},
+                (unused, operation, args) ->
+                    switch (operation.getName()) {
+                      case "shutdownNow" -> {
+                        assertEquals(0, release.getCount());
+                        calls.add("cancel");
+                        yield List.of();
+                      }
+                      case "awaitTermination" -> {
+                        assertEquals(10L, args[0]);
+                        assertSame(TimeUnit.SECONDS, args[1]);
+                        calls.add("wait");
+                        yield false;
+                      }
+                      case "isShutdown" -> false;
+                      default -> throw new AssertionError("unexpected executor operation");
+                    });
+    var primary = new AssertionError("first output fixture check failed");
+
+    var observed =
+        assertThrows(
+            AssertionError.class,
+            () -> {
+              try (var worker = new JsonOutputWorker(executor, release)) {
+                assertFalse(worker.executor().isShutdown());
+                throw primary;
+              }
+            });
+
+    assertSame(primary, observed);
+    assertEquals(List.of("cancel", "wait"), calls);
+    assertEquals(1, primary.getSuppressed().length);
+    assertEquals(
+        "output fixture worker did not terminate", primary.getSuppressed()[0].getMessage());
+  }
+
+  private record JsonOutputWorker(ExecutorService executor, CountDownLatch release)
+      implements AutoCloseable {
+    @Override
+    public void close() {
+      release.countDown();
+      executor.shutdownNow();
+      try {
+        if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+          throw new AssertionError("output fixture worker did not terminate");
+        }
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new AssertionError("output fixture cleanup was interrupted", interrupted);
+      }
+    }
   }
 
   private void assertMissingDatabaseUrlFailure(PreflightFixture fixture) throws Exception {
