@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -492,10 +493,9 @@ final class PendingRevocationPortTest {
 
   @Test
   void oneRepositoryHasIndependentConcurrentBorrowedConnectionsAndImmutableRows() throws Exception {
-    var executor = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var first =
-          executor.submit(
+          workers.submit(
               () -> {
                 Fixture f = new Fixture();
                 f.rows.add(row(1));
@@ -504,7 +504,7 @@ final class PendingRevocationPortTest {
                 return result;
               });
       var second =
-          executor.submit(
+          workers.submit(
               () -> {
                 Fixture f = new Fixture();
                 var secondRow = row(2);
@@ -522,11 +522,6 @@ final class PendingRevocationPortTest {
       assertEquals(OWNER, a.getFirst().leaseOwner());
       assertEquals(new UUID(0, 2), b.getFirst().leaseOwner());
       assertThrows(UnsupportedOperationException.class, () -> a.add(b.getFirst()));
-    } finally {
-      executor.shutdownNow();
-      if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
-        throw new AssertionError("revocation repository workers did not terminate");
-      }
     }
   }
 
