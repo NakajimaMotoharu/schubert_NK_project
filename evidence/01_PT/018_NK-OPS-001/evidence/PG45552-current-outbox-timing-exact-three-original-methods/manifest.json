@@ -1,0 +1,99 @@
+{
+  "run": "PG45552",
+  "source": "77b0b4f00f3860861e23ec17862089995ea3a82f",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P006-02/2",
+  "terminalAtUTC": "2026-11-25T19:27:27.665796+00:00",
+  "actualExit": 0,
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+    "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f"
+  },
+  "test": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxPolicyTest.java",
+    "sha256": "ddd94d17ece3c2ed0861cd21f463920ed5972c39102f60f147ee8c45f2e5abc6"
+  },
+  "companionSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    }
+  ],
+  "currentTypedPhysical": [
+    {
+      "member": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class",
+      "sha256": "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be"
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class",
+      "sha256": "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9"
+    }
+  ],
+  "threeWitnessMethods": {
+    "retryScheduleUsesOneFiveThirtySixtyAndFiveMinuteCap": "1/5/30/60/300 sec; cases 0 and 101 rejected",
+    "nextAttemptIsCalculatedFromExplicitFailureTime": "fixed UTC plus 30 sec, null clock boundary",
+    "retryJitterUsesIndependentExactBoundaryVectorsAfterCappingTheBase": "six attempts by -100/0/+100 permille and +/-101 rejected"
+  },
+  "existingHistoricalCaseCount": 10,
+  "originalResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38294-outbox-report-retry-independent-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "36dcd654b7daba395d5f0c1178b82ab75f78dc96b204aacc29c01d2571abacb2"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38288-outbox-report-retry-prepare-v2/manifest.json",
+    "sha256": "dba6d6f842d2e4e63df67b260aa8512d260b8323a73bfdab18c8aaecc56756bf"
+  },
+  "oldFullScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38294-outbox-report-retry-independent-v1/manifest.json",
+    "sha256": "41be1e3a3d4d6141e90b7442426073e39df0769906781efdab92cd3383e4eda5"
+  },
+  "sameLocalScopeCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 89
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 13
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 15
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 15
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "alreadyRegisteredSingleCase": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43140-p00602-outbox-retry-current-raw-v1/manifest.json",
+    "sha256": "e2524b0d650ae7807019802a5e65d35695a9d539c14bada5ceb85e1b986361cb"
+  },
+  "latestTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45160-outbox-current-exact-twelve-single-original/manifest.json",
+    "sha256": "b1b799c280313458c65b336ff17515760516ae40e6dc25be37469e6515aae6a5"
+  },
+  "distinctQa050Evidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44512-current-qa050-timing-oracle-and-necessary-fixture-delta/manifest.json",
+    "sha256": "5521ec6b512547f338e04924673e9f71dae8002172080d78af49a2f514ef2044"
+  },
+  "newTestExecutions": 0,
+  "mergeNativeOrExec": false,
+  "initialMetadataCaseListHandled": true,
+  "additionalFormalCredit": 0,
+  "actualDbJmsOrDeployment": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

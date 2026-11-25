@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-11087",
+  "source": "77b0b4f00f3860861e23ec17862089995ea3a82f",
+  "sourceBeforeWork": "77b0b4f00f3860861e23ec17862089995ea3a82f",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P006-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P006-02/2",
+    "元行": "WBS-P006-02/2",
+    "費目": "B",
+    "主担当": "WBS-P006-02",
+    "状態": "計画",
+    "作業": "Outbox永続化・配信・再送・DLQ／同source証拠による受入判定",
+    "残pp": "0.423",
+    "着手": "設計324・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Outbox永続化・配信・再送・DLQ：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-104,MQ-006,MQ-007,MQ-008,MQ-009,MQ-010",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-104、MQ-006、MQ-007、MQ-008、MQ-009、MQ-010",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "0.163",
+    "慎重pp": "0.845",
+    "要求設計の版差": "PT基準仕様 NK-MSG-002、SS 324",
+    "lineNumber": 337,
+    "改訂残pp": "0.423",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG45552",
+  "startEvent": "PGPT-20261008-11086",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": "Three original literal-policy proofs connect to the two exact current selected Outbox types. Previous overlapping single proof remains independent; no re-run or newly closed criterion.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45552-current-outbox-timing-exact-three-original-methods/manifest.json",
+    "sha256": "b668377866d2de6f0a3eefdc99ce8e2566b75482a2ff8dd1556a61f77d498a0e"
+  },
+  "nextEvidence": "Use checked storage ownership evidence to inspect a concrete remaining product quality issue or formal evidence-tool controls where the independent scope is authorized. Avoid repeat checks on unchanged already qualified criteria.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T19:27:54+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 67,
+    "remainingPercent": 33,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "710eeae9369e139c83aef136b00373aa675489376d3af1c8447c895e654040ce",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T19:27:54+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 67,
+        "remainingPercent": 33,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T19:27:27.665796+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 67,
+    "remainingPercent": 33,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}
