@@ -10,3 +10,9 @@ Program `NK-WEB-002`、対象予定class `WebNativeCodecs.create/close`。RD AUT
 | PT-WEB-NKEY004 | borrowとcloseの2 thread競合 | 同一ownerで返るcodecは所有済か、close済拒否だけ。秘密再取得・例外補完なし |
 
 実行: JDK25.0.4/Maven3.9.12、`./mvnw -o -q -Dmaven.repo.local=<fixed> -Dnk.pt.repository=<tree> -pl src/schubert-nk-web -Dtest=WebNativeCodecsTest,WebNativeCodecsCredentialTest test spotbugs:check jacoco:report`。PG367 source確定後、対象commit、結果、JaCoCo class四指標、JUnit hash、manifestを次番号の実行結果へ記録する。RED runは合格算入しない。NullAway/SpotBugsおよび必要依存suiteを確認する。秘密実体・raw keyは証跡に保存しない。
+
+## 現候補の適用範囲
+
+上表とコマンドはPG367時点。現 `WebNativeCodecsTest` の005までの5件は、合成の取得元を使う。製品の用途はsession、log、revokeの三つ。SS314の鍵用途分離とSS324 §9の再送責務に基づき、003は固定三用途順、無効versionで拒否、先に借りた配列の消去を判定する。旧表の別service／閉鎖済み `ServiceCredentialSet` は、現003で確認する運用後条件に含めない。
+
+005は三用途目の取得・null・不正長・version・例外の異常系に加え、合成の独立JCA復号で第三用途の値を照合する。実鍵、現owner、当sourceの合格結果は未取得。公開入口の `ServiceCredentialSet` の対応型が現候補でも同じ保留根拠に当たるため、当該候補の5件は未実行。現在の許可範囲／配備所有を確認してから正規の候補と品質結果を取得する。 [PG45366](evidence/PG45366-web-native-codec-test-and-held-owner-contract/manifest.json)

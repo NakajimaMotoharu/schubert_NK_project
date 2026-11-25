@@ -1,0 +1,69 @@
+{
+  "run": "PG45366",
+  "source": "bf8db18f66e8c25b4403d076aafb00f9bb8f830c",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-25T15:19:43.142642+00:00",
+  "actualExit": 0,
+  "priorWebClassification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45364-web-quality-implicit-and-cross-module-references/manifest.json",
+    "sha256": "dd3d054a003bfa7bd3f58f7d59bd3120cacb630776c41ed525799d327fb6d530"
+  },
+  "relatedWbs": [
+    "WBS-G13.03",
+    "WBS-P018-08",
+    "WBS-P016-02"
+  ],
+  "previousInspectedOwnerRecord": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44200-g1303-bootstrap-remaining-owner-requirement-matrix/manifest.json",
+    "sha256": "26171cf21c88320b22d5bc82183502e03755e10bbda169720bd47edd1dbd0edf"
+  },
+  "explanation": "The Web public create method references the same Bootstrap owner with CREDENTIAL_OWNER_HELD as prior. The current synthetic branch does not qualify the public whole type.",
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "gitSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+  },
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/047_NK-WEB-002_起動用Web暗号鍵所有単体テスト仕様書.md",
+    "sha256": "87191cf56c6954c30d23279c91b59b8a23a4f1fe5e455031c4fb957fd6cddfa0"
+  },
+  "productSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+    "sha256": "8c6616da95480f339028ca37e23f2eda7e83621c93899526016a4445358a7a0f"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecsTest.java",
+    "sha256": "be6f9d0d74f60da3fa60165567d7ba6dac2c9040ed97cc2a0f97513830857275"
+  },
+  "testIds": {
+    "PT-WEB-NKEY005": "nkey005ThirdPurposeCopyNullFaultAndIndependentCipher",
+    "PT-WEB-NKEY001": "nkey001CopiesErasedButBorrowedCodecsSurviveUntilOwnerClose",
+    "PT-WEB-NKEY002": "nkey002NullMissingSecondCopyAndInvalidLengthFailClosed",
+    "PT-WEB-NKEY003": "nkey003PurposeOrderAndVersionFailureNeverUseFallback",
+    "PT-WEB-NKEY004": "nkey004ConcurrentBorrowAndCloseHaveOnlyOwnedOrClosedOutcome"
+  },
+  "exactArtifactHoldIsolated": true,
+  "previousSuccessTransferred": 0,
+  "currentNotRun": 5,
+  "actualProductTrials": 0,
+  "actualCompile": 0,
+  "rawCredentialsLoaded": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "javaSourceObject": {
+    "gitObjectId": "728a8414d327a82ae4ca73bb5294ec1598d31570",
+    "gitObjectType": "blob"
+  },
+  "publicationQuality": {
+    "firstStagedRule": {
+      "RuleID": "generic-api-key",
+      "File": "evidence/01_PT/016_NK-WEB-002/evidence/PG45366-web-native-codec-test-and-held-owner-contract/manifest.json",
+      "StartLine": 21,
+      "EndLine": 21
+    },
+    "disposition": "Git source blob ID, independently matched to the exact tree and Git object type",
+    "priorStagedManifestSha256": "807ea45e4945d77b0e20a4e2223f9b8a0d177558c6b16d22233cf5db8390032d",
+    "changedRule": false
+  }
+}
