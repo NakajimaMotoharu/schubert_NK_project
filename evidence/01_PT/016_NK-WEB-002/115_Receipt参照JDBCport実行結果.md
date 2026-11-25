@@ -111,3 +111,9 @@
 現候補の製品クラスはPG44838と同一。再現入力はJDBC interface内の合成ResultSetだけ。PT-WEB-RCPTPORT010は供給元と同一の例外、commit 0、行／文／rollback／接続の順を1回ずつ確認した。同一実行の元9件と新1件の計10件が成功し、失敗・エラー・skip・未実行は各0。現対象クラスの未加工coverageは行104、method10、class1、branch32で各未達0。別のexecは合算していない。現在のCheckstyleとGJFはこのfixture1件について終了0。型付き静的検査の新fixtureへの適用と実DB・全451は別。
 
 [PG44914](evidence/PG44914-receipt-npe-owned-ten/manifest.json)
+
+## PG44918 受付参照のJDBC時刻契約
+
+PT-WEB-RCPTPORT011は固定の二つの非ゼロoffsetを同一Instantとして読取り、登録時の第3引数がUTC OffsetDateTimeであることを確認した。各読取・登録でcommitと所有接続closeは1回、rollbackは0回。同一execで元10件と新1件の全11件が成功した。対象クラスはPG44838と同一で、未加工の行104、method10、class1、branch32の未達は各0。実PostgreSQLのtimezone設定やドライバ動作は別。関連WBS-P004-05/2。
+
+[PG44918](evidence/PG44918-receipt-offset-owned-eleven/manifest.json)
