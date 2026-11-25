@@ -1,5 +1,21 @@
 # IT・ST引継ぎ事項
 
+## 現候補のLinux引継ぎ差分
+
+対象Core `cf08e414be9f877b851a387704350d5e7c980209`。正式PG/PTの受入と主管が承認した対象環境の確認後に、IT/STの開始を判定する。現候補の署名付きBOM、六製品の正規JAR、現source/runの全451、担当受領が前提。QA-056、QA-062、SSC-461、QA-061の配布について未成立の条件を四担当資料に保持する。ビルド・環境の役割と受領済み結果を別に記録する。 [四担当資料](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45332-four-owner-candidate-same-core-nov25/manifest.json)
+
+| 境界 | 引き継ぐ現候補の証拠 | 許可成立後にLinux側で必要な確認 |
+| --- | --- | --- |
+| Batch/Caddyの起動・停止 | 整形後Backup18と追加2を正規Batchの同対象クラスへ照合。Caddy旧合成20と実使用5物理を参照。 | 承認された同一bootでUnit・Invocation・親deadline、実TLSとHTTP/Web ready、逆順停止、残資源と独立postを記録する。旧20の合成を実終端に転用しない。 |
+| DB／Storage、原本 | 現例外2、借用JDBCの局所9とP004-03の種別別後条件。 | PostgreSQLトランザクションとJMS待機中の接続状態、advisory所有、原本とBackupの保持、実退役の後条件。設定変更・旧原本の復元は所有者確認後に既手順で行う。 |
+| 成果物／移行 | 正規四JAR、合成BOM18、CHR/DIFの局所比較工具。 | 正式署名を備えたBOMの六JAR・設定・配布条件を確定。承認済みmigrationとrollbackで正位置、旧データ保持、実DB・実FileStoreの前後の独立証跡を得る。 |
+| Web／互換比較 | 同CoreのWeb局所PT、現G06工具の30分岐。 | 実BrowserでCurrentとNKの個別case、QA-051 final、未承認差分0。負荷・再試行の計測は既QA-050条件で行う。 |
+| 資源・容量 | TransferCapacityの既8は局所合格。例外経路1行、実FileStoreの結果は保留。 | 安全な対象データで容量・同時配信・後片付け・停止を測定し、5GB境界と部分ファイルの所有・保全を確認する。 |
+
+[Backup](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json) [Caddy局所](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45342-caddy-original-twenty-consumed-owners/manifest.json) [借用JDBC](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45282-current-jdbc-acquired-or-missing-nine/manifest.json) [P004-03](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45288-current-p00403-borrowed-ownership-decision/manifest.json) [BOM](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG45220-current-release-inventory-eighteen/manifest.json) [G06工具](../../../evidence/01_PT/020_NK-CHR-001/evidence/PG45338-current-char-stream-large-file-and-fallback/manifest.json) [容量](../../../evidence/01_PT/008_NK-SCN-001/evidence/PG44716-transfer-capacity-exact-current-residual/manifest.json)
+
+現環境で必要な権限と空き容量、実時間、実ログI/O、Linux前後の資源集計は未実測。IT/ST開始・完了はいずれも未判定。
+
 ## 2026-11-25 02:13 JST 現候補をLinuxへ渡す条件
 
 基準は製品Java Core `4d3a0f69c8241f6dd3dbe67e5fdf7b067cd98349`。正規4製品のうちBatchは整形後18試験と同じ対象クラスを照合した。環境担当が現署名付き全artifact、BOM、boot・実効Unit、DB／FileStoreの所有と権限を確認し、工程担当がPG/PT受入とIT/ST着手可否を判定する。API/Webの正規JAR、QA-056／062、SSC-461、全451、担当受領が未成立。QA-061の配布条件と担当は未決。 [正規Batchの選択証拠](../../../evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json)
