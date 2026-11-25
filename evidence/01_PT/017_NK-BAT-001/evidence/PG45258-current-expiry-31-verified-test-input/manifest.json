@@ -1,0 +1,245 @@
+{
+  "run": "PG45258",
+  "source": "c1167277bea2b9f7790f503e4756ac84ca9c9868",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P017-11/2"
+  ],
+  "actualExit": 0,
+  "actualTrials": 93,
+  "currentQualifiedTrials": 31,
+  "cumulativeLocalProductTrials": 2041,
+  "terminalAtUTC": "2026-11-25T12:40:22.160511+00:00",
+  "linkedPrevious": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45250-current-expiry-seven-day-audit-proof/manifest.json",
+    "sha256": "e6f8a000288e270ecee2e505b473f561594331dbc07c81826c30a711d8666e28"
+  },
+  "specifications": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4977_Expiry監査fixture具体型の単体仕様.md",
+      "sha256": "ac6c5dce6004410cdc4efdf6f306fbdea6cfcd23278d87a77b2b01303982cbd9"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4978_Expiry監査現候補31ケースの局所結果.md",
+      "sha256": "253b2da4cb5a0f4abec738aca1ed9784dc8ccd6c57be06e017ec8333539c07c8"
+    }
+  ],
+  "bugs": [
+    "BUG-3838",
+    "BUG-3839",
+    "BUG-3840"
+  ],
+  "horizontal": [
+    "YKT-2995",
+    "YKT-2996"
+  ],
+  "earlierUnqualified": [
+    {
+      "reason": "first run compiled previous six archived fixture sources",
+      "child": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one/child-status.json",
+        "sha256": "28c2e877df0e3aeb4fd009141a7153c925e4f85bc5ef1e63ee34c23100ff4c3f"
+      },
+      "begin": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one/begin.json",
+        "sha256": "fb48cf758a7aa89bc58af801d64456311aa21718d69b13437043ce3324291dcc"
+      },
+      "trials": 31,
+      "countForCurrent": false
+    },
+    {
+      "reason": "two fixture LinkageError identities replaced by AssertionError",
+      "child": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v2/child-status.json",
+        "sha256": "b06092e1d64c1ce6497923b835ec4f4e35656dcf8acf0a5ee1bbc71247320c97"
+      },
+      "fixtureSignature": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v2/verified-compilation-signatures.json",
+        "sha256": "16dd802aa2ad508ed8409acf7fe862e9f49e29e6d11e5ebc6f9c1d0a5a85fbcc"
+      },
+      "failedCases": [
+        "updateCompoundFailurePreservesTheOwnedStatementPrimaryAndCloseFailure()",
+        "updateAndCloseWithTheSameFailureKeepThePublicFailureContract()"
+      ],
+      "trials": 31,
+      "countForCurrent": false
+    }
+  ],
+  "firstTypedStaticPreflight": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-expiry-fixture-precise-before/terminal.json",
+    "sha256": "a3ecc992d78bdd137e2b88daa95dba485f0d58bac8ad83ce769689caa66823de"
+  },
+  "currentCorrectStaticBaseline": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-expiry-fixture-precise-before-v3/terminal.json",
+    "sha256": "a587485281ac964e972f172dd3d5386eb674d52cea6cddb4cafc0c57c069d97a"
+  },
+  "currentCompileFixture": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java",
+      "sha256": "45b573efb5ac50dc33b1deac0f0517be66465598f6dd2cb10cb770295cb3a229"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "sha256": "6f8abf81c82097c3f24945eeb1fd5b66603f82b7427312bd7eb44035e346477a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java",
+      "sha256": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditValueOwnershipTest.java",
+      "sha256": "719a440df36d7438f487d3da4226f4efa545d751ff1ea73ce9b59cb0fad950a3"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceCases.java",
+      "sha256": "641d71157a20f609beb2b8639e8098497c6c714d5f2122540cd5264dfb717c97"
+    }
+  ],
+  "currentFrozenPin": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/ExpiryAuditJdbcFailureGraphTest.java",
+      "sha256": "45b573efb5ac50dc33b1deac0f0517be66465598f6dd2cb10cb770295cb3a229"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/ExpiryAuditResourceFailureTest.java",
+      "sha256": "6f8abf81c82097c3f24945eeb1fd5b66603f82b7427312bd7eb44035e346477a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/ExpiryAuditPortTest.java",
+      "sha256": "1322e0a3ec9fe17293ec39d7a0bedeb527db0df84496dddf6976e93bbcf28677"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/ExpiryAuditPredicateContractTest.java",
+      "sha256": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/ExpiryAuditValueOwnershipTest.java",
+      "sha256": "719a440df36d7438f487d3da4226f4efa545d751ff1ea73ce9b59cb0fad950a3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/fixed-input/JdbcResourceCases.java",
+      "sha256": "641d71157a20f609beb2b8639e8098497c6c714d5f2122540cd5264dfb717c97"
+    }
+  ],
+  "currentArgvAndScope": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/begin.json",
+    "sha256": "715c16698d961a8cec392679a085e269f3b8dcff463976e65e159cca3735fce1"
+  },
+  "finalIndependentSignature": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/verified-compilation-signatures.json",
+    "sha256": "9707c5b540de35a37d374d8fe0fa5055a8f57b945dff3c47669f2520287499a7"
+  },
+  "finalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/ordinary-terminal.json",
+    "sha256": "b51af9af8e927e5327a17dd279cd7573b00a10fdcc51316ea8762f3fc786410a"
+  },
+  "finalChildAndXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/child-status.json",
+    "sha256": "0088f49ab793a92bcea6d2515e81052593199c3ce23161ca7602a421085e3d59"
+  },
+  "finalQuality": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/terminal.json",
+    "sha256": "9494ffe9b8456850bd47e8d941e47a8512fe88d6e81cd8443913cf1351fa9e47"
+  },
+  "spotBugsFromTo": [
+    3,
+    0
+  ],
+  "pmdRaw": [
+    {
+      "fixture": "ExpiryAuditJdbcFailureGraphTest.java",
+      "line": 144,
+      "rule": "UseProperClassLoader"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 585,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 647,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 699,
+      "rule": "UseProperClassLoader"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 752,
+      "rule": "UseConcurrentHashMap"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 768,
+      "rule": "UseProperClassLoader"
+    },
+    {
+      "fixture": "ExpiryAuditPortTest.java",
+      "line": 807,
+      "rule": "UseProperClassLoader"
+    }
+  ],
+  "pmdXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/pmd.xml",
+    "sha256": "eab96a0f1d02cd85132b79f8863c27f88d4e2b47c37a3fcf97e91be51269b261"
+  },
+  "canonicalSpotless": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-expiry-canonical-spotless-v2/terminal.json",
+      "sha256": "8553b62535c493e060030656096c5a1e8bbe6277f260e064d01ee5263551267d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-expiry-canonical-spotless-v3/terminal.json",
+      "sha256": "78fc86901dea94097398270e84c58e4a9ee103aeaa5731529e579075498c2af1"
+    }
+  ],
+  "canonicalInitialPomFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-expiry-canonical-spotless/terminal.json",
+    "sha256": "aa0e36e6542cbd771601aa185a7f562b17c50d746cfc94cbbc87a96447a4e333"
+  },
+  "counters": {
+    "INSTRUCTION": [
+      0,
+      1416
+    ],
+    "BRANCH": [
+      0,
+      190
+    ],
+    "LINE": [
+      0,
+      284
+    ],
+    "COMPLEXITY": [
+      0,
+      147
+    ],
+    "METHOD": [
+      0,
+      52
+    ],
+    "CLASS": [
+      0,
+      4
+    ]
+  },
+  "originalStream": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/unit.exec",
+    "sha256": "a1201725931bc43a78c55b5a5ca9000e943c2e86a82420aa83ee77d41067912d"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/coverage.log",
+    "sha256": "960ff8622f0896cf5a6c1ee2e4ad4922e4b78931eb1cd59692100b7a97709439"
+  },
+  "allowedRealEnvironmentOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
