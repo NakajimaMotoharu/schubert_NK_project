@@ -1,0 +1,215 @@
+{
+  "run": "PG45500",
+  "source": "11adec31d06b805787f01c631cec9bcb76076a21",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.04",
+  "terminalAtUTC": "2026-11-25T18:14:32.777421+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3883",
+  "horizontal": "YKT-3009",
+  "previousSpec": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1603_DBPool時系列警報_単体テスト仕様書.md",
+      "sha256": "d25a234d2cd3de304d69d005a10fdca9b36afc7f27738823fc5cf4308f8c9660",
+      "source": "11adec31d06b805787f01c631cec9bcb76076a21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1712_DbQueryDurationMetric_単体テスト仕様書.md",
+      "sha256": "130e793f02efc856deed714a15f3569be85e553619edc0e8f28e383797e17278",
+      "source": "11adec31d06b805787f01c631cec9bcb76076a21"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1713_DbQueryDurationMetric_結果・横展開.md",
+      "sha256": "c359cd9a3eb836059f8579eb8c4c7d63766f60776c252caa8b10e8188fbdad51",
+      "source": "11adec31d06b805787f01c631cec9bcb76076a21"
+    }
+  ],
+  "revisedSpec": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1603_DBPool時系列警報_単体テスト仕様書.md",
+      "sha256": "585cbe966ac4cf37a2ee292c8827cc70fa14effdbe316c94a2060c95f33b307d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1712_DbQueryDurationMetric_単体テスト仕様書.md",
+      "sha256": "2c2be250bd86a57e86d240aabae29750b2f3bdf04849c24929c73c674a40839c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1713_DbQueryDurationMetric_結果・横展開.md",
+      "sha256": "64458a77ab76ab0946024de07860c2ed78c33eb48f536b9e6d6b2ceb5ed4bd4b"
+    }
+  ],
+  "apiNewStableIds": 9,
+  "collidingLegacyIds": 8,
+  "qualification": "suite-qualified XML; no result or coverage transfer between campaigns",
+  "exactCurrentJava": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "sha256": "9bea8e74df4ee202758cc383733cc46b54207134946469635c3d5e1eff744b61"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java",
+      "sha256": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9"
+    }
+  ],
+  "index": [
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-001",
+      "legacyAPIAlias": "DBTIME001",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime001ExactlyFourFixedSeriesRequestHistogramSecondsAndFiveObservationBuckets",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME001",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-002",
+      "legacyAPIAlias": "DBTIME002",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME002",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-003",
+      "legacyAPIAlias": "DBTIME003",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime003QueryAndOutcomeClosedParsersAndGeneratedFactoriesUseIndependentTypedConstants",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME003",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-004",
+      "legacyAPIAlias": "DBTIME004",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime004NullNegativeAndUnknownModeNeverRecordAndStandardStoresNoDetailedSamples",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME004",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime004KnownCountsAreIndependentOfUnknownPercent",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-005",
+      "legacyAPIAlias": "DBTIME005",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime005PartialFactoryFailurePreservesOriginalProblemAndCallerRegistryOwnership",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME005",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime005InvalidNullAndBackwardsInputsCannotMutateState",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-006",
+      "legacyAPIAlias": "DBTIME006",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime006FailureBeforeOrAfterSampleNeverRetriesCompensatesOrNormalizesSuccess",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME006",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-007",
+      "legacyAPIAlias": "DBTIME007",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": "PG45498",
+      "legacyBatchId": "DBTIME007",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-008",
+      "legacyAPIAlias": "DBTIME008",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime008ForeignCounterCannotBeReplacedBySummaryOrClosed",
+      "originalApiRun": "PG7858",
+      "latestQualifiedFixtureRun": null,
+      "legacyBatchId": "DBTIME008",
+      "batchSuite": "TimedDbPoolMonitorTest",
+      "batchMethod": "dbTime008BoundariesMaximumCountsAndOwnersStayIndependent",
+      "batchOriginalRun": "PG7224"
+    },
+    {
+      "canonicalAPI": "PT-OPS-DBQUERYTIME-009",
+      "legacyAPIAlias": "DBTIME009",
+      "apiSuite": "DbQueryDurationMetricRecorderTest",
+      "apiMethod": "dbTime009ExtremeRangeOrdersKeepIndependentSmallBucketCountsAndFiniteTotals",
+      "originalApiRun": "PG43092",
+      "latestQualifiedFixtureRun": null
+    }
+  ],
+  "originManifests": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7224-db-pool-host-v1/manifest.json",
+      "sha256": "9270760d220275f0728fc84b8e8ae8a0faf7b6f2e8082acdb05144b825b3d71f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7858-api-query-duration-host-v3/manifest.json",
+      "sha256": "ba96519a4b8455d0d376a2a4929e1e0c5bd8fbcd9a556425b8a302a98cc2ea3e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43092-duration-db-fixture-type-current-v1/manifest.json",
+      "sha256": "16094387a883abe70b86328a8bcba562a33318cfc1a855a221723a67b9113da0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45498-current-duration-and-message-fixture-owners/manifest.json",
+      "sha256": "ad1c6d9a8a12bfdafa4eeba5a033e41edb7b03a00aa2d8b776379d9748f5fe39"
+    }
+  ],
+  "originXml": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7224-db-pool-host-v1/snapshot/tools/quality/harnesses/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest.xml",
+      "sha256": "38a85a64d63cdff7061f171d4ad944bca2d0740de9431e06df3f38242879571a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7858-api-query-duration-host-v3/snapshot/tools/quality/harnesses/target/surefire-reports/TEST-dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest.xml",
+      "sha256": "48bbc9e74a668cd8edd48acfb825a4ebff8cb9b0ef5846fa2fde98ee89d990ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "9d5919c0179b1dee8c329cacd1c4593bd3e282fc65202ed8ba24d15fcb577912"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45498-current-three-duration-and-message-workers/xml/TEST-junit-jupiter.xml",
+      "sha256": "896b0347d94377e125f86bb4bd8cc958686e120363f8c5210b86ae1c10c53ca3"
+    }
+  ],
+  "historicalReferenceOwners": {
+    "Batch": [
+      "1604",
+      "2578",
+      "2807",
+      "3932"
+    ],
+    "API": [
+      "2157",
+      "2158",
+      "2673",
+      "5772"
+    ]
+  },
+  "historicalRefsUnchanged": true,
+  "fixturesUnchanged": true,
+  "productTestsRerun": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
