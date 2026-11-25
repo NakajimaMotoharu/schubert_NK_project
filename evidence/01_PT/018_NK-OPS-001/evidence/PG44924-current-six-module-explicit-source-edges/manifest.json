@@ -1,0 +1,959 @@
+{
+  "run": "PG44924",
+  "wbs": "WBS-F02-b-b",
+  "requirements": [
+    "SYS-005"
+  ],
+  "source": "300f6325df426588e1664a229b7e4017cdfcf84e",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:59:59.253882+00:00",
+  "actualExit": 0,
+  "canonicalDesign": {
+    "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+    "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "sha256": "8ed58c47adb5fa90afcd1dfa437edeb9c990635126cadd79c7cbc90bf4988808",
+    "sections": [
+      "2",
+      "3",
+      "SSC084/088",
+      "SSC126"
+    ]
+  },
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38240-current-six-source-reference-edges-v1/manifest.json",
+    "sha256": "62dfcbbfdf393b0a7895c2f09fcf546be99d5f4ef4702fbf0e536c8f4947800a"
+  },
+  "scope": {
+    "wholeMain": 1033,
+    "applicable1028": 1028,
+    "parsedMain": 1021,
+    "heldMain": 5,
+    "notAdmittedToThisParser": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java"
+    ],
+    "perModule": {
+      "api": 280,
+      "batch": 200,
+      "bootstrap": 86,
+      "protocol": 169,
+      "storage": 25,
+      "web": 261
+    },
+    "inputPinned": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44924-six-explicit-source-edges/plan.json",
+      "sha256": "2d0c4914660c8e2b6d83962bd36034492d719cbfee5e44338d49bc49d3d7942e"
+    },
+    "typedAuthorizationInherited": false
+  },
+  "execution": {
+    "begin": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44924-six-explicit-source-edges/begin.json",
+      "sha256": "0c5aecca3f69cd31157f6494f8316ef753a8c766dea23fff6b51f0157e3b730a"
+    },
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44924-six-explicit-source-edges/terminal.json",
+      "sha256": "01c525ee88a85243b34332f2ac0184ce9ed493c464a38f4bec2c3bdb06914b0d"
+    },
+    "pureSyntaxTool": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/4989_SourceModuleReferenceAudit.java",
+      "sha256": "2c7a78099eebcb648c29301f2f4a440d425271be5f578513577d4f28174b836f"
+    },
+    "preflight": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44924-six-explicit-source-edges/preflight.out",
+      "sha256": "a1836209cbe3cf933acb8afe3fba3b4fdedad1022d155a37121b64c73ae98eeb"
+    }
+  },
+  "physicalOwnersByDeclaration": true,
+  "explicitReferences": 3336,
+  "topLevelTypes": 984,
+  "moduleEdges": {
+    "api->bootstrap": 34,
+    "api->protocol": 648,
+    "api->storage": 67,
+    "batch->bootstrap": 76,
+    "batch->storage": 297,
+    "bootstrap->storage": 52,
+    "web->bootstrap": 13,
+    "web->protocol": 360,
+    "web->storage": 26
+  },
+  "explicitForbidden": [],
+  "unresolved": [
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessor.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionConsistency.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/MessageStageGuard.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiObservationContext.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiTerminalCapture.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java"
+    },
+    {
+      "owner": "api",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java"
+    },
+    {
+      "owner": "batch",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceLauncher.java"
+    },
+    {
+      "owner": "bootstrap",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java"
+    },
+    {
+      "owner": "bootstrap",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "category": "current path outside historic parser input",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java"
+    },
+    {
+      "owner": "bootstrap",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint.require",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java"
+    },
+    {
+      "owner": "bootstrap",
+      "syntax": "static-import",
+      "type": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint.unavailable",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebTerminalCapture.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java"
+    },
+    {
+      "owner": "web",
+      "syntax": "import",
+      "type": "dev.codex.schubert.nk.web.bootstrap.WebStartupException",
+      "category": "declared held Main",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java"
+    }
+  ],
+  "unresolvedByCategory": {
+    "declared held Main": 99,
+    "current path outside historic parser input": 23
+  },
+  "sameToolSyntheticControlsReused": {
+    "allowedPhysicalOwner": 1,
+    "forbiddenExplicitImportStaticAndFullyQualified": 3,
+    "splitWildcardReported": 1,
+    "commentStringIgnored": 1
+  },
+  "implicitReferencesRuntimeOrArchUnitMeasured": false,
+  "productsExecutedOrCompiled": 0,
+  "normalJarCoverageNotExpanded": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0
+}
