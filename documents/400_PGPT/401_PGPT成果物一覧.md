@@ -1,5 +1,11 @@
 # PGPT成果物一覧・進捗
 
+## 保存点5376の型付き検査の実測名簿
+
+製品の局所試行は延べ2,221件。P004-05の任意Statement解放は元8と独立追加1で全成功、対象四指標L23/M4/C1/B8を一回のexecで確認。別の比較工具は延べ200試行（成功199・修正前意図的失敗1）。製品と実NKの試行には加算しない。
+
+局所NullAwayをパスと当SHAで確認した結果は **API193/286、Web196/262**。従来のWeb197には同名簿で根拠未確認が1残り、その旧記録は保持。PG45290の五型とPG45292の八型に、新たに算入できるNullAway一意入力は0。両群の今回のSpotBugs／PMD結果は元診断と個別に保全する。今後の着手選択には集約名簿を使用。正式16/190および全六製品451未成立を維持。 [現入力と元終端](../../evidence/01_PT/018_NK-OPS-001/evidence/PG45294-current-nullaway-explicit-deduplicated-roster/manifest.json)
+
 ## 保存点5354の現候補と正式判定
 
 Core `cf08e414be9f877b851a387704350d5e7c980209`。元190項目の正式受入 **16/190（8.4%）**、再開後の正式追加0、重点0/5、指定0/12、成立した元行価格0pp。歴史認定は1,964 PT／53領域、工数率は未較正。再開後の局所製品試行は延べ **2,212件**。1,924から追加288試行のうち、選択範囲自体が成功したのは226試行。Expiryの旧入力31と、現入力の誤った例外型で2件失敗した選択31は不採用。試験未起動のコンパイルだけは試行数に含めない。 [Expiryの三結果](../../evidence/01_PT/017_NK-BAT-001/evidence/PG45258-current-expiry-31-verified-test-input/manifest.json) [移行の現135件](../../evidence/01_PT/019_NK-MIG-001/evidence/PG45270-six-migration-bounded-worker-fixtures/manifest.json)
