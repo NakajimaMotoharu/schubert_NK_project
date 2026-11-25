@@ -1,0 +1,238 @@
+{
+  "run": "PG44776",
+  "wbs": "WBS-P008-03/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "source": "95c9d5838a9f2852350a86f45951ae4073b34f75",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:30:16.169987+00:00",
+  "actualExit": 0,
+  "originalResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/manifest.json",
+    "sha256": "8439f47d48593e051af56018bb6854330df534b6e3e6230b083b8b362d9f399d"
+  },
+  "oldInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java",
+      "sha256": "c86d8e01903b09c050187c4da462e82279b86eb638d8a2e1f12ecbc09b80f2ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "601852935ea1d092bab0f8cf3b7f77a5aed998c64914b6683f9ff0cf6dd3cff3"
+    }
+  ],
+  "testIds": [
+    "PT-SCN-008-W04",
+    "PT-SCN-008-W05"
+  ],
+  "sourceCoreOfOriginal": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "originalPublicXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/sanitized-junit.xml",
+    "sha256": "e4afc01c65ed45f52c64eb248d492d1686d02148acb3b94fc0d47843834a7714"
+  },
+  "originalRawCoverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/coverage-unfiltered.tsv",
+    "sha256": "21e7ef9054462439186abe36ce827ab2b38c5b38373cc434f3ec53114826806f"
+  },
+  "negativeFixture": "W05不正count/sequence/byte、部分write、0/負応答・force例外、非fresh・close済み、呼出側channel所有保持。",
+  "independentBasis": "UI234手書き4800B、1/201/10000件の全byte・独立digest、16個の隔離channelを同じprepared値から比較。SS333 §5。",
+  "productExecutions": 0,
+  "priorFiveApplicable": true,
+  "originalCounts": {
+    "success": 5,
+    "failure": 0,
+    "error": 0,
+    "skip": 0
+  },
+  "sameMainPhysical": [
+    {
+      "path": "../pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/target/classes/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.class",
+      "sha256": "1c8a9e7fc62e56db6b6117bfa699dcefd9b69b856d45d8587c946621763a5268"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44774-current-api-scenario-record-stream-declarations-v2-nullaway/target/classes/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.class",
+      "sha256": "1c8a9e7fc62e56db6b6117bfa699dcefd9b69b856d45d8587c946621763a5268"
+    }
+  ],
+  "matchedActualUse": {
+    "protocol": {
+      "membersLen": 36,
+      "members": [
+        "dev/codex/schubert/nk/protocol/codec/FieldCodec.class",
+        "dev/codex/schubert/nk/protocol/codec/FieldEncodingException.class",
+        "dev/codex/schubert/nk/protocol/codec/MessageEncodingException.class",
+        "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+        "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class",
+        "dev/codex/schubert/nk/protocol/file/LargeResultContent.class",
+        "dev/codex/schubert/nk/protocol/header/InteractionKind.class",
+        "dev/codex/schubert/nk/protocol/header/MessageKind.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldArea.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldDefinition.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Text.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldValue.class",
+        "dev/codex/schubert/nk/protocol/layout/FieldValueSet.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutDefinition.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFields.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutId.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutRegistry.class",
+        "dev/codex/schubert/nk/protocol/layout/LayoutValidationException.class",
+        "dev/codex/schubert/nk/protocol/layout/Padding.class",
+        "dev/codex/schubert/nk/protocol/layout/PayloadRecord.class",
+        "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.class",
+        "dev/codex/schubert/nk/protocol/layout/Presence.class",
+        "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class",
+        "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.class",
+        "dev/codex/schubert/nk/protocol/layout/WireType.class",
+        "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/EntryId.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/EntryType.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/IdValue.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.class",
+        "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class"
+      ],
+      "memberDigestsSha256": "b724b89e1cf91e86c0bbfd839cd2c8e4c85e5843ed4cabc8aa45aec672c08cc6",
+      "old": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+      },
+      "physicalIdentity": true
+    },
+    "storage": {
+      "membersLen": 2,
+      "members": [
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+        "dev/codex/schubert/nk/storage/StorageIoException.class"
+      ],
+      "memberDigestsSha256": "e5a0354efd68a1f5261c5917becdc44ed336dcb05af562e199569fed025f5fd0",
+      "old": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/qualified-storage-exceptions.jar",
+        "sha256": "17d5cd6583b7307d98b843db719031d821b6650d10ce2833ed22e83e06725f09"
+      },
+      "current": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44774-current-api-scenario-record-stream-declarations-v2-nullaway/storage-declared-members.jar",
+        "sha256": "b52ffb6a12f3a3e634cf605daf465fc7d49c3cd9ad8a693a252fe2dc986ae3c8"
+      },
+      "physicalIdentity": true
+    }
+  },
+  "currentProductStatic": {
+    "path": "../pgpt-runs/PG379/PG44774-current-api-scenario-record-stream-declarations-v2-nullaway/terminal.json",
+    "sha256": "08a585b7245ffd61d31bfd226e5fa30416183a4b9c1b73852633ef2dddc3f1a2"
+  },
+  "coverage": {
+    "LINE": [
+      30,
+      30
+    ],
+    "METHOD": [
+      6,
+      6
+    ],
+    "CLASS": [
+      1,
+      1
+    ],
+    "BRANCH": [
+      16,
+      16
+    ],
+    "INSTRUCTION": [
+      145,
+      145
+    ]
+  },
+  "originalFixtureRawFindings": {
+    "pmd": [
+      {
+        "path": "ScenarioRecordStreamTest.java",
+        "line": 69,
+        "rule": "CloseResource"
+      },
+      {
+        "path": "ScenarioRecordStreamTest.java",
+        "line": 69,
+        "rule": "DoNotUseThreads"
+      },
+      {
+        "path": "ScenarioRecordStreamTest.java",
+        "line": 85,
+        "rule": "DoNotUseThreads"
+      },
+      {
+        "path": "ScenarioRecordStreamTest.java",
+        "line": 91,
+        "rule": "DoNotUseThreads"
+      },
+      {
+        "path": "ScenarioRecordStreamTest.java",
+        "line": 92,
+        "rule": "DoNotUseThreads"
+      }
+    ],
+    "spotbugs": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 115
+      }
+    ]
+  },
+  "originalFixtureAdjudication": [
+    {
+      "engine": "PMD",
+      "line": 69,
+      "rule": "CloseResource",
+      "basis": "Test owns executor; finally explicitly stops it and asserts bounded termination. A close waiting indefinitely would violate test termination."
+    },
+    {
+      "engine": "PMD",
+      "line": 69,
+      "rule": "DoNotUseThreads",
+      "basis": "Finite fixed Eight-worker fixture for the concurrent sharing oracle. Only owned temp files."
+    },
+    {
+      "engine": "PMD",
+      "line": 85,
+      "rule": "DoNotUseThreads",
+      "basis": "16 independent fixture tasks and fixed ten-second invokeAll; result retrieval also bounded."
+    },
+    {
+      "engine": "PMD",
+      "line": 91,
+      "rule": "DoNotUseThreads",
+      "basis": "Owned executor shutdownNow in finally."
+    },
+    {
+      "engine": "PMD",
+      "line": 92,
+      "rule": "DoNotUseThreads",
+      "basis": "Ten-second owned executor termination with an explicit assertion."
+    },
+    {
+      "engine": "SpotBugs",
+      "line": 115,
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "basis": "Explicit assertThrows exercises required null-channel negative and no temporary side effect."
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "品質担当のfixture指摘の適用承認",
+    "正規writer、容量予約一体・特権root/実native・原子公開の後条件",
+    "全体451・正式個別行と終了依存"
+  ]
+}
