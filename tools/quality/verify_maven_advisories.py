@@ -15,13 +15,16 @@ from verify_maven_sbom import SHA256, parse_maven_metadata_json, verify_model_bo
 
 
 def pinned_file(path, expected):
-    if not SHA256.fullmatch(expected) or not path.is_file():
+    if not SHA256.fullmatch(expected):
         raise ValueError("a regular file and its SHA-256 are required")
-    with path.open("rb") as source:
+    selected = path.resolve()
+    if not selected.is_file():
+        raise ValueError("a regular file and its SHA-256 are required")
+    with selected.open("rb") as source:
         actual = hashlib.file_digest(source, "sha256").hexdigest()
     if actual != expected.lower():
         raise ValueError(f"SHA-256 mismatch for {path.name}")
-    return path.resolve(strict=True)
+    return selected
 
 
 def findings_from_report(report, scan_input, expected_refs):

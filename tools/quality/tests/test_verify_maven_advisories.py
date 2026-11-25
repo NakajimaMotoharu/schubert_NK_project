@@ -1,4 +1,4 @@
-"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..011."""
+"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..014."""
 
 import json
 import subprocess
@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from verify_maven_advisories import scan_bom
+from verify_maven_advisories import pinned_file, scan_bom
 
 
 ROOT = "pkg:maven/local.example/nk@1?type=jar"
@@ -205,6 +205,19 @@ class VerifyMavenAdvisoriesTest(unittest.TestCase):
             self.scan()
 
         run.assert_called_once()
+
+    def test_014_digest_describes_the_resolved_file_that_is_returned(self):
+        resolved = self.directory / "selected-frozen-fixture"
+        resolved.write_bytes(b"xyz")
+        with patch.object(Path, "resolve", autospec=True, return_value=resolved) as select:
+            with self.assertRaisesRegex(ValueError, "SHA-256 mismatch for scanner"):
+                pinned_file(self.scanner, ABC_SHA256)
+            select.assert_called_once()
+
+        resolved.write_bytes(b"abc")
+        with patch.object(Path, "resolve", autospec=True, return_value=resolved) as select:
+            self.assertEqual(resolved, pinned_file(self.scanner, ABC_SHA256))
+            select.assert_called_once()
 
 
 if __name__ == "__main__":

@@ -22,3 +22,5 @@ Unitは `PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quali
 PT-OPS-SBOM-025は3-byteの既依存と到達可能なグラフを保持したまま、rootのgroup、artifact、version、PURL、添付type又は重複qualifierを個別に不正化して照合する。期待は6形すべて拒否。PT-OPS-OSV-010はroot不一致時に外部scannerを発行しないことを合成呼出で確認する。
 
 2026-11-23 JST、dev-foundation、工具source `eab10e0c3e`。修正前6形すべて拒否漏れ、修正後18工具試験成功。保存済みCycloneDX六件のroot座標は現六POMの明示・継承座標と一致した。実JAR・配布・advisoryの再検証には含めない。QA-061の配布条件と担当は未決。[PG43048 manifest](evidence/PG43048-sbom-root-gav-equivalence-v1/manifest.json)
+
+PT-OPS-OSV-014（BUG-3897、YKT-3018）は正規pathを一度だけ決定し、そのpathから得たSHAと返却結果の結合を検証する。代理が指定する3-byteの別ファイルは、SHA不一致なら拒否し、abc一致だけ同pathを返す。真のscanner、cache、配布操作は起動しない。元正常・欠落・異SHAは同じ通常fixtureを参照する。
