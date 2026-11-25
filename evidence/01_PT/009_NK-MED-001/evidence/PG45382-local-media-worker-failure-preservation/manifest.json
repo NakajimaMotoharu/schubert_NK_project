@@ -1,0 +1,160 @@
+{
+  "run": "PG45382",
+  "source": "824df5527fa47177f6e9236469abf5175865caea",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T15:48:02.158958+00:00",
+  "bug": "BUG-3856",
+  "horizontal": "YKT-2997",
+  "changedTests": [
+    "PT-MED-040",
+    "PT-MED-VERIFIED004"
+  ],
+  "spec": {
+    "path": "evidence/01_PT/009_NK-MED-001/010_NK-MED-001_検証済応答投影単体仕様.md",
+    "sha256": "ba2ec831a3207b21a4ad8982809b2362c2c15941b206c64489c131cfa0450ab2"
+  },
+  "strictFormatAndTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/terminal.json",
+    "sha256": "327a71be1401af361b1d3a91493704cebd1653808a60c60876f08a9e7ea77835"
+  },
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/begin.json",
+    "sha256": "9f6a4638c46090a131ef73751ea647a8b361835a824905a0525c7f6b56166bc9"
+  },
+  "selectedCases": [
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest#med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+    "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest#concurrentProjectionOfOneImmutableResultHasIndependentBinding"
+  ],
+  "otherFixtureMethodsNotReplayed": 13,
+  "currentProtocol": {
+    "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45374-current-protocol-oracles-full-174-quality/manifest.json",
+    "sha256": "ca6926a6f8fbb03df71232973c8c92c4876e51c2f759732c60d42e9384bc836e"
+  },
+  "sharedHelper": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ViewFixtureWorkers.java",
+    "sha256": "f382a3174673f470d89c1067960d5d2194431f9fd3cd30cee2fd0049880b3fd2"
+  },
+  "helperIndependentProof": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45354-local-audit-fixture-failure-preservation/manifest.json",
+    "sha256": "16d615dc2a4a1fe0c112cc6a652cbc03202819524f6684175c47cc6dc4730eef"
+  },
+  "ordinaryXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/xml/TEST-junit-jupiter.xml",
+    "sha256": "f4fa8ddcd2edce247fa269b421fe25cac3641b9fbf1ffcadc50505987938d893"
+  },
+  "actualExecution": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/jacoco.exec",
+    "sha256": "15c267d5b3fa7a8eb360837a5fac2c313103b02ccb50908454d6a412957d6d21"
+  },
+  "coverageInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/coverage-inputs.json",
+    "sha256": "d426a9d932d325d21596ce386018ac1c33615724954de34555c20de133ce2cf4"
+  },
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45382-local-media-concurrent-fixtures/coverage.xml",
+    "sha256": "a46c4ab9c0406309455efa886be552b2bec6cc541bfdc2f979c3d3080de433d6"
+  },
+  "rawScopeByClass": {
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations": {},
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$JdkContextOperations": {
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Result": {
+      "INSTRUCTION": {
+        "covered": 18,
+        "missed": 5
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 2
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 2
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 2
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder": {
+      "INSTRUCTION": {
+        "covered": 403,
+        "missed": 65
+      },
+      "BRANCH": {
+        "covered": 21,
+        "missed": 15
+      },
+      "LINE": {
+        "covered": 89,
+        "missed": 9
+      },
+      "COMPLEXITY": {
+        "covered": 13,
+        "missed": 16
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding": {
+      "INSTRUCTION": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "actualProductTrials": 2,
+  "cumulativeLocalProductTrialsGross": 2660,
+  "selectedPureJmsFacadeUsesMemory": true,
+  "httpBrokerFileOps": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
