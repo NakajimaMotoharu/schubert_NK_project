@@ -13,6 +13,7 @@ from pgpt_reactor_junit import (
     is_successful_reactor_exit,
     reactor_run_record,
     require_collection_inputs_unchanged,
+    require_exact_git_commit,
     require_index_visibility,
     verify_reactor_junit,
 )
@@ -262,15 +263,15 @@ def main():
                 raise ValueError("temporary and persisted source commits disagree")
     else:
         commit = reactor_run_record(records, args.run_id, ".commit").read_text().strip()
-    if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("invalid evidence source commit")
-    subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=repo, check=True)
+    require_exact_git_commit(repo, commit)
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
     paths = ["src", "pom.xml", "program/characterization"]
     if args.validate_only:
         require_index_visibility(repo, paths)
-        subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo,
-                       check=True)
+        subprocess.run(
+            ["git", "--no-replace-objects", "diff", "--exit-code", commit, "--", *paths],
+            cwd=repo, check=True,
+        )
     else:
         paths.extend(("tools/quality", ".mvn", "mvnw", "mvnw.cmd"))
         require_collection_inputs_unchanged(repo, commit, paths)

@@ -64,8 +64,8 @@ def require_index_visibility(repo, paths):
         raise ValueError("incomplete Git index visibility in reactor evidence collection scope")
 
 
-def require_collection_inputs_unchanged(repo, commit, paths):
-    """Compare the recorded inputs against the reactor's actual commit object."""
+def require_exact_git_commit(repo, commit):
+    """Require the original full commit ID without revision expansion or replacements."""
     if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("collection baseline must be a full Git commit")
     resolved = subprocess.run(
@@ -75,6 +75,11 @@ def require_collection_inputs_unchanged(repo, commit, paths):
     )
     if resolved.returncode or resolved.stdout.strip() != commit:
         raise ValueError("collection baseline must be a full Git commit")
+
+
+def require_collection_inputs_unchanged(repo, commit, paths):
+    """Compare the recorded inputs against the reactor's actual commit object."""
+    require_exact_git_commit(repo, commit)
     require_index_visibility(repo, paths)
     subprocess.run(
         ["git", "--no-replace-objects", "diff", "--quiet", commit, "--", *paths],

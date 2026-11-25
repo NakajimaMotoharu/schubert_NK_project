@@ -555,6 +555,18 @@ class ReactorJunitTest(unittest.TestCase):
                     finally:
                         self.git("update-index", "--no-" + flag, "src/persisted-input.txt")
             validate.assert_not_called()
+            self.git(
+                "-c", "user.name=Reactor Fixture",
+                "-c", "user.email=reactor@example.invalid",
+                "-c", "tag.gpgSign=false",
+                "tag", "-am", "fixture annotation", "recorded-tag",
+            )
+            tag = self.git("rev-parse", "recorded-tag").stdout.decode().strip()
+            self.assertNotEqual(recorded, tag)
+            manifest.write_text(json.dumps(dict(runId=run, targetCommit=tag, exitCode=0)))
+            with self.assertRaisesRegex(ValueError, "full Git commit"):
+                module.main()
+            validate.assert_not_called()
 
     def test_original_branch_rejects_same_commit_after_switch(self):
         self.success()

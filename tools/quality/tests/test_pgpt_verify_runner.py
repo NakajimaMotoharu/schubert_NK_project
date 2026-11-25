@@ -69,6 +69,7 @@ class VerifyRunnerTest(unittest.TestCase):
             'pwd -P >> "$PGPT_FIXTURE_STATE/builds"\n'
             'printf "%s\\n" "${MAVEN_ARGS-unset}" > "$PGPT_FIXTURE_STATE/maven-args"\n'
             'printf "%s\\n" "${_JAVA_OPTIONS-unset}" > "$PGPT_FIXTURE_STATE/java-options"\n'
+            'printf "%s\\n" "${GIT_NO_REPLACE_OBJECTS-unset}" > "$PGPT_FIXTURE_STATE/git-originals"\n'
             'if [ -e "$PGPT_FIXTURE_STATE/change-head" ]; then\n'
             '  git commit -q --allow-empty -m "Different source during build"\n'
             "fi\n"
@@ -132,6 +133,11 @@ class VerifyRunnerTest(unittest.TestCase):
         self.assertNotEqual(0, self.invoke().returncode)
         self.assertEqual([], list(self.records.iterdir()))
         self.assertFalse((self.state / "builds").exists())
+
+    def test_verification_children_use_original_git_objects(self):
+        self.env["GIT_NO_REPLACE_OBJECTS"] = "0"
+        self.assertEqual(0, self.invoke().returncode)
+        self.assertEqual("1", (self.state / "git-originals").read_text().strip())
 
     def test_index_flags_on_selected_input_prevent_claim_and_build(self):
         for flag, run in (("assume-unchanged", RUN_ID), ("skip-worktree", OTHER_RUN)):

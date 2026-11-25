@@ -8,6 +8,7 @@ today=$(TZ=Asia/Tokyo date +%Y%m%d)
 case "$run_id" in "PT-WEB-$today"-*) ;; *) exit 2 ;; esac
 printf '%s\n' "$run_id" | rg -q '^PT-WEB-[0-9]{8}-[0-9]{2}$' || exit 2
 umask 077
+export GIT_NO_REPLACE_OBJECTS=1
 git_dir=$(git rev-parse --absolute-git-dir)
 exec 9>"$git_dir/pgpt-verify.lock"
 flock -n 9
