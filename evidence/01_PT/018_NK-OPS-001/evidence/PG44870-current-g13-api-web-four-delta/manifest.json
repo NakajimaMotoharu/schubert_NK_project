@@ -1,0 +1,379 @@
+{
+  "run": "PG44870",
+  "wbs": "WBS-G13.04",
+  "relatedWbs": [
+    "WBS-G13.05"
+  ],
+  "source": "a4bedc9bcf02796905885ba074d62552e34e0e1f",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T03:38:25.875009+00:00",
+  "base": "f19d452c5b107ba5e97d658ad2963a1e860e2e41",
+  "productDelta": {
+    "main": 1,
+    "test": 3
+  },
+  "approvedDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "trace": [
+    {
+      "changed": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationOutcomeValuePortTest.java",
+        "sha256": "1d69c2f52677b9c466db364a8f3b224ca3ab19182f270cca6cbad4e5662eae2c"
+      },
+      "reviewOwners": [
+        {
+          "owner": "WBS-P010-02",
+          "costOwner": "WBS-P010-02",
+          "file": {
+            "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationResult.java",
+            "sha256": "fd070960f128b22813c6e01de6cdd6ddd3f4813291cf47abf435a08d8bd1d146"
+          }
+        },
+        {
+          "owner": "WBS-P010-03",
+          "costOwner": "WBS-P010-03",
+          "file": {
+            "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java",
+            "sha256": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0"
+          }
+        },
+        {
+          "owner": "WBS-P001-03",
+          "costOwner": "WBS-P001-03",
+          "file": {
+            "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java",
+            "sha256": "5bf98b1c3f7c67fc33e331c122b64672eb216b2398208107ca225131e870629b"
+          }
+        }
+      ],
+      "rd": [
+        {
+          "id": "FUN-009",
+          "rd": {
+            "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+            "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P010-02"
+        },
+        {
+          "id": "MON-004",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        }
+      ],
+      "uiSs": [
+        {
+          "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+          "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+          "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+          "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+          "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/3746_User更新結果値_通常PT仕様書.md",
+        "sha256": "029e422a5af4734f518dad23ca54ef363ca2c6718602c020bd09df7ea2fedb0c"
+      },
+      "tests": [
+        "ADM-VALUE-001",
+        "ADM-VALUE-002",
+        "ADM-VALUE-003",
+        "ADM-VALUE-004",
+        "ADM-VALUE-005",
+        "ADM-VALUE-006"
+      ],
+      "testReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44864-current-api-and-protocol-record-value-six/manifest.json",
+        "sha256": "4a2c46de27012f52d72e8805a0bd9310f74831bf81acd4859fdc106bceeea5f7"
+      },
+      "bug": "BUG-3812",
+      "horizontal": "YKT-2970",
+      "wholeScopeAccepted": false
+    },
+    {
+      "changed": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBindingTest.java",
+        "sha256": "4c365915592d16a935cf141ca371c6a947264f6ddf819b00286847f46a643d7c"
+      },
+      "reviewOwners": [
+        {
+          "owner": "WBS-P018-09",
+          "costOwner": "WBS-P018-09",
+          "file": {
+            "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBinding.java",
+            "sha256": "31ee3b228bac039042dad7c2c458acb6ffe96ea42a475fff646dd1d667af7e3f"
+          }
+        }
+      ],
+      "rd": [
+        {
+          "id": "MON-001",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        },
+        {
+          "id": "MON-004",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        },
+        {
+          "id": "MON-007",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        }
+      ],
+      "uiSs": [
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1825_TypedPoolBinding_単体テスト仕様.md",
+        "sha256": "ae4619f36db59d38b8a8c2a37dd2dc00e94a6dfa035cdb44049c0a5c43ece473"
+      },
+      "tests": [
+        "APIPOOLB001",
+        "APIPOOLB002",
+        "APIPOOLB003",
+        "APIPOOLB004",
+        "APIPOOLB005",
+        "APIPOOLB006",
+        "APIPOOLB007",
+        "APIPOOLB008",
+        "APIPOOLB009",
+        "APIPOOLB010"
+      ],
+      "testReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44816-borrowed-pool-serialization-fixture-closure/manifest.json",
+        "sha256": "f2eb56135d940fca6c260f2732bacabd82f33b982e77ae4f1ac75c7fddb66364"
+      },
+      "bug": "BUG-3810",
+      "horizontal": "YKT-2968",
+      "wholeScopeAccepted": false
+    },
+    {
+      "changed": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+        "sha256": "00654a461c21b363ec8478c8bd89e98a9b28e2fecea6e10c52d574c72f65e38f"
+      },
+      "reviewOwners": [
+        {
+          "owner": "WBS-P011-04",
+          "costOwner": "WBS-P011-04",
+          "file": {
+            "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+            "sha256": "00654a461c21b363ec8478c8bd89e98a9b28e2fecea6e10c52d574c72f65e38f"
+          }
+        }
+      ],
+      "rd": [
+        {
+          "id": "FUN-001",
+          "rd": {
+            "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+            "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P007-01"
+        },
+        {
+          "id": "AUT-004",
+          "rd": {
+            "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+            "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P007-02"
+        },
+        {
+          "id": "DAT-009",
+          "rd": {
+            "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+            "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P004-01"
+        }
+      ],
+      "uiSs": [
+        {
+          "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+          "sha256": "6dee135c32a367e0acd3b33b05a947adafe1ff889011d9b700b6c55ff6fa91c6",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "31b228c36012a1e7340da56d46eaf23d1c1de348f587bc177147600c800be47b",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/241_DB論理構成設計.md",
+          "sha256": "f6864bee106c4cfccb5a68a423d186a5973398c497ff3f3a34605f08420c68d2",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+          "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "specification": {
+        "path": "evidence/01_PT/011_NK-QST-001/4101_P01104Web受付参照原十二件通常PT仕様.md",
+        "sha256": "46f9e0ecf99856eadc947bbe1266ab271ffb13fae6045782a1de5a2093de574a"
+      },
+      "tests": [
+        "RCPTPORT001",
+        "RCPTPORT002",
+        "RCPTPORT003",
+        "RCPTPORT004",
+        "RCPTPORT005",
+        "RCPTPORT006",
+        "RCPTPORT007",
+        "RCPTPORT008",
+        "RCPTPORT009"
+      ],
+      "testReceipt": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44836-receipt-cleanup-branch-specific-proof/manifest.json",
+        "sha256": "0ccc995ead5b9d756a1a7c37c6e9eec401eca96c6e0bfb926b47f221d3a70fda"
+      },
+      "bug": "BUG-3811",
+      "horizontal": "YKT-2969",
+      "wholeScopeAccepted": false
+    },
+    {
+      "changed": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBindingTest.java",
+        "sha256": "e2f67b747cdc7bb287c88ee862a7821138792749e9badaf6a2083ab8d08d9f9f"
+      },
+      "reviewOwners": [
+        {
+          "owner": "WBS-P018-09",
+          "costOwner": "WBS-P018-09",
+          "file": {
+            "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java",
+            "sha256": "2ea187f82ff17dea4e1597ac2802cc72bb83b6c9cec2bfb7cadfb079753b1946"
+          }
+        }
+      ],
+      "rd": [
+        {
+          "id": "MON-001",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        },
+        {
+          "id": "MON-004",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        },
+        {
+          "id": "MON-007",
+          "rd": {
+            "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+            "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+            "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+          },
+          "owner": "WBS-P018-09"
+        }
+      ],
+      "uiSs": [
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+          "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986",
+          "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+        }
+      ],
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1825_TypedPoolBinding_単体テスト仕様.md",
+        "sha256": "ae4619f36db59d38b8a8c2a37dd2dc00e94a6dfa035cdb44049c0a5c43ece473"
+      },
+      "tests": [
+        "WEBPOOLB001",
+        "WEBPOOLB002",
+        "WEBPOOLB003",
+        "WEBPOOLB004",
+        "WEBPOOLB005",
+        "WEBPOOLB006",
+        "WEBPOOLB007",
+        "WEBPOOLB008",
+        "WEBPOOLB009",
+        "WEBPOOLB010"
+      ],
+      "testReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44816-borrowed-pool-serialization-fixture-closure/manifest.json",
+        "sha256": "f2eb56135d940fca6c260f2732bacabd82f33b982e77ae4f1ac75c7fddb66364"
+      },
+      "bug": "BUG-3810",
+      "horizontal": "YKT-2968",
+      "wholeScopeAccepted": false
+    }
+  ],
+  "originalBrokerQualificationReviewed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43574-broker-template-durable-offline-current-v1/manifest.json",
+    "sha256": "6503b229e6eda954a6a1a5bbad1fc2f4b3121b6b5f382d5182983e24e46f9f06"
+  },
+  "newBrokerOperation": 0,
+  "productTests": 0,
+  "coverageCombination": false,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
