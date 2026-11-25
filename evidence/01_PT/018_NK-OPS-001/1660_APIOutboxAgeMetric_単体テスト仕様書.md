@@ -18,3 +18,5 @@ API store/既OutboxRows.StatusのPENDING/SENT/ERROR閉集合だけ、供給非�
 独立oracleは固定秒値/JDK Duration hash（秒3,5,7/nano0は各3,5,7）と31fold=3045/固定全fieldtext、expected生成に本methodを使わない。生成record六methodは直接契約/生成元byteを別記しcoverage分子へ合成0、標準filter以外除外追加0。constructor/factory invariant/NullAway/negative/全分岐・例外・境界を通常実行。既API72を必要回帰し当80PT10suite、全20Java/実17＋metadata1予定。元72/API/他roleの成功を算術加算せず新source当全実行、元4222/common44確認再演0。
 
 原runPG7448/独立7450/六compile7452/全Jar7454/trace7456/review7458を予定。環境/command/日時/branch/source/exit/XML/coverage/static/input/output/hash/BUGは原manifest・1661以降へ。開始見積2/4/8pp上限10/原-v4-v5不変更、元製造新8と既72再資格/tool費を分離、正式1964/53・原190新受入0/工数null/QA051final/PTALT0/whole451/CHR/native不変更。
+
+BUG-3880／YKT-2997。OUTBOXAGE006の合成SDK registry、固定二cohort、8 worker／64件／10秒を維持。有限workerの終了失敗は元例外の抑制として保持し、registryは後に閉じる。局所二件と独立補助一件、F/E/skip各0。 [PG45488](evidence/PG45488-current-outbox-metric-shared-workers/manifest.json)
