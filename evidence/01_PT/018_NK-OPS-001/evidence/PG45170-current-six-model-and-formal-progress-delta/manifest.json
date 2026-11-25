@@ -1,0 +1,172 @@
+{
+  "run": "PG45170",
+  "source": "c4d57e1c51952ec682feddfad1d63255870750d7",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F02-b-a",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-25T10:37:18.982141+00:00",
+  "remoteMainVerified": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "sixEnforcerExistingExactModel": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42666-f02-maven-enforcer-six-current-model-v1/manifest.json",
+    "sha256": "b564cf804a60ed4a636178376ec3fb17c38a3a98fec6d380e789bf50aa5cc779"
+  },
+  "verifiedSevenPomAndWrapperInputs": [
+    {
+      "path": "pom.xml",
+      "gitBlob": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76",
+      "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9",
+      "modelBaseBlob": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76"
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "gitBlob": "9e1b868711e88e06748011ca7d345fcfb3d212e4",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "modelBaseBlob": "9e1b868711e88e06748011ca7d345fcfb3d212e4"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "gitBlob": "b0d15b225c56fdcae318600fb436984e7fb33876",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "modelBaseBlob": "b0d15b225c56fdcae318600fb436984e7fb33876"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "gitBlob": "540cbf7c804ce2574ecb037a7f2e589855156218",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "modelBaseBlob": "540cbf7c804ce2574ecb037a7f2e589855156218"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "gitBlob": "25d97f80825cdcca244cb6953a66906cde7ccc53",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+      "modelBaseBlob": "25d97f80825cdcca244cb6953a66906cde7ccc53"
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "gitBlob": "968f5090625708664487f79d4d9390fb8db58898",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "modelBaseBlob": "968f5090625708664487f79d4d9390fb8db58898"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "gitBlob": "e181f798331dbddfe82111108f770e27538b0f04",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "modelBaseBlob": "e181f798331dbddfe82111108f770e27538b0f04"
+    },
+    {
+      "path": "mvnw",
+      "gitBlob": "bd8896bf2217b46faa0291585e01ac1a3441a958",
+      "sha256": "cae96cef89ebea3531221f4ae17c23cf8edf67d00eae8306d4186ae1bbed4d02",
+      "modelBaseBlob": "bd8896bf2217b46faa0291585e01ac1a3441a958"
+    },
+    {
+      "path": ".mvn/wrapper/maven-wrapper.properties",
+      "gitBlob": "533e7754a644132066ff2e68af3acd058f7bd7bf",
+      "sha256": "db6a3c01d5a5d6ca468479d1d931109525fef82c3b788ec0c4d01f8a9029df99",
+      "modelBaseBlob": "8dea6c227c08000d2400d38a2ac886063f22bc36",
+      "knownWrapperChecksumOnly": true,
+      "previousProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42734-p01802-maven-wrapper-distribution-checksum-v1/manifest.json",
+          "sha256": "d8636fa75c3bf219ea6e405b90c26171db98d76dfbe899816046ad77d3f47e94"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42736-p01802-maven-wrapper-existing-cache-v1/manifest.json",
+          "sha256": "ccecd69ee384630216bf7466614e61aeae4ab09402383c43a5583e855d4f15bb"
+        }
+      ]
+    }
+  ],
+  "initialMetadataFailure": "generic equality guard detected the already qualified properties checksum line; no Maven or product execution",
+  "moduleChangesAreJdkImportsOnly": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+        "sha256": "a31207878b353385d3042b5adedb026ab21d862ec8204f5e82f58c9c488fef68"
+      },
+      "onlyNewImport": "import java.sql.PreparedStatement;",
+      "linkToProductionModuleDependency": false
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+        "sha256": "d42614f72d77fb2a3f3e62f0b549f8ee45a025bf81b3d67edaf5903ac2d5ac24"
+      },
+      "onlyNewImport": "import java.sql.PreparedStatement;",
+      "linkToProductionModuleDependency": false
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+        "sha256": "8b850ea25c0222df89a209668fa9bd95ca845af55d4b7aac90516f50f599cbf0"
+      },
+      "onlyNewImport": "import java.sql.PreparedStatement;",
+      "linkToProductionModuleDependency": false
+    }
+  ],
+  "sameCandidateFourCanonicalModuleInputs": 4,
+  "canonicalPhysical": 1116,
+  "apiWebKnownResources": [
+    32,
+    34
+  ],
+  "sysContract13": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44956-f02-current-thirteen-criterion-handoff-witnesses/manifest.json",
+    "sha256": "b048136bdafe73bb60956ca7231d2c84adaf1d1125d8cd98a1c13c8cb2457652"
+  },
+  "individuallyAcceptedSys": 0,
+  "acceptedWbs": 16,
+  "originalWbs": 190,
+  "newSince4197": 0,
+  "cumulativeLocalTrialCount": 1700,
+  "fulfilledPricePp": 0,
+  "estimatedWindowOnePp": 8.9,
+  "estimatedRevisedDec6Pp": 16.65,
+  "effortRate": null,
+  "technicalScope": {
+    "api": 193,
+    "web": 197,
+    "mainStyle": [
+      1028,
+      1033
+    ],
+    "testStyle": [
+      1165,
+      1197
+    ]
+  },
+  "currentObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T10:37:17+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "previousProgressProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44968-current-formal-and-measured-progress/manifest.json",
+    "sha256": "b10543743bec345ad975f64662a94fdc945b820eeeec31a6bdaf18d17631a587"
+  },
+  "mostRecentTrial": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45168-current-inspection-summary-fixture-thirteen/manifest.json",
+    "sha256": "793353afec64ff1cb566af5b3bb6c8e4b4c0cb1465e09503f2e3e9eafb98022c"
+  },
+  "latestOwnerPacket": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45146-four-reviewers-latest-same-candidate-admission/manifest.json",
+    "sha256": "2db1a139356a4c197984951ad9bedc3a413ba58cc9dd185cc5392bbc6b249d34"
+  },
+  "fourNormalizedJarScopeStillDistinct": true,
+  "noNewBuildOrTrial": true,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "blocking": [
+    "QA-056 four held types, API/Web regular JAR and same-candidate runtime",
+    "SSC-461 Storage JDBC owner/DB evidence",
+    "all six products and formal 451",
+    "named reviewer decisions"
+  ]
+}
