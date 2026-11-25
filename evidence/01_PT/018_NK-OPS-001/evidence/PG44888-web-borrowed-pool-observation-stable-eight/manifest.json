@@ -1,0 +1,160 @@
+{
+  "run": "PG44888",
+  "wbs": "WBS-P018-09/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "source": "10c8da3645cb74e1231c4173c1a9dfe855f8af5c",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:06:10.916972+00:00",
+  "eligibleTests": [
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead007ParallelOwnedInterfacesCannotShareMutableObservationState",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead006MaximumIntegersBecomeExactLongsWithoutSumOrWrap",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead004NullOwnersAreRejectedBeforeAnyGetter",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead003InvalidStatisticsRemainUnknownNotZero",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead008LaterGetterValuesAndSeparateOwnersCannotMutateSnapshots",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead005ProviderFailuresPreserveIdentityWithoutRetryOrLaterGetters",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead002TrueZeroWithPositiveMaximumIsKnownNotMissing",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest",
+      "name": "webPoolRead001FourBorrowedGettersHaveIndependentValuesAndExactCalls",
+      "nonPass": [],
+      "result": "PASS"
+    }
+  ],
+  "originalSourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java",
+      "sha256": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+      "sha256": "ab404d162153fac50ce66667f87ab2bcad0c83339b48d8c4700eff9d815a6b03"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+      "sha256": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b"
+    }
+  ],
+  "actuallyUsedProductPhysical": {
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44818-web-fixed-pool-binding/main/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.class",
+      "sha256": "0c0bb70d94dd1e2b68832b7a080634ab5f10b5f6e04e5fbe6ce576ff05dd66a5"
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44818-web-fixed-pool-binding/main/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+      "sha256": "08bdc4bb9936469f62ae641bc6110dd685015c6027d89eab524529ef44e52ff3"
+    }
+  },
+  "observationOracleScope": "Four ordered borrowed Proxy getters, 0 and absent separated, own snapshot and failures, bounded parallel distinct proxies.",
+  "oldRegularPackageMetadata": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+    "sha256": "29ecc44378c3ebf8ea4a436929926836edb43745d1778a31af2f78fd59ff1cf4",
+    "actualReadMode": "only three named allowed class entries"
+  },
+  "originalJUnit": {
+    "path": "../pgpt-runs/PG379/pg14390-pool-borrowed-getter-whole-thirty-two-pt-v1/xml/TEST-dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest.xml",
+    "sha256": "f57e88f0a6f900e7dc47e35281281ef799f7cf145b0c577fe220d1eb63b89067"
+  },
+  "oldQualified": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14392-pool-borrowed-getter-whole-thirty-two-post-v1/manifest.json",
+    "sha256": "6207ef0d8568c7a1ac8ba9af048a428cb3395f622f2b7c46274c84f3eb432338"
+  },
+  "originalToolEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14390-pool-borrowed-getter-whole-thirty-two-pt-v1/manifest.json",
+    "sha256": "e6487025e8a1cd8e081d895228e22335191a705864e137583bde18b6156ec0db"
+  },
+  "currentPoolReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44816-borrowed-pool-serialization-fixture-closure/manifest.json",
+    "sha256": "f2eb56135d940fca6c260f2732bacabd82f33b982e77ae4f1ac75c7fddb66364"
+  },
+  "currentHikariInterfaceJar": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar",
+    "sha256": "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b"
+  },
+  "actualFixtureByteDifference": [
+    {
+      "old": {
+        "path": "../pgpt-runs/PG379/pg14390-pool-borrowed-getter-whole-thirty-two-pt-v1/fresh-test-classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.class",
+        "sha256": "f7f16c605859cd0a00f02f2f5b908e79fb4d770833477f0c568325c633d8dacf"
+      },
+      "current": {
+        "path": "../pgpt-runs/PG379/PG44818-web-fixed-pool-binding/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.class",
+        "sha256": "59d92eb64e351fcb53d67685c87b7ba37c3a2461cdd14e22d50d906ef2195b41"
+      },
+      "normalizedEqual": true,
+      "normalizedSha256": "8edb0800716c0361e0302c18e2cb65ef255e6b1626d9303e206f10139e0c75bc"
+    },
+    {
+      "old": {
+        "path": "../pgpt-runs/PG379/pg14390-pool-borrowed-getter-whole-thirty-two-pt-v1/fresh-test-classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest$Fixture.class",
+        "sha256": "365c8ae68a0b64b25401b89e8cb1d9ff65c7e3d37062d8653c8f298fa284580b"
+      },
+      "current": {
+        "path": "../pgpt-runs/PG379/PG44818-web-fixed-pool-binding/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest$Fixture.class",
+        "sha256": "0338ba38a6179c6af7b0c414cd4c37368651e7b7ba46d67c3978afd42ed89a4a"
+      },
+      "normalizedEqual": true,
+      "normalizedSha256": "fe349899087d8abd638bd10658d17c5df886e7e0c67b5f3861b2363d35a8491d"
+    }
+  ],
+  "originalSingleRunObservedValueCounters": {
+    "BRANCH": {
+      "covered": 8,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 9,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 2,
+      "missed": 0
+    }
+  },
+  "collectorAndRecorderOuterChangedNotUsedByThisFixture": true,
+  "firstMetadataAttempt": "Expected entire Recorder source unchanged; approved mode parser change is in outer, used Counts verified exactly.",
+  "actualExternal": 0,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
