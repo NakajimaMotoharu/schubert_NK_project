@@ -12,3 +12,14 @@ ADM-VALUE-004: responseの二項目User ID/更新後versionを独立Mapと数値
 既adm023/protocol値検証と重複し得るため今回四methodは再資格としてnewUnique=0を保守的に固定、累計453不変。実行四件・当source三Codeの独立normalCRC/SourceFile全physical/Code四counterを確認し、自然branch0はN/A。自動生成record methodは標準JaCoCo filterを明記しbyte/CRCを保持、手動coverage除外0。source全名簿未完のため登録aggregate delta-null/暫定93を維持。正式1964PT/53scope/新leaf0/工数null、全DB/Root/HOLD維持。
 
 着手前見積0.5/2/5pp cap7、source/runを固定して一度だけ実行。限定検証・coverageを全451/正式受入へ加算しない。閉鎖後も477continuous-v2で独立後続を継続。利用枠残10%以下/取得不能で新規停止、5%までに保全。source/debug/runを混同しない。
+
+## ADM-VALUE-005／006 値同一性と防止する試験不足
+
+BUG-3812／YKT-2970。NK-ADM-001、FUN009、UI232/236、SS312/323/332/351。製品・業務・正本oracleは変更しない。オラクルは独立な固定値の組。試験を同じ候補の固定入力とJDK 25で、ADM-VALUE-001～006を一つのJUnit実行として再計測する。
+
+| Test ID | 対象 | 入力・独立期待 |
+| --- | --- | --- |
+| ADM-VALUE-005 | UserMutationResult と UserMutationResponseData | 別インスタンスの(7, 3)は等しく、ハッシュが同じで、固定オブジェクトのMapを別の等価キーで取得できる。ID 8、version 4、異なる成功結果コード、失敗結果のいずれも等しくない。 |
+| ADM-VALUE-006 | UserCommandMetadata | 2つの固定UUIDが同じで、UTCの123456µsと123456999nsは同値へ正規化される。同じハッシュとMap lookupを確認する。一方のUUIDや123457µsへの変更は非等価。 |
+
+旧PG44862の原入力・生coverageは保全し、既存execと合算しない。実DB、実Admin、実電文・サービスを起動しない。記録は現runのmanifestと本PT実行結果へ。

@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.application.admin;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +21,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-/** NK-ADM-001/FUN009; UI232/236; SS312/323/332/351; ADM-VALUE-001..004; no command/DB. */
+/** NK-ADM-001/FUN009; UI232/236; SS312/323/332/351; ADM-VALUE-001..006; no command/DB. */
 @Timeout(10)
 final class UserMutationOutcomeValuePortTest {
   private static final String ID_FIELD = "User ID";
@@ -189,5 +190,49 @@ final class UserMutationOutcomeValuePortTest {
                           VERSION_FIELD,
                           new FieldValue.Numeric(0)))));
     }
+  }
+
+  @Test
+  void value005IdentityIncludesOutcomeCodeAndBothResponseFields() {
+    var response = new UserMutationResponseData(new UserId(7), 3L);
+    var sameResponse = new UserMutationResponseData(new UserId(7), 3L);
+    var otherUser = new UserMutationResponseData(new UserId(8), 3L);
+    var otherVersion = new UserMutationResponseData(new UserId(7), 4L);
+    assertEquals(response, sameResponse);
+    assertEquals(response.hashCode(), sameResponse.hashCode());
+    assertEquals("accepted payload", Map.of(response, "accepted payload").get(sameResponse));
+    assertNotEquals(response, otherUser);
+    assertNotEquals(response, otherVersion);
+
+    var accepted = new UserMutationResult(ResultCode.SUCCESS, Optional.of(response));
+    var sameOutcome = new UserMutationResult(ResultCode.SUCCESS, Optional.of(sameResponse));
+    assertEquals(accepted, sameOutcome);
+    assertEquals(accepted.hashCode(), sameOutcome.hashCode());
+    assertEquals("accepted outcome", Map.of(accepted, "accepted outcome").get(sameOutcome));
+    assertNotEquals(
+        accepted, new UserMutationResult(ResultCode.IDEMPOTENT_SUCCESS, Optional.of(response)));
+    assertNotEquals(accepted, new UserMutationResult(ResultCode.SUCCESS, Optional.of(otherUser)));
+    assertNotEquals(accepted, new UserMutationResult(ResultCode.SUCCESS, Optional.of(otherVersion)));
+    assertNotEquals(accepted, new UserMutationResult(ResultCode.NOT_FOUND, Optional.empty()));
+  }
+
+  @Test
+  void value006IdentityUsesBothTraceValuesAndCanonicalUtcMicroseconds() {
+    var message = new UUID(0, 11);
+    var correlation = new UUID(0, 22);
+    var time = Instant.parse("2026-09-08T00:00:00.123456Z");
+    var metadata = new UserCommandMetadata(message, correlation, time);
+    var same =
+        new UserCommandMetadata(
+            new UUID(0, 11), new UUID(0, 22), Instant.parse("2026-09-08T00:00:00.123456999Z"));
+
+    assertEquals(metadata, same);
+    assertEquals(metadata.hashCode(), same.hashCode());
+    assertEquals("matching trace", Map.of(metadata, "matching trace").get(same));
+    assertNotEquals(metadata, new UserCommandMetadata(new UUID(0, 12), correlation, time));
+    assertNotEquals(metadata, new UserCommandMetadata(message, new UUID(0, 23), time));
+    assertNotEquals(
+        metadata,
+        new UserCommandMetadata(message, correlation, Instant.parse("2026-09-08T00:00:00.123457Z")));
   }
 }
