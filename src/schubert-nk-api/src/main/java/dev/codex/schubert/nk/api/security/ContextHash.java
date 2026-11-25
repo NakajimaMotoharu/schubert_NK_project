@@ -7,11 +7,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
 
 /** SHA-256 of raw ASCII, not hex-decoded bytes. NK-AUT-001; UI226 §5; SS314 §6; PT-AUT-005/007. */
 public final class ContextHash {
-  // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
-  private final Object stateLock = new Object();
+  // BUG-036/YKT-032 and BUG-3808: only this instance owns the digest lock.
+  private final ReentrantLock stateLock = new ReentrantLock();
   private final DigestOperations operations;
 
   /**
@@ -52,7 +53,8 @@ public final class ContextHash {
 
   /** Only the repository lookup receives this secret-derived value; never log it. */
   public String calculate(AuthenticationContext context) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(context, "context");
       byte[] raw = context.wireValue().getBytes(StandardCharsets.US_ASCII);
       try {
@@ -65,6 +67,8 @@ public final class ContextHash {
       } finally {
         Arrays.fill(raw, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 }
