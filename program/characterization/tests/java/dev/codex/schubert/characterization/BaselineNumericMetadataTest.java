@@ -3,7 +3,6 @@ package dev.codex.schubert.characterization;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -124,7 +123,9 @@ final class BaselineNumericMetadataTest {
     try (var workers = new CharacterizationTestWorkers(Executors.newFixedThreadPool(2))) {
       var valid = workers.executor().submit(() -> numbers(good));
       var invalid =
-          workers.executor().submit(() -> assertThrows(IllegalArgumentException.class, () -> numbers(bad)));
+          workers
+              .executor()
+              .submit(() -> assertThrows(IllegalArgumentException.class, () -> numbers(bad)));
       assertEquals(59627L, valid.get(5, TimeUnit.SECONDS).masterFileCount());
       assertEquals(
           "invalid baseline numeric metadata", invalid.get(5, TimeUnit.SECONDS).getMessage());
