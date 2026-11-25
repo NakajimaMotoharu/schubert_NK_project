@@ -1,0 +1,140 @@
+{
+  "run": "PG44782",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P008-03/2",
+    "WBS-P008-05/2",
+    "WBS-P009-03/2"
+  ],
+  "source": "bb579b6d41087d525ad1331dc2990dc6907b062c",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T01:36:14.746878+00:00",
+  "actualExit": 0,
+  "toolScope": {
+    "declared": 7,
+    "mainPhysical": 5,
+    "primaryNew": [
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/MediaFileInspector.java",
+        "sha256": "5adb888d851cfa1c7446a499cb389e94048d05366b181a0774f0892039824150"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFileInspector.java",
+        "sha256": "f6084db84908966c8ba9890fda62f481b028789153dd93d030623f27438ec5d5"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+        "sha256": "f03cb84c56ec170b3db7b7edbc03f60ababa8545cdb1bf43bfc42f631f1d03ff"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java",
+        "sha256": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6"
+      }
+    ]
+  },
+  "staticReceipts": {
+    "nullaway": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-nullaway/begin.json",
+        "sha256": "8f7f4bcf7659575a9da98f9a1903f95b6f16f2d3aaa5d5f269cdb3cc7111eb37"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-nullaway/terminal.json",
+        "sha256": "a4ba50caae448c0e35e93fbf6a79a9b5eccc2975257c6fabd64848f123857b24"
+      }
+    },
+    "spotbugs": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-spotbugs/begin.json",
+        "sha256": "dd55615254ee078e7140e46318f1dd3790f2fe5507b619b85bb530af8fe4d4c7"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-spotbugs/terminal.json",
+        "sha256": "6fd6f29032635e0c0176f5bdc4fbf610a8621b441d676a890b8ac6d38ad5a25c"
+      }
+    },
+    "pmd": {
+      "beginning": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-pmd/begin.json",
+        "sha256": "4fc6beba2920293f101b6ab6beb2de70d74d42b0891c876089b2e2a4c259c20e"
+      },
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-pmd/terminal.json",
+        "sha256": "dba6f7c9f265d6dbeeac2fd1372c5d3a05064b3ade4cd0a56cc2b1206cf2566e"
+      }
+    }
+  },
+  "preToolDriverRetry": "A temporary wrapper was cut at its first import and stopped before any compiler. Retried from the correct preflight entry; no tests repeated.",
+  "earlierW06": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43064-transfer-test-checked-declaration-v1/manifest.json",
+    "sha256": "31f46815c79c6e3dc95e0aed9726f19b1cc5febbe141984bd71ccba32ec0cc3d"
+  },
+  "sameFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+    "sha256": "df6f2d0f84810f1c21350307d391359921a6ff06f9925a810b3061016986f334"
+  },
+  "sameW06Main": [
+    {
+      "path": "../pgpt-runs/PG379/PG43064-transfer-test-checked-declaration-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferContentVerifier.class",
+      "sha256": "42f972f44f854a2484646204235687a2a0ba726765a5f6acc844382e54549320"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG44782-current-api-content-check-and-inspector-ports-nullaway/target/classes/dev/codex/schubert/nk/api/storage/TransferContentVerifier.class",
+      "sha256": "42f972f44f854a2484646204235687a2a0ba726765a5f6acc844382e54549320"
+    }
+  ],
+  "matchedSupportPhysical": [
+    "dev/codex/schubert/nk/protocol/file/LargeResultContent.class",
+    "dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class"
+  ],
+  "priorApplicableCases": [
+    "w06ActualOne201And10000RecordFilesMatchIndependentLengthAndHash",
+    "w06NullEarlyEofZeroExtraBytesIoClosedAndAmbiguousEofFailWithoutClosing",
+    "w06ReadFailurePreservesTheFirstWrappedErrorAndKeepsTheChannelBorrowed",
+    "w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected"
+  ],
+  "priorXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43064-transfer-test-checked-declaration-v1/sanitized-junit.xml",
+    "sha256": "fe34cf6029be8d32387e6a9ce5ad58a07ce0654be23ea7f2ce19d303fa602576"
+  },
+  "priorUnfilteredMissedCovered": {
+    "INSTRUCTION": [
+      7,
+      83
+    ],
+    "BRANCH": [
+      0,
+      10
+    ],
+    "LINE": [
+      2,
+      21
+    ],
+    "COMPLEXITY": [
+      1,
+      7
+    ],
+    "METHOD": [
+      1,
+      2
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "retainedFixtureRawFindings": 2,
+  "allToolCleanAdditions": 4,
+  "currentAPIMain": 139,
+  "totalAPIMain": 286,
+  "productExecutions": 0,
+  "actualEnvironmentOperations": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "W06のraw L2/M1/I7、原指摘を維持。到達根拠のないprivate constructor試験を追加しない。",
+    "実保持媒体とreadyファイル、native／全scope451、主担当受入。"
+  ]
+}
