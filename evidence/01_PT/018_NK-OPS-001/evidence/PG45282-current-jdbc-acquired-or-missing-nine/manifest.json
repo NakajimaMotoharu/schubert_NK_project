@@ -1,0 +1,140 @@
+{
+  "run": "PG45282",
+  "source": "5769f51ba7a805c19d157b045edcf6f7b389533f",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P004-05/2",
+  "relatedWbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P004-03/2"
+  ],
+  "terminalAtUTC": "2026-11-25T13:09:57.452793+00:00",
+  "actualExit": 0,
+  "actualTrials": 9,
+  "cumulativeLocalProductTrials": 2221,
+  "newTestId": "PT-JDBC-CLEANUP009",
+  "previousRawMethod": {
+    "name": "closeStatementIfPresent",
+    "descriptor": "(Ljava/lang/Throwable;Ljava/sql/Statement;)V",
+    "counters": {
+      "INSTRUCTION": [
+        6,
+        0
+      ],
+      "BRANCH": [
+        2,
+        0
+      ],
+      "LINE": [
+        2,
+        0
+      ],
+      "COMPLEXITY": [
+        2,
+        0
+      ],
+      "METHOD": [
+        1,
+        0
+      ],
+      "CLASS": [
+        0,
+        0
+      ]
+    }
+  },
+  "scopeStart": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/begin.json",
+    "sha256": "c15462ac5dace47669793c37876bfb2a945e06facaa81910ffd374e1fddc9c9a"
+  },
+  "scopeEnd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/terminal.json",
+    "sha256": "8ae3da3f54ed5a30d9194b1ce1190cc3a408bb977b84214a0a6d6c6b0297e0f6"
+  },
+  "actualJunit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/reports/TEST-junit-jupiter.xml",
+    "sha256": "82059d5799b996ab0e1c15982dbcef675b2e85c2df372c509208732e0c29e013"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/unit.exec",
+    "sha256": "e12998471127e32bc70b5acdee1047cfac559ebf2797613f26fac2ed8af59cf7"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-current-jdbc-cleanup-nine/raw.log",
+    "sha256": "99f1c34184f8a01aba75db246ff91a3040d31251d73797db4ea2b856eaeb7ff6"
+  },
+  "rawTotals": {
+    "INSTRUCTION": 54,
+    "BRANCH": 8,
+    "LINE": 23,
+    "COMPLEXITY": 8,
+    "METHOD": 4,
+    "CLASS": 1
+  },
+  "rawPhysicalClasses": [
+    [
+      "CLASS",
+      "dev/codex/schubert/nk/api/database/JdbcResourceCleanup",
+      "7b305a9b2dcf44b7",
+      "true",
+      "18",
+      "1537",
+      "INSTRUCTION:0:54",
+      "BRANCH:0:8",
+      "LINE:0:23",
+      "COMPLEXITY:0:8",
+      "METHOD:0:4",
+      "CLASS:0:1"
+    ],
+    [
+      "CLASS",
+      "dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose",
+      "781b6f85d61c7a2e",
+      "false",
+      "0",
+      "1537",
+      "INSTRUCTION:0:0",
+      "BRANCH:0:0",
+      "LINE:0:0",
+      "COMPLEXITY:0:0",
+      "METHOD:0:0",
+      "CLASS:0:0"
+    ]
+  ],
+  "canonicalStyle": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-jdbc-cleanup-canonical-spotless/terminal.json",
+    "sha256": "fff257bb9fbae5d92383c397126a229b362a1f3970e10402902facb081bbafcd"
+  },
+  "typedSpotbugs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-jdbc-cleanup-test-typed/spotbugs.xml",
+    "sha256": "a719cce0d2f76b7b55489f78fff4467a6b605af2039ee93f90795915d4bde3c0"
+  },
+  "pmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45282-jdbc-cleanup-test-typed/pmd.xml",
+    "sha256": "e668c7bae045f01af8bec54b4ef503234a5004249fdc5dbf8287ce68ff6b7afa"
+  },
+  "technicalDispositions": {
+    "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION": "既存の純合成失敗生成。固定SQL／Runtime／Errorの各同一インスタンスをCloseで注入し、判定先は実装側。既fixture本文一致。",
+    "UseProperClassLoader": "JDK代理型自体のローダーを使用し型の同一性を固定。",
+    "CompareObjectsWithEquals": "一次と二次の例外が同一オブジェクトかを判定する独立仕様。"
+  },
+  "signedDispositions": 0,
+  "callers": {
+    "dynamicScopes": [
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45184-current-three-jdbc-ownership-fixtures/manifest.json",
+        "sha256": "61f0ce26a7175e470954ccbb3ae50272ed744126ec748fe9078b19b8e0af286f"
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45186-current-jdbc-read-boundary-methods/manifest.json",
+        "sha256": "b3bf3b57668416c8efb9b5c22d9f66cec8b52e204de965530ab1b6e5e699b271"
+      }
+    ],
+    "otherCallerStaticOnly": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG45240-current-api-jdbc-pmd-sixty-three-sites/manifest.json",
+      "sha256": "5489b59c4bcdbd2f64dc1dab8fd3665693871a3219494e78a866dd0772f89f88"
+    }
+  },
+  "realJdbcConnectionTransactionOrBroker": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
