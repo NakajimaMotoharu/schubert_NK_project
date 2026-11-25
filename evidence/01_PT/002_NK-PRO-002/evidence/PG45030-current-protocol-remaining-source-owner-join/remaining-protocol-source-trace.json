@@ -1,0 +1,463 @@
+{
+  "source": "38203c355a8a5dd46b8cff4795b43aa7d4f79fd3",
+  "canonicalDesign": {
+    "RD131": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "RD132": {
+      "path": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+      "sha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS322": {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS323": {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS361": {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "UI232": {
+      "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+      "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "UI233": {
+      "path": "documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md",
+      "sha256": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  },
+  "programCases": {
+    "route": {
+      "testId": "PT-PRO-002-T01",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "method": "transportAndRouteContractsRejectEveryMismatch"
+    },
+    "header": {
+      "testId": "PT-PRO-002-H01",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "method": "headerEncodingMatchesIndependentUi232GoldenVector"
+    },
+    "badHeader": {
+      "testId": "PT-PRO-002-H02",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "method": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption"
+    },
+    "body": {
+      "testId": "PT-PRO-002-M02",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+        "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+        "sha256": "2e69ba89ae30935778127812ec27cad66f8530a6eedc218201c2066c295ed587"
+      },
+      "method": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes"
+    },
+    "encodedPayload": {
+      "testId": "PT-PRO-002-P01",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+        "sha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+        "sha256": "bc6eba8ecdbc5ff49b4b53a5ace20519763c20fc50c24e05c3608c62c780fbe2"
+      },
+      "method": "allSixtyFourLayoutsRoundTripMinimumSuccessValues"
+    },
+    "errorPayload": {
+      "testId": "PT-PRO-002-P02",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java",
+        "sha256": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+        "sha256": "bc6eba8ecdbc5ff49b4b53a5ace20519763c20fc50c24e05c3608c62c780fbe2"
+      },
+      "method": "everyResponseLayoutUsesExactErrorFillersAndNoRecords"
+    },
+    "semantic": {
+      "testId": "PT-PRO-002-P06",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+        "sha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+        "sha256": "62439217f4b00bb9565adaecfa6f06057c1c5357eba77597f00a8f36db44763c"
+      },
+      "method": "notificationCancellationAndQuestionStateConditionsAreEnforced"
+    },
+    "semanticPage": {
+      "testId": "PT-PRO-002-P06",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+        "sha256": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+        "sha256": "62439217f4b00bb9565adaecfa6f06057c1c5357eba77597f00a8f36db44763c"
+      },
+      "method": "pageConstantsCountsAndArithmeticAreEnforced"
+    },
+    "time": {
+      "testId": "PT-PRO-003-T01",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+        "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+        "sha256": "50fdc48a5d0ad9a65bd5949547ddee3ddaf81cdaec5d2b2e3c09be03a750a2eb"
+      },
+      "method": "formatsAndParsesStrictJstMilliseconds"
+    },
+    "invalidTime": {
+      "testId": "PT-PRO-003-T03",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+        "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+        "sha256": "50fdc48a5d0ad9a65bd5949547ddee3ddaf81cdaec5d2b2e3c09be03a750a2eb"
+      },
+      "method": "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected"
+    },
+    "iso": {
+      "testId": "PT-JMS-ISO011",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java",
+        "sha256": "4b38735c88ffee065f3499688a29df85d1d3e97a51401d9f9ce0805f75e41cca"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest.xml",
+        "sha256": "8ca8bcb6857511ca6c95fe6841a9a97d508be216136031dec2669687b680c705"
+      },
+      "method": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity"
+    },
+    "unc": {
+      "testId": "UNC007",
+      "input": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackExceptionTest.java",
+        "sha256": "189a8e5fc185e9cf70c22a72ff25be675ab284e5dc62bfd7920988456829bda9"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45004-current-protocol-ci-174/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest.xml",
+        "sha256": "5a808379549bc94c389cc6d92ece8a0f24ed982fd984f76d22f9a82a85b4e170"
+      },
+      "method": "distinctEqualValuedNodesAreBothRetained"
+    }
+  },
+  "remainingSourceRows": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java",
+        "sha256": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2"
+      },
+      "originalOwner": "WBS-P002-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-005",
+        "MQ-022"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/ExpectedRoute"
+      ],
+      "relatedTestRefs": [
+        "route"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+        "sha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3"
+      },
+      "originalOwner": "WBS-P002-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-015",
+        "MQ-030",
+        "MQ-035"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/HeaderCodec"
+      ],
+      "relatedTestRefs": [
+        "header",
+        "badHeader"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java",
+        "sha256": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3"
+      },
+      "originalOwner": "WBS-P002-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-028",
+        "MQ-030"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/MessageEncodingException"
+      ],
+      "relatedTestRefs": [
+        "body"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+      },
+      "originalOwner": "WBS-P002-02",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-014",
+        "MQ-017",
+        "MQ-024",
+        "MQ-025",
+        "MQ-026"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/PayloadCodec"
+      ],
+      "relatedTestRefs": [
+        "encodedPayload",
+        "errorPayload"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java",
+        "sha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3"
+      },
+      "originalOwner": "WBS-P002-04",
+      "designSs": [
+        "323"
+      ],
+      "requirementIds": [
+        "MQ-032",
+        "MQ-040"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException"
+      ],
+      "relatedTestRefs": [
+        "badHeader"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java",
+        "sha256": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8"
+      },
+      "originalOwner": "WBS-P002-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-023"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/TransportBodyType"
+      ],
+      "relatedTestRefs": [
+        "route"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java",
+        "sha256": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646"
+      },
+      "originalOwner": "WBS-P002-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-006",
+        "MQ-022",
+        "MQ-023"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/TransportMetadata"
+      ],
+      "relatedTestRefs": [
+        "route"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "sha256": "8570121e1e0461a0db760ef0bd4cb5ee40f36d3b77dde144d568cf4c3b23e8ef"
+      },
+      "originalOwner": "WBS-P002-02",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-016",
+        "MQ-017",
+        "MQ-042"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator"
+      ],
+      "relatedTestRefs": [
+        "semantic",
+        "semanticPage"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules.java",
+        "sha256": "6d30b0e099b8c8b21bd75c56266d9eb4717a4908d252aba9ec6b6aa2aa7acf4b"
+      },
+      "originalOwner": "WBS-P002-02",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-017",
+        "MQ-042"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules"
+      ],
+      "relatedTestRefs": [
+        "semantic",
+        "semanticPage"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+        "sha256": "c5751e9edcd477059661e634d945e66bb6d8d1e5eddae516faccff007c8ccd55"
+      },
+      "originalOwner": "WBS-P003-03",
+      "designSs": [
+        "322"
+      ],
+      "requirementIds": [
+        "MQ-035",
+        "MSG-011"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/time/JstWireTimestamp"
+      ],
+      "relatedTestRefs": [
+        "time",
+        "invalidTime"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+        "sha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb"
+      },
+      "originalOwner": "WBS-P005-03",
+      "designSs": [
+        "312"
+      ],
+      "requirementIds": [
+        "MQ-007",
+        "MQ-040"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException"
+      ],
+      "relatedTestRefs": [
+        "iso"
+      ],
+      "observedLayer": "typed and local contract"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": {
+      "input": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+        "sha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938"
+      },
+      "originalOwner": "WBS-P005-03",
+      "designSs": [
+        "312"
+      ],
+      "requirementIds": [
+        "MQ-007",
+        "MQ-008"
+      ],
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException"
+      ],
+      "relatedTestRefs": [
+        "unc"
+      ],
+      "observedLayer": "typed and local contract"
+    }
+  },
+  "traceCounts": {
+    "registered": 169,
+    "originalNonempty": 62,
+    "newLayout": 20,
+    "newNamed": 75,
+    "newSupplement": 12,
+    "noRdContextRemaining": 0
+  },
+  "strictlyExcludedFromDemonstration": [
+    "real API/Web JMS ACK and rollback",
+    "whole product 451",
+    "current judge H-G13.01"
+  ]
+}
