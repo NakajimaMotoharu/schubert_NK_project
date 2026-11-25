@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -284,7 +285,7 @@ class LogSearchFormTest {
   @Test
   void web285ConcurrentBinding() throws InterruptedException, ExecutionException, TimeoutException {
     var shared = Map.of(LEVEL_FIELD, List.of("WARN"));
-    try (var pool = new ViewFixtureWorkers(8)) {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
         final int n = i;

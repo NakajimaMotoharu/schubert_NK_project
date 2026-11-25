@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -238,7 +239,7 @@ class QuestionSubmitFormTest {
   @Test
   void qstForm008ConcurrentIndependentBodiesAndTokens()
       throws InterruptedException, ExecutionException, TimeoutException {
-    try (var executor = new ViewFixtureWorkers(8)) {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var results = new ArrayList<Future<byte[]>>();
       for (int i = 1; i <= 100; i++) {
         int index = i;

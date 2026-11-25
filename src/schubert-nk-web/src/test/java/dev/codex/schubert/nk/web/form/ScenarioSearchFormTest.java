@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -267,7 +268,7 @@ class ScenarioSearchFormTest {
   @Test
   void web221ConcurrentValidation()
       throws InterruptedException, ExecutionException, TimeoutException {
-    try (var pool = new ViewFixtureWorkers(8)) {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 1; i <= 64; i++) {
         int n = i;

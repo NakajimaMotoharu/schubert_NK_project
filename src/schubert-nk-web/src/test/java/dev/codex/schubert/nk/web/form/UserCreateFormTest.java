@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -279,7 +280,7 @@ class UserCreateFormTest {
   @Test
   void create007OneHundredConcurrentIndependentRequests()
       throws InterruptedException, ExecutionException, TimeoutException {
-    try (var executor = new ViewFixtureWorkers(8)) {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var results = new ArrayList<Future<Void>>();
       for (int i = 1; i <= 100; i++) {
         int n = i;

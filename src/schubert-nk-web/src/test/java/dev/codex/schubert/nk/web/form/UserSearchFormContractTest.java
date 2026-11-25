@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -219,7 +220,7 @@ final class UserSearchFormContractTest {
   @Test
   void search008IndependentParallelBindingsNeverShareMutableFields()
       throws InterruptedException, ExecutionException, TimeoutException {
-    try (var executor = new ViewFixtureWorkers(4)) {
+    try (var executor = new ViewFixtureWorkers(Executors.newFixedThreadPool(4))) {
       var results = new ArrayList<Future<?>>();
       for (int index = 1; index <= 16; index++) {
         final int number = index;
