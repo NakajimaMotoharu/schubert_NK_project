@@ -1,0 +1,120 @@
+{
+  "eventId": "PGPT-20261008-10230",
+  "source": "51b8ebc09896c7bdf5c762a24da9e7e601f6b05a",
+  "productionCoreMain": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "managementWorkIds": [
+    "WBS-P014-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P014-01/2",
+    "元行": "WBS-P014-01/2",
+    "費目": "B",
+    "主担当": "WBS-P014-01",
+    "状態": "計画",
+    "作業": "Question/Answer一覧・明細・USER/ADMIN scope／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計332・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Question/Answer一覧・明細・USER/ADMIN scope：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-012,QST-005,QST-006",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-012、QST-005、QST-006",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "13",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-QRY-001、SS 332",
+    "lineNumber": 429,
+    "改訂残pp": "0.39",
+    "wholePlan": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    }
+  },
+  "run": "PG44704",
+  "startEvent": "PGPT-20261008-10229",
+  "workCategory": "CONTRACT_AUDIT",
+  "outcome": {
+    "productTestsExecuted": 3,
+    "applicableProductPass": 3,
+    "reusedProjectionCases": 24,
+    "dbAndAuthenticatedPathsPending": true,
+    "formal": 0
+  },
+  "proof": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44704-question-owner-detail-current-four-templates/manifest.json",
+    "sha256": "e2f41da4fe94c651f54cd3e7e7c9149cc4c90c9e5e151000fd0e32f365fef8c6"
+  },
+  "nextEvidence": "WBS-P013-01/2 follow-up: existing read-only NotificationDetailRenderingTest now has a changed current detail/forms closure; use current regular resource receipts and the actual cutoff at the independent detail 'completed, deleted, error' cases. Check PG44506 for any already-current equivalent cases and keep linkage only when proved.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T00:11:53+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "modelRequested": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "speedRequested": "standard",
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 26,
+    "remainingPercent": 74,
+    "resetsAt": 1796126527,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "1589aa54d74ae56a1ae6ffcccd10f281582128c290303b1bf8d0568dd3442951",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-25T00:11:53+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 26,
+        "remainingPercent": 74,
+        "resetsAt": 1796126527,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-25T00:11:39.956019+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 26,
+    "remainingPercent": 74,
+    "resetsAt": 1796126528,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true
+}

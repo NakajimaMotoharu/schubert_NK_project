@@ -1,0 +1,112 @@
+{
+  "run": "PG44704",
+  "source": "51b8ebc09896c7bdf5c762a24da9e7e601f6b05a",
+  "productionCore": "03dfb35a6a68f4ee32e9303b4fa0df3d262156fa",
+  "canonicalDesign": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "wbs": "WBS-P014-01/2",
+  "terminalAtUTC": "2026-11-25T00:11:39.956019+00:00",
+  "actualExit": 0,
+  "approvedDesign": [
+    {
+      "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+      "blob": "79c54a79e96c1ef00fabbe7d9adc86935fad8afa"
+    },
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "blob": "b9c13bf2b5c9da6d53607e240d5856cb6eee880b"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "blob": "924f3b589ef5ddd11f63eed6412277b9ddff0748"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "blob": "f98e727f1a4731dacae7c916532a6ecbc009f047"
+    }
+  ],
+  "freshProductTests": 3,
+  "reusedProjectionCases": 24,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44704-current-question-detail-template-three-v2/begin.json",
+    "sha256": "7184297493412bfb24510e6bc85f2296ceb4fff1b9d7190c6e4b2879b1cb9072"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44704-current-question-detail-template-three-v2/terminal.json",
+    "sha256": "c15b18e1336795020699e62e357629e228dd03802da82012c4a15e7b9bdb4178"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44704-current-question-detail-template-three-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "61e390154c6e858b0aefe5811594e531f29eeb1c5a9749e6be432e7b0df39d8c"
+  },
+  "changedTemplateClosure": [
+    "src/schubert-nk-web/src/main/resources/templates/questions/detail.html"
+  ],
+  "firstPreparatoryFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44704-current-question-detail-template-three/terminal.json",
+    "sha256": "e22eb77cdfd9adbe6451a8be0a947a2c4b2712de7c07f99ea989e58f4bc287a7"
+  },
+  "specification": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4980_質問回答明細の表示接続単体仕様.md",
+    "sha256": "7195da2ff70e80acbfedbdbab1b7bb54734f1e9213ef0767b3f267901bde7c71"
+  },
+  "currentNormalResourceOutput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44498-web-maven-resource-stage-after-warning-buttons/manifest.json",
+    "sha256": "a52620db2acb5bcb44a1c42ca318bee770aec02bd2a4daba44c67056980575fa"
+  },
+  "priorTemplateEvidence": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44368-question-detail-projection-template-and-static/manifest.json",
+    "sha256": "3c3ed2ef18f5fa003d18c946cf1cfa8848d73a28d0b3f00112fa77ff2a346889"
+  },
+  "priorProjectionEvidence": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44362-question-state-labels-and-caller/manifest.json",
+    "sha256": "4a0eaddb4b64438f5ac26201587c21e571bab4313d4358cfcfd026e6a95f6a65"
+  },
+  "proven": [
+    {
+      "requirements": [
+        "FUN-012",
+        "QST-005"
+      ],
+      "cases": [
+        "adminAndUserFilteredLinksAreLiteral()",
+        "roleMismatchRejectsBothDirections()",
+        "wrongEffectivePageRejects()"
+      ],
+      "scope": "values and projection, not authenticated request or actual SQL"
+    },
+    {
+      "requirements": [
+        "FUN-012",
+        "QST-006"
+      ],
+      "cases": [
+        "errorRendersItsLabelWithoutAnswerOrDeleteConfirmation()",
+        "adminSeesOwnerAndTheEmptyAnswerLiteral()",
+        "unansweredOwnerSeesQuestionAndNoAnswer()"
+      ],
+      "scope": "localhost-free Thymeleaf rendering of current detail resources with synthetic owner/admin/error values"
+    },
+    {
+      "requirements": [
+        "UI224 §6–7",
+        "SS332 §9"
+      ],
+      "cases": [
+        "targetOwnerAndBodyReject()",
+        "adminMayViewAnotherOwner()"
+      ],
+      "scope": "model-side presentation and owner/role invariants, not database scope"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "coverageRemeasured": false,
+  "relatedIssues": [
+    "Question view states retained in PG44362; JDBC and authenticated routes not run"
+  ],
+  "remaining": [
+    "same source DB owner predicate and isolation/admin query",
+    "actual authenticated paths and omitted/deleted rows",
+    "served UI, trace, 451 and formal decision"
+  ]
+}
