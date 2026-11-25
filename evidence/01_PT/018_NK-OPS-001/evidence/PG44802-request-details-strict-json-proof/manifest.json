@@ -1,0 +1,94 @@
+{
+  "run": "PG44802",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "relatedWbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "source": "0cc638431e3ff2249e48edff9c182caa9da3e967",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T02:00:51.106838+00:00",
+  "actualExit": 4,
+  "fixtureTrace": {
+    "allowedScalarsAndRolesMatchLiteralJson": "PT-IDEM-012",
+    "unsafeMalformedDuplicateAndWrongTypesAreRejected": "PT-IDEM-012-invalid",
+    "rejectsMalformedUnicodeInKeysAndFamilyButPreservesAsciiEscapes": "PT-IDEM-012-UTF16",
+    "decodedPropertyIdentityControlsDuplicatesAndRoleOwnership": "PT-IDEM-012-JSON-001",
+    "numericZeroRequiresAnUnsignedDecimalIntegerSpelling": "PT-IDEM-012-JSON-002",
+    "raw002FourFixedHashCollisionsRemainUnknownKeys": "PT-LOG-RAW002",
+    "raw003ForbiddenPublicCanariesNeverEscapeThroughAnyRoleOrParserDiagnostic": "PT-LOG-RAW003",
+    "raw004BoundsTheOriginalJsonBeforeEscapeProjection": "PT-LOG-RAW004"
+  },
+  "qaDesign": "SS351 §3.3、SSC-008、PT-IDEM-012/LOG-RAW002..004",
+  "typedReceipts": {
+    "nullaway": {
+      "beginning": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-nullaway/begin.json",
+        "sha256": "eed8efaf0db0aaabf253d56e1f0f1e43dcc27e77339c2cef4aa6298005d24967"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-nullaway/terminal.json",
+        "sha256": "17fcaa02913d678ae5d6920a13aa3863e9a6935c59af25638a42970224601408"
+      }
+    },
+    "spotbugs": {
+      "beginning": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-spotbugs/begin.json",
+        "sha256": "ea9d36fdd0349677612a1c07c33a37b321111f6025c3b45002794d52591c4752"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-spotbugs/terminal.json",
+        "sha256": "9684dbd1818a08b43e9f19fa6c381751ecb3c6ac5eeca4ece017d31b7fad9e7c"
+      }
+    },
+    "pmd": {
+      "beginning": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-pmd/begin.json",
+        "sha256": "93805ec8b76142ed7afd067f2d3c0540f3146d9d518b0a87b696b942f190fbdb"
+      },
+      "terminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-pmd/terminal.json",
+        "sha256": "17fcbf60b772f4dab615353a2397daf56ba802b2e409169f7b40ae47973e5634"
+      }
+    }
+  },
+  "rawTypedPmd": [
+    {
+      "file": "RequestLogDetails.java",
+      "rule": "UnusedReturnValue",
+      "line": "76"
+    }
+  ],
+  "priorIndependentRuleApplicability": {
+    "path": "evidence/01_PT/018_NK-OPS-001/2118_JSON終端peek四文脈確認・Locale一PG候補結果.md",
+    "sha256": "ff17a37d3e35ffac64b4e32ec78aa44e0eefdee9802ac99d29783d02cc3c5227"
+  },
+  "observedBehavior": "STRICT JsonReader.peek after endObject is the required trailing-garbage check. On the pinned Gson it permits EOF after whitespace and throws on additional input. No return-value suppression or new unreachable condition added.",
+  "priorOldEight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42912-request-log-details-without-private-reflection-v1/manifest.json",
+    "sha256": "8cd222fe07d107632afe9e858353121197bd0e2042cb7a58e0129d84edc67fab"
+  },
+  "priorScopeAlreadyApplied": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44624-current-pure-log-type-evidence/manifest.json",
+    "sha256": "d114483808134c7265bfe72721036329e498eb2ce9f9c090412a64949a9f94bf"
+  },
+  "currentRequestLogDetails": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44802-current-api-request-details-strict-json-nullaway/target/classes/dev/codex/schubert/nk/api/logging/RequestLogDetails.class",
+    "sha256": "7c78f2b307c300ff4217b35541dc3e1ca184a314582c5a654bc28b5c1fb1abfe"
+  },
+  "sameUsedProtocolPhysical": 3,
+  "gson": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+    "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+  },
+  "retainedEightWithoutNewCounting": true,
+  "productExecutions": 0,
+  "newApplicableTests": 0,
+  "previousOriginalRawCounters": "CLASS\tdev/codex/schubert/nk/api/logging/RequestLogDetails\t1bcceba0a4c344cd\ttrue\t57\t48\tINSTRUCTION:7:201\tBRANCH:0:36\tLINE:2:49\tCOMPLEXITY:1:25\tMETHOD:1:4\tCLASS:0:1",
+  "currentRawCounterPolicy": "Preserve two lines and one private constructor method missed in ordinary results. No reflection reintroduced.",
+  "openConditions": [
+    "実REQUEST caller/sink、保留セキュリティ型及び全体451",
+    "品質担当の適用判定"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
