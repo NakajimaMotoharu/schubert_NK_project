@@ -1,0 +1,303 @@
+{
+  "run": "PG44794",
+  "wbs": "WBS-F02-b-b",
+  "relatedWbs": [
+    "WBS-F03/2-2-b",
+    "WBS-C02-b",
+    "F04",
+    "WBS-P004-03"
+  ],
+  "source": "8bb715d916aeca1c86e3bf0c3a6491389a8c7828",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "designSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "terminalAtUTC": "2026-11-25T01:52:19.779779+00:00",
+  "actualExit": 0,
+  "comparedPriorOwnerHandoff": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44718-owner-acceptance-evidence-current-candidate/manifest.json",
+    "sha256": "0a1c3046a52fa9dcb8dc1c70874f8df2672482e518cf9dbee1d1215beafcec3b"
+  },
+  "backup18": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG43944-ssc481-post-format-batch-byte-identity/manifest.json",
+    "sha256": "1cde55a811aa532b6d02080677e75c74b3056b1ec94fc02cbf11f105462a2749"
+  },
+  "formattedBackupCoverage": {
+    "line": [
+      91,
+      91
+    ],
+    "method": [
+      14,
+      14
+    ],
+    "clazz": [
+      1,
+      1
+    ],
+    "branch": [
+      68,
+      68
+    ],
+    "scope": "one class; single execution"
+  },
+  "backupRawPmd": {
+    "rawTotal": 12,
+    "rawExit": [
+      4,
+      4
+    ],
+    "analysisErrors": 0,
+    "applicableCount": null,
+    "classification": [
+      {
+        "rule": "CloseResource",
+        "raw": 2,
+        "preliminary": "Each acquired instance has exactly one matching finally close; null/acquisition failure branches avoid claiming absent resources. Both close-only faults and close precedence independently tested."
+      },
+      {
+        "rule": "AvoidCatchingGenericException",
+        "raw": 8,
+        "preliminary": "The two scopes record and immediately rethrow RuntimeException and Error; close handling retains an existing primary with exact same-object handling. SSC-481 requires primary preservation. Review raw mechanism and all fatal paths before classifying."
+      },
+      {
+        "rule": "CompareObjectsWithEquals",
+        "raw": 1,
+        "preliminary": "Same Throwable reference is the guard required by Java self-suppression; equals would be a distinct contract."
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "raw": 1,
+        "preliminary": "Decoupled JDK interface proxy for synthetic JDBC, same fixture rule as PG43930."
+      }
+    ],
+    "disposition": "Quality owner applicability review pending; no suppression, mapped findings retained, no PMD/451 pass."
+  },
+  "sameQualifiedRegularJars": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44740-f02-four-jars-and-resources-after-context-hash/manifest.json",
+    "sha256": "3bd17799db50016781c7f63fc8672aa16c8ecfdeddbd28562e567126d7145c93"
+  },
+  "sys13": [
+    "SYS-001",
+    "SYS-002",
+    "SYS-003",
+    "SYS-004",
+    "SYS-005",
+    "SYS-006",
+    "SYS-007",
+    "SYS-008",
+    "SYS-009",
+    "SYS-010",
+    "SYS-012",
+    "SYS-013",
+    "SYS-014"
+  ],
+  "previousSsc447": {
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "passed": 152,
+    "failed": 0,
+    "errors": 0,
+    "skips": 0,
+    "notRun": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    "currentFullCandidateCredit": 0
+  },
+  "rowDecisions": [
+    {
+      "item": "F02",
+      "wbs": [
+        "WBS-F02-b-a",
+        "WBS-F02-b-b"
+      ],
+      "owner": "ビルド・アーキテクチャ／Storage担当",
+      "ready": "正規4/6、1,116物理。API/Webの資源32/34とSYS 13要件。整形後Backup18の正規Batch SHA一致。",
+      "remaining": "QA-056四型とQA-062、API/Webの正規JAR、SSC-461の実証、当候補runtime、13要求の個別終端と署名。",
+      "receiptConfirmedInCheckedSources": false,
+      "receiptDateJST": null,
+      "acceptanceId": null
+    },
+    {
+      "item": "F03",
+      "wbs": [
+        "WBS-F03/2-2-a",
+        "WBS-F03/2-2-b",
+        "WBS-F03/2-3-a",
+        "WBS-F03/2-3-b"
+      ],
+      "owner": "品質／保留条件の担当",
+      "ready": "局所型付きAPI139/286源、Web129/262源、Batch291/660物理。新規の論点はWeb受付参照PMD24、Range Map 1、API JDBC helper 6。",
+      "remaining": "全六製品の当source/runの451。保留Main5・試験32（API4、Batch26、Storage2）、Root11、個別所見の適用、担当署名。Batchの残369物理は旧保留集合（直接53・推移316）に一致。",
+      "receiptConfirmedInCheckedSources": false,
+      "receiptDateJST": null,
+      "acceptanceId": null
+    },
+    {
+      "item": "C02",
+      "wbs": [
+        "WBS-C02-b"
+      ],
+      "owner": "運用・Unit担当",
+      "ready": "依存、保守受け口と終了条件の資料。",
+      "remaining": "専用受けUnit、現在所有、実効Unitと同bootのowned終端。",
+      "receiptConfirmedInCheckedSources": false,
+      "receiptDateJST": null,
+      "acceptanceId": null
+    },
+    {
+      "item": "F04",
+      "wbs": [
+        "F04"
+      ],
+      "owner": "基盤・haruka担当",
+      "ready": "既存の直接OS引渡しと適用条件の照合範囲。",
+      "remaining": "現在の利用権限・所有、同候補FileStore・実経路・Browser。",
+      "receiptConfirmedInCheckedSources": false,
+      "receiptDateJST": null,
+      "acceptanceId": null
+    }
+  ],
+  "repositoryReviewLookup": {
+    "localAndRemote": {
+      "refs/heads/dev-foundation": "8bb715d916aeca1c86e3bf0c3a6491389a8c7828",
+      "refs/heads/main": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "openDevFoundationPullRequests": [],
+    "checkedSources": "Published handoff and GitHub PR branch query; no inference on receipts outside these sources."
+  },
+  "latestScopeProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44782-current-inspector-ports-and-content-static/manifest.json",
+      "sha256": "b289090ec06d2497b5bbe1fc19015cdbd691100d37ffab6bd3f57bd64b2e495e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44790-web-metrics-static-and-batch-hold-boundary/manifest.json",
+      "sha256": "b0994f3cb100edf0b7ad69531d12b068a6ac7d4965f410372ac48c5ad54116ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44792-current-jdbc-helper-and-web-fixed-errors/manifest.json",
+      "sha256": "c6ad303d12b8f46916f71967507a633d6f32a66af45384819a0f468c932d3f4e"
+    },
+    {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG44788-current-web-reader-static-only/manifest.json",
+      "sha256": "e6eb58a15557adc4cbd543aa4bf5d4cdf2c7e1508c0ba7dfe83293c46226d803"
+    }
+  ],
+  "productResultsSinceLastRead": {
+    "referencedEarlierCounts": {
+      "latestRunDelta": 11,
+      "resumeExecuted": 839,
+      "resumeApplicable": 717,
+      "cumulativeExecuted": 4993,
+      "cumulativeApplicable": 4720,
+      "newProductTestsInThisAudit": 0,
+      "runs": [
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44704-question-owner-detail-current-four-templates/manifest.json",
+          "sha256": "e2f41da4fe94c651f54cd3e7e7c9149cc4c90c9e5e151000fd0e32f365fef8c6"
+        },
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44706-notification-detail-current-four-templates/manifest.json",
+          "sha256": "ab50027c0ebf088a767a648ed9b7d9fdb3900b422d178ab06f5178456537a6f8"
+        },
+        {
+          "path": "evidence/01_PT/009_NK-MED-001/evidence/PG44714-current-checksum-memory-four/manifest.json",
+          "sha256": "a3fd414679641712d2ae618d3622cd20c9b3dee56a6d1f4be1e848c1ad87c9eb"
+        }
+      ]
+    },
+    "checkpointDelta": [
+      {
+        "artifact": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44732-current-custom-metric-closed-value-fixtures/manifest.json",
+          "sha256": "feea8fe350f78b94ecb99eb71e45ecd0c7d5b3d2af4c7cd616d4065d90ecbcdf"
+        },
+        "execution": 3,
+        "applicable": 3
+      },
+      {
+        "artifact": {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG44738-context-hash-private-lock-usual-six/manifest.json",
+          "sha256": "9cbfcf33cccdebe1430cdc9131efc91493a065b517fe67e4c06650d6f412b773"
+        },
+        "execution": 6,
+        "applicable": 6
+      },
+      {
+        "artifact": {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG44754-codec-scope-and-duplicate-hasher-identified/manifest.json",
+          "sha256": "03551a93bdfdfb39c90bb443332644cbfec3dd065df8fb4aabcaa3304183c49b"
+        },
+        "execution": 4,
+        "applicable": 0
+      },
+      {
+        "artifact": {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG44760-current-api-authorization-value-two/manifest.json",
+          "sha256": "cab5e41182501e51d89c2bcbac5ce423c3cd4ec36a1cc2ee3ac20b18490f7510"
+        },
+        "execution": 2,
+        "applicable": 2
+      },
+      {
+        "artifact": {
+          "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG44768-current-auth-mapper-wire-three/manifest.json",
+          "sha256": "fa1c81916250c500ed7d6d8a69a9af79d8b1cfa63d9fef8c176e44d42bbea4e7"
+        },
+        "execution": 3,
+        "applicable": 3
+      },
+      {
+        "artifact": {
+          "path": "evidence/01_PT/008_NK-SCN-001/evidence/PG44772-current-scenario-result-projection-three/manifest.json",
+          "sha256": "6ef493f8cf0f44e6f34990c696d5fbd5d25cbc503f067e512b63c759f783e38d"
+        },
+        "execution": 3,
+        "applicable": 3
+      }
+    ],
+    "resumeExecuted": 860,
+    "resumeApplicable": 734,
+    "cumulativeExecuted": 5014,
+    "cumulativeApplicable": 4737,
+    "notQualifiedAcrossCore": true,
+    "formalProductProofsUnchanged": true
+  },
+  "sharedLatest": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-25T01:51:16+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "allocatedPp": null,
+  "actualTokens": null,
+  "effortRate": null,
+  "dates": {
+    "sourceWithProvedOutcome": "same local scoped evidence",
+    "shortDue": "2026-11-25T23:29:00+09:00",
+    "formalDue": "2026-12-02T23:29:00+09:00",
+    "reviewAt": "2026-12-06T18:00:00+09:00",
+    "firstWindowPlannedOriginalPricePp": 8.9,
+    "dec6PlannedOriginalPricePp": 16.65
+  },
+  "currentOfficial": {
+    "accepted": 16,
+    "original": 190,
+    "new": 0,
+    "priority": 0,
+    "designated": 0,
+    "earnedOriginalPricePp": 0,
+    "officialPT": 1964,
+    "officialScopes": 53,
+    "effortRate": null
+  },
+  "productExecutions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
