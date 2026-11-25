@@ -13,6 +13,8 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -21,6 +23,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -250,35 +254,81 @@ class AsyncJobMetricRecorderTest {
 
   @Test
   void asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth()
-      throws Exception {
-    try (var registry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
+      throws InterruptedException, ExecutionException {
+    try (var registry = new Registry();
+        var workers = new FixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
+      var first = new Snapshot(values(1, 2, 3, 4, 5));
+      var second = new Snapshot(values(10, 20, 30, 40, 50));
+      recorder.record(first);
+      var jobs =
+          java.util.stream.IntStream.range(0, 64)
+              .<Callable<Boolean>>mapToObj(
+                  i ->
+                      () -> {
+                        recorder.record(i % 2 == 0 ? first : second);
+                        var read = recorder.snapshot().orElseThrow();
+                        return read == first || read == second;
+                      })
+              .toList();
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+      assertEquals(15, first.totalJobs());
+      recorder.record(second);
+      assertSame(second, recorder.snapshot().orElseThrow());
+      double[] expected = {10, 20, 30, 40, 50};
+      for (int i = 0; i < STATES.length; i++)
+        assertEquals(expected[i], gauge(registry, STATES[i]), 0.0);
+      shape(registry);
+    }
+  }
+
+  @Test
+  void asyncGauge009CleanupRetainsFirstFailureAndStopsOnlyOnce() {
+    var calls = new ArrayList<String>();
+    var pool =
+        (ExecutorService)
+            Proxy.newProxyInstance(
+                ExecutorService.class.getClassLoader(),
+                new Class<?>[] {ExecutorService.class},
+                (proxy, method, arguments) -> {
+                  calls.add(method.getName());
+                  return switch (method.getName()) {
+                    case "shutdownNow" -> List.of();
+                    case "awaitTermination" -> {
+                      assertEquals(10L, arguments[0]);
+                      assertSame(TimeUnit.SECONDS, arguments[1]);
+                      yield false;
+                    }
+                    default -> throw new AssertionError(method.getName());
+                  };
+                });
+    AssertionError primary = new AssertionError("synthetic gauge assertion failure");
+    var observed =
+        assertThrows(
+            AssertionError.class,
+            () -> {
+              try (var workers = new FixtureWorkers(pool)) {
+                assertSame(pool, workers.executor());
+                throw primary;
+              }
+            });
+    assertSame(primary, observed);
+    assertEquals(1, observed.getSuppressed().length);
+    assertEquals("async metric fixture workers did not stop", observed.getSuppressed()[0].getMessage());
+    assertEquals(List.of("shutdownNow", "awaitTermination"), calls);
+  }
+
+  private record FixtureWorkers(ExecutorService executor) implements AutoCloseable {
+    @Override
+    public void close() {
+      executor.shutdownNow();
       try {
-        var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
-        var first = new Snapshot(values(1, 2, 3, 4, 5));
-        var second = new Snapshot(values(10, 20, 30, 40, 50));
-        recorder.record(first);
-        var jobs =
-            java.util.stream.IntStream.range(0, 64)
-                .<Callable<Boolean>>mapToObj(
-                    i ->
-                        () -> {
-                          recorder.record(i % 2 == 0 ? first : second);
-                          var read = recorder.snapshot().orElseThrow();
-                          return read == first || read == second;
-                        })
-                .toList();
-        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
-        assertEquals(15, first.totalJobs());
-        recorder.record(second);
-        assertSame(second, recorder.snapshot().orElseThrow());
-        double[] expected = {10, 20, 30, 40, 50};
-        for (int i = 0; i < STATES.length; i++)
-          assertEquals(expected[i], gauge(registry, STATES[i]), 0.0);
-        shape(registry);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+        if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+          throw new AssertionError("async metric fixture workers did not stop");
+        }
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new IllegalStateException("async metric fixture worker termination interrupted", interrupted);
       }
     }
   }
