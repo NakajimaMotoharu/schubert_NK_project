@@ -1,0 +1,75 @@
+{
+  "run": "PG44822",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "7abf907852c1146c944a07132982dadc1f784ca2",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "terminalAtUTC": "2026-11-25T02:37:22.459434+00:00",
+  "newlyExecuted": 0,
+  "exactExistingApplicable": 11,
+  "previousContext": "PG38242 accepted five negative requirements only under different candidate, no new PT or additive cumulative acceptance",
+  "newNullAway": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44822-web-security-audit-nullaway/terminal.json",
+    "sha256": "147763178d80cda8d083b4c20355b2e2597dc01c61b1e47cac951ee69432eb58"
+  },
+  "compilerInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44822-web-security-audit-nullaway/begin.json",
+    "sha256": "ae87cf53d7ccccf2f8819eab18cf11e1bd579ed19e1accf61bc0f65a3206c7f8"
+  },
+  "fixtureProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44822-web-security-audit-fixture-identity/terminal.json",
+    "sha256": "04909b26b1849b0ea8e9f165dbe9408fa1a9707aad12e14ba30c6b8a179e8f71"
+  },
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+  },
+  "identicalProtocolPhysical": {
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class": "a3e61c8d6ca6e132715714f82e215647b5bfc7c00d9dda967385ea8be6802338"
+  },
+  "verifiedExecutableWebPhysical": {
+    "dev/codex/schubert/nk/web/session/SessionPrincipal.class": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Route.class": "7e16609edfebc3e354a117b8162b0478039e7179a7ef9b24d638df2d1743029c",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAudit$Event.class": "a58423c9d40741625fc29e9d169d4be69447f79c4b81485575e6a83d6b1017a4",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAudit.class": "15eb95ec0e7d25f95881eea7fc648fa70f79f5f59c69a3b8ead8ee3c9eaf6c71"
+  },
+  "currentLoggingAndSessionNullability": "Two additional package-info annotation classes authenticated at source compile only",
+  "identicalFixturePhysical": {
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest$1.class": "192bd5daa8a0f09d5c469e559bc108c22a0a44f4a551bbdddb17e6b7b196fa30",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest$Logged.class": "7792361b575147d54e2b43ed3c9a1b7786d8f8622baa63d995ee5cc052b07488",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.class": "2f744e50afa729973967f5bf1ef209a2d84d329267ae71124a0d0174ef1dc510",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest$Golden.class": "d84f290c2343aa0281ab2be4a5a5d6a7b8b77cb638faa836bc94b7d8382e102b",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest$Bad.class": "50e89e62a4db9888998b5e45faede65903711d2005905ebe207646a53bbc6422",
+    "dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest$Sink.class": "9dd6df82514f0e75377e75176f16528499b674c7d95fbd85e8c4b679ebd16a95"
+  },
+  "originalJUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34652-security-audit11-independent-v1/sanitized-TEST-junit-jupiter.xml",
+    "sha256": "c9def68e63c8142225c1d6e5c1b884b1e4f4cce014ac20b92edf9e2c32229848"
+  },
+  "cases": [
+    "clockAndLoggerFailuresPropagateWithoutProviderDiagnostics()",
+    "concurrentRecordsKeepRequestIdsAndActorsSeparate()",
+    "actorSeparatorsAreRedactedAndContextNeverAppears()",
+    "allTenEventsMatchIndependentCatalogAndJsonSchema()",
+    "lockRetryBoundariesZeroOneAndNineHundredAreExplicit()",
+    "invalidMetadataNeverEmitsARecord()",
+    "versionOneAndSixtyFourAreRetainedAndInvalidFormatsReject()",
+    "nullConstructorAndRecordContractsReject()",
+    "secaud011ClosedEnumsHaveExactNamesLookupAndDefensiveArrays()",
+    "literalAddressesCanonicalizeWithoutDnsAndInvalidInputsDoNotLog()",
+    "allFiveRegisteredRoutesAndOptionalFieldsRemainClosed()"
+  ],
+  "productScope": "synthetic Logger port, fixed registered event/route enumeration, optional keys, identifier redaction and value validation; no request or auth path invoked",
+  "originalUnfilteredScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34654-security-audit11-unfiltered-same-exec-v1/manifest.json",
+    "sha256": "0c4fa6c894b34055ac54dcf8c18d1afa7fc751f70548bba80af41d736cf6aaaf"
+  },
+  "wholePriorDefaultFour100": false,
+  "currentCoverageExecution": false,
+  "staticApplicableInOriginal": 0,
+  "realSecurityCallerOrPersistentAudit": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newFormal": 0
+}
