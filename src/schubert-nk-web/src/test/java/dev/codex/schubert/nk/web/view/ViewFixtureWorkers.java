@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.web.view;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -22,6 +24,12 @@ public final class ViewFixtureWorkers implements AutoCloseable {
 
   public Future<?> submit(Runnable task) {
     return executor.submit(task);
+  }
+
+  public <T> List<Future<T>> invokeAll(
+      Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
+      throws InterruptedException {
+    return executor.invokeAll(tasks, timeout, unit);
   }
 
   @Override

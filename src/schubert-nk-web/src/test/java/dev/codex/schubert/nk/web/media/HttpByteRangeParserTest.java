@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -161,8 +162,7 @@ class HttpByteRangeParserTest {
 
   @Test
   void oneHundredConcurrentParsesHaveNoSharedState() throws Exception {
-    var workers = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
       List<Callable<HttpByteRangeParser.Selection>> tasks = new ArrayList<>();
       for (int index = 0; index < 100; index++) {
         int value = index;
@@ -179,9 +179,6 @@ class HttpByteRangeParserTest {
                 ? new HttpByteRangeParser.Partial(index, index)
                 : HttpByteRangeParser.Unsatisfiable.INSTANCE,
             results.get(index).get(10, TimeUnit.SECONDS));
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

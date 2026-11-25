@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import dev.codex.schubert.nk.protocol.file.ContentDisposition;
 import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
 import dev.codex.schubert.nk.protocol.file.MediaType;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -372,8 +373,7 @@ final class MediaRangePortTest {
               source.read(descriptor, operation);
             },
             1);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       Reply first = new Reply();
       var pending =
           workers.submit(
@@ -411,9 +411,6 @@ final class MediaRangePortTest {
       call(service, descriptor(ContentDisposition.INLINE), Optional.empty(), true, new Reply());
       assertEquals(2, source.opens);
       assertEquals(2, source.closes);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), "media range executor terminated");
     }
   }
 
