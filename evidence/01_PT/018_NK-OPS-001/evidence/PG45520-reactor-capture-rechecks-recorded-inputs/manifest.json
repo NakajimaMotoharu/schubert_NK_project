@@ -1,0 +1,91 @@
+{
+  "run": "PG45520",
+  "source": "f719a0dee0db891cb788767e9f00be922f5182d1",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G09",
+  "terminalAtUTC": "2026-11-25T18:37:51.365018+00:00",
+  "actualExit": 0,
+  "testIds": [
+    "PT-OPS-G09-RUN014",
+    "PT-OPS-G09-RUN015"
+  ],
+  "bugs": [
+    "BUG-3888",
+    "BUG-3889"
+  ],
+  "horizontal": "YKT-3012",
+  "originalRed": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/before.json",
+    "sha256": "45f49ce916f56cbf7617d21ea986e4d3fea9d2268fb6515d6e034b3aefbf8e35"
+  },
+  "originalRedLog": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/before.log",
+    "sha256": "23e8496875ccebee0812202fe760ae0390a95f43bb1e012025621e897e3bc851"
+  },
+  "firstFix": {
+    "source": "63a0906031d3e7fe780bc5a219322b9859af88c2",
+    "toolTests": 68,
+    "unit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/after.log",
+      "sha256": "a5c22229b1cc101da64e5e8844a9673c713011954953b55c6af387dd4e9f3b43"
+    },
+    "syntaxAndStatic": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/execution.json",
+      "sha256": "bba6a4d4e3e3d4844e9eb96f5fb21daa103b1a52d801e50949e1349c441a8214"
+    },
+    "diagnostic": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/shellcheck.log",
+      "sha256": "97bbe6c7e1376318cd041fbd00c6199f7857b7775a122b6aba9f9df779b3cc4b"
+    }
+  },
+  "finalAffectedFixture": {
+    "tests": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "output": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/final-runner.log",
+      "sha256": "600d69a5da815028b5c842f2bde79b3276f93d255a16ce4577c5be63c424a6c7"
+    }
+  },
+  "finalSyntax": {
+    "exit": 0,
+    "output": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/final-sh.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "finalStatic": {
+    "exit": 0,
+    "tool": {
+      "path": "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck",
+      "sha256": "311de5f94ecea1d98052ccdc94166591dce89e031e7357debd2f3213b547f7df"
+    },
+    "output": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/final-shellcheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "finalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45520-reactor-check-after-evidence-capture/terminal.json",
+    "sha256": "6ec17639ee2900af0abeaedc8b42c249a0226dc9119ea34dbc08afea3229d4b9"
+  },
+  "script": {
+    "path": "tools/quality/030_run_pgpt_verify.sh",
+    "sha256": "d85e068e99382e045f3f9979ac5c8ae18558e048338c05b1f4948eb9fa63c735"
+  },
+  "unit": {
+    "path": "tools/quality/tests/test_pgpt_verify_runner.py",
+    "sha256": "b3a8920b3ff1d35f8d5c2a11d1875c4a6d22e214d2a36ee9e56ec4fd2b370edf"
+  },
+  "actualProductTests": 0,
+  "actualMavenRuns": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "fixedPostCaptureConditions": [
+    "commit equality",
+    "branch equality",
+    "clean checkout"
+  ],
+  "classification": "comparison after evidence capture; existing checkout lock contract retained"
+}

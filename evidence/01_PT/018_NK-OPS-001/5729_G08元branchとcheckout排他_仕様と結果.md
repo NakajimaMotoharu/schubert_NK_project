@@ -13,3 +13,5 @@ BUG-3884／YKT-3006、PT-OPS-G09-JUNIT026。現collector 003・005・007～010�
 PT-OPS-G09-JUNIT027（BUG-3886／YKT-3010）。新規収集のsourceは完全なGit commit object。合成repoのHEAD別名・短縮参照・treeを拒否し、完全commit、元の追跡／未追跡の範囲を保持。工具65成功。 [PG45516](evidence/PG45516-collection-full-git-commit-identity/manifest.json)
 
 PT-OPS-G09-JUNIT028（BUG-3887／YKT-3011）。正式子28の合成型7種を個別判定し、整数0のみ受理。元56誤受理を修正。親018の従来型判定を独立7例で同等確認し、003・006の平文契約は同一。工具66成功。 [PG45518](evidence/PG45518-formal-collection-integer-success/manifest.json)
+
+PT-OPS-G09-RUN014/015（BUG-3888/3889、YKT-3012）。品質採取中の合成入力追加・同commit branch変更を検出し、既claimと原IDを保全して終了1。比較の前後で固定commit/branch/cleanを検査。初回静的SC2319二件を修正して現runner15・ShellCheck0。別sourceの68は履歴。 [PG45520](evidence/PG45520-reactor-capture-rechecks-recorded-inputs/manifest.json)
