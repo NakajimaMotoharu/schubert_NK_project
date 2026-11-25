@@ -77,6 +77,12 @@ final class GateContractValidator {
   static ValidationResult validate(
       Path projectRoot, Path firstRun, Path secondRun, Path comparisonReport)
       throws IOException, NoSuchAlgorithmException {
+    return validateComparisonSnapshot(projectRoot, firstRun, secondRun, read(comparisonReport));
+  }
+
+  static ValidationResult validateComparisonSnapshot(
+      Path projectRoot, Path firstRun, Path secondRun, JsonNode comparison)
+      throws IOException, NoSuchAlgorithmException {
     Path resources = projectRoot.resolve("program/characterization/tests/resources");
     JsonNode contract = read(resources.resolve("cases/gate-contract.json"));
     JsonNode catalog = read(resources.resolve("cases/catalog.json"));
@@ -94,8 +100,6 @@ final class GateContractValidator {
         read(projectRoot.resolve("program/characterization/reports/preflight.json"));
     JsonNode review =
         read(projectRoot.resolve("program/characterization/reports/review-record.json"));
-    JsonNode comparison = read(comparisonReport);
-
     List<String> failures =
         new ArrayList<>(
             validateDefinitions(contract, catalog, schema, differences, browser, requirements));

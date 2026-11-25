@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PT-CHR-SYN001..007 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
+/** PT-CHR-SYN001..008 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
 final class GateSyntheticRunPortTest {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path OWN_INPUT = Path.of(System.getProperty("chr.unitProjectRoot"));
@@ -42,6 +42,27 @@ final class GateSyntheticRunPortTest {
     assertEquals(0, result.metrics().get("failureCount"));
     assertThrows(UnsupportedOperationException.class, () -> result.failures().add("change"));
     assertThrows(UnsupportedOperationException.class, () -> result.metrics().put("change", 1));
+  }
+
+  @Test
+  void comparisonSnapshotUsedForDisplayAndValidationSurvivesReplacementOfTheFile()
+      throws Exception {
+    Path root = fixture("comparison-snapshot");
+    Path comparison = root.resolve(PREFIX + "reports/current-repeat-comparison.json");
+    var displayed = JSON.readTree(comparison.toFile());
+    assertEquals("PASS", displayed.path(STATUS).asText());
+    ObjectNode replacement = displayed.deepCopy();
+    replacement.put(STATUS, "FAIL");
+    JSON.writeValue(comparison.toFile(), replacement);
+
+    var captured =
+        GateContractValidator.validateComparisonSnapshot(
+            root, root.resolve(FIRST), root.resolve(SECOND), displayed);
+    var latest = validate(root);
+
+    assertTrue(captured.passed());
+    assertEquals(List.of("COMPARE_STATUS"), latest.failures());
+    assertEquals("PASS", displayed.path(STATUS).asText());
   }
 
   @Test

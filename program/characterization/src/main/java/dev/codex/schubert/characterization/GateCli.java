@@ -361,7 +361,7 @@ public final class GateCli {
       throws IOException, NoSuchAlgorithmException {
     JsonNode compare = JSON.readTree(comparison.toFile());
     GateContractValidator.ValidationResult validation =
-        GateContractValidator.validate(projectRoot, first, second, comparison);
+        GateContractValidator.validateComparisonSnapshot(projectRoot, first, second, compare);
     List<String> failures = new ArrayList<>(validation.failures());
     List<String> secretHits = secretScan(projectRoot, pathProperty("chr.usersFile"));
     if (!secretHits.isEmpty()) failures.add("SECRET_SCAN");
