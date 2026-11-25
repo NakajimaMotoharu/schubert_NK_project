@@ -1,0 +1,84 @@
+{
+  "source": "5e1d2fc613d3f442101b0498f078d0639607767e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "run": "PG45712",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "WBS-P017-05/2"
+  ],
+  "terminalAtUTC": "2026-11-25T22:53:35.391235+00:00",
+  "actualExit": 0,
+  "testId": "PT-BAT-180",
+  "tests": 1,
+  "failed": 0,
+  "error": 0,
+  "skip": 0,
+  "bug": "BUG-3919",
+  "preflightFirst": "helper Path type and later guard rejected absolute SHA256 plan; no compiler/PMD/JUnit started in either",
+  "beforeFixLedger": "c9f0463d3cc4cadd391cc3513d43ea2ed8252789",
+  "scope": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45712-manifest-schema-version-boundaries-only-v3/guard.json",
+    "sha256": "56587048f2daa0eba9c32e6b5fe57e962ca466baeefa705090eea8c0cc575806"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45712-manifest-schema-version-boundaries-only-v3/begin.json",
+    "sha256": "4c456b6ba8e33cb151b9e3d074273d52ae9864f08c977a30656d50514ebae6ca"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45712-manifest-schema-version-boundaries-only-v3/terminal.json",
+    "sha256": "e7c2bfbede0e6f82cd118e6963a03e6af92363b8b497953b15aaf6be710fb4e0"
+  },
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "xml": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45712-backup-schema-boundary-single-pmd/junit-sanitized.xml",
+    "sha256": "644f4a9dd454610c01a2f24fd424b88e46546e39381b9b2c417471aeb7c9e212"
+  },
+  "raw": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45712-backup-schema-boundary-single-pmd/coverage-unfiltered.tsv",
+    "sha256": "f5626d23cd735b53b754235786556df997027b226ed19a05c22bd2c9ce77bd9f"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45712-manifest-schema-version-boundaries-only-v3/pmd.xml",
+    "sha256": "d0c3b5dbda4c5521b550328b2db3defb43ee9d51353faa4dc2ef9b29c586d7db"
+  },
+  "pmdExit": 4,
+  "pmdRules": [
+    {
+      "rule": "DoNotUseThreads",
+      "line": "266"
+    }
+  ],
+  "avoidLiteralsBefore": 1,
+  "avoidLiteralsAfter": 0,
+  "sameIndependentAcceptedTokens": [
+    "001",
+    "999"
+  ],
+  "sameIndependentRejectedSchema": [
+    "",
+    "000",
+    "1",
+    "01",
+    "1000",
+    "+01",
+    "a01",
+    "００１"
+  ],
+  "alertIntent": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45686-current-five-alert-owned-worker-regressions/manifest.json",
+      "sha256": "2617833e0604b5acb1dcd1b7334ffe0f1c76b1caf5bddc02b305017e6809ed92"
+    },
+    "findingRetained": true,
+    "scope": "AlertLifecycleTest.alert009",
+    "basis": "Caller holds the public client monitor while other threads operate; removing the synchronized block would drop this independent private-lock oracle.",
+    "ownerSignoff": null
+  },
+  "previousBackup18NotReplayed": true,
+  "cumulativeProductTrialsGross": 2906,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
