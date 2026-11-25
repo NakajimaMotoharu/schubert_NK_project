@@ -1,0 +1,1817 @@
+{
+  "source": "9bf2816c5deb003dc7635e3b4506d07de27bb4a0",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalRd": {
+    "RD131": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "RD141": {
+      "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+      "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "RD171": {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  },
+  "supplementedContexts": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java": {
+      "currentGitBlob": "ec8baab489c45ee7b8a0ea3fb915c781f7b81952",
+      "originalOwner": "WBS-C02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44972-c02-marker-future-then-observed/manifest.json",
+          "sha256": "04be682f8f1e6698539efebb45767f6c8067bbe8ad7931cf0f9151ea58880a48"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45002-g13-two-current-ops-test-deltas/manifest.json",
+          "sha256": "e06314f771b85f00fe2ceccc62b98f44fc65eac0fe77caafcd4cf61f2e528a83"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java": {
+      "currentGitBlob": "25277b966eb0619e0c5b449954929d5c5df2a467",
+      "originalOwner": "WBS-C02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44972-c02-marker-future-then-observed/manifest.json",
+          "sha256": "04be682f8f1e6698539efebb45767f6c8067bbe8ad7931cf0f9151ea58880a48"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45002-g13-two-current-ops-test-deltas/manifest.json",
+          "sha256": "e06314f771b85f00fe2ceccc62b98f44fc65eac0fe77caafcd4cf61f2e528a83"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java": {
+      "currentGitBlob": "5c8378cef2ec3dd589e3970c32b2eef467b6f17b",
+      "originalOwner": "WBS-C02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-007",
+        "OPS-008"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44972-c02-marker-future-then-observed/manifest.json",
+          "sha256": "04be682f8f1e6698539efebb45767f6c8067bbe8ad7931cf0f9151ea58880a48"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45002-g13-two-current-ops-test-deltas/manifest.json",
+          "sha256": "e06314f771b85f00fe2ceccc62b98f44fc65eac0fe77caafcd4cf61f2e528a83"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": {
+      "currentGitBlob": "8581b7c3f675e8b729b56307046706baef63f1b1",
+      "originalOwner": "WBS-P017-01",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java": {
+      "currentGitBlob": "898d594ed77d77817f04bb74cfdc8286e035f075",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java": {
+      "currentGitBlob": "c542241b522833fe101de1dbb4d97dc972748331",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupProfile.java": {
+      "currentGitBlob": "b2b03fcd38973f76b123b40cd3f4ef253cb1c1b3",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java": {
+      "currentGitBlob": "f79ed36724bdd7ad4fe878c9a20b18bfb8e28d21",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java": {
+      "currentGitBlob": "5cf837b57b6e13cf4f24d782ce3debf621c8d41c",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java": {
+      "currentGitBlob": "fb121f95d2c41b9f5bdc7e7c2168f4d527f36e1a",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java": {
+      "currentGitBlob": "98fbad2d10b0c0062199f5b43322f9e94ad6bffe",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundleCompletion.java": {
+      "currentGitBlob": "1883ff762eb31ba31e7a9ccfc0cdacc1a7e22a19",
+      "originalOwner": "WBS-P017-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-001",
+        "BAK-002",
+        "BKO-001",
+        "OPS-005"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupBundlePublisher.java": {
+      "currentGitBlob": "98b8ff97463b6d361d204e4ce589bab920b72b91",
+      "originalOwner": "WBS-P017-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-001",
+        "BAK-002",
+        "BKO-001",
+        "OPS-005"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java": {
+      "currentGitBlob": "f60a0a043e603cf3430ec8aea330b7e288b862d8",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java": {
+      "currentGitBlob": "c8edd992afe3359f63b7145441b379d21770aded",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java": {
+      "currentGitBlob": "38d3661390d7c33c6df0de59f9718c0f36852280",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java": {
+      "currentGitBlob": "ae34c02bff9250a83f4f42628bc0621adb89b442",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java": {
+      "currentGitBlob": "c790a464530674c46f1395319300cef0fed0f879",
+      "originalOwner": "WBS-P018-01",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java": {
+      "currentGitBlob": "1756dfb861a8a2cec3c35c9d9005ff03f4765eb1",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java": {
+      "currentGitBlob": "fb9e69e2491c5525800df6b4e47412e9b8bde3ee",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java": {
+      "currentGitBlob": "78875cd8f121be498e87b00e8fd70482c41d641c",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java": {
+      "currentGitBlob": "d8729a28f5b24277d27fb284989e854fce57517a",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java": {
+      "currentGitBlob": "2e418618783671744333cdcb3f1cf36a6046535f",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupPreflight.java": {
+      "currentGitBlob": "f4f95ab2e31e20a1b47ea7a503d663ade00c0bfb",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java": {
+      "currentGitBlob": "111b008cb13d1bb4e8ee577e643311af4034c906",
+      "originalOwner": "WBS-P017-08",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-013",
+        "OPS-014",
+        "OPS-015",
+        "OPS-016",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java": {
+      "currentGitBlob": "11d14561e267cc96985823314a0766fccc22e55f",
+      "originalOwner": "WBS-P004-03",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java": {
+      "currentGitBlob": "e3063de3ffce217d5fdbbeb6141a60f9c05fe005",
+      "originalOwner": "WBS-P018-01",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java": {
+      "currentGitBlob": "9cd7e9d41f1922a7a3fe55333351b1af1b5f1002",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java": {
+      "currentGitBlob": "6eb3471efad8ff4357bc60e310581ccba3bc0138",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java": {
+      "currentGitBlob": "b6ebf3ca653fcd88d0f19235711d81da757c1257",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java": {
+      "currentGitBlob": "716ae960b786a5635a1c863644a0f10cb460b094",
+      "originalOwner": "WBS-P004-03",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java": {
+      "currentGitBlob": "baaee7a438f5abc3d4b50f4f6b6d769dd736bcd1",
+      "originalOwner": "WBS-P004-03",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupCompletion.java": {
+      "currentGitBlob": "b282c787ce9721917e0e02562b913a28f8c835b9",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparation.java": {
+      "currentGitBlob": "bffa2659a6575b8cf235bfc6082474a6bc4bab79",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.java": {
+      "currentGitBlob": "1158ef149f4a991752bc55a8d4f6195e93015ffd",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRetention.java": {
+      "currentGitBlob": "4b6ca2cff46b6ebf600d44beb4117ba5d8b0a05d",
+      "originalOwner": "WBS-P017-05",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-006",
+        "BKO-005",
+        "BKO-006"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupReuse.java": {
+      "currentGitBlob": "a0fd986be5ec0690f33d684b28279f614637800e",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupStage.java": {
+      "currentGitBlob": "24f140c43a53fafbc207385b84e314fbac1fe1cd",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java": {
+      "currentGitBlob": "7fcbcf824ebb265abaa89711b51d259fe22e407f",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningControlScope.java": {
+      "currentGitBlob": "f19cb92cf81f01266464792c55081381fee78f2f",
+      "originalOwner": "WBS-P017-01",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java": {
+      "currentGitBlob": "a1581fcd4871fae009898c1601fc0cb60abfbba6",
+      "originalOwner": "WBS-P017-11",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "MQ-010",
+        "OPS-010",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java": {
+      "currentGitBlob": "6acedb485091cfb6870baad756330c21f8531447",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java": {
+      "currentGitBlob": "98f03b9fd982fe3dd0da2164cec7130aff37c886",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java": {
+      "currentGitBlob": "85e50a5e3eeb091f6fb890a9c8fe9f1cbaaf38af",
+      "originalOwner": "WBS-P017-01",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootBatchCredentialReader.java": {
+      "currentGitBlob": "9a924565c4060dba4940e80f429382fe6872b728",
+      "originalOwner": "WBS-P018-01",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceCredentialSource.java": {
+      "currentGitBlob": "7a63c30de13c03ffcdff12a5d13b469837074a4a",
+      "originalOwner": "WBS-P018-01",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java": {
+      "currentGitBlob": "f4c6a7b9e2f6036768785e670da54adc32fca2c1",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": {
+      "currentGitBlob": "3096a54e6be14a47fd683f4de6e4668fa3bb6dc5",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java": {
+      "currentGitBlob": "ae8e7f40036bc738e1032c575bc1c639b7d729f6",
+      "originalOwner": "WBS-P017-11",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "MQ-010",
+        "OPS-010",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.java": {
+      "currentGitBlob": "db86d8d965e777f8eac0f0a02c257726098190b0",
+      "originalOwner": "WBS-P017-11",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "MQ-010",
+        "OPS-010",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java": {
+      "currentGitBlob": "e84c26c6400c8093f2b49da0ee2683727ffef099",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java": {
+      "currentGitBlob": "e3e56a47cf38bb3a55d9f4170fd583c96a8c1f00",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java": {
+      "currentGitBlob": "caf2f760860957b03b757e685f9cdf25ced1acf2",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java": {
+      "currentGitBlob": "ff4c8bfec86a9d60b7f3a4b07cf05025a7a9351e",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.java": {
+      "currentGitBlob": "6a531f3f929ebe72ed33828f2a88cf0bed8a9a19",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": {
+      "currentGitBlob": "b88ea93538e87f64c06684256e85807476596eb6",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java": {
+      "currentGitBlob": "683c1075cda4da02c3779482cd147782b021574e",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java": {
+      "currentGitBlob": "13dafdcc3db82f6ad4b66718d8d39e7cf9dfaf0f",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java": {
+      "currentGitBlob": "3cceff51aaefde935794f39acce30ccfe744f5fc",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java": {
+      "currentGitBlob": "7c91185221705faf2d1affb35312330167a2b4c7",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": {
+      "currentGitBlob": "16ae0d8439021b78139b198d3c37cde61ce41e57",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java": {
+      "currentGitBlob": "a0779e7f6072893db11c2cf79368936b15d74be5",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java": {
+      "currentGitBlob": "a01e9a43bf54eed51ba3703da570a59014d8e3d6",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest.java": {
+      "currentGitBlob": "f27e402280fb1c13c432007ce26ee2c4bcf05816",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java": {
+      "currentGitBlob": "72ae66243ac445522d20c47cb09db0f20732f096",
+      "originalOwner": "WBS-P018-01",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java": {
+      "currentGitBlob": "ce24891c0ab9817d2b19e8d943487ac088bcd6a4",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java": {
+      "currentGitBlob": "13c0013a127cce14a694c3294ee6a7664cd41c01",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java": {
+      "currentGitBlob": "509aa8bade932667824d2b11f878171971dc7f3f",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": {
+      "currentGitBlob": "f48482b035fdb7e07ceedf9eb8867ecc82cb14c3",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java": {
+      "currentGitBlob": "359dcd8c3d04623d47415439cc19d84251048ff3",
+      "originalOwner": "WBS-P004-04",
+      "designDependencies": [
+        "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "OPS-005",
+        "MON-003",
+        "MON-004"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java": {
+      "currentGitBlob": "1cd44a15fa9fe157b15a689901739ffe227fef1b",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java": {
+      "currentGitBlob": "34d834df1d5b8e1a90cc6cfc49cd6bdf3c0f1efe",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java": {
+      "currentGitBlob": "5f1e9799f772afb0ea847a1aa66dc8413cccfa99",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination.java": {
+      "currentGitBlob": "80466cce3895b48d3a6c9fe9be756cf8a9a72fe4",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java": {
+      "currentGitBlob": "cccb853186754029f19061b41a1235d433aeafc6",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java": {
+      "currentGitBlob": "66f98888331386a8a7d26238277e7adf1fc77f60",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java": {
+      "currentGitBlob": "ebfd1f6af60ef0222f50337c650e652556b17ed3",
+      "originalOwner": "WBS-P018-07",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java": {
+      "currentGitBlob": "8b4236d007d8f5ddd2782b88f99710781303eb31",
+      "originalOwner": "WBS-P018-07",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java": {
+      "currentGitBlob": "bf942d94fa8b8f994f688c22807117f598f2382b",
+      "originalOwner": "WBS-P017-10",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "MQ-001",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java": {
+      "currentGitBlob": "36268032f003919d27f3ef280a4d0ee103c711c5",
+      "originalOwner": "WBS-P018-07",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "MON-001"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java": {
+      "currentGitBlob": "b6efb24c32209daa1d24200583230a1f32cf8c95",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java": {
+      "currentGitBlob": "a9186e2743a615685fde837fbe5df69f6850ec65",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java": {
+      "currentGitBlob": "90983126a3ad14afa5abfca27212124c564b4ab6",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": {
+      "currentGitBlob": "8704c6a7407bee6134410a7c76883d6f571400cb",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": {
+      "currentGitBlob": "5fb2980bc9a5a640c9007fb676dd71246585d0e9",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java": {
+      "currentGitBlob": "1aaac905fbe87db98c0e23bf1d7a118ac1fa23ef",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java": {
+      "currentGitBlob": "2e40f91efbf0d255b1ec30e155ba284304dafb5c",
+      "originalOwner": "WBS-P018-04",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md"
+      ],
+      "requirementContext": [
+        "OPS-001",
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java": {
+      "currentGitBlob": "604bca4999d9cbce2b88ec0f54726344cf6da673",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java": {
+      "currentGitBlob": "02b7718a8ddbcc283b62a8d9f97c9225e0b5a6d0",
+      "originalOwner": "WBS-P017-06",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "BAK-008",
+        "BKO-003",
+        "BKO-007",
+        "BKO-008",
+        "OPS-017"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": {
+      "currentGitBlob": "5c0987b1dfd3fd8cb1b4cf07cf7040f03facd3a7",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": {
+      "currentGitBlob": "bc00199bd482342a83d9bb8986ff010831d0f1d0",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java": {
+      "currentGitBlob": "bb4231da3ade304c9bcd0423c6e16c330cda862b",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": {
+      "currentGitBlob": "64b87ecba8690eaa90da533e51fc3f59f9600a58",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": {
+      "currentGitBlob": "48d4c8e7bc160f7d22703d44ee0074b0cb1382a2",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java": {
+      "currentGitBlob": "97a228ea582fca35b7f9aa32c37e94072ae1be69",
+      "originalOwner": "WBS-P017-11",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "MQ-010",
+        "OPS-010",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": {
+      "currentGitBlob": "79ff5ef37b76f562791350a825a7b974c14863fe",
+      "originalOwner": "WBS-P004-02",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java": {
+      "currentGitBlob": "e4ac867337b93e7fe5918af99377ed5665c16e69",
+      "originalOwner": "WBS-P004-02",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-002",
+        "MON-003"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": {
+      "currentGitBlob": "e597b113db6cf060023c350820a402cf4ce40431",
+      "originalOwner": "WBS-P017-01",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": {
+      "currentGitBlob": "73fbd0b1fd25313507f50f5dce155acb16092d3d",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java": {
+      "currentGitBlob": "9e48e1d01f258dae40245039ba282df021031915",
+      "originalOwner": "WBS-P004-03",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java": {
+      "currentGitBlob": "4d697a5eeeb55a16eca0bd21ba3037876b3c94bb",
+      "originalOwner": "WBS-P017-02",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44960-current-batch-repository-two-spotbugs/manifest.json",
+          "sha256": "a1f4ad1c1bd06456d3775403b0981d64a42f3158bd2dad175da2598cbd4e8e30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44962-current-batch-repository-typed-pmd/manifest.json",
+          "sha256": "9b2c2e4d5c8bfdfdbab7c8f03a285d30e58d25301506697bb242e8e3d8034c50"
+        }
+      ],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java": {
+      "currentGitBlob": "7449a97a44377d03a8e7aa1d245f8d86518eadee",
+      "originalOwner": "WBS-P017-01",
+      "designDependencies": [
+        "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md"
+      ],
+      "requirementContext": [
+        "OPS-009",
+        "OPS-010",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": {
+      "currentGitBlob": "28274078a2bca6e71fa593a8b8e36ebd28f2515a",
+      "originalOwner": "WBS-P004-03",
+      "designDependencies": [
+        "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md"
+      ],
+      "requirementContext": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-011"
+      ],
+      "relatedOwnerScopedObservations": [],
+      "testStatus": "proof referenced at responsibility level only",
+      "requiresMethodAndRealScopeFollowUp": true
+    }
+  }
+}
