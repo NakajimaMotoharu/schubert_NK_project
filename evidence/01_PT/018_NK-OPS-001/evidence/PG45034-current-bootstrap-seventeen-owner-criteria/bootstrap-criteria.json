@@ -1,0 +1,350 @@
+{
+  "source": "337305974c6249054d0d9377d3015f360dd366c8",
+  "productionCoreMain": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "canonicalDesign": {
+    "RD111": {
+      "path": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "RD171": {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    },
+    "SS343": {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "430bccc860baee8b20f44ead63312247adf55a09d9d55b310ed750547f150519",
+      "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+    }
+  },
+  "criterionRows": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java": {
+      "gitBlob": "4a3b49773e1d54e470141916f0f5231679273cb9",
+      "owner": "WBS-P018-01",
+      "contextRequirements": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/file/AesCredentialFile.class"
+      ],
+      "restrictedEvidenceKind": "CREDENTIAL_OWNER_HELD",
+      "missingTerminal": "approved owner runtime; no prior key inputs transferred",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java": {
+      "gitBlob": "07c53c615ac9f1ede4661426d742e01e273e1d54",
+      "owner": "WBS-P018-03",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$Inputs.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$InspectorIdentity.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$Io.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$MaintenanceParent.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$NativeIo.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$Observed.class",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_BOOT_IDENTITY",
+      "missingTerminal": "same-boot active child and exact parent evidence",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java": {
+      "gitBlob": "548985cdc949249bd90672832df9054ca5bf61c0",
+      "owner": "WBS-P018-08",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold$1.class",
+        "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold$Calls.class",
+        "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold$Removal.class",
+        "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.class"
+      ],
+      "restrictedEvidenceKind": "NATIVE_HELD",
+      "missingTerminal": "native boot and raw stream owner",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java": {
+      "gitBlob": "7e8722a191aebb06fd8675407cdfb056936bb278",
+      "owner": "WBS-P018-04",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity$NativeQuery.class",
+        "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity$Query.class",
+        "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity$Start.class",
+        "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity$Value.class",
+        "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.class"
+      ],
+      "restrictedEvidenceKind": "APPROVED_EFFECTIVE_HOST_IDENTITY",
+      "missingTerminal": "authorized owner proof; no native runtime",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java": {
+      "gitBlob": "669bb92d2977be908f16422c1287ee6e0cd4e6d5",
+      "owner": "WBS-P018-01",
+      "contextRequirements": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.class"
+      ],
+      "restrictedEvidenceKind": "CREDENTIAL_OWNER_HELD",
+      "missingTerminal": "current owned credential lifecycle; no key anywhere in public proof",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": {
+      "gitBlob": "803b74d69195f4eb92af756a4bf24df328bd8897",
+      "owner": "WBS-P018-01",
+      "contextRequirements": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io.class",
+        "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Metadata.class",
+        "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$NioIo.class",
+        "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Snapshot.class",
+        "dev/codex/schubert/nk/api/file/InspectorCredentialLoader.class"
+      ],
+      "restrictedEvidenceKind": "CREDENTIAL_OWNER_HELD",
+      "missingTerminal": "current approved credential path and ownership with protected operations",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": {
+      "gitBlob": "ea96723cb8d91c59a88b46c46b674f3c69215019",
+      "owner": "WBS-P018-01",
+      "contextRequirements": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.class"
+      ],
+      "restrictedEvidenceKind": "CREDENTIAL_OWNER_HELD",
+      "missingTerminal": "current owned credential lifecycle; no key anywhere in public proof",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java": {
+      "gitBlob": "1e898b066cc2f088731a672f87c157640e204dc2",
+      "owner": "WBS-P018-03",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Clock.class",
+        "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class",
+        "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent.class",
+        "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$ParentProbe.class",
+        "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_BOOT_IDENTITY",
+      "missingTerminal": "current authorized maintenance owner and close",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java": {
+      "gitBlob": "68565193f03034493dc5c8bc2e88574462d3ad8d",
+      "owner": "WBS-P018-08",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$FileCalls.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$FileState.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$Identity.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$Io.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$NativeFileCalls.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$NativeIo.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile$ReadOnlyObservation.class",
+        "dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.class"
+      ],
+      "restrictedEvidenceKind": "NATIVE_HELD",
+      "missingTerminal": "current source file capability and native run owner",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": {
+      "gitBlob": "19e7833b01d03fb8303893110c64c3217c8506ee",
+      "owner": "WBS-P018-02",
+      "contextRequirements": [
+        "OPS-009",
+        "SYS-011"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification$FileValue.class",
+        "dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification$JarValue.class",
+        "dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.class"
+      ],
+      "restrictedEvidenceKind": "SIGNED_FILE_OWNER",
+      "missingTerminal": "fresh same-owner approved runtime read and terminal",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": {
+      "gitBlob": "e6c7ffe8693cb17548c9ba4b5766c8db6086c30d",
+      "owner": "WBS-P019-01",
+      "contextRequirements": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class"
+      ],
+      "restrictedEvidenceKind": "PARTIAL_CURRENT_RECORD_AND_METHOD",
+      "missingTerminal": "actual JDBC version/ownership; Row has five explicit method bindings",
+      "approvedLocalScope": {
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44144-schema-row-five-individual-methods/manifest.json",
+          "sha256": "65d3e6e4eecc1992b9efd22b91b906e665c6b35ed1dd537ae863c77cb3834135"
+        },
+        "cases": [
+          "PT-OPS-SCHEMAROW001",
+          "PT-OPS-SCHEMAROW002"
+        ],
+        "layer": "record methods only"
+      }
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java": {
+      "gitBlob": "728a8414d327a82ae4ca73bb5294ec1598d31570",
+      "owner": "WBS-P018-01",
+      "contextRequirements": [
+        "OPS-005",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/file/ServiceCredentialSet.class"
+      ],
+      "restrictedEvidenceKind": "CREDENTIAL_OWNER_HELD",
+      "missingTerminal": "current approved service credentials owner",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": {
+      "gitBlob": "4e9cc21869210b76301a2c95ee00d877cb79094f",
+      "owner": "WBS-P018-05",
+      "contextRequirements": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_DB_PROTOCOL",
+      "missingTerminal": "same-source JDBC same-owner proofs and applicability boundary",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": {
+      "gitBlob": "0adb00672e5270d863aff178ce0c31477c550473",
+      "owner": "WBS-P018-05",
+      "contextRequirements": [
+        "SYS-004",
+        "OPS-009"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector.class",
+        "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$StateAction.class",
+        "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_DB_PROTOCOL",
+      "missingTerminal": "same-source runtime datasource binding qualification",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java": {
+      "gitBlob": "1f96ee53cf4dc261ce6ee2874c30d23ec1000a4e",
+      "owner": "WBS-P018-04",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources$Inputs.class",
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources$Operation.class",
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources$PoolFactory.class",
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources$SourceFactory.class",
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_BOOT_IDENTITY",
+      "missingTerminal": "current ordinary resource lifecycle; local parts alone do not qualify whole type",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java": {
+      "gitBlob": "aa9b4ceb4a3fd76f9509fa9b3d8fa751dc593d6f",
+      "owner": "WBS-P018-03",
+      "contextRequirements": [
+        "OPS-003",
+        "OPS-009",
+        "OPS-012"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Admitted.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$ConfigSource.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Configuration.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$ConfiguredOperation.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$DescriptorGate.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Information.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeGate.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeObservation.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Observation.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Operation.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Ready.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$ReadyOnce.class",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.class"
+      ],
+      "restrictedEvidenceKind": "CURRENT_BOOT_IDENTITY",
+      "missingTerminal": "current application start/stop associated ownership",
+      "approvedLocalScope": null
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": {
+      "gitBlob": "84e43a017ed93841d58a7998d44e9892e134d39b",
+      "owner": "WBS-P018-02",
+      "contextRequirements": [
+        "OPS-009",
+        "SYS-011"
+      ],
+      "physicalNames": [
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$ApplicationOperation.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Io.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$ManifestValue.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$NioIo.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$ReleaseOperation.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Snapshot.class",
+        "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.class"
+      ],
+      "restrictedEvidenceKind": "PARTIAL_LOCAL_CONTENTS",
+      "missingTerminal": "actual release/version/config-owned reads",
+      "approvedLocalScope": {
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44342-existing-bootstrap-public-contents-exact/manifest.json",
+          "sha256": "eefc148ee4d2d484d13cbac2df41e34277e44edeb8e6ebf82d42f7c9bf91ac2b"
+        },
+        "cases": [
+          "PT-OPS-RELEASE-CONTENTS001..008"
+        ],
+        "layer": "synthetic public data record only"
+      }
+    }
+  },
+  "localTestContext": {
+    "PT-OPS-SCHEMAROW001": "SchemaHistoryAdmission.Row field projections",
+    "PT-OPS-SCHEMAROW002": "SchemaHistoryAdmission.Row equals",
+    "PT-OPS-RELEASE-CONTENTS001..008": "immutable synthetic Contents"
+  }
+}
