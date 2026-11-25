@@ -1,0 +1,70 @@
+{
+  "run": "PG44754",
+  "source": "9f640e747677c279a58989b2881e222678f0631f",
+  "productionCore": "34427a4ef823dc4ff92955eb39428d7fe40c9b8a",
+  "wbs": "WBS-P007-03/2",
+  "terminalAtUTC": "2026-11-25T01:03:13.825291+00:00",
+  "actualExit": 0,
+  "actualProductExecutions": 4,
+  "successfulExecution": 4,
+  "formalOrNewIndependentCriteria": 0,
+  "repeatedHashingCases": 4,
+  "informationalCurrentTestIds": {
+    "PT-AUT-002-01": "fixedSaltIndependentPbkdf2VectorAndNfcMatch",
+    "PT-AUT-002-02": "encodeUsesFreshSaltAndFull256BytePassword",
+    "PT-AUT-002-03": "invalidStoredGenerationAndInputsAreBoundedAndConsumed",
+    "PT-AUT-HASHFAULT001": "hashfault001EncoderFailureConsumesCallerAndObservedNormalizedBuffer"
+  },
+  "existingExactPrior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33580-admin-encoding29-unit-v1/manifest.json",
+    "sha256": "edb1413a17ec4059da588a63a61abc7cdbe71a7b8bca7f6fa738312a79e2030c"
+  },
+  "reexecutionCause": "PG26712 was compared during preparation; PG33580 contained the same newer source/fixture/classes and all four cases. Identified after the unit run; preserve actual usage and do not present a new criterion.",
+  "currentRawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44754-current-api-hasher-four-v2/raw.out",
+    "sha256": "464102de9801863f018d9ed3a25d150ab90a01c00c268ca4de274a9c179e27bf"
+  },
+  "counts": {
+    "LINE": 24,
+    "METHOD": 7,
+    "CLASS": 1,
+    "BRANCH": 2
+  },
+  "currentSource": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+    "sha256": "6697fe28ce9804f569102cecedd8961186e5079e72d58357519f142f7b14b993"
+  },
+  "unit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44754-current-api-hasher-four-v2/terminal.json",
+    "sha256": "5188820bf53a5b325d8e165d0f31936568a8fc120884cc25789cccaf88d9aa6a"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44754-current-api-hasher-four-v2/begin.json",
+    "sha256": "9d4ea7aa351e02b386da41d07ac34560d395f6e622c447ae6f022ee31ed33b98"
+  },
+  "initialPreparation": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44754-current-api-hasher-four/terminal.json",
+    "sha256": "d153139ed7c4b202310bfaf247f0d1067d1a860255400c1b0410c010f0f609e7"
+  },
+  "originalOtherCodec": [
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41372-p01810-auth-context-ownership-qualified-v1/manifest.json",
+      "sha256": "05076f50cb00d5d28938c34c33e24189144636be3857c80f40839c599d1b2008"
+    },
+    {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41374-p01810-auth-context-ownership-independent-v1/manifest.json",
+      "sha256": "377a5ff92b8ae03f9a424997d13346c155bed1cad361638d70f1987837b923ec"
+    }
+  ],
+  "exactExistingAuthContextCodec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG44752-current-api-crypto-value-nullaway/target/classes/dev/codex/schubert/nk/api/security/AuthContextCodec.class",
+    "sha256": "2185fab2d97179a93173e1e570b2f288bfb12370ffb41af6421b655cb68844bc"
+  },
+  "oldAuthContextRawNoUnion": "CLASS\tdev/codex/schubert/nk/api/security/AuthContextCodec\t132018bb80ba06b2\ttrue\t114\t49\tINSTRUCTION:6:523\tBRANCH:0:38\tLINE:0:121\tCOMPLEXITY:0:31\tMETHOD:0:12\tCLASS:0:1",
+  "savedCloseInstructionsMissing": 6,
+  "reportedExecutedAfterResumption": 852,
+  "newQualifiedCountUnchangedFrom": 726,
+  "actualCredentialOrBackendOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
