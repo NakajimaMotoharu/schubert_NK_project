@@ -381,11 +381,16 @@ final class RunReferenceRepositoryPureJdbcTest {
       failures.put(new Position(name, occurrence), failure);
     }
 
-    void hit(String name) throws Throwable {
+    void hit(String name) throws SQLException {
       events.add(name);
       int occurrence = counts.merge(name, 1, Integer::sum);
-      Throwable failure = failures.get(new Position(name, occurrence));
-      if (failure != null) throw failure;
+      switch (failures.get(new Position(name, occurrence))) {
+        case null -> {}
+        case SQLException sql -> throw sql;
+        case IllegalStateException state -> throw state;
+        case AssertionError fatal -> throw fatal;
+        default -> throw new AssertionError("Unexpected run reference fixture failure");
+      }
     }
 
     RunReferences read(BatchRun run) {
@@ -471,7 +476,7 @@ final class RunReferenceRepositoryPureJdbcTest {
 
   @FunctionalInterface
   private interface Calls {
-    Object invoke(String name, Object[] args) throws Throwable;
+    Object invoke(String name, Object[] args) throws SQLException;
   }
 
   private static <T> T proxy(Class<T> type, Calls calls) {
