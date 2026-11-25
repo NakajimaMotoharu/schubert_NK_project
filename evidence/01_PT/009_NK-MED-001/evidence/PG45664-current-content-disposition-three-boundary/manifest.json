@@ -1,0 +1,110 @@
+{
+  "run": "PG45664",
+  "source": "a2878751195d88eeeb8e364ec99dd1e1f0416836",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P009-04/2",
+  "terminalAtUTC": "2026-11-25T21:50:25.788541+00:00",
+  "actualExit": 0,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "sha256": "f1f8d15f3abf0a44b583ecda98f975da393bd4d56f8fa5c241725a23f8af5b38"
+  },
+  "originalExpected": {
+    "path": "evidence/01_PT/009_NK-MED-001/evidence/header-byte-boundaries/manifest.json",
+    "sha256": "378f37e7c5de4e0b9a6499ec53da93ee9db3da96d0c370523220ec1d2a4652ec"
+  },
+  "scopeEvidence": {
+    "path": "evidence/01_PT/009_NK-MED-001/evidence/PG45384-local-range-worker-failure-preservation/manifest.json",
+    "sha256": "c1fbe3a4969da30886a068079633b1cfcaa9ade125eb063f7bad6ccceff0e301"
+  },
+  "requalification": {
+    "currentTestAndCasesRetainHistoricalInput": true,
+    "oldDependencyChanged": [
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDigest.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules.java"
+    ],
+    "existingPTMED005NotRerun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42916-web-media-without-private-reflection-v1/manifest.json",
+      "sha256": "5746dcf5445afa94517242266e78455c9e388c94074559d98b08307efdf7b1a3"
+    }
+  },
+  "tests": 3,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cases": {
+    "asciiAndReservedCharactersHaveLiteralEscapes": "PT-MED-HEADERBOUND-001",
+    "supplementaryUtf8AndLiteralPercentAreNotDecoded": "PT-MED-HEADERBOUND-002",
+    "supplementaryNameLimitIsByteBasedForBothModes": "PT-MED-HEADERBOUND-003"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45664-current-content-disposition-three-boundary/begin.json",
+    "sha256": "da66858fce2bba499e2f7694f048e76eeea41b81d36002cd5bfd52d72ccdcf59"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45664-current-content-disposition-three-boundary/terminal.json",
+    "sha256": "8f1a768b8bc96c42ed5aaf9cbd4cd1feb7220d581bfdcd98d2a9a58449197a7a"
+  },
+  "ordinary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45664-current-content-disposition-three-boundary/xml/TEST-junit-jupiter.xml",
+    "sha256": "df315ca44909b3092189fd27f268e872d1ec446cc974ecbf4d571e610c47cc81"
+  },
+  "execOne": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45664-current-content-disposition-three-boundary/unit.exec",
+    "sha256": "89e8c9dc45cf73ac0e87a63bd5f2f2b5f267f30dc0d0039d2055e1becdc78d10"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45664-current-content-disposition-three-boundary/raw.log",
+    "sha256": "1622ee33b411646fe1b1296a5262804c83fed0e54411e38856b49674de8211f1"
+  },
+  "perClass": {
+    "crc": "67219b56b4cec527",
+    "four": {
+      "BRANCH": [
+        0,
+        2
+      ],
+      "LINE": [
+        2,
+        7
+      ],
+      "METHOD": [
+        1,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "missingMethods": {
+      "<init>()V": {
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          2,
+          0
+        ],
+        "METHOD": [
+          1,
+          0
+        ],
+        "CLASS": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "mergedExecutions": false,
+  "noPrivateReflection": true,
+  "httpFilesystemOrNativeOperation": false,
+  "cumulativeProductTrialsGross": 2864,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
