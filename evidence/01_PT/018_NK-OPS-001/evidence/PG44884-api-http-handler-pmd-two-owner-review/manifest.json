@@ -1,0 +1,79 @@
+{
+  "run": "PG44884",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "WBS-P018-09/2",
+    "YKT-2748"
+  ],
+  "source": "7f0491b73ae4d3a2595fccdc2f95b1b3427fd3c0",
+  "productionCore": "8e2a6b055c45f9f868433c73174b87bc72972d77",
+  "terminalAtUTC": "2026-11-25T04:01:10.331545+00:00",
+  "target": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+    "sha256": "03d90a8377612a8450264f13eb151f2b605bc5eefaee20158912452d80c1508e"
+  },
+  "currentIndependentCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44882-api-memory-http-all-twenty-five/manifest.json",
+    "sha256": "432dd2f4897953d8f1080b0b83011796830ce1fd26db8ec438e89635fa27c29e"
+  },
+  "originalStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/manifest.json",
+    "sha256": "ae4ff48292cc0ffe09be7dc75093fae1816765106160f688d62d41ea3d118728"
+  },
+  "currentExactNullAwayProjection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44880-current-nullaway-six-receipt-schema-extension/manifest.json",
+    "sha256": "232b8f44f09fb295c6590f92ec7c7a8d8d6474936e384ceb81a0bc25096613ef"
+  },
+  "sameRules": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "historicalPmdOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/pmd.xml",
+    "sha256": "fa9e0545dbfbf4d3aa30221417b1658bf3ef159a94ee4ed24f9b3bd055d832c4"
+  },
+  "rawPmdExit": 4,
+  "rawPmdCount": 2,
+  "scopedEvidence": [
+    {
+      "line": 36,
+      "localReason": "Retain the exact body failure, including unchecked and fatal failures, before closing the adopted exchange. Rethrow unchanged; there is no success conversion.",
+      "independentCases": [
+        "APIMHTTP010",
+        "APIMHTTP011",
+        "APIMHTTP012",
+        "APIMHTTP013",
+        "APIMHTTP024",
+        "APIMHTTP025"
+      ]
+    },
+    {
+      "line": 48,
+      "localReason": "If there is no body failure, release failure is propagated. Otherwise Java suppression on the identical primary object is retained, including documented self-suppression.",
+      "independentCases": [
+        "APIMHTTP023",
+        "APIMHTTP024",
+        "APIMHTTP025"
+      ]
+    }
+  ],
+  "accountableDispositionPending": true,
+  "priorSpotBugsZeroRetainedAsHistorical": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/spotbugs.xml",
+    "sha256": "fae69e1f60ed3ee8a94b60c7d725741c60e3c216b6bb498ba6fd0333c1508ed0"
+  },
+  "auxiliaryDeltasNotReclassifiedAsCurrentSpotbugsPass": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "sha256": "8d1961d0ec2e51b4970102b5a3b810c9fbdc8d1398059de460249274d3bad01a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+      "sha256": "d07e461d4e27f4aa2de9290f1633cbb1812d3a7c6cc6a37f82448fdbf3ad9afe"
+    }
+  ],
+  "noGlobalSuppressionOrRuleChange": true,
+  "newProductPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
