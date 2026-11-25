@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -164,12 +163,11 @@ final class PostgresCopyTextEncoderTest {
   @Test
   void copy012ConcurrentCallsHaveSeparateOutputOwnership()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var workers = Executors.newFixedThreadPool(8);
     var futures = new ArrayList<Future<?>>();
-    try {
+    try (var workerScope = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       for (int index = 0; index < 64; index++) {
         futures.add(
-            workers.submit(
+            workerScope.executor().submit(
                 () -> {
                   byte[] actual = encoder.encodeRow(Arrays.asList("A\tB", null));
                   assertArrayEquals(new byte[] {0x41, 0x5c, 0x74, 0x42, 9, 0x5c, 0x4e, 10}, actual);
@@ -177,9 +175,6 @@ final class PostgresCopyTextEncoderTest {
                 }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), "owned COPY workers terminate");
     }
     assertArrayEquals(
         new byte[] {0x41, 0x5c, 0x74, 0x42, 9, 0x5c, 0x4e, 10},

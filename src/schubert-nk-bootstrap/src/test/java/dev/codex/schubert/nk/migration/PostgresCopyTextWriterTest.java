@@ -258,12 +258,11 @@ final class PostgresCopyTextWriterTest {
   void finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()
       throws InterruptedException, ExecutionException, TimeoutException {
     var writer = writer();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var workerScope = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < 64; index++)
         futures.add(
-            executor.submit(
+            workerScope.executor().submit(
                 () -> {
                   var sink = new TrackingSink();
                   writer.writeRows(List.of(first(), second()), sink);
@@ -273,9 +272,6 @@ final class PostgresCopyTextWriterTest {
         assertArrayEquals(
             (ORACLE_FIRST_ROW + ORACLE_SECOND_ROW).getBytes(StandardCharsets.UTF_8),
             future.get(5, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

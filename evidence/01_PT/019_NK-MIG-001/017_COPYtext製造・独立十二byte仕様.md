@@ -25,3 +25,9 @@ PT-MIG-COPY001..012:
 全1physical、RootNullAway/lintWerror/全PMD/CS/SB・sourceごとの適用性、固定Git whole12一回/独立CRC初期化/単一exec/全四counterを確認。手除外/抑制/旧exec合算0。実PostgreSQL解釈/driver/pg_temp/COPY/transaction/全件数/権限/actualCurrent/RootVMnative/全451/ITSTは別未受入。
 
 追加不足.9/2.7/5.4: 詳細.1/.3/.6＋製造whole12定義.5/1.5/3を一群.6/1.8/3.6 cap4、normal.3/.9/1.8 cap3。元費用/群開始見積り/SV原上限を保持、専有実費/token不明null。
+
+## 有限workerの診断保持（BUG-3855／YKT-2997）
+
+PT-MIG-COPY012とwriterの並行ケースは、合成の文字列・独立期待バイト・メモリsinkを使う。各8 worker、64仕事、get 5秒・終了10秒を維持する。共有 `MigrationFixtureWorkers` でcancel後の有限終了を行い、終了側の失敗は既に起きた一次失敗を保持した上でsuppressedに残す。終了補助の独立3件はPG45298に対応する。
+
+PG45380では同じ正規Bootstrapの純粋encoder/writer二物理を固定し、元24を当候補の変更試験として一回実行する。実PostgreSQL、SDK、運用のCOPY、原本の取得は含まない。旧24の結果と当計測は別に保存する。
