@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..013, PT-OPS-SBOM-029..031.
+# SCM-005 / RD171 / SS352 §13 / PT-OPS-SBOM-008..013, PT-OPS-SBOM-029..032.
 # Use a verified Maven repository for the selected source. Run from its worktree root.
 if [[ $# -ne 3 || -z ${3:-} ]]; then
   printf 'Usage: %s MODULE MAVEN_REPOSITORY OUTPUT_TIMESTAMP\n' "$0" >&2
@@ -30,6 +30,9 @@ if [[ -L "$target" ]]; then
 fi
 mkdir -p -- "$target"
 output_directory=$(mktemp -d -- "$target/software-bom.XXXXXXXX")
+
+# Preserve the fixed Maven arguments and Java settings for this direct goal.
+unset MAVEN_ARGS _JAVA_OPTIONS
 
 ./mvnw --batch-mode --no-transfer-progress --strict-checksums \
   "-Dmaven.repo.local=$repository" -pl "$module_dir" \
