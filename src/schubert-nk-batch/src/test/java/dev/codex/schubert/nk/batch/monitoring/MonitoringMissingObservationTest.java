@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Event;
@@ -151,8 +152,9 @@ class MonitoringMissingObservationTest {
     warning(engine);
     engine.filesystem(Service.WEB, 0, Duration.ZERO, Duration.ZERO, context(1));
     var before = engine.activeAlerts();
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(4), 10, "missing observations")) {
       var tasks = new ArrayList<Callable<List<Event>>>();
       for (int index = 0; index < 64; index++)
         tasks.add(
@@ -160,11 +162,8 @@ class MonitoringMissingObservationTest {
               engine.observationMissing(Condition.FILESYSTEM, Service.WEB, Duration.ofSeconds(300));
               return engine.activeAlerts();
             });
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(before, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertThrows(UnsupportedOperationException.class, () -> before.clear());
     assertEquals(BigInteger.ONE, before.getFirst().count());

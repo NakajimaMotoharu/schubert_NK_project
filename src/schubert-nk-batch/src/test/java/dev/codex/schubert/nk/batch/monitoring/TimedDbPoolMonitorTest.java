@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
@@ -223,8 +224,9 @@ class TimedDbPoolMonitorTest {
             .observe(OptionalDouble.of(0), 1, 0, true, at(0, CauseClearance.CONFIRMED))
             .event()
             .orElseThrow();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "database pool values")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
@@ -237,11 +239,8 @@ class TimedDbPoolMonitorTest {
                               .orElseThrow()
                               .severity())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
         assertEquals(Severity.CRITICAL, result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, first.count());
     assertEquals(OBSERVED_AT, first.lastSeen());

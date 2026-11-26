@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
@@ -200,17 +201,14 @@ class TimedFilesystemMonitorTest {
   void timedFs006ConcurrentOwnerAndLocalStatusLiteral() throws Exception {
     sample(80, 0, false);
     var before = sample(80, 300, true).event().orElseThrow();
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "filesystem values")) {
       var tasks = new ArrayList<Callable<TimedFilesystemMonitor.Evaluation>>();
       for (int index = 0; index < 64; index++) tasks.add(() -> sample(80, 300, true));
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS)) {
         assertTrue(future.get().suppliedValuePresent());
         assertTrue(future.get().event().orElseThrow().isOpen());
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, before.count());
     var current = monitor.snapshot().orElseThrow();

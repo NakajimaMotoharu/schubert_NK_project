@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
@@ -183,18 +184,15 @@ class TimedJvmHeapMonitorTest {
   void heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot() throws Exception {
     var monitor = new TimedJvmHeapMonitor(Service.BATCH);
     var first = sample(monitor, 90, 0).event().orElseThrow();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "heap values")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
                   i -> () -> sample(monitor, 90, 1).event().orElseThrow().severity())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
         assertEquals(Severity.CRITICAL, result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, first.count());
     assertEquals(AT, first.lastSeen());

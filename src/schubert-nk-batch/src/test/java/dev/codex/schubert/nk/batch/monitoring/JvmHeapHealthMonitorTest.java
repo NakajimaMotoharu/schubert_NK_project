@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
@@ -222,8 +223,9 @@ class JvmHeapHealthMonitorTest {
     usage(fixture, 900);
     var monitor = new JvmHeapHealthMonitor(fixture.bean, Service.BATCH);
     var first = monitor.observe(true, false, context(0)).event().orElseThrow();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "synthetic heap observations")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
@@ -231,11 +233,8 @@ class JvmHeapHealthMonitorTest {
                       () ->
                           monitor.observe(true, false, context(1)).event().orElseThrow().severity())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
         assertEquals(Severity.CRITICAL, result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(65, fixture.reads.get());
     assertEquals(BigInteger.ONE, first.count());
