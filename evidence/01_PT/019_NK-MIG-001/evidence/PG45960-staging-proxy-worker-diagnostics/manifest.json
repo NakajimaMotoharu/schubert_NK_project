@@ -1,0 +1,159 @@
+{
+  "run": "PG45960",
+  "source": "5987d872a30aaf09d14ce406050c374758dae216",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.02/2",
+  "terminalAtUTC": "2026-11-26T03:22:24.025741+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3959",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "c533ba3391297a96c407772a22c26d41882729fd",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/6042_移行JDK代理資源並行単体仕様.md",
+    "sha256": "55d40cea14efaf181128fdbdaa11da55b22189c4df9bec64c1e9d443193cc167"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest#finiteWorkersOwnIndependentStatementsAndAllResultsTerminate": "PT-MIG-ASSETSTAGE030",
+    "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest#finiteParallelIndependentBorrowedTransactionsDoNotShareState": "PT-MIG-STAGE017",
+    "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest#transferFiniteWorkersHaveIndependentSqlCountsAndTermination": "PT-MIG-TRANSFER019",
+    "dev.codex.schubert.nk.migration.SpeakerStagingTableTest#speakerStage024FiniteWorkersHaveIndependentBorrowedResources": "PT-MIG-SPEAKERSTAGE024"
+  },
+  "productTests": 4,
+  "preflightScopeCorrectedBeforeJunit": false,
+  "ownJdkMemoryProxyOnly": true,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42854-four-migration-final-typed-v1/manifest.json",
+    "sha256": "27667d8e7770096366df127ed9d521a43a7bdb60e49c4572d2cbfa9cde92154a"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45960-staging-proxy-fixtures-canonical/terminal.json",
+    "sha256": "e6c6d5a59f8f83941702de9401f19cbd7c14b201eab970dee1c942a1ae5ab91d"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45960-staging-proxy-fixtures-ordinary-scoped-main/pmd.xml",
+    "sha256": "94aa0cb18f24f30f8950d21b0cf5e519d5edef2bd54c0d2f900720e8e06b8738"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "AssetStagingTablesTest.java",
+      "rule": "CloseResource",
+      "line": 422
+    },
+    {
+      "fixture": "AssetStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 479
+    },
+    {
+      "fixture": "AssetStagingTablesTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 551
+    },
+    {
+      "fixture": "AssetStagingTablesTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 564
+    },
+    {
+      "fixture": "AssetStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 723
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "CloseResource",
+      "line": 203
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 215
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 482
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 573
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 588
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 626
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 680
+    },
+    {
+      "fixture": "ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 703
+    },
+    {
+      "fixture": "SpeakerStagingTableTest.java",
+      "rule": "CloseResource",
+      "line": 382
+    },
+    {
+      "fixture": "SpeakerStagingTableTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 420
+    },
+    {
+      "fixture": "SpeakerStagingTableTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 567
+    },
+    {
+      "fixture": "SpeakerStagingTableTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 589
+    },
+    {
+      "fixture": "SpeakerStagingTableTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 631
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45960-staging-proxy-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "e540b01d156b385dff466f6d23dc45e13c2d6f82ac78113b4594c77652cf6ae1"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45960-staging-proxy-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "b280fc4f3f7c6278742488691e6d44fd53f54f13824196f0d99332fbd1057b47"
+    }
+  ],
+  "measuredClassCount": 6,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45960-staging-proxy-fixtures-ordinary-scoped-main/begin.json",
+    "sha256": "24873857476f9e7ec48439bf7337c208c25439b3b37ce2076b04c5177a173ec5"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45960-staging-proxy-fixtures-ordinary-scoped-main/terminal.json",
+    "sha256": "1e01b59f2ae39fbdc96d5185544352bf30b348f543b0a3172c98fc44cf0915a3"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3440,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
