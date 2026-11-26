@@ -44,6 +44,7 @@ class DbQueryDurationMetricCollectorTest {
 
   private static final class Registry extends SimpleMeterRegistry
       implements AutoCloseable, ExactDurationSupport {
+    private static final int FACTORY_FAILURE_ORDINAL = 2;
     final AtomicInteger closes = new AtomicInteger();
     final AtomicInteger factories = new AtomicInteger();
     final AtomicInteger records = new AtomicInteger();
@@ -67,7 +68,7 @@ class DbQueryDurationMetricCollectorTest {
     @Override
     protected DistributionSummary newDistributionSummary(
         Meter.Id id, DistributionStatisticConfig config, double scale) {
-      if (factories.incrementAndGet() == 2) fail(factoryFailure);
+      if (factories.incrementAndGet() == FACTORY_FAILURE_ORDINAL) fail(factoryFailure);
       var delegate = ExactDurationMeterRegistry.exactDurationSummary(this, id, config, scale);
       return new DistributionSummary() {
         public Meter.Id getId() {
