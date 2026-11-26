@@ -1,0 +1,78 @@
+{
+  "previous": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45968-migration-72-current-test-id-trace/trace-delta.json",
+    "sha256": "746b67814514aac0f83af200334ae9f710fed0a616d6b5379bca54b6b180bf02"
+  },
+  "priorUnique": 72,
+  "newLocalCases": [
+    {
+      "testId": "PT-MIG-CLEANID010",
+      "method": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest#cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall",
+      "result": "PASS",
+      "sameCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "originalUnitSource": "a81fdb1e692c48f3567f16f2e73f31c4612f6421",
+      "originalRun": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/manifest.json",
+        "sha256": "2fedcac6f376008fc2c4f71bb7ef3aa642de6d1a35772a157ef6cdbe1b9dde5a"
+      },
+      "xml": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/junit-sanitized.xml",
+        "sha256": "d94ec05bd5fcf4460e2eed11e7561fc907a7ff70746c08a3a4433f4b6eb2aa78"
+      }
+    },
+    {
+      "testId": "PT-MIG-FINAL028",
+      "method": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest#final028FiniteReadersOwnIndependentProxiesAndTerminate",
+      "result": "PASS",
+      "sameCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "originalUnitSource": "a81fdb1e692c48f3567f16f2e73f31c4612f6421",
+      "originalRun": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/manifest.json",
+        "sha256": "2fedcac6f376008fc2c4f71bb7ef3aa642de6d1a35772a157ef6cdbe1b9dde5a"
+      },
+      "xml": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/junit-sanitized.xml",
+        "sha256": "d94ec05bd5fcf4460e2eed11e7561fc907a7ff70746c08a3a4433f4b6eb2aa78"
+      }
+    },
+    {
+      "testId": "PT-MIG-FIVE014",
+      "method": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest#five014EachIoFailureStopsLaterStreamsAndPreservesInstance",
+      "result": "PASS",
+      "sameCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "originalUnitSource": "2521d750b38536df528f0b4d8f3074c43b3916b7",
+      "originalRun": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/manifest.json",
+        "sha256": "5167e2a1d812cab76e212c8bf9b2e7e2d967f49c44b3d659892afdb9d601e36c"
+      },
+      "xml": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/junit-sanitized.xml",
+        "sha256": "a9c13a2ad07ae31dd447a560c463a0a13506088760e30267e9061800e15c576c"
+      }
+    },
+    {
+      "testId": "PT-MIG-FIVE016",
+      "method": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest#five016PartialBytesRemainAndNoAutomaticReplay",
+      "result": "PASS",
+      "sameCore": "cf08e414be9f877b851a387704350d5e7c980209",
+      "originalUnitSource": "2521d750b38536df528f0b4d8f3074c43b3916b7",
+      "originalRun": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/manifest.json",
+        "sha256": "5167e2a1d812cab76e212c8bf9b2e7e2d967f49c44b3d659892afdb9d601e36c"
+      },
+      "xml": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/junit-sanitized.xml",
+        "sha256": "a9c13a2ad07ae31dd447a560c463a0a13506088760e30267e9061800e15c576c"
+      }
+    }
+  ],
+  "currentUnique": 76,
+  "controlledJDKOnly": true,
+  "resources": "Synthetic borrowed streams or JDK in-memory proxies; no actual database or COPY.",
+  "sourceReuseOnlySameProduct": true,
+  "stillHeld": [
+    "native and actual Current pairing and transfer",
+    "real DB transaction and target readback",
+    "same source full journey and authorized signatures"
+  ]
+}
