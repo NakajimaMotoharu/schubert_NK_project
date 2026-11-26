@@ -1,0 +1,28 @@
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	87ddf065baea68a9	true	1	49	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRun	7ebe79e62602f09c	true	15	65585	INSTRUCTION:14:38	BRANCH:3:3	LINE:2:8	COMPLEXITY:6:3	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:5:32	BRANCH:3:3	LINE:1:7	COMPLEXITY:3:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	id	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	cutoff	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	ce7471ab69e0bcf6	false	9	1536	INSTRUCTION:25:0	BRANCH:8:0	LINE:6:0	COMPLEXITY:5:0	METHOD:1:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	9	INSTRUCTION:25:0	BRANCH:8:0	LINE:6:0	COMPLEXITY:5:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	3b4297b001ab88bf	true	60	49	INSTRUCTION:51:179	BRANCH:11:13	LINE:12:47	COMPLEXITY:9:9	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	<init>	(Ljava/sql/Connection;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	read	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/RunReferences;	1	INSTRUCTION:32:146	BRANCH:4:8	LINE:8:32	COMPLEXITY:4:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	closeRow	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:7:6	BRANCH:3:1	LINE:2:4	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:7:6	BRANCH:3:1	LINE:2:4	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	require	(Z)V	10	INSTRUCTION:0:8	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	present	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:5:4	BRANCH:1:1	LINE:0:2	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/RunReferences	9718b54b7a517e38	true	20	65585	INSTRUCTION:36:26	BRANCH:9:5	LINE:3:4	COMPLEXITY:13:3	METHOD:7:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	<init>	(ZZZZ)V	1	INSTRUCTION:5:23	BRANCH:3:5	LINE:1:3	COMPLEXITY:3:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	anyReference	()Z	1	INSTRUCTION:13:0	BRANCH:6:0	LINE:1:0	COMPLEXITY:4:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasBatchHistory	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasInboxProgress	()Z	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasLogProgress	()Z	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	identityConsistent	()Z	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0

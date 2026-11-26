@@ -1,0 +1,139 @@
+{
+  "run": "PG45964",
+  "source": "da648b87b9f8a33f743ab74507526f61e0b9d3c3",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P004-03/2",
+  "terminalAtUTC": "2026-11-26T03:26:52.534446+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3960",
+  "preflightBug": "BUG-3961",
+  "fixCommit": "4f38db5cd5d4cfc09d24a0dab4b85e179de826b0",
+  "firstAttemptNoJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45964-run-reference-fixture-ordinary-scoped-main/failed-terminal.json",
+    "sha256": "cdfcd1b6d93826385738d244b0548b0c551d5924454d07685e7a31c68efd4262"
+  },
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "064d46184baa63dd2accb99932b94fe7dd5590c3",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6046_参照DAO二並行単体仕様.md",
+    "sha256": "be107f34c57791c056cc5731bf8de82bc3b4bb0b806bceb956b32f629035d619"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.repository.RunReferencePortTest#ownWorkerInterruptionAtEntryOrAfterCleanupNeverLeaksResultOrInterruptsCaller": "PT-BAT-RUNPORT007",
+    "dev.codex.schubert.nk.batch.repository.RunReferencePortTest#independentBorrowedParentsNeverShareBindingsOrReturnedProjection": "PT-BAT-RUNPORT008"
+  },
+  "productTests": 2,
+  "ownJdkMemoryProxyOnly": true,
+  "caseThreads": [
+    1,
+    2
+  ],
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 5,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG45786-current-reference-twelve-with-record-members-in-one-run/manifest.json",
+    "sha256": "c2d462f666e9d16c9f7a9ee3137fdeff08f4e3737fa57a5b011d8bfc3a85bb3f"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45964-run-reference-fixture-canonical/terminal.json",
+    "sha256": "ca3d2f36006832be80557981bedfeb8829b2ef9b1d3f9e7b292398e9a401e9bb"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45964-run-reference-fixture-ordinary-with-canonical-bootstrap/pmd.xml",
+    "sha256": "6d2f74108cb9e25f3e77991659d95c1840f3b7f2760bed1e5bd528f56be13d73"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "NullAssignment",
+      "line": 143
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 222
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 228
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 234
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 237
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 239
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 246
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 257
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 384
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 400
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 413
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 442
+    },
+    {
+      "fixture": "RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 474
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45964-run-reference-two-proxy-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "7cb72bf92e766353eb504122bb3a3f96e6e9f06d7558b5c1840cd863ecfa3783"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45964-run-reference-two-proxy-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "f8030598df31a4dfb9fb93f1d28910c230e5a55dbc0afef2b4fc5accb22abcf3"
+    }
+  ],
+  "measuredClassCount": 5,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45964-run-reference-fixture-ordinary-with-canonical-bootstrap/begin.json",
+    "sha256": "f23a7a7b7dae6812826a912efce10e6477925cc8ef76426b2887a1022a279fba"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45964-run-reference-fixture-ordinary-with-canonical-bootstrap/terminal.json",
+    "sha256": "279187f09829fafe4168f332f32fa20d999df187334bdce9f5ac3e7bcb2e5622"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3442,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
