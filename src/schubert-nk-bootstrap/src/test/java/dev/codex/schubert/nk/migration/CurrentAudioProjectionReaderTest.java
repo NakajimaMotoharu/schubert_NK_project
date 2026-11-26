@@ -459,24 +459,23 @@ final class CurrentAudioProjectionReaderTest {
   void audioRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
       throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentAudioProjectionReader();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int index = 0; index < TASKS; index++) {
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = normal();
-                  var rows = reader.read(f.connection(), 2);
-                  assertEquals(1, f.resultCloses);
-                  assertEquals(1, f.statementCloses);
-                  return rows.get(0).get(0);
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = normal();
+                      var rows = reader.read(f.connection(), 2);
+                      assertEquals(1, f.resultCloses);
+                      assertEquals(1, f.statementCloses);
+                      return rows.get(0).get(0);
+                    }));
       }
       for (var future : futures) assertEquals("-20", future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
