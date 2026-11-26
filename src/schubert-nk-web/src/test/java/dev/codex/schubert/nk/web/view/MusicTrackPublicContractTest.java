@@ -265,8 +265,7 @@ final class MusicTrackPublicContractTest {
   @Test
   void public006FiniteConcurrentProjectionsRemainIndependent()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newFixedThreadPool(4);
-    try {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(4))) {
       var tasks = new ArrayList<Future<?>>();
       for (int i = 0; i < 16; i++) {
         int n = i;
@@ -290,9 +289,6 @@ final class MusicTrackPublicContractTest {
                 }));
       }
       for (var task : tasks) task.get(5, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
