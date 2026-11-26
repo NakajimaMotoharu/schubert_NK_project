@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
@@ -286,8 +287,9 @@ class TransferHealthMonitorTest {
   @Test
   void transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot() throws Exception {
     try (var registry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(8), 10, "transfer observation fixture")) {
         var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.BATCH);
         var input = usage(9000, 1024);
         var first =
@@ -306,16 +308,13 @@ class TransferHealthMonitorTest {
                                 .orElseThrow()
                                 .severity())
                 .toList();
-        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+        for (var result : ownedWorkers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
           assertEquals(Severity.CRITICAL, result.get());
         assertEquals(BigInteger.ONE, first.count());
         assertEquals(OBSERVED_AT, first.lastSeen());
         assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
         assertSame(input, monitor.observedUsage().orElseThrow());
         assertEquals(4, registry.getMeters().size());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

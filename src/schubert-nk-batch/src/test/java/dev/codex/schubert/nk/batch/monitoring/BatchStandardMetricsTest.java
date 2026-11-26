@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.core.instrument.simple.SimpleConfig;
@@ -362,33 +363,33 @@ class BatchStandardMetricsTest {
 
   @Test
   void batchstd013FiniteIndependentConcurrentCompositions() throws Exception {
-    var workers = Executors.newFixedThreadPool(4);
-    try {
+    try (var ownedWorkers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(4), 10, "standard binder fixture")) {
       var jobs = new ArrayList<Future<?>>();
       var total = new AtomicInteger();
       for (int i = 0; i < 64; i++)
         jobs.add(
-            workers.submit(
-                () -> {
-                  try (var source = new Registry()) {
-                    var local = new AtomicInteger();
-                    Runnable action =
-                        () -> {
-                          local.incrementAndGet();
-                          total.incrementAndGet();
-                        };
-                    BatchStandardMetrics.install(
-                        source, DEBUG_MODE, resource -> true, action, action, action);
-                    assertEquals(3, local.get());
-                    assertFalse(source.isClosed());
-                    assertEquals(0, source.closes.get());
-                  }
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      try (var source = new Registry()) {
+                        var local = new AtomicInteger();
+                        Runnable action =
+                            () -> {
+                              local.incrementAndGet();
+                              total.incrementAndGet();
+                            };
+                        BatchStandardMetrics.install(
+                            source, DEBUG_MODE, resource -> true, action, action, action);
+                        assertEquals(3, local.get());
+                        assertFalse(source.isClosed());
+                        assertEquals(0, source.closes.get());
+                      }
+                    }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertEquals(192, total.get());
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
