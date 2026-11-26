@@ -1,0 +1,260 @@
+{
+  "run": "PG46040",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "c71e4fb8f85022f96af7e724e41d39d2f4b9ef73",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T04:53:41.004092+00:00",
+  "testIds": {
+    "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricCollectorTest#asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState": "ASYNCCONN007",
+    "dev.codex.schubert.nk.api.monitoring.OutboxMetricCollectorTest#outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState": "OUTBOXCONN007",
+    "dev.codex.schubert.nk.api.monitoring.MqPressureMetricCollectorTest#mqConn007ParallelCallsAndSeparateOwnersKeepExactReturnedObservations": "MQCONN007"
+  },
+  "passed": 3,
+  "failed": 0,
+  "skipped": 0,
+  "unitActualExit": 0,
+  "toolReportExit": 0,
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6122_API三観測の合成並行一次診断単体仕様.md",
+    "sha256": "68290df3457d91fd3c9e84d5830f3682c1859cb495b517227669ddf65348d7ce"
+  },
+  "canonicalFormatting": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46040-api-three-workers-canonical/terminal.json",
+    "sha256": "6a07944e7f69c1f3ae977445bf4140ead20023078f23ce2e08aa506c1d03d8c4"
+  },
+  "static": {
+    "pmdFindings": [
+      {
+        "file": "AsyncJobMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 37
+      },
+      {
+        "file": "AsyncJobMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 37
+      },
+      {
+        "file": "MqPressureMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 40
+      },
+      {
+        "file": "MqPressureMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 40
+      },
+      {
+        "file": "OutboxMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 43
+      },
+      {
+        "file": "OutboxMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 43
+      },
+      {
+        "file": "AsyncJobCountRepository.java",
+        "rule": "CloseResource",
+        "line": 39
+      },
+      {
+        "file": "AsyncJobCountRepository.java",
+        "rule": "CloseResource",
+        "line": 43
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "CloseResource",
+        "line": 47
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "CloseResource",
+        "line": 52
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 67
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 73
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 94
+      },
+      {
+        "file": "OutboxObservationRepository.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 104
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 186
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "CloseResource",
+        "line": 210
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 210
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 220
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 224
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 243
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 244
+      },
+      {
+        "file": "AsyncJobMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 253
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 123
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "CloseResource",
+        "line": 317
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 317
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 333
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 344
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 348
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 350
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 378
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 379
+      },
+      {
+        "file": "MqPressureMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 388
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 224
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "CloseResource",
+        "line": 248
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 248
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 259
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 263
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 283
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 284
+      },
+      {
+        "file": "OutboxMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 293
+      }
+    ],
+    "checkstyleExit": 0,
+    "strictCompile": true
+  },
+  "physicalCount": 16,
+  "realDbOrBrokerOrJmx": false,
+  "bug": [
+    "BUG-3977"
+  ],
+  "ykt": [
+    "YKT-2997"
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46040-api-three-supplied-metrics/begin.json",
+    "sha256": "4bd8c91c65c3ae03ed6dd99eee8821ec728deab5865715a050732670a6489776"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46040-api-three-supplied-metrics/terminal.json",
+    "sha256": "b81f6b36ca422ff79727d5d2cd5a8770a7e45d7d871de625d43ad5f783ecb20f"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46040-api-three-supplied-metrics/junit-sanitized.xml",
+      "sha256": "9217633805a712a31d6fb94d8856ebcf579a51d18e35e9d625a3e1b3d2a4be8f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46040-api-three-supplied-metrics/coverage-unfiltered.tsv",
+      "sha256": "08af0ed72c03bb6c6cd41c0bc9706f63fbae46e959bcf0451df28f96b9017e18"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3511,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
