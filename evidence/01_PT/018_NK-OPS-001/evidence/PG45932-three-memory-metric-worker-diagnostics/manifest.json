@@ -1,0 +1,95 @@
+{
+  "run": "PG45932",
+  "source": "55da13cf1adf13d948363da6805b45568e733a87",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:53:44.404158+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3951",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "a22e645694974f8e172d17289ad007fc6b284642",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6014_Batchメモリmetric三並行単体仕様.md",
+    "sha256": "a1f5e6e33cdc6410c3820ac161d11e5c8517973a9416a899008d783f7f525007"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.BatchMetricTextTest#batchtext024FiniteConcurrentCallsKeepBorrowedOwner": "BATCHTEXT024",
+    "dev.codex.schubert.nk.batch.monitoring.BatchMetricTextTest#batchfull011ConcurrentBorrowedSourcesNeverMixOrClose": "BATCHFULL011",
+    "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest#batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime": "BATCHREC007"
+  },
+  "productTests": 3,
+  "originalPoolSizes": [
+    4,
+    2,
+    8
+  ],
+  "allOwnedInMemorySources": true,
+  "futureWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45932-memory-meter-canonical/terminal.json",
+    "sha256": "d968b53d373818100e258c91316d348babb0413371294b169c76e6c9ce0a7361"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45932-memory-meter-ordinary/pmd.xml",
+    "sha256": "b3809747574ebafbb3e4c3be666293bb6285c2e6bc950ff97bb48b55a004943b"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "BatchMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 268
+    },
+    {
+      "fixture": "BatchMetricTextTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "line": 130
+    },
+    {
+      "fixture": "BatchMetricTextTest.java",
+      "rule": "NullAssignment",
+      "line": 241
+    },
+    {
+      "fixture": "BatchMetricTextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 540
+    },
+    {
+      "fixture": "BatchMetricTextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 782
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45932-three-memory-metric-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "fc463b167fc708b6fc0697a268cf6b0face6f8ed22506e57f9c1bf1f6ed22a9c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45932-three-memory-metric-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "cfe7ad64004ec7f3d79144b6234b18afe183a8df45a79fbeb46dcc32c018f8a9"
+    }
+  ],
+  "measuredClassCount": 6,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45932-memory-meter-ordinary/begin.json",
+    "sha256": "ebafb2fb67801c0d031f7d869f263a596c2fccbcd56b0630f3d3fe1d71642f8d"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45932-memory-meter-ordinary/terminal.json",
+    "sha256": "088244c441880e5ef3bcc75f78e6713d08ae165ebae0c824f338354142feedb7"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3413,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
