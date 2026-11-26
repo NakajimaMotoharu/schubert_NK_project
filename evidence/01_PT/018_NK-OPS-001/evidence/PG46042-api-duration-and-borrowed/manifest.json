@@ -1,0 +1,144 @@
+{
+  "run": "PG46042",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "5a81cdffa388cb853f972c9707139808dfda2383",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T04:56:43.654279+00:00",
+  "testIds": {
+    "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricCollectorTest#dbConn007ConcurrentSamplesUsePrecomputedIdentityInputsAndSeparateOwners": "DBCONN007",
+    "dev.codex.schubert.nk.api.monitoring.AsyncJobCountRepositoryTest#asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState": "ASYNCDB008"
+  },
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "unitActualExit": 0,
+  "toolReportExit": 0,
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6124_API時間とJDBC代理の有限終了単体仕様.md",
+    "sha256": "5397708fd1aa539d78f26248ff80722dd5a55471d53ab772fa36907d4396ae05"
+  },
+  "canonicalFormatting": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46042-api-duration-and-borrowed-canonical/terminal.json",
+    "sha256": "5743ea2843ad44dbb6ac64badb9e64718cd370617075037eb836ebb35c719f65"
+  },
+  "static": {
+    "pmdFindings": [
+      {
+        "file": "AsyncJobCountRepository.java",
+        "rule": "CloseResource",
+        "line": 39
+      },
+      {
+        "file": "AsyncJobCountRepository.java",
+        "rule": "CloseResource",
+        "line": 43
+      },
+      {
+        "file": "AsyncJobCountRepositoryTest.java",
+        "rule": "UseConcurrentHashMap",
+        "line": 45
+      },
+      {
+        "file": "AsyncJobCountRepositoryTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 69
+      },
+      {
+        "file": "AsyncJobCountRepositoryTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 96
+      },
+      {
+        "file": "AsyncJobCountRepositoryTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 123
+      },
+      {
+        "file": "AsyncJobCountRepositoryTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 340
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "AvoidLiteralsInIfCondition",
+        "line": 70
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 141
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "EqualsNull",
+        "line": 319
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 331
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "AvoidLiteralsInIfCondition",
+        "line": 343
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 344
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 355
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 359
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 361
+      },
+      {
+        "file": "DbQueryDurationMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 395
+      }
+    ],
+    "checkstyleExit": 0,
+    "strictCompile": true
+  },
+  "physicalCount": 12,
+  "realDbOrBrokerOrJmx": false,
+  "bug": [
+    "BUG-3978"
+  ],
+  "ykt": [
+    "YKT-2997"
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46042-api-duration-and-borrowed/begin.json",
+    "sha256": "2b5596fb2d8bc986b93bf8bc09f63f22ec4b50935ad49cbe3d156982e6684cb7"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46042-api-duration-and-borrowed/terminal.json",
+    "sha256": "062b782972c59b7798d3632266d80a9d2f595b15bb3c83e1f45ed85a6f904820"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46042-api-duration-and-borrowed/junit-sanitized.xml",
+      "sha256": "ff9654c50bd2533d791d72d0445ffe91f8262f6f698a3db66c0256e1fd5cf924"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46042-api-duration-and-borrowed/coverage-unfiltered.tsv",
+      "sha256": "ff4139dcc5b25df3606c7e3386524bff2959683574c85e238929bae578a0c269"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3513,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
