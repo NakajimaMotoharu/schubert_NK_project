@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MockClock;
@@ -534,21 +535,21 @@ class BatchMetricTextTest {
   @Test
   void batchtext024FiniteConcurrentCallsKeepBorrowedOwner() throws Exception {
     try (var source = new Registry(counter(2.5))) {
-      var workers = Executors.newFixedThreadPool(4);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(4), 10, "borrowed meter formatting")) {
         var jobs = new ArrayList<Future<?>>();
         for (int i = 0; i < 64; i++)
           jobs.add(
-              workers.submit(
-                  () ->
-                      assertEquals(
-                          C_HEADER + C_ROW + COUNTER_SAMPLE_LINE,
-                          formatter.scrape(source, DEBUG_MODE))));
+              ownedWorkers
+                  .executor()
+                  .submit(
+                      () ->
+                          assertEquals(
+                              C_HEADER + C_ROW + COUNTER_SAMPLE_LINE,
+                              formatter.scrape(source, DEBUG_MODE))));
         for (var job : jobs) job.get(10, TimeUnit.SECONDS);
         assertFalse(source.isClosed());
-      } finally {
-        workers.shutdownNow();
-        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
@@ -776,24 +777,29 @@ class BatchMetricTextTest {
         var second = new Registry(counter(2.5));
         var firstStandard = fullOwner(firstProbe);
         var secondStandard = fullOwner(secondProbe)) {
-      var workers = Executors.newFixedThreadPool(2);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(2), 10, "separate meter registries")) {
         var firstJob =
-            workers.submit(
-                () -> {
-                  for (int i = 0; i < 16; i++)
-                    assertEquals(
-                        C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
-                        formatter.scrape(first, DEBUG_MODE, firstStandard));
-                });
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      for (int i = 0; i < 16; i++)
+                        assertEquals(
+                            C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
+                            formatter.scrape(first, DEBUG_MODE, firstStandard));
+                    });
         var secondJob =
-            workers.submit(
-                () -> {
-                  for (int i = 0; i < 16; i++)
-                    assertEquals(
-                        C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
-                        formatter.scrape(second, DEBUG_MODE, secondStandard));
-                });
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      for (int i = 0; i < 16; i++)
+                        assertEquals(
+                            C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
+                            formatter.scrape(second, DEBUG_MODE, secondStandard));
+                    });
         firstJob.get(10, TimeUnit.SECONDS);
         secondJob.get(10, TimeUnit.SECONDS);
         assertEquals(16, firstProbe.scrapes.get());
@@ -802,9 +808,6 @@ class BatchMetricTextTest {
         assertFalse(second.isClosed());
         assertFalse(firstProbe.isClosed());
         assertFalse(secondProbe.isClosed());
-      } finally {
-        workers.shutdownNow();
-        assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

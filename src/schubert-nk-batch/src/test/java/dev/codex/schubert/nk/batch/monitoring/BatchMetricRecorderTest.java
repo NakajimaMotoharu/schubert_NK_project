@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Status;
 import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Step;
 import io.micrometer.core.instrument.Counter;
@@ -262,8 +263,9 @@ class BatchMetricRecorderTest {
   void batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime()
       throws InterruptedException, ExecutionException {
     try (var registry = new OwnedRegistry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(8), 10, "batch metric recorder")) {
         var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
         var jobs =
             java.util.stream.IntStream.range(0, 64)
@@ -275,13 +277,11 @@ class BatchMetricRecorderTest {
                           return true;
                         })
                 .toList();
-        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+        for (var result : ownedWorkers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
+          assertTrue(result.get());
         assertEquals(64.0, runs(registry, "CLEAN_LOG", SUCCESS_STATUS));
         assertEquals(64.0, last(registry, "CLEAN_LOG"), 0.0);
         shape(registry);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
