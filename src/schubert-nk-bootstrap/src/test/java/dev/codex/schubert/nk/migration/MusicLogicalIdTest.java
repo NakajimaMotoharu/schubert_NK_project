@@ -145,16 +145,13 @@ final class MusicLogicalIdTest {
   void finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()
       throws InterruptedException, ExecutionException, TimeoutException {
     var ids = new MusicLogicalId();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<String>>();
       for (int index = 0; index < TASKS; index++)
-        results.add(executor.submit(() -> ids.fromDisplayPath(ASCII_PATH)));
+        results.add(ownedWorkers.executor().submit(() -> ids.fromDisplayPath(ASCII_PATH)));
       for (var result : results)
         assertEquals(EXPECTED_ASCII, result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

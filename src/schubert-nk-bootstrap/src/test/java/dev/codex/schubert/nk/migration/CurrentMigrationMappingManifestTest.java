@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
@@ -207,24 +206,23 @@ final class CurrentMigrationMappingManifestTest {
   void mapman007SharedImmutableManifestHasFiniteIndependentReaders()
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var result = inputs(false, false, false).manifest();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  byte[] bytes = result.canonicalBytes();
-                  assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), bytes);
-                  bytes[0] = 0;
-                  assertEquals(2, result.rowCounts().get(PART_FILES));
-                  return result.sha256();
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] bytes = result.canonicalBytes();
+                      assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), bytes);
+                      bytes[0] = 0;
+                      assertEquals(2, result.rowCounts().get(PART_FILES));
+                      return result.sha256();
+                    }));
       for (var future : futures)
         assertEquals(NORMAL_HASH, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
     assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
   }

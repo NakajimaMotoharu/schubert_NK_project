@@ -382,17 +382,16 @@ final class VideoMigrationCatalogueTest {
     var manifest = inputs.manifest();
     var catalogue = new VideoMigrationCatalogue();
     byte[] expected = resource(WIRE_RESOURCE);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
         results.add(
-            executor.submit(() -> wire(catalogue.copyRows(inputs.targetMap, manifest, STAMP))));
+            ownedWorkers
+                .executor()
+                .submit(() -> wire(catalogue.copyRows(inputs.targetMap, manifest, STAMP))));
       for (var result : results)
         assertArrayEquals(expected, result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

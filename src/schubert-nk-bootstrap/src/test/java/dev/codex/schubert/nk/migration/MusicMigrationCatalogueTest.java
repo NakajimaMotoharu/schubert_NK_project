@@ -406,16 +406,16 @@ final class MusicMigrationCatalogueTest {
     var manifest = input.manifest();
     var catalogue = new MusicMigrationCatalogue();
     byte[] expected = resource(MUSIC_WIRE);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int i = 0; i < TASKS; i++)
-        results.add(executor.submit(() -> wire(catalogue.copyRows(input.ids, manifest, STAMP))));
+        results.add(
+            ownedWorkers
+                .executor()
+                .submit(() -> wire(catalogue.copyRows(input.ids, manifest, STAMP))));
       for (var result : results)
         assertArrayEquals(expected, result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

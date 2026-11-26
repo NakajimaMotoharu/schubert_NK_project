@@ -319,22 +319,21 @@ final class MediaAssetCopyBatchTest {
   void finiteWorkersUseOneImmutableBatchWithIndependentSinks()
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var batch = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int i = 0; i < TASKS; i++)
         results.add(
-            executor.submit(
-                () -> {
-                  var sink = new TrackingSink();
-                  batch.writeTo(writer(), sink);
-                  return sink.toByteArray();
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      var sink = new TrackingSink();
+                      batch.writeTo(writer(), sink);
+                      return sink.toByteArray();
+                    }));
       for (var result : results)
         assertArrayEquals(expected(), result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

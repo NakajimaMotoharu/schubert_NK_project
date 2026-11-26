@@ -3,7 +3,6 @@ package dev.codex.schubert.nk.migration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -226,16 +225,13 @@ final class MusicMigrationPairingTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     var planner = new MusicMigrationPairing();
     var input = tracks(PATH_A, ALPHA, PATH_Z, ALPHA_INST);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<List<String>>>();
       for (int i = 0; i < TASKS; i++)
-        results.add(executor.submit(() -> canonical(planner.plan(input))));
+        results.add(ownedWorkers.executor().submit(() -> canonical(planner.plan(input))));
       for (var result : results)
         assertEquals(List.of(ALPHA_PAIR), result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
