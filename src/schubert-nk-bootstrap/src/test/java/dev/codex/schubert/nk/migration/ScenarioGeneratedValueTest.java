@@ -220,16 +220,15 @@ final class ScenarioGeneratedValueTest {
         List.of(
             new PlacedEntry(1, 101, 1, 1, N12_MAXIMUM, Integer.MAX_VALUE),
             new PlacedEntry(2, 102, 2, 2, 1, Integer.MAX_VALUE));
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<List<PlacedEntry>>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(() -> new ScenarioEntryPlacementMap(files, entries, input).entries()));
+            owner
+                .executor()
+                .submit(() -> new ScenarioEntryPlacementMap(files, entries, input).entries()));
       for (var future : futures) assertEquals(expected, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 }

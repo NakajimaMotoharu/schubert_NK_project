@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -188,23 +187,23 @@ final class MigrationMasterCopyManifestTest {
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var mapping = mappings(-1, -2);
     var data = MigrationMasterCopyFingerprintTest.normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Void>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var result = new MigrationMasterCopyManifest(mapping, data);
-                  assertEquals(NORMAL_HASH, result.sha256());
-                  assertArrayEquals(
-                      NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
-                  return null;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var result = new MigrationMasterCopyManifest(mapping, data);
+                      assertEquals(NORMAL_HASH, result.sha256());
+                      assertArrayEquals(
+                          NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII),
+                          result.canonicalBytes());
+                      return null;
+                    }));
       for (var future : futures) assertNull(future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
