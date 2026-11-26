@@ -310,21 +310,20 @@ final class MigrationMasterCopyDatasetTest {
   void master020FiniteReadersUseIndependentMemoryAndTerminate()
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<List<String>>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var sinks = sinks();
-                  write(dataset, writer(), sinks);
-                  return sinks.stream().map(MemorySink::text).toList();
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      var sinks = sinks();
+                      write(dataset, writer(), sinks);
+                      return sinks.stream().map(MemorySink::text).toList();
+                    }));
       for (var future : futures) assertEquals(GOLDEN, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

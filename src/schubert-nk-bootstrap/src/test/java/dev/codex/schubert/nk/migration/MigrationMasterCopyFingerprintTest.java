@@ -357,16 +357,13 @@ final class MigrationMasterCopyFingerprintTest {
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var source = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<List<String>>>();
       for (int index = 0; index < TASKS; index++)
-        futures.add(executor.submit(() -> metadata(fingerprint.fingerprint(source))));
+        futures.add(workers.executor().submit(() -> metadata(fingerprint.fingerprint(source))));
       for (var future : futures)
         assertEquals(NORMAL_METADATA, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
