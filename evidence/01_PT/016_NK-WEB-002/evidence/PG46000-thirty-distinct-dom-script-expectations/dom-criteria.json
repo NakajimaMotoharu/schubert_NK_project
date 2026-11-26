@@ -1,0 +1,318 @@
+{
+  "design": {
+    "source": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "file": {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "5450c4d8f831f21f0cd9df089bccead78c3d35d49cb67b2df0ec6f82cc510ea9"
+    }
+  },
+  "scripts": [
+    {
+      "script": "log-search-validation.js",
+      "testIds": [
+        {
+          "tapNumber": 1,
+          "testId": "PT-SCR092-A",
+          "oracleTitle": "missing page stays inert"
+        },
+        {
+          "tapNumber": 2,
+          "testId": "PT-SCR092-B",
+          "oracleTitle": "fixed form structure"
+        },
+        {
+          "tapNumber": 3,
+          "testId": "PT-SCR092-C",
+          "oracleTitle": "ASCII boundary from UI225"
+        },
+        {
+          "tapNumber": 4,
+          "testId": "PT-SCR092-D",
+          "oracleTitle": "Unicode controls and malformed pairs"
+        },
+        {
+          "tapNumber": 5,
+          "testId": "PT-SCR092-E",
+          "oracleTitle": "NFC and ASCII trim byte vectors"
+        },
+        {
+          "tapNumber": 6,
+          "testId": "PT-SCR092-F",
+          "oracleTitle": "all invalid fields block native GET"
+        },
+        {
+          "tapNumber": 7,
+          "testId": "PT-SCR092-G",
+          "oracleTitle": "fixed Unicode byte edges"
+        },
+        {
+          "tapNumber": 8,
+          "testId": "PT-SCR092-H",
+          "oracleTitle": "corrected input permits submit"
+        }
+      ],
+      "criteria": "検索q/action/pathの欠落と境界、NFC/制御文字、修正後単一送信",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/021_NK-WEB-002_Logブラウザ入力単体テスト仕様書.md",
+        "sha256": "66d3cca5a8050aeefb90bdd49c7736e29005e6ed5dbb8ac02cb94337c981e791"
+      },
+      "coverage": {
+        "line": 100.0,
+        "branch": 100.0,
+        "function": 100.0
+      }
+    },
+    {
+      "script": "operation-post-submit.js",
+      "testIds": [
+        {
+          "tapNumber": 9,
+          "testId": "PT-WEB-OPSJS2646-A",
+          "oracleTitle": "no update form leaves document inert"
+        },
+        {
+          "tapNumber": 10,
+          "testId": "PT-WEB-OPSJS2646-B",
+          "oracleTitle": "token/button structure is closed"
+        },
+        {
+          "tapNumber": 11,
+          "testId": "PT-WEB-OPSJS2646-C",
+          "oracleTitle": "valid keyboard submit disables every submit button and preserves token"
+        },
+        {
+          "tapNumber": 12,
+          "testId": "PT-WEB-OPSJS2646-D",
+          "oracleTitle": "invalid then corrected submit never locks invalid form"
+        },
+        {
+          "tapNumber": 13,
+          "testId": "PT-WEB-OPSJS2646-E",
+          "oracleTitle": "second submit is suppressed without reissuing operation"
+        },
+        {
+          "tapNumber": 14,
+          "testId": "PT-WEB-OPSJS2646-F",
+          "oracleTitle": "independent forms retain independent submission state"
+        }
+      ],
+      "criteria": "フォーム有無・構造、正規一度だけと重複抑止、異なるフォームは独立",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/104_更新POST_disabled横展開仕様.md",
+        "sha256": "a64e15b6399edffc777081b6604e03f6c6229aaa2dc5d01672598e882e7d35e8"
+      },
+      "coverage": {
+        "line": 100.0,
+        "branch": 100.0,
+        "function": 100.0
+      }
+    },
+    {
+      "script": "question-input-validation.js",
+      "testIds": [
+        {
+          "tapNumber": 15,
+          "testId": "PT-QST-JS001-A",
+          "oracleTitle": "absent form is inert"
+        },
+        {
+          "tapNumber": 16,
+          "testId": "PT-QST-JS001-B",
+          "oracleTitle": "closed required structure"
+        },
+        {
+          "tapNumber": 17,
+          "testId": "PT-QST-JS001-C",
+          "oracleTitle": "initial count and required validation"
+        },
+        {
+          "tapNumber": 18,
+          "testId": "PT-QST-JS001-D",
+          "oracleTitle": "ASCII byte boundary"
+        },
+        {
+          "tapNumber": 19,
+          "testId": "PT-QST-JS001-E",
+          "oracleTitle": "independent NFC and Unicode byte vectors"
+        },
+        {
+          "tapNumber": 20,
+          "testId": "PT-QST-JS001-F",
+          "oracleTitle": "controls and malformed pairs"
+        },
+        {
+          "tapNumber": 21,
+          "testId": "PT-QST-JS001-G",
+          "oracleTitle": "no trimming and trailing ASCII only"
+        },
+        {
+          "tapNumber": 22,
+          "testId": "PT-QST-JS001-H",
+          "oracleTitle": "fresh input/submit never auto resends"
+        }
+      ],
+      "criteria": "構造欠落、4096 bytes前後、独立UTF8/NFC、末尾と制御、auto resendなし",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/067_NK-WEB-002_質問要求ブラウザ入力単体テスト仕様書.md",
+        "sha256": "9f06e76ef26ceacac7fc8fc4dd285035be7a34304d9463ac321a5c7d7a91eee5"
+      },
+      "coverage": {
+        "line": 100.0,
+        "branch": 100.0,
+        "function": 100.0
+      }
+    },
+    {
+      "script": "search-speaker-submit.js",
+      "testIds": [
+        {
+          "tapNumber": 23,
+          "testId": "PT-SCR025-A",
+          "oracleTitle": "absent form and registration"
+        },
+        {
+          "tapNumber": 24,
+          "testId": "PT-SCR025-B",
+          "oracleTitle": "missing template controls"
+        },
+        {
+          "tapNumber": 25,
+          "testId": "PT-SCR025-C",
+          "oracleTitle": "independent ASCII byte boundaries"
+        },
+        {
+          "tapNumber": 26,
+          "testId": "PT-SCR025-D",
+          "oracleTitle": "Unicode and forbidden controls"
+        },
+        {
+          "tapNumber": 27,
+          "testId": "PT-SCR025-E",
+          "oracleTitle": "NFC and Java ASCII trim compatibility"
+        },
+        {
+          "tapNumber": 28,
+          "testId": "PT-SCR025-F",
+          "oracleTitle": "all invalid fields stop submit"
+        },
+        {
+          "tapNumber": 29,
+          "testId": "PT-SCR025-G",
+          "oracleTitle": "input clears errors and permits valid submit"
+        },
+        {
+          "tapNumber": 30,
+          "testId": "PT-SCR025-H",
+          "oracleTitle": "game change uses native submission"
+        }
+      ],
+      "criteria": "入力欄欠落・Unicode・ASCII長、修正、game選択変更の独立入力",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/005_NK-WEB-002_検索ブラウザ入力単体テスト仕様書.md",
+        "sha256": "4c29a7afc915637232c77278bf6a6376721ed8d00886e5468b30f06879b19521"
+      },
+      "coverage": {
+        "line": 100.0,
+        "branch": 100.0,
+        "function": 100.0
+      }
+    }
+  ],
+  "localTemplateHooks": {
+    "templates/admin/user-detail.html": {
+      "sha256": "3bc01a993a4796e6927bcdf1de5580ef32774f6572db1a6554f4cbd98aa02ed1",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+        "sha256": "3bc01a993a4796e6927bcdf1de5580ef32774f6572db1a6554f4cbd98aa02ed1"
+      }
+    },
+    "templates/admin/user-new.html": {
+      "sha256": "40b90170b0d2f9938464e779a0bdbeb0b2eea2f2d9614df7d41780c77af61065",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+        "sha256": "40b90170b0d2f9938464e779a0bdbeb0b2eea2f2d9614df7d41780c77af61065"
+      }
+    },
+    "templates/logs.html": {
+      "sha256": "d60b9234674187874cf4f4621d22a9717e33325836c57a3a781aa7609a5d737a",
+      "localScript": "/js/log-search-validation.js",
+      "method": "get",
+      "formHook": "",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+        "sha256": "d60b9234674187874cf4f4621d22a9717e33325836c57a3a781aa7609a5d737a"
+      }
+    },
+    "templates/notifications/detail.html": {
+      "sha256": "8b21f81dada7b2082ad4c1f793da8a6ec9cdbd24196b931712b73dfd49b79fa2",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+        "sha256": "8b21f81dada7b2082ad4c1f793da8a6ec9cdbd24196b931712b73dfd49b79fa2"
+      }
+    },
+    "templates/questions/detail.html": {
+      "sha256": "42351337a102422a9b6c6ce56c8e798c21e7c87d41f62f8117dadaaf5ce77faa",
+      "localScript": "/js/operation-post-submit.js",
+      "method": "post",
+      "formHook": "operation",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+        "sha256": "42351337a102422a9b6c6ce56c8e798c21e7c87d41f62f8117dadaaf5ce77faa"
+      }
+    },
+    "templates/questions/new.html": {
+      "sha256": "f2bdc49dba685047afb6b0305a555f924ac841a40218e87ec47c8abab1d9bbf1",
+      "localScript": "/js/question-input-validation.js",
+      "method": "post",
+      "formHook": "question-input",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+        "sha256": "f2bdc49dba685047afb6b0305a555f924ac841a40218e87ec47c8abab1d9bbf1"
+      }
+    },
+    "templates/search.html": {
+      "sha256": "0c5af3c026d1449ef1a5831bf40d662ba9180b8efbfa731dd1cb88750c038007",
+      "localScript": "/js/search-speaker-submit.js",
+      "method": "get",
+      "formHook": "",
+      "externalDeferred": true,
+      "sourcePin": {
+        "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+        "sha256": "0c5af3c026d1449ef1a5831bf40d662ba9180b8efbfa731dd1cb88750c038007"
+      }
+    }
+  },
+  "rawNodeReceipt": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45346-current-four-web-scripts-one-node-run/manifest.json",
+    "sha256": "cda6b9ea600943367b27744c8969b060b3b71e6423f07c59afc0ca6c37f52d01"
+  },
+  "nodeVersion": "v24.19.0",
+  "configuration": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG44510-current-offline-js-coverage-input-bindings/manifest.json",
+    "sha256": "bd55465018052d27afa59e35b1f8d539e62619e1acf611a2a342a3a8f585bb1b"
+  },
+  "localTotal": 30,
+  "syntheticDomOnly": true,
+  "fullJavaCountAdded": 0,
+  "realBrowserEndpointsOrVisualOrder": null,
+  "remaining": [
+    "正常runtime/Caddyと実Browserでの操作結果",
+    "HTML/CSSの実視覚差分",
+    "同一候補の全451"
+  ]
+}
