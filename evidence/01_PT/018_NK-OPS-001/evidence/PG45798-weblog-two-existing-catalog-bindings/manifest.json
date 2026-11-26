@@ -1,0 +1,145 @@
+{
+  "run": "PG45798",
+  "source": "9f6cad601456280771ded1585aa035f53439c28f",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "terminalAtUTC": "2026-11-26T00:30:53.169452+00:00",
+  "actualExit": 0,
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45792-diagnostic-three-existing-value-oracles/manifest.json",
+    "sha256": "0fa250cbcdc3f7e7fed32f97c358498d1a996194c3820f72d39e0f268e81bb22"
+  },
+  "originalSources": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42056-p0181003-weblog-diagnostic-current-v1/manifest.json",
+      "sha256": "04af8b0971dd3ecb9d636ad6cce3740b4dfeaff5f043e83df57537b9cf3c88bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43010-weblog-local-current-four-criteria-v1/manifest.json",
+      "sha256": "57d088f7c9918f476c964e52dad5ffe49bb0651702555064e33575d0d8fe42b9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44272-weblog-immutable-owned-value-archived-exec/manifest.json",
+      "sha256": "2b32754e9f521b091b2f583a738ef299e9d2318e5798be201310996c81aec77c"
+    }
+  ],
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3c2d92ba1ee6b8a82db72280189d01d1b3301ee5f821099b71f4c033d4fdddc5"
+  },
+  "scopedCatalogRows": [
+    {
+      "id": "PT-P01810-CATALOG-033",
+      "testId": "PT-WLOG-VALUE002",
+      "method": "value002CiphertextOwnershipBoundsAndArrayReferenceEqualityRemainExplicit",
+      "independentExpected": "EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]",
+      "physicalCrc": "2051a9a29a9104c7",
+      "rawMethod": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "id": "PT-P01810-CATALOG-034",
+      "testId": "PT-WLOG-VALUE001",
+      "method": "value001IdentityIsCompleteAndAadMatchesIndependentEightFieldGolden",
+      "independentExpected": "WebLogPayloadIdentity[message/correlation=<redacted>]",
+      "physicalCrc": "71e8fe832e362116",
+      "rawMethod": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "currentSourcePins": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "sha256": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java",
+      "sha256": "a040ed22b820dccdb7da66a7af28dcdc1ea0a43c295aae150202090daac127df"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "sha256": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+      "sha256": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+      "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+    }
+  ],
+  "sameTwoHistoricPhysicalBytes": [
+    {
+      "path": "../pgpt-runs/PG379/pg38396-ssc454-web-value-privacy-prepare-v1/target/classes/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class",
+      "sha256": "f506601c92c034e091d7c42ec324e09c5d48b446d5393e2eada973138641d8fe"
+    },
+    {
+      "path": "../pgpt-runs/PG379/pg38396-ssc454-web-value-privacy-prepare-v1/target/classes/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class",
+      "sha256": "4434658b9840f794697863ad69277453db865e1ebcf7cd978f5da65402bc166b"
+    }
+  ],
+  "additionsToCurrentDecisionMap": 2,
+  "priorWorkAlreadyExistedAndNoRepeatPrice": true,
+  "recognizedInCurrentLocalMap": 13,
+  "totalOriginal": 93,
+  "held": 26,
+  "otherUnjoined": 54,
+  "actualSinkOrBrokerOrCryptography": false,
+  "newTests": 0,
+  "cumulativeProductTrialsGross": 3255,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
