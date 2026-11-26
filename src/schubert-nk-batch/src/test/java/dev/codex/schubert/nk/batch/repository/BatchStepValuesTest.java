@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -259,13 +260,16 @@ final class BatchStepValuesTest {
   @Test
   void independentConcurrentValues()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newVirtualThreadPerTaskExecutor(), 10, "batch attempt value")) {
       List<Future<BatchStepAttempt>> futures = new ArrayList<>();
       for (int i = 1; i <= 64; i++) {
         int n = i;
         futures.add(
-            pool.submit(() -> new BatchStepAttempt(n, RUN, BatchStep.CLEAN_LOG, n, NOW, false)));
+            workers
+                .executor()
+                .submit(() -> new BatchStepAttempt(n, RUN, BatchStep.CLEAN_LOG, n, NOW, false)));
       }
       for (int i = 1; i <= 64; i++) {
         var a = futures.get(i - 1).get(5, TimeUnit.SECONDS);
@@ -273,10 +277,6 @@ final class BatchStepValuesTest {
         assertEquals(i, a.attempt());
         assertEquals(LocalDate.of(2026, 9, 13), a.businessDate());
       }
-    } finally {
-      pool.shutdownNow();
-      if (!pool.awaitTermination(10, TimeUnit.SECONDS))
-        throw new AssertionError("owned virtual value workers did not terminate");
     }
   }
 

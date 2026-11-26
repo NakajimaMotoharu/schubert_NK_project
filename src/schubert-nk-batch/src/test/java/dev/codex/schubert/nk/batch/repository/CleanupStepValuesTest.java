@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.cleanup.StepCleanupSummary;
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -342,20 +343,23 @@ final class CleanupStepValuesTest {
 
   @Test
   void concurrentValues() throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newVirtualThreadPerTaskExecutor();
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newVirtualThreadPerTaskExecutor(), 10, "cleanup value")) {
       List<Future<CleanupStepChunk>> values = new ArrayList<>();
       for (int i = 0; i < 64; i++) {
         int n = i;
         values.add(
-            pool.submit(
-                () ->
-                    value(
-                        CleanupKind.QUESTIONS,
-                        new CleanupCounts(n, n, 0),
-                        Optional.of(new CleanupCounts(100, 100, 0)),
-                        n == 0,
-                        CleanupStepChunk.Reason.OK)));
+            workers
+                .executor()
+                .submit(
+                    () ->
+                        value(
+                            CleanupKind.QUESTIONS,
+                            new CleanupCounts(n, n, 0),
+                            Optional.of(new CleanupCounts(100, 100, 0)),
+                            n == 0,
+                            CleanupStepChunk.Reason.OK)));
       }
       for (int i = 0; i < 64; i++) {
         var v = values.get(i).get(5, TimeUnit.SECONDS);
@@ -363,10 +367,6 @@ final class CleanupStepValuesTest {
         assertEquals(new CleanupCounts(i, i, 0), v.counts());
         assertEquals(i == 0, v.complete());
       }
-    } finally {
-      pool.shutdownNow();
-      if (!pool.awaitTermination(10, TimeUnit.SECONDS))
-        throw new AssertionError("owned cleanup value workers did not terminate");
     }
   }
 }
