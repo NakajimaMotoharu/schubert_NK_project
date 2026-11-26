@@ -351,22 +351,21 @@ final class MigrationMasterReferenceVerifierTest {
   void reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate()
       throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var declared = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Integer>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = new Fixture();
-                  verify(f, declared);
-                  assertEquals(1, f.outerCloses);
-                  return f.resultCloses;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = new Fixture();
+                      verify(f, declared);
+                      assertEquals(1, f.outerCloses);
+                      return f.resultCloses;
+                    }));
       for (var future : futures) assertEquals(QUERIES, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

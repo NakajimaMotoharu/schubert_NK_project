@@ -445,24 +445,23 @@ final class MigrationMasterContentVerifierTest {
       throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var verifier = new MigrationMasterContentVerifier();
     var expected = declared(TIME, null);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Integer>>();
       for (int index = 0; index < TASKS; index++) {
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = new Fixture();
-                  verifier.verify(f.connection(), expected);
-                  assertEquals(SQL, f.sql);
-                  assertEquals(1, f.statementCloses);
-                  return f.resultCloses;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = new Fixture();
+                      verifier.verify(f.connection(), expected);
+                      assertEquals(SQL, f.sql);
+                      assertEquals(1, f.statementCloses);
+                      return f.resultCloses;
+                    }));
       }
       for (var future : futures) assertEquals(TABLES, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

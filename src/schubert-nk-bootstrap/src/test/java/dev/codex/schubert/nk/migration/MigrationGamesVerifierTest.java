@@ -380,23 +380,22 @@ final class MigrationGamesVerifierTest {
   void games020FiniteConcurrentCallsUseIndependentOwnedHandles()
       throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new MigrationGamesVerifier();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < TASKS; i++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = normal();
-                  reader.verify(f.connection());
-                  assertEquals(1, f.resultCloses);
-                  assertEquals(1, f.statementCloses);
-                  return f.sql.equals(List.of(SQL));
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = normal();
+                      reader.verify(f.connection());
+                      assertEquals(1, f.resultCloses);
+                      assertEquals(1, f.statementCloses);
+                      return f.sql.equals(List.of(SQL));
+                    }));
       for (var future : futures) assertTrue(future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
