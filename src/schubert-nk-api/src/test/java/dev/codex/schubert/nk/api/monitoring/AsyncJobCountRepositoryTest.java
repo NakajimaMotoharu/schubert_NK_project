@@ -337,14 +337,10 @@ class AsyncJobCountRepositoryTest {
             return actual.totalJobs();
           });
     }
-    var pool = Executors.newFixedThreadPool(8);
-    try {
-      var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
+    try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var results = workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int owner = 0; owner < results.size(); owner++)
         assertEquals(owner + 2L, results.get(owner).get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

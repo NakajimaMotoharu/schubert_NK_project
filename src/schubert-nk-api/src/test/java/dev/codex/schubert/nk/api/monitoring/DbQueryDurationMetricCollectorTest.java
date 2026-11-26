@@ -392,7 +392,7 @@ class DbQueryDurationMetricCollectorTest {
   void dbConn007ConcurrentSamplesUsePrecomputedIdentityInputsAndSeparateOwners() throws Exception {
     try (var registry = new Registry();
         var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
       var inputs = new ArrayList<Observation>();
       var sums = new HashMap<String, Long>();
       var counts = new HashMap<String, Long>();
@@ -425,7 +425,7 @@ class DbQueryDurationMetricCollectorTest {
               }
             });
       }
-      var futures = executor.invokeAll(jobs, 5, TimeUnit.SECONDS);
+      var futures = workers.executor().invokeAll(jobs, 5, TimeUnit.SECONDS);
       for (int i = 0; i < 64; i++)
         assertSame(inputs.get(i), futures.get(i).get(5, TimeUnit.SECONDS).orElseThrow());
       for (var query : QUERIES)
