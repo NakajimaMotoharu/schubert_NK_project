@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Event;
@@ -128,16 +129,13 @@ class MonitoringStatusTextTest {
   @Test
   void monStatus006ConcurrentStatelessFormatting() throws Exception {
     var events = List.of(event(Condition.FILESYSTEM, Service.WEB, Severity.WARNING, TIME));
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "status rendering")) {
       var tasks = new ArrayList<Callable<String>>();
       for (int index = 0; index < 64; index++)
         tasks.add(() -> renderer.render(MonitoringModePolicy.STANDARD, events));
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(STANDARD + SINGLE, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

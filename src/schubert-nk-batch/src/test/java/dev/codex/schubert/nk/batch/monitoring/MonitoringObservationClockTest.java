@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
@@ -213,21 +214,18 @@ class MonitoringObservationClockTest {
     var ticks = new AtomicLong();
     var clock = new MonitoringObservationClock(wall, ticks::getAndIncrement);
     var actual = new HashSet<Duration>();
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "observation clock")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<ObservationContext>>mapToObj(
                   i -> () -> clock.context(CauseClearance.UNCONFIRMED))
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) {
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS)) {
         var context = result.get();
         assertEquals(AT, context.at());
         assertTrue(actual.add(context.elapsed()));
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     var expected = new HashSet<Duration>();
     for (int i = 1; i <= 64; i++) expected.add(Duration.ofNanos(i));

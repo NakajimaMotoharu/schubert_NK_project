@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -135,8 +136,8 @@ class MetricContractTest {
   @Test
   void metric006ConcurrentCallersObserveOnlyOriginalCatalog() throws Exception {
     var expected = fixture();
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "metric catalog")) {
       var tasks = new ArrayList<Callable<String>>();
       for (int index = 0; index < 64; index++) {
         tasks.add(
@@ -150,11 +151,8 @@ class MetricContractTest {
               return "verified";
             });
       }
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals("verified", future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

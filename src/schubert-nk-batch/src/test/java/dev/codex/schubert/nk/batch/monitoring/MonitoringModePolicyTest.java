@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy.DetailService;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -147,8 +148,8 @@ class MonitoringModePolicyTest {
   @Test
   void monMode007ConcurrentCallersCannotChangePolicy()
       throws InterruptedException, ExecutionException {
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "monitoring policy")) {
       var tasks = new ArrayList<Callable<String>>();
       for (int index = 0; index < 64; index++) {
         tasks.add(
@@ -161,11 +162,8 @@ class MonitoringModePolicyTest {
               return "verified";
             });
       }
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals("verified", future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
