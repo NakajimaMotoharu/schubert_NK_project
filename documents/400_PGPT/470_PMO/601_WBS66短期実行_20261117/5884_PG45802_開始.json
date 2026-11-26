@@ -1,0 +1,91 @@
+{
+  "eventId": "PGPT-20261008-11338",
+  "groupId": "PG45802",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-26T00:36:16+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1796126527,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "e3107849e5adc406e773c5fe6fee2af922834633",
+    "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+    "canonicalDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "run": "PG45802",
+    "managementWorkIds": [
+      "候補再資格-06.01"
+    ],
+    "planRow": {
+      "ID": "候補再資格-06.01",
+      "元行": "WBS-P005-03/2",
+      "費目": "B",
+      "主担当": "WBS-P005-03",
+      "状態": "差分証跡不足時のみ",
+      "作業": "変更したMainの既存証跡の適用範囲を照合",
+      "残pp": "0.3",
+      "着手": "新規の実行前に今回のsource・byte・期待値・同じ証跡の既有無を確認",
+      "終了証拠": "依存への影響と当候補で使えるreceipt又は不足TestID。共通の1回分を全参照先へ渡す",
+      "補正根拠": "旧候補とのblob差分。Mainは1名義0.30、試験は0.15の暫定照合単価。A対象・閉鎖済だけのものは除外。既済みなら減額",
+      "契約HOLD": "",
+      "対象": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+      "範囲": "WBS-P005-03",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "11",
+      "楽観pp": "0",
+      "慎重pp": "0.9",
+      "要求設計の版差": "PT基準仕様 NK-MSG-001",
+      "lineNumber": 328,
+      "改訂残pp": "0.3",
+      "wholePlan": {
+        "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+        "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+      }
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月24日_PGPT再開実行計画.txt",
+        "sha256": "702ef0dfeb1b5efbf1b57f8e3d734a87a3c4d26c087c5980fcc9674ce9e15fa5"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "previousCheckpoint": "5883",
+    "startScope": "候補再資格4行。P005-03のGuard/Writer14は現証拠を再利用。P006-03のTraceは補助の現差分を明示して保留。",
+    "groupCapPp": 0.25,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.07,
+      "high": 0.25
+    },
+    "workCategory": "CONTRACT_AUDIT",
+    "completedOriginalRowPricePp": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "speedRequested": "standard",
+    "modelObserved": null,
+    "reasoningObserved": null,
+    "speedObserved": null,
+    "actualAllocatedPp": null,
+    "explicitReuseOnly": true,
+    "relatedSourceRows": [
+      "候補再資格-34.01",
+      "候補再資格-08.01",
+      "候補再資格-37.01"
+    ],
+    "nextAuthorized": [
+      "F02/F03判定票へStorageの資源・例外28と当版局所成果を追記。",
+      "未照合候補を転記前に、当sourceの既資格で有意差がある行を優先。"
+    ]
+  }
+}
