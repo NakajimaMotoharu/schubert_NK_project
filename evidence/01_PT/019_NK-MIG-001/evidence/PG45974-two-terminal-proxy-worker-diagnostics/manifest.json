@@ -1,0 +1,127 @@
+{
+  "run": "PG45974",
+  "source": "a81fdb1e692c48f3567f16f2e73f31c4612f6421",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.03/2",
+  "terminalAtUTC": "2026-11-26T03:33:47.506128+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3965",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "54b688a6babce064b754e760f0a8edc37c38f025",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/6056_移行終端合成二並行単体仕様.md",
+    "sha256": "7e8364ece2525da0748a256a00b75f37a2832751bdcedce013dc9f84ae9f65b5"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest#final028FiniteReadersOwnIndependentProxiesAndTerminate": "PT-MIG-FINAL028",
+    "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest#cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall": "PT-MIG-CLEANID010"
+  },
+  "productTests": 2,
+  "preflightScopeCorrectedBeforeJunit": false,
+  "ownJdkMemoryProxyOnly": true,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45140-current-migration-five-fixture-recovery/manifest.json",
+    "sha256": "9b27eb256672bff41951a049437fdcf12025f5b2a58ccb582b58e9466cad4d6a"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45974-two-terminal-proxy-fixtures-canonical/terminal.json",
+    "sha256": "8b02969baf0f2f18f57bf6ed4a5cd228543674e76a4b51f753cd9a910cea7a94"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45974-two-terminal-proxy-fixtures-ordinary-scoped-main/pmd.xml",
+    "sha256": "25a343e385539191fc72f15de5e74ddc61c52b1793b67f87659b4c77638dd39f"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "MigrationCleanupIdentityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 154
+    },
+    {
+      "fixture": "MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 274
+    },
+    {
+      "fixture": "MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 296
+    },
+    {
+      "fixture": "MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 337
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "CloseResource",
+      "line": 125
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 385
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 440
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 441
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 565
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 594
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 649
+    },
+    {
+      "fixture": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 688
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "d94ec05bd5fcf4460e2eed11e7561fc907a7ff70746c08a3a4433f4b6eb2aa78"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45974-two-terminal-proxy-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "c7aa0ab1f8dec22c9f0ebb7efe22e6e8e1b2e463088c94492f63278f3c1af5b4"
+    }
+  ],
+  "measuredClassCount": 12,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45974-two-terminal-proxy-fixtures-ordinary-scoped-main/begin.json",
+    "sha256": "d612f2c7fd7aa7db7e31f55b774a469da217a40c5ca1ed4eae5570dbd488b80e"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45974-two-terminal-proxy-fixtures-ordinary-scoped-main/terminal.json",
+    "sha256": "f65be9a17d19c384c5ef3d0386f7abf8fd2daccf1fb38fd89a26931552360a7d"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3452,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
