@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -105,7 +106,9 @@ final class BackupTerminalReadTest {
     assertEquals("BackupTerminal[actual=<redacted>]", terminal.toString());
     var equal = BackupStepRepository.readTerminal(BackupTerminalRows.row(values), DB, OBSERVED);
     assertEquals(terminal, equal);
-    assertEquals("observed", Map.of(terminal, "observed").get(equal));
+    var terminals = new HashSet<BackupStepRepository.Terminal>();
+    assertTrue(terminals.add(terminal));
+    assertTrue(terminals.contains(equal));
   }
 
   @Test
