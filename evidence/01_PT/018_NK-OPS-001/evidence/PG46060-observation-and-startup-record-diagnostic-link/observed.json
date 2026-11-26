@@ -1,0 +1,172 @@
+{
+  "PT-P01810-CATALOG-052": {
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15902-observation-public-values-four-pt-v1/manifest.json",
+      "sha256": "5d6d8b4865b44b35855c34c5fae72fc54f4186d3e27ad2faca8784119fb523b1"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15904-observation-public-values-four-post-v1/manifest.json",
+      "sha256": "19a2db0b39020483931422acc6c5dfd39da5f6ccdf447eb9dcdc5d7cd5b2d064"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/3039_ObservationValueRedaction原whole四_単体テスト仕様.md",
+      "sha256": "a40ba1e7f276ad45a7d39ca150aa48f0f77b3d8f36aca3757ff562b3f0b936f2"
+    },
+    "case": {
+      "classname": "dev.codex.schubert.nk.batch.file.ObservationValueRedactionTest",
+      "name": "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    "xml": {
+      "path": "../pgpt-runs/PG379/pg15902-observation-public-values-four-pt-v1/xml/TEST-dev.codex.schubert.nk.batch.file.ObservationValueRedactionTest.xml",
+      "sha256": "6410b1601dad614bebca7204a7176a915cb0551273aad80594e069eda846a9e0"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sha256": "b0659ff613078fd893ca30bf263b3d372d99dde987f5475a14f84c409a76ee77"
+    },
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+    "independentExpected": "BrokerObservations[actual=<redacted>], 2 independent maps and identities, 2 null rejections",
+    "classPins": [
+      {
+        "name": "dev/codex/schubert/nk/batch/file/MorningBrokerExecution$Observations",
+        "currentSha256": "d69eecc536a8796a1e94b0688e1df96fe3c462ce4e39684d1d079fee48ad5f24",
+        "oldSha256": "6f47b4af8386d6557ea2994703903a790fa78c1d867d8157bf4b3ea4ec3b24aa",
+        "exact": false,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "21eb7bf52c53bcfc19ea59e57aa1b109e6a9b86e1980d3b61fb29b770c16f601"
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence$Summary",
+        "currentSha256": "b7df2a163d34c0a751f22cff1776a0a5cfda7d7582d02aea9ff08c4be93716ac",
+        "oldSha256": "b7df2a163d34c0a751f22cff1776a0a5cfda7d7582d02aea9ff08c4be93716ac",
+        "exact": true,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "21eb7bf52c53bcfc19ea59e57aa1b109e6a9b86e1980d3b61fb29b770c16f601"
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation$Evidence",
+        "currentSha256": "b5550b056bfdcc6c3472e3fc9b4c413c1ec1fcb2f9724ea08d52af447890f23f",
+        "oldSha256": "e337580cd383fafb4099ba854ec2822b66194e1b83b56ca549e2cdbcde3d4e8e",
+        "exact": false,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "21eb7bf52c53bcfc19ea59e57aa1b109e6a9b86e1980d3b61fb29b770c16f601"
+        }
+      }
+    ],
+    "exact": false,
+    "held": "The parent includes other diagnostic/operation methods. A partial linked witness for Observations is reported while the CATALOG-052 parent remains unjoined.",
+    "exactLimitedClaim": "INPUT_BYTE_DIFFERENCE_NO_RESULT_TRANSFER",
+    "parentJoined": false
+  },
+  "PT-P01810-CATALOG-059": {
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16219-public-launch-five-pt-v1/manifest.json",
+      "sha256": "65287a1afc4a8fab08f73a260e50f87b9ad600d34aab6a8aa10fc8c4301fe749"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16218-public-launch-five-post-v1/manifest.json",
+      "sha256": "e61aea9c4b13c891c619e0686c3ed0ca37eebfd8e41be3c31310b0b57b37ca51"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/3127_公開起動相関record原四と独立境界一_単体テスト仕様書.md",
+      "sha256": "3e2e145477fa2a530d7ef9b5d8aa538a5e0348b8e44fd5ee5e8f334ed203390e"
+    },
+    "case": {
+      "classname": "dev.codex.schubert.nk.batch.file.StartupLaunchRecordTest",
+      "name": "wholeIndependentFrameBothServicesAndFields",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    "xml": {
+      "path": "../pgpt-runs/PG379/pg16219-public-launch-five-pt-v1/xml/TEST-dev.codex.schubert.nk.batch.file.StartupLaunchRecordTest.xml",
+      "sha256": "824314d05d432e94860a409bdfb524956972800c0f78c47419f6f1d33293b427"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupLaunchRecordTest.java",
+      "sha256": "cfb3ced853e96604d7746b195727258106aa75ec5af6d0f010dc7539f99f648d"
+    },
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupLaunchRecord.java",
+    "independentExpected": "StartupLaunchRecord[identity=<redacted>] for fixed independent API and Web values",
+    "classPins": [
+      {
+        "name": "dev/codex/schubert/nk/batch/file/StartupLaunchRecord",
+        "currentSha256": "593ac211ee08d5c9e3a218464b1bb1c7e45fbe2e35c78340ed727273879b22b5",
+        "oldSha256": "593ac211ee08d5c9e3a218464b1bb1c7e45fbe2e35c78340ed727273879b22b5",
+        "exact": true,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "21eb7bf52c53bcfc19ea59e57aa1b109e6a9b86e1980d3b61fb29b770c16f601"
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/batch/file/StartupLaunchRecord$DigestFactory",
+        "currentSha256": "53f2f5393652374b568ab7e067528f3d91a71555c819446dff1a15dd0534278c",
+        "oldSha256": "53f2f5393652374b568ab7e067528f3d91a71555c819446dff1a15dd0534278c",
+        "exact": true,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "21eb7bf52c53bcfc19ea59e57aa1b109e6a9b86e1980d3b61fb29b770c16f601"
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service",
+        "currentSha256": "3ba3120b773b03b8627f97b7438d31744fa327262d9a9bee0a523eb91d82955d",
+        "oldSha256": "3ba3120b773b03b8627f97b7438d31744fa327262d9a9bee0a523eb91d82955d",
+        "exact": true,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+          "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+          "sha256": "9c5bbd75424923872995c4389fbdd5853f3078394576efe88f28b9d8a032c6c5"
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent",
+        "currentSha256": "2cd864d63ca3e50cd41384c7fd1dfcc729c09fc2b09a0a7356110a8c286eb59d",
+        "oldSha256": "2cd864d63ca3e50cd41384c7fd1dfcc729c09fc2b09a0a7356110a8c286eb59d",
+        "exact": true,
+        "currentJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+          "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+        },
+        "oldJar": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+          "sha256": "b60ebb5445c1a0db304a60a0b7d922e02f85ed0e562d9e8c8e9cf9c2d5657499"
+        }
+      }
+    ],
+    "exact": true,
+    "held": "Real placement, registered/process ownership, trust validation and activation remain outside scope.",
+    "exactLimitedClaim": "REFERENCED_ORIGINAL_SAME_EXERCISED_VALUES",
+    "parentJoined": true
+  }
+}
