@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.file.MediaType;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
@@ -364,8 +365,7 @@ class MediaStreamsMetricCollectorTest {
   void mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate() throws Exception {
     try (var registry = new Registry();
         var otherRegistry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var expected = Collections.synchronizedMap(new IdentityHashMap<OptionalLong, Long>());
         var perType = new java.util.EnumMap<MediaType, Set<Long>>(MediaType.class);
         for (var type : TYPES)
@@ -387,7 +387,7 @@ class MediaStreamsMetricCollectorTest {
           var type = TYPES.get(index % 3);
           tasks.add(() -> collector.collect(type));
         }
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+        for (var result : owner.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
           var observation = result.get(5, TimeUnit.SECONDS);
           assertTrue(expected.containsKey(observation));
           assertEquals(expected.get(observation).longValue(), observation.orElseThrow());
@@ -409,9 +409,6 @@ class MediaStreamsMetricCollectorTest {
         }
         shape(registry);
         shape(otherRegistry);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
