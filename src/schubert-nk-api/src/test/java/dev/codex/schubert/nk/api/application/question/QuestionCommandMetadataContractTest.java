@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -65,7 +65,8 @@ final class QuestionCommandMetadataContractTest {
     assertEquals(floor, canonicalEquivalent.at());
     assertEquals(stored, canonicalEquivalent);
     assertEquals(canonicalEquivalent, stored);
-    var owners = Map.of(stored, "fixture owner");
+    var owners = new HashMap<QuestionCommandMetadata, String>();
+    owners.put(stored, "fixture owner");
     assertEquals("fixture owner", owners.get(canonicalEquivalent));
     for (var different :
         List.of(
