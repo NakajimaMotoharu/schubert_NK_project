@@ -1,0 +1,128 @@
+{
+  "rows": [
+    {
+      "id": "PT-P01810-CATALOG-040",
+      "testId": "REQUEST-DISPLAY001",
+      "javaMethod": "requestDisplay001ReceiptRetainsOnlyPublicLocatorValuesAtBothIdLimits",
+      "independentDiagnostic": "ReceiptReference[redacted]",
+      "target": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReference.java",
+        "sha256": "b8dff7e53fd4b8646817eb6673a57479d3746a37d01585c3e35c2eee749ff829"
+      },
+      "fixture": {
+        "path": "tools/quality/architecture/RequestDisplayContractTest.java",
+        "sha256": "402e6b71ac0292d115eb0d4926aeefc13835f698f338dbe8834d71b487ca3437"
+      },
+      "existingProof": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+        "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+      },
+      "qualification": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45838-question-input-receipt-13-explicit-ids/manifest.json",
+        "sha256": "c995b18d8ee9f47a2d567af7fdb484e58cf55750afe769671f6bc9ad5ddfb89d"
+      },
+      "actualSink": false
+    },
+    {
+      "id": "PT-P01810-CATALOG-046",
+      "testId": "PT-BAT-STEPVALUE002",
+      "javaMethod": "stepvalue002ChunkAndSummaryRetainAllValidComponentsAndClosedReasonFactories",
+      "independentDiagnostic": "StepCleanupSummary[observation=<redacted>]",
+      "target": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java",
+        "sha256": "fe92043709045bb68f2755934a48d70ae7c2c6e81ae87ca016ba2f743d018501"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/StepObservationValueContractTest.java",
+        "sha256": "17d0e4069ea9c6c1b9b6fff96c9e5c5b7480cafed93a0d7012f213e9235b5386"
+      },
+      "existingProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43512-current-batch-inspection-and-step-value-reuse-v1/manifest.json",
+        "sha256": "b109759325d1eece23954abbfc1b6d053f491d4c91469dc3e5b0e3a185388209"
+      },
+      "qualification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45834-backup-terminal-value-dependencies-exact/manifest.json",
+        "sha256": "ce59914042c145160f3e5eabde2ca7a22cace9b4432dba84026bb1086b75fbce"
+      },
+      "actualSink": false
+    },
+    {
+      "id": "PT-P01810-CATALOG-080",
+      "testId": "PT-BAT-RUNVALUE001",
+      "javaMethod": "cutoffBoundsNullsAndFixedRunDiagnostic",
+      "independentDiagnostic": "BatchRun[identity/cutoff=<redacted>]",
+      "target": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+        "sha256": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a"
+      },
+      "existingProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42944-batch-run-value-original-exec-v1/manifest.json",
+        "sha256": "e060ac9f8a74c09ae047f9424dc44f09c645c5bf5851cf7fefffc0e254137fbb"
+      },
+      "qualification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45834-backup-terminal-value-dependencies-exact/manifest.json",
+        "sha256": "ce59914042c145160f3e5eabde2ca7a22cace9b4432dba84026bb1086b75fbce"
+      },
+      "actualSink": false
+    },
+    {
+      "id": "PT-P01810-CATALOG-082",
+      "testId": "PT-BAT-STEPVALUE001",
+      "javaMethod": "stepvalue001AttemptAllComponentsBoundsNullsAndCivilDatesAreIndependent",
+      "independentDiagnostic": "BatchStepAttempt[identity/time=<redacted>]",
+      "target": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+        "sha256": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/StepObservationValueContractTest.java",
+        "sha256": "17d0e4069ea9c6c1b9b6fff96c9e5c5b7480cafed93a0d7012f213e9235b5386"
+      },
+      "existingProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43512-current-batch-inspection-and-step-value-reuse-v1/manifest.json",
+        "sha256": "b109759325d1eece23954abbfc1b6d053f491d4c91469dc3e5b0e3a185388209"
+      },
+      "qualification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45834-backup-terminal-value-dependencies-exact/manifest.json",
+        "sha256": "ce59914042c145160f3e5eabde2ca7a22cace9b4432dba84026bb1086b75fbce"
+      },
+      "actualSink": false
+    },
+    {
+      "id": "PT-P01810-CATALOG-088",
+      "testId": "PT-BAT-RUNVALUE002",
+      "javaMethod": "activationNullsValueAccessorsAndFixedDiagnostic",
+      "independentDiagnostic": "MaintenanceActivation[identity/cutoff=<redacted>]",
+      "target": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+        "sha256": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+        "sha256": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a"
+      },
+      "existingProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42944-batch-run-value-original-exec-v1/manifest.json",
+        "sha256": "e060ac9f8a74c09ae047f9424dc44f09c645c5bf5851cf7fefffc0e254137fbb"
+      },
+      "qualification": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45834-backup-terminal-value-dependencies-exact/manifest.json",
+        "sha256": "ce59914042c145160f3e5eabde2ca7a22cace9b4432dba84026bb1086b75fbce"
+      },
+      "actualSink": false
+    }
+  ],
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45798-weblog-two-existing-catalog-bindings/manifest.json",
+    "sha256": "980b682a877df7abe527873b1c0fd1c4d0cb75c1877ed2a95e74f05c7036eb16"
+  },
+  "knownPresentInCurrentScope": 18,
+  "totalOriginal": 93,
+  "originalHolds": 26,
+  "remainingUnjoined": 49,
+  "unchangedApprovalAndRemainingExit": "current real sink and broker, exact context/session, ordinary chain, permissions and 451"
+}
