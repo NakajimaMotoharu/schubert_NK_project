@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
@@ -305,12 +306,11 @@ class AsyncQueueMonitorTest {
                 && result.event().orElseThrow().isOpen();
           });
     }
-    var pool = Executors.newFixedThreadPool(8);
-    try {
-      for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "asynchronous queue monitor")) {
+      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+        assertTrue(result.get());
     }
     var finalEvent = monitor.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), finalEvent.count());
