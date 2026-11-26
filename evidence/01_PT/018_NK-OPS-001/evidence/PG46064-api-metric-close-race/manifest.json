@@ -1,0 +1,146 @@
+{
+  "run": "PG46064",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "e63e03b3cf3115c010b95eaa90c91c51328a1478",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T05:26:09.977181+00:00",
+  "testIds": {
+    "dev.codex.schubert.nk.api.monitoring.ApiCustomMetricPayloadTest#apifull012CallerCloseBetweenSourcesCannotReturnPartialText": "APIFULL012"
+  },
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "unitActualExit": 0,
+  "toolReportExit": 0,
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6146_API注入描画の途中closeと所有単体仕様.md",
+    "sha256": "3f8256ac23c25662f39e6e716a656c27b81380961d7b4d72e743bcbd851f1ecb"
+  },
+  "canonicalFormatting": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46064-api-metric-close-race-canonical/terminal.json",
+    "sha256": "f93c5d39ce12a7d843a6448a6123658b12f5532e020868839dcea8424d18ab0b"
+  },
+  "static": {
+    "pmdFindings": [
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "CloseResource",
+        "line": 241
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 263
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "CloseResource",
+        "line": 584
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 584
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 593
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 601
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 602
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "CloseResource",
+        "line": 617
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "CloseResource",
+        "line": 623
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 623
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 627
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 629
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 632
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 639
+      },
+      {
+        "file": "ApiCustomMetricPayloadTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 677
+      }
+    ],
+    "checkstyleExit": 0,
+    "strictCompile": true
+  },
+  "physicalCount": 9,
+  "realDbOrBrokerOrJmx": false,
+  "bug": [
+    "BUG-3981"
+  ],
+  "ykt": [
+    "YKT-2997"
+  ],
+  "oldResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39392-bug3276-api-custom-payload-unit-v1/manifest.json",
+    "sha256": "b61ccfddd800db26145ef709e4d2174cdd4260b988ecacfa109448ef384cfd9c"
+  },
+  "oldToCurrentMainSourceDifferences": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java"
+  ],
+  "noOpRegistrationAndInjectedRegistry": true,
+  "previousPmdReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46062-current-api-metric-rendering-pmd-disposition/manifest.json",
+    "sha256": "bf68b1e58fb5ceb3a333bf908171500e9b1f51da98649fd9b2344b54689c6ca3"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46064-api-metric-close-race/begin.json",
+    "sha256": "108bdb50da03b8191c9e380327d002320ffcdc321f1500f65d41791369e48383"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46064-api-metric-close-race/terminal.json",
+    "sha256": "0a7bdbe23039b8c42c34f2aa01e74184155b34bae3c564762cb6d4d282dce651"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46064-api-metric-close-race/junit-sanitized.xml",
+      "sha256": "f21cb312c5b3cb072290af8b09932c2e11587faf97a74f9f6c6a6adca7e470d4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46064-api-metric-close-race/coverage-unfiltered.tsv",
+      "sha256": "367d4c688dd948eab316f3dfda69764886a0746693bedcc0fa31d9c65b7cd171"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3516,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
