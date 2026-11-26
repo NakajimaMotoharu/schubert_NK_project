@@ -1,0 +1,122 @@
+[
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 241,
+    "anchor": "var source = new Borrowed();",
+    "technicalSiteDecision": "EXPLICIT_CLOSE_TEST_INPUT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 263,
+    "anchor": "try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(4))) {",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 584,
+    "anchor": "var executor = Executors.newFixedThreadPool(4);",
+    "technicalSiteDecision": "HOLD_ACTUAL_JVM_BIND",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 584,
+    "anchor": "var executor = Executors.newFixedThreadPool(4);",
+    "technicalSiteDecision": "HOLD_ACTUAL_JVM_BIND",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 593,
+    "anchor": "for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {",
+    "technicalSiteDecision": "HOLD_ACTUAL_JVM_BIND",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 601,
+    "anchor": "executor.shutdownNow();",
+    "technicalSiteDecision": "HOLD_ACTUAL_JVM_BIND",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 602,
+    "anchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+    "technicalSiteDecision": "HOLD_ACTUAL_JVM_BIND",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 617,
+    "anchor": "var standard = fullOwner(probe);",
+    "technicalSiteDecision": "LOCAL_OWNERSHIP_VIA_TWR_ALIAS",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 623,
+    "anchor": "var executor = Executors.newSingleThreadExecutor();",
+    "technicalSiteDecision": "LOCAL_OWNERSHIP_VIA_TWR_ALIAS",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 623,
+    "anchor": "var executor = Executors.newSingleThreadExecutor();",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 627,
+    "anchor": "executor.shutdownNow();",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 629,
+    "anchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 632,
+    "anchor": "Thread.currentThread().interrupt();",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 639,
+    "anchor": "executor.submit(",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 677,
+    "anchor": "Thread.currentThread().interrupt();",
+    "technicalSiteDecision": "LOCAL_FINITE_JUNIT",
+    "qualityOwnerId": null
+  }
+]
