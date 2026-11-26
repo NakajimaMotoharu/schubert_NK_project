@@ -1,0 +1,136 @@
+[
+  {
+    "id": "PT-P01810-CATALOG-009",
+    "oldSpec": {
+      "plannedCaseId": "PT-P01810-CATALOG-009",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+      "sourceSha256": "0b10a762ba66659b57aa3ae924030faa75f5a4cab1cbf7a06cc1b65002e05661",
+      "owners": [
+        "WBS-P006-01"
+      ],
+      "design": "origin/main SS351/RD MON/FUN008/OPS005",
+      "boundaryCategories": [
+        "EXPLICIT_REDACTED_DIAGNOSTIC"
+      ],
+      "fixtureKind": "PUBLIC_SYNTHETIC_PORT_OR_VALUE_ONLY_AFTER_INDIVIDUAL_AUTHORITY_ADMISSION",
+      "plannedInput": {
+        "untrustedCanary": "public-noncredential-canary-do-not-log",
+        "nullBoundary": null,
+        "unknownField": "public_unknown_field",
+        "emptyValue": "",
+        "providerFailure": "fixed synthetic failure object only, no real raw exception"
+      },
+      "independentExpected": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "independentBasis": "SS351 closed schema, canonical inventory field categories; expected literal requirements authored separately from production method output",
+      "actualCandidateTestSourceRefs": [
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java"
+      ],
+      "candidateRelationIsNotOracleProof": true,
+      "fixtureAdmission": "CANDIDATE_SOURCE_ONLY_NOT_EXECUTION_OR_COVERAGE",
+      "executionStatus": "NOT_RUN_SPECIFICATION_ONLY",
+      "remaining": "Map each concrete producer call and exact Test method to this expected contract; held authority/native/Root/DB dependencies stay HOLD. Source candidates do not establish pass, full coverage, current ABI or ending acceptance."
+    },
+    "originalUnit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38572-ssc460-actor-boundary-unit-v2/manifest.json",
+      "sha256": "f68f1882071747854949e16ff9eb752353ab9a5241cf658d10e5f8c88c728908"
+    },
+    "originalSource": "40b0f24b7c28eb3d266f7d11771481dc9f2c1b6a",
+    "ordinaryTestCase": "canonicalValue005SyntheticDigestMetadataIsClonedRedactedAndNeverCalculatesAFingerprint",
+    "inputs": [
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+        "sha256": "11c7d766aa67847d77b2a6c69e96f167316a751e27744758be327e557920f7ac"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+        "sha256": "4f82f83938dc0ef254756c3f38bbfe78b792620045d840cc15bb01535740d1f3"
+      }
+    ],
+    "physical": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46032-diagnostic-fingerprint-and-snapshot-values/main/dev/codex/schubert/nk/api/idempotency/Fingerprint.class",
+      "sha256": "455a50257f63103d6a08ecf2874a7d37a7cd00d882a368ce49f59ad3641c83fd"
+    },
+    "fixedExpected": "Fingerprint[<redacted>]"
+  },
+  {
+    "id": "PT-P01810-CATALOG-014",
+    "oldSpec": {
+      "plannedCaseId": "PT-P01810-CATALOG-014",
+      "source": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java",
+      "sourceSha256": "66e9e45738d02de02e8c0d336e997c2e2878f96e1620d84ae532c663ebd3418c",
+      "owners": [
+        "WBS-P006-01"
+      ],
+      "design": "origin/main SS351/RD MON/FUN008/OPS005",
+      "boundaryCategories": [
+        "EXPLICIT_REDACTED_DIAGNOSTIC"
+      ],
+      "fixtureKind": "PUBLIC_SYNTHETIC_PORT_OR_VALUE_ONLY_AFTER_INDIVIDUAL_AUTHORITY_ADMISSION",
+      "plannedInput": {
+        "untrustedCanary": "public-noncredential-canary-do-not-log",
+        "nullBoundary": null,
+        "unknownField": "public_unknown_field",
+        "emptyValue": "",
+        "providerFailure": "fixed synthetic failure object only, no real raw exception"
+      },
+      "independentExpected": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "independentBasis": "SS351 closed schema, canonical inventory field categories; expected literal requirements authored separately from production method output",
+      "actualCandidateTestSourceRefs": [
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorProcessTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnectionsTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecsTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecutionTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotNonceFailureTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentityValueTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java"
+      ],
+      "candidateRelationIsNotOracleProof": true,
+      "fixtureAdmission": "CANDIDATE_SOURCE_ONLY_NOT_EXECUTION_OR_COVERAGE",
+      "executionStatus": "NOT_RUN_SPECIFICATION_ONLY",
+      "remaining": "Map each concrete producer call and exact Test method to this expected contract; held authority/native/Root/DB dependencies stay HOLD. Source candidates do not establish pass, full coverage, current ABI or ending acceptance."
+    },
+    "originalUnit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35650-snapshot-identity3-unit-v1/manifest.json",
+      "sha256": "15892f62f8df488cf1cf99378abad5f4591542bf7bd82a8b87c1c5a2ae5efc79"
+    },
+    "originalSource": "aa95dad48edcdc41af1de3c12a365b58a3c97e95",
+    "ordinaryTestCase": "aadValue003AllOrderedRecordComponentsHashAndFixedRedaction",
+    "inputs": [
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java",
+        "sha256": "66e9e45738d02de02e8c0d336e997c2e2878f96e1620d84ae532c663ebd3418c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentityValueTest.java",
+        "sha256": "d440d24a56322d5b35b9d7ec2fc4e0149f226d4cd63cebedd7645f896f8a887c"
+      }
+    ],
+    "physical": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46032-diagnostic-fingerprint-and-snapshot-values/main/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.class",
+      "sha256": "aef3d9668b7fb77549f5e430fc640d304607d1058da91870c62b64465b900c2a"
+    },
+    "fixedExpected": "ResponseSnapshotIdentity[request/layout/version/owner=<redacted>]"
+  }
+]
