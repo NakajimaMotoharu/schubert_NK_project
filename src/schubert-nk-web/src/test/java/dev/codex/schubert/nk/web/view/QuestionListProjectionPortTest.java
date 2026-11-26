@@ -382,8 +382,7 @@ final class QuestionListProjectionPortTest {
 
   @Test
   void parallelViewsKeepActorsSeparate() throws Exception {
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var workers = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var pending = new ArrayList<Future<QuestionListViewModel>>();
       for (int i = 0; i < 8; i++) {
         String name = READER + i;
@@ -402,9 +401,6 @@ final class QuestionListProjectionPortTest {
         assertEquals(READER + i, page.getRows().getFirst().get(K_USERNAME));
         assertTrue(page.getNextHref().isEmpty());
       }
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
