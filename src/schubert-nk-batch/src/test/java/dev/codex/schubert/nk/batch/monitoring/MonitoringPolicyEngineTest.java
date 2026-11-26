@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Event;
@@ -319,22 +320,21 @@ class MonitoringPolicyEngineTest {
       throws InterruptedException, ExecutionException {
     var engine = new MonitoringPolicyEngine();
     var context = context(0, CauseClearance.UNCONFIRMED);
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var owner =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(4), 10, "monitoring aggregate")) {
       var tasks = new ArrayList<Callable<BigInteger>>();
       for (int index = 0; index < 64; index++)
         tasks.add(
             () -> engine.transfer(Service.WEB, 3_500_000_000L, 0, context).orElseThrow().count());
       var counts = new HashSet<BigInteger>();
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) counts.add(future.get());
+      for (var future : owner.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
+        counts.add(future.get());
       var expected = new HashSet<BigInteger>();
       for (int value = 1; value <= 64; value++) expected.add(BigInteger.valueOf(value));
       assertEquals(expected, counts);
       assertEquals(1, engine.activeAlerts().size());
       assertEquals(BigInteger.valueOf(64), engine.activeAlerts().getFirst().count());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

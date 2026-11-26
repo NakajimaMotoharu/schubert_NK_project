@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Event;
@@ -95,9 +96,11 @@ final class TimedMonitorSnapshotConcurrencyTest {
       assertThrows(IllegalArgumentException.class, () -> observe.accept(0));
     }
 
-    var worker = Executors.newVirtualThreadPerTaskExecutor();
-    try {
-      worker
+    try (var owner =
+        new BoundedBatchFixtureWorkers(
+            Executors.newVirtualThreadPerTaskExecutor(), 10, "rejected observations")) {
+      owner
+          .executor()
           .submit(
               () -> {
                 assertTrue(
@@ -129,9 +132,6 @@ final class TimedMonitorSnapshotConcurrencyTest {
                 assertEquals(EPOCH.plusSeconds(2), alert.snapshot().orElseThrow().lastSeen());
               })
           .get(10, TimeUnit.SECONDS);
-    } finally {
-      worker.shutdownNow();
-      assertTrue(worker.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -148,35 +148,37 @@ final class TimedMonitorSnapshotConcurrencyTest {
     assertEquals(1, verifyEvent(condition, original));
 
     var start = new CountDownLatch(1);
-    var workers = Executors.newFixedThreadPool(2);
-    try {
+    try (var owner =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(2), 10, "monitoring snapshots")) {
       var writer =
-          workers.submit(
-              () -> {
-                assertTrue(start.await(10, TimeUnit.SECONDS));
-                for (int i = 1; i <= UPDATES; i++) {
-                  observe.accept(FIRST_ELAPSED + i);
-                }
-                return null;
-              });
+          owner
+              .executor()
+              .submit(
+                  () -> {
+                    assertTrue(start.await(10, TimeUnit.SECONDS));
+                    for (int i = 1; i <= UPDATES; i++) {
+                      observe.accept(FIRST_ELAPSED + i);
+                    }
+                    return null;
+                  });
       var reader =
-          workers.submit(
-              () -> {
-                assertTrue(start.await(10, TimeUnit.SECONDS));
-                int lastCount = 1;
-                for (int i = 0; i < UPDATES; i++) {
-                  int count = verifyEvent(condition, snapshot.get().orElseThrow());
-                  assertTrue(count >= lastCount);
-                  lastCount = count;
-                }
-                return null;
-              });
+          owner
+              .executor()
+              .submit(
+                  () -> {
+                    assertTrue(start.await(10, TimeUnit.SECONDS));
+                    int lastCount = 1;
+                    for (int i = 0; i < UPDATES; i++) {
+                      int count = verifyEvent(condition, snapshot.get().orElseThrow());
+                      assertTrue(count >= lastCount);
+                      lastCount = count;
+                    }
+                    return null;
+                  });
       start.countDown();
       writer.get(10, TimeUnit.SECONDS);
       reader.get(10, TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
 
     assertEquals(UPDATES + 1, verifyEvent(condition, snapshot.get().orElseThrow()));
