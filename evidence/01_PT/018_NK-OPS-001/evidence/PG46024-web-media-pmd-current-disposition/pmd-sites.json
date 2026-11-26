@@ -1,0 +1,203 @@
+[
+  {
+    "file": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+    "line": 37,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "siteSHA256": "51b1f31ad80d64451ea580ce6a70cb83f7a1d6341282af4665b5f0319ca27016",
+    "testID": "MEDIACONN004/005/009",
+    "technicalAssessment": "注入源のRuntimeException/Errorを同一のまま伝播し、選ばれた型だけを欠測にする。例外文面なし、試験側の独立値と別worker回復で裏付け。",
+    "disposition": "DESIGN_REQUIRED_REVIEW_PENDING",
+    "relatedProof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46018-web-media-collector-recorder-eight/manifest.json",
+        "sha256": "2986bc472cf9811f6810682f8d6b0bb100ea8634db24bfa70bec5697a6e12ce9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46020-web-media-owned-recovery/manifest.json",
+        "sha256": "16680bea6898f1862412595807f8b237a0913d60e4e07588fd1956803413a6a6"
+      }
+    ],
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java",
+    "line": 37,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "siteSHA256": "51b1f31ad80d64451ea580ce6a70cb83f7a1d6341282af4665b5f0319ca27016",
+    "testID": "MEDIACONN004/005/009",
+    "technicalAssessment": "注入源のRuntimeException/Errorを同一のまま伝播し、選ばれた型だけを欠測にする。例外文面なし、試験側の独立値と別worker回復で裏付け。",
+    "disposition": "DESIGN_REQUIRED_REVIEW_PENDING",
+    "relatedProof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46018-web-media-collector-recorder-eight/manifest.json",
+        "sha256": "2986bc472cf9811f6810682f8d6b0bb100ea8634db24bfa70bec5697a6e12ce9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46020-web-media-owned-recovery/manifest.json",
+        "sha256": "16680bea6898f1862412595807f8b237a0913d60e4e07588fd1956803413a6a6"
+      }
+    ],
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 279,
+    "column": 27,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "febda83e3544652bdfdd22fe9ebdbbc8320cebdbb25258bc4ad1488c95001104",
+    "testID": "MEDIACONN009",
+    "technicalAssessment": "供給例外後の再利用を別workerで証明。試験用executorの有限回収と一次例外保持を確認。製品にはこのworkerを生成しない。",
+    "disposition": "TEST_FIXTURE_REVIEW_PENDING",
+    "relatedProof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46020-web-media-owned-recovery/manifest.json",
+        "sha256": "16680bea6898f1862412595807f8b237a0913d60e4e07588fd1956803413a6a6"
+      }
+    ],
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 281,
+    "column": 34,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "7019df46d019e708975c41b9eb961f6c680b72eb9f95b94a50723bc34549adc1",
+    "testID": "MEDIACONN009",
+    "technicalAssessment": "供給例外後の再利用を別workerで証明。試験用executorの有限回収と一次例外保持を確認。製品にはこのworkerを生成しない。",
+    "disposition": "TEST_FIXTURE_REVIEW_PENDING",
+    "relatedProof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46020-web-media-owned-recovery/manifest.json",
+        "sha256": "16680bea6898f1862412595807f8b237a0913d60e4e07588fd1956803413a6a6"
+      }
+    ],
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 296,
+    "column": 7,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "4a374e3be7bce6fc35bb32a61aaa5e7c94cc7cd0ce85248cd3f40cd713f9421f",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 305,
+    "column": 11,
+    "rule": "CloseResource",
+    "siteSHA256": "3afcbdb128552d27ad07dc52d76e3cdbcdc817437bdad03be661bb7168b0bbce",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 305,
+    "column": 22,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "3afcbdb128552d27ad07dc52d76e3cdbcdc817437bdad03be661bb7168b0bbce",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 318,
+    "column": 39,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "5c897789295832d1f68b6c520d91e7d935c6cebb23060d392351c22773af485f",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 327,
+    "column": 21,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "f8cf95f4f1b005566cb1585fdcd828bca12dbf6bbc33afd80699c4f79168b837",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 330,
+    "column": 13,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "c86a7a656bb299c9e0ca14bd0514ad63a6dfc49b5b9ac8ebf1a080f81ed5d46f",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 332,
+    "column": 41,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "0b2ce1cd8b0f1d375daf07cb1f55e82e88cc7d6e5b694085db70261134fae926",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 361,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "a351d723024d217b6d8188da8469e9a212af65cf27177f94fb0771fab309360f",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 362,
+    "column": 20,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "8db4e0833f0619e7bbfc97121b25b5066ec074407a7f4773d66236a71917f424",
+    "testID": "MEDIACONN006",
+    "technicalAssessment": "実JVM観測を含む試験に係る候補。参加workerの検証とwrapの終了例外優先順位は当scopeで判定しない。",
+    "disposition": "HOLD_AUTHORIZATION",
+    "relatedProof": null,
+    "qualityOwnerSigned": false
+  },
+  {
+    "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+    "line": 371,
+    "column": 47,
+    "rule": "DoNotUseThreads",
+    "siteSHA256": "f6293ec37a98978b92d50f5b748e7a6f380e53f056ea4c99596052c43f7a56a6",
+    "testID": "MEDIACONN007",
+    "technicalAssessment": "合成64観測と別registryの固定値を並行処理で検証。有限ownerの元試験と現差が期待ラベル参照だけであることを確認。",
+    "disposition": "TEST_FIXTURE_REVIEW_PENDING",
+    "relatedProof": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46014-web-media-collector-ordinary/manifest.json",
+        "sha256": "8b896b4f90e3175ee6a80330c0dab033c5ec79f36e7511fa1d828b115c3fda5e"
+      }
+    ],
+    "qualityOwnerSigned": false
+  }
+]
