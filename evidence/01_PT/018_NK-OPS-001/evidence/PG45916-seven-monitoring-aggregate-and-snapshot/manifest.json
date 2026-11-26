@@ -1,0 +1,91 @@
+{
+  "run": "PG45916",
+  "source": "900e2c493f521dd23ce38ab4b6347d46f174d254",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:37:34.919121+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3949",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "d8d5763080f520dc6fe471294814394dd81962cd",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5998_監視集約とsnapshot七単体仕様.md",
+    "sha256": "33426f615051d3870bf61f23ca0accb249a9211e681cf7819e6c60fdeb3d3239"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest#poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour": "POLL007",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest#monPipe006ConcurrentSingleEntryKeepsOneOwner": "MONPIPE006",
+    "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest#snap001FilesystemPublishesWholeEvents": "PT-OPS-MON-SNAP001",
+    "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest#snap002HeapPublishesWholeEvents": "PT-OPS-MON-SNAP002",
+    "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest#snap003PoolPublishesWholeEvents": "PT-OPS-MON-SNAP003",
+    "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest#snap004LatencyPublishesWholeEvents": "PT-OPS-MON-SNAP004",
+    "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest#rejectedElapsedTimeReleasesAllSixLocks": "PT-OPS-MON-SNAP005"
+  },
+  "productTests": 7,
+  "workerContract": "original 8/4 or 2/virtual by case",
+  "fixedAggregateInputs": 64,
+  "snapshotTransitions": 32,
+  "invocationWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45916-snapshot-aggregate-canonical/terminal.json",
+    "sha256": "f91bbc53c057d2e2b5707d4964516eea77df34a04479ad5a2919959f94516262"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45916-snapshot-aggregate-ordinary/pmd.xml",
+    "sha256": "825b6acf3ce8ad5dc3b3ccfdede00830487eeba8a43af364ddd9f2b59232f428"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "MonitoringPolicyEngineTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 325
+    },
+    {
+      "fixture": "MonitoringPollerTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 209
+    },
+    {
+      "fixture": "TimedMonitorSnapshotConcurrencyTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 101
+    },
+    {
+      "fixture": "TimedMonitorSnapshotConcurrencyTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 153
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45916-seven-monitoring-aggregate-and-snapshot/junit-sanitized.xml",
+      "sha256": "756efb45c224819490a38ebd8762cc9d318cb62149dd8a08006d823b3cb8e412"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45916-seven-monitoring-aggregate-and-snapshot/coverage-unfiltered.tsv",
+      "sha256": "f381ce11da8ea126521ceac0fe3683e755489ce6739bcb95d3b3fd7e87d7b640"
+    }
+  ],
+  "measuredClassCount": 19,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45916-snapshot-aggregate-ordinary/begin.json",
+    "sha256": "ce2d5325560461f8f612ee4343aedcf4a9d2ce2f41db115cb54224638952923c"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45916-snapshot-aggregate-ordinary/terminal.json",
+    "sha256": "4c2263b235920af92df10af934cca9e5000738cdf8ab0621f7b14699d0c5eafb"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3394,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
