@@ -1,0 +1,50 @@
+{
+  "run": "PG45804",
+  "source": "0a0fb19720a4b7a12caf2ca4462b0b5bf2498800",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "候補再資格-37.01",
+  "terminalAtUTC": "2026-11-26T00:38:25.677135+00:00",
+  "actualExit": 0,
+  "related": "WBS-P006-03/2",
+  "existingNoChange": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45354-local-audit-fixture-failure-preservation/manifest.json",
+    "sha256": "16d615dc2a4a1fe0c112cc6a652cbc03202819524f6684175c47cc6dc4730eef"
+  },
+  "onlyAffectedDependency": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45802-current-four-requalification-receipts-empty-count-delta/manifest.json",
+    "sha256": "6a7bb86be2e5dd762ef0adf5b7e05a2978e13144c6e7539d0151f2644525b9ed"
+  },
+  "productTrials": 2,
+  "currentCases": [
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest#req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest#req008HundredConcurrentRequestsDoNotCrossContaminate"
+  ],
+  "expected": "nested scope restores first business label, no inheritance; 100 local callers retain independent metadata",
+  "sameScopeRawNoTotalsClaim": true,
+  "canonicalProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "965fd026a8ab7131f7dbb5a902b87926f24db7cc544305d0eae2cd3d6972ce0e"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45804-web-trace-two-current-worker/begin.json",
+    "sha256": "9b5b69727a36822596d2df78e878264969838a00a76543925e350b1dd498b550"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45804-web-trace-two-current-worker/terminal.json",
+    "sha256": "3da34ccc6d1481e9875a8008979b9f383bd4bdbbae679cec5405db90538b4827"
+  },
+  "reports": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45804-current-web-request-trace-two-parallel-scope-cases/junit-sanitized.xml",
+      "sha256": "5e1d9311f613935b8e4689dde889e7c12c37e0c8ef75f86a64c0743ff26a856a"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45804-current-web-request-trace-two-parallel-scope-cases/coverage-unfiltered.tsv",
+      "sha256": "e7ebb810ab64027a265377c132d27eac9284017b593e08a808104d6e1d79d111"
+    }
+  ],
+  "actualOutboxSinkBrokerOrWebRequest": false,
+  "cumulativeProductTrialsGross": 3259,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
