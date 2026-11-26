@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -295,8 +296,7 @@ class OverflowSafeHttpMeterRegistryTest {
   void httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector() throws Exception {
     try (var registry = new OverflowSafeHttpMeterRegistry(new MockClock());
         var other = new OverflowSafeHttpMeterRegistry(new MockClock())) {
-      var executor = Executors.newFixedThreadPool(4);
-      try {
+      try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(4))) {
         var timer = timer(registry);
         var unrelated = timer(other);
         List<Callable<Void>> tasks = new ArrayList<>();
@@ -306,7 +306,7 @@ class OverflowSafeHttpMeterRegistryTest {
                 for (int i = 0; i < 64; i++) timer.record(1, TimeUnit.SECONDS);
                 return null;
               });
-        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        for (var future : owner.invokeAll(tasks, 10, TimeUnit.SECONDS))
           future.get(10, TimeUnit.SECONDS);
         assertEquals(256, timer.count());
         assertEquals(256, timer.totalTime(TimeUnit.SECONDS));
@@ -314,9 +314,6 @@ class OverflowSafeHttpMeterRegistryTest {
         cdf(timer, 0, 0, 0, 0, 256, 256, 256, 256, 256);
         assertEquals(0, unrelated.count());
         assertEquals(0, unrelated.totalTime(TimeUnit.SECONDS));
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder.Observation;
 import dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder.Status;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
@@ -318,8 +319,7 @@ class WebOutboxMetricRecorderTest {
       throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
+      try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
         var oracle = new IdentityHashMap<Observation, long[]>();
         var tasks = new ArrayList<Callable<Void>>();
@@ -337,7 +337,7 @@ class WebOutboxMetricRecorderTest {
                 return null;
               });
         }
-        for (var f : pool.invokeAll(tasks, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+        for (var f : owner.invokeAll(tasks, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
         var selected = metrics.snapshot().orElseThrow();
         assertTrue(oracle.containsKey(selected));
         var expected = oracle.get(selected);
@@ -352,9 +352,6 @@ class WebOutboxMetricRecorderTest {
         assertSame(selected, metrics.snapshot().orElseThrow());
         values(
             registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
       }
     }
   }

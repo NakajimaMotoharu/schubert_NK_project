@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder.Counts;
 import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder.State;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
@@ -223,8 +224,7 @@ class WebDbPoolMetricRecorderTest {
   void webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots()
       throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
+      try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var recorder = new WebDbPoolMetricRecorder(registry, DEBUG_MODE);
         var first = new Counts(1, 2, 3, 8);
         var second = new Counts(4, 5, 6, 9);
@@ -239,14 +239,11 @@ class WebDbPoolMetricRecorderTest {
                 return actual == first || actual == second;
               });
         }
-        for (var actual : pool.invokeAll(tasks, 5, java.util.concurrent.TimeUnit.SECONDS))
+        for (var actual : owner.invokeAll(tasks, 5, java.util.concurrent.TimeUnit.SECONDS))
           assertTrue(actual.get(5, java.util.concurrent.TimeUnit.SECONDS));
         assertEquals(1, first.active());
         assertEquals(8, first.maximum());
         shape(registry);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
       }
     }
   }
