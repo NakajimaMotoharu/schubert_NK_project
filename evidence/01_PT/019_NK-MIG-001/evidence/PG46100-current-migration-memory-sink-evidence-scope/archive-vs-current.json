@@ -1,0 +1,55 @@
+{
+  "oldArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+    "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+  },
+  "oldXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "7db766e59b2198eed63b4f740658363f37956bd7468b2553ff7018ca1308e72b"
+  },
+  "beforeArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/unit-begin.json",
+    "sha256": "40e045b0c294b494fa4e7c8381f6c5de02edc010a1c5a8930821dc9f4ec326a7"
+  },
+  "currentJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "currentFixture": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+    "sha256": "a1fb69051274964ccdeb56cc8afdbf1e3f5a3b18392d6ff90f0d186f8817d29a"
+  },
+  "sameExact": 30,
+  "bytesDiffer": [
+    [
+      "dev/codex/schubert/nk/migration/AudioFileCopyRow.class",
+      "b5f8d2ea806070830ea9d929534feadfd3bcecbdb433523ac99b06e610d7dc2d",
+      "ea50b38127af77e325c23f0d9810232341fd2eb2e0e4b17f179d4e9bae20500f"
+    ],
+    [
+      "dev/codex/schubert/nk/migration/AssetStagingTables.class",
+      "718f301e8d4fbdee614370e206b477da836ecb1026d52c1ebadb6efb21e23d3b",
+      "87a32b86456bafe55d52bdaa03d6c50996109596ae9083df2eda05601e1a118c"
+    ],
+    [
+      "dev/codex/schubert/nk/migration/ScenarioStagingTables.class",
+      "d6335c2f6346cab777981df3974a4e83acb97f402e7b55a0247a04d646ee8681",
+      "a92d5ff8b6118fb2e22c4c340199eb9c56c278ac64955905e5dde44d428dd87c"
+    ],
+    [
+      "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+      "4d8172e42644b6a0913f92972aae692a5b7d98b17275942c3f8105500032657d",
+      "0527198a6481a851dc82a6365311e77a3f86ac867c0965c7ff3d16ca66600f45"
+    ],
+    [
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest.class",
+      "54601a05e7b5b90fb33198a77137f79f2e725cb278f99428aefdff9f8aa5d75c",
+      "ec7d3623be95f92790b89d24cd25cad47c088bfe4a8301d92db71cd504ad6339"
+    ]
+  ],
+  "testBodyMatches": {
+    "five014EachIoFailureStopsLaterStreamsAndPreservesInstance": "PT-MIG-FIVE014",
+    "five016PartialBytesRemainAndNoAutomaticReplay": "PT-MIG-FIVE016"
+  },
+  "relevantDependencyDiff": "AudioFileCopyRow is created by the fixed input helper and used by writeAll."
+}
