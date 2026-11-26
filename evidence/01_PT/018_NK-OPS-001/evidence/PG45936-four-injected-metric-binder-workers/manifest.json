@@ -1,0 +1,122 @@
+{
+  "run": "PG45936",
+  "source": "cf2ed0e8e4cc981085f5dba156d2dee6f2e24635",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:57:43.358514+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3953",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "cf06a0d1f52ff532b5983d141dfeaae5964a0530",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6018_Batch注入binder四並行単体仕様.md",
+    "sha256": "f64db2679528d5a4f4378d1f1dfb2c8a81ec8353a20922468f78878bad75b4ff"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.BatchJvmMetricsTest#batchjvm014FiniteConcurrentPortsDoNotShareSourceState": "BATCHJVM014",
+    "dev.codex.schubert.nk.batch.monitoring.BatchSystemMetricsTest#batchsys014FiniteConcurrentPortsDoNotShareSourceState": "BATCHSYS014",
+    "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricsTest#batchstd013FiniteIndependentConcurrentCompositions": "BATCHSTD013",
+    "dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest#transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot": "TRANSFERCONN008"
+  },
+  "productTests": 4,
+  "originalPoolSizes": [
+    4,
+    4,
+    4,
+    8
+  ],
+  "allOwnedInMemorySources": true,
+  "futureWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45936-injected-binder-canonical/terminal.json",
+    "sha256": "cb1836cbafd61022c473e324f1489f352b42e431e5433a066ddcb40642064395"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45936-injected-binder-ordinary/pmd.xml",
+    "sha256": "50be37053781b76a1df7c0078b1ce7331b6ca3da3fa85c509df8e2139827bf55"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "BatchJvmMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 194
+    },
+    {
+      "fixture": "BatchJvmMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 343
+    },
+    {
+      "fixture": "BatchJvmMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 386
+    },
+    {
+      "fixture": "BatchStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 214
+    },
+    {
+      "fixture": "BatchStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 331
+    },
+    {
+      "fixture": "BatchStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 368
+    },
+    {
+      "fixture": "BatchSystemMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 201
+    },
+    {
+      "fixture": "BatchSystemMetricsTest.java",
+      "rule": "CloseResource",
+      "line": 350
+    },
+    {
+      "fixture": "BatchSystemMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 394
+    },
+    {
+      "fixture": "TransferHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 292
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45936-four-injected-metric-binder-workers/junit-sanitized.xml",
+      "sha256": "166085ce48b5d8bc7fd64a3c5f5624d66caf58358cf1da7550e3a2168949b0fe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45936-four-injected-metric-binder-workers/coverage-unfiltered.tsv",
+      "sha256": "295f5e3fe4c518be536a90d3794e3114c6cabda34f2dd49195b2b6276b979cce"
+    }
+  ],
+  "measuredClassCount": 5,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45936-injected-binder-ordinary/begin.json",
+    "sha256": "d75f4559b7199398d0a6fcaf62652ee342ce6335becaea5662f872a7d4093478"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45936-injected-binder-ordinary/terminal.json",
+    "sha256": "623e4930c89fee763bb271f4bec7e3b67ac19a39eae9e78d55d5cbbfc4bffdd7"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3420,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
