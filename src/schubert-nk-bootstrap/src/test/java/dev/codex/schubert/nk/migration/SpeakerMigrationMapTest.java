@@ -364,23 +364,22 @@ final class SpeakerMigrationMapTest {
   void speakerMap024FiniteSharedMapReadersRetainIndependentRowsAndTerminate()
       throws InterruptedException, ExecutionException, TimeoutException {
     var map = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  assertEquals(700L, map.targetSpeakerId(1, -20));
-                  return map.copyRows(currentRows(), STAMP)
-                      .copyBytes(new PostgresCopyTextEncoder());
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      assertEquals(700L, map.targetSpeakerId(1, -20));
+                      return map.copyRows(currentRows(), STAMP)
+                          .copyBytes(new PostgresCopyTextEncoder());
+                    }));
       for (var future : futures)
         assertArrayEquals(
             COPY.getBytes(StandardCharsets.UTF_8), future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

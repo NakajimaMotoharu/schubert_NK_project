@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -454,25 +453,24 @@ final class AudioMigrationMapTest {
   void audioMap024FiniteConcurrentCallsHaveIndependentOutputs()
       throws InterruptedException, ExecutionException, TimeoutException {
     var map = mapper();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int task = 0; task < TASKS; task++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var values = map.copyRows(normal(), at());
-                  return values.get(0).fields().get(0)
-                      + ":"
-                      + values.get(1).fields().get(0)
-                      + ":"
-                      + map.targetAudioId(1, -20);
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var values = map.copyRows(normal(), at());
+                      return values.get(0).fields().get(0)
+                          + ":"
+                          + values.get(1).fields().get(0)
+                          + ":"
+                          + map.targetAudioId(1, -20);
+                    }));
       for (var future : futures)
         assertEquals("700:900:700", future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

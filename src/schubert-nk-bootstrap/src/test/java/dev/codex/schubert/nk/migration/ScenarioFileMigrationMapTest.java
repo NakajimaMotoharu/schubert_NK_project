@@ -190,25 +190,23 @@ final class ScenarioFileMigrationMapTest {
   void file012ConcurrentReturnsRemainIndependentlyOwned()
       throws InterruptedException, ExecutionException, TimeoutException {
     var map = sample();
-    var executor = Executors.newFixedThreadPool(8);
-    var futures = new ArrayList<Future<?>>();
-    try {
+    try (var owner = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
+      var futures = new ArrayList<Future<?>>();
       for (int index = 0; index < 64; index++) {
         futures.add(
-            executor.submit(
-                () -> {
-                  byte[] actual = map.canonicalBytes();
-                  assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), actual);
-                  actual[0] = 0;
-                  tuple(map.lookup(1, 2), 1, 2, 900, 1);
-                  tuple(map.next(1, 10).orElseThrow(), 2, 1, 50, 1);
-                  assertFalse(map.previous(2, 1).isEmpty());
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] actual = map.canonicalBytes();
+                      assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), actual);
+                      actual[0] = 0;
+                      tuple(map.lookup(1, 2), 1, 2, 900, 1);
+                      tuple(map.next(1, 10).orElseThrow(), 2, 1, 50, 1);
+                      assertFalse(map.previous(2, 1).isEmpty());
+                    }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "owned worker termination");
     }
     assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), map.canonicalBytes());
   }

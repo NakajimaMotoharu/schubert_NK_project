@@ -167,26 +167,23 @@ final class ScenarioEntryMigrationMapTest {
   void order012ConcurrentIndependentReturnOwnership()
       throws InterruptedException, ExecutionException, TimeoutException {
     var value = map();
-    var workers = Executors.newFixedThreadPool(8);
-    try {
+    try (var owner = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       var tasks = new ArrayList<Future<Void>>();
       for (int index = 0; index < 64; index++) {
         tasks.add(
-            workers.submit(
-                () -> {
-                  tuple(value.lookup(2), 2, 900, 1);
-                  byte[] output = value.canonicalBytes();
-                  assertArrayEquals(bytes(GOLDEN), output);
-                  Arrays.fill(output, (byte) 0);
-                  assertArrayEquals(bytes(GOLDEN), value.canonicalBytes());
-                  return null;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      tuple(value.lookup(2), 2, 900, 1);
+                      byte[] output = value.canonicalBytes();
+                      assertArrayEquals(bytes(GOLDEN), output);
+                      Arrays.fill(output, (byte) 0);
+                      assertArrayEquals(bytes(GOLDEN), value.canonicalBytes());
+                      return null;
+                    }));
       }
       for (var task : tasks) task.get(5, TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      if (!workers.awaitTermination(10, TimeUnit.SECONDS))
-        throw new AssertionError("scenario migration workers did not terminate");
     }
   }
 }
