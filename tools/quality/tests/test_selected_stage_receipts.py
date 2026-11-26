@@ -126,3 +126,17 @@ class SelectedStageReceiptsTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, f"{stream} differs"):
                     self.verify()
                 path.write_bytes(old)
+
+    def test_stages006_nonstandard_constants_fail_in_each_receipt_role(self):
+        for role in ("begin", "process", "exit"):
+            path = self.scope / f"unit-{role}.safe.json"
+            original = path.read_text(encoding="utf-8")
+            for constant in ("NaN", "Infinity", "-Infinity"):
+                with self.subTest(role=role, constant=constant):
+                    damaged = original.rstrip().removesuffix("}")
+                    path.write_text(damaged + ', "synthetic": ' + constant + "}", encoding="utf-8")
+                    try:
+                        with self.assertRaisesRegex(ValueError, "INVALID_JSON_CONSTANT"):
+                            self.verify()
+                    finally:
+                        path.write_text(original, encoding="utf-8")

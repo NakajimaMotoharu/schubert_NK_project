@@ -6,6 +6,8 @@ import re
 from datetime import datetime
 from pathlib import Path
 
+from static_input_scope import invalid_constant
+
 
 def _file(directory, name):
     path = directory / name
@@ -25,7 +27,9 @@ def _unique_object(pairs):
 
 def _record(directory, label, role):
     path = _file(directory, f"{label}-{role}.safe.json")
-    record = json.loads(path.read_bytes(), object_pairs_hook=_unique_object)
+    record = json.loads(
+        path.read_bytes(), object_pairs_hook=_unique_object, parse_constant=invalid_constant
+    )
     if not isinstance(record, dict):
         raise ValueError(f"{label}: malformed stage record")
     return record
