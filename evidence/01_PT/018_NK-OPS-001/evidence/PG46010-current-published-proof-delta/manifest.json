@@ -1,0 +1,81 @@
+{
+  "run": "PG46010",
+  "source": "88971583cc3da923043615d9e7a624016e03e3eb",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-26T04:11:46.211656+00:00",
+  "actualExit": 0,
+  "stage": {
+    "pins": {
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/verify_published_manifest_pins.py",
+        "--start",
+        "337aab2860b0c15d25eae51b59696f78e1105ee2",
+        "--end",
+        "88971583cc3da923043615d9e7a624016e03e3eb"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/pins.stdout",
+        "sha256": "f42c98eb5fe17a8395ecfb3da33442ea0f0fc6eb3c9f864f62ad4ea8c7244d28"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/pins.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "secret": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+        "git",
+        "--redact=100",
+        "--no-banner",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/secrets.safe.json",
+        "--log-opts",
+        "337aab2860b0c15d25eae51b59696f78e1105ee2..88971583cc3da923043615d9e7a624016e03e3eb",
+        "."
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/secret.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/secret.stderr",
+        "sha256": "0fbfb86d67e6603bd7e98098df2d627a073fc5105ee786f7769e256ef99fe053"
+      }
+    }
+  },
+  "gitRange": {
+    "rangeStart": "337aab2860b0c15d25eae51b59696f78e1105ee2",
+    "rangeEnd": "88971583cc3da923043615d9e7a624016e03e3eb",
+    "manifests": 16,
+    "current": 45,
+    "historical": 1,
+    "externalOrProtected": 35,
+    "unresolved": []
+  },
+  "redactedSecrets": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46010-current-published-delta-only/secrets.safe.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "secretFindingCount": 0,
+  "last": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45978-current-published-proof-delta/manifest.json",
+    "sha256": "1be6ceaf8a0ed44d125e7494eb5991c712c50771174bafac566131cb6d3e4983"
+  },
+  "currentBaseline": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "trackedCleanBeforeWork": true,
+  "stashCount": 7,
+  "masterBackupAndNativeRetained": true,
+  "otherFilesUnchanged": true,
+  "productTests": 0,
+  "cumulativeProductTrialsGross": 3496,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
