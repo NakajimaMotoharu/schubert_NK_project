@@ -1,0 +1,63 @@
+{
+  "run": "PG45830",
+  "source": "8660de9b170c9844fcace0f9cb4dce1f7ace36a6",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T01:08:15.402314+00:00",
+  "actualExit": 0,
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupTerminalReadTest.java",
+    "sha256": "ed3ab136088db19ae20bc2c1befd959174000515ea5da128b38193150f54fcb0"
+  },
+  "canonicalSpotlessActual": [
+    [
+      1,
+      0,
+      1,
+      0
+    ]
+  ],
+  "spotless": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45830-backup-terminal-canonical-format/spotless.log",
+    "sha256": "2f0a63f9f9d4e21111784525b165dac5789f2e5bdcc429ea3318b30bc2ac9a3a"
+  },
+  "baseDynamicEvidence": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45828-current-backup-terminal-real-hash-twenty-two/manifest.json",
+    "sha256": "abf3edadbb4682eb497644d3d6d8b4ee240588959743a4f4e9e68464a8b2717b"
+  },
+  "pmdRawKept": true,
+  "technicalPmdDecisions": [
+    {
+      "rule": "CloseResource",
+      "line": 73,
+      "technical": "JDK dynamic ResultSet proxy; no real handle exists and the strict lookup oracle rejects any close",
+      "fixture": "PT-BAT-TERM001"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 76,
+      "technical": "The declared shared JDBC interface supplies the loader that defines that interface. No input-dependent or thread-context loader is selected.",
+      "fixture": "PT-BAT-TERM001"
+    },
+    {
+      "rule": "CloseResource",
+      "line": 178,
+      "technical": "BackupTerminalRows.row returns a synthetic dynamic proxy; nonexistent resource and the null-contract probe must remain a borrowed call.",
+      "fixture": "PT-BAT-TERM005"
+    }
+  ],
+  "pmdSuppressions": 0,
+  "ownerApproval": null,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45830-backup-terminal-canonical-format/begin.json",
+    "sha256": "c9eb976076c005cd68fb9c0837ca0a9f2eeab43b56da975c9430fb264177db83"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45830-backup-terminal-canonical-format/terminal.json",
+    "sha256": "569b7db1d8bfd98c809c82ea8ed7bf78a67d8abb48160a1056b68f1d27521b5a"
+  },
+  "noNewProductTests": 0,
+  "cumulativeProductTrialsGross": 3327,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
