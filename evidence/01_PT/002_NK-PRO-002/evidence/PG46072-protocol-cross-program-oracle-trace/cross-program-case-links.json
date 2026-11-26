@@ -1,0 +1,478 @@
+{
+  "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericErrorFillerDoesNotBecomeBusinessZero": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      10
+    ],
+    "testIds": [
+      "PT-PRO-002-N02"
+    ],
+    "expected": "Only error 00 becomes unset; normal 00 becomes 0 and 01 becomes 1.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "declarationLine": 96,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e0ffae917f3441dd7526c6a8185bbd8885564dc68b09ed77f4e5dc68b52b6fdb"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      11
+    ],
+    "testIds": [
+      "PT-PRO-002-B01"
+    ],
+    "expected": "Independent byte 0/1/space for false/true/filler; extra/malformed bytes rejected.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "declarationLine": 129,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e0ffae917f3441dd7526c6a8185bbd8885564dc68b09ed77f4e5dc68b52b6fdb"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      8
+    ],
+    "testIds": [
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02",
+      "PT-PRO-002-X03"
+    ],
+    "expected": "Internal spaces retained, mandatory and optional filler distinguished, strict wire.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "declarationLine": 37,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e0ffae917f3441dd7526c6a8185bbd8885564dc68b09ed77f4e5dc68b52b6fdb"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      7
+    ],
+    "testIds": [
+      "PT-PRO-002-X01",
+      "PT-PRO-002-X02"
+    ],
+    "expected": "AB to 41 42 20 20, NFC to fixed c3a9; over-width and invalid input.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "declarationLine": 17,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e0ffae917f3441dd7526c6a8185bbd8885564dc68b09ed77f4e5dc68b52b6fdb"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      9
+    ],
+    "testIds": [
+      "PT-PRO-002-N01",
+      "PT-PRO-002-N02"
+    ],
+    "expected": "Fixed 000,001,999 and known invalid non-digits and long overflow.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    },
+    "declarationLine": 61,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e0ffae917f3441dd7526c6a8185bbd8885564dc68b09ed77f4e5dc68b52b6fdb"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.MessageCodecTest#fixedPayloadIsDefensiveAndWireMessageChecksLengths": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      14
+    ],
+    "testIds": [
+      "PT-PRO-002-M02"
+    ],
+    "expected": "Independent arrays 1,2 and 3,4,5; defensive input/output ownership and cardinality violations.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java",
+      "sha256": "02cdbae5208f35e6c437ce14180090e451505e73041c45c3f620ca0ead2bf1ab"
+    },
+    "declarationLine": 153,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "sha256": "265f474eae1926a9ef334f7978322761e73ad7c9f32e7e12950de3920800f8cd"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      19
+    ],
+    "testIds": [
+      "PT-SCN-008-RD02"
+    ],
+    "expected": "Hand-built record expected independently; ownership and six fixed values.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+      "sha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15"
+    },
+    "declarationLine": 48,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "9572af35627b2e9f52f4e17fd52755d887b3d59668df23ca9f0f18754e3291a6"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      18
+    ],
+    "testIds": [
+      "PT-SCN-008-W03"
+    ],
+    "expected": "Fixed 4800-byte record without invented data/header and explicit negative inputs.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+      "sha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15"
+    },
+    "declarationLine": 19,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "9572af35627b2e9f52f4e17fd52755d887b3d59668df23ca9f0f18754e3291a6"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest#rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1961_G13CodecBoundary14_独立期待値意味対応表.md",
+      "sha256": "63ab0cce9fe8c84abc18fa9457bb7bbb9623c414182c92a8ee49b49f7a82e4bb"
+    },
+    "specLines": [
+      20
+    ],
+    "testIds": [
+      "PT-SCN-008-RD02"
+    ],
+    "expected": "Null/unknown family, inconsistent length, malformed field as fixed failures.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java",
+      "sha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15"
+    },
+    "declarationLine": 66,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "sha256": "9572af35627b2e9f52f4e17fd52755d887b3d59668df23ca9f0f18754e3291a6"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest#acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum": {
+    "testSpecification": {
+      "path": "evidence/01_PT/003_NK-PRO-003/011_独立並行・最大値是正と境界PT群仕様.md",
+      "sha256": "bcff2cbdf522bee85cbc74325408611c05d0104a1c875970b6ceb35ac2ffc670"
+    },
+    "specLines": [
+      8
+    ],
+    "testIds": [
+      "PT-PRO-003-L01"
+    ],
+    "expected": "Independent 10000×4800; maximum total 48000000.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java",
+      "sha256": "80497e82e58b9bd68f0c864d8caa8ca74a4c702f09c2cb9f4090dbbbda57f6ea"
+    },
+    "declarationLine": 151,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "sha256": "1e0d21c72f3b7dbdc34b7376c83d672e1a7f6b084fb8ae49f52133f1f8d26e94"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest#utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries": {
+    "testSpecification": {
+      "path": "evidence/01_PT/003_NK-PRO-003/011_独立並行・最大値是正と境界PT群仕様.md",
+      "sha256": "bcff2cbdf522bee85cbc74325408611c05d0104a1c875970b6ceb35ac2ffc670"
+    },
+    "specLines": [
+      9
+    ],
+    "testIds": [
+      "PT-PRO-003-M04"
+    ],
+    "expected": "Defined independent extension/MIME, UTF8 width and N12 endpoints.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java",
+      "sha256": "97faf48280d3d1e6fdf24cae984fae531f718545274c4567f9ca4c26b163ab34"
+    },
+    "declarationLine": 103,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "sha256": "e1da47980dae2aefa3b0ad1f175e5889dd197dae71f3b8da968ea067c8dc4c85"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.header.HeaderModelTest#authenticationContextValidatesAndRedacts": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1953_G13Header8_独立期待値・golden意味対応表.md",
+      "sha256": "c1c859e422dfd954f80fbd2d81b68b848d502e58f46a3ec11469b5f41421b424"
+    },
+    "specLines": [
+      8
+    ],
+    "testIds": [
+      "PT-PRO-001-H01",
+      "PT-PRO-001-H03"
+    ],
+    "expected": "Only allowed canonical form with independent public test markers; identity and redacted rendering.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+      "sha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f"
+    },
+    "declarationLine": 97,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "sha256": "99369ca1d6599cb794fa2da099fdf68a93e26ed98175573ed0d927296fa82a39"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest#catalogMatchesIndependentUi234To236Fixture": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    "specLines": [
+      11
+    ],
+    "testIds": [
+      "PT-PRO-001-F02",
+      "PT-PRO-001-L03"
+    ],
+    "expected": "Independent 389-field TSV and 64-layout catalogue.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java",
+      "sha256": "c338df0dbeb4f00ce03a0f80418a6c430be120bb12b59f475f380e2650fb6219"
+    },
+    "declarationLine": 24,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "94f13030dc2caada3dccbf4b8213724235b3f2a05dc206d4f33de0fbbfae3aa3"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest#layoutFieldsRejectWrongAreaGapLengthAndNull": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    "specLines": [
+      13
+    ],
+    "testIds": [
+      "PT-PRO-001-F03",
+      "PT-PRO-001-F01"
+    ],
+    "expected": "Fixed one-byte valid fields and mutations for wrong area, gaps, length, and null.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java",
+      "sha256": "c338df0dbeb4f00ce03a0f80418a6c430be120bb12b59f475f380e2650fb6219"
+    },
+    "declarationLine": 273,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "sha256": "94f13030dc2caada3dccbf4b8213724235b3f2a05dc206d4f33de0fbbfae3aa3"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#registryMatchesIndependentUi233Catalog": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    "specLines": [
+      7
+    ],
+    "testIds": [
+      "PT-PRO-001-L01",
+      "PT-PRO-001-L03"
+    ],
+    "expected": "Independent UI233 64 tuples.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "sha256": "2883db960fdee214c91b63320f76b8e72af15a9713942e1b629c71b4c21bce7f"
+    },
+    "declarationLine": 25,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "689ba5217046d0781f881b372816f5ab3da259d1460dbdb964639c460611e8ef"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest#layoutIdAndFieldDefinitionAreStrictAndOneBased": {
+    "testSpecification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1956_G13LayoutCatalog7_独立期待値意味対応表.md",
+      "sha256": "6ede52efc7cb04c471c6a55e2a17d4b8c4859c9186f24977bc9758b1dcd3d711"
+    },
+    "specLines": [
+      10
+    ],
+    "testIds": [
+      "PT-PRO-001-F01",
+      "PT-PRO-001-L02"
+    ],
+    "expected": "Fixed ASCII8, initial offsets, length and dictionary ordering.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "sha256": "2883db960fdee214c91b63320f76b8e72af15a9713942e1b629c71b4c21bce7f"
+    },
+    "declarationLine": 289,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "sha256": "689ba5217046d0781f881b372816f5ab3da259d1460dbdb964639c460611e8ef"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#typedModelsAndHelpersRejectNullMissingAndWrongKinds": {
+    "testSpecification": {
+      "path": "evidence/01_PT/001_NK-PRO-001/1197_型catalog十二method・P00102全二十Source参照完了.md",
+      "sha256": "3b021da46f66eaa1c9b2a106bfecf95e0d5a2b21baaecd5d3918104c19159228"
+    },
+    "specLines": [
+      27
+    ],
+    "testIds": [
+      "PT-PRO-001-T03",
+      "PT-PRO-002-P05"
+    ],
+    "expected": "Null/missing/wrong-kind inputs with distinct expected rejections.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    "declarationLine": 181,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b451a5c164d613ea644147f1d9900128e6111f65469d3205e412da1b3f4621ba"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning": {
+    "testSpecification": {
+      "path": "evidence/01_PT/001_NK-PRO-001/1197_型catalog十二method・P00102全二十Source参照完了.md",
+      "sha256": "3b021da46f66eaa1c9b2a106bfecf95e0d5a2b21baaecd5d3918104c19159228"
+    },
+    "specLines": [
+      22
+    ],
+    "testIds": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "expected": "Independent SS323 named mapping by field in both directions.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    "declarationLine": 30,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b451a5c164d613ea644147f1d9900128e6111f65469d3205e412da1b3f4621ba"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes": {
+    "testSpecification": {
+      "path": "evidence/01_PT/001_NK-PRO-001/1197_型catalog十二method・P00102全二十Source参照完了.md",
+      "sha256": "3b021da46f66eaa1c9b2a106bfecf95e0d5a2b21baaecd5d3918104c19159228"
+    },
+    "specLines": [
+      26
+    ],
+    "testIds": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P05"
+    ],
+    "expected": "Unknown layout and type mismatch reject before conversion.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    "declarationLine": 143,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b451a5c164d613ea644147f1d9900128e6111f65469d3205e412da1b3f4621ba"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes": {
+    "testSpecification": {
+      "path": "evidence/01_PT/001_NK-PRO-001/1197_型catalog十二method・P00102全二十Source参照完了.md",
+      "sha256": "3b021da46f66eaa1c9b2a106bfecf95e0d5a2b21baaecd5d3918104c19159228"
+    },
+    "specLines": [
+      24
+    ],
+    "testIds": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P04"
+    ],
+    "expected": "Explicit 64 layout and 69 typed structures; direction independent fixture is another case.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    "declarationLine": 78,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b451a5c164d613ea644147f1d9900128e6111f65469d3205e412da1b3f4621ba"
+    }
+  },
+  "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest#optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames": {
+    "testSpecification": {
+      "path": "evidence/01_PT/001_NK-PRO-001/1197_型catalog十二method・P00102全二十Source参照完了.md",
+      "sha256": "3b021da46f66eaa1c9b2a106bfecf95e0d5a2b21baaecd5d3918104c19159228"
+    },
+    "specLines": [
+      25
+    ],
+    "testIds": [
+      "PT-PRO-001-T02",
+      "PT-PRO-002-P05"
+    ],
+    "expected": "Distinct local present/unset and retained names.",
+    "testSource": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    "declarationLine": 123,
+    "originalUnitXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "sha256": "b451a5c164d613ea644147f1d9900128e6111f65469d3205e412da1b3f4621ba"
+    }
+  }
+}
