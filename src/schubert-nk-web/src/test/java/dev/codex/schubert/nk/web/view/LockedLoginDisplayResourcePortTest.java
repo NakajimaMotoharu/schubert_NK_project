@@ -137,8 +137,7 @@ final class LockedLoginDisplayResourcePortTest {
   @Test
   void parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags()
       throws InterruptedException, ExecutionException, TimeoutException {
-    var pool = Executors.newFixedThreadPool(2);
-    try {
+    try (var pool = new ViewFixtureWorkers(Executors.newFixedThreadPool(2))) {
       var jobs = new ArrayList<Future<List<String>>>();
       for (int index = 0; index < 8; index++) {
         int own = index;
@@ -156,9 +155,6 @@ final class LockedLoginDisplayResourcePortTest {
             index % 2 == 0 ? List.of(LOCK_MESSAGE) : List.of(),
             jobs.get(index).get(10, TimeUnit.SECONDS));
       }
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
