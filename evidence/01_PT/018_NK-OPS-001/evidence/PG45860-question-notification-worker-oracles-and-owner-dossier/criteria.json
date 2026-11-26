@@ -1,0 +1,333 @@
+{
+  "oracleModes": {
+    "質問送信": {
+      "wbs": "WBS-P016-18/2",
+      "support": "分解入力、固定wire、上限、破棄した要求bodyの所有",
+      "screen": "SCR018",
+      "remaining": "実submit transaction・SQL・MQ受渡しとowner",
+      "localMethods": [
+        {
+          "testId": "PT-QST-FORM001",
+          "method": "qstForm001IndependentGoldenAndNoQuestionTrimming",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM002",
+          "method": "qstForm002ByteBoundariesAfterNfcWithoutTruncation",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM003",
+          "method": "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM004",
+          "method": "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM005",
+          "method": "qstForm005ClosedBindingMissingDuplicateAndNullContracts",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM006",
+          "method": "qstForm006ImmutableSnapshotsAndRedaction",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM007",
+          "method": "qstForm007TerminalClosePreservesOtherOwners",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41646-p01618-question-submit-form-current-eight-v1/manifest.json",
+            "sha256": "634d93a4e8540b9a9359989fc60204c984f73738ba00787f62a9c9352c1a47b1"
+          }
+        },
+        {
+          "testId": "PT-QST-FORM008",
+          "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45836-question-submit-worker-current-delta/manifest.json",
+            "sha256": "59011c378c521897bc5b06c02c7adf2ef6918d2acbfe83cc336cee2eba526f60"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY003",
+          "method": "requestDisplay003QuestionNewFormUsesOnlyCorrectPurposeAndPublicSnapshot",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY004",
+          "method": "requestDisplay004QuestionRedisplayKeepsSameTokenRequestOnlyBodyAndIssueCopy",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        }
+      ]
+    },
+    "初期空回答": {
+      "wbs": "WBS-P012-02/2",
+      "support": "空文字と存在を64合成呼出で個別固定",
+      "run": "PG45704",
+      "remaining": "実worker FIFO・実回答保存・通知",
+      "localProof": {
+        "path": "evidence/01_PT/012_NK-ASY-001/evidence/PG45704-current-stub-provider-bounded-64-fixture/manifest.json",
+        "sha256": "27b75344ef37a8dd6b111f515bc00d9b1a1f5bd15f069f945cc0017cbf28d437"
+      },
+      "selectedTestId": "PT-ASY-STB005"
+    },
+    "通知検索と表示": {
+      "wbs": "WBS-P013-01/2",
+      "support": "既知状態、タイムゾーン・日指定、owner入力拒否、件数・並び・表示",
+      "screen": "SCR020",
+      "remaining": "本人保護と実データ順序・API再送",
+      "localMethods": [
+        {
+          "testId": "PT-WEB-NFORM001",
+          "method": "nform001DefaultPageAndTheThreeLiteralNotificationTypes",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM002",
+          "method": "nform002NoOwnerFieldAndNoAmbiguousOrUnknownType",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM003",
+          "method": "nform003PageMustFitTheDecimalWireField",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM004",
+          "method": "nform004ThirtyFirstDecemberRemainsInsideTheLeapYearRange",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM005",
+          "method": "nform005DatesRequireStrictCalendarValuesAndSingleInput",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM006",
+          "method": "nform006ControlSurrogatesAndOutsideEnumDoNotReachTheTypedRequest",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-NFORM007",
+          "method": "nform007InputSnapshotsAndNullContractsRemainExplicit",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45822-notification-search-form-seven-after-literals/manifest.json",
+            "sha256": "a5e89c928c7068977d526c6b4c6e83db69700f471683dd7d3c2dfb8112f39d8e"
+          }
+        },
+        {
+          "testId": "PT-WEB-PAGER-DOM002",
+          "method": "notificationsRenderTheTypedStateLabelAndRetainDateAndTypeFilters",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45584-current-three-list-rendering-on-exact-resource-stage/manifest.json",
+            "sha256": "91c1e999dcd6309d0220b6e22a68625f59dbe9a7f84030a8449ad6f85e54066c"
+          }
+        }
+      ]
+    },
+    "質問回答検索": {
+      "wbs": "WBS-P014-01/2",
+      "support": "独立NFC/byte・境界日付・OWNER検索項目および投影",
+      "screen": "SCR022",
+      "remaining": "USER/ADMINの実owner認可、DB条件と実リクエスト",
+      "localMethods": [
+        {
+          "testId": "PT-WEB-PAGER-DOM003",
+          "method": "questionsRenderTheTypedRecordAndRetainTheEncodedKeyword",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45584-current-three-list-rendering-on-exact-resource-stage/manifest.json",
+            "sha256": "91c1e999dcd6309d0220b6e22a68625f59dbe9a7f84030a8449ad6f85e54066c"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM001",
+          "method": "qform001MissingAndEmptyFiltersUseTheDefaultPage",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM002",
+          "method": "qform002Utf8LimitsApplyAfterNfcWithoutTruncation",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM003",
+          "method": "qform003RejectedParametersStayOutsideTheTypedRequest",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM004",
+          "method": "qform004OnlyTheThreeDocumentedStatesAreMapped",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM005",
+          "method": "qform005ThePageFitsTheSixDecimalPlacesOfTheWireLayout",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM006",
+          "method": "qform006LiteralJstBoundariesAndTheLeapYearInterval",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM007",
+          "method": "qform007DatesRequireOneStrictCalendarDay",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM008",
+          "method": "qform008RejectsControlAndUnpairedSurrogatesButAcceptsSupplementaryText",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        },
+        {
+          "testId": "PT-WEB-QFORM009",
+          "method": "qform009SnapshotAndJavaNullContractsKeepInputBoundariesExplicit",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45818-question-search-request-boundary-nine-cases/manifest.json",
+            "sha256": "3bb58686c9ec19dfcf1d462a1335650fe61168144878c1231ec350f7415e2df2"
+          }
+        }
+      ]
+    },
+    "受付値": {
+      "wbs": "WBS-P016-19/2",
+      "support": "公開locator、JST秒、項目・長さ、別の受付や利用者は拒否",
+      "screen": "SCR019",
+      "remaining": "同版API、HTTP、DB・ownerと実Browser",
+      "localMethods": [
+        {
+          "testId": "REQUEST-DISPLAY001",
+          "method": "requestDisplay001ReceiptRetainsOnlyPublicLocatorValuesAtBothIdLimits",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY002",
+          "method": "requestDisplay002ReceiptRejectsAllSyntaxNullIdAndSubmillisecondBoundaries",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY005",
+          "method": "requestDisplay005AcceptanceDisplaysJstAndAtMostTwoHundredUnicodeCodePoints",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY006",
+          "method": "requestDisplay006AcceptanceRejectsEachIndependentLocatorAndUsernameMismatch",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        },
+        {
+          "testId": "REQUEST-DISPLAY007",
+          "method": "requestDisplay007AcceptanceRejectsNullAbsentBodyAndInvalidWireSemantic",
+          "proof": {
+            "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41664-p01619-receipt-display-current-ten-v1/manifest.json",
+            "sha256": "d5ef2440c21ebad03d1c04ce0ad3164744df7c229ff04d54d264ef1611f34b08"
+          }
+        }
+      ]
+    }
+  },
+  "wholeG03Satisfies": false,
+  "activeRows": 5,
+  "ownFormalActions": 0,
+  "currentScreenIndex": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45858-all-24-registered-screen-test-trace/manifest.json",
+    "sha256": "e843219f00995c955af16a5d269e2f824e4e82acf5e273871868ff0a68bb0814"
+  },
+  "deferredF02": [
+    "QA-056",
+    "QA-062",
+    "regular API and Web packages",
+    "real Storage JDBC ownership",
+    "formal owner attestations"
+  ],
+  "deferredF03": [
+    "same six products scope in one authorized 451 run",
+    "32 test-related source files and Root11",
+    "369 held Batch physical classes",
+    "quality owner rulings"
+  ],
+  "closedSixOwnerAcceptance": 0,
+  "differentRunsNotAddedToCoverage": true
+}
