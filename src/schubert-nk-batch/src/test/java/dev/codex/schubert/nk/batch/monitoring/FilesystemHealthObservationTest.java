@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
@@ -224,16 +225,15 @@ class FilesystemHealthObservationTest {
     assertThrows(NullPointerException.class, () -> new FilesystemHealthObservation(null));
     var store = new FixtureStore();
     var source = new FilesystemHealthObservation(store);
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(8), 10, "filesystem observation")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Double>>mapToObj(i -> () -> source.read().orElseThrow())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertEquals(80, result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
+        assertEquals(80, result.get());
     }
     assertEquals(64, store.totalReads.get());
     assertEquals(64, store.usableReads.get());
@@ -330,8 +330,8 @@ class FilesystemHealthObservationTest {
         IllegalArgumentException.class,
         () -> monitor.observe(true, context(119, CauseClearance.CONFIRMED)));
     assertEquals(event, monitor.snapshot().orElseThrow());
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "filesystem monitor")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Severity>>mapToObj(
@@ -343,11 +343,8 @@ class FilesystemHealthObservationTest {
                               .orElseThrow()
                               .severity())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
         assertEquals(Severity.CRITICAL, result.get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
   }

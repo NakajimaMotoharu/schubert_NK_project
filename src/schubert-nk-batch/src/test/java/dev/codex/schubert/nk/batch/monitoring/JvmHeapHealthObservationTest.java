@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.lang.reflect.Proxy;
@@ -166,17 +167,14 @@ class JvmHeapHealthObservationTest {
     assertEquals(50, otherSource.read().orElseThrow());
     assertEquals(0, fixture.reads.get());
     assertEquals(1, other.reads.get());
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "heap observation")) {
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Double>>mapToObj(i -> () -> source.read().orElseThrow())
               .toList();
-      for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS))
+      for (var result : workers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
         assertEquals(75, result.get().doubleValue());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, fixture.reads.get());
     assertEquals(1, other.reads.get());
