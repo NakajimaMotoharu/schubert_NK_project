@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -152,22 +151,21 @@ final class ScenarioCopyDatasetTest {
   void finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()
       throws InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var ownedWorkers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       var futures = new ArrayList<Future<List<byte[]>>>();
       for (int index = 0; index < 64; index++)
         futures.add(
-            executor.submit(
-                () ->
-                    List.of(dataset.fileCopyBytes(encoder()), dataset.entryCopyBytes(encoder()))));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () ->
+                        List.of(
+                            dataset.fileCopyBytes(encoder()), dataset.entryCopyBytes(encoder()))));
       for (var future : futures) {
         var result = future.get(5, TimeUnit.SECONDS);
         assertArrayEquals(FILE_GOLDEN.getBytes(StandardCharsets.UTF_8), result.get(0));
         assertArrayEquals(ENTRY_GOLDEN.getBytes(StandardCharsets.UTF_8), result.get(1));
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

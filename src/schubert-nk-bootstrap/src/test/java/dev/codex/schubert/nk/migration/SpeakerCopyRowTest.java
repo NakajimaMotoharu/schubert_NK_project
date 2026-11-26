@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -202,17 +201,14 @@ final class SpeakerCopyRowTest {
   void speakerRow016FiniteParallelCopiesHaveIndependentBuffers()
       throws InterruptedException, ExecutionException, TimeoutException {
     var row = new SpeakerCopyRow(raw());
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
-        futures.add(executor.submit(() -> row.copyBytes(encoder())));
+        futures.add(ownedWorkers.executor().submit(() -> row.copyBytes(encoder())));
       for (var future : futures)
         assertArrayEquals(
             GOLDEN.getBytes(StandardCharsets.UTF_8), future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

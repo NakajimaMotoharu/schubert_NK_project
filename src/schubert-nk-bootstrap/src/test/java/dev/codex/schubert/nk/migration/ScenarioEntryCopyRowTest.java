@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -256,23 +255,21 @@ final class ScenarioEntryCopyRowTest {
   void row012ConcurrentCopyAndValueOwnership()
       throws InterruptedException, ExecutionException, TimeoutException {
     var row = new ScenarioEntryCopyRow(fixture());
-    var workers = Executors.newFixedThreadPool(8);
     var futures = new ArrayList<Future<?>>();
-    try {
+    try (var ownedWorkers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       for (int index = 0; index < 64; index++) {
         futures.add(
-            workers.submit(
-                () -> {
-                  byte[] actual = row.copyBytes(encoder);
-                  assertArrayEquals(GOLDEN.getBytes(StandardCharsets.UTF_8), actual);
-                  Arrays.fill(actual, (byte) 0);
-                  assertEquals("dialogue", row.fields().get(6));
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] actual = row.copyBytes(encoder);
+                      assertArrayEquals(GOLDEN.getBytes(StandardCharsets.UTF_8), actual);
+                      Arrays.fill(actual, (byte) 0);
+                      assertEquals("dialogue", row.fields().get(6));
+                    }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), "owned row workers terminate");
     }
     assertArrayEquals(GOLDEN.getBytes(StandardCharsets.UTF_8), row.copyBytes(encoder));
   }

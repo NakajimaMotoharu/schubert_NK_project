@@ -334,27 +334,26 @@ final class AudioCopyDatasetTest {
   void finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()
       throws InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<List<byte[]>>>();
       for (int index = 0; index < TASKS; index++)
         results.add(
-            executor.submit(
-                () -> {
-                  var audio = new MemorySink();
-                  var links = new MemorySink();
-                  dataset.writeAudio(writer(), audio);
-                  dataset.writeLinks(writer(), links);
-                  return List.of(audio.toByteArray(), links.toByteArray());
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      var audio = new MemorySink();
+                      var links = new MemorySink();
+                      dataset.writeAudio(writer(), audio);
+                      dataset.writeLinks(writer(), links);
+                      return List.of(audio.toByteArray(), links.toByteArray());
+                    }));
       for (var result : results) {
         var pair = result.get(WAIT_SECONDS, TimeUnit.SECONDS);
         assertArrayEquals(AUDIO_GOLDEN.getBytes(StandardCharsets.UTF_8), pair.get(0));
         assertArrayEquals(LINK_GOLDEN.getBytes(StandardCharsets.UTF_8), pair.get(1));
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

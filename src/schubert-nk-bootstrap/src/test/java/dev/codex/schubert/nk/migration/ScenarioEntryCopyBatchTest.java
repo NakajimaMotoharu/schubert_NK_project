@@ -182,17 +182,14 @@ final class ScenarioEntryCopyBatchTest {
   void batch012FiniteOwnedWorkersCompareIndependentGolden()
       throws InterruptedException, ExecutionException, TimeoutException {
     var batch = new ScenarioEntryCopyBatch(placement(), rows());
-    var executor = Executors.newFixedThreadPool(8);
-    try {
+    try (var ownedWorkers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < 64; index++)
-        futures.add(executor.submit(() -> batch.copyBytes(new PostgresCopyTextEncoder())));
+        futures.add(
+            ownedWorkers.executor().submit(() -> batch.copyBytes(new PostgresCopyTextEncoder())));
       for (Future<byte[]> future : futures)
         assertArrayEquals(
             GOLDEN.getBytes(StandardCharsets.US_ASCII), future.get(5, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

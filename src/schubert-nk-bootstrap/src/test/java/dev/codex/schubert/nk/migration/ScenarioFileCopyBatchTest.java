@@ -3,7 +3,6 @@ package dev.codex.schubert.nk.migration;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -291,16 +290,12 @@ final class ScenarioFileCopyBatchTest {
   void ownedFiniteConcurrentCopiesAllMatchIndependentGolden()
       throws InterruptedException, ExecutionException, TimeoutException {
     var batch = new ScenarioFileCopyBatch(mapping(), fixture());
-    var pool = Executors.newFixedThreadPool(8);
-    try {
+    try (var ownedWorkers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < 64; index++)
-        futures.add(pool.submit(() -> batch.copyBytes(encoder())));
+        futures.add(ownedWorkers.executor().submit(() -> batch.copyBytes(encoder())));
       for (var future : futures)
         assertArrayEquals(GOLDEN.getBytes(StandardCharsets.UTF_8), future.get(5, TimeUnit.SECONDS));
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

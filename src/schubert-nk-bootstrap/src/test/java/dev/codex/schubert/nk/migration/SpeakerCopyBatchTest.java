@@ -273,22 +273,21 @@ final class SpeakerCopyBatchTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     var batch = normal();
     var references = entries(GAME_ONE, FIRST_ID, STAMP);
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  batch.validateEntries(references);
-                  return batch.copyBytes(encoder());
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      batch.validateEntries(references);
+                      return batch.copyBytes(encoder());
+                    }));
       for (var future : futures)
         assertArrayEquals(
             GOLDEN.getBytes(StandardCharsets.UTF_8), future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
