@@ -1,0 +1,55 @@
+[
+  {
+    "id": "PT-P01810-CATALOG-065",
+    "matched": [
+      "anchorPreservesAllWitnessValuesWithoutRenderingThem",
+      "summaryPreservesIndependentValuesWithoutRenderingThem"
+    ],
+    "fixtures": [
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalValueContractTest.java",
+        "sha256": "3f289b5ceff86388402129f475d5a0dd7434f862692d37930c871072793263da"
+      }
+    ],
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "1a4d2b593b10bbc8ddb638b7b268c26a1dafc827af48565a2ac7099b62a8e6f5"
+    },
+    "source": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/manifest.json",
+      "sha256": "10c55159f5f0450e741db45d74f424b8dda846200dfa3b30e7c5652dca680cc4"
+    },
+    "physical": {
+      "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.class": "dce701216bdc6da169b845ea5dee982202d2cee8112d01b3b6ca7a1471d97056",
+      "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence$Summary.class": "b7df2a163d34c0a751f22cff1776a0a5cfda7d7582d02aea9ff08c4be93716ac",
+      "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence$Anchor.class": "3da590285eb7f868290f9cc6ae8250a715f88132adf6629cec1ae0c9ab89a3b3"
+    },
+    "boundary": "two detached record fields, no outer journal read or inspect"
+  },
+  {
+    "id": "PT-P01810-CATALOG-067",
+    "matched": [
+      "creq006RedactedDiagnosticNeverContainsCorrelationValues"
+    ],
+    "fixtures": [
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+        "sha256": "e7b1dad5355ae12f3d8c7383d66c465fe47620bcbaafa7e686c7cf7c97ac9207"
+      }
+    ],
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "b5d53f374a27fc5a47215f0160b37fab19f47e4e74e6d943a0b7573e3763f442"
+    },
+    "source": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/manifest.json",
+      "sha256": "6bf8471897165986b833a5c1d9824a6c5a297433998c4c5f65cf66020494b451"
+    },
+    "physical": {
+      "dev/codex/schubert/nk/batch/platform/CleanupProfile.class": "8aa02b490984c4e19009a8a36afe9725d23b0c8da0bea4e67581e8e5a580b57c",
+      "dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.class": "fbaca925da2087327c4dbe2917c88c431beb0c6b49f76dbaafb49c6b9d04d33c",
+      "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    "boundary": "fixed redaction of synthetic value, no worker start or actual activation"
+  }
+]
