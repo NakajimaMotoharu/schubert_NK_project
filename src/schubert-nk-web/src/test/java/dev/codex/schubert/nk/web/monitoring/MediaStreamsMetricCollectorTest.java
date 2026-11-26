@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -40,6 +39,7 @@ class MediaStreamsMetricCollectorTest {
   private static final String MEDIA_LABEL = "media_type";
   private static final String AUDIO_TYPE = "AUDIO";
   private static final String VIDEO_TYPE = "VIDEO";
+  private static final String MUSIC_TYPE = "MUSIC";
   private static final String DEBUG_MODE = "DEBUG";
   private static final List<MediaType> TYPES =
       List.of(MediaType.AUDIO, MediaType.VIDEO, MediaType.MUSIC);
@@ -96,7 +96,7 @@ class MediaStreamsMetricCollectorTest {
           meter.getId().getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
       observed.add(meter.getId().getTag(MEDIA_LABEL));
     }
-    assertEquals(Set.of(AUDIO_TYPE, VIDEO_TYPE, "MUSIC"), observed);
+    assertEquals(Set.of(AUDIO_TYPE, VIDEO_TYPE, MUSIC_TYPE), observed);
   }
 
   @Test
@@ -136,7 +136,7 @@ class MediaStreamsMetricCollectorTest {
       assertTrue(collector.collect(MediaType.AUDIO).isEmpty());
       assertTrue(Double.isNaN(gauge(registry, AUDIO_TYPE)));
       assertEquals(7, gauge(registry, VIDEO_TYPE));
-      assertEquals(7, gauge(registry, "MUSIC"));
+      assertEquals(7, gauge(registry, MUSIC_TYPE));
       assertEquals(OptionalLong.of(7), old);
       next.set(OptionalLong.of(0));
       assertEquals(OptionalLong.of(0), collector.collect(MediaType.AUDIO));
@@ -272,15 +272,18 @@ class MediaStreamsMetricCollectorTest {
           assertThrows(NullPointerException.class, () -> collector.collect(MediaType.MUSIC)));
       assertEquals(2, musicReads.get());
       assertTrue(collector.snapshot(MediaType.MUSIC).isEmpty());
-      assertTrue(Double.isNaN(gauge(registry, "MUSIC")));
+      assertTrue(Double.isNaN(gauge(registry, MUSIC_TYPE)));
       assertEquals(OptionalLong.of(5), collector.snapshot(MediaType.VIDEO));
       assertTrue(collector.snapshot(MediaType.AUDIO).isEmpty());
 
-      var next = new FutureTask<>(() -> collector.collect(MediaType.MUSIC));
-      Thread.ofVirtual().name("media-observation-recovery").start(next);
-      assertEquals(OptionalLong.of(0), next.get(5, TimeUnit.SECONDS));
+      var threadFactory = Thread.ofVirtual().name("media-observation-recovery").factory();
+      try (var worker =
+          new ViewFixtureWorkers(Executors.newSingleThreadExecutor(threadFactory), 5)) {
+        var next = worker.submit(() -> collector.collect(MediaType.MUSIC));
+        assertEquals(OptionalLong.of(0), next.get(5, TimeUnit.SECONDS));
+      }
       assertEquals(3, musicReads.get());
-      assertEquals(0, gauge(registry, "MUSIC"));
+      assertEquals(0, gauge(registry, MUSIC_TYPE));
       assertEquals(5, gauge(registry, VIDEO_TYPE));
       assertEquals(0, registry.closes.get());
     }
@@ -401,7 +404,7 @@ class MediaStreamsMetricCollectorTest {
         for (var type : TYPES) other.collect(type);
         assertEquals(100, gauge(otherRegistry, AUDIO_TYPE));
         assertEquals(101, gauge(otherRegistry, VIDEO_TYPE));
-        assertEquals(102, gauge(otherRegistry, "MUSIC"));
+        assertEquals(102, gauge(otherRegistry, MUSIC_TYPE));
         for (var type : TYPES) {
           assertTrue(perType.get(type).contains((long) gauge(registry, type.name())));
           assertTrue(gauge(registry, type.name()) >= 322);
