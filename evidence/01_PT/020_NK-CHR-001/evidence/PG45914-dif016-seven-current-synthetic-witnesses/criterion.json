@@ -1,0 +1,62 @@
+{
+  "armedApprovedDiff": "DIF-016",
+  "chr": "CHR-A02",
+  "currentExpected": [
+    "/",
+    "/",
+    "/"
+  ],
+  "nkExpected": [
+    "/login?session-expired",
+    "/",
+    "/"
+  ],
+  "approvedSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "approvedDesign": {
+    "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+    "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+    "source": "1a3ad1400e4effdf467681b65ff4be330fde045c"
+  },
+  "tests": {
+    "PT-CHR-DEF029": {
+      "method": "rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-DEF030": {
+      "method": "requiresOldestInvalidationEvidenceAlongsideTheCorrectCount",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-DEF031": {
+      "method": "leavesAnAdditionalSessionLossUnregistered",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-DEF032": {
+      "method": "rejectsAnUnapprovedConfiguredMaximum",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-DEF033": {
+      "method": "requiresTheOldestSessionsObservedRedirect",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-CMP-A02-003": {
+      "method": "rejectsReportsThatBothOmitTheTwoRetainedSessionDestinations",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    },
+    "PT-CHR-CMP-A02-004": {
+      "method": "rejectsReportsThatBothRedirectTheMiddleSessionDespiteActiveEvidence",
+      "testClass": "dev.codex.schubert.characterization.ArtifactComparatorTest"
+    }
+  },
+  "currentLocalToolMain": "bd8c25d09df60ac51df5050659dac3a894bb705c",
+  "unselectedChangedFixtures": [
+    "program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java"
+  ],
+  "goal": "最古一件の失効と、残二件への誤revoke／欠落を区別する。",
+  "sameCandidateLiveChr": 0,
+  "remaining": [
+    "同一利用者の正規認証経路で最古を無効にし、他二件が維持される証拠",
+    "同一候補の正式451と担当判定"
+  ]
+}
