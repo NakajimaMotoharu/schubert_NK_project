@@ -1,0 +1,97 @@
+{
+  "run": "PG45886",
+  "source": "2fff863334d50904a0a7984beb604218d1b9adce",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.03/2",
+  "terminalAtUTC": "2026-11-26T02:02:38.164164+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3940",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "2cab15a8f326a4f45f51d1525feb9c73b7db4bb0",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/5968_Current合成mapping四並行単体仕様.md",
+    "sha256": "ccf89772387f84111a89cd67dcdd635d7548263adda1e3906b5406a330699b76"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.CurrentScenarioEntryMapperTest#entryMap024ConcurrentCallsShareOnlyImmutableMappings": "PT-MIG-ENTRYMAP024",
+    "dev.codex.schubert.nk.migration.CurrentScenarioFileMapperTest#fileMap024FiniteParallelCallsConsumeOnlyPrivateClaimMaps": "PT-MIG-FILEMAP024",
+    "dev.codex.schubert.nk.migration.CurrentAudioLinkMapperTest#linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots": "PT-MIG-AUDIOLINKMAP024",
+    "dev.codex.schubert.nk.migration.CurrentMigrationMappingVerifierTest#mapverify016SharedVerifierHasFiniteIndependentSnapshots": "PT-MIG-MAPVERIFY016"
+  },
+  "productTests": 4,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44948-current-mapping-original-readback-sixteen/manifest.json",
+    "sha256": "4fa71a65a5da65588aaad56f1c77817b12a4f81eeca7979f9cda0d08a6e623d0"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45886-four-mapping-fixtures-canonical/terminal.json",
+    "sha256": "08baf145d07ef6bf2b281b47b8a7c35c3109e7616dd6363743717813cce9413b"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45886-four-mapping-fixtures-ordinary/pmd.xml",
+    "sha256": "6e180453b83faa0462c844f7b963fbd77e158a556fa7c30449eb8a5d2f66daa8"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "CurrentAudioLinkMapperTest.java",
+      "rule": "EqualsNull",
+      "line": 165
+    },
+    {
+      "fixture": "CurrentAudioLinkMapperTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 459
+    },
+    {
+      "fixture": "CurrentMigrationMappingVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 478
+    },
+    {
+      "fixture": "CurrentMigrationMappingVerifierTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 525
+    },
+    {
+      "fixture": "CurrentScenarioEntryMapperTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 335
+    },
+    {
+      "fixture": "CurrentScenarioFileMapperTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 396
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45886-four-mapping-tests-with-preserved-primary-diagnostics/junit-sanitized.xml",
+      "sha256": "1982d9c095ae279544fbd04c3a1c8876de148e2e1d93ef3486da159b3ee2d591"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45886-four-mapping-tests-with-preserved-primary-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "effa3d7e7df60c306bb579c80cbebeba612a5226f8a00a130c74186cebfe01aa"
+    }
+  ],
+  "measuredClassCount": 5,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45886-four-mapping-fixtures-ordinary/begin.json",
+    "sha256": "a6a7e4e47801947308ff4f1441aa42cdaa2cb52ccd901566ddd2df56b9d9394e"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45886-four-mapping-fixtures-ordinary/terminal.json",
+    "sha256": "80354be9e1d07f8e00ecccdff44fb0b8e6b0a9358402704b7a7d10ad20936f3c"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3363,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
