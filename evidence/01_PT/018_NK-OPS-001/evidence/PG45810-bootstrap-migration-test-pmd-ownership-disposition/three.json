@@ -1,0 +1,28 @@
+{
+  "decisions": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 314,
+      "developerAssessment": "8 worker・64の独立goldenを検証する試験専用並行処理。所有worker、Future5秒・終端10秒、診断保持を元2件で検証。",
+      "rawFindingPreserved": true,
+      "qualitySignature": null
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 502,
+      "developerAssessment": "ByteArrayOutputStreamを包むfixture。呼出し中の借用sinkのclose/flush 0を読む試験契約。意図された所有側の試験では閉鎖1を別に確認。",
+      "rawFindingPreserved": true,
+      "qualitySignature": null
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprintTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 361,
+      "developerAssessment": "8 worker・64の独立goldenを検証する試験専用並行処理。所有worker、Future5秒・終端10秒、診断保持を元2件で検証。",
+      "rawFindingPreserved": true,
+      "qualitySignature": null
+    }
+  ]
+}
