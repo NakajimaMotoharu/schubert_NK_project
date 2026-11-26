@@ -1,0 +1,89 @@
+{
+  "run": "PG46044",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P004-05/2"
+  ],
+  "source": "dabbe8b3b148e408fb5211b693db75de84dd2347",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T05:00:07.882153+00:00",
+  "originalRawTotal": 70,
+  "sourceDistinctSites": 68,
+  "identicalRepeatCount": 2,
+  "siteAssessment": {
+    "SOURCE_CONTRACT_REVIEW_BEFORE_ACCEPTANCE": 16,
+    "HOLD_WAITING_OBSERVATION_SIBLING": 32,
+    "FIXTURE_REVIEW_BEFORE_ACCEPTANCE": 19,
+    "NAMED_FIXTURE_BOUNDARY_CANDIDATE": 1
+  },
+  "detail": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46044-three-api-static-runs-and-ssc470/pmd-site-review.json",
+    "sha256": "4bf17a3d69d33c62379b0fb656a8951c0c80405386a48d5156f007943f2c6808"
+  },
+  "originalRuns": {
+    "46038": {
+      "parent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46038-api-proxy-two-worker-ordinary/manifest.json",
+        "sha256": "bb6899f16c13feb03bfda902fe779b1531c85cc44ef2ae1891561e90444dbefa"
+      },
+      "rawXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46038-api-proxy-two-worker-ordinary/pmd.xml",
+        "sha256": "204b60d28c52406c8f0551d9d8093b4232e163416ddc67666518a05b34e1f651"
+      },
+      "rawHits": 13,
+      "oldUnitExit": 0
+    },
+    "46040": {
+      "parent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46040-api-three-supplied-metrics/manifest.json",
+        "sha256": "1aef708510c9fa0d6e11e886b776da3e0c349178016ea615a2ca944b4ebf58d9"
+      },
+      "rawXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46040-api-three-supplied-metrics/pmd.xml",
+        "sha256": "07343ecbe87e0dd1ac9789aca8a14031bf052b711949a7cafe87a661761c4567"
+      },
+      "rawHits": 40,
+      "oldUnitExit": 0
+    },
+    "46042": {
+      "parent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46042-api-duration-and-borrowed/manifest.json",
+        "sha256": "f1f68337475436ae3990065b0cb58c0ab17cf21f003b2062ae096bf29bd851ee"
+      },
+      "rawXml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46042-api-duration-and-borrowed/pmd.xml",
+        "sha256": "f3219d51715ea346203304795604d28a201017cbf524c01ee7586a34c783b897"
+      },
+      "rawHits": 17,
+      "oldUnitExit": 0
+    }
+  },
+  "approvedSpecificJdbcContract": {
+    "approvedDesign": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+    "designSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+    "ssc": "SSC-470",
+    "clauseSha256": "0c1a1c549fa6f5d5761d130979f1327461a40a56c49079052f2a4e803920a787",
+    "independentOriginalTest": "outboxDb011SameReadAndCloseThrowablePreservesJdkSelfSuppressionAndReverseClose",
+    "oldRealUnit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39596-bug3292-api-outbox-unit-v1/manifest.json",
+      "sha256": "fe275f4b5c97f2c9dd9884e4e86a7fd3f6d28dad3ad92695a7dc29633f204e64"
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json",
+      "sha256": "1e3b26551a7f121e31b6afedfe7a562a557e02d6f2fd59dd1ce9bfbb71348424"
+    },
+    "currentPhysical": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46040-api-three-supplied-metrics/main/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.class",
+      "sha256": "15cc91203aa5ba04ad4a8a3789ce4c0b5c1cd121d6e035d4e06d6e8d3c3ed348"
+    },
+    "localScopeOnly": true
+  },
+  "qualityOwnerSigned": false,
+  "anyOriginalIgnored": false,
+  "ruleSuppressionChanged": false,
+  "aggregateFirstAttempt": "検査結果の読取で変数衝突。元job全件を保持し、製品・tool試験を追加実行しない。",
+  "cumulativeProductTrialsGross": 3513,
+  "newProductTrials": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
