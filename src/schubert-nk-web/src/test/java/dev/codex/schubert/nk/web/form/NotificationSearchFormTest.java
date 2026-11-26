@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 /** PT-WEB-NFORM001 through NFORM007. No MVC, broker, or database. */
 final class NotificationSearchFormTest {
   private static final String TYPE = "type";
+  private static final String ACCEPTED_LABEL = "ACCEPTED";
+  private static final String ERROR_LABEL = "ERROR";
   private static final String PAGE = "page";
   private static final String FROM = "from";
   private static final String TO = "to";
@@ -36,9 +38,12 @@ final class NotificationSearchFormTest {
     }
     Map<String, NotificationType> known =
         Map.of(
-            "ACCEPTED", NotificationType.ACCEPTED,
-            "COMPLETED", NotificationType.COMPLETED,
-            "ERROR", NotificationType.ERROR);
+            ACCEPTED_LABEL,
+            NotificationType.ACCEPTED,
+            "COMPLETED",
+            NotificationType.COMPLETED,
+            ERROR_LABEL,
+            NotificationType.ERROR);
     known.forEach(
         (name, expected) ->
             assertEquals(
@@ -53,7 +58,7 @@ final class NotificationSearchFormTest {
     invalid(Map.of("username", List.of("some-reader")), "form");
     invalid(Map.of("owner", List.of("some-reader")), "form");
     invalid(Map.of(TYPE, List.of()), TYPE);
-    invalid(Map.of(TYPE, List.of("ACCEPTED", "ERROR")), TYPE);
+    invalid(Map.of(TYPE, List.of(ACCEPTED_LABEL, ERROR_LABEL)), TYPE);
     invalid(Map.of(TYPE, List.of("RECEIVED")), TYPE);
   }
 
@@ -97,7 +102,7 @@ final class NotificationSearchFormTest {
   void nform006ControlSurrogatesAndOutsideEnumDoNotReachTheTypedRequest() {
     for (String tail :
         List.of("\n", "\r", "\t", "\0", String.valueOf(Character.MIN_HIGH_SURROGATE), "😀")) {
-      invalid(Map.of(TYPE, List.of("ACCEPTED" + tail)), TYPE);
+      invalid(Map.of(TYPE, List.of(ACCEPTED_LABEL + tail)), TYPE);
     }
   }
 
@@ -107,14 +112,15 @@ final class NotificationSearchFormTest {
     Map<String, List<String>> parameters = new HashMap<>();
     parameters.put(TYPE, input);
     var form = NotificationSearchForm.bind(parameters);
-    input.set(0, "ERROR");
+    input.set(0, ERROR_LABEL);
     parameters.clear();
     assertEquals(Optional.of(NotificationType.COMPLETED), form.toRequest().notificationType());
-    assertThrows(UnsupportedOperationException.class, () -> form.getValues().put(TYPE, "ERROR"));
+    assertThrows(
+        UnsupportedOperationException.class, () -> form.getValues().put(TYPE, ERROR_LABEL));
     assertThrows(UnsupportedOperationException.class, () -> form.getIssues().put(TYPE, "error"));
     assertFalse(form.toString().contains("COMPLETED"));
     assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(null));
-    parameters.put(null, List.of("ACCEPTED"));
+    parameters.put(null, List.of(ACCEPTED_LABEL));
     assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(parameters));
     parameters.clear();
     parameters.put(TYPE, null);
