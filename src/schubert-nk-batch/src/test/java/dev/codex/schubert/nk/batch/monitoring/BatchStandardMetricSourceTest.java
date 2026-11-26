@@ -375,7 +375,9 @@ class BatchStandardMetricSourceTest {
     var release = new CountDownLatch(1);
     source.entered = Optional.of(entered);
     source.release = Optional.of(release);
-    try (var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {})) {
+    var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {});
+    Runnable closeDuringScrape = owner::close;
+    try (owner) {
       owner.bind(DEBUG_MODE);
       try (var workers =
           new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(2), 10, "scrape and close")) {
@@ -389,7 +391,7 @@ class BatchStandardMetricSourceTest {
                   .submit(
                       () -> {
                         attemptedClose.countDown();
-                        owner.close();
+                        closeDuringScrape.run();
                       });
           assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
           assertFalse(source.isClosed());
