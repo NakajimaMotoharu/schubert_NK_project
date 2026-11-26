@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Status;
 import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Step;
@@ -76,12 +77,12 @@ class MonitoringLockContractTest {
   }
 
   private static <T> T anotherThread(Callable<T> operation) throws Exception {
-    var pool = Executors.newSingleThreadExecutor(Thread.ofPlatform().daemon().factory());
-    try {
-      return pool.submit(operation).get(WAIT_SECONDS, TimeUnit.SECONDS);
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(STOP_SECONDS, TimeUnit.SECONDS));
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newSingleThreadExecutor(Thread.ofPlatform().daemon().factory()),
+            STOP_SECONDS,
+            "another observation thread")) {
+      return workers.executor().submit(operation).get(WAIT_SECONDS, TimeUnit.SECONDS);
     }
   }
 
@@ -258,51 +259,58 @@ class MonitoringLockContractTest {
     var release = new CountDownLatch(1);
     var secondStarted = new CountDownLatch(1);
     var secondThread = new AtomicReference<Optional<Thread>>(Optional.empty());
-    var pool = Executors.newFixedThreadPool(2, Thread.ofPlatform().daemon().factory());
-    try {
-      Future<Integer> first =
-          pool.submit(
-              () ->
-                  poll.observe(
-                      false,
-                      at(0),
-                      (continuous, context) -> {
-                        entered.countDown();
-                        try {
-                          assertTrue(release.await(WAIT_SECONDS, TimeUnit.SECONDS));
-                        } catch (InterruptedException interrupted) {
-                          Thread.currentThread().interrupt();
-                          throw new AssertionError("callback interrupted", interrupted);
-                        }
-                        return 7;
-                      }));
-      assertTrue(entered.await(WAIT_SECONDS, TimeUnit.SECONDS));
-      Future<Integer> second =
-          pool.submit(
-              () -> {
-                secondThread.set(Optional.of(Thread.currentThread()));
-                secondStarted.countDown();
-                return poll.observeNow(
-                    true, CauseClearance.CONFIRMED, clock, (continuous, context) -> 11);
-              });
-      assertTrue(secondStarted.await(WAIT_SECONDS, TimeUnit.SECONDS));
-      var waiter = secondThread.get().orElseThrow();
-      long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(WAIT_SECONDS);
-      while (!second.isDone()
-          && waiter.getState() != Thread.State.WAITING
-          && waiter.getState() != Thread.State.BLOCKED
-          && System.nanoTime() - deadline < 0) Thread.onSpinWait();
-      assertFalse(second.isDone());
-      assertTrue(
-          waiter.getState() == Thread.State.WAITING || waiter.getState() == Thread.State.BLOCKED);
-      assertFalse(second.isDone());
-      release.countDown();
-      assertEquals(7, first.get(WAIT_SECONDS, TimeUnit.SECONDS));
-      assertEquals(11, second.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      release.countDown();
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(STOP_SECONDS, TimeUnit.SECONDS));
+    try (var workers =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(2, Thread.ofPlatform().daemon().factory()),
+            STOP_SECONDS,
+            "observation lock contention")) {
+      try {
+        Future<Integer> first =
+            workers
+                .executor()
+                .submit(
+                    () ->
+                        poll.observe(
+                            false,
+                            at(0),
+                            (continuous, context) -> {
+                              entered.countDown();
+                              try {
+                                assertTrue(release.await(WAIT_SECONDS, TimeUnit.SECONDS));
+                              } catch (InterruptedException interrupted) {
+                                Thread.currentThread().interrupt();
+                                throw new AssertionError("callback interrupted", interrupted);
+                              }
+                              return 7;
+                            }));
+        assertTrue(entered.await(WAIT_SECONDS, TimeUnit.SECONDS));
+        Future<Integer> second =
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      secondThread.set(Optional.of(Thread.currentThread()));
+                      secondStarted.countDown();
+                      return poll.observeNow(
+                          true, CauseClearance.CONFIRMED, clock, (continuous, context) -> 11);
+                    });
+        assertTrue(secondStarted.await(WAIT_SECONDS, TimeUnit.SECONDS));
+        var waiter = secondThread.get().orElseThrow();
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(WAIT_SECONDS);
+        while (!second.isDone()
+            && waiter.getState() != Thread.State.WAITING
+            && waiter.getState() != Thread.State.BLOCKED
+            && System.nanoTime() - deadline < 0) Thread.onSpinWait();
+        assertFalse(second.isDone());
+        assertTrue(
+            waiter.getState() == Thread.State.WAITING || waiter.getState() == Thread.State.BLOCKED);
+        assertFalse(second.isDone());
+        release.countDown();
+        assertEquals(7, first.get(WAIT_SECONDS, TimeUnit.SECONDS));
+        assertEquals(11, second.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      } finally {
+        release.countDown();
+      }
     }
   }
 }
