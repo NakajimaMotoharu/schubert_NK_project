@@ -260,31 +260,29 @@ class ApiCustomMetricPayloadTest {
 
   @Test
   void apipay013FiniteConcurrentIndependentPayloads() throws Exception {
-    var workers = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(4))) {
       var jobs = new ArrayList<Future<?>>();
       var total = new AtomicInteger();
       for (int i = 0; i < 64; i++) {
         boolean ready = (i % 2) == 0;
         jobs.add(
-            workers.submit(
-                () -> {
-                  try (var bundle = new Bundle()) {
-                    var calls = new AtomicInteger();
-                    assertEquals(
-                        (ready ? READY_ONE : READY_ZERO) + CUSTOM,
-                        bundle.render(payload, ready, calls));
-                    assertEquals(1, calls.get());
-                    assertFalse(bundle.source.isClosed());
-                    total.incrementAndGet();
-                  }
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      try (var bundle = new Bundle()) {
+                        var calls = new AtomicInteger();
+                        assertEquals(
+                            (ready ? READY_ONE : READY_ZERO) + CUSTOM,
+                            bundle.render(payload, ready, calls));
+                        assertEquals(1, calls.get());
+                        assertFalse(bundle.source.isClosed());
+                        total.incrementAndGet();
+                      }
+                    }));
       }
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertEquals(64, total.get());
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
