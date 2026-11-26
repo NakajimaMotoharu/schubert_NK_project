@@ -211,25 +211,24 @@ final class ScenarioStagingTablesTest {
   @Test
   void finiteParallelIndependentBorrowedTransactionsDoNotShareState() throws Exception {
     var staging = new ScenarioStagingTables();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<List<String>>>();
       for (int index = 0; index < TASKS; index++) {
         results.add(
-            executor.submit(
-                () -> {
-                  var fixture = new Fixture();
-                  staging.prepare(fixture.connection());
-                  assertEquals(1, fixture.closeCalls);
-                  return List.copyOf(fixture.sql);
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var fixture = new Fixture();
+                      staging.prepare(fixture.connection());
+                      assertEquals(1, fixture.closeCalls);
+                      return List.copyOf(fixture.sql);
+                    }));
       }
       for (var result : results)
         assertEquals(
             List.of(ORACLE_FILES, ORACLE_ENTRIES), result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
@@ -479,24 +478,23 @@ final class ScenarioStagingTablesTest {
   @Test
   void transferFiniteWorkersHaveIndependentSqlCountsAndTermination() throws Exception {
     var staging = new ScenarioStagingTables();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<Integer>>();
       for (int index = 0; index < TASKS; index++) {
         results.add(
-            executor.submit(
-                () -> {
-                  var fixture = new TransferFixture();
-                  staging.transfer(fixture.connection(), 1, 1);
-                  assertEquals(1, fixture.statementsClosed);
-                  return fixture.resultsClosed;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var fixture = new TransferFixture();
+                      staging.transfer(fixture.connection(), 1, 1);
+                      assertEquals(1, fixture.statementsClosed);
+                      return fixture.resultsClosed;
+                    }));
       }
       for (var result : results)
         assertEquals(SCALAR_QUERIES, result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

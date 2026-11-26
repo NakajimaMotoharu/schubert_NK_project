@@ -416,25 +416,24 @@ final class SpeakerStagingTableTest {
   @Test
   void speakerStage024FiniteWorkersHaveIndependentBorrowedResources() throws Exception {
     var table = new SpeakerStagingTable();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<List<Integer>>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = new Fixture();
-                  var connection = f.connection();
-                  table.prepare(connection);
-                  table.transfer(connection, DEFAULT_COUNT);
-                  return List.of(
-                      f.sql.size(), f.statementCreates, f.statementCloses, f.resultCloses);
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = new Fixture();
+                      var connection = f.connection();
+                      table.prepare(connection);
+                      table.transfer(connection, DEFAULT_COUNT);
+                      return List.of(
+                          f.sql.size(), f.statementCreates, f.statementCloses, f.resultCloses);
+                    }));
       for (var future : futures)
         assertEquals(List.of(5, 2, 2, 3), future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

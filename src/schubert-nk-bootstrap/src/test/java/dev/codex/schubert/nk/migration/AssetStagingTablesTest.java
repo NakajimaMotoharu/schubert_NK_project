@@ -475,23 +475,22 @@ final class AssetStagingTablesTest {
   void finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()
       throws InterruptedException, ExecutionException, TimeoutException {
     var tables = new AssetStagingTables();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<Integer>>();
       for (int i = 0; i < TASKS; i++)
         results.add(
-            executor.submit(
-                () -> {
-                  var f = new Fixture();
-                  tables.prepare(f.connection());
-                  tables.transfer(f.connection(), 2, 149, 3);
-                  assertEquals(2, f.statementsClosed);
-                  return f.resultsClosed;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = new Fixture();
+                      tables.prepare(f.connection());
+                      tables.transfer(f.connection(), 2, 149, 3);
+                      assertEquals(2, f.statementsClosed);
+                      return f.resultsClosed;
+                    }));
       for (var result : results) assertEquals(9, result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
