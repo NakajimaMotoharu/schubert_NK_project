@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -222,23 +223,23 @@ final class RunReferencePortTest {
     for (String phase : List.of(ENTRY_POINT, ROW_CLOSE, STATEMENT_CLOSE)) {
       Fixture fixture = new Fixture();
       if (!phase.equals(ENTRY_POINT)) fixture.interruptAt = phase;
-      var worker = Executors.newSingleThreadExecutor();
-      try {
+      try (var owner =
+          new BoundedBatchFixtureWorkers(
+              Executors.newSingleThreadExecutor(), 5, "run reference fixture")) {
         var task =
-            worker.submit(
-                () -> {
-                  if (phase.equals(ENTRY_POINT)) Thread.currentThread().interrupt();
-                  try {
-                    catalog(() -> new RunReferenceRepository(fixture.connection()).read(RUN));
-                    return Thread.currentThread().isInterrupted();
-                  } finally {
-                    Thread.interrupted();
-                  }
-                });
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      if (phase.equals(ENTRY_POINT)) Thread.currentThread().interrupt();
+                      try {
+                        catalog(() -> new RunReferenceRepository(fixture.connection()).read(RUN));
+                        return Thread.currentThread().isInterrupted();
+                      } finally {
+                        Thread.interrupted();
+                      }
+                    });
         assertEquals(true, task.get(5, TimeUnit.SECONDS));
-      } finally {
-        worker.shutdownNow();
-        assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));
       }
       fixture.assertClosed(phase.equals(ENTRY_POINT) ? 0 : 1, phase.equals(ENTRY_POINT) ? 0 : 1);
     }
@@ -251,15 +252,15 @@ final class RunReferencePortTest {
     Fixture two = new Fixture();
     two.values[0] = true;
     BatchRun other = new BatchRun(new UUID(0, 2), RUN.cutoff());
-    var workers = Executors.newFixedThreadPool(2);
-    try {
-      var first = workers.submit(() -> new RunReferenceRepository(one.connection()).read(RUN));
-      var second = workers.submit(() -> new RunReferenceRepository(two.connection()).read(other));
+    try (var owner =
+        new BoundedBatchFixtureWorkers(
+            Executors.newFixedThreadPool(2), 5, "run reference fixture")) {
+      var first =
+          owner.executor().submit(() -> new RunReferenceRepository(one.connection()).read(RUN));
+      var second =
+          owner.executor().submit(() -> new RunReferenceRepository(two.connection()).read(other));
       assertEquals(false, first.get(5, TimeUnit.SECONDS).hasBatchHistory());
       assertEquals(true, second.get(5, TimeUnit.SECONDS).hasBatchHistory());
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(new UUID(0, 1), one.bindings.get(1));
     assertEquals(new UUID(0, 2), two.bindings.get(1));
