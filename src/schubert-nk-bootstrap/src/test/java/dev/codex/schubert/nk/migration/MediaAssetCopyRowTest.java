@@ -367,18 +367,15 @@ final class MediaAssetCopyRowTest {
   void finiteWorkersReturnIndependentExactGoldenBytes()
       throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var row = new MediaAssetCopyRow(video());
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
-        results.add(executor.submit(() -> row.copyBytes(encoder())));
+        results.add(workers.executor().submit(() -> row.copyBytes(encoder())));
       for (var result : results)
         assertArrayEquals(
             VIDEO_GOLDEN.getBytes(StandardCharsets.UTF_8),
             result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -246,17 +245,14 @@ final class AudioFileCopyRowTest {
   void finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()
       throws InterruptedException, ExecutionException, TimeoutException {
     var row = new AudioFileCopyRow(fields());
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var workers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<byte[]>>();
       for (int index = 0; index < TASKS; index++)
-        results.add(executor.submit(() -> row.copyBytes(encoder())));
+        results.add(workers.executor().submit(() -> row.copyBytes(encoder())));
       for (var result : results)
         assertArrayEquals(
             GOLDEN.getBytes(StandardCharsets.UTF_8), result.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

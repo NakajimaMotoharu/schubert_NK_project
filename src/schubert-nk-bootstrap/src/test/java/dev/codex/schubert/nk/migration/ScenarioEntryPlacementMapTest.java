@@ -252,12 +252,11 @@ final class ScenarioEntryPlacementMapTest {
   void place012ConcurrentOwnershipAndLookup()
       throws InterruptedException, ExecutionException, TimeoutException {
     var map = sample();
-    var executor = Executors.newFixedThreadPool(8);
     var futures = new ArrayList<Future<?>>();
-    try {
+    try (var workers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       for (int index = 0; index < 64; index++) {
         futures.add(
-            executor.submit(
+            workers.executor().submit(
                 () -> {
                   byte[] actual = map.canonicalBytes();
                   assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), actual);
@@ -267,9 +266,6 @@ final class ScenarioEntryPlacementMapTest {
                 }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "owned worker termination");
     }
     assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), map.canonicalBytes());
   }
