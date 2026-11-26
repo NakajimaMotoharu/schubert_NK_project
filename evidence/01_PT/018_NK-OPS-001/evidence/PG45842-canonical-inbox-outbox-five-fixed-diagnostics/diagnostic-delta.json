@@ -1,0 +1,109 @@
+{
+  "rows": [
+    {
+      "registry": "PT-P01810-CATALOG-006",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+        "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+      },
+      "id": "PT-IDEM-CANONVALUE007",
+      "method": "canonicalValue007DifferentLayoutAndFieldMetadataHaveTheSameFixedDiagnostic",
+      "independentFixedExpected": "CanonicalField[<redacted>]",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42128-p0181003-canonical-value-diagnostic-current-v1/manifest.json",
+        "sha256": "f64a4bc0d70f36c34bddd5c91588e60ebca9c07a8ca924f773514bc11e9e250d"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalValueDiagnosticTest.java",
+        "sha256": "502c9de0c2d62d5bce7e81696dfddf2aeccc196ee8d0db58f5e345a90be6bc8a"
+      }
+    },
+    {
+      "registry": "PT-P01810-CATALOG-007",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+        "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+      },
+      "id": "PT-IDEM-CANONVALUE007",
+      "method": "canonicalValue007DifferentLayoutAndFieldMetadataHaveTheSameFixedDiagnostic",
+      "independentFixedExpected": "CanonicalRequest[<redacted>]",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42128-p0181003-canonical-value-diagnostic-current-v1/manifest.json",
+        "sha256": "f64a4bc0d70f36c34bddd5c91588e60ebca9c07a8ca924f773514bc11e9e250d"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalValueDiagnosticTest.java",
+        "sha256": "502c9de0c2d62d5bce7e81696dfddf2aeccc196ee8d0db58f5e345a90be6bc8a"
+      }
+    },
+    {
+      "registry": "PT-P01810-CATALOG-012",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxRequest.java",
+        "sha256": "5c4f01d72d17a234d201ee5de6e0a47fc5fed5be4d328b4f283544e0eaf69e1a"
+      },
+      "id": "PT-IDEM-REQUESTVALUE002",
+      "method": "requestValue002OrderedValueComponentsAndFixedRedactionRetainBorrowedCanonical",
+      "independentFixedExpected": "InboxRequest[message/correlation/owner/token/request/time=<redacted>]",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42124-p0181003-inbox-request-current-v1/manifest.json",
+        "sha256": "079bc1497f9772451d58ca92d443bd02cff881921686cd3209bed4378837ad06"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxRequestValueContractTest.java",
+        "sha256": "2ba361f89b2a4ac57fbf7c12c66b7dc8dba0d969a7deaf20455331ecbf3b16cf"
+      }
+    },
+    {
+      "registry": "PT-P01810-CATALOG-022",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+        "sha256": "97e9737bf3afd955019405f713355de62da50dfba9f96a9e7d549ce9568cf5aa"
+      },
+      "id": "PT-OUTBOX-DATA001",
+      "method": "data001RowAndRequestConstructorsKeepBodyOwnershipGettersAndEveryBoundedNonnullInput",
+      "independentFixedExpected": "OutboxEntry[<redacted>]",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44268-outbox-ownership-current-single-archived-exec/manifest.json",
+        "sha256": "9aa37ff31093e67b7e96221ac1f54023a1b27122ee9796c374285eb0b6a0561a"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+        "sha256": "1712c51387bdf0946af192b21a7b88164a8d48de6d31d01f30e66bee72c3442b"
+      }
+    },
+    {
+      "registry": "PT-P01810-CATALOG-023",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+        "sha256": "d0ba9bbf396af4cba3b912a87a37f9cc3162130cb5c8423c39ddc1f9c92e9f02"
+      },
+      "id": "PT-OUTBOX-DATA001",
+      "method": "data001RowAndRequestConstructorsKeepBodyOwnershipGettersAndEveryBoundedNonnullInput",
+      "independentFixedExpected": "OutboxRequest[<redacted>]",
+      "sourceProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44268-outbox-ownership-current-single-archived-exec/manifest.json",
+        "sha256": "9aa37ff31093e67b7e96221ac1f54023a1b27122ee9796c374285eb0b6a0561a"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+        "sha256": "1712c51387bdf0946af192b21a7b88164a8d48de6d31d01f30e66bee72c3442b"
+      }
+    }
+  ],
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45840-diagnostic-five-fixed-value-current-joins/manifest.json",
+    "sha256": "22284c92fa5f632bd74f44dda0e049d0af08c98714f48958bce61b4b221c28ea"
+  },
+  "knownCurrent": 23,
+  "remainingUnjoined": 44,
+  "retainedHolds": 26,
+  "total": 93,
+  "exactPhysicalNum": 10,
+  "exactFixtureNum": 3,
+  "remaining": [
+    "live sink and broker",
+    "special restricted paths",
+    "whole451"
+  ]
+}
