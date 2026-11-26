@@ -1,0 +1,155 @@
+{
+  "run": "PG45878",
+  "source": "1cc67587db6ef5243251657fd414917488e1b534",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.02/2",
+  "terminalAtUTC": "2026-11-26T01:55:52.290207+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3937",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "102f1e8d30f574715ecdc033038027ec4b48d3d2",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/5960_COPY七並行診断・単体仕様追補.md",
+    "sha256": "ec98dfeca750595f8a0f434e0beed2f0be34dbdd763719c489f8817bbb3fb9f0"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.AudioCopyDatasetTest#finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset": "PT-MIG-AUDIODATA019",
+    "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest#finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams": "PT-MIG-DATASET012",
+    "dev.codex.schubert.nk.migration.SpeakerCopyRowTest#speakerRow016FiniteParallelCopiesHaveIndependentBuffers": "PT-MIG-SPEAKERROW016",
+    "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest#row012ConcurrentCopyAndValueOwnership": "PT-MIG-ROW012",
+    "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest#batch012FiniteOwnedWorkersCompareIndependentGolden": "PT-MIG-BATCH012",
+    "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest#ownedFiniteConcurrentCopiesAllMatchIndependentGolden": "PT-MIG-FCOPY014",
+    "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest#speakerBatch016FiniteSharedReadersKeepIndependentCopies": "PT-MIG-SPEAKERBATCH016"
+  },
+  "productTests": 7,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44894-six-borrowed-output-dataset-current20/manifest.json",
+    "sha256": "154edfd56dc19d679ba3eae71153b7c3500be77b4f30f2f417ff866d4ab3f3b9"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45878-seven-copy-fixtures-canonical/terminal.json",
+    "sha256": "9c331bf5f2d27dd3881aa2e2ff7586d857d306884bc844f52e28956917ac1639"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45878-seven-copy-fixtures-ordinary/pmd.xml",
+    "sha256": "f66026ce802574b1ae352c6b1e72b25d6c97f79342874d10b453a4859d6ec7b9"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 56
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 57
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 74
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 80
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 269
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 290
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 338
+    },
+    {
+      "fixture": "AudioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 365
+    },
+    {
+      "fixture": "ScenarioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 154
+    },
+    {
+      "fixture": "ScenarioEntryCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 185
+    },
+    {
+      "fixture": "ScenarioEntryCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 259
+    },
+    {
+      "fixture": "ScenarioFileCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 293
+    },
+    {
+      "fixture": "SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 48
+    },
+    {
+      "fixture": "SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 63
+    },
+    {
+      "fixture": "SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 141
+    },
+    {
+      "fixture": "SpeakerCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 277
+    },
+    {
+      "fixture": "SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 205
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45878-seven-copy-tests-with-preserved-primary-diagnostics/junit-sanitized.xml",
+      "sha256": "03e0961f908c883f47b509e11b55fd89c62f0589a11ceb9cda25da5d91c15d6c"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45878-seven-copy-tests-with-preserved-primary-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "271304f22c8295c5544ec524e1656b1df2d47b325f9607e3403431df1e1fce2f"
+    }
+  ],
+  "measuredClassCount": 7,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45878-seven-copy-fixtures-ordinary/begin.json",
+    "sha256": "1d1e4ec8216107cf9b7ae02d524cab653d8fc08df3517fcc9a7acf569381e49a"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45878-seven-copy-fixtures-ordinary/terminal.json",
+    "sha256": "77da15e4d76bb26993d103bfeb919727354f7a2965d586ae31049cf22c1e5cd9"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3347,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
