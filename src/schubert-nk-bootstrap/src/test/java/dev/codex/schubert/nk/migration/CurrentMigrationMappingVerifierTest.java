@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -475,23 +474,22 @@ final class CurrentMigrationMappingVerifierTest {
   void mapverify016SharedVerifierHasFiniteIndependentSnapshots()
       throws InterruptedException, ExecutionException, TimeoutException {
     var verifier = new CurrentMigrationMappingVerifier();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Map<String, Integer>>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  byte[] source = bytes(NORMAL);
-                  var result = verifier.verify(source, NORMAL_HASH);
-                  source[0] = 0;
-                  assertEquals(TWO, result);
-                  return result;
-                }));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] source = bytes(NORMAL);
+                      var result = verifier.verify(source, NORMAL_HASH);
+                      source[0] = 0;
+                      assertEquals(TWO, result);
+                      return result;
+                    }));
       for (var future : futures) assertEquals(TWO, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

@@ -3,7 +3,6 @@ package dev.codex.schubert.nk.migration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -393,16 +392,14 @@ final class CurrentScenarioFileMapperTest {
   void fileMap024FiniteParallelCallsConsumeOnlyPrivateClaimMaps()
       throws InterruptedException, ExecutionException, TimeoutException {
     var m = mapper();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int index = 0; index < TASKS; index++)
-        futures.add(executor.submit(() -> m.copyRows(normal(), at()).rows().get(0).get(0)));
+        futures.add(
+            ownedWorkers.executor().submit(() -> m.copyRows(normal(), at()).rows().get(0).get(0)));
       for (var future : futures)
         assertEquals(TARGET_ONE, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

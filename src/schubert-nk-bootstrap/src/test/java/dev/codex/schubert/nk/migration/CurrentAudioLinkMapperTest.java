@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -456,22 +455,21 @@ final class CurrentAudioLinkMapperTest {
   void linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots()
       throws InterruptedException, ExecutionException, TimeoutException {
     var m = mapper();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var ownedWorkers =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<String>>();
       for (int i = 0; i < TASKS; i++)
         futures.add(
-            executor.submit(
-                () ->
-                    m.copyRows(normal(), entries(STAMP), audioRows(STAMP), at())
-                        .linkRows()
-                        .get(0)
-                        .get(1)));
+            ownedWorkers
+                .executor()
+                .submit(
+                    () ->
+                        m.copyRows(normal(), entries(STAMP), audioRows(STAMP), at())
+                            .linkRows()
+                            .get(0)
+                            .get(1)));
       for (var future : futures)
         assertEquals(AUDIO_HIGH, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
