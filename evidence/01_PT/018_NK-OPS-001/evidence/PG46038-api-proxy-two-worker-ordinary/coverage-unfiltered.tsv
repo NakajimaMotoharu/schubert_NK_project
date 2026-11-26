@@ -1,0 +1,33 @@
+CLASS	dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector	6c246ea398ebec33	true	19	49	INSTRUCTION:26:59	BRANCH:2:2	LINE:6:13	COMPLEXITY:3:2	METHOD:1:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector	<init>	(Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation;Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;)V	1	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector	collect	(Lcom/zaxxer/hikari/HikariPoolMXBean;Lcom/zaxxer/hikari/HikariConfigMXBean;)Ljava/util/Optional;	1	INSTRUCTION:22:38	BRANCH:2:2	LINE:5:8	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector	snapshot	()Ljava/util/Optional;	1	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation	bcc936c51a579ded	true	13	49	INSTRUCTION:2:45	BRANCH:4:4	LINE:0:9	COMPLEXITY:4:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation	observe	(Lcom/zaxxer/hikari/HikariPoolMXBean;Lcom/zaxxer/hikari/HikariConfigMXBean;)Ljava/util/Optional;	1	INSTRUCTION:2:42	BRANCH:4:4	LINE:0:8	COMPLEXITY:4:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	2e1e8387f818d8d9	true	17	65585	INSTRUCTION:40:43	BRANCH:10:4	LINE:6:4	COMPLEXITY:11:5	METHOD:4:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	<init>	(JJJJ)V	1	INSTRUCTION:5:31	BRANCH:4:4	LINE:1:3	COMPLEXITY:4:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	value	(Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;)J	1	INSTRUCTION:25:0	BRANCH:6:0	LINE:5:0	COMPLEXITY:4:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	active	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	idle	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	pending	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts	maximum	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	c2418589b505c301	true	10	16433	INSTRUCTION:5:65	BRANCH:0:0	LINE:0:9	COMPLEXITY:1:5	METHOD:1:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	values	()[Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	<init>	(Ljava/lang/String;ILjava/lang/String;)V	2	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	label	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	$values	()[Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;	4106	INSTRUCTION:0:19	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State	<clinit>	()V	8	INSTRUCTION:0:31	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	6238e84975bc9945	true	35	49	INSTRUCTION:73:87	BRANCH:13:7	LINE:9:18	COMPLEXITY:15:4	METHOD:5:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	<init>	(Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;)V	1	INSTRUCTION:13:71	BRANCH:8:6	LINE:2:14	COMPLEXITY:7:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	state	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;	9	INSTRUCTION:32:0	BRANCH:4:0	LINE:3:0	COMPLEXITY:3:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	record	(Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts;)V	1	INSTRUCTION:0:13	BRANCH:1:1	LINE:0:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	missing	()V	1	INSTRUCTION:5:0	BRANCH:0:0	LINE:2:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	snapshot	()Ljava/util/Optional;	1	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	detailedMetricsRequested	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	lambda$new$0	(Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;Ljava/util/concurrent/atomic/AtomicReference;)D	4106	INSTRUCTION:12:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder	lambda$new$1	(Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$State;Ldev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder$Counts;)Ljava/lang/Double;	4106	INSTRUCTION:6:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0

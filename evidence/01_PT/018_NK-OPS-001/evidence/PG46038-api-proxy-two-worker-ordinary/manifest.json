@@ -1,0 +1,126 @@
+{
+  "run": "PG46038",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "f64ef1a48e79d545a9c182fdce0f32a7b91ce30f",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T04:50:33.513843+00:00",
+  "testIds": {
+    "dev.codex.schubert.nk.api.monitoring.DbPoolMetricObservationTest#poolRead007ParallelOwnedInterfacesCannotShareMutableObservationState": "POOLREAD007",
+    "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest#poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts": "POOLCONN007"
+  },
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "unitActualExit": 0,
+  "toolReportExit": 0,
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6120_API借用監視二並行と一次診断の単体仕様.md",
+    "sha256": "94332d3976fca00762541840123715423b216aa8a12f7c431a47812200b5ee1f"
+  },
+  "canonicalFormatting": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46038-api-two-workers-canonical-explicit-pom/terminal.json",
+    "sha256": "b45104cf2150fa33070f22fa1558ed7becdc6de0da3eca2518db97a9c86751c4"
+  },
+  "static": {
+    "pmdFindings": [
+      {
+        "file": "DbPoolMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 36
+      },
+      {
+        "file": "DbPoolMetricCollector.java",
+        "rule": "AvoidCatchingGenericException",
+        "line": 36
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "CloseResource",
+        "line": 183
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 183
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 200
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 204
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 222
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 223
+      },
+      {
+        "file": "DbPoolMetricCollectorTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 231
+      },
+      {
+        "file": "DbPoolMetricObservationTest.java",
+        "rule": "UseConcurrentHashMap",
+        "line": 36
+      },
+      {
+        "file": "DbPoolMetricObservationTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 50
+      },
+      {
+        "file": "DbPoolMetricObservationTest.java",
+        "rule": "UseProperClassLoader",
+        "line": 64
+      },
+      {
+        "file": "DbPoolMetricObservationTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 178
+      }
+    ],
+    "checkstyleExit": 0,
+    "strictCompile": true
+  },
+  "physicalCount": 5,
+  "realDbOrPoolOrJmx": false,
+  "bug": [
+    "BUG-3975",
+    "BUG-3976"
+  ],
+  "ykt": [
+    "YKT-2997",
+    "YKT-3027"
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46038-api-proxy-two-worker-ordinary/begin.json",
+    "sha256": "9add154af58796849d731bce7a821450aec84aa78d29c11cb96562cec799962f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46038-api-proxy-two-worker-ordinary/terminal.json",
+    "sha256": "ebd6d3545d2a2cbb762eabb6482ce9af4942a50dbe48c7624eda2feb59164361"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46038-api-proxy-two-worker-ordinary/junit-sanitized.xml",
+      "sha256": "ca8ad44518e45c4329f73d03967e749232943d8e3845f0e0d6eef667313b603c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46038-api-proxy-two-worker-ordinary/coverage-unfiltered.tsv",
+      "sha256": "8c8c9cf3fc48b9462d8bb0dcffbde4c9afa0c898f8268bebd29c45d0c8221486"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3508,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
