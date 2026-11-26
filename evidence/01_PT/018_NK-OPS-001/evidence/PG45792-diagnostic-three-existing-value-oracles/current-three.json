@@ -1,0 +1,128 @@
+{
+  "criteria": [
+    {
+      "id": "PT-P01810-CATALOG-039",
+      "testIds": [
+        "PT-REPLY-VALUE001"
+      ],
+      "criterion": "相関とbodyを伏せる固定診断。合成bodyのcopy-in/outと所有の独立負例。",
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "3c2d92ba1ee6b8a82db72280189d01d1b3301ee5f821099b71f4c033d4fdddc5"
+      },
+      "input": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+          "sha256": "1d54367bc3065f294a34c128faab57d29b3ade2491f8ba4dde17c02e4010f1ec"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java",
+          "sha256": "0d2a1a7c5eceda3627e62e6d3f87a1868653fc7328a2d69e15c1ecc7ec605c12"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+          "sha256": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1"
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyValueContractTest.java",
+          "sha256": "3715e988f993ec10e5774b2b2801dd00782595106f9aee9c440f857f945a3908"
+        }
+      ],
+      "currentPhysical": [
+        {
+          "path": "../pgpt-runs/PG379/PG44672-current-web-local-values-and-reply-nullaway-v2/target/classes/dev/codex/schubert/nk/web/messaging/ValidatedReply.class",
+          "sha256": "5c9584c47c0ed7918eb4cfb0cefadd5b02b3046a728fe3876f7f16dc9081e936"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG44672-current-web-local-values-and-reply-nullaway-v2/target/classes/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.class",
+          "sha256": "423b6670a695172661941e9e6206f696e5464d6f90fa3b973e3da73e0aeaec63"
+        }
+      ],
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/manifest.json",
+        "sha256": "589a7bd279e88f7efc892e3e0c70caf53cccce1788edb41f9190466678da467b"
+      },
+      "currentTypeProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG44672-current-web-reply-value-static/manifest.json",
+        "sha256": "6d039521286d031ffdd1b1df0458fee0639c729e4cbc8214b5b081dda3639fac"
+      }
+    },
+    {
+      "id": "PT-P01810-CATALOG-070",
+      "testIds": [
+        "PT-OPS-MSTOP001",
+        "PT-OPS-MSTOP007"
+      ],
+      "criterion": "固定MaintenanceStopSnapshot[redacted]と別callerの純表示。実停止は対象外。",
+      "original": {
+        "path": "../pgpt-runs/PG379/PG43416-mstop-catalog-oracle-style-nine-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "b3e28f9f4d8f3af9d0871fa82cf5107dc0ed7b9d9e66f90661cdf88707c364f6"
+      },
+      "currentPhysical": [
+        {
+          "className": "dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class",
+          "sha256": "24215a68cad48c13b84d6a7180eda4ae6b2aebee3e126c96cb4f31938ddbe969"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class",
+          "sha256": "650b3540616c612413d26e8f3be0c1ced71271b861fb06a1f7e00d1908176453"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/platform/StopGateFailure.class",
+          "sha256": "8a52a783cb7f59c6d51fa3f58ff10a0a24e2bdc194a0de8f4c5605512bba57a5"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/platform/StopGateException.class",
+          "sha256": "c17fa221e36f0a1d5750d2ee57701cb61ca09960f871aba434d79b1bb2ab6318"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+        "sha256": "61940dfa792d06506efd0fa07ad3fda9d5dfe730eff4a292623944cdc75a7dd9"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43416-mstop-catalog-oracle-style-nine-v1/manifest.json",
+        "sha256": "13957ad8d054dd44acde828cd8d770780d536689a703af5f70edddf3b64c2c2f"
+      }
+    },
+    {
+      "id": "PT-P01810-CATALOG-083",
+      "testIds": [
+        "PT-BAT-RESULT001",
+        "PT-BAT-RESULT004"
+      ],
+      "criterion": "44状態/11種の固定表、値を露出しない固定診断。",
+      "original": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg35170-ssc438-result4-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "da7cd360a6cc3bdc22a4ec6eb99020fb8ea025f159a05c7232a1572fc295cbd3"
+      },
+      "currentPhysical": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+          "sha256": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+          "sha256": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+          "sha256": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepResultContractTest.java",
+        "sha256": "4be50405894f2e8199fda0a0c5181aba5b08e5559a245eae0f06c36c85e3274d"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41714-batch-terminal-evidence-current-v1/manifest.json",
+        "sha256": "13bb2b6a1f1e5b0f0536f73054776d5f5c21b6e287430fa4ecaf7517d864c887"
+      }
+    }
+  ],
+  "previousExact8HeldSeparate": true,
+  "uniqueLocallyBound": 11,
+  "totalOriginal": 93,
+  "held": 26,
+  "unjoined": 56
+}
