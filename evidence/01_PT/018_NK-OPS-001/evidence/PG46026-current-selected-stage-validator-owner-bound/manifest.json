@@ -1,0 +1,62 @@
+{
+  "run": "PG46026",
+  "wbs": "WBS-G08",
+  "source": "3ca323c1042ccc9d3f5f4a3c56b97ba88b6ade3f",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T04:36:27.097861+00:00",
+  "scope": "specified completed local stage journal only",
+  "toolAndSpec": [
+    {
+      "path": "tools/quality/selected_stage_receipts.py",
+      "sha256": "da8d83a6b21f5fca3abf68c8bc5ff35ef1ae2bea4fd571d241d421fa9621d1d5"
+    },
+    {
+      "path": "tools/quality/tests/test_selected_stage_receipts.py",
+      "sha256": "41e5c5691065c02ece17eb4ecd8f751ee88efd7346056ae5efaa12718164946e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/6108_選択局所工程終端証跡の単体仕様.md",
+      "sha256": "97b73de7ccdee88163cbd20e5f928fc29ae252c4b62e47ec928abc3bcad9418b"
+    }
+  ],
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_selected_stage_receipts"
+  ],
+  "results": {
+    "toolTestsPassed": 5,
+    "existingArchiveCount": 2,
+    "numericStageCount": 14,
+    "productTestsStarted": 0
+  },
+  "related": [
+    "BUG-3968",
+    "BUG-3971",
+    "YKT-3027",
+    "SS354"
+  ],
+  "preOwnerBindingTrial": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46026-current-selected-stage-record-validator/terminal.json",
+    "sha256": "47c7b8db59d152cecae6ba4200a0dfd7ec29c70e7a0e8aaac2bdcafb65878d24"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46026-current-selected-stage-validator-owner-bound/begin.json",
+    "sha256": "7ae4fe41d4f109f9d9ef2bd8fc0f4214169e1fb0a67c201e0eb5321517b38c3f"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46026-current-selected-stage-validator-owner-bound/terminal.json",
+    "sha256": "3ef974f47f769f2d3224a92d29fc13ee5585131475299651ae8a82bb157dd14f"
+  },
+  "publicProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46026-current-selected-stage-validator-owner-bound/tool-result.txt",
+    "sha256": "e848908a3b026ba2446ea28cab180ee4e0f271eebbc79877ce3e66f5393dbbda"
+  },
+  "sameSourceAndRunProofRequired": true,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "cumulativeProductTrialsGross": 3506
+}
