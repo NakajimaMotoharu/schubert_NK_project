@@ -1,0 +1,123 @@
+{
+  "run": "PG45918",
+  "source": "ab35f2b5ac8fd5af6de04b1d1af1729d1ab9db24",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:40:18.607769+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3950",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "a241fc28e49299ca02b81af047d4d08d3eedabf8",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6000_監視ロック五試験worker単体仕様.md",
+    "sha256": "a69089366e020b1c470ecce6ec255e93900ddac31109f584f54cb0d0506930f6"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest#lock401ObserveFailureReleasesForAnotherThreadAndPreservesOneGap": "LOCK401",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest#lock402ObserveNowClockFailureReleasesBothLocksAcrossThreads": "LOCK402",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest#lock403UtcFailureReleasesClockAndDoesNotCommitFailedObservation": "LOCK403",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest#lock404CounterFailureReleasesWithoutClosingBorrowedRegistry": "LOCK404",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest#lock406OtherMethodWaitsForOwnedCallbackThenCompletes": "LOCK406"
+  },
+  "productTests": 5,
+  "workerContract": "original platform daemon, callback released before cancellation",
+  "unaffectedLock405NotReplayed": true,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45918-monitor-lock-five-canonical/terminal.json",
+    "sha256": "b73f116e66d5e76d4a150d5282d7266734b88a56dc9920a62b47c93198ce2887"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45918-monitor-lock-five-ordinary/pmd.xml",
+    "sha256": "8e9e3983b1aa516c89cfadae3ec4c240f34b08f8fc91546d877124a14d6bdf3a"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 82
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 82
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 261
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 264
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 264
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 281
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 292
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 301
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 302
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 306
+    },
+    {
+      "fixture": "MonitoringLockContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 306
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45918-five-monitoring-lock-scoped/junit-sanitized.xml",
+      "sha256": "e995fcfd76051eab48abfc8a5a25f42b72875253083e124971fa772ff2524ce6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45918-five-monitoring-lock-scoped/coverage-unfiltered.tsv",
+      "sha256": "327e6ef1a58158420df51939aa627dd3be7dda125b1829d450942498e6395b6f"
+    }
+  ],
+  "measuredClassCount": 4,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45918-monitor-lock-five-ordinary/begin.json",
+    "sha256": "03af1b51878ed1b6d8a50cc4502e4c85e0fff48038187a1e05f95d3b53ecefb1"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45918-monitor-lock-five-ordinary/terminal.json",
+    "sha256": "74238ec80672bffc562ff98a4fb1c16c866b8f74775dd14feaea2b5270346048"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3399,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
