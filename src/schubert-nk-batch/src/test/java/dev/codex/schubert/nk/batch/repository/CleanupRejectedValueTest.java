@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** PT-BAT-REJVAL001..006. Closed values only; the repository does not execute. */
+/** PT-BAT-REJVAL001..008. Closed values only; the repository does not execute. */
 final class CleanupRejectedValueTest {
   private static final Instant CUTOFF = Instant.parse("2026-11-01T00:00:00Z");
   private static final Instant START = Instant.parse("2026-11-01T00:00:01Z");
@@ -34,6 +34,16 @@ final class CleanupRejectedValueTest {
           BatchStepResult.Status.SKIPPED, 0, 0, 0, 0, BatchStepResult.Reason.BACKUP_UNAVAILABLE);
   private static final String INVALID_ROW = "Cleanup rejection row invalid";
   private static final String INVALID_IDENTITY = "Cleanup rejection identity invalid";
+
+  private static final List<BatchStep> TERMINAL_STEPS =
+      List.of(
+          BatchStep.CLEAN_NOTIFICATION,
+          BatchStep.CLEAN_QUESTION,
+          BatchStep.CLEAN_SESSION,
+          BatchStep.CLEAN_INBOX_OUTBOX,
+          BatchStep.CLEAN_LOG,
+          BatchStep.CLEAN_BATCH_RUN,
+          BatchStep.CLEAN_TRANSFER);
 
   @Test
   void keepsSuccessfulRunningSkippedAndAbsentSlotsDistinct() {
@@ -158,15 +168,6 @@ final class CleanupRejectedValueTest {
 
   @Test
   void terminalSnapshotDiagnosticsOmitBothRunsAndAllStoredObservations() {
-    List<BatchStep> stepOrder =
-        List.of(
-            BatchStep.CLEAN_NOTIFICATION,
-            BatchStep.CLEAN_QUESTION,
-            BatchStep.CLEAN_SESSION,
-            BatchStep.CLEAN_INBOX_OUTBOX,
-            BatchStep.CLEAN_LOG,
-            BatchStep.CLEAN_BATCH_RUN,
-            BatchStep.CLEAN_TRANSFER);
     var successfulRows = new ArrayList<Entry>();
     var warningRows = new ArrayList<Entry>();
     var warning =
@@ -177,8 +178,8 @@ final class CleanupRejectedValueTest {
             1,
             163,
             BatchStepResult.Reason.PROTECTED_RECORDS);
-    for (int slot = 0; slot < stepOrder.size(); slot++) {
-      BatchStep step = stepOrder.get(slot);
+    for (int slot = 0; slot < TERMINAL_STEPS.size(); slot++) {
+      BatchStep step = TERMINAL_STEPS.get(slot);
       successfulRows.add(new Entry(attempt(201 + slot, RUN, step, false), END, SUCCESS));
       warningRows.add(
           new Entry(
@@ -200,6 +201,63 @@ final class CleanupRejectedValueTest {
     String expectedDiagnostic = "CleanupTerminalSnapshot[data=<redacted>]";
     assertEquals(expectedDiagnostic, successful.toString());
     assertEquals(expectedDiagnostic, protectedRecords.toString());
+  }
+
+  @Test
+  void terminalSnapshotRejectsWrongWidthStepOrderMixedRunAndDuplicateId() {
+    var baseline = terminalRows();
+    var extra = new ArrayList<>(baseline);
+    extra.add(baseline.getLast());
+    for (List<Entry> incorrectSize : List.of(List.<Entry>of(), extra)) {
+      assertEquals(
+          "Cleanup terminal incomplete",
+          assertThrows(IllegalArgumentException.class, () -> new Snapshot(incorrectSize))
+              .getMessage());
+    }
+
+    var wrongOrder = new ArrayList<>(baseline);
+    Collections.swap(wrongOrder, 1, 2);
+    var otherRun = new ArrayList<>(baseline);
+    otherRun.set(
+        1, new Entry(attempt(202, OTHER_RUN, BatchStep.CLEAN_QUESTION, false), END, SUCCESS));
+    var duplicate = new ArrayList<>(baseline);
+    duplicate.set(1, new Entry(attempt(201, RUN, BatchStep.CLEAN_QUESTION, false), END, SUCCESS));
+    for (List<Entry> inconsistent : List.of(wrongOrder, otherRun, duplicate)) {
+      assertEquals(
+          "Cleanup terminal inconsistent",
+          assertThrows(IllegalArgumentException.class, () -> new Snapshot(inconsistent))
+              .getMessage());
+    }
+    assertThrows(NullPointerException.class, () -> new Snapshot(null));
+    var missing = new ArrayList<>(baseline);
+    missing.set(2, null);
+    assertThrows(NullPointerException.class, () -> new Snapshot(missing));
+  }
+
+  @Test
+  void terminalSnapshotKeysDistinguishAnIndependentlyChangedLastObservation() {
+    var baseline = new Snapshot(terminalRows());
+    var equivalent = new Snapshot(terminalRows());
+    var alternative = terminalRows();
+    var attempt = attempt(207, RUN, BatchStep.CLEAN_TRANSFER, false);
+    alternative.set(6, new Entry(attempt, END.plusSeconds(1), SUCCESS));
+    var changed = new Snapshot(alternative);
+
+    assertEquals(baseline, equivalent);
+    assertNotEquals(baseline, changed);
+    assertNotEquals(baseline, null);
+    assertNotEquals(baseline, baseline.entries());
+    var retained = new HashSet<>(List.of(baseline));
+    assertTrue(retained.contains(equivalent));
+    assertFalse(retained.contains(changed));
+  }
+
+  private static List<Entry> terminalRows() {
+    var rows = new ArrayList<Entry>();
+    for (int i = 0; i < TERMINAL_STEPS.size(); i++) {
+      rows.add(new Entry(attempt(201 + i, RUN, TERMINAL_STEPS.get(i), false), END, SUCCESS));
+    }
+    return rows;
   }
 
   private static BatchStepAttempt attempt(long id, BatchRun run, BatchStep step, boolean skipped) {
