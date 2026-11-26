@@ -1,0 +1,13 @@
+CLASS	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	2d4376c967ca14f1	true	130	49	INSTRUCTION:342:218	BRANCH:29:10	LINE:90:54	COMPLEXITY:25:8	METHOD:5:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	<init>	()V	1	INSTRUCTION:4:0	BRANCH:0:0	LINE:2:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	<init>	(Ljava/util/function/IntSupplier;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	enqueue	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;Ljava/time/Instant;)Z	1	INSTRUCTION:80:0	BRANCH:2:0	LINE:20:0	COMPLEXITY:2:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	claim	(Ljava/sql/Connection;Ljava/lang/String;Ljava/time/Instant;I)Ljava/util/List;	1	INSTRUCTION:27:94	BRANCH:2:4	LINE:9:25	COMPLEXITY:2:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	markSent	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;Ljava/time/Instant;)Z	1	INSTRUCTION:60:0	BRANCH:2:0	LINE:16:0	COMPLEXITY:2:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	markFailure	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;Ljava/time/Instant;Ljava/lang/String;)Z	1	INSTRUCTION:131:0	BRANCH:13:0	LINE:34:0	COMPLEXITY:9:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	closeRows	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:9:6	BRANCH:3:1	LINE:3:4	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:9:6	BRANCH:3:1	LINE:3:4	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	read	(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;	8	INSTRUCTION:6:91	BRANCH:2:2	LINE:1:13	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	required	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:6:4	BRANCH:1:1	LINE:1:2	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	requireTransaction	(Ljava/sql/Connection;)V	10	INSTRUCTION:5:8	BRANCH:1:1	LINE:1:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	lambda$new$0	()I	4106	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
