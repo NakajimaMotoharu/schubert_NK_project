@@ -1,0 +1,129 @@
+{
+  "artifacts": {
+    "protocol": {
+      "gitPom": {
+        "path": "src/schubert-nk-protocol/pom.xml",
+        "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+      },
+      "directProductionInternal": [],
+      "directTestInternal": [],
+      "normalArtifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45722-current-protocol-changed-fixtures-module-176/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "965fd026a8ab7131f7dbb5a902b87926f24db7cc544305d0eae2cd3d6972ce0e"
+      },
+      "embeddedPom": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "embeddedProperties": "f7c55ba1782bd602d954507c908261c65d7104134212981a80394b07b4ad3b61",
+      "coordinate": [
+        "dev.codex.schubert",
+        "schubert-nk-protocol",
+        "0.1.0-SNAPSHOT"
+      ]
+    },
+    "storage": {
+      "gitPom": {
+        "path": "src/schubert-nk-storage/pom.xml",
+        "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+      },
+      "directProductionInternal": [],
+      "directTestInternal": [],
+      "normalArtifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "embeddedPom": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "embeddedProperties": "bd6a71a09c4f87738321f863288ab815c65026fba4f6a2b6b59910a453f6246b",
+      "coordinate": [
+        "dev.codex.schubert",
+        "schubert-nk-storage",
+        "0.1.0-SNAPSHOT"
+      ]
+    },
+    "bootstrap": {
+      "gitPom": {
+        "path": "src/schubert-nk-bootstrap/pom.xml",
+        "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+      },
+      "directProductionInternal": [
+        "storage"
+      ],
+      "directTestInternal": [],
+      "normalArtifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "embeddedPom": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "embeddedProperties": "078bf9b184f8103cb59f8060b31d931f47661927d86d8e3ba55c15b7565602ec",
+      "coordinate": [
+        "dev.codex.schubert",
+        "schubert-nk-bootstrap",
+        "0.1.0-SNAPSHOT"
+      ]
+    },
+    "batch": {
+      "gitPom": {
+        "path": "src/schubert-nk-batch/pom.xml",
+        "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+      },
+      "directProductionInternal": [
+        "bootstrap",
+        "storage"
+      ],
+      "directTestInternal": [
+        "bootstrap"
+      ],
+      "normalArtifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+      },
+      "embeddedPom": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "embeddedProperties": "53832d91a4eec1b4ef717deca928687eb4cda762322db0ba3532616786d8ba42",
+      "coordinate": [
+        "dev.codex.schubert",
+        "schubert-nk-batch",
+        "0.1.0-SNAPSHOT"
+      ]
+    },
+    "api": {
+      "gitPom": {
+        "path": "src/schubert-nk-api/pom.xml",
+        "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+      },
+      "directProductionInternal": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "directTestInternal": [
+        "bootstrap"
+      ]
+    },
+    "web": {
+      "gitPom": {
+        "path": "src/schubert-nk-web/pom.xml",
+        "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+      },
+      "directProductionInternal": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "directTestInternal": [
+        "api",
+        "bootstrap"
+      ]
+    }
+  },
+  "root": {
+    "path": "pom.xml",
+    "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+  },
+  "commonOriginal": "WBS-P019-02",
+  "commonOriginalIncrementPp": 0,
+  "currentDirectInternalDepthExplained": true,
+  "readClassBodies": 0,
+  "formalBomSigned": false,
+  "licenseApprovalOpen": true,
+  "apiAndWebCurrentPomOnly": true,
+  "crlfIndependentHoldUnaffected": true,
+  "regularJarCount": 4
+}
