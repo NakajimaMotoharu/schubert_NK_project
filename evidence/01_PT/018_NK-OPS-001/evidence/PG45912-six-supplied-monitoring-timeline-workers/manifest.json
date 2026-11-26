@@ -1,0 +1,106 @@
+{
+  "run": "PG45912",
+  "source": "4f1cf1c60c4ae5912f31ee979bd76d0c756be27e",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:33:03.418577+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3948",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "87c9469641a444b8d34906e8df371089e11a7a5a",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5994_Batch供給時系列六並行単体仕様.md",
+    "sha256": "b1d0c68a3205b63dc23bd05b4c473d07d5da4972f6a7a9b75d87576c3f9881a7"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest#dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount": "DBTIME007",
+    "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest#timedFs006ConcurrentOwnerAndLocalStatusLiteral": "timedFs006",
+    "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest#heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot": "HEAPTIME007",
+    "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest#syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts": "SYNCTIME007",
+    "dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest#heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots": "HEAPCONN008",
+    "dev.codex.schubert.nk.batch.monitoring.MonitoringMissingObservationTest#monMissing003ConcurrentAbsencePreservesImmutableSnapshot": "monMissing003"
+  },
+  "productTests": 6,
+  "caseThreads": [
+    8,
+    4,
+    8,
+    8,
+    8,
+    4
+  ],
+  "independentInputsPerMethod": 64,
+  "invocationWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45912-duration-value-six-canonical/terminal-exact-order.json",
+    "sha256": "eac633cf67a25c54be4bd17c0e0904f0c405f20bb6f319792dfa8262b01cc7da"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45912-duration-value-six-ordinary/pmd.xml",
+    "sha256": "7fc1027d111f99b26f716b71d7155f615d5a6b01de9b1e01f70cdf6b636669b2"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "JvmHeapHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 228
+    },
+    {
+      "fixture": "MonitoringMissingObservationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 157
+    },
+    {
+      "fixture": "TimedDbPoolMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 229
+    },
+    {
+      "fixture": "TimedFilesystemMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 205
+    },
+    {
+      "fixture": "TimedJvmHeapMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 188
+    },
+    {
+      "fixture": "TimedSyncLatencyMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 176
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45912-six-supplied-monitoring-timeline-workers/junit-sanitized.xml",
+      "sha256": "14a4eab7006b6069afeefe46359215cf9840a0128af1eb42265adc77411a0973"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45912-six-supplied-monitoring-timeline-workers/coverage-unfiltered.tsv",
+      "sha256": "c1fc7fa53b3c3a9b44f01a0979e575d79529aac1bc8543cae1bd80b851a76b54"
+    }
+  ],
+  "measuredClassCount": 10,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45912-duration-value-six-ordinary/begin.json",
+    "sha256": "f918dd75b158152119c1992c3f553095239ffdada3b8f85d99d145ac811bf5f3"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45912-duration-value-six-ordinary/terminal.json",
+    "sha256": "81ed107f18d12004e5fa35ba8a12955028dec6b78adbe679e2ce2a9d5950203e"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3387,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
