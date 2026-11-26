@@ -322,16 +322,14 @@ final class AssetMigrationManifestTest {
         (int)
             (GENERATED_ENUM_COEFFICIENT * System.identityHashCode(Kind.SCENARIO)
                 + GENERATED_ENTRY_REMAINDER);
-    var executor = Executors.newFixedThreadPool(GENERATED_WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(
+            Executors.newFixedThreadPool(GENERATED_WORKERS), GENERATED_TERMINATION_SECONDS)) {
       var results = new ArrayList<Future<Integer>>();
       for (int index = 0; index < GENERATED_TASKS; index++)
-        results.add(executor.submit(value::hashCode));
+        results.add(owner.executor().submit(value::hashCode));
       for (var result : results)
         assertEquals(expected, result.get(GENERATED_WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(GENERATED_TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
