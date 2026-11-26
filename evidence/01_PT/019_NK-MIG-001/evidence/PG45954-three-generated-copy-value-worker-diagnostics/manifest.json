@@ -1,0 +1,127 @@
+{
+  "run": "PG45954",
+  "source": "3c6bcd961466941ddabb2c24af339ecb7687f317",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.02/2",
+  "terminalAtUTC": "2026-11-26T03:16:30.789642+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3957",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "0d2d5b6625c5c2cb56dd36cf72e12f188196d996",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/6036_移行生成とCOPY三並行単体仕様.md",
+    "sha256": "0215c062dcbec859721514f65a0db3ba960a731f68be45f8213e7c6165b5bc3b"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest#scenarioGen016LargeIndexPairAndFiniteIsolation": "PT-MIG-SCENARIOGEN016",
+    "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest#five020FiniteParallelReadersHaveIndependentMemorySinks": "PT-MIG-FIVE020",
+    "dev.codex.schubert.nk.migration.MigrationMasterCopyManifestTest#copyman011FiniteConcurrentImmutableSource": "PT-MIG-COPYMAN011"
+  },
+  "productTests": 3,
+  "preflightScopeCorrectedBeforeJunit": true,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44948-current-mapping-original-readback-sixteen/manifest.json",
+    "sha256": "4fa71a65a5da65588aaad56f1c77817b12a4f81eeca7979f9cda0d08a6e623d0"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45954-three-copy-value-fixtures-canonical/terminal.json",
+    "sha256": "39e97ec5e2b4553fc7247eaec911ce4cea8c3e239bb0929faa01678035a0c4d7"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45954-three-copy-value-fixtures-ordinary-scoped-main/pmd.xml",
+    "sha256": "0ec85c42dc855523cf3cfd9f79649b2457191eae780c909a61de11a54db3afc8"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 65
+    },
+    {
+      "fixture": "MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 232
+    },
+    {
+      "fixture": "MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 302
+    },
+    {
+      "fixture": "MigrationCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 350
+    },
+    {
+      "fixture": "MigrationMasterCopyManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 191
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 37
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 54
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 73
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 91
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 112
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": 133
+    },
+    {
+      "fixture": "ScenarioGeneratedValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 224
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45954-three-generated-copy-value-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "4f7ea6fce7a8a5df16599e5b35583d7219ece8471ddbc448427582155f29e021"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45954-three-generated-copy-value-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "ba61e2ee72832cbf5a78f76c9dbbb5f8b1cb19ccf50f115a0cf77be49c4716ee"
+    }
+  ],
+  "measuredClassCount": 11,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45954-three-copy-value-fixtures-ordinary-scoped-main/begin.json",
+    "sha256": "f6c40899827e3ea2a3557bf3bea453f6318434cf4e0a570cf1ae875c8b1894e5"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45954-three-copy-value-fixtures-ordinary-scoped-main/terminal.json",
+    "sha256": "32598464efba699b284eb761c3fe09e419061e058d2899bf7a9f1b3a4da84598"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3435,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
