@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.file.MediaType;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
@@ -234,8 +235,7 @@ class MediaStreamsMetricRecorderTest {
       throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(8))) {
         var recorder = new MediaStreamsMetricRecorder(registry, DEBUG_MODE);
         var second = new MediaStreamsMetricRecorder(other, DEBUG_MODE);
         second.record(MediaType.MUSIC, 99);
@@ -256,7 +256,7 @@ class MediaStreamsMetricRecorderTest {
                 return "published";
               });
         }
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        for (var result : owner.invokeAll(tasks, 10, TimeUnit.SECONDS))
           assertEquals("published", result.get());
         for (int i = 0; i < 3; i++) {
           var type = MediaType.valueOf(TYPES.get(i));
@@ -277,9 +277,6 @@ class MediaStreamsMetricRecorderTest {
         shape(other);
         assertEquals(3, registry.registrations.get());
         assertEquals(3, other.registrations.get());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

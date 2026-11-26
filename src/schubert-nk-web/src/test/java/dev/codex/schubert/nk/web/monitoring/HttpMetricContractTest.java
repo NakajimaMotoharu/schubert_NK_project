@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Method;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Metric;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Route;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Status;
+import dev.codex.schubert.nk.web.view.ViewFixtureWorkers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -226,18 +227,14 @@ class HttpMetricContractTest {
   @Test
   void httpMetric006ConcurrentClassifiersAreStateless()
       throws InterruptedException, ExecutionException {
-    var executor = Executors.newFixedThreadPool(4);
-    try {
+    try (var owner = new ViewFixtureWorkers(Executors.newFixedThreadPool(4))) {
       var tasks = new ArrayList<Callable<Map<String, String>>>();
       for (int index = 0; index < 64; index++) {
         String raw = "/fixture/" + index;
         tasks.add(() -> contract.labels(raw, raw, 204).requestLabels());
       }
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+      for (var future : owner.invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(UNKNOWN, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
