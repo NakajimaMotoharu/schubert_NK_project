@@ -1,0 +1,89 @@
+{
+  "run": "PG46002",
+  "source": "6554cb9701b97ecacc0e9785fb08692ad42dc57f",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T04:05:02.415495+00:00",
+  "actualExit": 0,
+  "reportedExitIsIndependentPost": true,
+  "ordinaryLauncherExit": 1,
+  "ordinaryWrapperFailureBug": "BUG-3968",
+  "productTrials": 3,
+  "xmlSuccessfulLocalCases": 3,
+  "replayed": 0,
+  "staticAfterPost": "SCOPED_RESULT_ONLY",
+  "primaryFailureBug": "BUG-3967",
+  "selected": {
+    "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest#webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots": "WEBPOOLMETRIC006",
+    "dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorderTest#webObxMet007ConcurrentPublicationKeepsWholeFixtureIdentityAndIndependentGaugeVector": "WEBOBXMET007",
+    "dev.codex.schubert.nk.web.monitoring.OverflowSafeHttpMeterRegistryTest#httpDur008ConcurrentWorkersAndIndependentOwnersKeepExactIntegerVector": "HTTPDUR008"
+  },
+  "originalBegin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46002-web-registry-three-ordinary/begin.json",
+    "sha256": "32c09dcc7997d29af6c05902e86c66389f9ce7f2b20ecf60696ccc39bdb09939"
+  },
+  "independent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46002-web-registry-three-ordinary/independent-post.json",
+    "sha256": "57f0a98658ddee45bb7c22aa2cb93764587162757b7f36c2883499b97269a7cf"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6084_Webメモリregistry三並行単体仕様.md",
+    "sha256": "00a51e305779c24970e6b722a08543dc787cffc44ac5abc1393920f205334c87"
+  },
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46002-web-registry-three-ordinary/coverage-unfiltered.tsv",
+      "sha256": "02f022af59c226ee81adb37c15b7455306235c74240b60c180b9ba83cc6c9470"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46002-web-registry-three-ordinary/junit-sanitized.xml",
+      "sha256": "11351f198228dbf9fa2fd28eb60be168e3cb1fbb36e7c43c59fd088db1ef674b"
+    }
+  ],
+  "pmdSites": [
+    {
+      "file": "OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 299
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": 120
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 227
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 239
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 239
+    },
+    {
+      "file": "WebOutboxMetricRecorderTest.java",
+      "rule": "NullAssignment",
+      "line": 158
+    },
+    {
+      "file": "WebOutboxMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": 293
+    },
+    {
+      "file": "WebOutboxMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 322
+    }
+  ],
+  "noHttpDbJvmCollector": true,
+  "cumulativeProductTrialsGross": 3484,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
