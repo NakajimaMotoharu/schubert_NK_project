@@ -1,0 +1,180 @@
+{
+  "f02Criteria": [
+    {
+      "id": "SYS-001",
+      "designLiteral": "次期システムの名称をschubert NKとする。",
+      "priorScope": "ログイン題名の現資源と承認DIF-001。実描画の名義は未確認。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "Web",
+      "requiredReceipt": "現Browserの製品版で名称を確認したDOMとCHR-A01終端、担当判定。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-002",
+      "designLiteral": "Java 25 LTSを使用する。Ubuntu標準パッケージ`openjdk-25-jdk`で動作可能な構成とする。",
+      "priorScope": "正規四JAR、実release25 485 Main。作業機の隔離JDK25.0.4。",
+      "latestProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45744-f02-current-four-packages-and-whole-protocol-content/manifest.json",
+          "sha256": "124c88d1c2b4b4841943569fec5ba1b2310b27b8f7a262d6c26488db21772868"
+        },
+        {
+          "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG45722-current-protocol-176-module-verify/manifest.json",
+          "sha256": "cee87f7f2f3704525d7b6668d0e35b3d7269123d8ab4736a932fe10d9a72ca8d"
+        },
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG44828-current-backup-original-eighteen-plus-two-and-pmd/manifest.json",
+          "sha256": "9a727f6fbd0088ab112130a8848b710d2848b4d93fc2a64f185d02cb28412e73"
+        }
+      ],
+      "latestApplication": "現JAR 4/6の正規包装、Protocolの更新後verify、Batch整形後18の同正規JAR。",
+      "responsibleArea": "ビルド・アーキテクチャ",
+      "requiredReceipt": "QA-056後のAPI/Web正規JAR、同一環境の六製品と標準Java 25。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-003",
+      "designLiteral": "OSはUbuntu Server 26.04 LTSとする。",
+      "priorScope": "現在の作業ホストUbuntu 26.04と、別の既存対象環境引渡し。対象Serverの現物は未照合。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "運用・環境",
+      "requiredReceipt": "現対象の環境承認、同じホストと稼働Ubuntu版。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-004",
+      "designLiteral": "DBMSはPostgreSQL 18系を使用し、構築時点の最新minor releaseを採用する。",
+      "priorScope": "元PG18.6環境整備の記録のみ。現在版・接続・schema実証は保留。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "API・DB",
+      "requiredReceipt": "現PostgreSQL環境・所有・版・承認schemaとJDBC後条件。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-005",
+      "designLiteral": "Web層とサーバ側アプリケーション層の通信は、すべてApache ActiveMQ Artemisを介する。",
+      "priorScope": "明示依存3,369参照で既定外0。保留5源の99参照、全型付きと実Artemisは未完。",
+      "latestProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45770-canonical-spotless-five-current-api-web-delta/manifest.json",
+          "sha256": "9d66f1fa30d7c2b141aaf783da1e038b10a33fc067bf0a897a624bd588b64bbb"
+        }
+      ],
+      "latestApplication": "API/Web五差分はF03の書式補助。依存方向・実Artemisの証明は別。",
+      "responsibleArea": "ビルド・アーキテクチャ／API・Web",
+      "requiredReceipt": "全依存境界及び実Artemisの同候補接続と終端。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-006",
+      "designLiteral": "ブラウザ向け画面デザインは極力維持する。MQ導入等に伴う必要不可欠な変更は許容する。",
+      "priorScope": "現Web資源34と24ページの静的構造の局所検査。実ブラウザと全互換は別。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "Web・品質",
+      "requiredReceipt": "現Browser・DOMを承認済みDIFと比較。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-007",
+      "designLiteral": "Web層より後段の内部処理方式は、利用者から見た挙動を極端に変えない範囲で変更できる。安定性を優先する。",
+      "priorScope": "差分判定工具の同候補ローカル89件。実Current/NK比較や処理結果の確認では未成立。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "品質",
+      "requiredReceipt": "現実経路のCurrent/NK比較と未承認差分0。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-008",
+      "designLiteral": "本番環境はオンプレミス、単一拠点、インターネット接続ありとする。",
+      "priorScope": "既存の対象ホスト引渡し資料のみ。配備の正規所有・同稼働は別。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "運用・環境",
+      "requiredReceipt": "対象Linuxの所有・権限と配備機器の同一性。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-009",
+      "designLiteral": "コンテナおよびKubernetesは初期前提としない。必要性が確認された場合に再評価する。",
+      "priorScope": "六module構成・正規JAR四、資源二。対象Linuxの直接OS作業条件・稼働は別。",
+      "latestProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45744-f02-current-four-packages-and-whole-protocol-content/manifest.json",
+          "sha256": "124c88d1c2b4b4841943569fec5ba1b2310b27b8f7a262d6c26488db21772868"
+        }
+      ],
+      "latestApplication": "正規四包装の版を更新。実OSや運用構成の確認は別。",
+      "responsibleArea": "運用・ビルド",
+      "requiredReceipt": "実対象のサービス構成と直接OS稼働。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-010",
+      "designLiteral": "大容量マスタ素材を含む業務データはローカルストレージに保持し、外部ストレージサービスを利用しない。",
+      "priorScope": "現local設定3とUnit3の公開バイトを過去の独立資料と照合。実配置・FileStore未実施。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "Storage・運用",
+      "requiredReceipt": "SSC-461の実JDBC・受渡しの所有、実FileStore配置。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-012",
+      "designLiteral": "初期公開方式はdomainを使用せず、到達確認済みのglobal IP addressと現行外部port `55160/tcp`を使用する。本番サーバ側のport開放は完了済みとする。",
+      "priorScope": "公開Caddyテンプレートの宣言は既元証拠の同一バイト。現稼働は別。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "運用・環境",
+      "requiredReceipt": "承認入口とポートを同所有の有効サービスで実証。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-013",
+      "designLiteral": "初期TLS方式は現行相当のCaddy内部証明書を許容し、client側の証明書警告を許容する。通信暗号化は維持する。",
+      "priorScope": "TLSの宣言を含む公開テンプレートの同一バイト。実証明書とTLS通信の検証は未実施。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "運用・環境",
+      "requiredReceipt": "同所有Caddyの独立TLS終端と証明書証拠。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    },
+    {
+      "id": "SYS-014",
+      "designLiteral": "Domainまたは公的に信頼されるIP address証明書を将来採用する場合に、業務アプリを改修せず入口設定と証明書を交換できる構成とする。",
+      "priorScope": "入口宣言の既ソースが同一。実際の証明書交換、再配備、正規同候補運用の確認は保留。",
+      "latestProofs": [],
+      "latestApplication": null,
+      "responsibleArea": "運用・環境",
+      "requiredReceipt": "入口と証明書を入替可能とする正規契約の同対象証拠。",
+      "formalAcceptanceId": null,
+      "status": "未成立"
+    }
+  ],
+  "g13Requirement": {
+    "id": "SYS-011",
+    "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+    "line": 22,
+    "requirement": "要件定義、基本設計、詳細設計、実装、単体試験、結合試験、総合試験、リリースの順に工程を進める。",
+    "owner": "WBS-G13",
+    "scope": "PGPT",
+    "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+    "acceptance": "UNASSESSED"
+  }
+}
