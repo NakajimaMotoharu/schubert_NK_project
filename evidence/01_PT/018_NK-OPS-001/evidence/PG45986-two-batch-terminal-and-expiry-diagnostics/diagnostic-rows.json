@@ -1,0 +1,128 @@
+{
+  "localOriginalIds": [
+    "PT-P01810-CATALOG-006",
+    "PT-P01810-CATALOG-007",
+    "PT-P01810-CATALOG-008",
+    "PT-P01810-CATALOG-010",
+    "PT-P01810-CATALOG-011",
+    "PT-P01810-CATALOG-012",
+    "PT-P01810-CATALOG-013",
+    "PT-P01810-CATALOG-016",
+    "PT-P01810-CATALOG-017",
+    "PT-P01810-CATALOG-019",
+    "PT-P01810-CATALOG-020",
+    "PT-P01810-CATALOG-021",
+    "PT-P01810-CATALOG-022",
+    "PT-P01810-CATALOG-023",
+    "PT-P01810-CATALOG-033",
+    "PT-P01810-CATALOG-034",
+    "PT-P01810-CATALOG-035",
+    "PT-P01810-CATALOG-037",
+    "PT-P01810-CATALOG-038",
+    "PT-P01810-CATALOG-039",
+    "PT-P01810-CATALOG-040",
+    "PT-P01810-CATALOG-046",
+    "PT-P01810-CATALOG-070",
+    "PT-P01810-CATALOG-080",
+    "PT-P01810-CATALOG-082",
+    "PT-P01810-CATALOG-083",
+    "PT-P01810-CATALOG-084",
+    "PT-P01810-CATALOG-085",
+    "PT-P01810-CATALOG-086",
+    "PT-P01810-CATALOG-087",
+    "PT-P01810-CATALOG-088",
+    "PT-P01810-CATALOG-089",
+    "PT-P01810-CATALOG-090",
+    "PT-P01810-CATALOG-091",
+    "PT-P01810-CATALOG-093"
+  ],
+  "original": 93,
+  "held": 26,
+  "unjoined": 32,
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45982-two-diagnostic-structured-logger-criteria/manifest.json",
+    "sha256": "1fdbb9364aff1c8cb64c69fe8189548da7dd4c878afe68ffe109f378e681cfed"
+  },
+  "rows": [
+    {
+      "id": "PT-P01810-CATALOG-085",
+      "fixed": [
+        "CleanupTerminalSnapshot[data=<redacted>]",
+        "CleanupRejectedSnapshot[data=<redacted>]"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45984-cleanup-terminal-one-new-five-regression-values/manifest.json",
+        "sha256": "c3f3f91adc281d5793880d7585545558b157809f3f8496662eedc611d954e1f8"
+      },
+      "testIds": [
+        "PT-BAT-REJVAL001",
+        "PT-BAT-REJVAL006"
+      ],
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45984-cleanup-terminal-one-new-five-regression-values/junit-sanitized.xml",
+        "sha256": "c5738328046e16d486ea958f2dbc7e86e11f38243ea56a77e6e9e4d0c6b358b6"
+      },
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/6066_Batch終了診断純値単体仕様.md",
+        "sha256": "7a4fefd0c910985b1c677d7527a2a8b72d0d04a7c122e23c0f8fdc088a36ab01"
+      }
+    },
+    {
+      "id": "PT-P01810-CATALOG-086",
+      "fixed": [
+        "ExpiryAuditStage[observation=<redacted>]",
+        "ExpiryAuditSnapshot[observation=<redacted>]"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45258-current-expiry-31-verified-test-input/manifest.json",
+        "sha256": "05ff960dc082091bfe371e0970d80643369de24e8c867ed88bbe2f8405e8f714"
+      },
+      "testIds": [
+        "EXPPORT-P001"
+      ],
+      "method": "stageAndPriorEstablishRequiredInvariantsAndAllRenderingsStayRedacted",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45258-current-expiry-thirty-one-v3/reports/TEST-junit-jupiter.xml",
+        "sha256": "25bffb31b10476ea7d62cb3ab03749ce0ac1f8cd84dec02d138f82d5946da1bb"
+      },
+      "spec": {
+        "path": "evidence/01_PT/017_NK-BAT-001/697_Expiry監査SQL・状態契約単体仕様.md",
+        "sha256": "aa479aede238f3ef09822276f513cbb8b9dcd753f307cb7f933c0c4d8a3609da"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java",
+        "sha256": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb"
+      },
+      "sameCanonicalBatchPhysical": {
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.class",
+          "sha256": "1e9bd6959698e28f0213098be7c8909bd5573786e6eedb88fa85b85c153c3a8e"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.class",
+          "sha256": "9fedde7f8fd2ceda99d2604384b72209ae3005228b7bc423f9488a19fdc69c51"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.class",
+          "sha256": "c298098ef1fb8aa9aeb21680df29bc093ee0bebb4156678779fcf51796f7fd9e"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior.class",
+          "sha256": "48f91fc8d3240de710b61c1fc2988d97bf09c33f26f7e67401f0c29f427e67c4"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class",
+          "sha256": "2394756c3a558df38394db0e03b2bb27c031812e13ed361c7b126d63a611aa97"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.class",
+          "sha256": "977ec26b8b12d01f5a252ddf54892712b222b9d8a1469b9e9ce0223b3851b28f"
+        },
+        "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42958-expiry-audit-current-regular-maven-v1/production/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class",
+          "sha256": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93"
+        }
+      }
+    }
+  ]
+}
