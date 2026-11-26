@@ -1,0 +1,77 @@
+{
+  "run": "PG46014",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "93c33b69b7d6b4da77435616b87c86d0ef76dd81",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "branch": "dev-foundation",
+  "terminalAtUTC": "2026-11-26T04:17:15.256614+00:00",
+  "testResults": {
+    "passCount": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unitActualExit": 0
+  },
+  "fixture": "三media種の固定合成値64件の同一性、別registryの100/101/102、両ownerの有限終了",
+  "testIds": {
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn007ConcurrentResultsAreExactlyFixtureInputsAndOwnersAreSeparate": "MEDIACONN007"
+  },
+  "trace": [
+    "SS333",
+    "SS351",
+    "SS354",
+    "NK-OPS-001",
+    "BUG-3970",
+    "BUG-3971",
+    "YKT-3027",
+    "YKT-2997"
+  ],
+  "environment": {
+    "jdk": "25.0.4",
+    "scope": "Linux local fixture and in-memory registry",
+    "platformOperations": false
+  },
+  "coverage": {
+    "physicalClasses": 2,
+    "unfiltered": true,
+    "countersByClass": {
+      "dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector": [
+        "BRANCH:2:2",
+        "LINE:6:12",
+        "METHOD:1:2",
+        "CLASS:0:1"
+      ],
+      "dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder": [
+        "BRANCH:8:6",
+        "LINE:5:20",
+        "METHOD:2:6",
+        "CLASS:0:1"
+      ]
+    }
+  },
+  "static": {
+    "scopedCheckstyleExit": 0,
+    "pmdExit": 4,
+    "pmdOpen": 14,
+    "canonicalSpotlessSelection": 1
+  },
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46014-web-media-collector-ordinary/independent-post.json",
+    "sha256": "fd15853779ff6a15011e9e9df97705d8c2a9411757392b6b2d1f443ccd0f373b"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46014-web-media-collector-ordinary/junit-sanitized.xml",
+      "sha256": "dc458c854240b9fc2ca565db0c916d53e77c0d1a14e67f62695526c2be5e759f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46014-web-media-collector-ordinary/coverage-unfiltered.tsv",
+      "sha256": "1b108da5fb56317491c4d76739bfe0920c66daa69caf567259efec4d47366870"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "originalHostWrapperExit": 1,
+  "junitRelaunchCount": 0,
+  "cumulativeProductTrialsGross": 3497
+}
