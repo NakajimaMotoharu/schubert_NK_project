@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.prometheusmetrics.PrometheusConfig;
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
@@ -374,36 +375,33 @@ class BatchStandardMetricSourceTest {
     var release = new CountDownLatch(1);
     source.entered = Optional.of(entered);
     source.release = Optional.of(release);
-    var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {});
-    try {
-
+    try (var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {})) {
       owner.bind(DEBUG_MODE);
-      var executor = Executors.newFixedThreadPool(2);
-      try {
-        var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
-        assertTrue(entered.await(10, TimeUnit.SECONDS));
-        var attemptedClose = new CountDownLatch(1);
-        var close =
-            executor.submit(
-                () -> {
-                  attemptedClose.countDown();
-                  owner.close();
-                });
-        assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
-        assertFalse(source.isClosed());
-        release.countDown();
-        assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
-        close.get(10, TimeUnit.SECONDS);
-        assertTrue(source.isClosed());
-        assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-      } finally {
-        release.countDown();
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-        owner.close();
+      try (var workers =
+          new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(2), 10, "scrape and close")) {
+        try {
+          var scrape = workers.executor().submit(() -> owner.scrape(DEBUG_MODE));
+          assertTrue(entered.await(10, TimeUnit.SECONDS));
+          var attemptedClose = new CountDownLatch(1);
+          var close =
+              workers
+                  .executor()
+                  .submit(
+                      () -> {
+                        attemptedClose.countDown();
+                        owner.close();
+                      });
+          assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
+          assertFalse(source.isClosed());
+          release.countDown();
+          assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
+          close.get(10, TimeUnit.SECONDS);
+          assertTrue(source.isClosed());
+          assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+        } finally {
+          release.countDown();
+        }
       }
-    } finally {
-      owner.close();
     }
   }
 
