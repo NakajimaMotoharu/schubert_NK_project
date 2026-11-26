@@ -1,0 +1,161 @@
+{
+  "run": "PG46018",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "404477d1e90b0facb171451a82cbbfb53aa49284",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T04:25:30.351696+00:00",
+  "sourceTestCaseAuthority": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/6100_Web媒体収集と記録の同一計測.md",
+      "sha256": "589485778afe0aecc74221e9b8d6206d6992fba5ffaebbe6274c179cacc9f960"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1704_WebMediaStream取得結線_単体テスト仕様書.md",
+      "sha256": "c430a698a048e1f9583bcb2a22056d56669548edc23c8d65ed8f7a0654b41a19"
+    }
+  ],
+  "testIds": {
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn001NoReadDuringAssemblyThenOneSelectedObservationPerCall": "MEDIACONN001",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn002UnknownOnlyClearsSelectedTypeAndZeroIsNotMissing": "MEDIACONN002",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn003StandardNeverCallsSourceAndEveryBoundaryIsStrict": "MEDIACONN003",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn004ProviderFailureKeepsExactIdentityAndOnlySelectedTypeBecomesUnknown": "MEDIACONN004",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn005NullOrNegativeObservationIsNotSuccessfulZeroAndMaximumIsRetained": "MEDIACONN005",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn008AssemblyFailureDoesNotReadRetryCloseOrReplaceForeignMeter": "MEDIACONN008",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollectorTest#mediaConn009SuppliedNullPointerLeavesOtherTypesAndDoesNotRetainLock": "MEDIACONN009",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricRecorderTest#mediaStream004StandardHasNoDetailedSeriesOrRetainedCountsAndModeIsStrict": "MEDIASTREAM004"
+  },
+  "selectedCount": 8,
+  "passed": 8,
+  "failed": 0,
+  "notRunWithinSelection": 0,
+  "held": [
+    "MEDIACONN006"
+  ],
+  "excludedAlreadyRun": {
+    "MEDIACONN007": "PG46014",
+    "MEDIASTREAM007": "PG45976"
+  },
+  "sdkOnly": true,
+  "realRuntime": false,
+  "countersByClass": {
+    "dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector": [
+      "BRANCH:0:4",
+      "LINE:0:18",
+      "METHOD:0:3",
+      "CLASS:0:1"
+    ],
+    "dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder": [
+      "BRANCH:0:14",
+      "LINE:0:25",
+      "METHOD:0:8",
+      "CLASS:0:1"
+    ]
+  },
+  "pmdRawFindings": [
+    {
+      "file": "MediaStreamsMetricCollector.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 37
+    },
+    {
+      "file": "MediaStreamsMetricCollector.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 37
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "AvoidDuplicateLiterals",
+      "line": 99
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 280
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 293
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "CloseResource",
+      "line": 302
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 302
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 315
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 324
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 327
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 329
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 358
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 359
+    },
+    {
+      "file": "MediaStreamsMetricCollectorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 368
+    },
+    {
+      "file": "MediaStreamsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 238
+    }
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46018-web-media-collector-recorder-eight/begin.json",
+    "sha256": "683e5d88c6d12aad0be8915334278a2f130adef226c5f2a1ed300a233f6cebcb"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46018-web-media-collector-recorder-eight/terminal.json",
+    "sha256": "b8d344c103041ace35835d0b2e2d063898752b41bea16c913db1a9ac2eb3d63b"
+  },
+  "stageExit": {
+    "main": 0,
+    "test": 0,
+    "style": 0,
+    "deps": 0,
+    "unit": 0,
+    "pmd": 4,
+    "raw": 0
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46018-web-media-collector-recorder-eight/junit-sanitized.xml",
+      "sha256": "839e97ceb3b5ee180f816fddf9c2616e47cccec251058934e4c273e62a57d6c8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG46018-web-media-collector-recorder-eight/coverage-unfiltered.tsv",
+      "sha256": "d1660f79951d2db5392afee77b1a7b9b669bbf8532453a8e24d5f55a22654d6b"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3505,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
