@@ -613,43 +613,61 @@ class ApiCustomMetricPayloadTest {
     var entered = new java.util.concurrent.CountDownLatch(1);
     var release = new java.util.concurrent.CountDownLatch(1);
     var probe = new FullProbe();
+    var mayRelease = new java.util.concurrent.atomic.AtomicBoolean(true);
     var standard = fullOwner(probe);
-    var bundle = new Bundle();
-    var executor = Executors.newSingleThreadExecutor();
-    try {
-      var future =
-          executor.submit(
-              () ->
-                  payload.render(
-                      true,
-                      DEBUG_MODE,
-                      () -> {
-                        entered.countDown();
-                        awaitFull(release);
-                        return bundle.source;
-                      },
-                      standard));
-      assertTrue(entered.await(30, TimeUnit.SECONDS));
-      standard.close();
-      release.countDown();
-      var failure =
-          assertThrows(
-              java.util.concurrent.ExecutionException.class,
-              () -> future.get(30, TimeUnit.SECONDS));
-      assertInstanceOf(IllegalStateException.class, failure.getCause());
-      assertEquals(0, probe.scrapes.get());
-      assertFalse(bundle.source.isClosed());
-      Reference.reachabilityFence(bundle);
-    } finally {
-      release.countDown();
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-      try {
-        bundle.close();
-      } finally {
-        standard.close();
+    AutoCloseable releaseStandard = closeWhenQuiescent(standard, mayRelease);
+    try (releaseStandard) {
+      var bundle = new Bundle();
+      AutoCloseable releaseBundle = closeWhenQuiescent(bundle, mayRelease);
+      try (releaseBundle) {
+        var executor = Executors.newSingleThreadExecutor();
+        AutoCloseable finishWorkers =
+            () -> {
+              release.countDown();
+              executor.shutdownNow();
+              try {
+                assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+                mayRelease.set(true);
+              } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw interrupted;
+              }
+            };
+        try (finishWorkers) {
+          mayRelease.set(false);
+          var future =
+              executor.submit(
+                  () ->
+                      payload.render(
+                          true,
+                          DEBUG_MODE,
+                          () -> {
+                            entered.countDown();
+                            awaitFull(release);
+                            return bundle.source;
+                          },
+                          standard));
+          assertTrue(entered.await(30, TimeUnit.SECONDS));
+          standard.close();
+          release.countDown();
+          var failure =
+              assertThrows(
+                  java.util.concurrent.ExecutionException.class,
+                  () -> future.get(30, TimeUnit.SECONDS));
+          assertInstanceOf(IllegalStateException.class, failure.getCause());
+          assertEquals(0, probe.scrapes.get());
+          assertFalse(bundle.source.isClosed());
+          Reference.reachabilityFence(bundle);
+        }
       }
     }
+  }
+
+  private static AutoCloseable closeWhenQuiescent(
+      AutoCloseable owner, java.util.concurrent.atomic.AtomicBoolean mayRelease) {
+    return () -> {
+      if (mayRelease.get()) owner.close();
+    };
   }
 
   private static void awaitFull(java.util.concurrent.CountDownLatch release) {
