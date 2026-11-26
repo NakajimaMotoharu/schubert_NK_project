@@ -1,0 +1,240 @@
+{
+  "run": "PG45970",
+  "source": "82dbab1b75a46b65056f994d8b34e20338f8f5d5",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.02/2",
+  "terminalAtUTC": "2026-11-26T03:31:08.668641+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3964",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "5f5ce6bcde8375a09be0c6f41464ba344ea56b02",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/6052_Current純代理五並行単体仕様.md",
+    "sha256": "3a167b4d09b86dcf2bf0d393b709302eeda0ade4e7397d9fd47b7ea6efa7bf4c"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest#audioLinkRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources": "PT-MIG-AUDIOLINKREAD020",
+    "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest#audioRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources": "PT-MIG-AUDIOREAD020",
+    "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest#entryRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources": "PT-MIG-ENTRYREAD020",
+    "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest#fileRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources": "PT-MIG-FILEREAD020",
+    "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest#speakerRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources": "PT-MIG-SPEAKERREAD020"
+  },
+  "productTests": 5,
+  "preflightScopeCorrectedBeforeJunit": false,
+  "ownJdkMemoryProxyOnly": true,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42654-five-projection-fixture-15-current-v1/manifest.json",
+    "sha256": "01c552b2c19a57ebd10cd0f7837dafb2bf6c74ad53667386f6d8f382cfba9440"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45970-current-five-proxies-canonical/terminal.json",
+    "sha256": "b9567b30dfb25499a0af1f4ca06d99667b8e5b03b907eb7668333e3a1f1762e0"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45970-current-five-proxies-ordinary-scoped-main/pmd.xml",
+    "sha256": "218b002ebc6ac371fd4fd5af3aa30272df4a4e9e4382dc9bd972ecf51f818511"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 143
+    },
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 166
+    },
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 368
+    },
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 435
+    },
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 458
+    },
+    {
+      "fixture": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 490
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 182
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 205
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 213
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 232
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 463
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 544
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 567
+    },
+    {
+      "fixture": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 599
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 155
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 183
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 202
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 437
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 503
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 526
+    },
+    {
+      "fixture": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 558
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 154
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 178
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 198
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 410
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 476
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 499
+    },
+    {
+      "fixture": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 531
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 152
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 176
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 388
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 461
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 484
+    },
+    {
+      "fixture": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 516
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45970-five-synthetic-projection-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "b6167d8831b7004309fe01c5057a9a568b12f6383fc055906dada1f938f8b5ce"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45970-five-synthetic-projection-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "679fe9fc36bab9a58814ee81e2be40585fbbc901c60d20c5462050d4dd011ac3"
+    }
+  ],
+  "measuredClassCount": 5,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45970-current-five-proxies-ordinary-scoped-main/begin.json",
+    "sha256": "3127472ec72f59f89d2c37173e7bec4468efc13fbfbd76c755ae76f9d6315f97"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45970-current-five-proxies-ordinary-scoped-main/terminal.json",
+    "sha256": "061f7c47c8f21367955cf4cfcf0a621c9e0a5a1fda018372a7594eb50dacdc8d"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3450,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
