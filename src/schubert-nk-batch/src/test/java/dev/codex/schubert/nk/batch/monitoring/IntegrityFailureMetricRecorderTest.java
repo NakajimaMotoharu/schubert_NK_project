@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorder.Area;
 import dev.codex.schubert.nk.batch.repository.BatchStep;
 import io.micrometer.core.instrument.Counter;
@@ -313,8 +314,9 @@ class IntegrityFailureMetricRecorderTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry();
         var otherRegistry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(8), 10, "integrity metric recorder")) {
         var recorder = new IntegrityFailureMetricRecorder(registry, DEBUG_MODE);
         Map<String, Integer> expected = new HashMap<>();
         var tasks = new ArrayList<Callable<Void>>();
@@ -329,7 +331,7 @@ class IntegrityFailureMetricRecorderTest {
                 return null;
               });
         }
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        for (var result : ownedWorkers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           result.get(5, TimeUnit.SECONDS);
         for (String area : List.of(HASH_AREA_NAME, PATH_AREA_NAME, CONFIG_AREA_NAME))
           for (String step : STEPS)
@@ -345,9 +347,6 @@ class IntegrityFailureMetricRecorderTest {
             count(registry, HASH_AREA_NAME, BACKUP_DB_STEP_NAME));
         shape(registry);
         shape(otherRegistry);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

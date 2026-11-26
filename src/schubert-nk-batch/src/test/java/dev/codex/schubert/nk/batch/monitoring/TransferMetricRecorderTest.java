@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder.Counts;
 import dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder.Suffix;
 import dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder.Usage;
@@ -200,8 +201,9 @@ class TransferMetricRecorderTest {
   void transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues()
       throws Exception {
     try (var registry = new OwnedRegistry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(8), 10, "transfer metric recorder")) {
         var recorder = new TransferMetricRecorder(registry, DEBUG_MONITORING_MODE);
         var first = usage(1, 10, 2, 20);
         var second = usage(3, 30, 4, 40);
@@ -216,7 +218,8 @@ class TransferMetricRecorderTest {
                           return snapshot == first || snapshot == second;
                         })
                 .toList();
-        for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());
+        for (var result : ownedWorkers.executor().invokeAll(jobs, 10, TimeUnit.SECONDS))
+          assertTrue(result.get());
         assertEquals(3, first.totalFiles());
         assertEquals(30, first.totalBytes());
         recorder.record(second);
@@ -224,9 +227,6 @@ class TransferMetricRecorderTest {
         assertEquals(3.0, value(registry, FILES, PART_SUFFIX_LABEL));
         assertEquals(40.0, value(registry, BYTES, READY_SUFFIX_LABEL));
         shape(registry);
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }

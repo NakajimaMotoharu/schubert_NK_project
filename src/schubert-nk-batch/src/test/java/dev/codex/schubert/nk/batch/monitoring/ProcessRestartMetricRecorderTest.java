@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorder.Reason;
 import io.micrometer.core.instrument.Counter;
@@ -293,8 +294,9 @@ class ProcessRestartMetricRecorderTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry();
         var otherRegistry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
+      try (var ownedWorkers =
+          new BoundedBatchFixtureWorkers(
+              Executors.newFixedThreadPool(8), 10, "restart metric recorder")) {
         var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
         Map<String, Integer> expected = new HashMap<>();
         var tasks = new ArrayList<Callable<Void>>();
@@ -309,7 +311,7 @@ class ProcessRestartMetricRecorderTest {
                 return null;
               });
         }
-        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+        for (var result : ownedWorkers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
           result.get(5, TimeUnit.SECONDS);
         for (String reason :
             List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
@@ -326,9 +328,6 @@ class ProcessRestartMetricRecorderTest {
             count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
         shape(registry);
         shape(otherRegistry);
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
     }
   }
