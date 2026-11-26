@@ -1,0 +1,105 @@
+{
+  "run": "PG45900",
+  "source": "20e75293a70c60fe13708217c2e25dfd0b4ba0fc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:22:28.749037+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3945",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "1b2b1b8e9b34f662c50f6fac4bcc30b4f45c20b6",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5982_Batch警報七並行単体仕様.md",
+    "sha256": "080243da4843d45bfee1e1856135c0edd7912e68d59e860ac9f1ab03e4527d94"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest#backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent": "BACKUPMON006",
+    "dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest#integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner": "INTEGRITYMON007",
+    "dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest#restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents": "RESTARTMON006",
+    "dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest#webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts": "WEBLOG007",
+    "dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest#expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts": "EXPIRYMON007",
+    "dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest#dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts": "DLQMON006",
+    "dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest#asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts": "ASYNCQUEUE007"
+  },
+  "productTests": 7,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "invocationWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45900-alert-value-seven-canonical/terminal.json",
+    "sha256": "64f0514034aed767d10b6d3a8a6b2f072939cb29f9ff0a07a76b79dc75b492c6"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45900-alert-value-seven-ordinary/pmd.xml",
+    "sha256": "4cfbc9a74236542d50191f8fdc8d3ca3c1a4445edc51cacdcbe406b0b54a27bd"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "AsyncQueueMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 311
+    },
+    {
+      "fixture": "BackupHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 212
+    },
+    {
+      "fixture": "DlqHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 179
+    },
+    {
+      "fixture": "ExpiryBacklogMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 161
+    },
+    {
+      "fixture": "IntegrityHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 155
+    },
+    {
+      "fixture": "RestartHealthMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 214
+    },
+    {
+      "fixture": "WebLogBacklogMonitorTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 237
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45900-seven-supplied-alert-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "68ea0f141fabe764dadec31ec78765b127af80982b68074f01c99dec7b8fd5bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45900-seven-supplied-alert-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "c8ce00b1d89aad2dec1e9aa534e429d385387e5393119641af8084d59c4a8b0b"
+    }
+  ],
+  "measuredClassCount": 17,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45900-alert-value-seven-ordinary/begin.json",
+    "sha256": "8587328d8859648884bbabaca06a92326a6c4b641f24d08dd7394d095cd08df1"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45900-alert-value-seven-ordinary/terminal.json",
+    "sha256": "ebc10adcf102d9da2a22718fa3fd9eaa6240bfd766622dc102b742fcadfbae6f"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3378,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
