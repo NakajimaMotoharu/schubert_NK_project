@@ -18,8 +18,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-/** PT-BAT-REJVAL001..008. Closed values only; the repository does not execute. */
+/** PT-BAT-REJVAL001..011. Closed values only; the repository does not execute. */
 final class CleanupRejectedValueTest {
   private static final Instant CUTOFF = Instant.parse("2026-11-01T00:00:00Z");
   private static final Instant START = Instant.parse("2026-11-01T00:00:01Z");
@@ -250,6 +251,87 @@ final class CleanupRejectedValueTest {
     var retained = new HashSet<>(List.of(baseline));
     assertTrue(retained.contains(equivalent));
     assertFalse(retained.contains(changed));
+  }
+
+  @Test
+  void terminalEntryAdmitsProgressEvidenceOnlyForSuccessfulLogAndInboxOutbox() {
+    String observedDigest = "0123456789abcdef".repeat(4);
+    var present = Optional.of(observedDigest);
+    for (BatchStep step : List.of(BatchStep.CLEAN_LOG, BatchStep.CLEAN_INBOX_OUTBOX)) {
+      var handle = attempt(301, RUN, step, false);
+      var completed = new Entry(handle, END, SUCCESS, present);
+      assertEquals(handle, completed.attempt());
+      assertEquals(END, completed.endedAt());
+      assertEquals(SUCCESS, completed.result());
+      assertEquals(present, completed.progressSeal());
+      assertTrue(new Entry(handle, END, SUCCESS).progressSeal().isEmpty());
+    }
+
+    var log = attempt(301, RUN, BatchStep.CLEAN_LOG, false);
+    for (String malformed : List.of("", "a".repeat(63), "A".repeat(64), "g".repeat(64))) {
+      var invalid =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> new Entry(log, END, SUCCESS, Optional.of(malformed)));
+      assertEquals("Cleanup progress seal invalid", invalid.getMessage());
+    }
+    var transfer = attempt(301, RUN, BatchStep.CLEAN_TRANSFER, false);
+    var skippedLog = attempt(301, RUN, BatchStep.CLEAN_LOG, true);
+    var warning =
+        new BatchStepResult(
+            BatchStepResult.Status.WARNING, 1, 0, 1, 0, BatchStepResult.Reason.PROTECTED_RECORDS);
+    for (var candidate :
+        List.<Executable>of(
+            () -> new Entry(transfer, END, SUCCESS, present),
+            () -> new Entry(skippedLog, END, SKIPPED, present),
+            () -> new Entry(log, END, warning, present))) {
+      assertEquals(
+          "Cleanup progress seal invalid",
+          assertThrows(IllegalArgumentException.class, candidate).getMessage());
+    }
+  }
+
+  @Test
+  void terminalEntryRejectsInvalidPhaseTimestampAndMissingFields() {
+    var handle = attempt(301, RUN, BatchStep.CLEAN_LOG, false);
+    var outOfScope = attempt(301, RUN, BatchStep.BACKUP_DB, false);
+    var failed =
+        new BatchStepResult(
+            BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.DATABASE_FAILURE);
+    var greatest = Instant.parse("9999-12-31T23:59:59.999999Z");
+    assertEquals(START, new Entry(handle, START, SUCCESS).endedAt());
+    assertEquals(greatest, new Entry(handle, greatest, SUCCESS).endedAt());
+    for (var candidate :
+        List.<Executable>of(
+            () -> new Entry(outOfScope, END, SUCCESS),
+            () -> new Entry(handle, START.minusNanos(1_000), SUCCESS),
+            () -> new Entry(handle, greatest.plusNanos(1_000), SUCCESS),
+            () -> new Entry(handle, END.plusNanos(1), SUCCESS),
+            () -> new Entry(handle, END, failed))) {
+      assertEquals(
+          "Cleanup terminal invalid",
+          assertThrows(IllegalArgumentException.class, candidate).getMessage());
+    }
+    assertThrows(NullPointerException.class, () -> new Entry(null, END, SUCCESS));
+    assertThrows(NullPointerException.class, () -> new Entry(handle, null, SUCCESS));
+    assertThrows(NullPointerException.class, () -> new Entry(handle, END, null));
+    assertThrows(NullPointerException.class, () -> new Entry(handle, END, SUCCESS, null));
+  }
+
+  @Test
+  void terminalEntryKeyRetainsTheObservationAndNestedValuesStayRedacted() {
+    var handle = attempt(301, RUN, BatchStep.CLEAN_LOG, false);
+    var first = new Entry(handle, END, SUCCESS);
+    var equal = new Entry(attempt(301, RUN, BatchStep.CLEAN_LOG, false), END, SUCCESS);
+    assertEquals(first, equal);
+    var retained = new HashSet<>(List.of(first));
+    assertTrue(retained.contains(equal));
+    assertFalse(retained.contains(new Entry(handle, END.plusSeconds(1), SUCCESS)));
+    assertNotEquals(first, new Entry(handle, END, SUCCESS, Optional.of("b".repeat(64))));
+    String diagnostic = first.toString();
+    assertTrue(diagnostic.contains("BatchStepAttempt[identity/time=<redacted>]"));
+    assertTrue(diagnostic.contains("BatchStepResult[observation=<redacted>]"));
+    assertFalse(diagnostic.contains(RUN.id().toString()));
   }
 
   private static List<Entry> terminalRows() {
