@@ -1,0 +1,56 @@
+{
+  "run": "PG46102",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": [
+    "WBS-P019-03.02/2-照合"
+  ],
+  "source": "2521d750b38536df528f0b4d8f3074c43b3916b7",
+  "productionCore": "cf08e414be9f877b851a387704350d5e7c980209",
+  "terminalAtUTC": "2026-11-26T05:54:26.376299+00:00",
+  "directExpected": "Fail per-stream at each of five positions and retain borrowed ownership. Partial bytes remain, no later writes and no automatic replay.",
+  "genuineUnitTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46102-migration-two-synthetic-stream-failures/terminal.json",
+    "sha256": "e7877785f122d8b3cfaf52b15b3610287d9fe676b1846645fa5ac035deb616a5"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG46102-migration-two-synthetic-stream-failures/begin.json",
+    "sha256": "628896b2beb2332a2a2b48e7abbe88ac80cdf483b206c85b07e9ff23de42f153"
+  },
+  "previousScopeAndStatic": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45954-three-generated-copy-value-worker-diagnostics/manifest.json",
+    "sha256": "8ae83f7cd604140c608530fb0b84566c2cc6138cd08246854887be95a4d9cb51"
+  },
+  "priorGap": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46100-current-migration-memory-sink-evidence-scope/manifest.json",
+    "sha256": "158a37baf88acdd52bd5b5b7f73bfed26ca9581d6b26f75a9e6f8db0ec7a369b"
+  },
+  "normalJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "actualExit": 0,
+  "passed": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "physicalCount": 10,
+  "testIds": {
+    "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest#five014EachIoFailureStopsLaterStreamsAndPreservesInstance": "PT-MIG-FIVE014",
+    "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest#five016PartialBytesRemainAndNoAutomaticReplay": "PT-MIG-FIVE016"
+  },
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/junit-sanitized.xml",
+      "sha256": "a9c13a2ad07ae31dd447a560c463a0a13506088760e30267e9061800e15c576c"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG46102-migration-two-synthetic-stream-failures/coverage-unfiltered.tsv",
+      "sha256": "2f5d724946ed771d6530ae9ff53e013c138523ee288ba0ed4381f38edba4957e"
+    }
+  ],
+  "cumulativeProductTrialsGross": 3519,
+  "newProductTrials": 2,
+  "backendCopyOrActualDb": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
