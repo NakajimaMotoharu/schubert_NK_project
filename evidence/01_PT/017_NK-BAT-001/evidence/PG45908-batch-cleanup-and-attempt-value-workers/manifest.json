@@ -1,0 +1,75 @@
+{
+  "run": "PG45908",
+  "source": "529f69d2362b726a76e796f4affeb86af28235de",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P017-07.03/2",
+  "terminalAtUTC": "2026-11-26T02:29:58.395964+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3947",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "929a2a533efaee4a1b8b5b32d68b243971ea178b",
+  "specification": {
+    "path": "evidence/01_PT/017_NK-BAT-001/5990_Batch集計値二並行単体仕様.md",
+    "sha256": "80b1ac5e1208657001f3e3b63a2a0f8eaabba7bd718628e26cba586d76a546ff"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest#concurrentValues": "PT-BAT-161",
+    "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest#independentConcurrentValues": "PT-BAT-137"
+  },
+  "productTests": 2,
+  "workers": "64 virtual tasks",
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45908-counter-two-canonical/terminal.json",
+    "sha256": "1abea10e87c60a466ae7721671f0df2646df58f1a2b4767d4687ffd4ff752887"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45908-counter-two-ordinary/pmd.xml",
+    "sha256": "366b5f60f71a77a6b86e5bb92e4cba4bd730f2962691a4413892bbfe06ff47bc"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "BatchStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 265
+    },
+    {
+      "fixture": "CleanupStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 348
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45908-batch-cleanup-and-attempt-value-workers/junit-sanitized.xml",
+      "sha256": "d765c5d5cd95f7bda3d628586db9cdda044ae22d10523f0d7896f0f8b513d57d"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45908-batch-cleanup-and-attempt-value-workers/coverage-unfiltered.tsv",
+      "sha256": "af8cd7377d49c350033f6349493e3a033ed767b1bc522326d689c29b2d5ae2cd"
+    }
+  ],
+  "measuredClassCount": 6,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45908-counter-two-ordinary/begin.json",
+    "sha256": "a777db0620da4c90bb58525d7937b30d46a5b395312fe0de734d510583fdb010"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45908-counter-two-ordinary/terminal.json",
+    "sha256": "bef0be64072e68a77f8b700b2dfe70085f974dc2e46408b4b935e33bdfe41405"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3381,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
