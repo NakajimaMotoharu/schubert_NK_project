@@ -1,0 +1,97 @@
+{
+  "run": "PG45952",
+  "source": "a504c96a8ae385e69eebb44825ebe51f5196b152",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P019-03.02/2",
+  "terminalAtUTC": "2026-11-26T03:13:50.967591+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3956",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "cc7dedf545e103264b49999bfaefe830fc083329",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/6034_移行mapping四並行単体仕様追補.md",
+    "sha256": "987bf8425a32b305ac4b6c218cfac4f907642297901248844bd6fcc2c466225d"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.AudioMigrationMapTest#audioMap024FiniteConcurrentCallsHaveIndependentOutputs": "PT-MIG-AUDIOMAP024",
+    "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest#order012ConcurrentIndependentReturnOwnership": "PT-MIG-ORDER012",
+    "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest#file012ConcurrentReturnsRemainIndependentlyOwned": "PT-MIG-FILEORDER012",
+    "dev.codex.schubert.nk.migration.SpeakerMigrationMapTest#speakerMap024FiniteSharedMapReadersRetainIndependentRowsAndTerminate": "PT-MIG-SPEAKERMAP024"
+  },
+  "productTests": 4,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44948-current-mapping-original-readback-sixteen/manifest.json",
+    "sha256": "4fa71a65a5da65588aaad56f1c77817b12a4f81eeca7979f9cda0d08a6e623d0"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45952-four-declaration-fixtures-canonical/terminal.json",
+    "sha256": "a1cdfd41b9cc2f1e0e13b0148e30b723409cef5e0d04890aa3b85b50f671cd37"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45952-four-declaration-fixtures-ordinary/pmd.xml",
+    "sha256": "0f3818dbecdf6d71d794b5fb25fa1eea82ad6e8aea2e3dcd3e86f176cc9ca1e1"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "AudioMigrationMapTest.java",
+      "rule": "EqualsNull",
+      "line": 182
+    },
+    {
+      "fixture": "AudioMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 457
+    },
+    {
+      "fixture": "ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 170
+    },
+    {
+      "fixture": "ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 193
+    },
+    {
+      "fixture": "SpeakerMigrationMapTest.java",
+      "rule": "EqualsNull",
+      "line": 321
+    },
+    {
+      "fixture": "SpeakerMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 368
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45952-four-declarative-mapping-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "32e1e0a5b47d802c9349a9532e6e20910a1928429bd94e950bf809a1926c2a77"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45952-four-declarative-mapping-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "21b7f31c223a6917d5aaf48e20ccec6d5a421366833b135dff6f4b1d059d4f3d"
+    }
+  ],
+  "measuredClassCount": 10,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45952-four-declaration-fixtures-ordinary/begin.json",
+    "sha256": "bf4eb41114d82629758ed4f092a32e0214020c5fdb64df61083c3e9596661502"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45952-four-declaration-fixtures-ordinary/terminal.json",
+    "sha256": "706411d05a08a600a0c610f3552bf2cb44b669c1a4cff424316a04623d1490b2"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3432,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
