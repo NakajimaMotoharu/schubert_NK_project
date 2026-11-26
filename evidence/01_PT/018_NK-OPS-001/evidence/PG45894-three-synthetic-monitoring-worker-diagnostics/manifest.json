@@ -1,0 +1,86 @@
+{
+  "run": "PG45894",
+  "source": "66af44a55f1395d04972c3e2b05f07255a749a9a",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:11:54.595050+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3941",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "ff46abb200dd67532f45e0254b7468bc3e022edc",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5976_Batch合成観測三並行単体仕様.md",
+    "sha256": "376596f3e362558039e89eaa2d521a9be817a0f3d66422c894e0d9e593bc1d99"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest#fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership": "FSINPUT007",
+    "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest#fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner": "FSINPUT010",
+    "dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthObservationTest#heapInput008ManyBindingsDoNotReadOrMutateAndConcurrentReadsAreExact": "HEAPINPUT008"
+  },
+  "productTests": 3,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "invocationWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45894-observation-fixture-canonical/terminal.json",
+    "sha256": "a0ff4da3f3f2735f276ca5cbb8e3b0bb159e47319ff7d21681eec1b8e5343b13"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45894-observation-fixture-ordinary/pmd.xml",
+    "sha256": "f3a0c5fdefb27d0b8bcbfe79be5a6c3e8fc1292dc632d89ce42b63ba9ce5d0a5"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "FilesystemHealthObservationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 230
+    },
+    {
+      "fixture": "FilesystemHealthObservationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 334
+    },
+    {
+      "fixture": "JvmHeapHealthObservationTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 29
+    },
+    {
+      "fixture": "JvmHeapHealthObservationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 171
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45894-three-synthetic-monitoring-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "f734ca2ac3928f74bd897a61d866d4e72ecd28943b42809d9cb75a1a73b0791d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45894-three-synthetic-monitoring-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "283a1d1909dfc433e14817f66002da8d8dbfe33aba4c38bcda6fcf22de49a7a6"
+    }
+  ],
+  "measuredClassCount": 3,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45894-observation-fixture-ordinary/begin.json",
+    "sha256": "a9b361aff870dae1da6ce997643e1eb3f14b764d306506d26f373fa3f3269e6e"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45894-observation-fixture-ordinary/terminal.json",
+    "sha256": "d1b2bdb1d51624b030b236cf013fb00493adefcd289c70ba72ad6edec129ebaf"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3366,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
