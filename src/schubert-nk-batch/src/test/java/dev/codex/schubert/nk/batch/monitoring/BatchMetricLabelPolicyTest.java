@@ -3,8 +3,8 @@ package dev.codex.schubert.nk.batch.monitoring;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import io.micrometer.core.instrument.Tag;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -302,24 +302,23 @@ class BatchMetricLabelPolicyTest {
 
   @Test
   void batchlabel013FiniteConcurrentCallsHaveNoSharedMutableState() throws Exception {
-    var workers = Executors.newFixedThreadPool(4);
-    try {
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(4), 10, "metric label")) {
       var other = new BatchMetricLabelPolicy();
       var jobs = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++)
         jobs.add(
-            workers.submit(
-                () -> {
-                  FIXED.forEach(
-                      (name, expected) -> {
-                        check(name, expected);
-                        assertEquals(expected, other.labels(name, tags(expected)));
-                      });
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      FIXED.forEach(
+                          (name, expected) -> {
+                            check(name, expected);
+                            assertEquals(expected, other.labels(name, tags(expected)));
+                          });
+                    }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
-    } finally {
-      workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

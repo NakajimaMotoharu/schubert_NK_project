@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.fixture.BoundedBatchFixtureWorkers;
 import dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy.DetailService;
 import dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy.RetentionConfiguration;
 import java.util.ArrayList;
@@ -176,13 +177,10 @@ class MonitoringRetentionConfigurationTest {
             return "verified";
           });
     }
-    var executor = Executors.newFixedThreadPool(8);
-    try {
-      for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+    try (var workers =
+        new BoundedBatchFixtureWorkers(Executors.newFixedThreadPool(8), 10, "retention")) {
+      for (var result : workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals("verified", result.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "retention executor terminated");
     }
     assertEquals(15, debug.days());
     assertEquals(5_000_000_000L, debug.bytes());
