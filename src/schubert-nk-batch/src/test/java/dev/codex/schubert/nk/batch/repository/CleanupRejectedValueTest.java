@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.Entry;
 import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.RejectedEntry;
 import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.RejectedSnapshot;
+import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.Snapshot;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** PT-BAT-REJVAL001..005. Closed values only; the repository does not execute. */
+/** PT-BAT-REJVAL001..006. Closed values only; the repository does not execute. */
 final class CleanupRejectedValueTest {
   private static final Instant CUTOFF = Instant.parse("2026-11-01T00:00:00Z");
   private static final Instant START = Instant.parse("2026-11-01T00:00:01Z");
@@ -152,6 +154,52 @@ final class CleanupRejectedValueTest {
     assertTrue(diagnostic.contains("observation=<redacted>"));
     assertFalse(diagnostic.contains(RUN.id().toString()));
     assertFalse(diagnostic.contains("135"));
+  }
+
+  @Test
+  void terminalSnapshotDiagnosticsOmitBothRunsAndAllStoredObservations() {
+    List<BatchStep> stepOrder =
+        List.of(
+            BatchStep.CLEAN_NOTIFICATION,
+            BatchStep.CLEAN_QUESTION,
+            BatchStep.CLEAN_SESSION,
+            BatchStep.CLEAN_INBOX_OUTBOX,
+            BatchStep.CLEAN_LOG,
+            BatchStep.CLEAN_BATCH_RUN,
+            BatchStep.CLEAN_TRANSFER);
+    var successfulRows = new ArrayList<Entry>();
+    var warningRows = new ArrayList<Entry>();
+    var warning =
+        new BatchStepResult(
+            BatchStepResult.Status.WARNING,
+            27,
+            26,
+            1,
+            163,
+            BatchStepResult.Reason.PROTECTED_RECORDS);
+    for (int slot = 0; slot < stepOrder.size(); slot++) {
+      BatchStep step = stepOrder.get(slot);
+      successfulRows.add(new Entry(attempt(201 + slot, RUN, step, false), END, SUCCESS));
+      warningRows.add(
+          new Entry(
+              attempt(401 + slot, OTHER_RUN, step, false), END, slot == 4 ? warning : SUCCESS));
+    }
+
+    var successful = new Snapshot(successfulRows);
+    var protectedRecords = new Snapshot(warningRows);
+    successfulRows.clear();
+    warningRows.clear();
+
+    assertEquals(0, successful.exitCode());
+    assertEquals(10, protectedRecords.exitCode());
+    assertEquals(7, successful.entries().size());
+    assertEquals(7, protectedRecords.entries().size());
+    assertEquals(135, successful.entries().getFirst().result().bytes());
+    assertEquals(163, protectedRecords.entries().get(4).result().bytes());
+    assertThrows(UnsupportedOperationException.class, () -> protectedRecords.entries().clear());
+    String expectedDiagnostic = "CleanupTerminalSnapshot[data=<redacted>]";
+    assertEquals(expectedDiagnostic, successful.toString());
+    assertEquals(expectedDiagnostic, protectedRecords.toString());
   }
 
   private static BatchStepAttempt attempt(long id, BatchRun run, BatchStep step, boolean skipped) {
