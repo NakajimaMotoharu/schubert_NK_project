@@ -1,0 +1,181 @@
+{
+  "run": "PG45882",
+  "source": "a3b70d4ec9ef602f7dea6f42ced6cca28d36da7c",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T01:59:36.938276+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3939",
+  "originalFix": "BUG-3938",
+  "horizontal": "YKT-3026",
+  "ledgerBeforeFix": "a3b70d4ec9ef602f7dea6f42ced6cca28d36da7c",
+  "specification": {
+    "path": "evidence/01_PT/019_NK-MIG-001/5962_素材metadataの並行六件単体仕様.md",
+    "sha256": "81f318a2c364627dacfd741ef806f6970e7d845cd9d8c947f63c5de0e01e213c"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.migration.MusicLogicalIdTest#finiteWorkersUseFreshDigestsForTheSameStatelessIdentity": "PT-MIG-MUSICID012",
+    "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest#finiteWorkersProduceTheSameIndependent129RowGolden": "PT-MIG-MUSICCAT024",
+    "dev.codex.schubert.nk.migration.MusicMigrationPairingTest#finiteWorkersShareNoMutablePairOrShadowState": "PT-MIG-MUSICPAIR026",
+    "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest#finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput": "PT-MIG-VIDEO024",
+    "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest#finiteWorkersUseOneImmutableBatchWithIndependentSinks": "PT-MIG-MEDIABATCH020",
+    "dev.codex.schubert.nk.migration.CurrentMigrationMappingManifestTest#mapman007SharedImmutableManifestHasFiniteIndependentReaders": "PT-MIG-MAPMAN007"
+  },
+  "productTests": 6,
+  "caseThreads": 8,
+  "independentInputsPerMethod": 64,
+  "futureWaitSeconds": 5,
+  "terminationSeconds": 10,
+  "canonicalBootstrap": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "oldEvidenceNotReplayed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG44948-current-mapping-original-readback-sixteen/manifest.json",
+    "sha256": "4fa71a65a5da65588aaad56f1c77817b12a4f81eeca7979f9cda0d08a6e623d0"
+  },
+  "originalFailed": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45880-six-metadata-fixtures-missing-resource-attempt/manifest.json",
+    "sha256": "628b8689502db63704a6f58ea99f702cdb5fa468856ac6e70ef7956c33c7e28a"
+  },
+  "resources": [
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-extra-id-vectors.tsv",
+        "sha256": "f475606af5cec7e7ead2780d898e6fbcd959494969090834fa587d8e7a998821"
+      },
+      "isolated": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/test/fixtures/migration-music-extra-id-vectors.tsv",
+        "sha256": "f475606af5cec7e7ead2780d898e6fbcd959494969090834fa587d8e7a998821"
+      }
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-copy-129.wire",
+        "sha256": "6fdc83ef26afac1a4dac7348e0e6096dc5a75a906902d1658712967ba8586ab2"
+      },
+      "isolated": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/test/fixtures/migration-music-copy-129.wire",
+        "sha256": "6fdc83ef26afac1a4dac7348e0e6096dc5a75a906902d1658712967ba8586ab2"
+      }
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-copy-20.wire",
+        "sha256": "8e5f015e191c68488ef03cfe022143ef64e30b9c2ad831098c217f9bea79b7a0"
+      },
+      "isolated": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/test/fixtures/migration-video-copy-20.wire",
+        "sha256": "8e5f015e191c68488ef03cfe022143ef64e30b9c2ad831098c217f9bea79b7a0"
+      }
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-catalogue-20.tsv",
+        "sha256": "14866542997faf06cff53d4d1792455183eca9e4f7494bed788f027768cef53c"
+      },
+      "isolated": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/test/fixtures/migration-video-catalogue-20.tsv",
+        "sha256": "14866542997faf06cff53d4d1792455183eca9e4f7494bed788f027768cef53c"
+      }
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-catalogue-129.tsv",
+        "sha256": "b76b08743169996935379d3116280419b85055b5f44af08d004b11b353b71aaf"
+      },
+      "isolated": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/test/fixtures/migration-music-catalogue-129.tsv",
+        "sha256": "b76b08743169996935379d3116280419b85055b5f44af08d004b11b353b71aaf"
+      }
+    }
+  ],
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45880-six-metadata-fixtures-canonical/terminal.json",
+    "sha256": "13b06bba706ae5ffc3fe40511141d7a966cdabd8c601c6f1b439d9f9be1bcc9d"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/pmd.xml",
+    "sha256": "62eacbd1e1fb6d103e632c9aee67f4334a938861c92fc452ec82cec26b427497"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "CurrentMigrationMappingManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 210
+    },
+    {
+      "fixture": "MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 100
+    },
+    {
+      "fixture": "MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 285
+    },
+    {
+      "fixture": "MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": 312
+    },
+    {
+      "fixture": "MediaAssetCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 323
+    },
+    {
+      "fixture": "MusicLogicalIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 149
+    },
+    {
+      "fixture": "MusicMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 85
+    },
+    {
+      "fixture": "MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 410
+    },
+    {
+      "fixture": "MusicMigrationPairingTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 229
+    },
+    {
+      "fixture": "VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 386
+    },
+    {
+      "fixture": "VideoMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 442
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45882-six-metadata-current-with-exact-fixtures/junit-sanitized.xml",
+      "sha256": "c86ae7ac1cfeccdfd217f07dde399b2ecd7f62b518bf997e29f3f0695a9292ac"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45882-six-metadata-current-with-exact-fixtures/coverage-unfiltered.tsv",
+      "sha256": "6cd9bc435cbdd17eb4d66fe41176dbcb8727bac0b25da838b978adc459427b54"
+    }
+  ],
+  "measuredClassCount": 9,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/begin.json",
+    "sha256": "59ff6456ef3b33e2a565200d92bbf713168c7e0191bbbea5d12555473094299e"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45882-six-metadata-fixtures-normal-resource-recovery/terminal.json",
+    "sha256": "843d48b424f50961a31a718f6078bae5989465ff31b25346901ff07ece16638e"
+  },
+  "anyDatabaseActualCopyOrOriginalFiles": false,
+  "cumulativeProductTrialsGross": 3359,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
