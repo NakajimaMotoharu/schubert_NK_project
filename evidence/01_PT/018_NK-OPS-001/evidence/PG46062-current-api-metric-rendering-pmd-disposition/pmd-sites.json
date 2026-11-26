@@ -1,0 +1,132 @@
+[
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 241,
+    "method": "apipay011",
+    "anchor": "var source = new Borrowed();",
+    "technicalDisposition": "EXPLICIT_CLOSE_AS_INPUT",
+    "basis": "Immediate explicit close creates the test precondition; adding a second implicit close changes the independent close count of one.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 263,
+    "method": "apipay013",
+    "anchor": "try (var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(4))) {",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "Four JDK test-owned workers; finite result reads and shutdown through MetricFixtureWorkers tested at PG46054. No server use.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 584,
+    "method": "apifull011",
+    "anchor": "var executor = Executors.newFixedThreadPool(4);",
+    "technicalDisposition": "HOLD_ACTUAL_JVM_BIND",
+    "basis": "Calls default ApiStandardMetricSource bind, which reaches actual JVM metrics. No execution or new applicability concession.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 584,
+    "method": "apifull011",
+    "anchor": "var executor = Executors.newFixedThreadPool(4);",
+    "technicalDisposition": "HOLD_ACTUAL_JVM_BIND",
+    "basis": "Calls default ApiStandardMetricSource bind, which reaches actual JVM metrics. No execution or new applicability concession.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 593,
+    "method": "apifull011",
+    "anchor": "for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {",
+    "technicalDisposition": "HOLD_ACTUAL_JVM_BIND",
+    "basis": "Calls default ApiStandardMetricSource bind, which reaches actual JVM metrics. No execution or new applicability concession.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 601,
+    "method": "apifull011",
+    "anchor": "executor.shutdownNow();",
+    "technicalDisposition": "HOLD_ACTUAL_JVM_BIND",
+    "basis": "Calls default ApiStandardMetricSource bind, which reaches actual JVM metrics. No execution or new applicability concession.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 602,
+    "method": "apifull011",
+    "anchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+    "technicalDisposition": "HOLD_ACTUAL_JVM_BIND",
+    "basis": "Calls default ApiStandardMetricSource bind, which reaches actual JVM metrics. No execution or new applicability concession.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "CloseResource",
+    "line": 618,
+    "method": "apifull012",
+    "anchor": "var executor = Executors.newSingleThreadExecutor();",
+    "technicalDisposition": "APPLICABLE_FIXTURE_ACQUISITION",
+    "basis": "Caller-owned standard and bundle are acquired before the guarded body, and exit/cleanup assertion can mask the primary or prevent release. Preserve order, 30s timeout and owner on unterminated worker.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 618,
+    "method": "apifull012",
+    "anchor": "var executor = Executors.newSingleThreadExecutor();",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "APIFULL012 passes an in-memory substitute registry and a no-op registration function. Latch and worker are owned by test; direct await methods do not collect JVM data.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 621,
+    "method": "apifull012",
+    "anchor": "executor.submit(",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "APIFULL012 passes an in-memory substitute registry and a no-op registration function. Latch and worker are owned by test; direct await methods do not collect JVM data.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 645,
+    "method": "apifull012",
+    "anchor": "executor.shutdownNow();",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "APIFULL012 passes an in-memory substitute registry and a no-op registration function. Latch and worker are owned by test; direct await methods do not collect JVM data.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 646,
+    "method": "apifull012",
+    "anchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "APIFULL012 passes an in-memory substitute registry and a no-op registration function. Latch and worker are owned by test; direct await methods do not collect JVM data.",
+    "signedDecisionId": null
+  },
+  {
+    "file": "ApiCustomMetricPayloadTest.java",
+    "rule": "DoNotUseThreads",
+    "line": 659,
+    "method": "awaitFull",
+    "anchor": "Thread.currentThread().interrupt();",
+    "technicalDisposition": "STANDALONE_SYNTHETIC_FIXTURE",
+    "basis": "APIFULL012 passes an in-memory substitute registry and a no-op registration function. Latch and worker are owned by test; direct await methods do not collect JVM data.",
+    "signedDecisionId": null
+  }
+]
