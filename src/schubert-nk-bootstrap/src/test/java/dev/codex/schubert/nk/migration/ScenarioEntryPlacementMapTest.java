@@ -256,14 +256,16 @@ final class ScenarioEntryPlacementMapTest {
     try (var workers = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {
       for (int index = 0; index < 64; index++) {
         futures.add(
-            workers.executor().submit(
-                () -> {
-                  byte[] actual = map.canonicalBytes();
-                  assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), actual);
-                  actual[0] = 0;
-                  tuple(map.lookup(2), 2, 900, 1, 1, 500, 7);
-                  tuple(map.entriesForFile(2, 10).get(0), 30, 50, 3, 2, 600, 0);
-                }));
+            workers
+                .executor()
+                .submit(
+                    () -> {
+                      byte[] actual = map.canonicalBytes();
+                      assertArrayEquals(GOLDEN.getBytes(StandardCharsets.US_ASCII), actual);
+                      actual[0] = 0;
+                      tuple(map.lookup(2), 2, 900, 1, 1, 500, 7);
+                      tuple(map.entriesForFile(2, 10).get(0), 30, 50, 3, 2, 600, 0);
+                    }));
       }
       for (Future<?> future : futures) future.get(5, TimeUnit.SECONDS);
     }
