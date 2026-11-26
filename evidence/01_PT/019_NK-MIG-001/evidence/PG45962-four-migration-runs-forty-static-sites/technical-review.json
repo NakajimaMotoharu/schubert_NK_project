@@ -1,0 +1,555 @@
+{
+  "runs": {
+    "PG45952": {
+      "manifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45952-four-declarative-mapping-worker-diagnostics/manifest.json",
+        "sha256": "c293caaf333ea36d169849bbada24d48b1106b78c2d32a877d65e28c56fcaa43"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45952-four-declaration-fixtures-ordinary/pmd.xml",
+        "sha256": "0f3818dbecdf6d71d794b5fb25fa1eea82ad6e8aea2e3dcd3e86f176cc9ca1e1"
+      },
+      "rawSites": 6,
+      "unit": 4,
+      "fixCommit": "a504c96a8ae385e69eebb44825ebe51f5196b152"
+    },
+    "PG45954": {
+      "manifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45954-three-generated-copy-value-worker-diagnostics/manifest.json",
+        "sha256": "8ae83f7cd604140c608530fb0b84566c2cc6138cd08246854887be95a4d9cb51"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45954-three-copy-value-fixtures-ordinary-scoped-main/pmd.xml",
+        "sha256": "0ec85c42dc855523cf3cfd9f79649b2457191eae780c909a61de11a54db3afc8"
+      },
+      "rawSites": 12,
+      "unit": 3,
+      "fixCommit": "3c6bcd961466941ddabb2c24af339ecb7687f317"
+    },
+    "PG45958": {
+      "manifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45958-asset-hash-value-worker-diagnostics/manifest.json",
+        "sha256": "7f90b01f1a697721df48a7f586b8b47507c949db8d40d78333bc7f8f72a6ec9e"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45958-asset-hash-fixture-ordinary-scoped-main/pmd.xml",
+        "sha256": "cb89e12675771879338e9583696614dcbbe6ec432b27623553589b032fdac5a0"
+      },
+      "rawSites": 4,
+      "unit": 1,
+      "fixCommit": "3e63bb0e018e235a46261edea535a73ce35192da"
+    },
+    "PG45960": {
+      "manifest": {
+        "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45960-staging-proxy-worker-diagnostics/manifest.json",
+        "sha256": "167a1ae4606094bd8794f5e7ca94d2daa6ed9232159c71432c296617d57e98f0"
+      },
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45960-staging-proxy-fixtures-ordinary-scoped-main/pmd.xml",
+        "sha256": "94aa0cb18f24f30f8950d21b0cf5e519d5edef2bd54c0d2f900720e8e06b8738"
+      },
+      "rawSites": 18,
+      "unit": 4,
+      "fixCommit": "5987d872a30aaf09d14ce406050c374758dae216"
+    }
+  },
+  "siteDecisions": [
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioMigrationMapTest.java",
+        "sha256": "10121b8805f86f6b0dfe925dae6c2591b7ec107a04110dda85636c3d01fa71d7"
+      },
+      "line": 182,
+      "rule": "EqualsNull",
+      "source": "assertFalse(first.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioMigrationMapTest.java",
+        "sha256": "10121b8805f86f6b0dfe925dae6c2591b7ec107a04110dda85636c3d01fa71d7"
+      },
+      "line": 457,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+        "sha256": "03b0115353ce35a5cfac2b4a24db0a29d69a5af79ef34665b694500d3a1cabb1"
+      },
+      "line": 170,
+      "rule": "DoNotUseThreads",
+      "source": "try (var owner = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+        "sha256": "ada66e948dbb2c2a05633c93c6990fbd886fb9296eeeffc508997b8f0089d74e"
+      },
+      "line": 193,
+      "rule": "DoNotUseThreads",
+      "source": "try (var owner = new MigrationFixtureWorkers(Executors.newFixedThreadPool(8), 10)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+        "sha256": "767bfcdde01b643e7d7cf6393e5410a41a4c2281f2aecf330f1e6a20152f64d2"
+      },
+      "line": 321,
+      "rule": "EqualsNull",
+      "source": "assertFalse(first.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+        "sha256": "767bfcdde01b643e7d7cf6393e5410a41a4c2281f2aecf330f1e6a20152f64d2"
+      },
+      "line": 368,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+        "sha256": "a1fb69051274964ccdeb56cc8afdbf1e3f5a3b18392d6ff90f0d186f8817d29a"
+      },
+      "line": 65,
+      "rule": "CloseResource",
+      "source": "for (var sink : sinks) {",
+      "technical": "SYNTHETIC_MEMORY_SINK_OWNERSHIP_CONTRACT",
+      "reason": "JVMだけの記録sinkで外部資源を開かない。借用sinkのclose/flushまたは部分失敗が期待値のため、指摘位置に汎用終端を追加すると元観測を変える。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+        "sha256": "a1fb69051274964ccdeb56cc8afdbf1e3f5a3b18392d6ff90f0d186f8817d29a"
+      },
+      "line": 232,
+      "rule": "CloseResource",
+      "source": "var faulty = new MemorySink(failedIndex, sinks.getFirst().order, 0, failure);",
+      "technical": "SYNTHETIC_MEMORY_SINK_OWNERSHIP_CONTRACT",
+      "reason": "JVMだけの記録sinkで外部資源を開かない。借用sinkのclose/flushまたは部分失敗が期待値のため、指摘位置に汎用終端を追加すると元観測を変える。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+        "sha256": "a1fb69051274964ccdeb56cc8afdbf1e3f5a3b18392d6ff90f0d186f8817d29a"
+      },
+      "line": 302,
+      "rule": "CloseResource",
+      "source": "var faulty = new MemorySink(0, sinks.getFirst().order, 2, failure);",
+      "technical": "SYNTHETIC_MEMORY_SINK_OWNERSHIP_CONTRACT",
+      "reason": "JVMだけの記録sinkで外部資源を開かない。借用sinkのclose/flushまたは部分失敗が期待値のため、指摘位置に汎用終端を追加すると元観測を変える。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+        "sha256": "a1fb69051274964ccdeb56cc8afdbf1e3f5a3b18392d6ff90f0d186f8817d29a"
+      },
+      "line": 350,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+        "sha256": "db7429bc4829b18f9d4fff17626d24d75cc894cc7085a01582d8454050145224"
+      },
+      "line": 191,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 37,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 54,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 73,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 91,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 112,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 133,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "sha256": "556a2fa4e1f197eca1d22441459720c5144584501633beb56b108e615b86f591"
+      },
+      "line": 224,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+        "sha256": "269c9f51365818b3ddc7fa54ceba403d82fbea3835c3197378e6f68f9721d0ad"
+      },
+      "line": 290,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+        "sha256": "269c9f51365818b3ddc7fa54ceba403d82fbea3835c3197378e6f68f9721d0ad"
+      },
+      "line": 327,
+      "rule": "DoNotUseThreads",
+      "source": "Executors.newFixedThreadPool(GENERATED_WORKERS), GENERATED_TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+        "sha256": "269c9f51365818b3ddc7fa54ceba403d82fbea3835c3197378e6f68f9721d0ad"
+      },
+      "line": 341,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+        "sha256": "269c9f51365818b3ddc7fa54ceba403d82fbea3835c3197378e6f68f9721d0ad"
+      },
+      "line": 360,
+      "rule": "EqualsNull",
+      "source": "assertFalse(value.equals(null));",
+      "technical": "ASSERTS_REJECTED_NULL_ON_NONNULL_RECORD_OR_VALUE_RECEIVER",
+      "reason": "固定の非null値をreceiverにし、equals(null)がfalseの契約を直接検査する。null receiverを通過させない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "e413951011df8fc2e458ae02320b9bfe4ed6940739c253f2cec826f3b581e11a"
+      },
+      "line": 422,
+      "rule": "CloseResource",
+      "source": "var connection = f.connection();",
+      "technical": "BORROWED_CONNECTION_IS_PURE_JDK_PROXY",
+      "reason": "JDK代理Connectionは実取得せず、不明操作をAssertionErrorにする。借用元を閉じずowned StatementとResultSetを確認する固定契約。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "e413951011df8fc2e458ae02320b9bfe4ed6940739c253f2cec826f3b581e11a"
+      },
+      "line": 479,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "e413951011df8fc2e458ae02320b9bfe4ed6940739c253f2cec826f3b581e11a"
+      },
+      "line": 551,
+      "rule": "UseConcurrentHashMap",
+      "source": "private final Map<String, Long> staged =",
+      "technical": "MUTABLE_MAP_OWNED_PER_FIXTURE_AND_WORKER",
+      "reason": "各JDK fixture内の可変SQL件数oracle。並行試験でも各workerが新規生成し、同一Mapは共有しない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "e413951011df8fc2e458ae02320b9bfe4ed6940739c253f2cec826f3b581e11a"
+      },
+      "line": 564,
+      "rule": "UseConcurrentHashMap",
+      "source": "private final Map<String, Long> targets =",
+      "technical": "MUTABLE_MAP_OWNED_PER_FIXTURE_AND_WORKER",
+      "reason": "各JDK fixture内の可変SQL件数oracle。並行試験でも各workerが新規生成し、同一Mapは共有しない。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "sha256": "e413951011df8fc2e458ae02320b9bfe4ed6940739c253f2cec826f3b581e11a"
+      },
+      "line": 723,
+      "rule": "UseProperClassLoader",
+      "source": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 203,
+      "rule": "CloseResource",
+      "source": "var connection = fixture.connection();",
+      "technical": "BORROWED_CONNECTION_IS_PURE_JDK_PROXY",
+      "reason": "JDK代理Connectionは実取得せず、不明操作をAssertionErrorにする。借用元を閉じずowned StatementとResultSetを確認する固定契約。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 215,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 482,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 573,
+      "rule": "UseProperClassLoader",
+      "source": "Connection.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 588,
+      "rule": "UseProperClassLoader",
+      "source": "Statement.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 626,
+      "rule": "UseProperClassLoader",
+      "source": "ResultSet.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 680,
+      "rule": "UseProperClassLoader",
+      "source": "Connection.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "sha256": "f60defbd2e3a7543d4a9e78c220c7870856e58f4a1ea1b0edcc4027de82e1a9a"
+      },
+      "line": 703,
+      "rule": "UseProperClassLoader",
+      "source": "Statement.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "sha256": "bd8db7a7521ada4674943f635ae66c3f9480cb046e02c9bec06f0b1a43374bf1"
+      },
+      "line": 382,
+      "rule": "CloseResource",
+      "source": "var connection = f.connection();",
+      "technical": "BORROWED_CONNECTION_IS_PURE_JDK_PROXY",
+      "reason": "JDK代理Connectionは実取得せず、不明操作をAssertionErrorにする。借用元を閉じずowned StatementとResultSetを確認する固定契約。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "sha256": "bd8db7a7521ada4674943f635ae66c3f9480cb046e02c9bec06f0b1a43374bf1"
+      },
+      "line": 420,
+      "rule": "DoNotUseThreads",
+      "source": "new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {",
+      "technical": "FINITE_FIXTURE_OWNER_CANCEL_AND_WAIT",
+      "reason": "試験のJDK worker。別の外部スレッド資源は所有せず、固定入力と5秒結果取得、cancelと10秒待機を維持する。失敗はWORKER004と同じtry-with-resourcesで抑制する。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "sha256": "bd8db7a7521ada4674943f635ae66c3f9480cb046e02c9bec06f0b1a43374bf1"
+      },
+      "line": 567,
+      "rule": "UseProperClassLoader",
+      "source": "Connection.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "sha256": "bd8db7a7521ada4674943f635ae66c3f9480cb046e02c9bec06f0b1a43374bf1"
+      },
+      "line": 589,
+      "rule": "UseProperClassLoader",
+      "source": "Statement.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    },
+    {
+      "fixture": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "sha256": "bd8db7a7521ada4674943f635ae66c3f9480cb046e02c9bec06f0b1a43374bf1"
+      },
+      "line": 631,
+      "rule": "UseProperClassLoader",
+      "source": "ResultSet.class.getClassLoader(),",
+      "technical": "JDK_INTERFACE_LOADER_FOR_FIXTURE_PROXY",
+      "reason": "固定java.sql interfaceまたはその型を受けるJDK Proxyのloaderのみを指定。外部型、動的認証、context loaderの変更なし。",
+      "ownerJudgment": null
+    }
+  ],
+  "counter": {
+    "EqualsNull": 11,
+    "DoNotUseThreads": 12,
+    "CloseResource": 6,
+    "UseConcurrentHashMap": 2,
+    "UseProperClassLoader": 9
+  },
+  "helper": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationFixtureWorkers.java",
+    "sha256": "3e84daf390806be875ca14272276cc4c13bf00bd5a3e7edc558bb1adda520f26"
+  },
+  "commonSuppression": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG45528-current-schema-fixture-diagnostics-and-format/manifest.json",
+    "sha256": "cf12fa7b983abc716a5153c4fc62be2b87c28c1725cdd639a19c09bc5cebe3e1"
+  },
+  "ownerSignedSites": 0,
+  "noSuppressionOrRuleChanges": true
+}
