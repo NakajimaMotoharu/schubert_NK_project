@@ -1,0 +1,379 @@
+{
+  "counts": {
+    "FINITE_OWNED_TEST_CONCURRENCY": 15,
+    "LOCAL_TEST_VALUE_ORACLE": 16,
+    "REQUIRED_EQUALS_NULL_ORACLE": 6,
+    "REQUIRED_NEGATIVE_OR_OWNERSHIP_VECTOR": 4
+  },
+  "rows": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "line": 165,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "並行する8個の固定ベクトルの結果、同時起点・有限Future.get。試験所有のworkerを閉じる。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "line": 363,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "同じ試験で作った別値のHashMapキー解決とhashCode/equals契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "line": 369,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 11,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 13,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 17,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 23,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 26,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkers.java",
+      "line": 29,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "試験だけが所有するExecutorの起動経路・shutdownNow・10秒上限・割込み復元を保持する。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 20,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 36,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 49,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 65,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 68,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/fixture/ProtocolFixtureWorkersTest.java",
+      "line": 72,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "偽Executorの上限・原失敗との抑制関係・割込み復元を実時間待ち無しで検証する。既定割込み状態はfinallyで戻す。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 89,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 94,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 102,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 185,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 188,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 190,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 198,
+      "rule": "NullAssignment",
+      "technicalDisposition": "REQUIRED_NEGATIVE_OR_OWNERSHIP_VECTOR",
+      "reason": "各参照型constructorへのnullに対する例外と固定アクセサ名の独立期待値。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 205,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "line": 251,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "各verify/各呼出内部だけのfield期待表または負例vector。宣言順のLinkedHashMapと公開値のHashMap結合は別。外部に可変Mapを公開しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "line": 59,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "同じ型catalogに2読者を同時接続した一致の検証。起点・Future待ちを制限し、試験所有のworkerを閉じる。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolAggregateValueContractTest.java",
+      "line": 217,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "同一試験のHashMapキー一致を独立値と照合。共有されない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolAggregateValueContractTest.java",
+      "line": 223,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "line": 79,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "同一試験の数値衝突と型区別をHashMapで観測する。並行更新なし。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "line": 124,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "同一試験の数値衝突と型区別をHashMapで観測する。並行更新なし。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "line": 165,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "line": 167,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "同一試験の数値衝突と型区別をHashMapで観測する。並行更新なし。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "line": 190,
+      "rule": "NullAssignment",
+      "technicalDisposition": "REQUIRED_NEGATIVE_OR_OWNERSHIP_VECTOR",
+      "reason": "呼出側のenum配列をnullへ変え、次の返値が元値と別配列を保持することを検証。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "line": 182,
+      "rule": "NullAssignment",
+      "technicalDisposition": "REQUIRED_NEGATIVE_OR_OWNERSHIP_VECTOR",
+      "reason": "各コンストラクタ引数のnullを一つずつ注入する独立負例。公開constructorを使用。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "line": 212,
+      "rule": "DoNotUseThreads",
+      "technicalDisposition": "FINITE_OWNED_TEST_CONCURRENCY",
+      "reason": "同時二callerのlegacy/現ACTIONが混ざらない独立golden。個別Futureは10秒、試験所有のworkerを閉じる。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/N12IdentifierValueContractTest.java",
+      "line": 84,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "合成された別インスタンスのMap membershipと型の違い。Mapは試験local。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "line": 33,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "line": 37,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "RelativePath/DisplayPath各型をHashMapキーとして使う通常イミュータブル値の契約。スレッド間で共有しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "line": 109,
+      "rule": "EqualsNull",
+      "technicalDisposition": "REQUIRED_EQUALS_NULL_ORACLE",
+      "reason": "独立値のequals(null)がfalseを返すJavaの同値契約。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "line": 113,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "RelativePath/DisplayPath各型をHashMapキーとして使う通常イミュータブル値の契約。スレッド間で共有しない。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "line": 200,
+      "rule": "NullAssignment",
+      "technicalDisposition": "REQUIRED_NEGATIVE_OR_OWNERSHIP_VECTOR",
+      "reason": "一度返ったenum配列の変更が、別返値・新規取得へ伝播しないことを検証。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "line": 218,
+      "rule": "UseConcurrentHashMap",
+      "technicalDisposition": "LOCAL_TEST_VALUE_ORACLE",
+      "reason": "固定enum表の同値キー・正規aliasの独立照合。単独試験のlocal Map。",
+      "rawRetained": true,
+      "qualityOwnerSigned": null
+    }
+  ]
+}
