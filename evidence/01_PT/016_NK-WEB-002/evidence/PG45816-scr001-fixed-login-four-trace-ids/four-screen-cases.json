@@ -1,0 +1,50 @@
+{
+  "rows": [
+    {
+      "screen": "SCR001",
+      "testId": "PT-LOCK-DOM001",
+      "method": "approvedLockedMessageDependsOnFlagPresenceNotItsValues",
+      "oracle": "lock値の内容に依存せずフラグがある場合の固定文",
+      "actualConfidence": "RETAINED_PRIOR_UNMODIFIED_METHOD",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43258-p01601-qa045-055-current-display-v1/manifest.json",
+        "sha256": "ab36bcd775e805fc2301e06b42c2bf69b5803fc66f6e78be59ea3e739062f5d6"
+      }
+    },
+    {
+      "screen": "SCR001",
+      "testId": "PT-LOCK-DOM002",
+      "method": "independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText",
+      "oracle": "エラー・lock・logoutの独立順と固定文",
+      "actualConfidence": "RETAINED_PRIOR_UNMODIFIED_METHOD",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43258-p01601-qa045-055-current-display-v1/manifest.json",
+        "sha256": "ab36bcd775e805fc2301e06b42c2bf69b5803fc66f6e78be59ea3e739062f5d6"
+      }
+    },
+    {
+      "screen": "SCR001",
+      "testId": "PT-LOCK-DOM003",
+      "method": "allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay",
+      "oracle": "残り秒や入力値によって文言が変化しない",
+      "actualConfidence": "RETAINED_PRIOR_UNMODIFIED_METHOD",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43258-p01601-qa045-055-current-display-v1/manifest.json",
+        "sha256": "ab36bcd775e805fc2301e06b42c2bf69b5803fc66f6e78be59ea3e739062f5d6"
+      }
+    },
+    {
+      "screen": "SCR001",
+      "testId": "PT-LOCK-DOM004",
+      "method": "parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags",
+      "oracle": "8合成描画でlock有無を別表示。名称は共通",
+      "actualConfidence": "CURRENT_LOCAL_EXEC",
+      "source": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG45814-current-qa055-lock-display-parallel-diagnostics/manifest.json",
+        "sha256": "9c8ccbd15668567a1ae0c288be16a3528cf43e5304d7a0cf47febb1000d56a66"
+      }
+    }
+  ],
+  "knownLocalIds": 43,
+  "knownScreens": 17
+}
