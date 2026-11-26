@@ -1,0 +1,105 @@
+{
+  "run": "PG45934",
+  "source": "05adddd29b527fcb32fd116820ce48ba8621cbe0",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T02:55:34.249439+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3952",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "63f14de570620d58d22cb0eb890892830320581f",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6016_Batch監査metric三並行単体仕様.md",
+    "sha256": "abcafeddf36277801e9de3d48d651f0be86bcfcbced34856c8ad436598bb044e"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest#transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues": "TRANSFERMET007",
+    "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest#integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate": "INTEGRITYMET007",
+    "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest#restartMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate": "RESTARTMET007"
+  },
+  "productTests": 3,
+  "originalPoolSizes": [
+    8,
+    8,
+    8
+  ],
+  "allOwnedInMemorySources": true,
+  "futureWaitSeconds": 10,
+  "terminationSeconds": 10,
+  "canonicalBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+  },
+  "oldWorkerEvidenceNotReplayed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45782-current-two-batch-monitoring-fixture-diagnostics/manifest.json",
+    "sha256": "c73a096be821d12ec83f4d124034403681cf50e2ab0dd7ab17e67d7cb6a1f444"
+  },
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45934-audit-recorder-canonical/terminal.json",
+    "sha256": "b463b86c2ed39f1e3211d2b1b02baa9e590788d86b4dee37b98c937a3e197d5e"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45934-audit-recorder-ordinary/pmd.xml",
+    "sha256": "40fff11126246535d7ffa83d04b56cfd24378d47aaf77fc4d4f59a19209f858b"
+  },
+  "pmdFindings": [
+    {
+      "fixture": "IntegrityFailureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 319
+    },
+    {
+      "fixture": "IntegrityFailureMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 321
+    },
+    {
+      "fixture": "ProcessRestartMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 299
+    },
+    {
+      "fixture": "ProcessRestartMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 301
+    },
+    {
+      "fixture": "TransferMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 206
+    },
+    {
+      "fixture": "TransferMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 218
+    },
+    {
+      "fixture": "TransferMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 218
+    }
+  ],
+  "reports": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45934-three-audit-recorder-worker-diagnostics/junit-sanitized.xml",
+      "sha256": "3288b6d156cb00dac933d90f3e2c30b9c5342456efa38913919afd95775c856f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45934-three-audit-recorder-worker-diagnostics/coverage-unfiltered.tsv",
+      "sha256": "261bcc8572e535c42424e29fe647bc3a92263701787546e99863306fa1e182a4"
+    }
+  ],
+  "measuredClassCount": 8,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45934-audit-recorder-ordinary/begin.json",
+    "sha256": "450e47d95e1efc17da80b2ceae68eb5b54e1f57346757cb073ae3c6381ef36c7"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45934-audit-recorder-ordinary/terminal.json",
+    "sha256": "4ab6c4f805e4526875e84f14c4cfc7334668eff8d0825e9e3c443dc7e47b2f4c"
+  },
+  "anyActualFilesystemJvmManagementOrDatabase": false,
+  "cumulativeProductTrialsGross": 3416,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
