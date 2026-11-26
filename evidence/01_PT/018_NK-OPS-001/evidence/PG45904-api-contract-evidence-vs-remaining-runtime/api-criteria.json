@@ -1,0 +1,159 @@
+{
+  "approvedDesignSource": "1a3ad1400e4effdf467681b65ff4be330fde045c",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-G13.04",
+  "domainRoutes": [
+    {
+      "wbs": [
+        "WBS-P006-02",
+        "WBS-P004-05"
+      ],
+      "criterion": "Outboxの固定値・所有試験",
+      "verified": {
+        "executed": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "newTestDefinitions": 0,
+        "newDistinctCases": 0,
+        "totalOperationalProductExecutions": 3172,
+        "totalApplicableProductSuccesses": 3124
+      },
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          699
+        ],
+        "BRANCH": [
+          0,
+          40
+        ],
+        "LINE": [
+          0,
+          178
+        ],
+        "COMPLEXITY": [
+          0,
+          33
+        ],
+        "METHOD": [
+          0,
+          13
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45160-outbox-current-exact-twelve-single-original/manifest.json",
+        "sha256": "b1b799c280313458c65b336ff17515760516ae40e6dc25be37469e6515aae6a5"
+      },
+      "remaining": "実トランザクション、配備されたAPI/JMS"
+    },
+    {
+      "wbs": [
+        "WBS-P006-03",
+        "WBS-P006-05",
+        "WBS-P018-10"
+      ],
+      "criterion": "QA-054の書式とAPIの初回記録を分離",
+      "wire": {
+        "PT-PRO-QA054-001": "legacyRequestMatchesIndependentOriginalBytes",
+        "PT-PRO-QA054-002": "menuActionMatchesIndependentOffsetsAndRoundTrips",
+        "PT-PRO-QA054-003": "explicitRequestActionKeepsItsOwnClosedPair",
+        "PT-PRO-QA054-004": "everyOtherCategoryIsRejectedByNamedBoundary",
+        "PT-PRO-QA054-005": "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+        "PT-PRO-QA054-006": "omittedActionIsAllowedForRequestOnly",
+        "PT-PRO-QA054-007": "missingBlankUnknownAndWrongCaseCategoryFail",
+        "PT-PRO-QA054-008": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+        "PT-PRO-QA054-009": "everyCanonicalConstructorReferenceRejectsNull",
+        "PT-PRO-QA054-010": "existingHttpMetadataAndReservedRulesRemainEnforced",
+        "PT-PRO-QA054-011": "independentConcurrentCallersDoNotMixCategories",
+        "PT-PRO-QA054-012": "recordFieldsAreCompleteImmutableAndRedacted",
+        "PT-PRO-QA054-013": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire"
+      },
+      "webPhysical": {
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+        "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+        "dev/codex/schubert/nk/protocol/layout/semantic/LogType.class": "16abeb98a98e841bd4717e668ae242a03c41cfca3036536103e79171d0aac150"
+      },
+      "apiCurrentDynamic": 0,
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45352-qa054-approved-contract-and-local-layer-lineage/manifest.json",
+        "sha256": "f0a4e8ec9efd22323a947b92adb156d51f4e00379620d9ef9cbda7f90093c8e7"
+      },
+      "freshWebMenu005": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG45902-current-menu-audit005-with-current-worker/manifest.json",
+        "sha256": "c46baa2f23a9e5253f0d015fe8954412e498778496b992e4789c30574cbf16ed"
+      },
+      "remaining": "LOG_SEARCHED初回とREPLAY、Web MENU_VIEWEDの実到達とCHR-L01 · QA-056適用判断"
+    },
+    {
+      "wbs": [
+        "WBS-P004-05"
+      ],
+      "criterion": "借用JDBCの所有・UTC境界",
+      "criteria": [
+        {
+          "criterion": "UTCと資源の分離：Backupのsnapshot/例外",
+          "result": "JDBC代理の20成功。当18および拡張2の証拠として既集計・本群加算0。",
+          "stillNeededForAcceptance": "実PostgreSQLのtimezone・取得精度・backup保持"
+        },
+        {
+          "criterion": "取得済／取得前失敗のclose、一次と抑制順序",
+          "result": "JdbcResourceCleanupの合成9件。現L23/M4/C1/B8。実Connection操作は依存先が別所有。",
+          "stillNeededForAcceptance": "通常ApiJdbcPoolと実call siteのcommit/rollback・障害時資源"
+        },
+        {
+          "criterion": "SQLの結果、束縛、借用状態の保存",
+          "result": "Outboxの旧単一run12と当入力・10物理が一致。関連RequiredColumnの分岐は当該coverageに合算なし。",
+          "stillNeededForAcceptance": "実Outbox transactionと整合後条件、claim/rollback"
+        },
+        {
+          "criterion": "UTCとborrowed Connectionの所有を分離",
+          "result": "Web受付scopeの元11件を現候補の合成境界として確認。受領16番Program、API同期取引には転用不可。",
+          "stillNeededForAcceptance": "実ブラウザ／実SQL時の結果と接続所有"
+        },
+        {
+          "criterion": "借用read-only観測の完了後publish、close順",
+          "result": "当純JDK代理3、元5SDK。当counterのraw未到達を保持。",
+          "stillNeededForAcceptance": "実DB状態・監視sink"
+        },
+        {
+          "criterion": "API管理者・session readの親子資源受渡し",
+          "result": "二Mainの現NullAway/SpotBugsと戻り前の順序を照合。実auth runtime判定は0。",
+          "stillNeededForAcceptance": "同候補認証とSQL実境界"
+        }
+      ],
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45442-current-p00405-jdbc-evidence-by-exit-condition/manifest.json",
+        "sha256": "b631f703a7dea0c3c0588d4e74a5729e14cbe8adf37d2181756e056bce941198"
+      },
+      "remaining": "現runtimeの借用・所有・実DBを同一候補で再認証"
+    },
+    {
+      "wbs": [
+        "WBS-P006-04",
+        "WBS-P006-02"
+      ],
+      "criterion": "QA-050と別個の汎用retry値・jitterを混合しない",
+      "localGeneric": {
+        "retryScheduleUsesOneFiveThirtySixtyAndFiveMinuteCap": "1/5/30/60/300 sec; cases 0 and 101 rejected",
+        "nextAttemptIsCalculatedFromExplicitFailureTime": "fixed UTC plus 30 sec, null clock boundary",
+        "retryJitterUsesIndependentExactBoundaryVectorsAfterCappingTheBase": "six attempts by -100/0/+100 permille and +/-101 rejected"
+      },
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45552-current-outbox-timing-exact-three-original-methods/manifest.json",
+        "sha256": "b668377866d2de6f0a3eefdc99ce8e2566b75482a2ff8dd1556a61f77d498a0e"
+      },
+      "remaining": "当sourceのWeb Log初期backoff後15分規則、実配送の再送・再実行、IT/ST性能"
+    }
+  ],
+  "typedAPI": 193,
+  "totalAPI": 286,
+  "untypedAPIRemains": 93,
+  "apiRegularJar": null,
+  "QA056Pending": true,
+  "noHeldBodiesLoaded": true
+}
