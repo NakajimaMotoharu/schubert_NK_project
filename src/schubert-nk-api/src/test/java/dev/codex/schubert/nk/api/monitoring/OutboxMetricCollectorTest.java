@@ -289,35 +289,30 @@ class OutboxMetricCollectorTest {
   @Test
   void outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        var collector = collector(registry, DEBUG_MODE);
-        var other = collector(otherRegistry, DEBUG_MODE);
-        other.collect(new Fixture(Row.row(ERROR_VALUE, 222, 333)).connection(), AS_OF);
-        var tasks = new ArrayList<Callable<Long>>();
-        for (int owner = 1; owner <= 64; owner++) {
-          long count = owner;
-          tasks.add(
-              () -> {
-                var f = new Fixture(Row.row(PENDING_STATUS, count, count));
-                var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
-                assertEquals(count, actual.counts().pending());
-                assertEquals(Duration.ofSeconds(count), actual.ages().pending());
-                f.complete();
-                return actual.counts().pending();
-              });
-        }
-        var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
-        for (int i = 0; i < results.size(); i++) assertEquals(i + 1L, results.get(i).get());
-        assertEquals(222, other.snapshot().orElseThrow().counts().error());
-        assertEquals(333, gauge(otherRegistry, OUTBOX_AGES_METRIC, ERROR_VALUE));
-        assertEquals(6, registry.getMeters().size());
-        assertEquals(6, otherRegistry.getMeters().size());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+        var otherRegistry = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var collector = collector(registry, DEBUG_MODE);
+      var other = collector(otherRegistry, DEBUG_MODE);
+      other.collect(new Fixture(Row.row(ERROR_VALUE, 222, 333)).connection(), AS_OF);
+      var tasks = new ArrayList<Callable<Long>>();
+      for (int owner = 1; owner <= 64; owner++) {
+        long count = owner;
+        tasks.add(
+            () -> {
+              var f = new Fixture(Row.row(PENDING_STATUS, count, count));
+              var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
+              assertEquals(count, actual.counts().pending());
+              assertEquals(Duration.ofSeconds(count), actual.ages().pending());
+              f.complete();
+              return actual.counts().pending();
+            });
       }
+      var results = workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS);
+      for (int i = 0; i < results.size(); i++) assertEquals(i + 1L, results.get(i).get());
+      assertEquals(222, other.snapshot().orElseThrow().counts().error());
+      assertEquals(333, gauge(otherRegistry, OUTBOX_AGES_METRIC, ERROR_VALUE));
+      assertEquals(6, registry.getMeters().size());
+      assertEquals(6, otherRegistry.getMeters().size());
     }
   }
 

@@ -249,35 +249,30 @@ class AsyncJobMetricCollectorTest {
   @Test
   void asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState() throws Exception {
     try (var registry = new Registry();
-        var otherRegistry = new Registry()) {
-      var pool = Executors.newFixedThreadPool(8);
-      try {
-        var collector = collector(registry, DEBUG_MODE);
-        var other = collector(otherRegistry, DEBUG_MODE);
-        other.collect(new Fixture(Row.row(CANCELLED_STATE, 222)).connection());
-        var tasks = new ArrayList<Callable<Long>>();
-        for (int owner = 0; owner < 64; owner++) {
-          long count = owner;
-          tasks.add(
-              () -> {
-                var f = new Fixture(Row.row(RECEIVED_STATE, count), Row.row(ERROR_VALUE, 2));
-                var result = collector.collect(f.connection()).orElseThrow();
-                assertEquals(count, result.value(State.RECEIVED));
-                assertEquals(2, result.value(State.ERROR));
-                assertEquals(0, result.value(State.CANCELLED));
-                f.complete();
-                return result.totalJobs();
-              });
-        }
-        var actual = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
-        for (int i = 0; i < actual.size(); i++) assertEquals(i + 2L, actual.get(i).get());
-        assertEquals(222, other.snapshot().orElseThrow().totalJobs());
-        assertEquals(5, registry.getMeters().size());
-        assertEquals(5, otherRegistry.getMeters().size());
-      } finally {
-        pool.shutdownNow();
-        assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
+        var otherRegistry = new Registry();
+        var workers = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var collector = collector(registry, DEBUG_MODE);
+      var other = collector(otherRegistry, DEBUG_MODE);
+      other.collect(new Fixture(Row.row(CANCELLED_STATE, 222)).connection());
+      var tasks = new ArrayList<Callable<Long>>();
+      for (int owner = 0; owner < 64; owner++) {
+        long count = owner;
+        tasks.add(
+            () -> {
+              var f = new Fixture(Row.row(RECEIVED_STATE, count), Row.row(ERROR_VALUE, 2));
+              var result = collector.collect(f.connection()).orElseThrow();
+              assertEquals(count, result.value(State.RECEIVED));
+              assertEquals(2, result.value(State.ERROR));
+              assertEquals(0, result.value(State.CANCELLED));
+              f.complete();
+              return result.totalJobs();
+            });
       }
+      var actual = workers.executor().invokeAll(tasks, 10, TimeUnit.SECONDS);
+      for (int i = 0; i < actual.size(); i++) assertEquals(i + 2L, actual.get(i).get());
+      assertEquals(222, other.snapshot().orElseThrow().totalJobs());
+      assertEquals(5, registry.getMeters().size());
+      assertEquals(5, otherRegistry.getMeters().size());
     }
   }
 
