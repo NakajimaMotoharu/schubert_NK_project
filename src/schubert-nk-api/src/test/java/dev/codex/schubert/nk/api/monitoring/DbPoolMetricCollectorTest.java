@@ -227,30 +227,25 @@ class DbPoolMetricCollectorTest {
 
   @Test
   void poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts() throws Exception {
-    try (var registry = new Registry()) {
-      var executor = Executors.newFixedThreadPool(8);
-      try {
-        var collector = collector(registry, DEBUG_MONITORING_MODE);
-        var tasks = new ArrayList<Callable<Long>>();
-        for (int i = 0; i < 64; i++) {
-          int active = i;
-          tasks.add(
-              () -> {
-                var f = new Fixture();
-                f.active = active;
-                var actual = collector.collect(f.pool(), f.config()).orElseThrow();
-                DbPoolMetricObservationTest.values(actual, active, 5, 2, 8);
-                f.complete();
-                return actual.active();
-              });
-        }
-        var actual = executor.invokeAll(tasks, 10, TimeUnit.SECONDS);
-        for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
-        assertEquals(4, registry.getMeters().size());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    try (var registry = new Registry();
+        var owner = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
+      var tasks = new ArrayList<Callable<Long>>();
+      for (int i = 0; i < 64; i++) {
+        int active = i;
+        tasks.add(
+            () -> {
+              var f = new Fixture();
+              f.active = active;
+              var actual = collector.collect(f.pool(), f.config()).orElseThrow();
+              DbPoolMetricObservationTest.values(actual, active, 5, 2, 8);
+              f.complete();
+              return actual.active();
+            });
       }
+      var actual = owner.executor().invokeAll(tasks, 10, TimeUnit.SECONDS);
+      for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
+      assertEquals(4, registry.getMeters().size());
     }
   }
 

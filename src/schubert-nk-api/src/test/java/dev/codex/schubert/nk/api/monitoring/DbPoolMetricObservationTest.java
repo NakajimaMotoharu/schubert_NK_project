@@ -175,13 +175,9 @@ class DbPoolMetricObservationTest {
             return actual.active();
           });
     }
-    var pool = Executors.newFixedThreadPool(8);
-    try {
-      var actual = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);
+    try (var owner = new MetricFixtureWorkers(Executors.newFixedThreadPool(8))) {
+      var actual = owner.executor().invokeAll(tasks, 10, TimeUnit.SECONDS);
       for (int i = 0; i < actual.size(); i++) assertEquals((long) i, actual.get(i).get());
-    } finally {
-      pool.shutdownNow();
-      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
