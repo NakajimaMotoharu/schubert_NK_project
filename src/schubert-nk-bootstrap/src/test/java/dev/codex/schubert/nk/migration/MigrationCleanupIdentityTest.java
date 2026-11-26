@@ -150,24 +150,23 @@ final class MigrationCleanupIdentityTest {
 
   @Test
   void cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall() throws Exception {
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<Integer>>();
       for (int index = 0; index < TASKS; index++) {
         int subject = index % SUBJECTS;
         futures.add(
-            executor.submit(
-                () -> {
-                  var primary = new SQLException("synthetic primary");
-                  var f = new Fixture(primary, primary, primary, false);
-                  assertPrimary(subject, f, primary, List.of());
-                  return f.statementCloses;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var primary = new SQLException("synthetic primary");
+                      var f = new Fixture(primary, primary, primary, false);
+                      assertPrimary(subject, f, primary, List.of());
+                      return f.statementCloses;
+                    }));
       }
       for (var future : futures) assertEquals(1, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 

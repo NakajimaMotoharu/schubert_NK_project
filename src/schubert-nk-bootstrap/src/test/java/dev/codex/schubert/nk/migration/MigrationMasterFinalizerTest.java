@@ -381,24 +381,23 @@ final class MigrationMasterFinalizerTest {
   void final028FiniteReadersOwnIndependentProxiesAndTerminate()
       throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var declared = normal();
-    var executor = Executors.newFixedThreadPool(WORKERS);
-    try {
+    try (var owner =
+        new MigrationFixtureWorkers(Executors.newFixedThreadPool(WORKERS), TERMINATION_SECONDS)) {
       var futures = new ArrayList<Future<List<Long>>>();
       for (int index = 0; index < TASKS; index++)
         futures.add(
-            executor.submit(
-                () -> {
-                  var f = new Fixture();
-                  finish(f, declared);
-                  assertEquals(1, f.outerCloses);
-                  return f.boundLong;
-                }));
+            owner
+                .executor()
+                .submit(
+                    () -> {
+                      var f = new Fixture();
+                      finish(f, declared);
+                      assertEquals(1, f.outerCloses);
+                      return f.boundLong;
+                    }));
       for (var future : futures)
         assertEquals(
             List.of(42L, 700L, 900L, 500L, 600L), future.get(WAIT_SECONDS, TimeUnit.SECONDS));
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
