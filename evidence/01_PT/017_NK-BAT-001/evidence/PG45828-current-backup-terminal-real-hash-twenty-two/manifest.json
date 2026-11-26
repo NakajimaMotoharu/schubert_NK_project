@@ -1,0 +1,125 @@
+{
+  "run": "PG45828",
+  "source": "127514dff467754aabf96b20cd22c2ffdc8f0cea",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-P017-06/2",
+  "terminalAtUTC": "2026-11-26T01:07:14.759536+00:00",
+  "actualExit": 0,
+  "spec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/5908_Backup終端行の読み取り境界単体仕様.md",
+    "sha256": "8a3476fed120294799150eb6f082a490a86b88d7cf0e27f46965029c075b906b"
+  },
+  "prior16RunsNeededForFreshSingleExec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45674-current-backup-pair-commit-sixteen-unfiltered/manifest.json",
+    "sha256": "7ce27da614d7e666e1c5ec8de9c703c89fc158549d8b91314506cf2161dd52b3"
+  },
+  "newTests": 0,
+  "requalifiedTerminalTests": 6,
+  "passed": 22,
+  "errors": 0,
+  "skips": 0,
+  "failure": 0,
+  "newTestIds": [
+    "PT-BAT-TERM001",
+    "PT-BAT-TERM002",
+    "PT-BAT-TERM003",
+    "PT-BAT-TERM004",
+    "PT-BAT-TERM005",
+    "PT-BAT-TERM006"
+  ],
+  "scope": {
+    "dev/codex/schubert/nk/batch/repository/BackupStepRepository": {
+      "BRANCH": [
+        0,
+        88
+      ],
+      "LINE": [
+        0,
+        142
+      ],
+      "METHOD": [
+        0,
+        12
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal": {
+      "BRANCH": [
+        0,
+        12
+      ],
+      "LINE": [
+        0,
+        16
+      ],
+      "METHOD": [
+        0,
+        9
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "scopeAllFour100": true,
+  "anyCurrentArtifactMigrationOrRealDbAccess": false,
+  "oldExecMerged": false,
+  "requestedProductionClassesFromRegular3Archives": {
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+    },
+    "batch": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43944-ssc481-post-format-batch-regular/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "sha256": "5ab1311eb7cc4700495b89f6f6b37f42f3cbfffaa8d607639fed9c7215c10f8e"
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45828-current-backup-terminal-real-hash-twenty-two/junit-sanitized.xml",
+      "sha256": "3316856f71c79e088cef416afb07748379efff4a5c4ca4d4d3c0f04653fc99de"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45828-current-backup-terminal-real-hash-twenty-two/coverage-unfiltered.tsv",
+      "sha256": "16d271ca3e7f9814000f40e23ebbc39a6704db961da1d9b175791027a16b0d0f"
+    }
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45828-current-backup-terminal-real-hash-twenty-two/begin.json",
+    "sha256": "5537dab24bd4b094e524ff15c9ce981e0fa86e711aa352902af3bcca20dbe220"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45828-current-backup-terminal-real-hash-twenty-two/terminal.json",
+    "sha256": "a3cd522311cfc75af2aeb6b780697b6458c1aafd1aea300162ba594d2cf85952"
+  },
+  "pmdRawFindings": [
+    {
+      "rule": "CloseResource",
+      "line": 73
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 76
+    },
+    {
+      "rule": "CloseResource",
+      "line": 178
+    }
+  ],
+  "fix": "BUG-3933",
+  "previousMethodGap": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG45826-current-backup-terminal-and-pair-twenty-two/manifest.json",
+    "sha256": "82d57d4d50fdb38692c3259c8c7db76bd0e555de23727b2474991ee8a2d94f3a"
+  },
+  "cumulativeProductTrialsGross": 3327,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

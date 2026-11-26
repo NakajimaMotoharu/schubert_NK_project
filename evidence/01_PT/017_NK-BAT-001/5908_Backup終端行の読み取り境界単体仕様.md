@@ -12,3 +12,5 @@ NK-BAT-001、OPS-009、UI251、SS331 §8.3・SS341 §6.6・SSC134、WBS-P017-06/
 | PT-BAT-TERM006 | Terminal値constructorへ非Backup step、skip/result不一致、診断code不一致 | 型と意味の不一致を拒否する。原データの所有権を変更しない。 |
 
 既PG45674はJDK代理の16でouterの未到達4行・8分岐とnested Terminalを残した。元16と新6は現正規三JARの同一runで測定し、既実行と生counterを合算しない。支持型の不足は別に残す。実運用のDB、原本、退役、ファイル操作、保留ISSCOMPはこの試験に含めない。
+
+PG45826は22件成功、TerminalのhashCodeだけ未測定。BUG-3933で単一不変MapからJDK HashSetを使う照合に改め、独立に読み取った等価の二値で登録と検索を確認した。同じ正規三JAR・一つのexecによるPG45828は22件成功、outerとTerminalの四種生測定の未到達0。実JDBC／所有権移転は未確認。 [再試験](evidence/PG45828-current-backup-terminal-real-hash-twenty-two/manifest.json)
