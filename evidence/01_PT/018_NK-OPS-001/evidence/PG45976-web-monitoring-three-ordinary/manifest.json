@@ -1,0 +1,84 @@
+{
+  "run": "PG45976",
+  "source": "c1fed2affa261e2746ff53de7c99928eac1f34cc",
+  "productionCoreMain": "cf08e414be9f877b851a387704350d5e7c980209",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-26T03:37:22.241709+00:00",
+  "actualExit": 0,
+  "bug": "BUG-3966",
+  "horizontal": "YKT-2997",
+  "ledgerBeforeFix": "25abce77f1239d0d62e0987ed8c2902d1b681052",
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/6058_Web監視三並行単体仕様.md",
+    "sha256": "c4c18eff94216f8ee69a6a07754531b022ebee10fcb6554270a19da84ef68ee9"
+  },
+  "selected": {
+    "dev.codex.schubert.nk.web.monitoring.HttpMetricContractTest#httpMetric006ConcurrentClassifiersAreStateless": "HTTPMETRIC006",
+    "dev.codex.schubert.nk.web.monitoring.WebMetricCatalogTest#webcat014FiniteConcurrentCallsHaveNoRetainedMutableState": "WEBCAT014",
+    "dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricRecorderTest#mediaStream007ParallelTypePublicationAndSeparateOwnersCannotCrossStateOrGrowLabels": "MEDIASTREAM007"
+  },
+  "productTests": 3,
+  "webRegularPackagingClaimed": false,
+  "physical": 8,
+  "formatProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45976-web-monitoring-three-canonical-checked/terminal.json",
+    "sha256": "2ee3fbe7aefe5d566d1835e6d56533df7cb42970498036395c272d2b827169cc"
+  },
+  "pmdRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45976-web-monitoring-three-ordinary/pmd.xml",
+    "sha256": "a4d46dab6d1a3e915a381c5d16d669c0621d0e4b9219489839d7f83795f4b24f"
+  },
+  "pmdSites": [
+    {
+      "file": "HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 230
+    },
+    {
+      "file": "MediaStreamsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 238
+    },
+    {
+      "file": "WebMetricCatalogTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "line": 116
+    },
+    {
+      "file": "WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 339
+    }
+  ],
+  "gcHeld": {
+    "test": "BATCHGC013",
+    "jvmCollectorAccessed": false,
+    "javap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45976-web-monitoring-three-ordinary/gc-metadata-only.log",
+      "sha256": "5b89aa2cf34217992f6c3f3e570f28fa15444816d543c4ea639733647fd7262b"
+    },
+    "reason": "SDK superclass constructor queries ManagementFactory.getMemoryPoolMXBeans"
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45976-web-monitoring-three-ordinary/junit-sanitized.xml",
+      "sha256": "f336f2b4a953883980a45c5d60be4e7cc60c48ff1d3add7c166fa489d2049bd0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG45976-web-monitoring-three-ordinary/coverage-unfiltered.tsv",
+      "sha256": "0c26256386350ae5a2d62ce06ac7cbf73c23c60b71545fd576c21ab77e6d4446"
+    }
+  ],
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45976-web-monitoring-three-ordinary/begin.json",
+    "sha256": "1da15ac34d38a1cfd691b1a62ee6cba0f39b3ccb9191d3b2be57fd01d7a45cb2"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG45976-web-monitoring-three-ordinary/terminal.json",
+    "sha256": "5f17f47e3c1691dabd53a33df673c5b3c5b8b4a4a1f3b61b19605f77d76713a2"
+  },
+  "noHttpCollectorDbOrStream": true,
+  "cumulativeProductTrialsGross": 3455,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
