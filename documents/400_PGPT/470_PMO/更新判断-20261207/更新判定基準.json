@@ -1,0 +1,199 @@
+{
+  "planId": "PGPT-20261207-継続判定-v1",
+  "createdJst": "2026-11-16T22:58:30+09:00",
+  "baseline": {
+    "wbs": "第58版",
+    "wbsFile": "/home/mini/codex/project1/work/PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+    "wbsSha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794",
+    "scheduleSha256": "0eb4695f95dd35fe057997e81106d711fb1d70044fe9f7257bee4cdfcd6e94ff",
+    "originalItems": 190,
+    "accepted": 17,
+    "lastRunNewAccepted": 0,
+    "lastRunSharedPp": 90,
+    "scheduledValueAchievementPct": 45.88
+  },
+  "datesJst": {
+    "assumedAuthorizedRestart": "2026-11-18T23:29:00+09:00",
+    "firstCheckpoint": "2026-11-25T23:29:00+09:00",
+    "midAsOf": "2026-12-02T23:29:00+09:00",
+    "finalAsOf": "2026-12-06T18:00:00+09:00",
+    "userRenewalDay": "2026-12-07"
+  },
+  "marchScenario": {
+    "weeklyWorkPpCap": 70,
+    "weeklyTotalReviewSlots": 15,
+    "weeklyTerminalSlots": 15,
+    "weeklyNewParentCap": 15,
+    "note": "短縮案の既存WBS内で想定した判断機会。各元項目の個別条件・全子・451・HOLDと承認が成立して初めて加算。"
+  },
+  "firstCheckpoint": "SSC447の152件の実行・未実行内訳と、F02・F03・C02・F04の引渡し資料。第1窓の新規目標0。",
+  "midTarget": {
+    "ids": [
+      "F02",
+      "F03",
+      "P004-03",
+      "P004-05",
+      "P018-08"
+    ],
+    "newAccepted": 5
+  },
+  "finalTarget": {
+    "ids": [
+      "F02",
+      "F03",
+      "P004-03",
+      "P004-05",
+      "P018-08",
+      "P018-02",
+      "P018-10",
+      "P004-02",
+      "P018-07",
+      "P019-02",
+      "C02",
+      "P020-01"
+    ],
+    "allTwelveWithNetTwelve": "短縮案の今回目標達成",
+    "minimum": {
+      "allFiveCoreAtFinal": true,
+      "ownAcceptedOfEleven": 10,
+      "originalScopeNetIncrease": 10,
+      "minimumAcceptedOf190": 27,
+      "referenceOnlyExcludedFromOwnCount": "P019-02"
+    },
+    "lateMidCanRecover": true,
+    "outcomeBelowMinimumOrEvidenceMissing": "移行検討を推奨。未達理由・外部依存・観測欠落を明記。"
+  },
+  "matchedParentRules": "計画に固定した元項目ごとの当候補source、公開の正式判定ID、原条件・451・全子・終了依存、締切時にも受入有効。旧17の再資格、部分納品、試験件数を加算しない。実績の遡及・他項目への差替えをしない。",
+  "costBoundary": {
+    "firstWindowPp": 69.865,
+    "secondWindowPp": 69.98,
+    "thirdWindowThroughTargetPp": 3.526,
+    "cumulativeThroughAllTargetsPp": 143.371,
+    "description": "3月案の元順序上の同範囲の計画価格。消費上限・専有費・更新の判定点数を表さない。各窓の実際の共有差を併記。"
+  },
+  "workbook": "/home/mini/codex/project1/work/PMO/hourly-monitor/更新判断-20261207/PGPT更新判定・短期予実.xlsx",
+  "asIssuedWorkbookSHA256": "ea48d49617ca7072ffbb97a9bceeb99dfe4ff12a6790acde1d979b6f822fa617",
+  "reporting": "正当に再開された既存の毎時監査で初週・中間・最終を照合し、判定時刻以前の公開記録のみで予定、実績、差、消費、未達理由を報告。監査が停止中なら未観測を明記し、別監視の起動や自動再開を行わない。",
+  "targets": [
+    {
+      "id": "F02",
+      "name": "JDK/Maven/toolchain・6module build・依存境界",
+      "wk": 2,
+      "rank": 81,
+      "wp": 1.4,
+      "allp": 71.265,
+      "gates": "閉/WBS-F02",
+      "criteria": "WBS-F02/reuse、WBS-F02/criterion/contract、WBS-F02/criterion/scope、WBS-F02/criterion/quality"
+    },
+    {
+      "id": "F03",
+      "name": "NullAway/format/Werror/静的解析gateの稼働",
+      "wk": 2,
+      "rank": 84,
+      "wp": 4.8,
+      "allp": 74.665,
+      "gates": "閉/WBS-F03",
+      "criteria": "WBS-F03/reuse、WBS-F03/criterion/contract、WBS-F03/criterion/scope、WBS-F03/criterion/quality"
+    },
+    {
+      "id": "P004-03",
+      "name": "参照原本DAO・保持・退役",
+      "wk": 2,
+      "rank": 88,
+      "wp": 5.673,
+      "allp": 75.538,
+      "gates": "閉/WBS-P004-03",
+      "criteria": "WBS-P004-03/reuse、WBS-P004-03/criterion/contract、WBS-P004-03/criterion/scope、WBS-P004-03/criterion/quality"
+    },
+    {
+      "id": "P004-05",
+      "name": "JDBC UTC・SQL exception・transaction境界",
+      "wk": 2,
+      "rank": 92,
+      "wp": 6.519,
+      "allp": 76.384,
+      "gates": "閉/WBS-P004-05",
+      "criteria": "WBS-P004-05/reuse、WBS-P004-05/criterion/contract、WBS-P004-05/criterion/scope、WBS-P004-05/criterion/quality"
+    },
+    {
+      "id": "P018-08",
+      "name": "native coverage正常/異常/停止checkpoint",
+      "wk": 2,
+      "rank": 100,
+      "wp": 9.119,
+      "allp": 78.984,
+      "gates": "閉/WBS-P018-08.01、閉/WBS-P018-08.02、閉/WBS-P018-08.03",
+      "criteria": "WBS-P018-08.01/reuse、WBS-P018-08.01/criterion/deliverable、WBS-P018-08.01/criterion/quality、WBS-P018-08.02/reuse、WBS-P018-08.02/criterion/deliverable、WBS-P018-08.02/criterion/quality、WBS-P018-08.03/reuse、WBS-P018-08.03/criterion/deliverable、WBS-P018-08.03/criterion/quality"
+    },
+    {
+      "id": "P018-02",
+      "name": "署名BOM・全artifact・host immutable",
+      "wk": 3,
+      "rank": 149,
+      "wp": 1.0,
+      "allp": 140.845,
+      "gates": "閉/WBS-P018-02",
+      "criteria": "WBS-P018-02/reuse、WBS-P018-02/criterion/contract、WBS-P018-02/criterion/scope、WBS-P018-02/criterion/quality"
+    },
+    {
+      "id": "P018-10",
+      "name": "command/log redaction・監査",
+      "wk": 3,
+      "rank": 152,
+      "wp": 1.0,
+      "allp": 140.845,
+      "gates": "閉/WBS-P018-10.01、閉/WBS-P018-10.02、閉/WBS-P018-10.03",
+      "criteria": "WBS-P018-10.01/reuse、WBS-P018-10.01/criterion/deliverable、WBS-P018-10.01/criterion/quality、WBS-P018-10.02/reuse、WBS-P018-10.02/criterion/deliverable、WBS-P018-10.02/criterion/quality、WBS-P018-10.03/reuse、WBS-P018-10.03/criterion/deliverable、WBS-P018-10.03/criterion/quality"
+    },
+    {
+      "id": "P004-02",
+      "name": "Inbox参照保護・summaryのSQL契約",
+      "wk": 3,
+      "rank": 153,
+      "wp": 1.0,
+      "allp": 140.845,
+      "gates": "閉/WBS-P004-02",
+      "criteria": "WBS-P004-02/reuse、WBS-P004-02/criterion/contract、WBS-P004-02/criterion/scope、WBS-P004-02/criterion/quality"
+    },
+    {
+      "id": "P018-07",
+      "name": "Caddy同parent deadline・TLS/ready",
+      "wk": 3,
+      "rank": 154,
+      "wp": 1.0,
+      "allp": 140.845,
+      "gates": "閉/WBS-P018-07",
+      "criteria": "WBS-P018-07/reuse、WBS-P018-07/criterion/contract、WBS-P018-07/criterion/scope、WBS-P018-07/criterion/quality"
+    },
+    {
+      "id": "P019-02",
+      "name": "配布manifest・version・署名検証",
+      "wk": 3,
+      "rank": 155,
+      "wp": 1.0,
+      "allp": 140.845,
+      "gates": "閉/元項目判定/WBS-P019-02",
+      "criteria": "WBS-P018-02/criterion/contract、WBS-P018-02/criterion/quality、WBS-P018-02/criterion/scope、WBS-P018-02/reuse"
+    },
+    {
+      "id": "C02",
+      "name": "systemd全Unit/依存/timeout/hardening設定",
+      "wk": 3,
+      "rank": 159,
+      "wp": 2.55,
+      "allp": 142.395,
+      "gates": "閉/WBS-C02",
+      "criteria": "WBS-C02/reuse、WBS-C02/criterion/contract、WBS-C02/criterion/scope、WBS-C02/criterion/quality"
+    },
+    {
+      "id": "P020-01",
+      "name": "Current/NK共通harness・比較・DIF/G01～G06",
+      "wk": 3,
+      "rank": 163,
+      "wp": 3.526,
+      "allp": 143.371,
+      "gates": "閉/WBS-P020-01.01、閉/WBS-P020-01.02、閉/WBS-P020-01.03",
+      "criteria": "WBS-P020-01.01/reuse、WBS-P020-01.01/criterion/deliverable、WBS-P020-01.01/criterion/quality、WBS-P020-01.02/reuse、WBS-P020-01.02/criterion/deliverable、WBS-P020-01.02/criterion/quality、WBS-P020-01.03/reuse、WBS-P020-01.03/criterion/deliverable、WBS-P020-01.03/criterion/quality"
+    }
+  ]
+}
